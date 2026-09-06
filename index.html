@@ -1,1 +1,56 @@
-#
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website Marketplace</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <h1>🛒 Website Marketplace</h1>
+        <p>প্রিমিয়াম এবং রেডিমেড ওয়েবসাইট কিনুন</p>
+    </header>
+
+    <main>
+        <h2 class="section-title">আমাদের রেডিমেড ওয়েবসাইট গুলো</h2>
+        <div id="website-list" class="website-grid">
+            <!-- main.js এই জায়গায় ডাটাবেজ থেকে card গুলো বসাবে -->
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2026 My Website Marketplace. সকল অধিকার সংরক্ষিত।</p>
+    </footer>
+
+    <!-- ===== Buy Modal (কেনার সময় তথ্য নেওয়ার popup) ===== -->
+    <div id="buy-modal" class="modal-overlay hidden">
+        <div class="modal-box">
+            <h2>🛒 অর্ডার করুন</h2>
+            <p id="buy-website-title" class="buy-website-title"></p>
+            <p id="buy-message" class="form-message"></p>
+
+            <form id="buy-form" class="admin-form">
+                <input type="hidden" id="buy_website_id">
+
+                <label>আপনার নাম *</label>
+                <input type="text" id="buy_name" required placeholder="যেমন: করিম উদ্দিন">
+
+                <label>ইমেইল *</label>
+                <input type="email" id="buy_email" required placeholder="you@example.com">
+
+                <label>ফোন নাম্বার *</label>
+                <input type="tel" id="buy_phone" required placeholder="01XXXXXXXXX" pattern="01[0-9]{9}">
+
+                <div class="modal-btn-row">
+                    <button type="button" id="cancel-buy-btn" class="btn-secondary">বাতিল</button>
+                    <button type="submit" class="btn-primary">পেমেন্টে যান</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
