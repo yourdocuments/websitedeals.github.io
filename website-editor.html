@@ -1,0 +1,3226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#f5f7f9"
+  >
+
+  <title>Website Editor | Website Deals</title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  >
+
+  <link
+    rel="stylesheet"
+    href="css/admin.css"
+  >
+
+  <style>
+
+    /* =====================================================
+       WEBSITE EDITOR
+       ===================================================== */
+
+    .editor-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .editor-main {
+      min-width: 0;
+    }
+
+    .editor-sidebar {
+      position: sticky;
+      top: 96px;
+    }
+
+    .editor-section {
+      margin-bottom: 18px;
+    }
+
+    .editor-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .editor-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+
+      padding-bottom: 15px;
+      margin-bottom: 18px;
+
+      border-bottom: 1px solid var(--admin-border);
+    }
+
+    .editor-section-title {
+      margin: 0;
+
+      color: var(--admin-text);
+
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .editor-section-description {
+      margin: 3px 0 0;
+
+      color: var(--admin-muted);
+
+      font-size: 10px;
+    }
+
+    .editor-field-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      gap: 15px;
+    }
+
+    .editor-field-full {
+      grid-column: 1 / -1;
+    }
+
+    .editor-price-input {
+      position: relative;
+    }
+
+    .editor-price-input span {
+      position: absolute;
+
+      left: 12px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      color: var(--admin-muted);
+
+      font-size: 12px;
+      font-weight: 700;
+
+      pointer-events: none;
+    }
+
+    .editor-price-input input {
+      padding-left: 31px;
+    }
+
+    .editor-upload-box {
+      position: relative;
+
+      min-height: 210px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      padding: 25px;
+
+      border: 1.5px dashed #cbd3db;
+      border-radius: 13px;
+
+      background: #fafbfc;
+
+      text-align: center;
+
+      transition:
+        border-color var(--admin-transition),
+        background var(--admin-transition);
+    }
+
+    .editor-upload-box:hover {
+      border-color: var(--admin-green);
+      background: var(--admin-green-soft);
+    }
+
+    .editor-upload-icon {
+      width: 48px;
+      height: 48px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 10px;
+
+      border-radius: 14px;
+
+      background: var(--admin-green-soft);
+      color: var(--admin-green-dark);
+
+      font-size: 18px;
+    }
+
+    .editor-upload-title {
+      color: var(--admin-text);
+
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .editor-upload-text {
+      max-width: 360px;
+
+      margin-top: 4px;
+
+      color: var(--admin-muted);
+
+      font-size: 10px;
+    }
+
+    .editor-upload-input {
+      position: absolute;
+
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      opacity: 0;
+
+      cursor: pointer;
+    }
+
+    .editor-image-preview {
+      position: relative;
+
+      width: 100%;
+
+      display: none;
+
+      overflow: hidden;
+
+      border-radius: 11px;
+    }
+
+    .editor-image-preview.active {
+      display: block;
+    }
+
+    .editor-image-preview img {
+      width: 100%;
+      height: 220px;
+
+      object-fit: cover;
+    }
+
+    .editor-image-preview-remove {
+      position: absolute;
+
+      top: 10px;
+      right: 10px;
+
+      width: 32px;
+      height: 32px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 8px;
+
+      background: rgba(16,24,39,.85);
+      color: #fff;
+
+      cursor: pointer;
+    }
+
+    .editor-image-preview-remove:hover {
+      background: var(--admin-danger);
+    }
+
+    .editor-url-row {
+      display: grid;
+
+      grid-template-columns: minmax(0, 1fr) auto;
+
+      gap: 8px;
+    }
+
+    .editor-checkbox-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 8px;
+    }
+
+    .editor-checkbox {
+      position: relative;
+    }
+
+    .editor-checkbox input {
+      position: absolute;
+
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .editor-checkbox label {
+      min-height: 42px;
+
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 9px 11px;
+
+      background: #fff;
+
+      border: 1px solid var(--admin-border);
+      border-radius: 9px;
+
+      color: var(--admin-text-soft);
+
+      font-size: 11px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        background var(--admin-transition),
+        border-color var(--admin-transition),
+        color var(--admin-transition);
+    }
+
+    .editor-checkbox label i {
+      color: var(--admin-muted);
+    }
+
+    .editor-checkbox input:checked + label {
+      background: var(--admin-green-soft);
+
+      border-color: rgba(24,169,87,.35);
+
+      color: var(--admin-green-dark);
+    }
+
+    .editor-checkbox input:checked + label i {
+      color: var(--admin-green-dark);
+    }
+
+    .editor-preview-card {
+      overflow: hidden;
+
+      background: #fff;
+
+      border: 1px solid var(--admin-border);
+      border-radius: var(--admin-radius-lg);
+
+      box-shadow: var(--admin-shadow-sm);
+    }
+
+    .editor-preview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 15px 17px;
+
+      border-bottom: 1px solid var(--admin-border);
+    }
+
+    .editor-preview-title {
+      margin: 0;
+
+      color: var(--admin-text);
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .editor-live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+
+      padding: 5px 8px;
+
+      border-radius: 20px;
+
+      background: var(--admin-green-soft);
+      color: var(--admin-green-dark);
+
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .editor-live-badge::before {
+      content: "";
+
+      width: 5px;
+      height: 5px;
+
+      border-radius: 50%;
+
+      background: currentColor;
+    }
+
+    .editor-preview-image {
+      aspect-ratio: 16 / 10;
+
+      background: #eef1f3;
+
+      overflow: hidden;
+    }
+
+    .editor-preview-image img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    .editor-preview-content {
+      padding: 15px;
+    }
+
+    .editor-preview-category {
+      margin-bottom: 4px;
+
+      color: var(--admin-green-dark);
+
+      font-size: 9px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .editor-preview-name {
+      margin: 0;
+
+      color: var(--admin-text);
+
+      font-size: 15px;
+      font-weight: 800;
+
+      line-height: 1.35;
+    }
+
+    .editor-preview-description {
+      margin-top: 6px;
+
+      color: var(--admin-muted);
+
+      font-size: 10px;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .editor-preview-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-top: 14px;
+      padding-top: 13px;
+
+      border-top: 1px solid var(--admin-border);
+    }
+
+    .editor-preview-price {
+      color: var(--admin-text);
+
+      font-size: 17px;
+      font-weight: 850;
+    }
+
+    .editor-preview-status {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--admin-muted);
+    }
+
+    .editor-sidebar-card {
+      padding: 18px;
+
+      background: #fff;
+
+      border: 1px solid var(--admin-border);
+      border-radius: var(--admin-radius-lg);
+
+      box-shadow: var(--admin-shadow-sm);
+
+      margin-bottom: 16px;
+    }
+
+    .editor-sidebar-card:last-child {
+      margin-bottom: 0;
+    }
+
+    .editor-sidebar-title {
+      margin: 0 0 13px;
+
+      color: var(--admin-text);
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .editor-publish-status {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+
+      padding: 12px;
+
+      background: var(--admin-surface-soft);
+
+      border: 1px solid var(--admin-border);
+      border-radius: 9px;
+    }
+
+    .editor-publish-icon {
+      width: 32px;
+      height: 32px;
+
+      flex: 0 0 32px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 8px;
+
+      background: var(--admin-green-soft);
+      color: var(--admin-green-dark);
+    }
+
+    .editor-publish-title {
+      color: var(--admin-text);
+
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .editor-publish-text {
+      margin-top: 2px;
+
+      color: var(--admin-muted);
+
+      font-size: 9px;
+    }
+
+    .editor-actions {
+      display: grid;
+      gap: 8px;
+    }
+
+    .editor-meta-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .editor-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+
+      padding-bottom: 9px;
+
+      border-bottom: 1px solid var(--admin-border);
+    }
+
+    .editor-meta-row:last-child {
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+
+    .editor-meta-label {
+      color: var(--admin-muted);
+
+      font-size: 10px;
+    }
+
+    .editor-meta-value {
+      color: var(--admin-text);
+
+      font-size: 10px;
+      font-weight: 750;
+
+      text-align: right;
+    }
+
+    .editor-danger-action {
+      width: 100%;
+
+      min-height: 38px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      padding: 8px 12px;
+
+      border: 1px solid #f0c9ce;
+      border-radius: 8px;
+
+      background: var(--admin-danger-soft);
+      color: var(--admin-danger);
+
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .editor-danger-action:hover {
+      background: #ffe5e8;
+    }
+
+    .editor-footer-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+
+      padding-top: 18px;
+      margin-top: 18px;
+
+      border-top: 1px solid var(--admin-border);
+    }
+
+    .editor-required {
+      color: var(--admin-danger);
+    }
+
+    .editor-hint {
+      display: block;
+
+      margin-top: 5px;
+
+      color: var(--admin-muted);
+
+      font-size: 9px;
+    }
+
+    /* =====================================================
+       RESPONSIVE
+       ===================================================== */
+
+    @media (max-width: 1100px) {
+
+      .editor-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .editor-sidebar {
+        position: static;
+
+        display: grid;
+
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+
+        gap: 16px;
+      }
+
+      .editor-sidebar-card {
+        margin-bottom: 0;
+      }
+
+    }
+
+    @media (max-width: 700px) {
+
+      .editor-field-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .editor-field-full {
+        grid-column: auto;
+      }
+
+      .editor-checkbox-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .editor-sidebar {
+        grid-template-columns: 1fr;
+      }
+
+      .editor-footer-actions {
+        flex-direction: column-reverse;
+      }
+
+      .editor-footer-actions .admin-btn {
+        width: 100%;
+      }
+
+      .editor-url-row {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- =====================================================
+       APP
+       ===================================================== -->
+
+  <div class="admin-app">
+
+    <!-- ===================================================
+         SIDEBAR
+         =================================================== -->
+
+    <aside
+      class="admin-sidebar"
+      id="admin-sidebar"
+    >
+
+      <div class="admin-brand">
+
+        <div class="admin-brand-logo">
+          WD
+        </div>
+
+        <div class="admin-brand-text">
+
+          <div class="admin-brand-title">
+            Website Deals
+          </div>
+
+          <div class="admin-brand-subtitle">
+            Admin Portal
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <nav class="admin-nav">
+
+        <div class="admin-nav-section">
+
+          <div class="admin-nav-label">
+            Workspace
+          </div>
+
+          <div class="admin-nav-list">
+
+            <a
+              href="dashboard.html"
+              class="admin-nav-item"
+            >
+              <i class="fa-solid fa-chart-line"></i>
+              <span>Dashboard</span>
+            </a>
+
+
+            <a
+              href="websites.html"
+              class="admin-nav-item active"
+            >
+              <i class="fa-solid fa-layer-group"></i>
+              <span>Websites</span>
+            </a>
+
+
+            <a
+              href="categories.html"
+              class="admin-nav-item"
+            >
+              <i class="fa-solid fa-grid-2"></i>
+              <span>Categories</span>
+            </a>
+
+
+            <a
+              href="orders.html"
+              class="admin-nav-item"
+            >
+              <i class="fa-solid fa-bag-shopping"></i>
+              <span>Orders</span>
+            </a>
+
+
+            <a
+              href="customers.html"
+              class="admin-nav-item"
+            >
+              <i class="fa-solid fa-users"></i>
+              <span>Customers</span>
+            </a>
+
+
+            <a
+              href="newsletter.html"
+              class="admin-nav-item"
+            >
+              <i class="fa-solid fa-envelope"></i>
+              <span>Newsletter</span>
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="admin-nav-section"
+          id="privileged-nav"
+          style="display:none;"
+        >
+
+          <div class="admin-nav-label">
+            Management
+          </div>
+
+          <div class="admin-nav-list">
+
+            <a
+              href="admins.html"
+              class="admin-nav-item"
+            >
+              <i class="fa-solid fa-user-shield"></i>
+              <span>Access Management</span>
+            </a>
+
+
+            <a
+              href="settings.html"
+              class="admin-nav-item"
+            >
+              <i class="fa-solid fa-sliders"></i>
+              <span>Settings</span>
+            </a>
+
+          </div>
+
+        </div>
+
+      </nav>
+
+
+      <div class="admin-sidebar-footer">
+
+        <div class="admin-user-mini">
+
+          <div
+            class="admin-user-avatar"
+            id="sidebar-avatar"
+          >
+            A
+          </div>
+
+          <div class="admin-user-info">
+
+            <div
+              class="admin-user-name"
+              id="sidebar-user-name"
+            >
+              Admin
+            </div>
+
+            <div
+              class="admin-user-role"
+              id="sidebar-user-role"
+            >
+              Administrator
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+
+    <!-- ===================================================
+         MAIN
+         =================================================== -->
+
+    <main class="admin-main">
+
+      <!-- TOPBAR -->
+
+      <header class="admin-topbar">
+
+        <div class="admin-topbar-left">
+
+          <button
+            type="button"
+            class="admin-menu-toggle"
+            id="admin-menu-toggle"
+            aria-label="Open menu"
+          >
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <span class="admin-topbar-title">
+            Website Management
+          </span>
+
+        </div>
+
+
+        <div class="admin-topbar-right">
+
+          <button
+            type="button"
+            class="admin-icon-button"
+            title="Preview Marketplace"
+            onclick="window.open('../index.html','_blank')"
+          >
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </button>
+
+
+          <button
+            type="button"
+            class="admin-icon-button"
+            id="logout-button"
+            title="Logout"
+          >
+            <i class="fa-solid fa-right-from-bracket"></i>
+          </button>
+
+        </div>
+
+      </header>
+
+
+      <!-- PAGE -->
+
+      <div class="admin-page">
+
+        <!-- PAGE HEADER -->
+
+        <div class="admin-page-header">
+
+          <div class="admin-page-header-left">
+
+            <div class="admin-eyebrow">
+              Website Management
+            </div>
+
+            <h1
+              class="admin-page-title"
+              id="page-title"
+            >
+              Add Website
+            </h1>
+
+            <p class="admin-page-description">
+              Create a new marketplace listing or update an
+              existing website.
+            </p>
+
+          </div>
+
+
+          <div class="admin-page-actions">
+
+            <a
+              href="websites.html"
+              class="admin-btn admin-btn-secondary"
+            >
+              <i class="fa-solid fa-arrow-left"></i>
+              Back to Websites
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- EDITOR -->
+
+        <div class="editor-layout">
+
+          <!-- =================================================
+               LEFT / MAIN EDITOR
+               ================================================= -->
+
+          <div class="editor-main">
+
+
+            <!-- BASIC INFORMATION -->
+
+            <section class="admin-card editor-section">
+
+              <div class="admin-card-body">
+
+                <div class="editor-section-header">
+
+                  <div>
+
+                    <h2 class="editor-section-title">
+                      Basic Information
+                    </h2>
+
+                    <p class="editor-section-description">
+                      Define the main information customers
+                      will see in the marketplace.
+                    </p>
+
+                  </div>
+
+                </div>
+
+
+                <div class="editor-field-grid">
+
+                  <!-- TITLE -->
+
+                  <div class="admin-form-group editor-field-full">
+
+                    <label
+                      class="admin-form-label"
+                      for="website-title"
+                    >
+                      Website Title
+                      <span class="editor-required">*</span>
+                    </label>
+
+                    <input
+                      type="text"
+                      class="admin-input"
+                      id="website-title"
+                      placeholder="e.g. Nova Business Pro"
+                      maxlength="100"
+                      required
+                    >
+
+                  </div>
+
+
+                  <!-- CATEGORY -->
+
+                  <div class="admin-form-group">
+
+                    <label
+                      class="admin-form-label"
+                      for="website-category"
+                    >
+                      Category
+                      <span class="editor-required">*</span>
+                    </label>
+
+                    <select
+                      class="admin-select"
+                      id="website-category"
+                      required
+                    >
+
+                      <option value="">
+                        Select Category
+                      </option>
+
+                      <option value="business">
+                        Business
+                      </option>
+
+                      <option value="restaurant">
+                        Restaurant
+                      </option>
+
+                      <option value="agency">
+                        Agency
+                      </option>
+
+                      <option value="ecommerce">
+                        E-commerce
+                      </option>
+
+                      <option value="portfolio">
+                        Portfolio
+                      </option>
+
+                      <option value="monthly">
+                        Monthly
+                      </option>
+
+                    </select>
+
+                  </div>
+
+
+                  <!-- PRICE -->
+
+                  <div class="admin-form-group">
+
+                    <label
+                      class="admin-form-label"
+                      for="website-price"
+                    >
+                      Price
+                      <span class="editor-required">*</span>
+                    </label>
+
+                    <div class="editor-price-input">
+
+                      <span>৳</span>
+
+                      <input
+                        type="number"
+                        class="admin-input"
+                        id="website-price"
+                        min="0"
+                        step="1"
+                        placeholder="2499"
+                        required
+                      >
+
+                    </div>
+
+                  </div>
+
+
+                  <!-- RATING -->
+
+                  <div class="admin-form-group">
+
+                    <label
+                      class="admin-form-label"
+                      for="website-rating"
+                    >
+                      Rating
+                    </label>
+
+                    <input
+                      type="number"
+                      class="admin-input"
+                      id="website-rating"
+                      min="0"
+                      max="5"
+                      step="0.1"
+                      value="4.8"
+                      placeholder="4.8"
+                    >
+
+                  </div>
+
+
+                  <!-- SALES -->
+
+                  <div class="admin-form-group">
+
+                    <label
+                      class="admin-form-label"
+                      for="website-sales"
+                    >
+                      Sales / Orders
+                    </label>
+
+                    <input
+                      type="number"
+                      class="admin-input"
+                      id="website-sales"
+                      min="0"
+                      step="1"
+                      value="0"
+                      placeholder="0"
+                    >
+
+                  </div>
+
+
+                  <!-- DESCRIPTION -->
+
+                  <div class="admin-form-group editor-field-full">
+
+                    <label
+                      class="admin-form-label"
+                      for="website-description"
+                    >
+                      Short Description
+                    </label>
+
+                    <textarea
+                      class="admin-textarea"
+                      id="website-description"
+                      rows="5"
+                      maxlength="500"
+                      placeholder="Describe the website design, ideal use case and key value..."
+                    ></textarea>
+
+                    <span class="editor-hint">
+                      Keep the description clear and customer-friendly.
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- WEBSITE PREVIEW -->
+
+            <section class="admin-card editor-section">
+
+              <div class="admin-card-body">
+
+                <div class="editor-section-header">
+
+                  <div>
+
+                    <h2 class="editor-section-title">
+                      Website Preview
+                    </h2>
+
+                    <p class="editor-section-description">
+                      Add the image customers will see on the
+                      marketplace card.
+                    </p>
+
+                  </div>
+
+                </div>
+
+
+                <!-- URL -->
+
+                <div class="admin-form-group">
+
+                  <label
+                    class="admin-form-label"
+                    for="website-image"
+                  >
+                    Preview Image URL
+                  </label>
+
+                  <div class="editor-url-row">
+
+                    <input
+                      type="url"
+                      class="admin-input"
+                      id="website-image"
+                      placeholder="https://images.unsplash.com/..."
+                    >
+
+                    <button
+                      type="button"
+                      class="admin-btn admin-btn-secondary"
+                      id="load-image-url"
+                    >
+                      <i class="fa-solid fa-image"></i>
+                      Load
+                    </button>
+
+                  </div>
+
+                  <span class="editor-hint">
+                    Use a direct image URL for the website preview.
+                  </span>
+
+                </div>
+
+
+                <!-- UPLOAD -->
+
+                <div class="admin-form-group">
+
+                  <label class="admin-form-label">
+                    Or Select Local Image
+                  </label>
+
+                  <div
+                    class="editor-upload-box"
+                    id="upload-box"
+                  >
+
+                    <div
+                      class="editor-upload-icon"
+                      id="upload-icon"
+                    >
+                      <i class="fa-solid fa-cloud-arrow-up"></i>
+                    </div>
+
+                    <div
+                      class="editor-upload-title"
+                      id="upload-title"
+                    >
+                      Drop an image here
+                    </div>
+
+                    <div
+                      class="editor-upload-text"
+                      id="upload-text"
+                    >
+                      Or click to select an image from your device.
+                      JPG, PNG or WebP recommended.
+                    </div>
+
+                    <input
+                      type="file"
+                      class="editor-upload-input"
+                      id="website-image-file"
+                      accept="image/png,image/jpeg,image/webp"
+                    >
+
+                  </div>
+
+                </div>
+
+
+                <!-- IMAGE PREVIEW -->
+
+                <div
+                  class="editor-image-preview"
+                  id="editor-image-preview"
+                >
+
+                  <img
+                    src=""
+                    alt="Website preview"
+                    id="editor-preview-image"
+                  >
+
+                  <button
+                    type="button"
+                    class="editor-image-preview-remove"
+                    id="remove-preview-image"
+                    aria-label="Remove image"
+                  >
+                    <i class="fa-solid fa-xmark"></i>
+                  </button>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- LINKS -->
+
+            <section class="admin-card editor-section">
+
+              <div class="admin-card-body">
+
+                <div class="editor-section-header">
+
+                  <div>
+
+                    <h2 class="editor-section-title">
+                      Website Links
+                    </h2>
+
+                    <p class="editor-section-description">
+                      Connect the marketplace listing to its
+                      actual preview and purchase information.
+                    </p>
+
+                  </div>
+
+                </div>
+
+
+                <div class="editor-field-grid">
+
+                  <div class="admin-form-group editor-field-full">
+
+                    <label
+                      class="admin-form-label"
+                      for="website-preview-url"
+                    >
+                      Live Preview URL
+                    </label>
+
+                    <input
+                      type="url"
+                      class="admin-input"
+                      id="website-preview-url"
+                      placeholder="https://example.com"
+                    >
+
+                    <span class="editor-hint">
+                      Customers can use this link to preview the
+                      actual website.
+                    </span>
+
+                  </div>
+
+
+                  <div class="admin-form-group">
+
+                    <label
+                      class="admin-form-label"
+                      for="website-demo-url"
+                    >
+                      Demo URL
+                    </label>
+
+                    <input
+                      type="url"
+                      class="admin-input"
+                      id="website-demo-url"
+                      placeholder="https://demo.example.com"
+                    >
+
+                  </div>
+
+
+                  <div class="admin-form-group">
+
+                    <label
+                      class="admin-form-label"
+                      for="website-source"
+                    >
+                      Source / Delivery
+                    </label>
+
+                    <select
+                      class="admin-select"
+                      id="website-source"
+                    >
+
+                      <option value="ready-made">
+                        Ready-made
+                      </option>
+
+                      <option value="customizable">
+                        Customizable
+                      </option>
+
+                      <option value="monthly">
+                        Monthly
+                      </option>
+
+                    </select>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- BADGES & FEATURES -->
+
+            <section class="admin-card editor-section">
+
+              <div class="admin-card-body">
+
+                <div class="editor-section-header">
+
+                  <div>
+
+                    <h2 class="editor-section-title">
+                      Marketplace Labels
+                    </h2>
+
+                    <p class="editor-section-description">
+                      Select the labels that should appear on
+                      this listing.
+                    </p>
+
+                  </div>
+
+                </div>
+
+
+                <div class="editor-checkbox-grid">
+
+                  <div class="editor-checkbox">
+
+                    <input
+                      type="checkbox"
+                      id="badge-new"
+                    >
+
+                    <label for="badge-new">
+
+                      <i class="fa-solid fa-sparkles"></i>
+
+                      New
+
+                    </label>
+
+                  </div>
+
+
+                  <div class="editor-checkbox">
+
+                    <input
+                      type="checkbox"
+                      id="badge-popular"
+                    >
+
+                    <label for="badge-popular">
+
+                      <i class="fa-solid fa-fire"></i>
+
+                      Popular
+
+                    </label>
+
+                  </div>
+
+
+                  <div class="editor-checkbox">
+
+                    <input
+                      type="checkbox"
+                      id="badge-sale"
+                    >
+
+                    <label for="badge-sale">
+
+                      <i class="fa-solid fa-tag"></i>
+
+                      Sale
+
+                    </label>
+
+                  </div>
+
+
+                  <div class="editor-checkbox">
+
+                    <input
+                      type="checkbox"
+                      id="badge-featured"
+                    >
+
+                    <label for="badge-featured">
+
+                      <i class="fa-solid fa-star"></i>
+
+                      Featured
+
+                    </label>
+
+                  </div>
+
+
+                  <div class="editor-checkbox">
+
+                    <input
+                      type="checkbox"
+                      id="badge-monthly"
+                    >
+
+                    <label for="badge-monthly">
+
+                      <i class="fa-solid fa-calendar"></i>
+
+                      Monthly
+
+                    </label>
+
+                  </div>
+
+
+                  <div class="editor-checkbox">
+
+                    <input
+                      type="checkbox"
+                      id="badge-trending"
+                    >
+
+                    <label for="badge-trending">
+
+                      <i class="fa-solid fa-chart-line"></i>
+
+                      Trending
+
+                    </label>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+            </section>
+
+
+            <!-- SAVE ACTIONS -->
+
+            <div class="editor-footer-actions">
+
+              <a
+                href="websites.html"
+                class="admin-btn admin-btn-secondary"
+              >
+                Cancel
+              </a>
+
+
+              <button
+                type="button"
+                class="admin-btn admin-btn-primary"
+                id="save-website"
+              >
+
+                <i class="fa-solid fa-check"></i>
+
+                <span id="save-button-text">
+                  Publish Website
+                </span>
+
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               RIGHT / SIDEBAR
+               ================================================= -->
+
+          <aside class="editor-sidebar">
+
+
+            <!-- STATUS -->
+
+            <div class="editor-sidebar-card">
+
+              <h3 class="editor-sidebar-title">
+                Publishing
+              </h3>
+
+
+              <div class="admin-form-group">
+
+                <label
+                  class="admin-form-label"
+                  for="website-status"
+                >
+                  Listing Status
+                </label>
+
+                <select
+                  class="admin-select"
+                  id="website-status"
+                >
+
+                  <option value="live">
+                    Live
+                  </option>
+
+                  <option value="draft">
+                    Draft
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="editor-publish-status">
+
+                <div class="editor-publish-icon">
+
+                  <i
+                    class="fa-solid fa-globe"
+                    id="publish-icon"
+                  ></i>
+
+                </div>
+
+                <div>
+
+                  <div
+                    class="editor-publish-title"
+                    id="publish-title"
+                  >
+                    Ready to publish
+                  </div>
+
+                  <div
+                    class="editor-publish-text"
+                    id="publish-text"
+                  >
+                    This listing will appear on the marketplace.
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- LIVE PREVIEW -->
+
+            <div class="editor-preview-card">
+
+              <div class="editor-preview-header">
+
+                <h3 class="editor-preview-title">
+                  Listing Preview
+                </h3>
+
+                <span class="editor-live-badge">
+                  Preview
+                </span>
+
+              </div>
+
+
+              <div
+                class="editor-preview-image"
+                id="live-preview-image"
+              >
+
+                <div
+                  style="
+                    width:100%;
+                    height:100%;
+                    display:grid;
+                    place-items:center;
+                    color:#9aa3ad;
+                    font-size:12px;
+                  "
+                  id="live-preview-placeholder"
+                >
+                  <i
+                    class="fa-regular fa-image"
+                    style="font-size:22px;margin-bottom:7px;"
+                  ></i>
+                </div>
+
+              </div>
+
+
+              <div class="editor-preview-content">
+
+                <div
+                  class="editor-preview-category"
+                  id="live-preview-category"
+                >
+                  Category
+                </div>
+
+
+                <h3
+                  class="editor-preview-name"
+                  id="live-preview-name"
+                >
+                  Website Title
+                </h3>
+
+
+                <p
+                  class="editor-preview-description"
+                  id="live-preview-description"
+                >
+                  Your website description will appear here.
+                </p>
+
+
+                <div class="editor-preview-price-row">
+
+                  <span
+                    class="editor-preview-price"
+                    id="live-preview-price"
+                  >
+                    ৳0
+                  </span>
+
+                  <span
+                    class="editor-preview-status"
+                    id="live-preview-status"
+                  >
+                    Draft
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- META -->
+
+            <div
+              class="editor-sidebar-card"
+              id="editor-meta-card"
+            >
+
+              <h3 class="editor-sidebar-title">
+                Listing Information
+              </h3>
+
+
+              <div class="editor-meta-list">
+
+                <div class="editor-meta-row">
+
+                  <span class="editor-meta-label">
+                    ID
+                  </span>
+
+                  <span
+                    class="editor-meta-value"
+                    id="meta-id"
+                  >
+                    New
+                  </span>
+
+                </div>
+
+
+                <div class="editor-meta-row">
+
+                  <span class="editor-meta-label">
+                    Created
+                  </span>
+
+                  <span
+                    class="editor-meta-value"
+                    id="meta-created"
+                  >
+                    —
+                  </span>
+
+                </div>
+
+
+                <div class="editor-meta-row">
+
+                  <span class="editor-meta-label">
+                    Updated
+                  </span>
+
+                  <span
+                    class="editor-meta-value"
+                    id="meta-updated"
+                  >
+                    —
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- DANGER -->
+
+            <div
+              class="editor-sidebar-card"
+              id="delete-card"
+              style="display:none;"
+            >
+
+              <h3 class="editor-sidebar-title">
+                Danger Zone
+              </h3>
+
+              <p
+                style="
+                  margin:0 0 12px;
+                  color:var(--admin-muted);
+                  font-size:10px;
+                "
+              >
+                Delete this listing from the local demo database.
+              </p>
+
+              <button
+                type="button"
+                class="editor-danger-action"
+                id="delete-website"
+              >
+                <i class="fa-solid fa-trash"></i>
+                Delete Website
+              </button>
+
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- =====================================================
+       TOAST
+       ===================================================== -->
+
+  <div
+    class="admin-toast"
+    id="admin-toast"
+  >
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <span id="admin-toast-message">
+      Done
+    </span>
+
+  </div>
+
+
+  <!-- =====================================================
+       DELETE MODAL
+       ===================================================== -->
+
+  <div
+    class="admin-modal"
+    id="delete-modal"
+  >
+
+    <div class="admin-modal-dialog small">
+
+      <div class="admin-modal-header">
+
+        <h2 class="admin-modal-title">
+          Delete Website
+        </h2>
+
+        <button
+          type="button"
+          class="admin-modal-close"
+          id="close-delete-modal"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+      </div>
+
+
+      <div class="admin-modal-body">
+
+        <div class="admin-confirm">
+
+          <div class="admin-confirm-icon">
+            <i class="fa-solid fa-trash"></i>
+          </div>
+
+          <h3 class="admin-confirm-title">
+            Delete this listing?
+          </h3>
+
+          <p class="admin-confirm-text">
+            This action will remove the website from the
+            demo database. This cannot be undone.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="admin-modal-footer">
+
+        <button
+          type="button"
+          class="admin-btn admin-btn-secondary"
+          id="cancel-delete"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="admin-btn admin-btn-danger"
+          id="confirm-delete"
+        >
+          Delete Website
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+       ===================================================== -->
+
+  <script>
+
+    /* =====================================================
+       SESSION
+       ===================================================== */
+
+    const SESSION_KEY = "websiteDealsAdminSession";
+    const STORAGE_KEY = "websiteDealsWebsites";
+
+    const session = JSON.parse(
+      localStorage.getItem(SESSION_KEY) || "null"
+    );
+
+    if (!session) {
+      window.location.href = "index.html";
+    }
+
+
+    /* =====================================================
+       ELEMENTS
+       ===================================================== */
+
+    const sidebar =
+      document.getElementById("admin-sidebar");
+
+    const menuToggle =
+      document.getElementById("admin-menu-toggle");
+
+    const privilegedNav =
+      document.getElementById("privileged-nav");
+
+    const logoutButton =
+      document.getElementById("logout-button");
+
+    const pageTitle =
+      document.getElementById("page-title");
+
+    const saveButton =
+      document.getElementById("save-website");
+
+    const saveButtonText =
+      document.getElementById("save-button-text");
+
+    const titleInput =
+      document.getElementById("website-title");
+
+    const categoryInput =
+      document.getElementById("website-category");
+
+    const priceInput =
+      document.getElementById("website-price");
+
+    const ratingInput =
+      document.getElementById("website-rating");
+
+    const salesInput =
+      document.getElementById("website-sales");
+
+    const descriptionInput =
+      document.getElementById("website-description");
+
+    const imageInput =
+      document.getElementById("website-image");
+
+    const imageFile =
+      document.getElementById("website-image-file");
+
+    const previewUrlInput =
+      document.getElementById("website-preview-url");
+
+    const demoUrlInput =
+      document.getElementById("website-demo-url");
+
+    const sourceInput =
+      document.getElementById("website-source");
+
+    const statusInput =
+      document.getElementById("website-status");
+
+    const ratingEl =
+      document.getElementById("website-rating");
+
+    const previewImage =
+      document.getElementById("editor-preview-image");
+
+    const previewImageBox =
+      document.getElementById("editor-image-preview");
+
+    const uploadBox =
+      document.getElementById("upload-box");
+
+    const uploadIcon =
+      document.getElementById("upload-icon");
+
+    const uploadTitle =
+      document.getElementById("upload-title");
+
+    const uploadText =
+      document.getElementById("upload-text");
+
+    const livePreviewImage =
+      document.getElementById("live-preview-image");
+
+    const livePreviewPlaceholder =
+      document.getElementById("live-preview-placeholder");
+
+    const livePreviewName =
+      document.getElementById("live-preview-name");
+
+    const livePreviewCategory =
+      document.getElementById("live-preview-category");
+
+    const livePreviewDescription =
+      document.getElementById("live-preview-description");
+
+    const livePreviewPrice =
+      document.getElementById("live-preview-price");
+
+    const livePreviewStatus =
+      document.getElementById("live-preview-status");
+
+    const publishTitle =
+      document.getElementById("publish-title");
+
+    const publishText =
+      document.getElementById("publish-text");
+
+    const publishIcon =
+      document.getElementById("publish-icon");
+
+    const deleteCard =
+      document.getElementById("delete-card");
+
+    const deleteModal =
+      document.getElementById("delete-modal");
+
+
+    /* =====================================================
+       USER UI
+       ===================================================== */
+
+    function updateUserUI() {
+
+      if (!session) return;
+
+      const name =
+        session.name ||
+        session.fullName ||
+        session.email ||
+        "Admin";
+
+      const initials =
+        name
+          .split(" ")
+          .map(word => word.charAt(0))
+          .join("")
+          .slice(0, 2)
+          .toUpperCase();
+
+      document.getElementById(
+        "sidebar-user-name"
+      ).textContent = name;
+
+      document.getElementById(
+        "sidebar-avatar"
+      ).textContent = initials || "A";
+
+      document.getElementById(
+        "sidebar-user-role"
+      ).textContent =
+        session.role === "superadmin"
+          ? "Administrator"
+          : "Administrator";
+
+
+      if (
+        session.role === "superadmin"
+      ) {
+
+        privilegedNav.style.display = "block";
+
+      }
+
+    }
+
+    updateUserUI();
+
+
+    /* =====================================================
+       MOBILE SIDEBAR
+       ===================================================== */
+
+    menuToggle?.addEventListener(
+      "click",
+      () => {
+
+        sidebar.classList.toggle("open");
+
+      }
+    );
+
+
+    /* =====================================================
+       LOGOUT
+       ===================================================== */
+
+    logoutButton?.addEventListener(
+      "click",
+      () => {
+
+        localStorage.removeItem(
+          SESSION_KEY
+        );
+
+        window.location.href = "index.html";
+
+      }
+    );
+
+
+    /* =====================================================
+       DATA
+       ===================================================== */
+
+    function getWebsites() {
+
+      try {
+
+        return JSON.parse(
+          localStorage.getItem(STORAGE_KEY) || "[]"
+        );
+
+      } catch {
+
+        return [];
+
+      }
+
+    }
+
+
+    function saveWebsites(websites) {
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(websites)
+      );
+
+    }
+
+
+    /* =====================================================
+       URL / EDIT MODE
+       ===================================================== */
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    const editId =
+      params.get("id");
+
+    let editingWebsite = null;
+
+
+    function findWebsite() {
+
+      if (!editId) return null;
+
+      const websites =
+        getWebsites();
+
+      return websites.find(
+        website =>
+          String(website.id) === String(editId)
+      ) || null;
+
+    }
+
+
+    /* =====================================================
+       DEFAULT IMAGE
+       ===================================================== */
+
+    const fallbackImage =
+      "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=85";
+
+
+    /* =====================================================
+       GENERATE ID
+       ===================================================== */
+
+    function generateId() {
+
+      return (
+        "WD-" +
+        Date.now().toString(36).toUpperCase()
+      );
+
+    }
+
+
+    /* =====================================================
+       FORMAT DATE
+       ===================================================== */
+
+    function formatDate(date) {
+
+      if (!date) return "—";
+
+      const d =
+        new Date(date);
+
+      if (Number.isNaN(d.getTime())) {
+        return "—";
+      }
+
+      return d.toLocaleDateString(
+        "en-GB",
+        {
+          day: "2-digit",
+          month: "short",
+          year: "numeric"
+        }
+      );
+
+    }
+
+
+    /* =====================================================
+       LOAD EDIT DATA
+       ===================================================== */
+
+    function loadWebsiteData() {
+
+      editingWebsite =
+        findWebsite();
+
+      if (!editingWebsite) {
+
+        pageTitle.textContent =
+          "Add Website";
+
+        saveButtonText.textContent =
+          "Publish Website";
+
+        document.getElementById(
+          "meta-id"
+        ).textContent = "New";
+
+        document.getElementById(
+          "meta-created"
+        ).textContent = "—";
+
+        document.getElementById(
+          "meta-updated"
+        ).textContent = "—";
+
+        deleteCard.style.display =
+          "none";
+
+        return;
+
+      }
+
+
+      pageTitle.textContent =
+        "Edit Website";
+
+      saveButtonText.textContent =
+        "Save Changes";
+
+      deleteCard.style.display =
+        "block";
+
+
+      titleInput.value =
+        editingWebsite.title || "";
+
+      categoryInput.value =
+        editingWebsite.category || "";
+
+      priceInput.value =
+        editingWebsite.price ?? "";
+
+      ratingInput.value =
+        editingWebsite.rating ?? 4.8;
+
+      salesInput.value =
+        editingWebsite.sales ??
+        editingWebsite.orders ??
+        0;
+
+      descriptionInput.value =
+        editingWebsite.description || "";
+
+      imageInput.value =
+        editingWebsite.image || "";
+
+      previewUrlInput.value =
+        editingWebsite.previewUrl ||
+        editingWebsite.url ||
+        "";
+
+      demoUrlInput.value =
+        editingWebsite.demoUrl || "";
+
+      sourceInput.value =
+        editingWebsite.source ||
+        "ready-made";
+
+      statusInput.value =
+        editingWebsite.status ||
+        "live";
+
+
+      setBadge(
+        "badge-new",
+        editingWebsite.new
+      );
+
+      setBadge(
+        "badge-popular",
+        editingWebsite.popular
+      );
+
+      setBadge(
+        "badge-sale",
+        editingWebsite.sale
+      );
+
+      setBadge(
+        "badge-featured",
+        editingWebsite.featured
+      );
+
+      setBadge(
+        "badge-monthly",
+        editingWebsite.monthly
+      );
+
+      setBadge(
+        "badge-trending",
+        editingWebsite.trending
+      );
+
+
+      if (editingWebsite.image) {
+
+        setImagePreview(
+          editingWebsite.image
+        );
+
+      }
+
+
+      document.getElementById(
+        "meta-id"
+      ).textContent =
+        editingWebsite.id || "—";
+
+      document.getElementById(
+        "meta-created"
+      ).textContent =
+        formatDate(
+          editingWebsite.createdAt
+        );
+
+      document.getElementById(
+        "meta-updated"
+      ).textContent =
+        formatDate(
+          editingWebsite.updatedAt
+        );
+
+
+      updateLivePreview();
+
+    }
+
+
+    function setBadge(
+      id,
+      value
+    ) {
+
+      const checkbox =
+        document.getElementById(id);
+
+      if (checkbox) {
+        checkbox.checked =
+          Boolean(value);
+      }
+
+    }
+
+
+    /* =====================================================
+       IMAGE PREVIEW
+       ===================================================== */
+
+    function setImagePreview(
+      src
+    ) {
+
+      if (!src) return;
+
+      previewImage.src = src;
+
+      previewImageBox.classList.add(
+        "active"
+      );
+
+      uploadBox.style.display =
+        "none";
+
+      imageInput.value =
+        src;
+
+      livePreviewPlaceholder.style.display =
+        "none";
+
+      livePreviewImage.innerHTML = "";
+
+      const img =
+        document.createElement("img");
+
+      img.src = src;
+
+      img.alt =
+        "Website preview";
+
+      img.style.width =
+        "100%";
+
+      img.style.height =
+        "100%";
+
+      img.style.objectFit =
+        "cover";
+
+      livePreviewImage.appendChild(
+        img
+      );
+
+    }
+
+
+    function clearImagePreview() {
+
+      previewImageBox.classList.remove(
+        "active"
+      );
+
+      previewImage.src = "";
+
+      uploadBox.style.display =
+        "flex";
+
+      imageInput.value = "";
+
+      imageFile.value = "";
+
+      livePreviewImage.innerHTML = "";
+
+      livePreviewImage.appendChild(
+        livePreviewPlaceholder
+      );
+
+      livePreviewPlaceholder.style.display =
+        "grid";
+
+    }
+
+
+    document
+      .getElementById("remove-preview-image")
+      ?.addEventListener(
+        "click",
+        clearImagePreview
+      );
+
+
+    /* =====================================================
+       LOAD IMAGE URL
+       ===================================================== */
+
+    document
+      .getElementById("load-image-url")
+      ?.addEventListener(
+        "click",
+        () => {
+
+          const url =
+            imageInput.value.trim();
+
+          if (!url) {
+
+            showToast(
+              "Please enter an image URL."
+            );
+
+            return;
+
+          }
+
+          setImagePreview(url);
+
+          showToast(
+            "Image preview loaded."
+          );
+
+        }
+      );
+
+
+    /* =====================================================
+       FILE IMAGE
+       ===================================================== */
+
+    imageFile?.addEventListener(
+      "change",
+      event => {
+
+        const file =
+          event.target.files?.[0];
+
+        if (!file) return;
+
+        if (
+          !file.type.startsWith("image/")
+        ) {
+
+          showToast(
+            "Please select a valid image."
+          );
+
+          return;
+
+        }
+
+        const reader =
+          new FileReader();
+
+        reader.onload =
+          event => {
+
+            const result =
+              event.target.result;
+
+            /*
+             * Demo only.
+             *
+             * Base64 image data can make
+             * localStorage large.
+             *
+             * Production should use
+             * Firebase Storage / CDN.
+             */
+
+            setImagePreview(
+              result
+            );
+
+            uploadIcon.innerHTML =
+              '<i class="fa-solid fa-check"></i>';
+
+            uploadTitle.textContent =
+              "Image selected";
+
+            uploadText.textContent =
+              file.name;
+
+            showToast(
+              "Image selected."
+            );
+
+          };
+
+        reader.readAsDataURL(file);
+
+      }
+    );
+
+
+    /* =====================================================
+       LIVE PREVIEW
+       ===================================================== */
+
+    function updateLivePreview() {
+
+      const title =
+        titleInput.value.trim() ||
+        "Website Title";
+
+      const category =
+        categoryInput.value ||
+        "Category";
+
+      const description =
+        descriptionInput.value.trim() ||
+        "Your website description will appear here.";
+
+      const price =
+        priceInput.value;
+
+      const status =
+        statusInput.value;
+
+
+      livePreviewName.textContent =
+        title;
+
+      livePreviewCategory.textContent =
+        category
+          .replace(
+            "ecommerce",
+            "E-commerce"
+          );
+
+      livePreviewDescription.textContent =
+        description;
+
+      livePreviewPrice.textContent =
+        price
+          ? `৳${Number(price).toLocaleString()}`
+          : "৳0";
+
+      livePreviewStatus.textContent =
+        status === "live"
+          ? "Live"
+          : "Draft";
+
+
+      if (status === "live") {
+
+        publishTitle.textContent =
+          "Ready to publish";
+
+        publishText.textContent =
+          "This listing will appear on the marketplace.";
+
+        publishIcon.className =
+          "fa-solid fa-globe";
+
+      } else {
+
+        publishTitle.textContent =
+          "Saved as draft";
+
+        publishText.textContent =
+          "This listing will remain hidden from the marketplace.";
+
+        publishIcon.className =
+          "fa-solid fa-file-pen";
+
+      }
+
+    }
+
+
+    [
+      titleInput,
+      categoryInput,
+      priceInput,
+      ratingInput,
+      salesInput,
+      descriptionInput,
+      statusInput
+    ].forEach(
+      element => {
+
+        element?.addEventListener(
+          "input",
+          updateLivePreview
+        );
+
+        element?.addEventListener(
+          "change",
+          updateLivePreview
+        );
+
+      }
+    );
+
+
+    /* =====================================================
+       GET BADGES
+       ===================================================== */
+
+    function getBadges() {
+
+      return {
+
+        new:
+          document.getElementById(
+            "badge-new"
+          ).checked,
+
+        popular:
+          document.getElementById(
+            "badge-popular"
+          ).checked,
+
+        sale:
+          document.getElementById(
+            "badge-sale"
+          ).checked,
+
+        featured:
+          document.getElementById(
+            "badge-featured"
+          ).checked,
+
+        monthly:
+          document.getElementById(
+            "badge-monthly"
+          ).checked,
+
+        trending:
+          document.getElementById(
+            "badge-trending"
+          ).checked
+
+      };
+
+    }
+
+
+    /* =====================================================
+       SAVE WEBSITE
+       ===================================================== */
+
+    saveButton?.addEventListener(
+      "click",
+      saveWebsite
+    );
+
+
+    function saveWebsite() {
+
+      const title =
+        titleInput.value.trim();
+
+      const category =
+        categoryInput.value;
+
+      const price =
+        Number(
+          priceInput.value
+        );
+
+
+      if (!title) {
+
+        showToast(
+          "Website title is required."
+        );
+
+        titleInput.focus();
+
+        return;
+
+      }
+
+
+      if (!category) {
+
+        showToast(
+          "Please select a category."
+        );
+
+        categoryInput.focus();
+
+        return;
+
+      }
+
+
+      if (
+        Number.isNaN(price) ||
+        price < 0
+      ) {
+
+        showToast(
+          "Please enter a valid price."
+        );
+
+        priceInput.focus();
+
+        return;
+
+      }
+
+
+      let image =
+        imageInput.value.trim();
+
+      if (!image) {
+        image = fallbackImage;
+      }
+
+
+      const now =
+        new Date().toISOString();
+
+      const badges =
+        getBadges();
+
+      const websites =
+        getWebsites();
+
+
+      if (editingWebsite) {
+
+        const index =
+          websites.findIndex(
+            website =>
+              String(website.id) ===
+              String(editId)
+          );
+
+
+        if (index === -1) {
+
+          showToast(
+            "Website could not be found."
+          );
+
+          return;
+
+        }
+
+
+        websites[index] = {
+
+          ...websites[index],
+
+          title,
+
+          category,
+
+          price,
+
+          rating:
+            Number(
+              ratingInput.value
+            ) || 0,
+
+          sales:
+            Number(
+              salesInput.value
+            ) || 0,
+
+          description:
+            descriptionInput.value.trim(),
+
+          image,
+
+          previewUrl:
+            previewUrlInput.value.trim(),
+
+          demoUrl:
+            demoUrlInput.value.trim(),
+
+          source:
+            sourceInput.value,
+
+          status:
+            statusInput.value,
+
+          ...badges,
+
+          updatedAt: now
+
+        };
+
+
+        saveWebsites(
+          websites
+        );
+
+
+        showToast(
+          "Website updated successfully."
+        );
+
+
+        setTimeout(
+          () => {
+
+            window.location.href =
+              "websites.html";
+
+          },
+          700
+        );
+
+
+      } else {
+
+        const website = {
+
+          id:
+            generateId(),
+
+          title,
+
+          category,
+
+          price,
+
+          rating:
+            Number(
+              ratingInput.value
+            ) || 0,
+
+          sales:
+            Number(
+              salesInput.value
+            ) || 0,
+
+          description:
+            descriptionInput.value.trim(),
+
+          image,
+
+          previewUrl:
+            previewUrlInput.value.trim(),
+
+          demoUrl:
+            demoUrlInput.value.trim(),
+
+          source:
+            sourceInput.value,
+
+          status:
+            statusInput.value,
+
+          ...badges,
+
+          createdAt: now,
+
+          updatedAt: now
+
+        };
+
+
+        websites.unshift(
+          website
+        );
+
+
+        saveWebsites(
+          websites
+        );
+
+
+        showToast(
+          "Website published successfully."
+        );
+
+
+        setTimeout(
+          () => {
+
+            window.location.href =
+              "websites.html";
+
+          },
+          700
+        );
+
+      }
+
+    }
+
+
+    /* =====================================================
+       DELETE
+       ===================================================== */
+
+    document
+      .getElementById("delete-website")
+      ?.addEventListener(
+        "click",
+        () => {
+
+          deleteModal.classList.add(
+            "show"
+          );
+
+        }
+      );
+
+
+    document
+      .getElementById("close-delete-modal")
+      ?.addEventListener(
+        "click",
+        closeDeleteModal
+      );
+
+
+    document
+      .getElementById("cancel-delete")
+      ?.addEventListener(
+        "click",
+        closeDeleteModal
+      );
+
+
+    document
+      .getElementById("confirm-delete")
+      ?.addEventListener(
+        "click",
+        () => {
+
+          if (!editId) return;
+
+          const websites =
+            getWebsites();
+
+          const filtered =
+            websites.filter(
+              website =>
+                String(website.id) !==
+                String(editId)
+            );
+
+          saveWebsites(
+            filtered
+          );
+
+          closeDeleteModal();
+
+          showToast(
+            "Website deleted."
+          );
+
+          setTimeout(
+            () => {
+
+              window.location.href =
+                "websites.html";
+
+            },
+            600
+          );
+
+        }
+      );
+
+
+    function closeDeleteModal() {
+
+      deleteModal.classList.remove(
+        "show"
+      );
+
+    }
+
+
+    /* =====================================================
+       TOAST
+       ===================================================== */
+
+    let toastTimer = null;
+
+    function showToast(
+      message
+    ) {
+
+      const toast =
+        document.getElementById(
+          "admin-toast"
+        );
+
+      const toastMessage =
+        document.getElementById(
+          "admin-toast-message"
+        );
+
+      toastMessage.textContent =
+        message;
+
+      toast.classList.add(
+        "show"
+      );
+
+      clearTimeout(
+        toastTimer
+      );
+
+      toastTimer =
+        setTimeout(
+          () => {
+
+            toast.classList.remove(
+              "show"
+            );
+
+          },
+          2500
+        );
+
+    }
+
+
+    /* =====================================================
+       CLOSE MODAL WITH ESC
+       ===================================================== */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closeDeleteModal();
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       INIT
+       ===================================================== */
+
+    loadWebsiteData();
+
+    updateLivePreview();
+
+  </script>
+
+</body>
+</html>
