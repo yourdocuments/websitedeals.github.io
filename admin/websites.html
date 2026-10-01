@@ -4,8 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Websites | Website Deals Admin</title>
-  <meta name="description" content="Manage ready-made websites for Website Deals.">
+  <title>Website Management | Website Deals Admin</title>
+  <meta name="theme-color" content="#07110c">
 
   <link rel="icon" type="image/png" href="../logo.png">
 
@@ -13,1081 +13,1339 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
     rel="stylesheet"
-  >
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   >
 
   <style>
-    :root {
-      --green: #18a957;
-      --green-dark: #108344;
-      --green-soft: #eaf9f0;
-
-      --black: #111713;
-      --text: #18211c;
-      --muted: #738078;
-
-      --white: #ffffff;
-      --surface: #f6f8f7;
-      --border: #e4e9e6;
-
-      --danger: #dc3545;
-      --danger-soft: #fff0f2;
-
-      --warning: #d58a00;
-      --warning-soft: #fff7e6;
-
-      --shadow-sm: 0 4px 18px rgba(18, 35, 25, .05);
-      --shadow-md: 0 12px 35px rgba(18, 35, 25, .08);
-
-      --radius-sm: 10px;
-      --radius-md: 16px;
-      --radius-lg: 22px;
-      --radius-xl: 28px;
-
-      --sidebar-width: 270px;
+    :root{
+      --green:#19b45b;
+      --green-dark:#0d8f45;
+      --green-soft:#eafaf1;
+      --black:#07110c;
+      --dark:#0c1711;
+      --text:#142019;
+      --muted:#718078;
+      --white:#ffffff;
+      --bg:#f5f8f6;
+      --surface:#ffffff;
+      --border:#e3ebe6;
+      --danger:#e5484d;
+      --warning:#e9a23b;
+      --shadow:0 18px 55px rgba(8,30,18,.08);
+      --shadow-sm:0 8px 28px rgba(8,30,18,.06);
+      --radius:20px;
+      --sidebar:268px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
+    html{
+      scroll-behavior:smooth;
     }
 
-    body {
-      font-family: "Inter", sans-serif;
-      background: var(--surface);
-      color: var(--text);
-      min-height: 100vh;
+    body{
+      font-family:"DM Sans",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      min-height:100vh;
     }
 
     button,
     input,
-    select {
-      font: inherit;
+    select,
+    textarea{
+      font:inherit;
     }
 
-    button {
-      cursor: pointer;
+    button{
+      cursor:pointer;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    img{
+      display:block;
+      max-width:100%;
     }
 
     /* =========================
        APP
     ========================== */
 
-    .app {
-      min-height: 100vh;
+    .app{
+      min-height:100vh;
     }
 
     /* =========================
        SIDEBAR
     ========================== */
 
-    .sidebar {
-      position: fixed;
-      inset: 0 auto 0 0;
-      width: var(--sidebar-width);
-      background: var(--white);
-      border-right: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      z-index: 1000;
-      transition: transform .3s ease;
+    .sidebar{
+      position:fixed;
+      inset:0 auto 0 0;
+      width:var(--sidebar);
+      background:
+        radial-gradient(circle at 10% 0%,rgba(25,180,91,.16),transparent 30%),
+        linear-gradient(180deg,#07110c 0%,#0a1510 100%);
+      color:#fff;
+      z-index:1000;
+      display:flex;
+      flex-direction:column;
+      border-right:1px solid rgba(255,255,255,.07);
     }
 
-    .brand {
-      height: 82px;
-      padding: 0 24px;
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
+    .brand{
+      height:82px;
+      padding:0 24px;
+      display:flex;
+      align-items:center;
+      gap:13px;
+      border-bottom:1px solid rgba(255,255,255,.07);
     }
 
-    .brand a {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .brand img{
+      width:42px;
+      height:42px;
+      object-fit:contain;
+      border-radius:12px;
+      background:#fff;
+      padding:4px;
     }
 
-    .brand img {
-      width: 38px;
-      height: 38px;
-      object-fit: contain;
-      border-radius: 10px;
+    .brand-text{
+      min-width:0;
     }
 
-    .brand-text strong {
-      display: block;
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 18px;
-      letter-spacing: -.5px;
+    .brand-title{
+      font-family:"Manrope",sans-serif;
+      font-size:17px;
+      font-weight:800;
+      letter-spacing:-.4px;
     }
 
-    .brand-text span {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 2px;
+    .brand-subtitle{
+      color:#8fa198;
+      font-size:11px;
+      margin-top:2px;
     }
 
-    .sidebar-nav {
-      padding: 22px 14px;
-      overflow-y: auto;
-      flex: 1;
+    .sidebar-scroll{
+      flex:1;
+      overflow-y:auto;
+      padding:22px 14px;
     }
 
-    .nav-label {
-      padding: 0 12px;
-      margin: 0 0 9px;
-      color: #9aa39d;
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
+    .nav-label{
+      color:#6e7f76;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:1.4px;
+      text-transform:uppercase;
+      padding:0 12px 9px;
     }
 
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      min-height: 45px;
-      padding: 0 13px;
-      margin-bottom: 5px;
-      border-radius: 12px;
-      color: #657068;
-      font-size: 13px;
-      font-weight: 600;
-      transition: .2s ease;
+    .nav-group{
+      margin-bottom:24px;
     }
 
-    .nav-item i {
-      width: 18px;
-      text-align: center;
-      font-size: 14px;
+    .nav-item{
+      position:relative;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-height:46px;
+      padding:0 13px;
+      border-radius:13px;
+      color:#9eada6;
+      font-size:13px;
+      font-weight:600;
+      margin:3px 0;
+      transition:.2s ease;
     }
 
-    .nav-item:hover {
-      background: #f2f6f3;
-      color: var(--text);
+    .nav-item:hover{
+      background:rgba(255,255,255,.055);
+      color:#fff;
     }
 
-    .nav-item.active {
-      background: var(--green-soft);
-      color: var(--green-dark);
+    .nav-item.active{
+      color:#fff;
+      background:linear-gradient(135deg,rgba(25,180,91,.22),rgba(25,180,91,.09));
+      box-shadow:inset 0 0 0 1px rgba(25,180,91,.18);
     }
 
-    .nav-badge {
-      margin-left: auto;
-      min-width: 21px;
-      height: 21px;
-      padding: 0 6px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 999px;
-      background: #edf1ee;
-      color: #68736c;
-      font-size: 10px;
-      font-weight: 800;
+    .nav-item.active::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:11px;
+      bottom:11px;
+      width:3px;
+      border-radius:10px;
+      background:var(--green);
     }
 
-    .nav-item.active .nav-badge {
-      background: var(--green);
-      color: white;
+    .nav-icon{
+      width:21px;
+      text-align:center;
+      font-size:15px;
     }
 
-    .sidebar-profile {
-      padding: 17px;
-      border-top: 1px solid var(--border);
+    .nav-text{
+      flex:1;
     }
 
-    .profile-box {
-      padding: 13px;
-      border-radius: 15px;
-      background: #f7f9f8;
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    .nav-badge{
+      min-width:22px;
+      height:21px;
+      padding:0 6px;
+      border-radius:20px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      background:rgba(25,180,91,.16);
+      color:#7af0a9;
+      font-size:10px;
+      font-weight:800;
     }
 
-    .profile-avatar {
-      width: 38px;
-      height: 38px;
-      flex: 0 0 38px;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      background: var(--black);
-      color: white;
-      font-size: 13px;
-      font-weight: 800;
+    .sidebar-bottom{
+      padding:14px;
+      border-top:1px solid rgba(255,255,255,.07);
     }
 
-    .profile-info {
-      min-width: 0;
-      flex: 1;
+    .admin-profile{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      padding:12px;
+      border-radius:15px;
+      background:rgba(255,255,255,.045);
     }
 
-    .profile-info strong {
-      display: block;
-      font-size: 12px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .admin-avatar{
+      width:37px;
+      height:37px;
+      border-radius:11px;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,#20c86a,#087f3d);
+      font-size:13px;
+      font-weight:800;
     }
 
-    .profile-info span {
-      display: block;
-      color: var(--muted);
-      font-size: 10px;
-      margin-top: 2px;
+    .admin-info{
+      flex:1;
+      min-width:0;
     }
 
-    .logout-btn {
-      border: 0;
-      background: transparent;
-      color: #7b847e;
-      font-size: 15px;
-      padding: 5px;
+    .admin-name{
+      color:#fff;
+      font-size:12px;
+      font-weight:700;
     }
 
-    .logout-btn:hover {
-      color: var(--danger);
+    .admin-role{
+      color:#7f9188;
+      font-size:10px;
+      margin-top:2px;
+    }
+
+    .logout-btn{
+      border:0;
+      background:none;
+      color:#8b9c94;
+      padding:8px;
+      font-size:14px;
     }
 
     /* =========================
        MAIN
     ========================== */
 
-    .main {
-      margin-left: var(--sidebar-width);
-      min-height: 100vh;
+    .main{
+      margin-left:var(--sidebar);
+      min-height:100vh;
     }
 
-    .topbar {
-      height: 82px;
-      padding: 0 34px;
-      background: rgba(255,255,255,.94);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 900;
+    .topbar{
+      height:82px;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 34px;
+      position:sticky;
+      top:0;
+      z-index:500;
     }
 
-    .topbar-left {
-      display: flex;
-      align-items: center;
-      gap: 15px;
+    .topbar-left{
+      display:flex;
+      align-items:center;
+      gap:15px;
     }
 
-    .mobile-menu {
-      display: none;
-      width: 40px;
-      height: 40px;
-      border: 1px solid var(--border);
-      border-radius: 11px;
-      background: white;
-      color: var(--text);
+    .mobile-sidebar-btn{
+      display:none;
+      width:40px;
+      height:40px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:12px;
     }
 
-    .page-heading h1 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 23px;
-      letter-spacing: -.7px;
+    .page-heading h1{
+      font-family:"Manrope",sans-serif;
+      font-size:23px;
+      letter-spacing:-.8px;
+      font-weight:800;
     }
 
-    .page-heading p {
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 4px;
+    .page-heading p{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:3px;
     }
 
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 9px;
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:9px;
     }
 
-    .icon-btn {
-      width: 39px;
-      height: 39px;
-      border: 1px solid var(--border);
-      background: white;
-      border-radius: 11px;
-      display: grid;
-      place-items: center;
-      color: #657068;
-      transition: .2s;
+    .icon-btn,
+    .outline-btn{
+      height:42px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+      border-radius:12px;
+      padding:0 14px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      font-size:12px;
+      font-weight:700;
+      transition:.2s ease;
     }
 
-    .icon-btn:hover {
-      border-color: #cdd6d0;
-      color: var(--green-dark);
+    .icon-btn{
+      width:42px;
+      padding:0;
     }
 
-    .view-site-btn {
-      height: 39px;
-      padding: 0 15px;
-      border-radius: 11px;
-      background: var(--black);
-      color: white;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      font-weight: 700;
+    .icon-btn:hover,
+    .outline-btn:hover{
+      border-color:#c8d7ce;
+      transform:translateY(-1px);
     }
 
-    .view-site-btn:hover {
-      background: #253129;
+    .primary-btn{
+      height:42px;
+      border:0;
+      background:linear-gradient(135deg,var(--green),var(--green-dark));
+      color:#fff;
+      border-radius:12px;
+      padding:0 17px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      font-size:12px;
+      font-weight:800;
+      box-shadow:0 9px 20px rgba(25,180,91,.18);
+      transition:.2s ease;
+    }
+
+    .primary-btn:hover{
+      transform:translateY(-1px);
+      box-shadow:0 13px 25px rgba(25,180,91,.24);
     }
 
     /* =========================
        CONTENT
     ========================== */
 
-    .content {
-      padding: 30px 34px 50px;
+    .content{
+      padding:32px;
+      max-width:1600px;
+      margin:auto;
     }
 
     /* =========================
        STATS
     ========================== */
 
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 15px;
-      margin-bottom: 24px;
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      margin-bottom:24px;
     }
 
-    .stat-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      padding: 19px;
-      box-shadow: var(--shadow-sm);
+    .stat-card{
+      position:relative;
+      overflow:hidden;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:19px;
+      padding:21px;
+      box-shadow:var(--shadow-sm);
     }
 
-    .stat-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .stat-card::after{
+      content:"";
+      position:absolute;
+      width:100px;
+      height:100px;
+      right:-40px;
+      top:-45px;
+      border-radius:50%;
+      background:var(--green-soft);
     }
 
-    .stat-icon {
-      width: 37px;
-      height: 37px;
-      border-radius: 11px;
-      display: grid;
-      place-items: center;
-      background: var(--green-soft);
-      color: var(--green-dark);
-      font-size: 14px;
+    .stat-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:relative;
+      z-index:1;
     }
 
-    .stat-change {
-      font-size: 10px;
-      font-weight: 800;
-      color: var(--green-dark);
-      background: var(--green-soft);
-      padding: 5px 8px;
-      border-radius: 999px;
+    .stat-label{
+      color:var(--muted);
+      font-size:11px;
+      font-weight:700;
     }
 
-    .stat-card h3 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 25px;
-      margin-top: 17px;
-      letter-spacing: -.7px;
+    .stat-icon{
+      width:39px;
+      height:39px;
+      border-radius:12px;
+      background:var(--green-soft);
+      color:var(--green-dark);
+      display:grid;
+      place-items:center;
+      font-size:15px;
     }
 
-    .stat-card p {
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 4px;
+    .stat-value{
+      font-family:"Manrope",sans-serif;
+      font-size:27px;
+      font-weight:800;
+      letter-spacing:-1px;
+      margin-top:15px;
+      position:relative;
+      z-index:1;
+    }
+
+    .stat-change{
+      margin-top:7px;
+      font-size:10px;
+      color:#1b9c53;
+      font-weight:700;
+      position:relative;
+      z-index:1;
     }
 
     /* =========================
        TOOLBAR
     ========================== */
 
-    .management-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-sm);
-      overflow: hidden;
+    .management-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:22px;
+      box-shadow:var(--shadow-sm);
+      overflow:hidden;
     }
 
-    .management-header {
-      padding: 22px 22px 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      border-bottom: 1px solid var(--border);
+    .management-head{
+      padding:22px 23px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      border-bottom:1px solid var(--border);
     }
 
-    .management-title h2 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 17px;
-      letter-spacing: -.4px;
+    .management-title h2{
+      font-family:"Manrope",sans-serif;
+      font-size:17px;
+      font-weight:800;
+      letter-spacing:-.4px;
     }
 
-    .management-title p {
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 4px;
+    .management-title p{
+      color:var(--muted);
+      font-size:11px;
+      margin-top:4px;
     }
 
-    .add-btn {
-      height: 40px;
-      padding: 0 15px;
-      border: 0;
-      border-radius: 11px;
-      background: var(--green);
-      color: white;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 11px;
-      font-weight: 800;
-      box-shadow: 0 8px 18px rgba(24,169,87,.18);
+    .toolbar{
+      padding:17px 22px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      background:#fbfcfb;
+      border-bottom:1px solid var(--border);
     }
 
-    .add-btn:hover {
-      background: var(--green-dark);
-      transform: translateY(-1px);
+    .search-box{
+      position:relative;
+      flex:1;
+      min-width:220px;
     }
 
-    .toolbar {
-      padding: 15px 22px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      border-bottom: 1px solid var(--border);
-      background: #fbfcfb;
+    .search-box span{
+      position:absolute;
+      left:14px;
+      top:50%;
+      transform:translateY(-50%);
+      color:#91a097;
+      font-size:13px;
     }
 
-    .search-box {
-      position: relative;
-      flex: 1;
-      max-width: 390px;
+    .search-box input{
+      width:100%;
+      height:42px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      outline:none;
+      background:#fff;
+      padding:0 14px 0 39px;
+      font-size:12px;
+      color:var(--text);
     }
 
-    .search-box i {
-      position: absolute;
-      left: 13px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #9aa39d;
-      font-size: 12px;
+    .search-box input:focus{
+      border-color:rgba(25,180,91,.55);
+      box-shadow:0 0 0 4px rgba(25,180,91,.08);
     }
 
-    .search-box input {
-      width: 100%;
-      height: 39px;
-      border: 1px solid var(--border);
-      background: white;
-      border-radius: 10px;
-      outline: none;
-      padding: 0 13px 0 36px;
-      font-size: 11px;
-      color: var(--text);
-    }
-
-    .search-box input:focus {
-      border-color: #9bd7b5;
-      box-shadow: 0 0 0 3px rgba(24,169,87,.08);
-    }
-
-    .filter-select {
-      height: 39px;
-      min-width: 145px;
-      border: 1px solid var(--border);
-      background: white;
-      border-radius: 10px;
-      padding: 0 12px;
-      color: #66716a;
-      outline: none;
-      font-size: 11px;
-    }
-
-    .filter-select:focus {
-      border-color: #9bd7b5;
+    .filter-select{
+      height:42px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      padding:0 34px 0 13px;
+      outline:none;
+      color:#34443c;
+      font-size:11px;
+      font-weight:600;
+      min-width:145px;
     }
 
     /* =========================
        TABLE
     ========================== */
 
-    .table-wrap {
-      overflow-x: auto;
+    .table-wrap{
+      overflow-x:auto;
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 900px;
+    table{
+      width:100%;
+      min-width:1050px;
+      border-collapse:collapse;
     }
 
-    thead {
-      background: #fafbfa;
+    th{
+      text-align:left;
+      padding:13px 20px;
+      background:#fbfcfb;
+      color:#89968f;
+      font-size:9px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      border-bottom:1px solid var(--border);
+      white-space:nowrap;
     }
 
-    th {
-      text-align: left;
-      padding: 13px 20px;
-      color: #89938c;
-      font-size: 9px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .8px;
-      border-bottom: 1px solid var(--border);
-      white-space: nowrap;
+    td{
+      padding:14px 20px;
+      border-bottom:1px solid #edf1ee;
+      vertical-align:middle;
+      font-size:11px;
     }
 
-    td {
-      padding: 15px 20px;
-      border-bottom: 1px solid #edf0ee;
-      vertical-align: middle;
-      font-size: 11px;
+    tbody tr{
+      transition:.18s ease;
     }
 
-    tbody tr {
-      transition: .15s;
+    tbody tr:hover{
+      background:#fbfdfc;
     }
 
-    tbody tr:hover {
-      background: #fbfdfc;
+    tbody tr:last-child td{
+      border-bottom:0;
     }
 
-    .website-cell {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      min-width: 230px;
+    .website-info{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:250px;
     }
 
-    .website-thumb {
-      width: 58px;
-      height: 43px;
-      border-radius: 9px;
-      object-fit: cover;
-      background: #edf1ee;
-      border: 1px solid var(--border);
-      flex: 0 0 58px;
+    .thumb{
+      width:67px;
+      height:47px;
+      border-radius:10px;
+      overflow:hidden;
+      background:#edf2ee;
+      border:1px solid #e1e9e4;
+      flex:none;
+      position:relative;
     }
 
-    .website-info strong {
-      display: block;
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--text);
+    .thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
     }
 
-    .website-info span {
-      display: block;
-      margin-top: 3px;
-      color: var(--muted);
-      font-size: 9px;
+    .thumb-fallback{
+      width:100%;
+      height:100%;
+      display:grid;
+      place-items:center;
+      color:#789084;
+      font-size:13px;
+      background:linear-gradient(135deg,#edf7f1,#dfece4);
     }
 
-    .category-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 5px 8px;
-      border-radius: 999px;
-      background: #f1f4f2;
-      color: #66716a;
-      font-size: 9px;
-      font-weight: 700;
+    .website-name{
+      font-weight:800;
+      color:#16221b;
+      font-size:12px;
     }
 
-    .price {
-      font-family: "Space Grotesk", sans-serif;
-      font-weight: 700;
-      font-size: 12px;
+    .website-id{
+      color:#9aa69f;
+      font-size:9px;
+      margin-top:3px;
+      font-family:monospace;
     }
 
-    .old-price {
-      display: block;
-      color: #a0a8a2;
-      text-decoration: line-through;
-      font-size: 9px;
-      margin-top: 2px;
+    .category-pill{
+      display:inline-flex;
+      align-items:center;
+      min-height:25px;
+      padding:0 9px;
+      border-radius:30px;
+      background:#f0f5f2;
+      color:#53645b;
+      font-size:10px;
+      font-weight:700;
     }
 
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 5px 8px;
-      border-radius: 999px;
-      font-size: 9px;
-      font-weight: 800;
+    .price{
+      font-weight:800;
+      font-size:12px;
     }
 
-    .status::before {
-      content: "";
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: currentColor;
+    .old-price{
+      color:#a4afa9;
+      text-decoration:line-through;
+      font-size:9px;
+      margin-top:2px;
     }
 
-    .status.published {
-      background: var(--green-soft);
-      color: var(--green-dark);
+    .status{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      min-height:25px;
+      padding:0 9px;
+      border-radius:30px;
+      font-size:9px;
+      font-weight:800;
     }
 
-    .status.draft {
-      background: #f0f2f1;
-      color: #77817a;
+    .status::before{
+      content:"";
+      width:5px;
+      height:5px;
+      border-radius:50%;
+      background:currentColor;
     }
 
-    .status.archived {
-      background: var(--danger-soft);
-      color: var(--danger);
+    .status.published{
+      color:#16834a;
+      background:#eaf8f0;
     }
 
-    .badge-list {
-      display: flex;
-      gap: 4px;
-      flex-wrap: wrap;
+    .status.draft{
+      color:#9b6b18;
+      background:#fff6df;
     }
 
-    .mini-badge {
-      padding: 4px 6px;
-      border-radius: 5px;
-      background: var(--warning-soft);
-      color: var(--warning);
-      font-size: 8px;
-      font-weight: 800;
-      text-transform: uppercase;
+    .badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:4px;
+      max-width:130px;
     }
 
-    .mini-badge.green {
-      background: var(--green-soft);
-      color: var(--green-dark);
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      padding:4px 6px;
+      border-radius:5px;
+      background:#eef5f1;
+      color:#64746c;
+      font-size:8px;
+      font-weight:800;
     }
 
-    .mini-badge.dark {
-      background: #eef0ef;
-      color: #5e6861;
+    .badge.green{
+      color:#128148;
+      background:#e7f8ee;
     }
 
-    .actions {
-      display: flex;
-      align-items: center;
-      gap: 5px;
+    .badge.orange{
+      color:#a36c13;
+      background:#fff3d7;
     }
 
-    .action-btn {
-      width: 31px;
-      height: 31px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: white;
-      color: #707a73;
-      display: grid;
-      place-items: center;
-      font-size: 10px;
-      transition: .2s;
+    .badge.red{
+      color:#b23e43;
+      background:#fff0f0;
     }
 
-    .action-btn:hover {
-      border-color: #b9c7be;
-      color: var(--green-dark);
-      background: #f8fbf9;
+    .sales{
+      font-weight:800;
     }
 
-    .action-btn.delete:hover {
-      border-color: #f1b8be;
-      color: var(--danger);
-      background: var(--danger-soft);
+    .rating{
+      color:#b77912;
+      font-weight:800;
+      font-size:10px;
+    }
+
+    .actions{
+      display:flex;
+      align-items:center;
+      gap:5px;
+    }
+
+    .action-btn{
+      width:33px;
+      height:33px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:9px;
+      display:grid;
+      place-items:center;
+      color:#66766e;
+      font-size:11px;
+      transition:.2s ease;
+    }
+
+    .action-btn:hover{
+      border-color:#bfd1c6;
+      color:var(--green-dark);
+      background:#f7fbf8;
+    }
+
+    .action-btn.delete:hover{
+      color:var(--danger);
+      border-color:#f0c7c9;
+      background:#fff7f7;
     }
 
     /* =========================
        EMPTY
     ========================== */
 
-    .empty-state {
-      display: none;
-      padding: 60px 20px;
-      text-align: center;
+    .empty-state{
+      display:none;
+      padding:65px 20px;
+      text-align:center;
     }
 
-    .empty-state.show {
-      display: block;
+    .empty-icon{
+      width:58px;
+      height:58px;
+      margin:0 auto 15px;
+      border-radius:17px;
+      background:var(--green-soft);
+      color:var(--green-dark);
+      display:grid;
+      place-items:center;
+      font-size:20px;
     }
 
-    .empty-icon {
-      width: 58px;
-      height: 58px;
-      margin: 0 auto 13px;
-      border-radius: 17px;
-      background: var(--green-soft);
-      color: var(--green-dark);
-      display: grid;
-      place-items: center;
-      font-size: 20px;
+    .empty-state h3{
+      font-family:"Manrope",sans-serif;
+      font-size:17px;
     }
 
-    .empty-state h3 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 17px;
-    }
-
-    .empty-state p {
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 6px;
+    .empty-state p{
+      color:var(--muted);
+      font-size:11px;
+      margin-top:6px;
     }
 
     /* =========================
        MODAL
     ========================== */
 
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(13, 20, 16, .55);
-      backdrop-filter: blur(7px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 2000;
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(4,13,8,.68);
+      backdrop-filter:blur(12px);
+      z-index:2000;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:25px;
     }
 
-    .modal-overlay.show {
-      display: flex;
+    .modal-overlay.show{
+      display:flex;
     }
 
-    .modal {
-      width: min(500px, 100%);
-      background: white;
-      border-radius: 22px;
-      box-shadow: 0 25px 80px rgba(0,0,0,.22);
-      overflow: hidden;
-      animation: modalIn .2s ease;
+    .modal{
+      width:min(1080px,100%);
+      max-height:92vh;
+      overflow:auto;
+      background:#fff;
+      border-radius:24px;
+      box-shadow:0 35px 100px rgba(0,0,0,.25);
+      animation:modalIn .22s ease;
     }
 
-    @keyframes modalIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px) scale(.98);
+    @keyframes modalIn{
+      from{
+        opacity:0;
+        transform:translateY(15px) scale(.98);
       }
-
-      to {
-        opacity: 1;
-        transform: none;
+      to{
+        opacity:1;
+        transform:none;
       }
     }
 
-    .modal-header {
-      padding: 19px 20px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+    .modal.small{
+      width:min(570px,100%);
     }
 
-    .modal-header h3 {
-      font-family: "Space Grotesk", sans-serif;
-      font-size: 17px;
+    .modal-head{
+      min-height:72px;
+      padding:16px 21px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
     }
 
-    .modal-close {
-      width: 32px;
-      height: 32px;
-      border: 1px solid var(--border);
-      background: white;
-      border-radius: 9px;
-      color: #6f7972;
+    .modal-title{
+      font-family:"Manrope",sans-serif;
+      font-size:17px;
+      font-weight:800;
     }
 
-    .modal-body {
-      padding: 20px;
+    .modal-subtitle{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:3px;
     }
 
-    .form-group {
-      margin-bottom: 15px;
+    .close-btn{
+      width:38px;
+      height:38px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:11px;
+      display:grid;
+      place-items:center;
+      color:#68776f;
     }
 
-    .form-group label {
-      display: block;
-      font-size: 10px;
-      font-weight: 800;
-      margin-bottom: 7px;
-      color: #59635c;
+    /* =========================
+       PREVIEW
+    ========================== */
+
+    .preview-toolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      padding:13px 18px;
+      background:#f8faf9;
+      border-bottom:1px solid var(--border);
     }
 
-    .form-control {
-      width: 100%;
-      height: 41px;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      outline: none;
-      padding: 0 12px;
-      color: var(--text);
-      font-size: 11px;
-      background: white;
+    .device-switch{
+      display:flex;
+      padding:4px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:11px;
+      gap:3px;
     }
 
-    textarea.form-control {
-      height: 90px;
-      padding-top: 11px;
-      resize: vertical;
+    .device-btn{
+      height:34px;
+      border:0;
+      border-radius:8px;
+      background:transparent;
+      color:#829088;
+      padding:0 12px;
+      font-size:10px;
+      font-weight:800;
     }
 
-    .form-control:focus {
-      border-color: #9bd7b5;
-      box-shadow: 0 0 0 3px rgba(24,169,87,.08);
+    .device-btn.active{
+      background:#eaf8f0;
+      color:var(--green-dark);
     }
 
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 11px;
+    .preview-title-mini{
+      font-size:11px;
+      color:#64736b;
+      font-weight:700;
     }
 
-    .modal-footer {
-      padding: 15px 20px;
-      background: #fafbfa;
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
+    .preview-stage{
+      min-height:600px;
+      padding:28px;
+      background:
+        radial-gradient(circle at 20% 10%,rgba(25,180,91,.09),transparent 25%),
+        #eef2ef;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      overflow:auto;
     }
 
-    .btn {
-      height: 39px;
-      padding: 0 15px;
-      border-radius: 10px;
-      font-size: 10px;
-      font-weight: 800;
-      border: 1px solid var(--border);
-      background: white;
-      color: #657068;
+    .browser{
+      width:min(900px,100%);
+      height:560px;
+      background:#fff;
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 25px 60px rgba(12,25,18,.18);
+      border:1px solid #dce5df;
+      transition:.3s ease;
+      display:flex;
+      flex-direction:column;
     }
 
-    .btn-primary {
-      background: var(--green);
-      border-color: var(--green);
-      color: white;
+    .browser.mobile{
+      width:375px;
+      height:650px;
+      border:7px solid #101612;
+      border-radius:35px;
+      box-shadow:0 30px 70px rgba(0,0,0,.27);
+      position:relative;
     }
 
-    .btn-primary:hover {
-      background: var(--green-dark);
+    .browser.mobile::before{
+      content:"";
+      position:absolute;
+      width:105px;
+      height:22px;
+      top:0;
+      left:50%;
+      transform:translateX(-50%);
+      background:#101612;
+      border-radius:0 0 14px 14px;
+      z-index:10;
+    }
+
+    .browser.mobile .browser-top{
+      padding-top:19px;
+    }
+
+    .browser-top{
+      height:38px;
+      flex:none;
+      background:#f7f8f7;
+      border-bottom:1px solid #e8ece9;
+      display:flex;
+      align-items:center;
+      gap:7px;
+      padding:0 13px;
+    }
+
+    .browser-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#ccd4cf;
+    }
+
+    .browser-url{
+      flex:1;
+      height:23px;
+      border-radius:6px;
+      background:#edf1ee;
+      color:#89958f;
+      font-size:8px;
+      display:flex;
+      align-items:center;
+      padding:0 9px;
+      margin-left:5px;
+    }
+
+    .browser-content{
+      flex:1;
+      position:relative;
+      overflow:hidden;
+      background:#fff;
+    }
+
+    .preview-placeholder{
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      gap:10px;
+      color:#7d8c84;
+      text-align:center;
+      padding:25px;
+    }
+
+    .preview-placeholder .icon{
+      width:62px;
+      height:62px;
+      border-radius:18px;
+      display:grid;
+      place-items:center;
+      background:#eaf8f0;
+      color:#14894a;
+      font-size:23px;
+    }
+
+    .preview-placeholder strong{
+      font-family:"Manrope",sans-serif;
+      font-size:15px;
+      color:#26352d;
+    }
+
+    .preview-placeholder span{
+      font-size:10px;
+      max-width:340px;
+      line-height:1.6;
+    }
+
+    /* =========================
+       FORM MODAL
+    ========================== */
+
+    .form-body{
+      padding:22px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:15px;
+    }
+
+    .field.full{
+      grid-column:1/-1;
+    }
+
+    .field label{
+      display:block;
+      color:#526159;
+      font-size:10px;
+      font-weight:800;
+      margin-bottom:7px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:11px;
+      outline:none;
+      background:#fff;
+      color:var(--text);
+      font-size:11px;
+      padding:0 12px;
+    }
+
+    .field input,
+    .field select{
+      height:42px;
+    }
+
+    .field textarea{
+      padding:11px 12px;
+      min-height:100px;
+      resize:vertical;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus{
+      border-color:rgba(25,180,91,.55);
+      box-shadow:0 0 0 4px rgba(25,180,91,.07);
+    }
+
+    .modal-footer{
+      padding:16px 22px;
+      border-top:1px solid var(--border);
+      display:flex;
+      justify-content:flex-end;
+      gap:9px;
     }
 
     /* =========================
        TOAST
     ========================== */
 
-    .toast {
-      position: fixed;
-      right: 24px;
-      bottom: 24px;
-      width: min(350px, calc(100% - 30px));
-      background: var(--black);
-      color: white;
-      border-radius: 15px;
-      padding: 14px 16px;
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      box-shadow: 0 20px 45px rgba(0,0,0,.22);
-      transform: translateY(120px);
-      opacity: 0;
-      pointer-events: none;
-      transition: .3s ease;
-      z-index: 5000;
+    .toast{
+      position:fixed;
+      right:24px;
+      bottom:24px;
+      z-index:5000;
+      min-width:290px;
+      max-width:380px;
+      background:#0b1710;
+      color:#fff;
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:15px;
+      padding:14px 15px;
+      box-shadow:0 20px 50px rgba(0,0,0,.22);
+      display:flex;
+      align-items:flex-start;
+      gap:11px;
+      transform:translateY(120px);
+      opacity:0;
+      pointer-events:none;
+      transition:.3s ease;
     }
 
-    .toast.show {
-      transform: translateY(0);
-      opacity: 1;
+    .toast.show{
+      transform:none;
+      opacity:1;
     }
 
-    .toast-icon {
-      width: 31px;
-      height: 31px;
-      border-radius: 9px;
-      background: rgba(255,255,255,.1);
-      display: grid;
-      place-items: center;
-      color: #76e6a6;
-      flex: 0 0 31px;
+    .toast-icon{
+      width:30px;
+      height:30px;
+      border-radius:9px;
+      background:rgba(25,180,91,.18);
+      color:#72eda5;
+      display:grid;
+      place-items:center;
+      flex:none;
     }
 
-    .toast-content {
-      flex: 1;
+    .toast-text{
+      flex:1;
     }
 
-    .toast-content strong {
-      display: block;
-      font-size: 11px;
+    .toast-title{
+      font-size:11px;
+      font-weight:800;
     }
 
-    .toast-content span {
-      display: block;
-      font-size: 9px;
-      color: #aab3ad;
-      margin-top: 2px;
+    .toast-message{
+      color:#9baaa2;
+      font-size:10px;
+      line-height:1.5;
+      margin-top:2px;
     }
 
-    .toast-close {
-      border: 0;
-      background: transparent;
-      color: #aab3ad;
+    .toast-close{
+      border:0;
+      background:none;
+      color:#82918a;
+      padding:2px;
     }
 
     /* =========================
-       OVERLAY
+       OVERLAY SIDEBAR
     ========================== */
 
-    .sidebar-overlay {
-      display: none;
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.35);
-      z-index: 950;
+    .sidebar-overlay{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.45);
+      z-index:900;
     }
 
     /* =========================
        RESPONSIVE
     ========================== */
 
-    @media (max-width: 1100px) {
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
+    @media(max-width:1200px){
+      .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .content{
+        padding:25px;
       }
     }
 
-    @media (max-width: 850px) {
-      .sidebar {
-        transform: translateX(-100%);
+    @media(max-width:900px){
+      :root{
+        --sidebar:250px;
       }
 
-      .sidebar.open {
-        transform: translateX(0);
+      .sidebar{
+        transform:translateX(-100%);
+        transition:.25s ease;
       }
 
-      .sidebar-overlay.show {
-        display: block;
+      .sidebar.open{
+        transform:none;
       }
 
-      .main {
-        margin-left: 0;
+      .sidebar-overlay.show{
+        display:block;
       }
 
-      .mobile-menu {
-        display: grid;
-        place-items: center;
+      .main{
+        margin-left:0;
       }
 
-      .content {
-        padding: 25px 20px 40px;
+      .mobile-sidebar-btn{
+        display:grid;
+        place-items:center;
       }
 
-      .topbar {
-        padding: 0 20px;
-      }
-    }
-
-    @media (max-width: 650px) {
-      .stats-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
+      .topbar{
+        padding:0 20px;
       }
 
-      .stat-card {
-        padding: 15px;
-      }
-
-      .stat-card h3 {
-        font-size: 21px;
-      }
-
-      .management-header {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .toolbar {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .search-box {
-        max-width: none;
-      }
-
-      .filter-select {
-        width: 100%;
-      }
-
-      .view-site-btn span {
-        display: none;
-      }
-
-      .top-actions {
-        gap: 5px;
+      .preview-stage{
+        min-height:500px;
       }
     }
 
-    @media (max-width: 480px) {
-      .stats-grid {
-        grid-template-columns: 1fr;
+    @media(max-width:680px){
+      .content{
+        padding:17px;
       }
 
-      .page-heading p {
-        display: none;
+      .topbar{
+        height:72px;
       }
 
-      .content {
-        padding: 20px 14px 35px;
+      .page-heading h1{
+        font-size:18px;
       }
 
-      .topbar {
-        padding: 0 14px;
+      .page-heading p{
+        display:none;
       }
 
-      .management-header,
-      .toolbar {
-        padding-left: 15px;
-        padding-right: 15px;
+      .top-actions .outline-btn{
+        display:none;
       }
 
-      .form-row {
-        grid-template-columns: 1fr;
+      .stats-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
       }
 
-      .modal-overlay {
-        padding: 10px;
+      .stat-card{
+        padding:16px;
+      }
+
+      .stat-value{
+        font-size:22px;
+      }
+
+      .management-head{
+        align-items:flex-start;
+        flex-direction:column;
+        padding:18px;
+      }
+
+      .management-head .primary-btn{
+        width:100%;
+      }
+
+      .toolbar{
+        padding:13px;
+      }
+
+      .search-box{
+        min-width:100%;
+      }
+
+      .filter-select{
+        flex:1;
+        min-width:0;
+      }
+
+      .preview-stage{
+        padding:15px;
+      }
+
+      .browser{
+        height:500px;
+      }
+
+      .browser.mobile{
+        width:320px;
+        height:570px;
+      }
+
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+
+      .field.full{
+        grid-column:auto;
+      }
+
+      .toast{
+        left:15px;
+        right:15px;
+        bottom:15px;
+        min-width:0;
+      }
+    }
+
+    @media(max-width:440px){
+      .stats-grid{
+        grid-template-columns:1fr;
+      }
+
+      .top-actions .primary-btn{
+        padding:0 11px;
+      }
+
+      .top-actions .primary-btn span{
+        display:none;
+      }
+
+      .modal-overlay{
+        padding:10px;
+      }
+
+      .modal{
+        border-radius:19px;
       }
     }
   </style>
@@ -1097,82 +1355,78 @@
 
 <div class="app">
 
-  <!-- =========================
-       SIDEBAR
-  ========================== -->
+  <!-- ================= SIDEBAR ================= -->
 
   <aside class="sidebar" id="sidebar">
 
     <div class="brand">
-      <a href="../index.html">
-        <img src="../logo.png" alt="Website Deals">
-        <div class="brand-text">
-          <strong>Website Deals</strong>
-          <span>Admin Portal</span>
-        </div>
-      </a>
+      <img src="../logo.png" alt="Website Deals">
+      <div class="brand-text">
+        <div class="brand-title">Website Deals</div>
+        <div class="brand-subtitle">Admin Marketplace</div>
+      </div>
     </div>
 
-    <nav class="sidebar-nav">
+    <div class="sidebar-scroll">
 
-      <div class="nav-label">Marketplace</div>
+      <div class="nav-group">
+        <div class="nav-label">Marketplace</div>
 
-      <a class="nav-item" href="dashboard.html">
-        <i class="fa-solid fa-grid-2"></i>
-        <span>Dashboard</span>
-      </a>
+        <a class="nav-item" href="dashboard.html">
+          <span class="nav-icon">⌂</span>
+          <span class="nav-text">Dashboard</span>
+        </a>
 
-      <a class="nav-item active" href="websites.html">
-        <i class="fa-solid fa-window-maximize"></i>
-        <span>Websites</span>
-        <span class="nav-badge" id="sidebarWebsiteCount">8</span>
-      </a>
+        <a class="nav-item active" href="websites.html">
+          <span class="nav-icon">▣</span>
+          <span class="nav-text">Websites</span>
+          <span class="nav-badge" id="sideWebsiteCount">8</span>
+        </a>
 
-      <a class="nav-item" href="categories.html">
-        <i class="fa-solid fa-layer-group"></i>
-        <span>Categories</span>
-      </a>
+        <a class="nav-item" href="categories.html">
+          <span class="nav-icon">◫</span>
+          <span class="nav-text">Categories</span>
+        </a>
 
-      <a class="nav-item" href="orders.html">
-        <i class="fa-solid fa-bag-shopping"></i>
-        <span>Orders</span>
-        <span class="nav-badge">12</span>
-      </a>
+        <a class="nav-item" href="orders.html">
+          <span class="nav-icon">⌁</span>
+          <span class="nav-text">Orders</span>
+          <span class="nav-badge">12</span>
+        </a>
 
-      <a class="nav-item" href="customers.html">
-        <i class="fa-solid fa-users"></i>
-        <span>Customers</span>
-      </a>
+        <a class="nav-item" href="customers.html">
+          <span class="nav-icon">♙</span>
+          <span class="nav-text">Customers</span>
+        </a>
 
-      <a class="nav-item" href="newsletter.html">
-        <i class="fa-solid fa-envelope"></i>
-        <span>Newsletter</span>
-      </a>
+        <a class="nav-item" href="newsletter.html">
+          <span class="nav-icon">✉</span>
+          <span class="nav-text">Newsletter</span>
+        </a>
+      </div>
 
-    </nav>
+    </div>
 
-    <div class="sidebar-profile">
-      <div class="profile-box">
-        <div class="profile-avatar">A</div>
+    <div class="sidebar-bottom">
+      <div class="admin-profile">
+        <div class="admin-avatar">A</div>
 
-        <div class="profile-info">
-          <strong>Administrator</strong>
-          <span>Marketplace Admin</span>
+        <div class="admin-info">
+          <div class="admin-name">Administrator</div>
+          <div class="admin-role">Marketplace Admin</div>
         </div>
 
-        <button class="logout-btn" id="logoutBtn" title="Sign out">
-          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <button class="logout-btn" onclick="logout()" title="Sign out">
+          ↪
         </button>
       </div>
     </div>
 
   </aside>
 
-  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
-  <!-- =========================
-       MAIN
-  ========================== -->
+  <!-- ================= MAIN ================= -->
 
   <main class="main">
 
@@ -1180,31 +1434,38 @@
 
       <div class="topbar-left">
 
-        <button class="mobile-menu" id="mobileMenu">
-          <i class="fa-solid fa-bars"></i>
+        <button
+          class="mobile-sidebar-btn"
+          onclick="openSidebar()"
+          aria-label="Open menu"
+        >
+          ☰
         </button>
 
         <div class="page-heading">
           <h1>Website Management</h1>
-          <p>Add, edit and manage marketplace websites</p>
+          <p>Manage your marketplace websites and previews.</p>
         </div>
 
       </div>
 
       <div class="top-actions">
 
-        <button class="icon-btn" id="refreshBtn" title="Refresh">
-          <i class="fa-solid fa-rotate"></i>
+        <button class="icon-btn" onclick="refreshPage()" title="Refresh">
+          ↻
         </button>
 
         <a
           href="../index.html"
           target="_blank"
-          class="view-site-btn"
+          class="outline-btn"
         >
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          <span>View Marketplace</span>
+          ↗ <span>View Marketplace</span>
         </a>
+
+        <button class="primary-btn" onclick="openAddModal()">
+          ＋ <span>Add Website</span>
+        </button>
 
       </div>
 
@@ -1212,96 +1473,84 @@
 
     <section class="content">
 
-      <!-- =========================
-           STATS
-      ========================== -->
+      <!-- ================= STATS ================= -->
 
       <div class="stats-grid">
 
         <div class="stat-card">
           <div class="stat-top">
-            <div class="stat-icon">
-              <i class="fa-solid fa-globe"></i>
-            </div>
-            <span class="stat-change">Live</span>
+            <div class="stat-label">Total Websites</div>
+            <div class="stat-icon">▣</div>
           </div>
-
-          <h3 id="totalWebsites">8</h3>
-          <p>Total Websites</p>
+          <div class="stat-value" id="totalWebsites">8</div>
+          <div class="stat-change">All marketplace listings</div>
         </div>
 
         <div class="stat-card">
           <div class="stat-top">
-            <div class="stat-icon">
-              <i class="fa-solid fa-circle-check"></i>
-            </div>
-            <span class="stat-change">Active</span>
+            <div class="stat-label">Published</div>
+            <div class="stat-icon">✓</div>
           </div>
-
-          <h3 id="publishedWebsites">6</h3>
-          <p>Published</p>
+          <div class="stat-value" id="publishedWebsites">7</div>
+          <div class="stat-change">Visible on marketplace</div>
         </div>
 
         <div class="stat-card">
           <div class="stat-top">
-            <div class="stat-icon">
-              <i class="fa-solid fa-pen-to-square"></i>
-            </div>
-            <span class="stat-change">Draft</span>
+            <div class="stat-label">Drafts</div>
+            <div class="stat-icon">◷</div>
           </div>
-
-          <h3 id="draftWebsites">2</h3>
-          <p>Draft Websites</p>
+          <div class="stat-value" id="draftWebsites">1</div>
+          <div class="stat-change">Not publicly visible</div>
         </div>
 
         <div class="stat-card">
           <div class="stat-top">
-            <div class="stat-icon">
-              <i class="fa-solid fa-chart-line"></i>
-            </div>
-            <span class="stat-change">Sales</span>
+            <div class="stat-label">Total Sales</div>
+            <div class="stat-icon">↗</div>
           </div>
-
-          <h3 id="totalSales">1,248</h3>
-          <p>Total Website Sales</p>
+          <div class="stat-value" id="totalSales">1,248</div>
+          <div class="stat-change">Across all websites</div>
         </div>
 
       </div>
 
-      <!-- =========================
-           MANAGEMENT
-      ========================== -->
+      <!-- ================= MANAGEMENT ================= -->
 
       <div class="management-card">
 
-        <div class="management-header">
+        <div class="management-head">
 
           <div class="management-title">
-            <h2>All Websites</h2>
-            <p>Manage the websites displayed on your marketplace.</p>
+            <h2>Marketplace Websites</h2>
+            <p>View, preview, edit and manage every website listing.</p>
           </div>
 
-          <button class="add-btn" id="addWebsiteBtn">
-            <i class="fa-solid fa-plus"></i>
-            Add Website
+          <button class="primary-btn" onclick="openAddModal()">
+            ＋ Add Website
           </button>
 
         </div>
 
-        <!-- Toolbar -->
+        <!-- TOOLBAR -->
 
         <div class="toolbar">
 
           <div class="search-box">
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>⌕</span>
             <input
               type="search"
               id="searchInput"
-              placeholder="Search website name, category..."
+              placeholder="Search website name, ID or category..."
+              oninput="renderWebsites()"
             >
           </div>
 
-          <select class="filter-select" id="categoryFilter">
+          <select
+            class="filter-select"
+            id="categoryFilter"
+            onchange="renderWebsites()"
+          >
             <option value="all">All Categories</option>
             <option value="Business">Business</option>
             <option value="Restaurant">Restaurant</option>
@@ -1311,25 +1560,32 @@
             <option value="Monthly">Monthly</option>
           </select>
 
-          <select class="filter-select" id="statusFilter">
+          <select
+            class="filter-select"
+            id="statusFilter"
+            onchange="renderWebsites()"
+          >
             <option value="all">All Status</option>
             <option value="published">Published</option>
             <option value="draft">Draft</option>
-            <option value="archived">Archived</option>
           </select>
 
-          <select class="filter-select" id="sortFilter">
-            <option value="newest">Newest First</option>
-            <option value="oldest">Oldest First</option>
-            <option value="price-low">Price: Low → High</option>
-            <option value="price-high">Price: High → Low</option>
-            <option value="sales">Most Sales</option>
-            <option value="name">Name A → Z</option>
+          <select
+            class="filter-select"
+            id="sortFilter"
+            onchange="renderWebsites()"
+          >
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="price-low">Price: Low</option>
+            <option value="price-high">Price: High</option>
+            <option value="sales-high">Sales: High</option>
+            <option value="name">Name A–Z</option>
           </select>
 
         </div>
 
-        <!-- Table -->
+        <!-- TABLE -->
 
         <div class="table-wrap">
 
@@ -1342,6 +1598,7 @@
                 <th>Price</th>
                 <th>Status</th>
                 <th>Badges</th>
+                <th>Rating</th>
                 <th>Sales</th>
                 <th>Actions</th>
               </tr>
@@ -1351,19 +1608,17 @@
 
           </table>
 
-        </div>
+          <div class="empty-state" id="emptyState">
 
-        <div class="empty-state" id="emptyState">
+            <div class="empty-icon">⌕</div>
 
-          <div class="empty-icon">
-            <i class="fa-solid fa-window-maximize"></i>
+            <h3>No websites found</h3>
+
+            <p>
+              Try another search or change your filters.
+            </p>
+
           </div>
-
-          <h3>No websites found</h3>
-
-          <p>
-            Try another search or filter, or add a new website.
-          </p>
 
         </div>
 
@@ -1375,54 +1630,160 @@
 
 </div>
 
-<!-- =========================
-     ADD / EDIT MODAL
-========================== -->
 
-<div class="modal-overlay" id="websiteModal">
+<!-- ================= PREVIEW MODAL ================= -->
+
+<div class="modal-overlay" id="previewModal">
 
   <div class="modal">
 
-    <div class="modal-header">
+    <div class="modal-head">
 
-      <h3 id="modalTitle">Add Website</h3>
+      <div>
+        <div class="modal-title" id="previewModalTitle">
+          Website Preview
+        </div>
 
-      <button class="modal-close" id="modalClose">
-        <i class="fa-solid fa-xmark"></i>
+        <div class="modal-subtitle" id="previewModalSubtitle">
+          Live website preview
+        </div>
+      </div>
+
+      <button class="close-btn" onclick="closePreview()">
+        ✕
       </button>
 
     </div>
 
-    <form id="websiteForm">
+    <div class="preview-toolbar">
 
-      <div class="modal-body">
+      <div class="preview-title-mini">
+        <span id="previewDeviceText">Desktop Preview</span>
+      </div>
 
-        <input type="hidden" id="editId">
+      <div class="device-switch">
 
-        <div class="form-group">
-          <label for="websiteName">Website Name</label>
+        <button
+          class="device-btn active"
+          id="desktopBtn"
+          onclick="setDevice('desktop')"
+        >
+          🖥 Desktop
+        </button>
 
-          <input
-            class="form-control"
-            id="websiteName"
-            type="text"
-            placeholder="e.g. Corporate Pro"
-            required
-          >
+        <button
+          class="device-btn"
+          id="mobileBtn"
+          onclick="setDevice('mobile')"
+        >
+          📱 Mobile
+        </button>
+
+      </div>
+
+    </div>
+
+    <div class="preview-stage">
+
+      <div class="browser" id="browserPreview">
+
+        <div class="browser-top">
+
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+
+          <div class="browser-url" id="browserUrl">
+            website-preview.local
+          </div>
+
         </div>
 
-        <div class="form-row">
+        <div class="browser-content">
 
-          <div class="form-group">
+          <iframe
+            id="previewFrame"
+            title="Website Preview"
+            style="
+              width:100%;
+              height:100%;
+              border:0;
+              display:none;
+              background:#fff;
+            "
+          ></iframe>
 
-            <label for="websiteCategory">Category</label>
+          <div
+            class="preview-placeholder"
+            id="previewPlaceholder"
+          >
 
-            <select
-              class="form-control"
-              id="websiteCategory"
+            <div class="icon">◫</div>
+
+            <strong id="placeholderTitle">
+              Website Preview
+            </strong>
+
+            <span id="placeholderText">
+              Add a real Live Preview URL to display this website here.
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= ADD / EDIT MODAL ================= -->
+
+<div class="modal-overlay" id="formModal">
+
+  <div class="modal small">
+
+    <div class="modal-head">
+
+      <div>
+        <div class="modal-title" id="formModalTitle">
+          Add Website
+        </div>
+
+        <div class="modal-subtitle">
+          Create a marketplace website listing.
+        </div>
+      </div>
+
+      <button class="close-btn" onclick="closeFormModal()">
+        ✕
+      </button>
+
+    </div>
+
+    <form id="websiteForm" onsubmit="saveWebsite(event)">
+
+      <div class="form-body">
+
+        <div class="form-grid">
+
+          <div class="field full">
+            <label>Website Name</label>
+            <input
+              type="text"
+              id="websiteName"
+              placeholder="e.g. Corporate Pro"
               required
             >
-              <option value="">Select Category</option>
+          </div>
+
+          <div class="field">
+            <label>Category</label>
+            <select id="websiteCategory" required>
               <option value="Business">Business</option>
               <option value="Restaurant">Restaurant</option>
               <option value="Agency">Agency</option>
@@ -1430,95 +1791,62 @@
               <option value="Portfolio">Portfolio</option>
               <option value="Monthly">Monthly</option>
             </select>
-
           </div>
 
-          <div class="form-group">
-
-            <label for="websiteStatus">Status</label>
-
-            <select
-              class="form-control"
-              id="websiteStatus"
-              required
-            >
+          <div class="field">
+            <label>Status</label>
+            <select id="websiteStatus">
               <option value="published">Published</option>
               <option value="draft">Draft</option>
-              <option value="archived">Archived</option>
             </select>
-
           </div>
 
-        </div>
-
-        <div class="form-row">
-
-          <div class="form-group">
-
-            <label for="websitePrice">Selling Price</label>
-
+          <div class="field">
+            <label>Selling Price (৳)</label>
             <input
-              class="form-control"
-              id="websitePrice"
               type="number"
+              id="websitePrice"
               min="0"
               placeholder="999"
               required
             >
-
           </div>
 
-          <div class="form-group">
-
-            <label for="websiteOldPrice">Original Price</label>
-
+          <div class="field">
+            <label>Original Price (৳)</label>
             <input
-              class="form-control"
-              id="websiteOldPrice"
               type="number"
+              id="websiteOldPrice"
               min="0"
               placeholder="1499"
             >
-
           </div>
 
-        </div>
+          <div class="field full">
+            <label>Thumbnail Image URL</label>
+            <input
+              type="url"
+              id="websiteImage"
+              placeholder="https://..."
+            >
+          </div>
 
-        <div class="form-group">
+          <div class="field full">
+            <label>Live Preview URL</label>
+            <input
+              type="url"
+              id="websitePreviewUrl"
+              placeholder="https://..."
+            >
+          </div>
 
-          <label for="websiteImage">Thumbnail Image URL</label>
-
-          <input
-            class="form-control"
-            id="websiteImage"
-            type="url"
-            placeholder="https://..."
-          >
-
-        </div>
-
-        <div class="form-group">
-
-          <label for="websitePreview">Live Preview URL</label>
-
-          <input
-            class="form-control"
-            id="websitePreview"
-            type="url"
-            placeholder="https://..."
-          >
-
-        </div>
-
-        <div class="form-group">
-
-          <label for="websiteDescription">Description</label>
-
-          <textarea
-            class="form-control"
-            id="websiteDescription"
-            placeholder="Short description of this website..."
-          ></textarea>
+          <div class="field full">
+            <label>Description</label>
+            <textarea
+              id="websiteDescription"
+              placeholder="Short description of this website..."
+            ></textarea>
+          </div>
 
         </div>
 
@@ -1528,18 +1856,17 @@
 
         <button
           type="button"
-          class="btn"
-          id="cancelBtn"
+          class="outline-btn"
+          onclick="closeFormModal()"
         >
           Cancel
         </button>
 
         <button
           type="submit"
-          class="btn btn-primary"
+          class="primary-btn"
         >
-          <i class="fa-solid fa-floppy-disk"></i>
-          Save Website
+          ✓ Save Website
         </button>
 
       </div>
@@ -1550,222 +1877,322 @@
 
 </div>
 
-<!-- =========================
-     TOAST
-========================== -->
+
+<!-- ================= DELETE MODAL ================= -->
+
+<div class="modal-overlay" id="deleteModal">
+
+  <div class="modal small">
+
+    <div class="modal-head">
+
+      <div>
+        <div class="modal-title">
+          Delete Website?
+        </div>
+
+        <div class="modal-subtitle">
+          This action cannot be undone in the demo.
+        </div>
+      </div>
+
+      <button class="close-btn" onclick="closeDeleteModal()">
+        ✕
+      </button>
+
+    </div>
+
+    <div class="form-body">
+
+      <p
+        id="deleteText"
+        style="
+          color:#596860;
+          font-size:12px;
+          line-height:1.7;
+        "
+      ></p>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button
+        class="outline-btn"
+        onclick="closeDeleteModal()"
+      >
+        Cancel
+      </button>
+
+      <button
+        class="primary-btn"
+        style="background:linear-gradient(135deg,#e5484d,#bd3035);"
+        onclick="confirmDelete()"
+      >
+        Delete Website
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- ================= TOAST ================= -->
 
 <div class="toast" id="toast">
 
-  <div class="toast-icon">
-    <i class="fa-solid fa-check"></i>
+  <div class="toast-icon">✓</div>
+
+  <div class="toast-text">
+    <div class="toast-title" id="toastTitle">
+      Done
+    </div>
+
+    <div class="toast-message" id="toastMessage">
+      Action completed.
+    </div>
   </div>
 
-  <div class="toast-content">
-    <strong id="toastTitle">Success</strong>
-    <span id="toastMessage">Done.</span>
-  </div>
-
-  <button class="toast-close" id="toastClose">
-    <i class="fa-solid fa-xmark"></i>
+  <button
+    class="toast-close"
+    onclick="hideToast()"
+  >
+    ✕
   </button>
 
 </div>
 
+
 <script>
 
-  /* =========================================
-     DEMO DATA
-     Firebase will replace this later.
-  ========================================== */
-
-  const defaultWebsites = [
-    {
-      id: "wd001",
-      title: "Corporate Pro",
-      category: "Business",
-      price: 999,
-      oldPrice: 1499,
-      status: "published",
-      image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=900&q=80",
-      previewUrl: "#",
-      description: "Professional business website for modern companies.",
-      badge: "POPULAR",
-      sales: 312,
-      createdAt: "2026-09-01"
-    },
-    {
-      id: "wd002",
-      title: "Tasty Bites",
-      category: "Restaurant",
-      price: 1499,
-      oldPrice: 1999,
-      status: "published",
-      image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80",
-      previewUrl: "#",
-      description: "Elegant restaurant website with menu-focused layout.",
-      badge: "SALE",
-      sales: 205,
-      createdAt: "2026-09-05"
-    },
-    {
-      id: "wd003",
-      title: "Creative Studio",
-      category: "Agency",
-      price: 1999,
-      oldPrice: 2999,
-      status: "published",
-      image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80",
-      previewUrl: "#",
-      description: "Creative agency website for design and digital teams.",
-      badge: "POPULAR",
-      sales: 187,
-      createdAt: "2026-09-08"
-    },
-    {
-      id: "wd004",
-      title: "ShopEasy Store",
-      category: "E-commerce",
-      price: 2999,
-      oldPrice: 4499,
-      status: "published",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80",
-      previewUrl: "#",
-      description: "Modern e-commerce storefront for online sellers.",
-      badge: "POPULAR",
-      sales: 164,
-      createdAt: "2026-09-12"
-    },
-    {
-      id: "wd005",
-      title: "Personal Folio",
-      category: "Portfolio",
-      price: 999,
-      oldPrice: 1299,
-      status: "published",
-      image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=900&q=80",
-      previewUrl: "#",
-      description: "Clean portfolio website for creatives and professionals.",
-      badge: "NEW",
-      sales: 146,
-      createdAt: "2026-09-15"
-    },
-    {
-      id: "wd006",
-      title: "Starter Monthly",
-      category: "Monthly",
-      price: 999,
-      oldPrice: 1299,
-      status: "published",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80",
-      previewUrl: "#",
-      description: "Affordable monthly website package for startups.",
-      badge: "NEW",
-      sales: 121,
-      createdAt: "2026-09-18"
-    },
-    {
-      id: "wd007",
-      title: "Biz Launch",
-      category: "Business",
-      price: 1299,
-      oldPrice: 1899,
-      status: "draft",
-      image: "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=900&q=80",
-      previewUrl: "#",
-      description: "Launch-ready business website for growing brands.",
-      badge: "NEW",
-      sales: 73,
-      createdAt: "2026-09-20"
-    },
-    {
-      id: "wd008",
-      title: "Cafe Corner",
-      category: "Restaurant",
-      price: 1199,
-      oldPrice: 1699,
-      status: "draft",
-      image: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=900&q=80",
-      previewUrl: "#",
-      description: "Warm and stylish cafe website for local businesses.",
-      badge: "NEW",
-      sales: 40,
-      createdAt: "2026-09-22"
-    }
-  ];
+  /* =========================================================
+     WEBSITE DEALS — WEBSITE MANAGEMENT
+     Demo storage now.
+     Firebase integration will replace this later.
+  ========================================================= */
 
   const STORAGE_KEY = "websiteDealsAdminWebsites";
 
   let websites = [];
+  let editingId = null;
+  let deletingId = null;
+  let currentPreview = null;
 
-  function loadWebsites() {
+
+  /* =========================
+     DEMO DATA
+  ========================== */
+
+  const defaultWebsites = [
+    {
+      id:"wd001",
+      title:"Corporate Pro",
+      category:"Business",
+      price:999,
+      oldPrice:1499,
+      status:"published",
+      badge:"POPULAR",
+      rating:4.9,
+      reviews:42,
+      sales:284,
+      image:"",
+      previewUrl:"",
+      description:"Premium corporate business website.",
+      createdAt:"2026-09-28"
+    },
+    {
+      id:"wd002",
+      title:"Tasty Bites",
+      category:"Restaurant",
+      price:1499,
+      oldPrice:1999,
+      status:"published",
+      badge:"SALE",
+      rating:4.8,
+      reviews:31,
+      sales:196,
+      image:"",
+      previewUrl:"",
+      description:"Modern restaurant and food website.",
+      createdAt:"2026-09-27"
+    },
+    {
+      id:"wd003",
+      title:"Creative Studio",
+      category:"Agency",
+      price:1999,
+      oldPrice:2499,
+      status:"published",
+      badge:"POPULAR",
+      rating:4.7,
+      reviews:28,
+      sales:164,
+      image:"",
+      previewUrl:"",
+      description:"Creative agency portfolio website.",
+      createdAt:"2026-09-26"
+    },
+    {
+      id:"wd004",
+      title:"ShopEasy Store",
+      category:"E-commerce",
+      price:2999,
+      oldPrice:3999,
+      status:"published",
+      badge:"POPULAR",
+      rating:4.9,
+      reviews:55,
+      sales:221,
+      image:"",
+      previewUrl:"",
+      description:"Complete modern e-commerce storefront.",
+      createdAt:"2026-09-25"
+    },
+    {
+      id:"wd005",
+      title:"Personal Folio",
+      category:"Portfolio",
+      price:999,
+      oldPrice:1299,
+      status:"published",
+      badge:"NEW",
+      rating:4.6,
+      reviews:19,
+      sales:108,
+      image:"",
+      previewUrl:"",
+      description:"Minimal portfolio website for professionals.",
+      createdAt:"2026-09-24"
+    },
+    {
+      id:"wd006",
+      title:"Starter Monthly",
+      category:"Monthly",
+      price:999,
+      oldPrice:1299,
+      status:"published",
+      badge:"MONTHLY",
+      rating:4.8,
+      reviews:36,
+      sales:143,
+      image:"",
+      previewUrl:"",
+      description:"Affordable monthly website package.",
+      createdAt:"2026-09-23"
+    },
+    {
+      id:"wd007",
+      title:"Biz Launch",
+      category:"Business",
+      price:1299,
+      oldPrice:1699,
+      status:"published",
+      badge:"NEW",
+      rating:4.5,
+      reviews:17,
+      sales:76,
+      image:"",
+      previewUrl:"",
+      description:"Fast business launch website.",
+      createdAt:"2026-09-22"
+    },
+    {
+      id:"wd008",
+      title:"Cafe Corner",
+      category:"Restaurant",
+      price:1199,
+      oldPrice:1599,
+      status:"draft",
+      badge:"NEW",
+      rating:4.7,
+      reviews:12,
+      sales:56,
+      image:"",
+      previewUrl:"",
+      description:"Elegant cafe and restaurant website.",
+      createdAt:"2026-09-21"
+    }
+  ];
+
+
+  /* =========================
+     INIT
+  ========================== */
+
+  document.addEventListener("DOMContentLoaded", () => {
+
+    loadWebsites();
+
+    renderWebsites();
+
+    updateStats();
+
+    document.addEventListener("keydown", handleKeyboard);
+
+  });
+
+
+  /* =========================
+     LOAD
+  ========================== */
+
+  function loadWebsites(){
+
     const saved = localStorage.getItem(STORAGE_KEY);
 
-    if (saved) {
-      try {
+    if(saved){
+
+      try{
         websites = JSON.parse(saved);
-      } catch {
+      }catch(error){
         websites = [...defaultWebsites];
       }
-    } else {
+
+    }else{
+
       websites = [...defaultWebsites];
-      saveWebsites();
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(websites)
+      );
+
     }
 
-    render();
   }
 
-  function saveWebsites() {
+
+  /* =========================
+     SAVE
+  ========================== */
+
+  function persist(){
+
     localStorage.setItem(
       STORAGE_KEY,
       JSON.stringify(websites)
     );
+
   }
 
-  /* =========================================
-     HELPERS
-  ========================================== */
 
-  function escapeHTML(value) {
-    return String(value ?? "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
-
-  function formatPrice(value) {
-    return "৳" + Number(value || 0).toLocaleString("en-BD");
-  }
-
-  function categoryIcon(category) {
-    const icons = {
-      "Business": "fa-briefcase",
-      "Restaurant": "fa-utensils",
-      "Agency": "fa-wand-magic-sparkles",
-      "E-commerce": "fa-cart-shopping",
-      "Portfolio": "fa-id-card",
-      "Monthly": "fa-calendar-days"
-    };
-
-    return icons[category] || "fa-globe";
-  }
-
-  function statusLabel(status) {
-    return status.charAt(0).toUpperCase() + status.slice(1);
-  }
-
-  /* =========================================
+  /* =========================
      RENDER
-  ========================================== */
+  ========================== */
 
-  function render() {
+  function renderWebsites(){
 
-    const tbody = document.getElementById("websiteTableBody");
-    const empty = document.getElementById("emptyState");
+    const tbody =
+      document.getElementById("websiteTableBody");
+
+    const empty =
+      document.getElementById("emptyState");
 
     const search =
-      document.getElementById("searchInput")
+      document
+        .getElementById("searchInput")
         .value
         .trim()
         .toLowerCase();
@@ -1779,13 +2206,14 @@
     const sort =
       document.getElementById("sortFilter").value;
 
+
     let filtered = websites.filter(site => {
 
       const matchesSearch =
         !search ||
         site.title.toLowerCase().includes(search) ||
-        site.category.toLowerCase().includes(search) ||
-        site.id.toLowerCase().includes(search);
+        site.id.toLowerCase().includes(search) ||
+        site.category.toLowerCase().includes(search);
 
       const matchesCategory =
         category === "all" ||
@@ -1800,613 +2228,1073 @@
         matchesCategory &&
         matchesStatus
       );
+
     });
 
-    filtered.sort((a, b) => {
 
-      if (sort === "oldest") {
-        return new Date(a.createdAt) - new Date(b.createdAt);
-      }
+    filtered.sort((a,b) => {
 
-      if (sort === "price-low") {
+      if(sort === "price-low"){
         return Number(a.price) - Number(b.price);
       }
 
-      if (sort === "price-high") {
+      if(sort === "price-high"){
         return Number(b.price) - Number(a.price);
       }
 
-      if (sort === "sales") {
-        return Number(b.sales) - Number(a.sales);
+      if(sort === "sales-high"){
+        return Number(b.sales || 0) - Number(a.sales || 0);
       }
 
-      if (sort === "name") {
+      if(sort === "name"){
         return a.title.localeCompare(b.title);
       }
 
-      return new Date(b.createdAt) - new Date(a.createdAt);
+      if(sort === "oldest"){
+        return new Date(a.createdAt || 0) -
+               new Date(b.createdAt || 0);
+      }
+
+      return new Date(b.createdAt || 0) -
+             new Date(a.createdAt || 0);
+
     });
 
-    tbody.innerHTML = "";
 
-    if (!filtered.length) {
-      empty.classList.add("show");
-    } else {
-      empty.classList.remove("show");
+    tbody.innerHTML = filtered
+      .map(createRow)
+      .join("");
+
+
+    if(filtered.length){
+
+      empty.style.display = "none";
+
+    }else{
+
+      empty.style.display = "block";
+
     }
 
-    filtered.forEach(site => {
+  }
 
-      const row = document.createElement("tr");
 
-      const badges = [];
+  /* =========================
+     TABLE ROW
+  ========================== */
 
-      if (site.badge) {
-        badges.push(
-          `<span class="mini-badge">${escapeHTML(site.badge)}</span>`
-        );
-      }
+  function createRow(site){
 
-      if (site.isPopular) {
-        badges.push(
-          `<span class="mini-badge green">Popular</span>`
-        );
-      }
+    const safeTitle =
+      escapeHTML(site.title);
 
-      if (site.isNew) {
-        badges.push(
-          `<span class="mini-badge dark">New</span>`
-        );
-      }
+    const safeCategory =
+      escapeHTML(site.category);
 
-      row.innerHTML = `
+    const image =
+      site.image
+        ? `
+          <img
+            src="${escapeAttr(site.image)}"
+            alt="${safeTitle}"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='grid';"
+          >
+          <div class="thumb-fallback" style="display:none;">▣</div>
+        `
+        : `
+          <div class="thumb-fallback">▣</div>
+        `;
+
+
+    const badge =
+      getBadge(site.badge);
+
+
+    return `
+
+      <tr>
 
         <td>
-          <div class="website-cell">
 
-            <img
-              class="website-thumb"
-              src="${escapeHTML(site.image)}"
-              alt="${escapeHTML(site.title)}"
-              onerror="this.style.opacity='.35'"
-            >
+          <div class="website-info">
 
-            <div class="website-info">
-              <strong>${escapeHTML(site.title)}</strong>
-              <span>${escapeHTML(site.id)}</span>
+            <div class="thumb">
+              ${image}
+            </div>
+
+            <div>
+              <div class="website-name">
+                ${safeTitle}
+              </div>
+
+              <div class="website-id">
+                ${escapeHTML(site.id)}
+              </div>
             </div>
 
           </div>
+
         </td>
 
+
         <td>
+
           <span class="category-pill">
-            <i class="fa-solid ${categoryIcon(site.category)}"></i>
-            ${escapeHTML(site.category)}
+            ${safeCategory}
           </span>
+
         </td>
 
+
         <td>
-          <span class="price">
-            ${formatPrice(site.price)}
-          </span>
+
+          <div class="price">
+            ৳${formatNumber(site.price)}
+          </div>
 
           ${
             site.oldPrice
-              ? `<span class="old-price">${formatPrice(site.oldPrice)}</span>`
-              : ""
+            ?
+            `<div class="old-price">
+              ৳${formatNumber(site.oldPrice)}
+            </div>`
+            :
+            ""
           }
+
         </td>
 
+
         <td>
-          <span class="status ${escapeHTML(site.status)}">
-            ${statusLabel(site.status)}
+
+          <span class="status ${site.status}">
+            ${site.status === "published"
+              ? "Published"
+              : "Draft"}
           </span>
+
         </td>
 
+
         <td>
-          <div class="badge-list">
-            ${
-              badges.length
-                ? badges.join("")
-                : '<span style="color:#a0a8a2;font-size:9px;">—</span>'
-            }
+
+          <div class="badges">
+            ${badge}
           </div>
+
         </td>
 
-        <td>
-          <strong>${Number(site.sales || 0).toLocaleString()}</strong>
-        </td>
 
         <td>
+
+          <span class="rating">
+            ★ ${site.rating || "—"}
+          </span>
+
+        </td>
+
+
+        <td>
+
+          <span class="sales">
+            ${formatNumber(site.sales || 0)}
+          </span>
+
+        </td>
+
+
+        <td>
+
           <div class="actions">
 
             <button
               class="action-btn"
-              title="Preview"
-              onclick="previewWebsite('${site.id}')"
+              onclick="openPreview('${escapeJS(site.id)}')"
+              title="View"
             >
-              <i class="fa-solid fa-eye"></i>
+              👁
             </button>
 
             <button
               class="action-btn"
+              onclick="editWebsite('${escapeJS(site.id)}')"
               title="Edit"
-              onclick="editWebsite('${site.id}')"
             >
-              <i class="fa-solid fa-pen"></i>
+              ✎
             </button>
 
             <button
               class="action-btn delete"
+              onclick="openDeleteModal('${escapeJS(site.id)}')"
               title="Delete"
-              onclick="deleteWebsite('${site.id}')"
             >
-              <i class="fa-solid fa-trash"></i>
+              ♲
             </button>
 
           </div>
+
         </td>
-      `;
 
-      tbody.appendChild(row);
-    });
+      </tr>
 
-    updateStats();
+    `;
+
   }
 
-  /* =========================================
+
+  /* =========================
+     BADGE
+  ========================== */
+
+  function getBadge(badge){
+
+    if(!badge){
+      return "";
+    }
+
+    const value =
+      String(badge).toUpperCase();
+
+    let cls = "";
+
+    if(value === "POPULAR"){
+      cls = "green";
+    }
+
+    if(value === "SALE"){
+      cls = "red";
+    }
+
+    if(value === "NEW"){
+      cls = "orange";
+    }
+
+    if(value === "MONTHLY"){
+      cls = "green";
+    }
+
+    return `
+      <span class="badge ${cls}">
+        ${escapeHTML(value)}
+      </span>
+    `;
+
+  }
+
+
+  /* =========================
      STATS
-  ========================================== */
+  ========================== */
 
-  function updateStats() {
+  function updateStats(){
 
-    const total = websites.length;
+    const total =
+      websites.length;
 
     const published =
-      websites.filter(x => x.status === "published").length;
+      websites.filter(
+        x => x.status === "published"
+      ).length;
 
     const drafts =
-      websites.filter(x => x.status === "draft").length;
+      websites.filter(
+        x => x.status === "draft"
+      ).length;
 
     const sales =
       websites.reduce(
-        (sum, x) => sum + Number(x.sales || 0),
+        (sum,x) =>
+          sum + Number(x.sales || 0),
         0
       );
 
-    document.getElementById("totalWebsites").textContent =
-      total.toLocaleString();
 
-    document.getElementById("publishedWebsites").textContent =
-      published.toLocaleString();
+    document.getElementById(
+      "totalWebsites"
+    ).textContent = formatNumber(total);
 
-    document.getElementById("draftWebsites").textContent =
-      drafts.toLocaleString();
 
-    document.getElementById("totalSales").textContent =
-      sales.toLocaleString();
+    document.getElementById(
+      "publishedWebsites"
+    ).textContent = formatNumber(published);
 
-    document.getElementById("sidebarWebsiteCount").textContent =
-      total;
+
+    document.getElementById(
+      "draftWebsites"
+    ).textContent = formatNumber(drafts);
+
+
+    document.getElementById(
+      "totalSales"
+    ).textContent = formatNumber(sales);
+
+
+    document.getElementById(
+      "sideWebsiteCount"
+    ).textContent = total;
+
   }
 
-  /* =========================================
-     MODAL
-  ========================================== */
 
-  const modal =
-    document.getElementById("websiteModal");
+  /* =========================
+     PREVIEW
+  ========================== */
 
-  const form =
-    document.getElementById("websiteForm");
-
-  function openModal(site = null) {
-
-    modal.classList.add("show");
-
-    if (site) {
-
-      document.getElementById("modalTitle").textContent =
-        "Edit Website";
-
-      document.getElementById("editId").value =
-        site.id;
-
-      document.getElementById("websiteName").value =
-        site.title;
-
-      document.getElementById("websiteCategory").value =
-        site.category;
-
-      document.getElementById("websiteStatus").value =
-        site.status;
-
-      document.getElementById("websitePrice").value =
-        site.price;
-
-      document.getElementById("websiteOldPrice").value =
-        site.oldPrice || "";
-
-      document.getElementById("websiteImage").value =
-        site.image || "";
-
-      document.getElementById("websitePreview").value =
-        site.previewUrl || "";
-
-      document.getElementById("websiteDescription").value =
-        site.description || "";
-
-    } else {
-
-      document.getElementById("modalTitle").textContent =
-        "Add Website";
-
-      form.reset();
-
-      document.getElementById("editId").value = "";
-
-      document.getElementById("websiteStatus").value =
-        "published";
-    }
-
-    setTimeout(() => {
-      document.getElementById("websiteName").focus();
-    }, 100);
-  }
-
-  function closeModal() {
-    modal.classList.remove("show");
-  }
-
-  /* =========================================
-     ADD
-  ========================================== */
-
-  document
-    .getElementById("addWebsiteBtn")
-    .addEventListener("click", () => {
-      openModal();
-    });
-
-  /* =========================================
-     EDIT
-  ========================================== */
-
-  function editWebsite(id) {
+  function openPreview(id){
 
     const site =
-      websites.find(x => x.id === id);
+      websites.find(
+        x => x.id === id
+      );
 
-    if (!site) return;
+    if(!site){
+      return;
+    }
 
-    openModal(site);
+    currentPreview = site;
+
+    document.getElementById(
+      "previewModalTitle"
+    ).textContent =
+      site.title;
+
+
+    document.getElementById(
+      "previewModalSubtitle"
+    ).textContent =
+      `${site.category} · ${site.id}`;
+
+
+    document.getElementById(
+      "browserUrl"
+    ).textContent =
+      site.previewUrl ||
+      "preview.website-deals.local";
+
+
+    document.getElementById(
+      "placeholderTitle"
+    ).textContent =
+      site.title;
+
+
+    document.getElementById(
+      "placeholderText"
+    ).textContent =
+      site.previewUrl
+      ? "Loading live preview..."
+      : "Add a real Live Preview URL to display this website here.";
+
+
+    const frame =
+      document.getElementById("previewFrame");
+
+    const placeholder =
+      document.getElementById("previewPlaceholder");
+
+
+    frame.style.display = "none";
+
+    placeholder.style.display = "flex";
+
+
+    if(site.previewUrl){
+
+      try{
+
+        frame.src = site.previewUrl;
+
+        frame.onload = () => {
+
+          frame.style.display = "block";
+          placeholder.style.display = "none";
+
+        };
+
+      }catch(error){
+
+        placeholder.style.display = "flex";
+
+      }
+
+    }
+
+
+    setDevice("desktop");
+
+    document
+      .getElementById("previewModal")
+      .classList.add("show");
+
+    document.body.style.overflow = "hidden";
+
   }
 
-  /* =========================================
-     SAVE
-  ========================================== */
 
-  form.addEventListener("submit", event => {
+  function setDevice(device){
+
+    const browser =
+      document.getElementById(
+        "browserPreview"
+      );
+
+    const desktopBtn =
+      document.getElementById(
+        "desktopBtn"
+      );
+
+    const mobileBtn =
+      document.getElementById(
+        "mobileBtn"
+      );
+
+    const text =
+      document.getElementById(
+        "previewDeviceText"
+      );
+
+
+    if(device === "mobile"){
+
+      browser.classList.add("mobile");
+
+      mobileBtn.classList.add("active");
+      desktopBtn.classList.remove("active");
+
+      text.textContent =
+        "Mobile Phone Preview";
+
+    }else{
+
+      browser.classList.remove("mobile");
+
+      desktopBtn.classList.add("active");
+      mobileBtn.classList.remove("active");
+
+      text.textContent =
+        "Desktop Preview";
+
+    }
+
+  }
+
+
+  function closePreview(){
+
+    document
+      .getElementById("previewModal")
+      .classList.remove("show");
+
+    document.body.style.overflow = "";
+
+    const frame =
+      document.getElementById("previewFrame");
+
+    frame.src = "";
+
+  }
+
+
+  /* =========================
+     ADD MODAL
+  ========================== */
+
+  function openAddModal(){
+
+    editingId = null;
+
+    document.getElementById(
+      "formModalTitle"
+    ).textContent =
+      "Add Website";
+
+
+    document.getElementById(
+      "websiteForm"
+    ).reset();
+
+
+    document.getElementById(
+      "websiteStatus"
+    ).value =
+      "published";
+
+
+    document
+      .getElementById("formModal")
+      .classList.add("show");
+
+    document.body.style.overflow = "hidden";
+
+  }
+
+
+  /* =========================
+     EDIT
+  ========================== */
+
+  function editWebsite(id){
+
+    const site =
+      websites.find(
+        x => x.id === id
+      );
+
+    if(!site){
+      return;
+    }
+
+    editingId = id;
+
+    document.getElementById(
+      "formModalTitle"
+    ).textContent =
+      "Edit Website";
+
+
+    document.getElementById(
+      "websiteName"
+    ).value =
+      site.title || "";
+
+
+    document.getElementById(
+      "websiteCategory"
+    ).value =
+      site.category || "Business";
+
+
+    document.getElementById(
+      "websiteStatus"
+    ).value =
+      site.status || "published";
+
+
+    document.getElementById(
+      "websitePrice"
+    ).value =
+      site.price || "";
+
+
+    document.getElementById(
+      "websiteOldPrice"
+    ).value =
+      site.oldPrice || "";
+
+
+    document.getElementById(
+      "websiteImage"
+    ).value =
+      site.image || "";
+
+
+    document.getElementById(
+      "websitePreviewUrl"
+    ).value =
+      site.previewUrl || "";
+
+
+    document.getElementById(
+      "websiteDescription"
+    ).value =
+      site.description || "";
+
+
+    document
+      .getElementById("formModal")
+      .classList.add("show");
+
+    document.body.style.overflow = "hidden";
+
+  }
+
+
+  /* =========================
+     SAVE
+  ========================== */
+
+  function saveWebsite(event){
 
     event.preventDefault();
 
-    const editId =
-      document.getElementById("editId").value;
 
-    const data = {
+    const title =
+      document.getElementById(
+        "websiteName"
+      ).value.trim();
 
-      title:
-        document.getElementById("websiteName").value.trim(),
 
-      category:
-        document.getElementById("websiteCategory").value,
+    const category =
+      document.getElementById(
+        "websiteCategory"
+      ).value;
 
-      status:
-        document.getElementById("websiteStatus").value,
 
-      price:
-        Number(document.getElementById("websitePrice").value),
+    const status =
+      document.getElementById(
+        "websiteStatus"
+      ).value;
 
-      oldPrice:
-        Number(document.getElementById("websiteOldPrice").value) || 0,
 
-      image:
-        document.getElementById("websiteImage").value.trim(),
-
-      previewUrl:
-        document.getElementById("websitePreview").value.trim(),
-
-      description:
-        document.getElementById("websiteDescription").value.trim()
-    };
-
-    if (!data.title || !data.category || !data.price) {
-      showToast(
-        "Missing information",
-        "Please complete the required fields.",
-        true
+    const price =
+      Number(
+        document.getElementById(
+          "websitePrice"
+        ).value
       );
-      return;
-    }
 
-    if (editId) {
+
+    const oldPrice =
+      Number(
+        document.getElementById(
+          "websiteOldPrice"
+        ).value
+      ) || 0;
+
+
+    const image =
+      document.getElementById(
+        "websiteImage"
+      ).value.trim();
+
+
+    const previewUrl =
+      document.getElementById(
+        "websitePreviewUrl"
+      ).value.trim();
+
+
+    const description =
+      document.getElementById(
+        "websiteDescription"
+      ).value.trim();
+
+
+    if(editingId){
 
       const index =
-        websites.findIndex(x => x.id === editId);
+        websites.findIndex(
+          x => x.id === editingId
+        );
 
-      if (index !== -1) {
+
+      if(index !== -1){
 
         websites[index] = {
           ...websites[index],
-          ...data
+          title,
+          category,
+          status,
+          price,
+          oldPrice,
+          image,
+          previewUrl,
+          description
         };
 
-        showToast(
-          "Website updated",
-          `${data.title} has been updated.`
-        );
       }
 
-    } else {
+      showToast(
+        "Website Updated",
+        `${title} has been updated successfully.`
+      );
 
-      const nextNumber =
-        websites.length + 1;
+    }else{
 
-      const newSite = {
+      const newId =
+        generateId();
 
-        id:
-          "wd" +
-          String(nextNumber).padStart(3, "0"),
 
-        ...data,
+      websites.unshift({
 
-        badge: "NEW",
+        id:newId,
 
-        sales: 0,
+        title,
+
+        category,
+
+        price,
+
+        oldPrice,
+
+        status,
+
+        badge:"NEW",
+
+        rating:5,
+
+        reviews:0,
+
+        sales:0,
+
+        image,
+
+        previewUrl,
+
+        description,
 
         createdAt:
-          new Date().toISOString().slice(0, 10)
-      };
+          new Date()
+            .toISOString()
+            .slice(0,10)
 
-      websites.unshift(newSite);
+      });
+
 
       showToast(
-        "Website added",
-        `${data.title} has been added successfully.`
+        "Website Added",
+        `${title} has been added to the marketplace manager.`
       );
+
     }
 
-    saveWebsites();
-    render();
-    closeModal();
-  });
 
-  /* =========================================
-     DELETE
-  ========================================== */
+    persist();
 
-  function deleteWebsite(id) {
+    renderWebsites();
 
-    const site =
-      websites.find(x => x.id === id);
+    updateStats();
 
-    if (!site) return;
+    closeFormModal();
 
-    const confirmed =
-      confirm(
-        `Delete "${site.title}"?\n\nThis demo will remove it from the local website list.`
-      );
-
-    if (!confirmed) return;
-
-    websites =
-      websites.filter(x => x.id !== id);
-
-    saveWebsites();
-    render();
-
-    showToast(
-      "Website deleted",
-      `${site.title} has been removed.`
-    );
   }
 
-  /* =========================================
-     PREVIEW
-  ========================================== */
 
-  function previewWebsite(id) {
+  /* =========================
+     CLOSE FORM
+  ========================== */
+
+  function closeFormModal(){
+
+    document
+      .getElementById("formModal")
+      .classList.remove("show");
+
+    document.body.style.overflow = "";
+
+  }
+
+
+  /* =========================
+     DELETE
+  ========================== */
+
+  function openDeleteModal(id){
 
     const site =
-      websites.find(x => x.id === id);
-
-    if (!site) return;
-
-    if (
-      site.previewUrl &&
-      site.previewUrl !== "#"
-    ) {
-      window.open(
-        site.previewUrl,
-        "_blank",
-        "noopener,noreferrer"
+      websites.find(
+        x => x.id === id
       );
 
+    if(!site){
       return;
     }
 
-    showToast(
-      "Preview coming soon",
-      `${site.title} does not have a live preview URL yet.`,
-      true
-    );
+    deletingId = id;
+
+    document.getElementById(
+      "deleteText"
+    ).innerHTML =
+      `You are about to delete <strong>${escapeHTML(site.title)}</strong> (${escapeHTML(site.id)}). This will remove the listing from the demo admin storage.`;
+
+
+    document
+      .getElementById("deleteModal")
+      .classList.add("show");
+
+    document.body.style.overflow = "hidden";
+
   }
 
-  /* =========================================
-     FILTERS
-  ========================================== */
 
-  document
-    .getElementById("searchInput")
-    .addEventListener("input", render);
+  function confirmDelete(){
 
-  document
-    .getElementById("categoryFilter")
-    .addEventListener("change", render);
-
-  document
-    .getElementById("statusFilter")
-    .addEventListener("change", render);
-
-  document
-    .getElementById("sortFilter")
-    .addEventListener("change", render);
-
-  /* =========================================
-     MODAL EVENTS
-  ========================================== */
-
-  document
-    .getElementById("modalClose")
-    .addEventListener("click", closeModal);
-
-  document
-    .getElementById("cancelBtn")
-    .addEventListener("click", closeModal);
-
-  modal.addEventListener("click", event => {
-
-    if (event.target === modal) {
-      closeModal();
+    if(!deletingId){
+      return;
     }
 
-  });
+    const site =
+      websites.find(
+        x => x.id === deletingId
+      );
 
-  document.addEventListener("keydown", event => {
 
-    if (event.key === "Escape") {
-      closeModal();
+    websites =
+      websites.filter(
+        x => x.id !== deletingId
+      );
+
+
+    persist();
+
+    renderWebsites();
+
+    updateStats();
+
+    closeDeleteModal();
+
+
+    showToast(
+      "Website Deleted",
+      `${site ? site.title : "Website"} was removed.`
+    );
+
+
+    deletingId = null;
+
+  }
+
+
+  function closeDeleteModal(){
+
+    document
+      .getElementById("deleteModal")
+      .classList.remove("show");
+
+    document.body.style.overflow = "";
+
+    deletingId = null;
+
+  }
+
+
+  /* =========================
+     ID
+  ========================== */
+
+  function generateId(){
+
+    let number = websites.length + 1;
+
+    let id =
+      "wd" +
+      String(number).padStart(3,"0");
+
+
+    while(
+      websites.some(
+        x => x.id === id
+      )
+    ){
+
+      number++;
+
+      id =
+        "wd" +
+        String(number).padStart(3,"0");
+
     }
 
-  });
+    return id;
 
-  /* =========================================
+  }
+
+
+  /* =========================
+     HELPERS
+  ========================== */
+
+  function formatNumber(value){
+
+    return Number(value || 0)
+      .toLocaleString("en-US");
+
+  }
+
+
+  function escapeHTML(value){
+
+    return String(value ?? "")
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
+
+  }
+
+
+  function escapeAttr(value){
+
+    return String(value ?? "")
+      .replace(/"/g,"&quot;");
+
+  }
+
+
+  function escapeJS(value){
+
+    return String(value ?? "")
+      .replace(/\\/g,"\\\\")
+      .replace(/'/g,"\\'");
+
+  }
+
+
+  /* =========================
      TOAST
-  ========================================== */
+  ========================== */
 
   let toastTimer;
 
-  function showToast(title, message, error = false) {
+
+  function showToast(title,message){
 
     const toast =
       document.getElementById("toast");
 
-    const icon =
-      toast.querySelector(".toast-icon i");
 
-    document.getElementById("toastTitle")
-      .textContent = title;
+    document.getElementById(
+      "toastTitle"
+    ).textContent =
+      title;
 
-    document.getElementById("toastMessage")
-      .textContent = message;
 
-    icon.className =
-      error
-        ? "fa-solid fa-circle-exclamation"
-        : "fa-solid fa-check";
+    document.getElementById(
+      "toastMessage"
+    ).textContent =
+      message;
+
 
     toast.classList.add("show");
 
+
     clearTimeout(toastTimer);
 
+
     toastTimer =
-      setTimeout(() => {
-        toast.classList.remove("show");
-      }, 3500);
+      setTimeout(
+        hideToast,
+        3500
+      );
+
   }
 
-  document
-    .getElementById("toastClose")
-    .addEventListener("click", () => {
-      document
-        .getElementById("toast")
-        .classList.remove("show");
-    });
 
-  /* =========================================
+  function hideToast(){
+
+    document
+      .getElementById("toast")
+      .classList.remove("show");
+
+  }
+
+
+  /* =========================
+     SIDEBAR
+  ========================== */
+
+  function openSidebar(){
+
+    document
+      .getElementById("sidebar")
+      .classList.add("open");
+
+    document
+      .getElementById("sidebarOverlay")
+      .classList.add("show");
+
+  }
+
+
+  function closeSidebar(){
+
+    document
+      .getElementById("sidebar")
+      .classList.remove("open");
+
+    document
+      .getElementById("sidebarOverlay")
+      .classList.remove("show");
+
+  }
+
+
+  /* =========================
      REFRESH
-  ========================================== */
+  ========================== */
 
-  document
-    .getElementById("refreshBtn")
-    .addEventListener("click", event => {
+  function refreshPage(){
 
-      const icon =
-        event.currentTarget.querySelector("i");
+    loadWebsites();
 
-      icon.classList.add("fa-spin");
+    renderWebsites();
 
-      loadWebsites();
+    updateStats();
 
-      setTimeout(() => {
-        icon.classList.remove("fa-spin");
-      }, 500);
+    showToast(
+      "Refreshed",
+      "Website management data has been refreshed."
+    );
 
-      showToast(
-        "Refreshed",
-        "Website data has been refreshed."
-      );
-    });
+  }
 
-  /* =========================================
-     MOBILE SIDEBAR
-  ========================================== */
 
-  const sidebar =
-    document.getElementById("sidebar");
-
-  const overlay =
-    document.getElementById("sidebarOverlay");
-
-  document
-    .getElementById("mobileMenu")
-    .addEventListener("click", () => {
-
-      sidebar.classList.toggle("open");
-      overlay.classList.toggle("show");
-
-    });
-
-  overlay.addEventListener("click", () => {
-
-    sidebar.classList.remove("open");
-    overlay.classList.remove("show");
-
-  });
-
-  /* =========================================
+  /* =========================
      LOGOUT
-     Firebase Auth will replace this later.
-  ========================================== */
+  ========================== */
 
-  document
-    .getElementById("logoutBtn")
-    .addEventListener("click", () => {
+  function logout(){
 
-      const confirmed =
-        confirm("Sign out from Admin Portal?");
+    localStorage.removeItem(
+      "websiteDealsAdminSession"
+    );
 
-      if (!confirmed) return;
+    window.location.href =
+      "index.html";
 
-      window.location.href = "index.html";
-    });
+  }
 
-  /* =========================================
-     INITIALIZE
-  ========================================== */
 
-  loadWebsites();
+  /* =========================
+     KEYBOARD
+  ========================== */
+
+  function handleKeyboard(event){
+
+    if(event.key === "Escape"){
+
+      closePreview();
+
+      closeFormModal();
+
+      closeDeleteModal();
+
+      closeSidebar();
+
+    }
+
+  }
+
+
+  /* =========================
+     MODAL OUTSIDE CLICK
+  ========================== */
+
+  document.addEventListener(
+    "click",
+    function(event){
+
+      if(
+        event.target.id === "previewModal"
+      ){
+        closePreview();
+      }
+
+      if(
+        event.target.id === "formModal"
+      ){
+        closeFormModal();
+      }
+
+      if(
+        event.target.id === "deleteModal"
+      ){
+        closeDeleteModal();
+      }
+
+    }
+  );
 
 </script>
 
