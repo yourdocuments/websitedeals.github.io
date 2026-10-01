@@ -1,529 +1,846 @@
 /* =========================================================
    WEBSITE DEALS — MAIN JAVASCRIPT
-   File: js/main.js
-========================================================= */
-
-"use strict";
-
-/* =========================================================
-   WEBSITE DATA
-========================================================= */
-
-const websites = [
-  {
-    id: 1,
-    title: "Premium Business Website",
-    category: "Business",
-    description: "Modern professional website for companies and businesses.",
-    price: "৳999",
-    badge: "Popular",
-    icon: "fa-briefcase",
-    demo: "#"
-  },
-  {
-    id: 2,
-    title: "Restaurant Website",
-    category: "Restaurant",
-    description: "Elegant restaurant website with menu and contact sections.",
-    price: "৳1,499",
-    badge: "New",
-    icon: "fa-utensils",
-    demo: "#"
-  },
-  {
-    id: 3,
-    title: "Creative Agency Website",
-    category: "Agency",
-    description: "Premium agency website for creative and digital teams.",
-    price: "৳1,999",
-    badge: "Featured",
-    icon: "fa-pen-ruler",
-    demo: "#"
-  },
-  {
-    id: 4,
-    title: "Modern E-Commerce Website",
-    category: "E-Commerce",
-    description: "Clean online store layout for products and online selling.",
-    price: "৳2,499",
-    badge: "Popular",
-    icon: "fa-cart-shopping",
-    demo: "#"
-  },
-  {
-    id: 5,
-    title: "Personal Portfolio",
-    category: "Portfolio",
-    description: "Modern portfolio website for designers, developers and creators.",
-    price: "৳999",
-    badge: "New",
-    icon: "fa-user",
-    demo: "#"
-  },
-  {
-    id: 6,
-    title: "Monthly Website Pack",
-    category: "Monthly Pack",
-    description: "Affordable monthly website package for growing businesses.",
-    price: "৳499/mo",
-    badge: "Monthly",
-    icon: "fa-calendar-days",
-    demo: "#"
-  },
-  {
-    id: 7,
-    title: "Corporate Business Website",
-    category: "Business",
-    description: "Professional corporate website with premium visual design.",
-    price: "৳1,799",
-    badge: "Premium",
-    icon: "fa-building",
-    demo: "#"
-  },
-  {
-    id: 8,
-    title: "Food Delivery Website",
-    category: "Restaurant",
-    description: "Modern food and restaurant website for delivery businesses.",
-    price: "৳1,999",
-    badge: "Hot",
-    icon: "fa-bowl-food",
-    demo: "#"
-  }
-];
-
-
-/* =========================================================
-   DOM ELEMENTS
-========================================================= */
-
-const pageLoader = document.getElementById("page-loader");
-
-const searchToggle = document.getElementById("search-toggle");
-const searchPanel = document.getElementById("search-panel");
-const websiteSearch = document.getElementById("website-search");
-const clearSearch = document.getElementById("clear-search");
-
-const mobileMenuBtn = document.getElementById("mobile-menu-btn");
-const mobileNav = document.getElementById("mobile-nav");
-
-const websiteList = document.getElementById("website-list");
-const emptyState = document.getElementById("empty-state");
-const resetFilters = document.getElementById("reset-filters");
-
-const categoryButtons = document.querySelectorAll(".category-btn");
-
-const buyModal = document.getElementById("buy-modal");
-const modalClose = document.getElementById("modal-close");
-const cancelBuyBtn = document.getElementById("cancel-buy-btn");
-
-const buyForm = document.getElementById("buy-form");
-const buyWebsiteTitle = document.getElementById("buy-website-title");
-const buyWebsiteId = document.getElementById("buy_website_id");
-const buyMessage = document.getElementById("buy-message");
-
-const newsletterForm = document.getElementById("newsletter-form");
-
-const toast = document.getElementById("toast");
-const toastTitle = document.getElementById("toast-title");
-const toastMessage = document.getElementById("toast-message");
-const toastClose = document.getElementById("toast-close");
-
-const backToTop = document.getElementById("back-to-top");
-
-const currentYear = document.getElementById("current-year");
-
-const siteHeader = document.getElementById("site-header");
-
-
-/* =========================================================
-   STATE
-========================================================= */
-
-let activeCategory = "all";
-let searchQuery = "";
-
-let toastTimer = null;
-
-
-/* =========================================================
-   INITIALIZATION
-========================================================= */
+   Premium Ready-Made Website Marketplace
+   ========================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
+  "use strict";
 
-  initializeWebsite();
+  /* =========================================================
+     SAMPLE WEBSITE DATA
+     পরে এখানেই আপনার real website data বসাতে পারবেন
+     ========================================================= */
 
-});
+  const websites = [
+    {
+      id: "wd001",
+      title: "Nova Business Pro",
+      category: "business",
+      categoryLabel: "Business",
+      price: 2499,
+      oldPrice: 3999,
+      badge: "POPULAR",
+      rating: 4.9,
+      reviews: 28,
+      sales: 86,
+      isPopular: true,
+      isNew: false,
+      image:
+        "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=85",
+      previewUrl: "#",
+      description:
+        "Modern business website for companies, startups and professional services.",
+      features: [
+        "Responsive Design",
+        "Modern UI",
+        "Contact Section",
+        "Easy Customization"
+      ]
+    },
+
+    {
+      id: "wd002",
+      title: "Restaurant Royale",
+      category: "restaurant",
+      categoryLabel: "Restaurant",
+      price: 1999,
+      oldPrice: 2999,
+      badge: "NEW",
+      rating: 4.8,
+      reviews: 17,
+      sales: 52,
+      isPopular: false,
+      isNew: true,
+      image:
+        "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=85",
+      previewUrl: "#",
+      description:
+        "Elegant restaurant website for cafes, restaurants and food businesses.",
+      features: [
+        "Food Menu",
+        "Reservation CTA",
+        "Gallery",
+        "Mobile Friendly"
+      ]
+    },
+
+    {
+      id: "wd003",
+      title: "Creative Agency X",
+      category: "agency",
+      categoryLabel: "Agency",
+      price: 2999,
+      oldPrice: 4499,
+      badge: "POPULAR",
+      rating: 5.0,
+      reviews: 34,
+      sales: 104,
+      isPopular: true,
+      isNew: false,
+      image:
+        "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=85",
+      previewUrl: "#",
+      description:
+        "Premium agency website for creative studios, digital agencies and teams.",
+      features: [
+        "Portfolio",
+        "Services",
+        "Team Section",
+        "Premium Layout"
+      ]
+    },
+
+    {
+      id: "wd004",
+      title: "ShopEase Store",
+      category: "ecommerce",
+      categoryLabel: "E-commerce",
+      price: 3499,
+      oldPrice: 4999,
+      badge: "SALE",
+      rating: 4.9,
+      reviews: 41,
+      sales: 129,
+      isPopular: true,
+      isNew: false,
+      image:
+        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=85",
+      previewUrl: "#",
+      description:
+        "Clean e-commerce storefront concept for products and online businesses.",
+      features: [
+        "Product Grid",
+        "Shopping UI",
+        "Categories",
+        "Responsive"
+      ]
+    },
+
+    {
+      id: "wd005",
+      title: "Personal Portfolio",
+      category: "portfolio",
+      categoryLabel: "Portfolio",
+      price: 1499,
+      oldPrice: 2499,
+      badge: "NEW",
+      rating: 4.8,
+      reviews: 13,
+      sales: 39,
+      isPopular: false,
+      isNew: true,
+      image:
+        "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=85",
+      previewUrl: "#",
+      description:
+        "Minimal premium portfolio website for designers, developers and creators.",
+      features: [
+        "About",
+        "Projects",
+        "Skills",
+        "Contact"
+      ]
+    },
+
+    {
+      id: "wd006",
+      title: "Corporate Edge",
+      category: "business",
+      categoryLabel: "Business",
+      price: 2799,
+      oldPrice: 3999,
+      badge: "",
+      rating: 4.7,
+      reviews: 21,
+      sales: 67,
+      isPopular: false,
+      isNew: false,
+      image:
+        "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=85",
+      previewUrl: "#",
+      description:
+        "Professional corporate website for growing businesses.",
+      features: [
+        "Corporate Layout",
+        "Services",
+        "About Company",
+        "Contact"
+      ]
+    },
+
+    {
+      id: "wd007",
+      title: "Foodie Restaurant",
+      category: "restaurant",
+      categoryLabel: "Restaurant",
+      price: 2199,
+      oldPrice: 3299,
+      badge: "POPULAR",
+      rating: 4.9,
+      reviews: 26,
+      sales: 73,
+      isPopular: true,
+      isNew: false,
+      image:
+        "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=85",
+      previewUrl: "#",
+      description:
+        "Beautiful food business website with menu and promotional sections.",
+      features: [
+        "Menu",
+        "Food Gallery",
+        "Location",
+        "Contact"
+      ]
+    },
+
+    {
+      id: "wd008",
+      title: "Creator Studio",
+      category: "portfolio",
+      categoryLabel: "Portfolio",
+      price: 1799,
+      oldPrice: 2799,
+      badge: "NEW",
+      rating: 4.8,
+      reviews: 11,
+      sales: 31,
+      isPopular: false,
+      isNew: true,
+      image:
+        "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=85",
+      previewUrl: "#",
+      description:
+        "Creative personal brand website for creators and professionals.",
+      features: [
+        "Personal Brand",
+        "Blog Ready",
+        "Projects",
+        "Social Links"
+      ]
+    }
+  ];
+
+  /* =========================================================
+     DOM ELEMENTS
+     ========================================================= */
+
+  const pageLoader = document.getElementById("page-loader");
+
+  const siteHeader = document.getElementById("site-header");
+
+  const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+  const mobileNav = document.getElementById("mobile-nav");
+
+  const searchToggle = document.getElementById("search-toggle");
+  const searchPanel = document.getElementById("search-panel");
+  const websiteSearch = document.getElementById("website-search");
+  const clearSearch = document.getElementById("clear-search");
+
+  const heroSearch = document.getElementById("hero-search");
+  const heroCategory = document.getElementById("hero-category");
+  const heroSearchBtn = document.getElementById("hero-search-btn");
+
+  const websiteList = document.getElementById("website-list");
+  const popularList = document.getElementById("popular-list");
+  const newList = document.getElementById("new-list");
+
+  const categoryFilter = document.getElementById("category-filter");
+  const sortWebsites = document.getElementById("sort-websites");
+
+  const emptyState = document.getElementById("empty-state");
+  const resetFilters = document.getElementById("reset-filters");
+
+  const countryStatus = document.getElementById("country-status");
+
+  const buyModal = document.getElementById("buy-modal");
+  const modalClose = document.getElementById("modal-close");
+  const cancelBuyBtn = document.getElementById("cancel-buy-btn");
+
+  const buyModalTitle = document.getElementById("buy-modal-title");
+  const buyWebsiteTitle = document.getElementById("buy-website-title");
+  const buyMessage = document.getElementById("buy-message");
+
+  const buyForm = document.getElementById("buy-form");
+
+  const buyWebsiteId = document.getElementById("buy_website_id");
+  const buyName = document.getElementById("buy_name");
+  const buyEmail = document.getElementById("buy_email");
+  const buyPhone = document.getElementById("buy_phone");
+
+  const toast = document.getElementById("toast");
+  const toastTitle = document.getElementById("toast-title");
+  const toastMessage = document.getElementById("toast-message");
+  const toastClose = document.getElementById("toast-close");
+
+  const backToTop = document.getElementById("back-to-top");
+
+  const newsletterForm = document.getElementById("newsletter-form");
+  const newsletterEmail = document.getElementById("newsletter-email");
+
+  const currentYear = document.getElementById("current-year");
 
 
-function initializeWebsite() {
+  /* =========================================================
+     STATE
+     ========================================================= */
 
-  renderWebsites();
-
-  setupCategoryFilters();
-
-  setupSearch();
-
-  setupMobileMenu();
-
-  setupBuyModal();
-
-  setupNewsletter();
-
-  setupToast();
-
-  setupBackToTop();
-
-  setupHeaderScroll();
-
-  updateCurrentYear();
-
-  setupSmoothScroll();
-
-  hidePageLoader();
-
-}
+  let activeCategory = "all";
+  let currentSearch = "";
+  let currentSort = "popular";
+  let toastTimer = null;
 
 
-/* =========================================================
-   PAGE LOADER
-========================================================= */
+  /* =========================================================
+     HELPER FUNCTIONS
+     ========================================================= */
 
-function hidePageLoader() {
-
-  window.addEventListener("load", () => {
-
-    setTimeout(() => {
-
-      if (!pageLoader) return;
-
-      pageLoader.classList.add("loaded");
-
-      setTimeout(() => {
-
-        pageLoader.style.display = "none";
-
-      }, 500);
-
-    }, 500);
-
-  });
-
-}
+  function escapeHTML(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
 
 
-/* =========================================================
-   RENDER WEBSITE CARDS
-========================================================= */
+  function formatPrice(price) {
+    return `৳${Number(price).toLocaleString("en-BD")}`;
+  }
 
-function renderWebsites() {
 
-  if (!websiteList) return;
+  function getCategoryIcon(category) {
+    const icons = {
+      business: "fa-building",
+      restaurant: "fa-utensils",
+      agency: "fa-wand-magic-sparkles",
+      ecommerce: "fa-cart-shopping",
+      portfolio: "fa-user-tie",
+      monthly: "fa-calendar-days"
+    };
 
-  const filteredWebsites = getFilteredWebsites();
+    return icons[category] || "fa-globe";
+  }
 
-  websiteList.innerHTML = "";
 
-  if (filteredWebsites.length === 0) {
+  function getCategoryName(category) {
+    const names = {
+      business: "Business",
+      restaurant: "Restaurant",
+      agency: "Agency",
+      ecommerce: "E-commerce",
+      portfolio: "Portfolio",
+      monthly: "Monthly"
+    };
 
-    if (emptyState) {
-      emptyState.classList.remove("hidden");
+    return names[category] || "Website";
+  }
+
+
+  /* =========================================================
+     TOAST
+     ========================================================= */
+
+  function showToast(title, message, type = "success") {
+    if (!toast) return;
+
+    if (toastTitle) {
+      toastTitle.textContent = title;
     }
 
-    return;
-
-  }
-
-  if (emptyState) {
-    emptyState.classList.add("hidden");
-  }
-
-
-  filteredWebsites.forEach((website, index) => {
-
-    const card = createWebsiteCard(website, index);
-
-    websiteList.appendChild(card);
-
-  });
-
-}
-
-
-/* =========================================================
-   FILTER WEBSITE DATA
-========================================================= */
-
-function getFilteredWebsites() {
-
-  return websites.filter((website) => {
-
-    const matchesCategory =
-      activeCategory === "all" ||
-      website.category === activeCategory;
-
-
-    const searchableText = `
-      ${website.title}
-      ${website.category}
-      ${website.description}
-    `.toLowerCase();
-
-
-    const matchesSearch =
-      searchQuery === "" ||
-      searchableText.includes(searchQuery.toLowerCase());
-
-
-    return matchesCategory && matchesSearch;
-
-  });
-
-}
-
-
-/* =========================================================
-   CREATE WEBSITE CARD
-========================================================= */
-
-function createWebsiteCard(website, index) {
-
-  const article = document.createElement("article");
-
-  article.className = "website-card";
-
-  article.dataset.category = website.category;
-
-  article.style.animationDelay = `${index * 60}ms`;
-
-
-  article.innerHTML = `
-
-    <div class="website-card-image">
-
-      <div class="website-preview">
-
-        <div class="preview-topbar">
-
-          <span></span>
-          <span></span>
-          <span></span>
-
-        </div>
-
-        <div class="preview-content">
-
-          <div class="preview-text">
-
-            <small></small>
-
-            <strong></strong>
-
-            <strong class="short"></strong>
-
-            <span></span>
-            <span></span>
-
-            <div class="preview-button"></div>
-
-          </div>
-
-          <div class="preview-visual">
-
-            <i class="fa-solid ${website.icon}"></i>
-
-          </div>
-
-        </div>
-
-        <div class="preview-bottom">
-
-          <span></span>
-          <span></span>
-          <span></span>
-
-        </div>
-
-      </div>
-
-
-      <div class="website-badge">
-
-        ${escapeHTML(website.badge)}
-
-      </div>
-
-
-      <div class="website-category">
-
-        <i class="fa-solid fa-layer-group"></i>
-
-        ${escapeHTML(website.category)}
-
-      </div>
-
-    </div>
-
-
-    <div class="website-card-body">
-
-      <div class="website-card-heading">
-
-        <h3>
-          ${escapeHTML(website.title)}
-        </h3>
-
-        <span class="website-price">
-
-          ${escapeHTML(website.price)}
-
-        </span>
-
-      </div>
-
-
-      <p class="website-description">
-
-        ${escapeHTML(website.description)}
-
-      </p>
-
-
-      <div class="website-card-features">
-
-        <span>
-          <i class="fa-solid fa-circle-check"></i>
-          Responsive
-        </span>
-
-        <span>
-          <i class="fa-solid fa-bolt"></i>
-          Fast
-        </span>
-
-        <span>
-          <i class="fa-solid fa-code"></i>
-          Modern
-        </span>
-
-      </div>
-
-
-      <div class="website-card-actions">
-
-        <a
-          href="${website.demo}"
-          class="btn btn-secondary website-demo-btn"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-
-          <i class="fa-solid fa-eye"></i>
-
-          <span>
-            Preview
-          </span>
-
-        </a>
-
-
-        <button
-          type="button"
-          class="btn btn-primary website-buy-btn"
-          data-website-id="${website.id}"
-        >
-
-          <span>
-            Order Now
-          </span>
-
-          <i class="fa-solid fa-arrow-right"></i>
-
-        </button>
-
-      </div>
-
-    </div>
-
-  `;
-
-
-  const buyButton =
-    article.querySelector(".website-buy-btn");
-
-
-  if (buyButton) {
-
-    buyButton.addEventListener("click", () => {
-
-      openBuyModal(website);
-
+    if (toastMessage) {
+      toastMessage.textContent = message;
+    }
+
+    toast.classList.remove(
+      "success",
+      "error",
+      "warning",
+      "show"
+    );
+
+    toast.classList.add(type);
+
+    requestAnimationFrame(() => {
+      toast.classList.add("show");
     });
 
+    clearTimeout(toastTimer);
+
+    toastTimer = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 4500);
   }
 
 
-  return article;
+  if (toastClose) {
+    toastClose.addEventListener("click", () => {
+      toast.classList.remove("show");
+    });
+  }
 
-}
+
+  /* =========================================================
+     WEBSITE CARD
+     ========================================================= */
+
+  function createWebsiteCard(website) {
+    const badgeHTML = website.badge
+      ? `<span class="website-badge ${website.badge.toLowerCase()}">
+          ${escapeHTML(website.badge)}
+        </span>`
+      : "";
+
+    const stars = "★★★★★";
+
+    const oldPriceHTML = website.oldPrice
+      ? `<span class="old-price">${formatPrice(website.oldPrice)}</span>`
+      : "";
+
+    return `
+      <article class="website-card" data-id="${escapeHTML(website.id)}">
+
+        <div class="website-card-image">
+
+          <img
+            src="${escapeHTML(website.image)}"
+            alt="${escapeHTML(website.title)}"
+            loading="lazy"
+          >
+
+          ${badgeHTML}
+
+          <div class="website-card-overlay">
+
+            <button
+              type="button"
+              class="preview-btn"
+              data-preview="${escapeHTML(website.id)}"
+            >
+              <i class="fa-solid fa-eye"></i>
+              Preview
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="website-card-content">
+
+          <div class="website-card-category">
+            <i class="fa-solid ${getCategoryIcon(website.category)}"></i>
+            ${escapeHTML(website.categoryLabel)}
+          </div>
+
+          <h3 class="website-card-title">
+            ${escapeHTML(website.title)}
+          </h3>
+
+          <p class="website-card-description">
+            ${escapeHTML(website.description)}
+          </p>
+
+          <div class="website-card-meta">
+
+            <div class="rating">
+              <span class="stars">${stars}</span>
+              <strong>${website.rating}</strong>
+              <span>(${website.reviews})</span>
+            </div>
+
+            <div class="sales">
+              ${website.sales}+ sales
+            </div>
+
+          </div>
+
+          <div class="website-card-price">
+
+            <div>
+              ${oldPriceHTML}
+              <strong>${formatPrice(website.price)}</strong>
+            </div>
+
+            <span class="price-label">
+              One-time
+            </span>
+
+          </div>
+
+          <div class="website-card-actions">
+
+            <button
+              type="button"
+              class="preview-btn secondary"
+              data-preview="${escapeHTML(website.id)}"
+            >
+              <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              Preview
+            </button>
+
+            <button
+              type="button"
+              class="buy-btn"
+              data-buy="${escapeHTML(website.id)}"
+            >
+              Buy Now
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+    `;
+  }
 
 
-/* =========================================================
-   CATEGORY FILTER
-========================================================= */
+  /* =========================================================
+     FILTER + SEARCH
+     ========================================================= */
 
-function setupCategoryFilters() {
+  function getFilteredWebsites() {
+    let result = [...websites];
 
-  categoryButtons.forEach((button) => {
+    if (activeCategory !== "all") {
+      result = result.filter(
+        website => website.category === activeCategory
+      );
+    }
 
-    button.addEventListener("click", () => {
+    if (currentSearch.trim()) {
+      const query = currentSearch
+        .trim()
+        .toLowerCase();
 
-      categoryButtons.forEach((btn) => {
+      result = result.filter(website => {
+        const searchableText = [
+          website.title,
+          website.category,
+          website.categoryLabel,
+          website.description,
+          ...website.features
+        ]
+          .join(" ")
+          .toLowerCase();
 
-        btn.classList.remove("active");
+        return searchableText.includes(query);
+      });
+    }
+
+    result = sortWebsitesData(result);
+
+    return result;
+  }
+
+
+  /* =========================================================
+     SORTING
+     ========================================================= */
+
+  function sortWebsitesData(list) {
+    const sorted = [...list];
+
+    switch (currentSort) {
+      case "new":
+        sorted.sort((a, b) => {
+          return Number(b.isNew) - Number(a.isNew);
+        });
+        break;
+
+      case "price-low":
+        sorted.sort((a, b) => a.price - b.price);
+        break;
+
+      case "price-high":
+        sorted.sort((a, b) => b.price - a.price);
+        break;
+
+      case "rating":
+        sorted.sort((a, b) => b.rating - a.rating);
+        break;
+
+      case "popular":
+      default:
+        sorted.sort((a, b) => {
+          return b.sales - a.sales;
+        });
+        break;
+    }
+
+    return sorted;
+  }
+
+
+  /* =========================================================
+     MAIN MARKETPLACE RENDER
+     ========================================================= */
+
+  function renderMarketplace() {
+    if (!websiteList) return;
+
+    const filtered = getFilteredWebsites();
+
+    websiteList.innerHTML = "";
+
+    if (!filtered.length) {
+      if (emptyState) {
+        emptyState.classList.remove("hidden");
+      }
+
+      return;
+    }
+
+    if (emptyState) {
+      emptyState.classList.add("hidden");
+    }
+
+    websiteList.innerHTML = filtered
+      .map(createWebsiteCard)
+      .join("");
+  }
+
+
+  /* =========================================================
+     POPULAR WEBSITES
+     ========================================================= */
+
+  function renderPopularWebsites() {
+    if (!popularList) return;
+
+    const popular = websites
+      .filter(website => website.isPopular)
+      .sort((a, b) => b.sales - a.sales)
+      .slice(0, 4);
+
+    popularList.innerHTML = popular
+      .map(createWebsiteCard)
+      .join("");
+  }
+
+
+  /* =========================================================
+     NEW WEBSITES
+     ========================================================= */
+
+  function renderNewWebsites() {
+    if (!newList) return;
+
+    const newWebsites = websites
+      .filter(website => website.isNew)
+      .slice(0, 4);
+
+    newList.innerHTML = newWebsites
+      .map(createWebsiteCard)
+      .join("");
+  }
+
+
+  /* =========================================================
+     CATEGORY FILTER
+     ========================================================= */
+
+  function updateCategoryButtons(category) {
+    if (!categoryFilter) return;
+
+    const buttons =
+      categoryFilter.querySelectorAll(
+        "[data-category]"
+      );
+
+    buttons.forEach(button => {
+      button.classList.toggle(
+        "active",
+        button.dataset.category === category
+      );
+    });
+  }
+
+
+  function setCategory(category) {
+    activeCategory = category || "all";
+
+    updateCategoryButtons(activeCategory);
+
+    renderMarketplace();
+
+    const marketplace =
+      document.getElementById("websites");
+
+    if (marketplace) {
+      marketplace.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+  }
+
+
+  if (categoryFilter) {
+    categoryFilter.addEventListener("click", event => {
+      const button =
+        event.target.closest("[data-category]");
+
+      if (!button) return;
+
+      setCategory(button.dataset.category);
+    });
+  }
+
+
+  /* =========================================================
+     CATEGORY DISCOVERY CARDS
+     ========================================================= */
+
+  document
+    .querySelectorAll("[data-category-link]")
+    .forEach(link => {
+
+      link.addEventListener("click", event => {
+        event.preventDefault();
+
+        const category =
+          link.dataset.categoryLink;
+
+        setCategory(category);
 
       });
 
-
-      button.classList.add("active");
-
-
-      activeCategory =
-        button.dataset.category || "all";
-
-
-      renderWebsites();
-
     });
 
-  });
 
-}
+  /* =========================================================
+     SORT
+     ========================================================= */
+
+  if (sortWebsites) {
+    sortWebsites.addEventListener("change", () => {
+
+      currentSort = sortWebsites.value;
+
+      renderMarketplace();
+
+    });
+  }
 
 
-/* =========================================================
-   SEARCH
-========================================================= */
+  /* =========================================================
+     SEARCH FUNCTION
+     ========================================================= */
 
-function setupSearch() {
+  function performSearch(query, category = "all") {
+
+    currentSearch =
+      String(query || "").trim();
+
+    activeCategory =
+      category || "all";
+
+    updateCategoryButtons(activeCategory);
+
+    renderMarketplace();
+
+    const marketplace =
+      document.getElementById("websites");
+
+    if (marketplace) {
+      marketplace.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }
+
+  }
+
+
+  /* =========================================================
+     HERO SEARCH
+     ========================================================= */
+
+  if (heroSearchBtn) {
+    heroSearchBtn.addEventListener("click", () => {
+
+      const query =
+        heroSearch ? heroSearch.value : "";
+
+      const category =
+        heroCategory ? heroCategory.value : "all";
+
+      performSearch(query, category);
+
+    });
+  }
+
+
+  if (heroSearch) {
+    heroSearch.addEventListener("keydown", event => {
+
+      if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        const category =
+          heroCategory
+            ? heroCategory.value
+            : "all";
+
+        performSearch(
+          heroSearch.value,
+          category
+        );
+
+      }
+
+    });
+  }
+
+
+  /* =========================================================
+     SEARCH OVERLAY
+     ========================================================= */
+
+  function openSearchPanel() {
+
+    if (!searchPanel) return;
+
+    searchPanel.classList.add("active");
+
+    setTimeout(() => {
+
+      if (websiteSearch) {
+        websiteSearch.focus();
+      }
+
+    }, 150);
+
+  }
+
+
+  function closeSearchPanel() {
+
+    if (!searchPanel) return;
+
+    searchPanel.classList.remove("active");
+
+  }
+
 
   if (searchToggle) {
+    searchToggle.addEventListener(
+      "click",
+      openSearchPanel
+    );
+  }
 
-    searchToggle.addEventListener("click", () => {
 
-      const isOpen =
-        searchPanel.classList.contains("active");
+  if (searchPanel) {
 
+    searchPanel.addEventListener("click", event => {
 
-      if (isOpen) {
-
+      if (event.target === searchPanel) {
         closeSearchPanel();
-
-      } else {
-
-        openSearchPanel();
-
       }
 
     });
@@ -533,499 +850,330 @@ function setupSearch() {
 
   if (websiteSearch) {
 
-    websiteSearch.addEventListener("input", (event) => {
+    websiteSearch.addEventListener(
+      "input",
+      () => {
 
-      searchQuery =
-        event.target.value.trim();
+        currentSearch =
+          websiteSearch.value;
 
+        renderMarketplace();
 
-      renderWebsites();
-
-    });
+      }
+    );
 
   }
 
 
   if (clearSearch) {
 
-    clearSearch.addEventListener("click", () => {
+    clearSearch.addEventListener(
+      "click",
+      () => {
 
-      if (!websiteSearch) return;
+        if (websiteSearch) {
+          websiteSearch.value = "";
+        }
 
-      websiteSearch.value = "";
+        currentSearch = "";
 
-      searchQuery = "";
+        renderMarketplace();
 
-      renderWebsites();
-
-      websiteSearch.focus();
-
-    });
-
-  }
-
-}
-
-
-function openSearchPanel() {
-
-  if (!searchPanel) return;
-
-  searchPanel.classList.add("active");
-
-  searchPanel.setAttribute("aria-hidden", "false");
-
-
-  if (websiteSearch) {
-
-    setTimeout(() => {
-
-      websiteSearch.focus();
-
-    }, 150);
-
-  }
-
-}
-
-
-function closeSearchPanel() {
-
-  if (!searchPanel) return;
-
-  searchPanel.classList.remove("active");
-
-  searchPanel.setAttribute("aria-hidden", "true");
-
-}
-
-
-/* =========================================================
-   MOBILE MENU
-========================================================= */
-
-function setupMobileMenu() {
-
-  if (!mobileMenuBtn || !mobileNav) return;
-
-
-  mobileMenuBtn.addEventListener("click", () => {
-
-    const isOpen =
-      mobileNav.classList.contains("active");
-
-
-    if (isOpen) {
-
-      closeMobileMenu();
-
-    } else {
-
-      openMobileMenu();
-
-    }
-
-  });
-
-
-  const mobileLinks =
-    mobileNav.querySelectorAll("a");
-
-
-  mobileLinks.forEach((link) => {
-
-    link.addEventListener("click", () => {
-
-      closeMobileMenu();
-
-    });
-
-  });
-
-}
-
-
-function openMobileMenu() {
-
-  mobileNav.classList.add("active");
-
-  mobileNav.setAttribute("aria-hidden", "false");
-
-  mobileMenuBtn.setAttribute("aria-expanded", "true");
-
-  mobileMenuBtn.innerHTML =
-    `<i class="fa-solid fa-xmark"></i>`;
-
-}
-
-
-function closeMobileMenu() {
-
-  mobileNav.classList.remove("active");
-
-  mobileNav.setAttribute("aria-hidden", "true");
-
-  mobileMenuBtn.setAttribute("aria-expanded", "false");
-
-  mobileMenuBtn.innerHTML =
-    `<i class="fa-solid fa-bars"></i>`;
-
-}
-
-
-/* =========================================================
-   BUY MODAL
-========================================================= */
-
-function setupBuyModal() {
-
-  if (modalClose) {
-
-    modalClose.addEventListener("click", closeBuyModal);
-
-  }
-
-
-  if (cancelBuyBtn) {
-
-    cancelBuyBtn.addEventListener("click", closeBuyModal);
-
-  }
-
-
-  if (buyModal) {
-
-    buyModal.addEventListener("click", (event) => {
-
-      if (event.target === buyModal) {
-
-        closeBuyModal();
+        if (websiteSearch) {
+          websiteSearch.focus();
+        }
 
       }
-
-    });
+    );
 
   }
 
 
-  document.addEventListener("keydown", (event) => {
+  /* =========================================================
+     KEYBOARD SEARCH CLOSE
+     ========================================================= */
+
+  document.addEventListener("keydown", event => {
 
     if (event.key === "Escape") {
+
+      closeSearchPanel();
 
       closeBuyModal();
 
       closeMobileMenu();
 
-      closeSearchPanel();
-
     }
 
   });
 
 
-  if (buyForm) {
+  /* =========================================================
+     MOBILE MENU
+     ========================================================= */
 
-    buyForm.addEventListener("submit", handleBuySubmit);
+  function openMobileMenu() {
 
-  }
+    if (!mobileNav) return;
 
-}
+    mobileNav.classList.add("active");
 
+    if (mobileMenuBtn) {
+      mobileMenuBtn.classList.add("active");
+    }
 
-function openBuyModal(website) {
-
-  if (!buyModal) return;
-
-
-  if (buyWebsiteTitle) {
-
-    buyWebsiteTitle.textContent =
-      website.title;
-
-  }
-
-
-  if (buyWebsiteId) {
-
-    buyWebsiteId.value =
-      website.id;
+    document.body.classList.add(
+      "menu-open"
+    );
 
   }
 
 
-  if (buyMessage) {
+  function closeMobileMenu() {
 
-    buyMessage.textContent = "";
+    if (!mobileNav) return;
 
-    buyMessage.className =
-      "form-message";
+    mobileNav.classList.remove("active");
+
+    if (mobileMenuBtn) {
+      mobileMenuBtn.classList.remove("active");
+    }
+
+    document.body.classList.remove(
+      "menu-open"
+    );
 
   }
 
 
-  buyModal.classList.remove("hidden");
+  if (mobileMenuBtn) {
 
-  buyModal.classList.add("active");
+    mobileMenuBtn.addEventListener(
+      "click",
+      () => {
 
-  buyModal.setAttribute("aria-hidden", "false");
+        const isOpen =
+          mobileNav &&
+          mobileNav.classList.contains(
+            "active"
+          );
+
+        if (isOpen) {
+          closeMobileMenu();
+        } else {
+          openMobileMenu();
+        }
+
+      }
+    );
+
+  }
 
 
-  document.body.classList.add("modal-open");
+  if (mobileNav) {
+
+    mobileNav
+      .querySelectorAll("a")
+      .forEach(link => {
+
+        link.addEventListener(
+          "click",
+          closeMobileMenu
+        );
+
+      });
+
+  }
 
 
-  const nameInput =
-    document.getElementById("buy_name");
+  /* =========================================================
+     HEADER SCROLL EFFECT
+     ========================================================= */
+
+  function handleHeaderScroll() {
+
+    if (!siteHeader) return;
+
+    if (window.scrollY > 20) {
+      siteHeader.classList.add(
+        "scrolled"
+      );
+    } else {
+      siteHeader.classList.remove(
+        "scrolled"
+      );
+    }
+
+  }
 
 
-  if (nameInput) {
+  window.addEventListener(
+    "scroll",
+    handleHeaderScroll,
+    { passive: true }
+  );
+
+  handleHeaderScroll();
+
+
+  /* =========================================================
+     PREVIEW
+     ========================================================= */
+
+  function previewWebsite(id) {
+
+    const website =
+      websites.find(
+        item => item.id === id
+      );
+
+    if (!website) return;
+
+    if (
+      website.previewUrl &&
+      website.previewUrl !== "#"
+    ) {
+
+      window.open(
+        website.previewUrl,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+      return;
+    }
+
+    showToast(
+      "Preview Coming Soon",
+      `${website.title} এর live preview খুব শীঘ্রই available হবে।`,
+      "warning"
+    );
+
+  }
+
+
+  /* =========================================================
+     BUY MODAL
+     ========================================================= */
+
+  function openBuyModal(id) {
+
+    const website =
+      websites.find(
+        item => item.id === id
+      );
+
+    if (!website || !buyModal) return;
+
+    if (buyWebsiteId) {
+      buyWebsiteId.value =
+        website.id;
+    }
+
+    if (buyWebsiteTitle) {
+      buyWebsiteTitle.textContent =
+        website.title;
+    }
+
+    if (buyModalTitle) {
+      buyModalTitle.textContent =
+        `Order ${website.title}`;
+    }
+
+    if (buyMessage) {
+      buyMessage.innerHTML =
+        `আপনি <strong>${escapeHTML(
+          website.title
+        )}</strong> নির্বাচন করেছেন।`;
+    }
+
+    buyModal.classList.remove(
+      "hidden"
+    );
+
+    document.body.classList.add(
+      "modal-open"
+    );
 
     setTimeout(() => {
 
-      nameInput.focus();
+      if (buyName) {
+        buyName.focus();
+      }
 
-    }, 200);
+    }, 150);
 
   }
 
-}
 
+  function closeBuyModal() {
 
-function closeBuyModal() {
+    if (!buyModal) return;
 
-  if (!buyModal) return;
-
-
-  buyModal.classList.remove("active");
-
-  buyModal.setAttribute("aria-hidden", "true");
-
-  document.body.classList.remove("modal-open");
-
-
-  setTimeout(() => {
-
-    buyModal.classList.add("hidden");
-
-  }, 250);
-
-}
-
-
-/* =========================================================
-   BUY FORM SUBMISSION
-========================================================= */
-
-function handleBuySubmit(event) {
-
-  event.preventDefault();
-
-
-  const name =
-    document.getElementById("buy_name")?.value.trim();
-
-
-  const email =
-    document.getElementById("buy_email")?.value.trim();
-
-
-  const phone =
-    document.getElementById("buy_phone")?.value.trim();
-
-
-  const websiteId =
-    document.getElementById("buy_website_id")?.value;
-
-
-  if (!name || !email || !phone) {
-
-    showFormMessage(
-      "দয়া করে সব প্রয়োজনীয় তথ্য পূরণ করুন।",
-      "error"
+    buyModal.classList.add(
+      "hidden"
     );
 
-    return;
-
-  }
-
-
-  if (!/^01[0-9]{9}$/.test(phone)) {
-
-    showFormMessage(
-      "সঠিক ১১ সংখ্যার বাংলাদেশি ফোন নম্বর দিন।",
-      "error"
+    document.body.classList.remove(
+      "modal-open"
     );
 
-    return;
-
   }
 
 
-  const selectedWebsite =
-    websites.find(
-      website =>
-        String(website.id) === String(websiteId)
+  if (modalClose) {
+    modalClose.addEventListener(
+      "click",
+      closeBuyModal
+    );
+  }
+
+
+  if (cancelBuyBtn) {
+    cancelBuyBtn.addEventListener(
+      "click",
+      closeBuyModal
+    );
+  }
+
+
+  if (buyModal) {
+
+    buyModal.addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target === buyModal
+        ) {
+          closeBuyModal();
+        }
+
+      }
     );
 
-
-  if (!selectedWebsite) {
-
-    showFormMessage(
-      "Website information পাওয়া যায়নি।",
-      "error"
-    );
-
-    return;
-
   }
 
 
-  const orderData = {
+  /* =========================================================
+     DYNAMIC BUTTON HANDLER
+     ========================================================= */
 
-    id: `WD-${Date.now()}`,
+  document.addEventListener(
+    "click",
+    event => {
 
-    websiteId: selectedWebsite.id,
-
-    website:
-      selectedWebsite.title,
-
-    category:
-      selectedWebsite.category,
-
-    price:
-      selectedWebsite.price,
-
-    name,
-
-    email,
-
-    phone,
-
-    status: "pending",
-
-    createdAt:
-      new Date().toISOString()
-
-  };
-
-
-  saveOrder(orderData);
-
-
-  showToast(
-    "Order Request",
-    "আপনার order request সফলভাবে গ্রহণ করা হয়েছে।",
-    "success"
-  );
-
-
-  buyForm.reset();
-
-  closeBuyModal();
-
-
-  /*
-    ভবিষ্যতে payment page থাকলে এখানে redirect করতে পারবেন।
-
-    Example:
-
-    window.location.href =
-      `payment/index.html?order=${orderData.id}`;
-
-  */
-
-}
-
-
-/* =========================================================
-   FORM MESSAGE
-========================================================= */
-
-function showFormMessage(message, type = "success") {
-
-  if (!buyMessage) return;
-
-
-  buyMessage.textContent = message;
-
-  buyMessage.className =
-    `form-message ${type}`;
-
-}
-
-
-/* =========================================================
-   SAVE ORDER — LOCAL STORAGE
-========================================================= */
-
-function saveOrder(order) {
-
-  const storageKey =
-    "websiteDealsOrders";
-
-
-  let orders = [];
-
-
-  try {
-
-    orders =
-      JSON.parse(
-        localStorage.getItem(storageKey)
-      ) || [];
-
-  } catch (error) {
-
-    orders = [];
-
-  }
-
-
-  orders.push(order);
-
-
-  localStorage.setItem(
-    storageKey,
-    JSON.stringify(orders)
-  );
-
-}
-
-
-/* =========================================================
-   NEWSLETTER
-========================================================= */
-
-function setupNewsletter() {
-
-  if (!newsletterForm) return;
-
-
-  newsletterForm.addEventListener(
-    "submit",
-    (event) => {
-
-      event.preventDefault();
-
-
-      const emailInput =
-        document.getElementById(
-          "newsletter-email"
+      const previewButton =
+        event.target.closest(
+          "[data-preview]"
         );
 
+      if (previewButton) {
 
-      if (!emailInput) return;
+        event.preventDefault();
 
-
-      const email =
-        emailInput.value.trim();
-
-
-      if (!isValidEmail(email)) {
-
-        showToast(
-          "Invalid Email",
-          "দয়া করে একটি সঠিক email address দিন।",
-          "error"
+        previewWebsite(
+          previewButton.dataset.preview
         );
 
         return;
@@ -1033,613 +1181,536 @@ function setupNewsletter() {
       }
 
 
-      saveSubscriber(email);
+      const buyButton =
+        event.target.closest(
+          "[data-buy]"
+        );
 
+      if (buyButton) {
 
-      emailInput.value = "";
+        event.preventDefault();
 
+        openBuyModal(
+          buyButton.dataset.buy
+        );
 
-      showToast(
-        "Subscribed",
-        "ধন্যবাদ! আপনি সফলভাবে subscribe করেছেন।",
-        "success"
-      );
+      }
 
     }
   );
 
-}
 
+  /* =========================================================
+     BUY FORM
+     ========================================================= */
 
-function saveSubscriber(email) {
+  if (buyForm) {
 
-  const storageKey =
-    "websiteDealsSubscribers";
+    buyForm.addEventListener(
+      "submit",
+      event => {
 
+        event.preventDefault();
 
-  let subscribers = [];
+        const name =
+          buyName
+            ? buyName.value.trim()
+            : "";
 
+        const email =
+          buyEmail
+            ? buyEmail.value.trim()
+            : "";
 
-  try {
+        const phone =
+          buyPhone
+            ? buyPhone.value.trim()
+            : "";
 
-    subscribers =
-      JSON.parse(
-        localStorage.getItem(storageKey)
-      ) || [];
+        const websiteId =
+          buyWebsiteId
+            ? buyWebsiteId.value
+            : "";
 
-  } catch (error) {
-
-    subscribers = [];
-
-  }
-
-
-  const alreadyExists =
-    subscribers.some(
-      item =>
-        item.toLowerCase() ===
-        email.toLowerCase()
-    );
-
-
-  if (!alreadyExists) {
-
-    subscribers.push(email);
-
-  }
-
-
-  localStorage.setItem(
-    storageKey,
-    JSON.stringify(subscribers)
-  );
-
-}
-
-
-/* =========================================================
-   TOAST
-========================================================= */
-
-function setupToast() {
-
-  if (!toastClose) return;
-
-
-  toastClose.addEventListener("click", () => {
-
-    hideToast();
-
-  });
-
-}
-
-
-function showToast(
-  title,
-  message,
-  type = "success"
-) {
-
-  if (!toast) return;
-
-
-  clearTimeout(toastTimer);
-
-
-  if (toastTitle) {
-
-    toastTitle.textContent =
-      title;
-
-  }
-
-
-  if (toastMessage) {
-
-    toastMessage.textContent =
-      message;
-
-  }
-
-
-  toast.classList.remove(
-    "success",
-    "error",
-    "warning"
-  );
-
-
-  toast.classList.add(type);
-
-
-  toast.classList.add("active");
-
-  toast.setAttribute(
-    "aria-hidden",
-    "false"
-  );
-
-
-  toastTimer =
-    setTimeout(() => {
-
-      hideToast();
-
-    }, 5000);
-
-}
-
-
-function hideToast() {
-
-  if (!toast) return;
-
-
-  toast.classList.remove("active");
-
-  toast.setAttribute(
-    "aria-hidden",
-    "true"
-  );
-
-}
-
-
-/* =========================================================
-   RESET FILTERS
-========================================================= */
-
-if (resetFilters) {
-
-  resetFilters.addEventListener(
-    "click",
-    () => {
-
-      activeCategory = "all";
-
-      searchQuery = "";
-
-
-      if (websiteSearch) {
-
-        websiteSearch.value = "";
-
-      }
-
-
-      categoryButtons.forEach(
-        (button) => {
-
-          button.classList.remove(
-            "active"
+        const website =
+          websites.find(
+            item => item.id === websiteId
           );
 
 
-          if (
-            button.dataset.category ===
-            "all"
-          ) {
+        if (!name) {
 
-            button.classList.add(
-              "active"
-            );
+          showToast(
+            "Name Required",
+            "আপনার নাম লিখুন।",
+            "error"
+          );
 
-          }
-
-        }
-      );
-
-
-      renderWebsites();
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   BACK TO TOP
-========================================================= */
-
-function setupBackToTop() {
-
-  if (!backToTop) return;
-
-
-  window.addEventListener(
-    "scroll",
-    () => {
-
-      if (window.scrollY > 600) {
-
-        backToTop.classList.add(
-          "visible"
-        );
-
-      } else {
-
-        backToTop.classList.remove(
-          "visible"
-        );
-
-      }
-
-    },
-    { passive: true }
-  );
-
-
-  backToTop.addEventListener(
-    "click",
-    () => {
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-
-    }
-  );
-
-}
-
-
-/* =========================================================
-   HEADER SCROLL EFFECT
-========================================================= */
-
-function setupHeaderScroll() {
-
-  if (!siteHeader) return;
-
-
-  window.addEventListener(
-    "scroll",
-    () => {
-
-      if (window.scrollY > 30) {
-
-        siteHeader.classList.add(
-          "scrolled"
-        );
-
-      } else {
-
-        siteHeader.classList.remove(
-          "scrolled"
-        );
-
-      }
-
-    },
-    { passive: true }
-  );
-
-}
-
-
-/* =========================================================
-   SMOOTH SCROLL
-========================================================= */
-
-function setupSmoothScroll() {
-
-  const anchors =
-    document.querySelectorAll(
-      'a[href^="#"]'
-    );
-
-
-  anchors.forEach((anchor) => {
-
-    anchor.addEventListener(
-      "click",
-      (event) => {
-
-        const targetId =
-          anchor.getAttribute("href");
-
-
-        if (
-          !targetId ||
-          targetId === "#"
-        ) {
+          buyName?.focus();
 
           return;
 
         }
 
 
-        const target =
-          document.querySelector(
-            targetId
+        if (!email) {
+
+          showToast(
+            "Email Required",
+            "আপনার email address লিখুন।",
+            "error"
           );
 
+          buyEmail?.focus();
 
-        if (!target) return;
+          return;
 
+        }
+
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+
+          showToast(
+            "Invalid Email",
+            "সঠিক email address দিন।",
+            "error"
+          );
+
+          buyEmail?.focus();
+
+          return;
+
+        }
+
+
+        if (!phone) {
+
+          showToast(
+            "Phone Required",
+            "আপনার phone number দিন।",
+            "error"
+          );
+
+          buyPhone?.focus();
+
+          return;
+
+        }
+
+
+        /*
+         * এখানে বর্তমানে demo order handling রাখা হয়েছে।
+         *
+         * পরে চাইলে এখানে:
+         * - Firebase
+         * - Google Sheets
+         * - WhatsApp
+         * - Email
+         * - Payment Gateway
+         * connect করা যাবে।
+         */
+
+
+        const order = {
+          orderId:
+            "WD-" +
+            Date.now(),
+
+          websiteId,
+
+          websiteTitle:
+            website
+              ? website.title
+              : "",
+
+          name,
+
+          email,
+
+          phone,
+
+          price:
+            website
+              ? website.price
+              : null,
+
+          createdAt:
+            new Date().toISOString()
+        };
+
+
+        try {
+
+          const existingOrders =
+            JSON.parse(
+              localStorage.getItem(
+                "websiteDealsOrders"
+              ) || "[]"
+            );
+
+          existingOrders.push(order);
+
+          localStorage.setItem(
+            "websiteDealsOrders",
+            JSON.stringify(
+              existingOrders
+            )
+          );
+
+        } catch (error) {
+
+          console.warn(
+            "Order could not be saved:",
+            error
+          );
+
+        }
+
+
+        closeBuyModal();
+
+        buyForm.reset();
+
+
+        showToast(
+          "Order Received",
+          "আপনার order request সফলভাবে নেওয়া হয়েছে। আমরা শীঘ্রই যোগাযোগ করব।",
+          "success"
+        );
+
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     NEWSLETTER
+     ========================================================= */
+
+  if (newsletterForm) {
+
+    newsletterForm.addEventListener(
+      "submit",
+      event => {
 
         event.preventDefault();
 
+        const email =
+          newsletterEmail
+            ? newsletterEmail.value.trim()
+            : "";
 
-        const headerHeight =
-          siteHeader
-            ? siteHeader.offsetHeight
-            : 0;
+        if (!email) {
+
+          showToast(
+            "Email Required",
+            "Newsletter-এর জন্য email দিন।",
+            "error"
+          );
+
+          return;
+
+        }
 
 
-        const targetPosition =
-          target.getBoundingClientRect().top +
-          window.scrollY -
-          headerHeight;
+        if (
+          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+            email
+          )
+        ) {
 
+          showToast(
+            "Invalid Email",
+            "সঠিক email address দিন।",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        try {
+
+          const subscribers =
+            JSON.parse(
+              localStorage.getItem(
+                "websiteDealsSubscribers"
+              ) || "[]"
+            );
+
+          if (
+            !subscribers.includes(email)
+          ) {
+
+            subscribers.push(email);
+
+          }
+
+          localStorage.setItem(
+            "websiteDealsSubscribers",
+            JSON.stringify(
+              subscribers
+            )
+          );
+
+        } catch (error) {
+
+          console.warn(
+            "Newsletter save failed:",
+            error
+          );
+
+        }
+
+
+        newsletterForm.reset();
+
+        showToast(
+          "Subscribed",
+          "আপনাকে newsletter list-এ যুক্ত করা হয়েছে।",
+          "success"
+        );
+
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     RESET FILTERS
+     ========================================================= */
+
+  if (resetFilters) {
+
+    resetFilters.addEventListener(
+      "click",
+      () => {
+
+        activeCategory = "all";
+
+        currentSearch = "";
+
+        currentSort = "popular";
+
+
+        if (sortWebsites) {
+          sortWebsites.value =
+            "popular";
+        }
+
+
+        if (websiteSearch) {
+          websiteSearch.value = "";
+        }
+
+
+        if (heroSearch) {
+          heroSearch.value = "";
+        }
+
+
+        if (heroCategory) {
+          heroCategory.value = "all";
+        }
+
+
+        updateCategoryButtons("all");
+
+        renderMarketplace();
+
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     BACK TO TOP
+     ========================================================= */
+
+  function updateBackToTop() {
+
+    if (!backToTop) return;
+
+    if (window.scrollY > 600) {
+
+      backToTop.classList.add(
+        "show"
+      );
+
+    } else {
+
+      backToTop.classList.remove(
+        "show"
+      );
+
+    }
+
+  }
+
+
+  window.addEventListener(
+    "scroll",
+    updateBackToTop,
+    { passive: true }
+  );
+
+
+  if (backToTop) {
+
+    backToTop.addEventListener(
+      "click",
+      () => {
 
         window.scrollTo({
-
-          top:
-            Math.max(
-              targetPosition,
-              0
-            ),
-
+          top: 0,
           behavior: "smooth"
-
         });
 
       }
     );
 
-  });
-
-}
+  }
 
 
-/* =========================================================
-   ACTIVE NAVIGATION
-========================================================= */
+  /* =========================================================
+     COUNTRY STATUS
+     ========================================================= */
 
-window.addEventListener(
-  "scroll",
-  updateActiveNavigation,
-  { passive: true }
-);
+  if (countryStatus) {
+
+    countryStatus.innerHTML = `
+      <i class="fa-solid fa-location-dot"></i>
+      Bangladesh • BDT (৳)
+    `;
+
+  }
 
 
-function updateActiveNavigation() {
+  /* =========================================================
+     CURRENT YEAR
+     ========================================================= */
 
-  const sections =
-    document.querySelectorAll(
-      "main section[id]"
+  if (currentYear) {
+
+    currentYear.textContent =
+      new Date().getFullYear();
+
+  }
+
+
+  /* =========================================================
+     PAGE LOADER
+     ========================================================= */
+
+  function hidePageLoader() {
+
+    if (!pageLoader) return;
+
+    pageLoader.classList.add(
+      "hidden"
     );
 
+    setTimeout(() => {
 
-  const navLinks =
-    document.querySelectorAll(
-      ".nav-link"
-    );
+      pageLoader.style.display =
+        "none";
 
+    }, 500);
 
-  let currentSection = "";
-
-
-  sections.forEach((section) => {
-
-    const sectionTop =
-      section.offsetTop - 160;
+  }
 
 
-    if (
-      window.scrollY >=
-      sectionTop
-    ) {
+  window.addEventListener(
+    "load",
+    () => {
 
-      currentSection =
-        section.id;
-
-    }
-
-  });
-
-
-  navLinks.forEach((link) => {
-
-    link.classList.remove(
-      "active"
-    );
-
-
-    const href =
-      link.getAttribute("href");
-
-
-    if (
-      href ===
-      `#${currentSection}`
-    ) {
-
-      link.classList.add(
-        "active"
+      setTimeout(
+        hidePageLoader,
+        350
       );
 
     }
-
-  });
-
-}
-
-
-/* =========================================================
-   CURRENT YEAR
-========================================================= */
-
-function updateCurrentYear() {
-
-  if (!currentYear) return;
-
-
-  currentYear.textContent =
-    new Date().getFullYear();
-
-}
-
-
-/* =========================================================
-   EMAIL VALIDATION
-========================================================= */
-
-function isValidEmail(email) {
-
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
-    email
   );
 
-}
+
+  /*
+   * Safety fallback:
+   * যদি window load event আগে চলে যায়,
+   * তাহলে কিছুক্ষণ পর loader hide হবে।
+   */
+
+  setTimeout(
+    hidePageLoader,
+    2500
+  );
 
 
-/* =========================================================
-   HTML ESCAPE
-========================================================= */
+  /* =========================================================
+     IMAGE ERROR FALLBACK
+     ========================================================= */
 
-function escapeHTML(value) {
+  document.addEventListener(
+    "error",
+    event => {
 
-  return String(value)
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
+      const target =
+        event.target;
 
-}
+      if (
+        target &&
+        target.tagName === "IMG"
+      ) {
 
+        target.style.opacity = "0";
 
-/* =========================================================
-   CLOSE PANELS WHEN CLICKING OUTSIDE
-========================================================= */
+        const parent =
+          target.parentElement;
 
-document.addEventListener(
-  "click",
-  (event) => {
+        if (parent) {
+          parent.classList.add(
+            "image-fallback"
+          );
+        }
 
-    if (
-      searchPanel &&
-      searchPanel.classList.contains("active") &&
-      !searchPanel.contains(event.target) &&
-      !searchToggle?.contains(event.target)
-    ) {
+      }
 
-      closeSearchPanel();
-
-    }
-
-  }
-);
+    },
+    true
+  );
 
 
-/* =========================================================
-   KEYBOARD ACCESSIBILITY
-========================================================= */
+  /* =========================================================
+     INITIAL RENDER
+     ========================================================= */
 
-document.addEventListener(
-  "keydown",
-  (event) => {
+  updateCategoryButtons("all");
 
-    if (
-      event.key === "Tab" &&
-      buyModal &&
-      buyModal.classList.contains("active")
-    ) {
+  renderMarketplace();
 
-      /*
-        Basic modal accessibility support.
-        Full focus-trap can be added later if needed.
-      */
+  renderPopularWebsites();
 
-    }
+  renderNewWebsites();
 
-  }
-);
+  handleHeaderScroll();
+
+  updateBackToTop();
 
 
-/* =========================================================
-   GLOBAL ERROR PROTECTION
-========================================================= */
+  /* =========================================================
+     CONSOLE BRAND MESSAGE
+     ========================================================= */
 
-window.addEventListener(
-  "error",
-  (event) => {
+  console.log(
+    "%c Website Deals ",
+    "background:#18a957;color:#fff;font-size:18px;font-weight:700;padding:8px 14px;border-radius:8px;"
+  );
 
-    console.warn(
-      "Website Deals JS:",
-      event.message
-    );
+  console.log(
+    "Premium Ready-Made Website Marketplace"
+  );
 
-  }
-);
-
-
-/* =========================================================
-   WEBSITE DEALS API
-   Future Firebase/API integration can use these.
-========================================================= */
-
-window.WebsiteDeals = {
-
-  getWebsites() {
-
-    return websites;
-
-  },
-
-
-  getOrders() {
-
-    try {
-
-      return JSON.parse(
-        localStorage.getItem(
-          "websiteDealsOrders"
-        )
-      ) || [];
-
-    } catch {
-
-      return [];
-
-    }
-
-  },
-
-
-  getSubscribers() {
-
-    try {
-
-      return JSON.parse(
-        localStorage.getItem(
-          "websiteDealsSubscribers"
-        )
-      ) || [];
-
-    } catch {
-
-      return [];
-
-    }
-
-  },
-
-
-  refresh() {
-
-    renderWebsites();
-
-  }
-
-};
-
-
-/* =========================================================
-   END OF MAIN.JS
-========================================================= */
+});
