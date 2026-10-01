@@ -1,0 +1,2819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0b0d10"
+  >
+
+  <title>Websites | Website Deals Admin</title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="../logo.png"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <style>
+
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+
+      --green: #18a957;
+      --green-dark: #108344;
+
+      --black: #0b0d10;
+      --sidebar: #101317;
+
+      --bg: #f5f7f8;
+      --white: #ffffff;
+
+      --text: #171a1e;
+      --muted: #737b84;
+
+      --border: #e7eaed;
+
+      --danger: #d92d20;
+      --warning: #b77900;
+
+      --shadow:
+        0 12px 35px rgba(16,24,40,0.06);
+
+      --radius: 16px;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family:
+        "Inter",
+        "Hind Siliguri",
+        sans-serif;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =====================================================
+       LAYOUT
+    ===================================================== */
+
+    .admin-layout {
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* =====================================================
+       SIDEBAR
+    ===================================================== */
+
+    .sidebar {
+
+      position: fixed;
+
+      top: 0;
+      left: 0;
+      bottom: 0;
+
+      width: 260px;
+
+      background: var(--sidebar);
+      color: #fff;
+
+      display: flex;
+      flex-direction: column;
+
+      z-index: 100;
+
+      transition:
+        transform 0.25s ease;
+    }
+
+    .sidebar-header {
+
+      height: 78px;
+
+      padding: 0 22px;
+
+      display: flex;
+      align-items: center;
+
+      border-bottom:
+        1px solid rgba(255,255,255,0.07);
+    }
+
+    .brand {
+
+      display: flex;
+      align-items: center;
+
+      gap: 11px;
+    }
+
+    .brand img {
+
+      width: 38px;
+      height: 38px;
+
+      object-fit: contain;
+
+      background: #fff;
+
+      padding: 4px;
+
+      border-radius: 10px;
+    }
+
+    .brand strong {
+
+      display: block;
+
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .brand span {
+
+      display: block;
+
+      margin-top: 2px;
+
+      color: #8f98a1;
+
+      font-size: 9px;
+
+      letter-spacing: 1px;
+
+      text-transform: uppercase;
+    }
+
+    .sidebar-content {
+
+      flex: 1;
+
+      overflow-y: auto;
+
+      padding: 22px 14px;
+    }
+
+    .menu-label {
+
+      padding: 0 12px;
+
+      margin:
+        12px 0 9px;
+
+      color: #6f7882;
+
+      font-size: 10px;
+
+      font-weight: 800;
+
+      letter-spacing: 1.4px;
+
+      text-transform: uppercase;
+    }
+
+    .nav-menu {
+
+      display: grid;
+
+      gap: 4px;
+    }
+
+    .nav-item {
+
+      display: flex;
+      align-items: center;
+
+      gap: 12px;
+
+      padding: 12px;
+
+      border-radius: 11px;
+
+      color: #aeb6bf;
+
+      font-size: 13px;
+
+      font-weight: 600;
+
+      transition: 0.2s ease;
+    }
+
+    .nav-item i {
+
+      width: 19px;
+
+      text-align: center;
+    }
+
+    .nav-item:hover {
+
+      color: #fff;
+
+      background:
+        rgba(255,255,255,0.05);
+    }
+
+    .nav-item.active {
+
+      color: #fff;
+
+      background:
+        rgba(24,169,87,0.14);
+    }
+
+    .nav-item.active i {
+
+      color: var(--green);
+    }
+
+    .sidebar-footer {
+
+      padding: 14px;
+
+      border-top:
+        1px solid rgba(255,255,255,0.07);
+    }
+
+    .logout-btn {
+
+      width: 100%;
+
+      padding: 12px;
+
+      border: 0;
+
+      border-radius: 11px;
+
+      background: transparent;
+
+      color: #9da5ae;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+
+      font-size: 13px;
+
+      text-align: left;
+    }
+
+    .logout-btn:hover {
+
+      background:
+        rgba(217,45,32,0.10);
+
+      color: #ff8178;
+    }
+
+    /* =====================================================
+       MAIN
+    ===================================================== */
+
+    .main {
+
+      width:
+        calc(100% - 260px);
+
+      margin-left: 260px;
+
+      min-height: 100vh;
+    }
+
+    /* =====================================================
+       TOPBAR
+    ===================================================== */
+
+    .topbar {
+
+      height: 78px;
+
+      padding:
+        0 30px;
+
+      background: #fff;
+
+      border-bottom:
+        1px solid var(--border);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      position: sticky;
+
+      top: 0;
+
+      z-index: 50;
+    }
+
+    .topbar-left {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 15px;
+    }
+
+    .mobile-menu {
+
+      width: 40px;
+      height: 40px;
+
+      display: none;
+
+      place-items: center;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 10px;
+
+      background: #fff;
+    }
+
+    .page-title h1 {
+
+      font-size: 21px;
+
+      letter-spacing: -0.5px;
+    }
+
+    .page-title p {
+
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 11px;
+    }
+
+    .topbar-right {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 18px;
+    }
+
+    .view-site {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      color: #626b74;
+
+      font-size: 12px;
+
+      font-weight: 700;
+    }
+
+    .view-site:hover {
+
+      color:
+        var(--green-dark);
+    }
+
+    .user-box {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      padding-left: 18px;
+
+      border-left:
+        1px solid var(--border);
+    }
+
+    .user-avatar {
+
+      width: 38px;
+      height: 38px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 50%;
+
+      background: #eaf8ef;
+
+      color:
+        var(--green-dark);
+
+      font-size: 13px;
+
+      font-weight: 800;
+    }
+
+    .user-info strong {
+
+      display: block;
+
+      max-width: 180px;
+
+      overflow: hidden;
+
+      white-space: nowrap;
+
+      text-overflow: ellipsis;
+
+      font-size: 12px;
+    }
+
+    .user-info span {
+
+      display: block;
+
+      margin-top: 2px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+    }
+
+    /* =====================================================
+       CONTENT
+    ===================================================== */
+
+    .content {
+
+      max-width: 1500px;
+
+      padding: 30px;
+    }
+
+    /* =====================================================
+       PAGE HEADER
+    ===================================================== */
+
+    .page-header {
+
+      display: flex;
+
+      align-items: flex-end;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      margin-bottom: 25px;
+    }
+
+    .page-header h2 {
+
+      font-size: 27px;
+
+      letter-spacing: -1px;
+    }
+
+    .page-header p {
+
+      margin-top: 6px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+    .primary-btn {
+
+      min-height: 44px;
+
+      padding:
+        0 17px;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      gap: 8px;
+
+      border: 0;
+
+      border-radius: 11px;
+
+      background: var(--black);
+
+      color: #fff;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      transition: 0.2s ease;
+    }
+
+    .primary-btn:hover {
+
+      background:
+        var(--green);
+
+      transform:
+        translateY(-1px);
+
+      box-shadow:
+        0 10px 24px
+        rgba(24,169,87,0.18);
+    }
+
+    /* =====================================================
+       TOOLBAR
+    ===================================================== */
+
+    .toolbar {
+
+      padding: 16px;
+
+      margin-bottom: 20px;
+
+      background: #fff;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: var(--radius);
+
+      box-shadow: var(--shadow);
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+    }
+
+    .search-box {
+
+      flex: 1;
+
+      position: relative;
+    }
+
+    .search-box i {
+
+      position: absolute;
+
+      left: 14px;
+
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      color: #9aa2aa;
+
+      font-size: 13px;
+    }
+
+    .search-box input {
+
+      width: 100%;
+
+      height: 43px;
+
+      padding:
+        0 14px 0 40px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 10px;
+
+      outline: none;
+
+      color: var(--text);
+
+      background: #fff;
+
+      font-size: 12px;
+    }
+
+    .search-box input:focus {
+
+      border-color:
+        var(--green);
+
+      box-shadow:
+        0 0 0 3px
+        rgba(24,169,87,0.08);
+    }
+
+    .filter-select {
+
+      min-width: 150px;
+
+      height: 43px;
+
+      padding:
+        0 12px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 10px;
+
+      outline: none;
+
+      background: #fff;
+
+      color: #39414a;
+
+      font-size: 11px;
+
+      font-weight: 600;
+    }
+
+    .filter-select:focus {
+
+      border-color:
+        var(--green);
+    }
+
+    /* =====================================================
+       WEBSITE GRID
+    ===================================================== */
+
+    .website-grid {
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 20px;
+    }
+
+    /* =====================================================
+       WEBSITE CARD
+    ===================================================== */
+
+    .website-card {
+
+      overflow: hidden;
+
+      background: #fff;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: var(--radius);
+
+      box-shadow: var(--shadow);
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .website-card:hover {
+
+      transform:
+        translateY(-3px);
+
+      box-shadow:
+        0 18px 45px
+        rgba(16,24,40,0.09);
+    }
+
+    .website-image {
+
+      height: 190px;
+
+      position: relative;
+
+      overflow: hidden;
+
+      background: #eef1f2;
+    }
+
+    .website-image img {
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      transition:
+        transform 0.35s ease;
+    }
+
+    .website-card:hover
+    .website-image img {
+
+      transform:
+        scale(1.04);
+    }
+
+    .badge {
+
+      position: absolute;
+
+      top: 12px;
+      left: 12px;
+
+      padding:
+        6px 9px;
+
+      border-radius: 999px;
+
+      background: #111418;
+
+      color: #fff;
+
+      font-size: 8px;
+
+      font-weight: 800;
+
+      letter-spacing: 0.5px;
+
+      text-transform: uppercase;
+    }
+
+    .badge.sale {
+
+      background:
+        #fff3d6;
+
+      color:
+        #946200;
+    }
+
+    .badge.new {
+
+      background:
+        #eaf8ef;
+
+      color:
+        #087443;
+    }
+
+    .website-body {
+
+      padding: 18px;
+    }
+
+    .website-category {
+
+      color:
+        var(--green-dark);
+
+      font-size: 9px;
+
+      font-weight: 800;
+
+      letter-spacing: 0.8px;
+
+      text-transform: uppercase;
+    }
+
+    .website-title {
+
+      margin-top: 7px;
+
+      font-size: 15px;
+
+      line-height: 1.35;
+
+      letter-spacing: -0.3px;
+    }
+
+    .website-meta {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-top: 11px;
+    }
+
+    .rating {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 5px;
+
+      color: #6d747c;
+
+      font-size: 10px;
+    }
+
+    .rating i {
+
+      color:
+        #e5a300;
+    }
+
+    .status {
+
+      display: inline-flex;
+
+      align-items: center;
+
+      padding:
+        5px 8px;
+
+      border-radius: 999px;
+
+      font-size: 8px;
+
+      font-weight: 800;
+    }
+
+    .status.live {
+
+      background:
+        #eaf8ef;
+
+      color:
+        #087443;
+    }
+
+    .status.draft {
+
+      background:
+        #fff5db;
+
+      color:
+        #936200;
+    }
+
+    .website-bottom {
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      gap: 10px;
+
+      margin-top: 16px;
+
+      padding-top: 15px;
+
+      border-top:
+        1px solid #f0f2f4;
+    }
+
+    .price {
+
+      font-size: 17px;
+
+      font-weight: 800;
+
+      letter-spacing: -0.4px;
+    }
+
+    .actions {
+
+      display: flex;
+
+      gap: 6px;
+    }
+
+    .icon-btn {
+
+      width: 35px;
+      height: 35px;
+
+      display: grid;
+
+      place-items: center;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 9px;
+
+      background: #fff;
+
+      color: #6d747c;
+
+      font-size: 11px;
+
+      transition: 0.2s ease;
+    }
+
+    .icon-btn:hover {
+
+      color:
+        var(--green-dark);
+
+      border-color:
+        #b9e7ca;
+
+      background:
+        #f6fcf8;
+    }
+
+    .icon-btn.delete:hover {
+
+      color:
+        var(--danger);
+
+      border-color:
+        #ffd3d0;
+
+      background:
+        #fff5f4;
+    }
+
+    /* =====================================================
+       EMPTY
+    ===================================================== */
+
+    .empty-state {
+
+      display: none;
+
+      padding: 70px 20px;
+
+      text-align: center;
+
+      background: #fff;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: var(--radius);
+    }
+
+    .empty-state.show {
+
+      display: block;
+    }
+
+    .empty-icon {
+
+      width: 58px;
+      height: 58px;
+
+      margin: 0 auto 17px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 16px;
+
+      background:
+        #effaf3;
+
+      color:
+        var(--green-dark);
+
+      font-size: 20px;
+    }
+
+    .empty-state h3 {
+
+      font-size: 16px;
+    }
+
+    .empty-state p {
+
+      margin-top: 6px;
+
+      color: var(--muted);
+
+      font-size: 11px;
+    }
+
+    /* =====================================================
+       DELETE MODAL
+    ===================================================== */
+
+    .modal {
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 500;
+
+      display: none;
+
+      place-items: center;
+
+      padding: 20px;
+
+      background:
+        rgba(11,13,16,0.60);
+
+      backdrop-filter:
+        blur(6px);
+    }
+
+    .modal.show {
+
+      display: grid;
+    }
+
+    .modal-box {
+
+      width: min(420px, 100%);
+
+      background: #fff;
+
+      border-radius: 18px;
+
+      padding: 28px;
+
+      box-shadow:
+        0 25px 80px
+        rgba(0,0,0,0.20);
+
+      animation:
+        modalIn 0.2s ease;
+    }
+
+    @keyframes modalIn {
+
+      from {
+        opacity: 0;
+        transform:
+          translateY(10px)
+          scale(0.98);
+      }
+
+      to {
+        opacity: 1;
+        transform:
+          translateY(0)
+          scale(1);
+      }
+    }
+
+    .modal-icon {
+
+      width: 48px;
+      height: 48px;
+
+      display: grid;
+
+      place-items: center;
+
+      border-radius: 13px;
+
+      background:
+        #fff1f0;
+
+      color:
+        var(--danger);
+    }
+
+    .modal-box h3 {
+
+      margin-top: 18px;
+
+      font-size: 20px;
+    }
+
+    .modal-box p {
+
+      margin-top: 8px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+
+      line-height: 1.7;
+    }
+
+    .modal-actions {
+
+      display: flex;
+
+      justify-content: flex-end;
+
+      gap: 9px;
+
+      margin-top: 25px;
+    }
+
+    .secondary-btn {
+
+      min-height: 42px;
+
+      padding:
+        0 15px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 10px;
+
+      background: #fff;
+
+      color: #555e67;
+
+      font-size: 11px;
+
+      font-weight: 700;
+    }
+
+    .danger-btn {
+
+      min-height: 42px;
+
+      padding:
+        0 15px;
+
+      border: 0;
+
+      border-radius: 10px;
+
+      background:
+        var(--danger);
+
+      color: #fff;
+
+      font-size: 11px;
+
+      font-weight: 800;
+    }
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    .toast {
+
+      position: fixed;
+
+      right: 24px;
+      bottom: 24px;
+
+      z-index: 900;
+
+      max-width: 350px;
+
+      padding:
+        14px 17px;
+
+      border-radius: 12px;
+
+      background:
+        #111418;
+
+      color: #fff;
+
+      font-size: 11px;
+
+      box-shadow:
+        0 15px 40px
+        rgba(0,0,0,0.20);
+
+      transform:
+        translateY(20px);
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      transition: 0.25s ease;
+    }
+
+    .toast.show {
+
+      opacity: 1;
+
+      transform:
+        translateY(0);
+    }
+
+    /* =====================================================
+       SIDEBAR OVERLAY
+    ===================================================== */
+
+    .sidebar-overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      background:
+        rgba(0,0,0,0.45);
+
+      z-index: 90;
+
+      display: none;
+    }
+
+    .sidebar-overlay.show {
+
+      display: block;
+    }
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 1200px) {
+
+      .website-grid {
+
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+    }
+
+    @media (max-width: 850px) {
+
+      .sidebar {
+
+        transform:
+          translateX(-100%);
+      }
+
+      .sidebar.open {
+
+        transform:
+          translateX(0);
+      }
+
+      .main {
+
+        width: 100%;
+
+        margin-left: 0;
+      }
+
+      .mobile-menu {
+
+        display: grid;
+      }
+
+      .content {
+
+        padding: 20px;
+      }
+
+      .topbar {
+
+        padding:
+          0 20px;
+      }
+
+      .view-site {
+
+        display: none;
+      }
+
+    }
+
+    @media (max-width: 650px) {
+
+      .website-grid {
+
+        grid-template-columns: 1fr;
+      }
+
+      .page-header {
+
+        align-items: stretch;
+
+        flex-direction: column;
+      }
+
+      .primary-btn {
+
+        width: 100%;
+      }
+
+      .toolbar {
+
+        align-items: stretch;
+
+        flex-direction: column;
+      }
+
+      .filter-select {
+
+        width: 100%;
+      }
+
+      .user-info {
+
+        display: none;
+      }
+
+      .user-box {
+
+        padding-left: 8px;
+
+        border-left: 0;
+      }
+
+    }
+
+    /* =====================================================
+       ACCESSIBILITY
+    ===================================================== */
+
+    :focus-visible {
+
+      outline:
+        3px solid
+        rgba(24,169,87,0.22);
+
+      outline-offset: 3px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+
+        animation-duration:
+          0.01ms !important;
+
+        transition-duration:
+          0.01ms !important;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div class="admin-layout">
+
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside
+      class="sidebar"
+      id="sidebar"
+    >
+
+      <div class="sidebar-header">
+
+        <a
+          href="../index.html"
+          class="brand"
+        >
+
+          <img
+            src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
+            alt="Website Deals"
+          >
+
+          <div>
+
+            <strong>
+              Website Deals
+            </strong>
+
+            <span>
+              Management Portal
+            </span>
+
+          </div>
+
+        </a>
+
+      </div>
+
+
+      <div class="sidebar-content">
+
+
+        <div class="menu-label">
+          General
+        </div>
+
+
+        <nav class="nav-menu">
+
+          <a
+            href="dashboard.html"
+            class="nav-item"
+          >
+            <i class="fa-solid fa-grid-2"></i>
+            <span>Dashboard</span>
+          </a>
+
+
+          <a
+            href="websites.html"
+            class="nav-item active"
+          >
+            <i class="fa-solid fa-window-maximize"></i>
+            <span>Websites</span>
+          </a>
+
+
+          <a
+            href="categories.html"
+            class="nav-item"
+          >
+            <i class="fa-solid fa-layer-group"></i>
+            <span>Categories</span>
+          </a>
+
+        </nav>
+
+
+        <div class="menu-label">
+          Business
+        </div>
+
+
+        <nav class="nav-menu">
+
+          <a
+            href="orders.html"
+            class="nav-item"
+          >
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span>Orders</span>
+          </a>
+
+
+          <a
+            href="customers.html"
+            class="nav-item"
+          >
+            <i class="fa-solid fa-users"></i>
+            <span>Customers</span>
+          </a>
+
+
+          <a
+            href="newsletter.html"
+            class="nav-item"
+          >
+            <i class="fa-regular fa-envelope"></i>
+            <span>Newsletter</span>
+          </a>
+
+        </nav>
+
+
+        <!-- PRIVILEGED MENU -->
+
+        <div id="protected-menu"></div>
+
+      </div>
+
+
+      <div class="sidebar-footer">
+
+        <button
+          class="logout-btn"
+          id="logout-btn"
+          type="button"
+        >
+
+          <i
+            class="fa-solid fa-arrow-right-from-bracket"
+          ></i>
+
+          <span>
+            Sign Out
+          </span>
+
+        </button>
+
+      </div>
+
+    </aside>
+
+
+    <div
+      class="sidebar-overlay"
+      id="sidebar-overlay"
+    ></div>
+
+
+    <!-- =================================================
+         MAIN
+    ================================================== -->
+
+    <main class="main">
+
+
+      <!-- TOPBAR -->
+
+      <header class="topbar">
+
+        <div class="topbar-left">
+
+          <button
+            type="button"
+            class="mobile-menu"
+            id="mobile-menu"
+            aria-label="Open menu"
+          >
+
+            <i class="fa-solid fa-bars"></i>
+
+          </button>
+
+
+          <div class="page-title">
+
+            <h1>
+              Websites
+            </h1>
+
+            <p>
+              Manage marketplace listings
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+          <a
+            href="../index.html"
+            target="_blank"
+            class="view-site"
+          >
+
+            <i
+              class="fa-solid fa-arrow-up-right-from-square"
+            ></i>
+
+            View Marketplace
+
+          </a>
+
+
+          <div class="user-box">
+
+            <div
+              class="user-avatar"
+              id="user-avatar"
+            >
+              A
+            </div>
+
+
+            <div class="user-info">
+
+              <strong id="user-email">
+                Admin
+              </strong>
+
+              <span>
+                Authorized Account
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </header>
+
+
+      <!-- =================================================
+           CONTENT
+      ================================================== -->
+
+      <section class="content">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-header">
+
+          <div>
+
+            <h2>
+              Website Listings
+            </h2>
+
+            <p>
+              Add, edit and manage your ready-made websites.
+            </p>
+
+          </div>
+
+
+          <a
+            href="website-editor.html"
+            class="primary-btn"
+          >
+
+            <i class="fa-solid fa-plus"></i>
+
+            Add Website
+
+          </a>
+
+        </div>
+
+
+        <!-- =================================================
+             TOOLBAR
+        ================================================== -->
+
+        <div class="toolbar">
+
+
+          <div class="search-box">
+
+            <i
+              class="fa-solid fa-magnifying-glass"
+            ></i>
+
+            <input
+              type="search"
+              id="search-input"
+              placeholder="Search websites..."
+              autocomplete="off"
+            >
+
+          </div>
+
+
+          <select
+            id="category-filter"
+            class="filter-select"
+          >
+
+            <option value="all">
+              All Categories
+            </option>
+
+            <option value="business">
+              Business
+            </option>
+
+            <option value="restaurant">
+              Restaurant
+            </option>
+
+            <option value="agency">
+              Agency
+            </option>
+
+            <option value="ecommerce">
+              E-commerce
+            </option>
+
+            <option value="portfolio">
+              Portfolio
+            </option>
+
+            <option value="monthly">
+              Monthly
+            </option>
+
+          </select>
+
+
+          <select
+            id="status-filter"
+            class="filter-select"
+          >
+
+            <option value="all">
+              All Status
+            </option>
+
+            <option value="live">
+              Live
+            </option>
+
+            <option value="draft">
+              Draft
+            </option>
+
+          </select>
+
+
+        </div>
+
+
+        <!-- =================================================
+             WEBSITE GRID
+        ================================================== -->
+
+        <div
+          class="website-grid"
+          id="website-grid"
+        ></div>
+
+
+        <!-- EMPTY STATE -->
+
+        <div
+          class="empty-state"
+          id="empty-state"
+        >
+
+          <div class="empty-icon">
+
+            <i
+              class="fa-solid fa-window-maximize"
+            ></i>
+
+          </div>
+
+          <h3>
+            No websites found
+          </h3>
+
+          <p>
+            Try changing your search or filters.
+          </p>
+
+        </div>
+
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- =====================================================
+       DELETE MODAL
+  ====================================================== -->
+
+  <div
+    class="modal"
+    id="delete-modal"
+  >
+
+    <div class="modal-box">
+
+      <div class="modal-icon">
+
+        <i class="fa-solid fa-trash"></i>
+
+      </div>
+
+
+      <h3>
+        Delete Website?
+      </h3>
+
+
+      <p id="delete-message">
+
+        This website will be removed from the
+        current marketplace data.
+
+      </p>
+
+
+      <div class="modal-actions">
+
+        <button
+          type="button"
+          class="secondary-btn"
+          id="cancel-delete"
+        >
+          Cancel
+        </button>
+
+
+        <button
+          type="button"
+          class="danger-btn"
+          id="confirm-delete"
+        >
+          Delete Website
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- TOAST -->
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <script>
+
+    /* =====================================================
+       AUTHORIZATION
+    ===================================================== */
+
+    const sessionRaw =
+      sessionStorage.getItem(
+        "websiteDealsAdminSession"
+      );
+
+
+    if (!sessionRaw) {
+
+      window.location.replace(
+        "index.html"
+      );
+
+    }
+
+
+    let session = null;
+
+
+    try {
+
+      session =
+        JSON.parse(sessionRaw);
+
+    } catch (error) {
+
+      sessionStorage.removeItem(
+        "websiteDealsAdminSession"
+      );
+
+      window.location.replace(
+        "index.html"
+      );
+
+    }
+
+
+    if (
+      !session ||
+      session.authenticated !== true
+    ) {
+
+      sessionStorage.removeItem(
+        "websiteDealsAdminSession"
+      );
+
+      window.location.replace(
+        "index.html"
+      );
+
+    }
+
+
+    /* =====================================================
+       USER INFO
+    ===================================================== */
+
+    const userEmail =
+      document.getElementById(
+        "user-email"
+      );
+
+    const userAvatar =
+      document.getElementById(
+        "user-avatar"
+      );
+
+
+    if (session.email) {
+
+      userEmail.textContent =
+        session.email;
+
+      userAvatar.textContent =
+        session.email
+          .charAt(0)
+          .toUpperCase();
+
+    }
+
+
+    /* =====================================================
+       PRIVILEGED MENU
+    ===================================================== */
+
+    const protectedMenu =
+      document.getElementById(
+        "protected-menu"
+      );
+
+
+    if (session.role === "superadmin") {
+
+      protectedMenu.innerHTML = `
+
+        <div class="menu-label">
+          Management
+        </div>
+
+        <nav class="nav-menu">
+
+          <a
+            href="admins.html"
+            class="nav-item"
+          >
+            <i class="fa-solid fa-user-shield"></i>
+            <span>Access Management</span>
+          </a>
+
+          <a
+            href="settings.html"
+            class="nav-item"
+          >
+            <i class="fa-solid fa-sliders"></i>
+            <span>Settings</span>
+          </a>
+
+        </nav>
+
+      `;
+
+    }
+
+
+    /* =====================================================
+       WEBSITE DATA
+    ===================================================== */
+
+    const defaultWebsites = [
+
+      {
+        id: "WD001",
+        title: "Nova Business Pro",
+        category: "business",
+        price: 2499,
+        rating: 4.9,
+        status: "live",
+        badge: "popular",
+        image:
+          "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=85"
+      },
+
+
+      {
+        id: "WD002",
+        title: "Restaurant Royale",
+        category: "restaurant",
+        price: 1999,
+        rating: 4.8,
+        status: "live",
+        badge: "new",
+        image:
+          "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=85"
+      },
+
+
+      {
+        id: "WD003",
+        title: "Creative Agency X",
+        category: "agency",
+        price: 2999,
+        rating: 5.0,
+        status: "live",
+        badge: "popular",
+        image:
+          "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1000&q=85"
+      },
+
+
+      {
+        id: "WD004",
+        title: "ShopEase Store",
+        category: "ecommerce",
+        price: 3499,
+        rating: 4.9,
+        status: "live",
+        badge: "sale",
+        image:
+          "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1000&q=85"
+      },
+
+
+      {
+        id: "WD005",
+        title: "Personal Portfolio",
+        category: "portfolio",
+        price: 1499,
+        rating: 4.7,
+        status: "draft",
+        badge: "new",
+        image:
+          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1000&q=85"
+      },
+
+
+      {
+        id: "WD006",
+        title: "Corporate Edge",
+        category: "business",
+        price: 2799,
+        rating: 4.8,
+        status: "live",
+        badge: "",
+        image:
+          "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1000&q=85"
+      },
+
+
+      {
+        id: "WD007",
+        title: "Foodie Restaurant",
+        category: "restaurant",
+        price: 2199,
+        rating: 4.9,
+        status: "live",
+        badge: "popular",
+        image:
+          "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1000&q=85"
+      },
+
+
+      {
+        id: "WD008",
+        title: "Creator Studio",
+        category: "portfolio",
+        price: 1799,
+        rating: 4.8,
+        status: "live",
+        badge: "new",
+        image:
+          "https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=1000&q=85"
+      }
+
+    ];
+
+
+    const STORAGE_KEY =
+      "websiteDealsWebsites";
+
+
+    function getWebsites() {
+
+      const saved =
+        localStorage.getItem(
+          STORAGE_KEY
+        );
+
+
+      if (!saved) {
+
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify(
+            defaultWebsites
+          )
+        );
+
+        return [...defaultWebsites];
+
+      }
+
+
+      try {
+
+        const parsed =
+          JSON.parse(saved);
+
+        return Array.isArray(parsed)
+          ? parsed
+          : [...defaultWebsites];
+
+      } catch {
+
+        return [...defaultWebsites];
+
+      }
+
+    }
+
+
+    function saveWebsites(data) {
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(data)
+      );
+
+    }
+
+
+    let websites =
+      getWebsites();
+
+
+    /* =====================================================
+       DOM
+    ===================================================== */
+
+    const websiteGrid =
+      document.getElementById(
+        "website-grid"
+      );
+
+    const emptyState =
+      document.getElementById(
+        "empty-state"
+      );
+
+    const searchInput =
+      document.getElementById(
+        "search-input"
+      );
+
+    const categoryFilter =
+      document.getElementById(
+        "category-filter"
+      );
+
+    const statusFilter =
+      document.getElementById(
+        "status-filter"
+      );
+
+
+    /* =====================================================
+       CATEGORY LABEL
+    ===================================================== */
+
+    function categoryLabel(category) {
+
+      const labels = {
+
+        business: "Business",
+
+        restaurant: "Restaurant",
+
+        agency: "Agency",
+
+        ecommerce: "E-commerce",
+
+        portfolio: "Portfolio",
+
+        monthly: "Monthly"
+
+      };
+
+
+      return labels[category]
+        || category;
+
+    }
+
+
+    /* =====================================================
+       BADGE
+    ===================================================== */
+
+    function badgeHTML(badge) {
+
+      if (!badge) {
+        return "";
+      }
+
+
+      const labels = {
+
+        popular: "Popular",
+
+        new: "New",
+
+        sale: "Sale"
+
+      };
+
+
+      return `
+        <span class="badge ${badge}">
+          ${labels[badge] || badge}
+        </span>
+      `;
+
+    }
+
+
+    /* =====================================================
+       RENDER
+    ===================================================== */
+
+    function renderWebsites() {
+
+      const search =
+        searchInput.value
+          .trim()
+          .toLowerCase();
+
+
+      const category =
+        categoryFilter.value;
+
+
+      const status =
+        statusFilter.value;
+
+
+      const filtered =
+        websites.filter(site => {
+
+          const matchesSearch =
+            !search ||
+            site.title
+              .toLowerCase()
+              .includes(search);
+
+
+          const matchesCategory =
+            category === "all" ||
+            site.category === category;
+
+
+          const matchesStatus =
+            status === "all" ||
+            site.status === status;
+
+
+          return (
+            matchesSearch &&
+            matchesCategory &&
+            matchesStatus
+          );
+
+        });
+
+
+      websiteGrid.innerHTML = "";
+
+
+      if (!filtered.length) {
+
+        emptyState.classList.add(
+          "show"
+        );
+
+        return;
+
+      }
+
+
+      emptyState.classList.remove(
+        "show"
+      );
+
+
+      filtered.forEach(site => {
+
+        const card =
+          document.createElement(
+            "article"
+          );
+
+        card.className =
+          "website-card";
+
+
+        card.innerHTML = `
+
+          <div class="website-image">
+
+            <img
+              src="${site.image}"
+              alt="${site.title}"
+              loading="lazy"
+            >
+
+            ${badgeHTML(site.badge)}
+
+          </div>
+
+
+          <div class="website-body">
+
+            <div class="website-category">
+              ${categoryLabel(site.category)}
+            </div>
+
+
+            <h3 class="website-title">
+              ${site.title}
+            </h3>
+
+
+            <div class="website-meta">
+
+              <div class="rating">
+
+                <i class="fa-solid fa-star"></i>
+
+                ${site.rating}
+
+              </div>
+
+
+              <span
+                class="status ${site.status}"
+              >
+                ${
+                  site.status === "live"
+                    ? "Live"
+                    : "Draft"
+                }
+              </span>
+
+            </div>
+
+
+            <div class="website-bottom">
+
+              <div class="price">
+                ৳${Number(site.price).toLocaleString()}
+              </div>
+
+
+              <div class="actions">
+
+                <button
+                  type="button"
+                  class="icon-btn"
+                  title="Preview"
+                  data-preview="${site.id}"
+                >
+                  <i class="fa-solid fa-eye"></i>
+                </button>
+
+
+                <button
+                  type="button"
+                  class="icon-btn"
+                  title="Edit"
+                  data-edit="${site.id}"
+                >
+                  <i class="fa-solid fa-pen"></i>
+                </button>
+
+
+                <button
+                  type="button"
+                  class="icon-btn delete"
+                  title="Delete"
+                  data-delete="${site.id}"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        `;
+
+
+        websiteGrid.appendChild(card);
+
+      });
+
+
+      bindCardActions();
+
+    }
+
+
+    /* =====================================================
+       CARD ACTIONS
+    ===================================================== */
+
+    function bindCardActions() {
+
+      document
+        .querySelectorAll(
+          "[data-preview]"
+        )
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              const id =
+                button.dataset.preview;
+
+              const site =
+                websites.find(
+                  item => item.id === id
+                );
+
+
+              if (!site) return;
+
+
+              /*
+                If a real preview URL exists,
+                replace this with:
+
+                window.open(site.preview, "_blank");
+              */
+
+              showToast(
+                `Preview: ${site.title}`
+              );
+
+            }
+          );
+
+        });
+
+
+      document
+        .querySelectorAll(
+          "[data-edit]"
+        )
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              const id =
+                button.dataset.edit;
+
+              window.location.href =
+                `website-editor.html?id=${encodeURIComponent(id)}`;
+
+            }
+          );
+
+        });
+
+
+      document
+        .querySelectorAll(
+          "[data-delete]"
+        )
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              openDeleteModal(
+                button.dataset.delete
+              );
+
+            }
+          );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       DELETE
+    ===================================================== */
+
+    let deleteId = null;
+
+
+    const deleteModal =
+      document.getElementById(
+        "delete-modal"
+      );
+
+
+    const deleteMessage =
+      document.getElementById(
+        "delete-message"
+      );
+
+
+    function openDeleteModal(id) {
+
+      const site =
+        websites.find(
+          item => item.id === id
+        );
+
+
+      if (!site) return;
+
+
+      deleteId = id;
+
+
+      deleteMessage.textContent =
+        `"${site.title}" will be removed from the current marketplace data.`;
+
+
+      deleteModal.classList.add(
+        "show"
+      );
+
+    }
+
+
+    function closeDeleteModal() {
+
+      deleteId = null;
+
+      deleteModal.classList.remove(
+        "show"
+      );
+
+    }
+
+
+    document
+      .getElementById(
+        "cancel-delete"
+      )
+      .addEventListener(
+        "click",
+        closeDeleteModal
+      );
+
+
+    document
+      .getElementById(
+        "confirm-delete"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          if (!deleteId) return;
+
+
+          websites =
+            websites.filter(
+              site =>
+                site.id !== deleteId
+            );
+
+
+          saveWebsites(
+            websites
+          );
+
+
+          closeDeleteModal();
+
+          renderWebsites();
+
+
+          showToast(
+            "Website deleted successfully."
+          );
+
+        }
+      );
+
+
+    deleteModal.addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target ===
+          deleteModal
+        ) {
+
+          closeDeleteModal();
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       SEARCH & FILTER
+    ===================================================== */
+
+    searchInput.addEventListener(
+      "input",
+      renderWebsites
+    );
+
+
+    categoryFilter.addEventListener(
+      "change",
+      renderWebsites
+    );
+
+
+    statusFilter.addEventListener(
+      "change",
+      renderWebsites
+    );
+
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    const toast =
+      document.getElementById(
+        "toast"
+      );
+
+
+    let toastTimer;
+
+
+    function showToast(message) {
+
+      toast.textContent =
+        message;
+
+      toast.classList.add(
+        "show"
+      );
+
+
+      clearTimeout(
+        toastTimer
+      );
+
+
+      toastTimer =
+        setTimeout(() => {
+
+          toast.classList.remove(
+            "show"
+          );
+
+        }, 2500);
+
+    }
+
+
+    /* =====================================================
+       MOBILE SIDEBAR
+    ===================================================== */
+
+    const sidebar =
+      document.getElementById(
+        "sidebar"
+      );
+
+    const mobileMenu =
+      document.getElementById(
+        "mobile-menu"
+      );
+
+    const sidebarOverlay =
+      document.getElementById(
+        "sidebar-overlay"
+      );
+
+
+    mobileMenu.addEventListener(
+      "click",
+      () => {
+
+        sidebar.classList.add(
+          "open"
+        );
+
+        sidebarOverlay.classList.add(
+          "show"
+        );
+
+      }
+    );
+
+
+    sidebarOverlay.addEventListener(
+      "click",
+      () => {
+
+        sidebar.classList.remove(
+          "open"
+        );
+
+        sidebarOverlay.classList.remove(
+          "show"
+        );
+
+      }
+    );
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    document
+      .getElementById(
+        "logout-btn"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          sessionStorage.removeItem(
+            "websiteDealsAdminSession"
+          );
+
+          window.location.replace(
+            "index.html"
+          );
+
+        }
+      );
+
+
+    /* =====================================================
+       INITIALIZE
+    ===================================================== */
+
+    renderWebsites();
+
+  </script>
+
+</body>
+</html>
