@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0b0d10"
+  >
+
+  <title>Dashboard | Website Deals</title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="../logo.png"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <style>
+
+    /* =====================================================
+       RESET
+    ===================================================== */
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --green: #18a957;
+      --green-dark: #108344;
+      --black: #0b0d10;
+      --sidebar: #101317;
+      --sidebar-soft: #171b20;
+      --text: #171a1e;
+      --muted: #737b84;
+      --border: #e8ebee;
+      --bg: #f5f7f8;
+      --white: #ffffff;
+      --danger: #d92d20;
+      --warning: #dc8b00;
+      --shadow: 0 12px 35px rgba(16,24,40,0.06);
+      --radius: 16px;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: "Inter", "Hind Siliguri", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =====================================================
+       LAYOUT
+    ===================================================== */
+
+    .admin-layout {
+      min-height: 100vh;
+      display: flex;
+    }
+
+    /* =====================================================
+       SIDEBAR
+    ===================================================== */
+
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 260px;
+      background: var(--sidebar);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      transition: transform 0.25s ease;
+    }
+
+    .sidebar-header {
+      height: 78px;
+      padding: 0 22px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .brand img {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      object-fit: contain;
+      background: #fff;
+      padding: 4px;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .brand span {
+      display: block;
+      margin-top: 2px;
+      color: #8f98a1;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .sidebar-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 22px 14px;
+    }
+
+    .menu-label {
+      padding: 0 12px;
+      margin: 12px 0 9px;
+      color: #6f7882;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+    }
+
+    .nav-menu {
+      display: grid;
+      gap: 4px;
+    }
+
+    .nav-item {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      border-radius: 11px;
+      color: #aeb6bf;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .nav-item i {
+      width: 19px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .nav-item:hover {
+      background: var(--sidebar-soft);
+      color: #fff;
+    }
+
+    .nav-item.active {
+      background: rgba(24,169,87,0.14);
+      color: #fff;
+    }
+
+    .nav-item.active i {
+      color: var(--green);
+    }
+
+    .sidebar-footer {
+      padding: 14px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .logout-btn {
+      width: 100%;
+      border: 0;
+      background: transparent;
+      color: #9da5ae;
+      padding: 12px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: left;
+    }
+
+    .logout-btn:hover {
+      background: rgba(217,45,32,0.10);
+      color: #ff8178;
+    }
+
+    /* =====================================================
+       MAIN
+    ===================================================== */
+
+    .main {
+      width: calc(100% - 260px);
+      margin-left: 260px;
+      min-height: 100vh;
+    }
+
+    /* =====================================================
+       TOPBAR
+    ===================================================== */
+
+    .topbar {
+      height: 78px;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .mobile-menu {
+      width: 40px;
+      height: 40px;
+      display: none;
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 10px;
+    }
+
+    .page-title h1 {
+      font-size: 21px;
+      letter-spacing: -0.5px;
+    }
+
+    .page-title p {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .view-site {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #626b74;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .view-site:hover {
+      color: var(--green-dark);
+    }
+
+    .user-box {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-left: 18px;
+      border-left: 1px solid var(--border);
+    }
+
+    .user-avatar {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: #eaf8ef;
+      color: var(--green-dark);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .user-info strong {
+      display: block;
+      max-width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-size: 12px;
+    }
+
+    .user-info span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    /* =====================================================
+       CONTENT
+    ===================================================== */
+
+    .content {
+      padding: 30px;
+      max-width: 1500px;
+    }
+
+    /* =====================================================
+       WELCOME
+    ===================================================== */
+
+    .welcome {
+      background:
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(24,169,87,0.17),
+          transparent 25%
+        ),
+        #101418;
+      border-radius: 20px;
+      color: #fff;
+      padding: 30px;
+      margin-bottom: 25px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .welcome::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 50%;
+      right: -90px;
+      bottom: -150px;
+    }
+
+    .welcome-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .welcome h2 {
+      font-size: 26px;
+      letter-spacing: -1px;
+    }
+
+    .welcome p {
+      max-width: 650px;
+      margin-top: 8px;
+      color: #aeb6bf;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    /* =====================================================
+       STAT CARDS
+    ===================================================== */
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 25px;
+    }
+
+    .stat-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stat-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #effaf3;
+      color: var(--green-dark);
+    }
+
+    .stat-change {
+      color: #15803d;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .stat-card h3 {
+      margin-top: 19px;
+      font-size: 27px;
+      letter-spacing: -1px;
+    }
+
+    .stat-card p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    /* =====================================================
+       GRID
+    ===================================================== */
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.75fr);
+      gap: 20px;
+    }
+
+    .panel {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-header {
+      min-height: 66px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-header h3 {
+      font-size: 14px;
+    }
+
+    .panel-header a {
+      color: var(--green-dark);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    /* =====================================================
+       ORDERS
+    ===================================================== */
+
+    .order-list {
+      display: grid;
+    }
+
+    .order-item {
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      gap: 13px;
+      align-items: center;
+      padding: 17px 20px;
+      border-bottom: 1px solid #f0f2f4;
+    }
+
+    .order-item:last-child {
+      border-bottom: 0;
+    }
+
+    .order-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: #f4f7f5;
+      color: var(--green-dark);
+    }
+
+    .order-info strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    .order-info span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .order-price {
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    /* =====================================================
+       QUICK ACTIONS
+    ===================================================== */
+
+    .quick-actions {
+      padding: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .quick-action {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      transition: 0.2s ease;
+    }
+
+    .quick-action:hover {
+      border-color: #b8e7c9;
+      background: #f7fcf9;
+      transform: translateY(-1px);
+    }
+
+    .quick-action-icon {
+      width: 37px;
+      height: 37px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: #effaf3;
+      color: var(--green-dark);
+      font-size: 13px;
+    }
+
+    .quick-action strong {
+      display: block;
+      font-size: 11px;
+    }
+
+    .quick-action span {
+      display: block;
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: 9px;
+    }
+
+    /* =====================================================
+       RECENT WEBSITES
+    ===================================================== */
+
+    .website-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .website-table th,
+    .website-table td {
+      padding: 15px 20px;
+      border-bottom: 1px solid #f0f2f4;
+      text-align: left;
+      font-size: 11px;
+    }
+
+    .website-table th {
+      color: #858e97;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .website-table td strong {
+      font-size: 11px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 8px;
+      border-radius: 999px;
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .status.live {
+      background: #eaf8ef;
+      color: #087443;
+    }
+
+    .status.draft {
+      background: #fff6df;
+      color: #9a6700;
+    }
+
+    /* =====================================================
+       OVERLAY
+    ===================================================== */
+
+    .sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 90;
+      display: none;
+    }
+
+    .sidebar-overlay.show {
+      display: block;
+    }
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    .toast {
+      position: fixed;
+      right: 25px;
+      bottom: 25px;
+      z-index: 500;
+      background: #111418;
+      color: #fff;
+      padding: 14px 17px;
+      border-radius: 12px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+      font-size: 12px;
+      transform: translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.25s ease;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 1150px) {
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+    @media (max-width: 850px) {
+
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      .mobile-menu {
+        display: grid;
+        place-items: center;
+      }
+
+      .view-site {
+        display: none;
+      }
+
+      .content {
+        padding: 20px;
+      }
+
+      .topbar {
+        padding: 0 20px;
+      }
+
+    }
+
+    @media (max-width: 550px) {
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .welcome {
+        padding: 24px;
+      }
+
+      .welcome h2 {
+        font-size: 22px;
+      }
+
+      .user-info {
+        display: none;
+      }
+
+      .user-box {
+        padding-left: 10px;
+        border-left: 0;
+      }
+
+      .website-table {
+        min-width: 650px;
+      }
+
+      .table-scroll {
+        overflow-x: auto;
+      }
+
+      .order-item {
+        grid-template-columns: 38px 1fr;
+      }
+
+      .order-price {
+        grid-column: 2;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <div class="admin-layout">
+
+    <!-- =================================================
+         SIDEBAR
+    ================================================== -->
+
+    <aside
+      class="sidebar"
+      id="sidebar"
+    >
+
+      <div class="sidebar-header">
+
+        <a
+          href="../index.html"
+          class="brand"
+        >
+
+          <img
+            src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
+            alt="Website Deals"
+          >
+
+          <div>
+            <strong>Website Deals</strong>
+            <span>Management Portal</span>
+          </div>
+
+        </a>
+
+      </div>
+
+
+      <div class="sidebar-content">
+
+        <!-- GENERAL -->
+
+        <div class="menu-label">
+          General
+        </div>
+
+        <nav class="nav-menu">
+
+          <a
+            href="dashboard.html"
+            class="nav-item active"
+          >
+            <i class="fa-solid fa-grid-2"></i>
+            <span>Dashboard</span>
+          </a>
+
+          <a
+            href="websites.html"
+            class="nav-item"
+          >
+            <i class="fa-solid fa-window-maximize"></i>
+            <span>Websites</span>
+          </a>
+
+          <a
+            href="categories.html"
+            class="nav-item"
+          >
+            <i class="fa-solid fa-layer-group"></i>
+            <span>Categories</span>
+          </a>
+
+        </nav>
+
+
+        <!-- BUSINESS -->
+
+        <div class="menu-label">
+          Business
+        </div>
+
+        <nav class="nav-menu">
+
+          <a
+            href="orders.html"
+            class="nav-item"
+          >
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span>Orders</span>
+          </a>
+
+          <a
+            href="customers.html"
+            class="nav-item"
+          >
+            <i class="fa-solid fa-users"></i>
+            <span>Customers</span>
+          </a>
+
+          <a
+            href="newsletter.html"
+            class="nav-item"
+          >
+            <i class="fa-regular fa-envelope"></i>
+            <span>Newsletter</span>
+          </a>
+
+        </nav>
+
+
+        <!-- ADMIN ONLY ITEMS WILL BE INSERTED
+             HERE BY AUTHORIZATION -->
+
+        <div
+          id="protected-menu"
+        ></div>
+
+      </div>
+
+
+      <div class="sidebar-footer">
+
+        <button
+          type="button"
+          class="logout-btn"
+          id="logout-btn"
+        >
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          <span>Sign Out</span>
+        </button>
+
+      </div>
+
+    </aside>
+
+
+    <div
+      class="sidebar-overlay"
+      id="sidebar-overlay"
+    ></div>
+
+
+    <!-- =================================================
+         MAIN
+    ================================================== -->
+
+    <main class="main">
+
+      <!-- TOPBAR -->
+
+      <header class="topbar">
+
+        <div class="topbar-left">
+
+          <button
+            type="button"
+            class="mobile-menu"
+            id="mobile-menu"
+            aria-label="Open menu"
+          >
+            <i class="fa-solid fa-bars"></i>
+          </button>
+
+          <div class="page-title">
+
+            <h1>
+              Dashboard
+            </h1>
+
+            <p>
+              Marketplace overview
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="topbar-right">
+
+          <a
+            href="../index.html"
+            target="_blank"
+            class="view-site"
+          >
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            View Marketplace
+          </a>
+
+          <div class="user-box">
+
+            <div
+              class="user-avatar"
+              id="user-avatar"
+            >
+              A
+            </div>
+
+            <div class="user-info">
+
+              <strong id="user-email">
+                Admin
+              </strong>
+
+              <span>
+                Authorized Account
+              </span>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </header>
+
+
+      <!-- CONTENT -->
+
+      <section class="content">
+
+
+        <!-- WELCOME -->
+
+        <div class="welcome">
+
+          <div class="welcome-content">
+
+            <h2 id="welcome-title">
+              Welcome back 👋
+            </h2>
+
+            <p>
+              Manage your marketplace, websites,
+              orders and customers from one secure
+              workspace.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- STATS -->
+
+        <div class="stats-grid">
+
+          <article class="stat-card">
+
+            <div class="stat-top">
+
+              <div class="stat-icon">
+                <i class="fa-solid fa-window-maximize"></i>
+              </div>
+
+              <span class="stat-change">
+                +12%
+              </span>
+
+            </div>
+
+            <h3 id="stat-websites">
+              8
+            </h3>
+
+            <p>
+              Total Websites
+            </p>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <div class="stat-top">
+
+              <div class="stat-icon">
+                <i class="fa-solid fa-bag-shopping"></i>
+              </div>
+
+              <span class="stat-change">
+                +18%
+              </span>
+
+            </div>
+
+            <h3 id="stat-orders">
+              24
+            </h3>
+
+            <p>
+              Total Orders
+            </p>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <div class="stat-top">
+
+              <div class="stat-icon">
+                <i class="fa-solid fa-users"></i>
+              </div>
+
+              <span class="stat-change">
+                +9%
+              </span>
+
+            </div>
+
+            <h3 id="stat-customers">
+              19
+            </h3>
+
+            <p>
+              Customers
+            </p>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <div class="stat-top">
+
+              <div class="stat-icon">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+
+              <span class="stat-change">
+                +21%
+              </span>
+
+            </div>
+
+            <h3 id="stat-revenue">
+              ৳42.8K
+            </h3>
+
+            <p>
+              Revenue
+            </p>
+
+          </article>
+
+        </div>
+
+
+        <!-- MAIN DASHBOARD -->
+
+        <div class="dashboard-grid">
+
+
+          <!-- RECENT ORDERS -->
+
+          <section class="panel">
+
+            <div class="panel-header">
+
+              <h3>
+                Recent Orders
+              </h3>
+
+              <a href="orders.html">
+                View all
+              </a>
+
+            </div>
+
+
+            <div class="order-list">
+
+              <div class="order-item">
+
+                <div class="order-icon">
+                  <i class="fa-solid fa-store"></i>
+                </div>
+
+                <div class="order-info">
+
+                  <strong>
+                    Nova Business Pro
+                  </strong>
+
+                  <span>
+                    Customer #WD1024 • Today
+                  </span>
+
+                </div>
+
+                <div class="order-price">
+                  ৳2,499
+                </div>
+
+              </div>
+
+
+              <div class="order-item">
+
+                <div class="order-icon">
+                  <i class="fa-solid fa-utensils"></i>
+                </div>
+
+                <div class="order-info">
+
+                  <strong>
+                    Restaurant Royale
+                  </strong>
+
+                  <span>
+                    Customer #WD1023 • Today
+                  </span>
+
+                </div>
+
+                <div class="order-price">
+                  ৳1,999
+                </div>
+
+              </div>
+
+
+              <div class="order-item">
+
+                <div class="order-icon">
+                  <i class="fa-solid fa-bullhorn"></i>
+                </div>
+
+                <div class="order-info">
+
+                  <strong>
+                    Creative Agency X
+                  </strong>
+
+                  <span>
+                    Customer #WD1022 • Yesterday
+                  </span>
+
+                </div>
+
+                <div class="order-price">
+                  ৳2,999
+                </div>
+
+              </div>
+
+
+              <div class="order-item">
+
+                <div class="order-icon">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+
+                <div class="order-info">
+
+                  <strong>
+                    ShopEase Store
+                  </strong>
+
+                  <span>
+                    Customer #WD1021 • Yesterday
+                  </span>
+
+                </div>
+
+                <div class="order-price">
+                  ৳3,499
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- QUICK ACTIONS -->
+
+          <section class="panel">
+
+            <div class="panel-header">
+
+              <h3>
+                Quick Actions
+              </h3>
+
+            </div>
+
+
+            <div class="quick-actions">
+
+              <a
+                href="website-editor.html"
+                class="quick-action"
+              >
+
+                <div class="quick-action-icon">
+                  <i class="fa-solid fa-plus"></i>
+                </div>
+
+                <div>
+                  <strong>
+                    Add Website
+                  </strong>
+
+                  <span>
+                    Create a new marketplace listing
+                  </span>
+                </div>
+
+              </a>
+
+
+              <a
+                href="websites.html"
+                class="quick-action"
+              >
+
+                <div class="quick-action-icon">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                </div>
+
+                <div>
+                  <strong>
+                    Manage Websites
+                  </strong>
+
+                  <span>
+                    Edit existing listings
+                  </span>
+                </div>
+
+              </a>
+
+
+              <a
+                href="orders.html"
+                class="quick-action"
+              >
+
+                <div class="quick-action-icon">
+                  <i class="fa-solid fa-receipt"></i>
+                </div>
+
+                <div>
+                  <strong>
+                    Check Orders
+                  </strong>
+
+                  <span>
+                    Review recent purchases
+                  </span>
+                </div>
+
+              </a>
+
+
+              <a
+                href="../index.html"
+                target="_blank"
+                class="quick-action"
+              >
+
+                <div class="quick-action-icon">
+                  <i class="fa-solid fa-globe"></i>
+                </div>
+
+                <div>
+                  <strong>
+                    View Marketplace
+                  </strong>
+
+                  <span>
+                    Open the public website
+                  </span>
+                </div>
+
+              </a>
+
+            </div>
+
+          </section>
+
+        </div>
+
+
+        <!-- RECENT WEBSITES -->
+
+        <section
+          class="panel"
+          style="margin-top:20px;"
+        >
+
+          <div class="panel-header">
+
+            <h3>
+              Recent Websites
+            </h3>
+
+            <a href="websites.html">
+              Manage
+            </a>
+
+          </div>
+
+          <div class="table-scroll">
+
+            <table class="website-table">
+
+              <thead>
+
+                <tr>
+                  <th>Website</th>
+                  <th>Category</th>
+                  <th>Price</th>
+                  <th>Status</th>
+                </tr>
+
+              </thead>
+
+              <tbody>
+
+                <tr>
+
+                  <td>
+                    <strong>
+                      Nova Business Pro
+                    </strong>
+                  </td>
+
+                  <td>
+                    Business
+                  </td>
+
+                  <td>
+                    ৳2,499
+                  </td>
+
+                  <td>
+                    <span class="status live">
+                      Live
+                    </span>
+                  </td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>
+                    <strong>
+                      Restaurant Royale
+                    </strong>
+                  </td>
+
+                  <td>
+                    Restaurant
+                  </td>
+
+                  <td>
+                    ৳1,999
+                  </td>
+
+                  <td>
+                    <span class="status live">
+                      Live
+                    </span>
+                  </td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>
+                    <strong>
+                      Creative Agency X
+                    </strong>
+                  </td>
+
+                  <td>
+                    Agency
+                  </td>
+
+                  <td>
+                    ৳2,999
+                  </td>
+
+                  <td>
+                    <span class="status live">
+                      Live
+                    </span>
+                  </td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>
+                    <strong>
+                      Personal Portfolio
+                    </strong>
+                  </td>
+
+                  <td>
+                    Portfolio
+                  </td>
+
+                  <td>
+                    ৳1,499
+                  </td>
+
+                  <td>
+                    <span class="status draft">
+                      Draft
+                    </span>
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </section>
+
+
+      </section>
+
+    </main>
+
+  </div>
+
+
+  <!-- TOAST -->
+
+  <div
+    class="toast"
+    id="toast"
+  ></div>
+
+
+  <script>
+
+    /* =====================================================
+       SESSION CHECK
+    ===================================================== */
+
+    const sessionRaw =
+      sessionStorage.getItem(
+        "websiteDealsAdminSession"
+      );
+
+    if (!sessionRaw) {
+
+      window.location.replace("index.html");
+
+    }
+
+
+    let session = null;
+
+    try {
+
+      session =
+        JSON.parse(sessionRaw);
+
+    } catch (error) {
+
+      sessionStorage.removeItem(
+        "websiteDealsAdminSession"
+      );
+
+      window.location.replace("index.html");
+
+    }
+
+
+    if (
+      !session ||
+      session.authenticated !== true
+    ) {
+
+      sessionStorage.removeItem(
+        "websiteDealsAdminSession"
+      );
+
+      window.location.replace("index.html");
+
+    }
+
+
+    /* =====================================================
+       USER INFORMATION
+    ===================================================== */
+
+    const userEmail =
+      document.getElementById("user-email");
+
+    const userAvatar =
+      document.getElementById("user-avatar");
+
+    const welcomeTitle =
+      document.getElementById("welcome-title");
+
+
+    if (session.email) {
+
+      userEmail.textContent =
+        session.email;
+
+      const firstLetter =
+        session.email
+          .charAt(0)
+          .toUpperCase();
+
+      userAvatar.textContent =
+        firstLetter;
+
+    }
+
+
+    /* =====================================================
+       PROTECTED MANAGEMENT AREA
+       
+       IMPORTANT:
+       This is UI protection only.
+       Real production authorization must also be
+       enforced by Firebase/Firestore security rules.
+    ===================================================== */
+
+    const protectedMenu =
+      document.getElementById("protected-menu");
+
+
+    if (session.role === "superadmin") {
+
+      protectedMenu.innerHTML = `
+
+        <div class="menu-label">
+          Management
+        </div>
+
+        <nav class="nav-menu">
+
+          <a
+            href="admins.html"
+            class="nav-item"
+          >
+            <i class="fa-solid fa-user-shield"></i>
+            <span>Access Management</span>
+          </a>
+
+          <a
+            href="settings.html"
+            class="nav-item"
+          >
+            <i class="fa-solid fa-sliders"></i>
+            <span>Settings</span>
+          </a>
+
+        </nav>
+
+      `;
+
+    }
+
+
+    /* =====================================================
+       MOBILE SIDEBAR
+    ===================================================== */
+
+    const sidebar =
+      document.getElementById("sidebar");
+
+    const mobileMenu =
+      document.getElementById("mobile-menu");
+
+    const sidebarOverlay =
+      document.getElementById(
+        "sidebar-overlay"
+      );
+
+
+    function openSidebar() {
+
+      sidebar.classList.add("open");
+
+      sidebarOverlay.classList.add("show");
+
+    }
+
+
+    function closeSidebar() {
+
+      sidebar.classList.remove("open");
+
+      sidebarOverlay.classList.remove("show");
+
+    }
+
+
+    mobileMenu.addEventListener(
+      "click",
+      openSidebar
+    );
+
+    sidebarOverlay.addEventListener(
+      "click",
+      closeSidebar
+    );
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    document
+      .getElementById("logout-btn")
+      .addEventListener("click", () => {
+
+        sessionStorage.removeItem(
+          "websiteDealsAdminSession"
+        );
+
+        window.location.replace(
+          "index.html"
+        );
+
+      });
+
+
+    /* =====================================================
+       DEMO LOCALSTORAGE STATS
+    ===================================================== */
+
+    function loadLocalStats() {
+
+      const orders =
+        JSON.parse(
+          localStorage.getItem(
+            "websiteDealsOrders"
+          ) || "[]"
+        );
+
+      const subscribers =
+        JSON.parse(
+          localStorage.getItem(
+            "websiteDealsSubscribers"
+          ) || "[]"
+        );
+
+
+      if (orders.length > 0) {
+
+        document.getElementById(
+          "stat-orders"
+        ).textContent =
+          orders.length;
+
+      }
+
+
+      if (subscribers.length > 0) {
+
+        document.getElementById(
+          "stat-customers"
+        ).textContent =
+          Math.max(
+            19,
+            subscribers.length
+          );
+
+      }
+
+    }
+
+    loadLocalStats();
+
+
+    /* =====================================================
+       ACTIVE NAV
+    ===================================================== */
+
+    document
+      .querySelectorAll(".nav-item")
+      .forEach(link => {
+
+        link.addEventListener(
+          "click",
+          () => {
+
+            document
+              .querySelectorAll(".nav-item")
+              .forEach(item =>
+                item.classList.remove(
+                  "active"
+                )
+              );
+
+            link.classList.add("active");
+
+          }
+        );
+
+      });
+
+
+    /* =====================================================
+       FUTURE AUTH NOTE
+    =====================================================
+
+       Production version:
+
+       Firebase Authentication
+             ↓
+       authenticated user
+             ↓
+       Firestore user profile
+             ↓
+       role
+             ↓
+       permission guard
+             ↓
+       dashboard
+
+       Never rely only on hidden menu items.
+    ===================================================== */
+
+  </script>
+
+</body>
+</html>
