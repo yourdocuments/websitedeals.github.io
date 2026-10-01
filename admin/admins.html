@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Access Management | Website Deals</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <link rel="stylesheet" href="css/admin.css">
+
+  <style>
+
+    .access-stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+      margin-bottom:24px;
+    }
+
+    .access-card{
+      background:#fff;
+      border:1px solid #e7ece9;
+      border-radius:18px;
+      padding:20px;
+      box-shadow:0 8px 25px rgba(15,23,42,.05);
+    }
+
+    .access-card-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:16px;
+    }
+
+    .access-icon{
+      width:44px;
+      height:44px;
+      border-radius:13px;
+      background:#e9f9ef;
+      color:#18a957;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .access-label{
+      color:#718096;
+      font-size:13px;
+      font-weight:600;
+    }
+
+    .access-value{
+      color:#10202b;
+      font-size:28px;
+      font-weight:800;
+    }
+
+    .table-card{
+      background:#fff;
+      border:1px solid #e7ece9;
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 8px 25px rgba(15,23,42,.05);
+    }
+
+    .table-header{
+      padding:20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      border-bottom:1px solid #e7ece9;
+    }
+
+    .table-header h2{
+      margin:0;
+      font-size:18px;
+      color:#10202b;
+    }
+
+    .table-header p{
+      margin:5px 0 0;
+      color:#718096;
+      font-size:13px;
+    }
+
+    .btn-primary{
+      height:44px;
+      border:0;
+      background:#18a957;
+      color:#fff;
+      padding:0 16px;
+      border-radius:11px;
+      cursor:pointer;
+      font-family:inherit;
+      font-weight:700;
+    }
+
+    .btn-primary:hover{
+      background:#108344;
+    }
+
+    .table-wrap{
+      overflow-x:auto;
+    }
+
+    table{
+      width:100%;
+      min-width:850px;
+      border-collapse:collapse;
+    }
+
+    th{
+      padding:15px 18px;
+      text-align:left;
+      background:#f8faf9;
+      color:#64748b;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      border-bottom:1px solid #e7ece9;
+    }
+
+    td{
+      padding:17px 18px;
+      border-bottom:1px solid #eef2ef;
+      font-size:14px;
+      color:#26343d;
+    }
+
+    tr:last-child td{
+      border-bottom:0;
+    }
+
+    .person{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .avatar{
+      width:42px;
+      height:42px;
+      border-radius:13px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#10202b;
+      color:#fff;
+      font-weight:800;
+    }
+
+    .person strong{
+      display:block;
+      color:#10202b;
+    }
+
+    .person small{
+      display:block;
+      color:#718096;
+      margin-top:3px;
+    }
+
+    .role-badge{
+      display:inline-flex;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .role-owner{
+      background:#e9f9ef;
+      color:#168345;
+    }
+
+    .role-admin{
+      background:#eef4ff;
+      color:#315fa8;
+    }
+
+    .status{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .status.active{
+      background:#eaf9ef;
+      color:#168345;
+    }
+
+    .status.inactive{
+      background:#fff1f2;
+      color:#be123c;
+    }
+
+    .actions{
+      display:flex;
+      gap:7px;
+    }
+
+    .icon-btn{
+      width:36px;
+      height:36px;
+      border:1px solid #dfe6e2;
+      background:#fff;
+      border-radius:10px;
+      cursor:pointer;
+      color:#475569;
+    }
+
+    .icon-btn:hover{
+      border-color:#18a957;
+      color:#18a957;
+    }
+
+    .icon-btn.danger:hover{
+      border-color:#ef4444;
+      color:#ef4444;
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(15,23,42,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:9999;
+    }
+
+    .modal.show{
+      display:flex;
+    }
+
+    .modal-box{
+      width:100%;
+      max-width:520px;
+      background:#fff;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 30px 80px rgba(0,0,0,.2);
+    }
+
+    .modal-head{
+      padding:20px;
+      border-bottom:1px solid #e7ece9;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .modal-head h3{
+      margin:0;
+      color:#10202b;
+    }
+
+    .modal-close{
+      border:0;
+      width:36px;
+      height:36px;
+      border-radius:10px;
+      background:#f1f5f3;
+      cursor:pointer;
+    }
+
+    .modal-body{
+      padding:22px;
+    }
+
+    .form-group{
+      margin-bottom:16px;
+    }
+
+    .form-group label{
+      display:block;
+      margin-bottom:7px;
+      color:#34434d;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .form-group input,
+    .form-group select{
+      width:100%;
+      height:45px;
+      padding:0 13px;
+      border:1px solid #dfe6e2;
+      border-radius:11px;
+      outline:none;
+      font-family:inherit;
+      background:#fff;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus{
+      border-color:#18a957;
+      box-shadow:0 0 0 3px rgba(24,169,87,.08);
+    }
+
+    .modal-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      margin-top:20px;
+    }
+
+    .btn-secondary{
+      height:44px;
+      padding:0 15px;
+      border:1px solid #dfe6e2;
+      background:#fff;
+      border-radius:11px;
+      cursor:pointer;
+      font-family:inherit;
+      font-weight:600;
+    }
+
+    .security-note{
+      margin-top:22px;
+      padding:16px;
+      background:#f8faf9;
+      border:1px solid #e7ece9;
+      border-radius:14px;
+      display:flex;
+      gap:12px;
+      color:#64748b;
+      font-size:13px;
+      line-height:1.6;
+    }
+
+    .security-note i{
+      color:#18a957;
+      margin-top:3px;
+    }
+
+    @media(max-width:800px){
+      .access-stats{
+        grid-template-columns:1fr;
+      }
+
+      .table-header{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .btn-primary{
+        width:100%;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<script>
+(function(){
+
+  const session =
+    JSON.parse(
+      localStorage.getItem("websiteDealsAdminSession") || "null"
+    );
+
+  if(!session){
+    window.location.href = "index.html";
+    return;
+  }
+
+  if(session.role !== "superadmin"){
+    window.location.href = "dashboard.html";
+    return;
+  }
+
+  window.ADMIN_SESSION = session;
+
+})();
+</script>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-brand">
+      <a href="dashboard.html">
+        <img
+          src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
+          alt="Website Deals"
+        >
+      </a>
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <a href="dashboard.html">
+        <i class="fa-solid fa-grid-2"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="websites.html">
+        <i class="fa-solid fa-window-maximize"></i>
+        <span>Websites</span>
+      </a>
+
+      <a href="categories.html">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>Categories</span>
+      </a>
+
+      <a href="orders.html">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Orders</span>
+      </a>
+
+      <a href="customers.html">
+        <i class="fa-solid fa-users"></i>
+        <span>Customers</span>
+      </a>
+
+      <a href="newsletter.html">
+        <i class="fa-solid fa-envelope"></i>
+        <span>Newsletter</span>
+      </a>
+
+      <div class="sidebar-divider"></div>
+
+      <div class="sidebar-section-title">Management</div>
+
+      <a href="admins.html" class="active">
+        <i class="fa-solid fa-user-shield"></i>
+        <span>Access Management</span>
+      </a>
+
+      <a href="settings.html">
+        <i class="fa-solid fa-sliders"></i>
+        <span>Settings</span>
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="logout-btn" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Logout</span>
+      </button>
+    </div>
+
+  </aside>
+
+  <main class="main-content">
+
+    <header class="topbar">
+
+      <button class="mobile-menu-btn" onclick="toggleSidebar()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <div class="topbar-title">
+        <span>Access Management</span>
+      </div>
+
+      <div class="topbar-user">
+        <div class="user-avatar" id="user-avatar">S</div>
+
+        <div>
+          <strong id="user-name">Admin</strong>
+          <small>Administrator</small>
+        </div>
+      </div>
+
+    </header>
+
+    <section class="page-content">
+
+      <div class="page-header">
+
+        <div>
+
+          <div class="breadcrumb">
+            Dashboard / Access Management
+          </div>
+
+          <h1>Access Management</h1>
+
+          <p>
+            Manage authorized team accounts and access levels.
+          </p>
+
+        </div>
+
+      </div>
+
+      <!-- STATS -->
+      <div class="access-stats">
+
+        <div class="access-card">
+
+          <div class="access-card-top">
+
+            <span class="access-label">
+              Total Accounts
+            </span>
+
+            <div class="access-icon">
+              <i class="fa-solid fa-users"></i>
+            </div>
+
+          </div>
+
+          <div class="access-value" id="total-accounts">
+            0
+          </div>
+
+        </div>
+
+        <div class="access-card">
+
+          <div class="access-card-top">
+
+            <span class="access-label">
+              Active Accounts
+            </span>
+
+            <div class="access-icon">
+              <i class="fa-solid fa-user-check"></i>
+            </div>
+
+          </div>
+
+          <div class="access-value" id="active-accounts">
+            0
+          </div>
+
+        </div>
+
+        <div class="access-card">
+
+          <div class="access-card-top">
+
+            <span class="access-label">
+              Administrator Accounts
+            </span>
+
+            <div class="access-icon">
+              <i class="fa-solid fa-user-gear"></i>
+            </div>
+
+          </div>
+
+          <div class="access-value" id="admin-accounts">
+            0
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-card">
+
+        <div class="table-header">
+
+          <div>
+            <h2>Authorized Accounts</h2>
+
+            <p>
+              Accounts with access to the Website Deals admin portal.
+            </p>
+          </div>
+
+          <button
+            class="btn-primary"
+            onclick="openAddModal()"
+          >
+            <i class="fa-solid fa-plus"></i>
+            Add Account
+          </button>
+
+        </div>
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>User</th>
+                <th>Access Level</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th>Last Access</th>
+                <th>Actions</th>
+              </tr>
+
+            </thead>
+
+            <tbody id="admin-list"></tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+      <div class="security-note">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        <div>
+          <strong>Security reminder</strong><br>
+          This browser-based version is for interface testing.
+          For production, use Firebase Authentication and Firestore
+          Security Rules so permissions cannot be bypassed by changing
+          browser storage or directly opening restricted URLs.
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<!-- ADD/EDIT MODAL -->
+<div class="modal" id="account-modal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+
+      <h3 id="modal-title">
+        Add Account
+      </h3>
+
+      <button
+        class="modal-close"
+        onclick="closeModal()"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <form id="account-form">
+
+        <input type="hidden" id="account-id">
+
+        <div class="form-group">
+
+          <label>Full Name</label>
+
+          <input
+            id="account-name"
+            type="text"
+            placeholder="Enter full name"
+            required
+          >
+
+        </div>
+
+        <div class="form-group">
+
+          <label>Email Address</label>
+
+          <input
+            id="account-email"
+            type="email"
+            placeholder="name@example.com"
+            required
+          >
+
+        </div>
+
+        <div class="form-group">
+
+          <label>Access Level</label>
+
+          <select id="account-role">
+
+            <option value="admin">
+              Administrator
+            </option>
+
+            <option value="superadmin">
+              Full Access
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="form-group">
+
+          <label>Status</label>
+
+          <select id="account-status">
+
+            <option value="active">
+              Active
+            </option>
+
+            <option value="inactive">
+              Inactive
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="modal-actions">
+
+          <button
+            type="button"
+            class="btn-secondary"
+            onclick="closeModal()"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="btn-primary"
+          >
+            Save Account
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script>
+
+const DEFAULT_ACCOUNTS = [
+
+  {
+    id:"ACC-001",
+    name:"Website Deals Owner",
+    email:"superadmin@websitedeals.com",
+    role:"superadmin",
+    status:"active",
+    created:"2026-09-01",
+    lastAccess:"Today"
+  },
+
+  {
+    id:"ACC-002",
+    name:"Website Deals Admin",
+    email:"admin@websitedeals.com",
+    role:"admin",
+    status:"active",
+    created:"2026-09-05",
+    lastAccess:"Today"
+  }
+
+];
+
+function getAccounts(){
+
+  let data =
+    JSON.parse(
+      localStorage.getItem("websiteDealsAccounts") || "null"
+    );
+
+  if(!Array.isArray(data) || !data.length){
+
+    data = DEFAULT_ACCOUNTS;
+
+    localStorage.setItem(
+      "websiteDealsAccounts",
+      JSON.stringify(data)
+    );
+
+  }
+
+  return data;
+}
+
+let accounts = getAccounts();
+
+function saveAccounts(){
+
+  localStorage.setItem(
+    "websiteDealsAccounts",
+    JSON.stringify(accounts)
+  );
+
+}
+
+function renderAccounts(){
+
+  const tbody =
+    document.getElementById("admin-list");
+
+  tbody.innerHTML = "";
+
+  accounts.forEach(account => {
+
+    const initial =
+      account.name.charAt(0).toUpperCase();
+
+    const tr =
+      document.createElement("tr");
+
+    tr.innerHTML = `
+
+      <td>
+
+        <div class="person">
+
+          <div class="avatar">
+            ${escapeHTML(initial)}
+          </div>
+
+          <div>
+
+            <strong>
+              ${escapeHTML(account.name)}
+            </strong>
+
+            <small>
+              ${escapeHTML(account.email)}
+            </small>
+
+          </div>
+
+        </div>
+
+      </td>
+
+      <td>
+
+        <span class="role-badge ${
+          account.role === "superadmin"
+            ? "role-owner"
+            : "role-admin"
+        }">
+
+          ${
+            account.role === "superadmin"
+              ? "Full Access"
+              : "Administrator"
+          }
+
+        </span>
+
+      </td>
+
+      <td>
+
+        <span class="status ${
+          account.status === "active"
+            ? "active"
+            : "inactive"
+        }">
+
+          <i class="fa-solid ${
+            account.status === "active"
+              ? "fa-circle-check"
+              : "fa-circle-xmark"
+          }"></i>
+
+          ${
+            account.status === "active"
+              ? "Active"
+              : "Inactive"
+          }
+
+        </span>
+
+      </td>
+
+      <td>
+        ${formatDate(account.created)}
+      </td>
+
+      <td>
+        ${escapeHTML(account.lastAccess || "—")}
+      </td>
+
+      <td>
+
+        <div class="actions">
+
+          <button
+            class="icon-btn"
+            title="Edit"
+            onclick="editAccount('${account.id}')"
+          >
+            <i class="fa-solid fa-pen"></i>
+          </button>
+
+          <button
+            class="icon-btn danger"
+            title="Delete"
+            onclick="deleteAccount('${account.id}')"
+          >
+            <i class="fa-solid fa-trash"></i>
+          </button>
+
+        </div>
+
+      </td>
+
+    `;
+
+    tbody.appendChild(tr);
+
+  });
+
+  updateStats();
+
+}
+
+function updateStats(){
+
+  document.getElementById("total-accounts").textContent =
+    accounts.length;
+
+  document.getElementById("active-accounts").textContent =
+    accounts.filter(x => x.status === "active").length;
+
+  document.getElementById("admin-accounts").textContent =
+    accounts.filter(x => x.role === "admin").length;
+
+}
+
+function openAddModal(){
+
+  document.getElementById("account-form").reset();
+
+  document.getElementById("account-id").value = "";
+
+  document.getElementById("modal-title").textContent =
+    "Add Account";
+
+  document
+    .getElementById("account-modal")
+    .classList.add("show");
+
+}
+
+function editAccount(id){
+
+  const account =
+    accounts.find(x => x.id === id);
+
+  if(!account) return;
+
+  document.getElementById("account-id").value =
+    account.id;
+
+  document.getElementById("account-name").value =
+    account.name;
+
+  document.getElementById("account-email").value =
+    account.email;
+
+  document.getElementById("account-role").value =
+    account.role;
+
+  document.getElementById("account-status").value =
+    account.status;
+
+  document.getElementById("modal-title").textContent =
+    "Edit Account";
+
+  document
+    .getElementById("account-modal")
+    .classList.add("show");
+
+}
+
+function closeModal(){
+
+  document
+    .getElementById("account-modal")
+    .classList.remove("show");
+
+}
+
+document
+  .getElementById("account-form")
+  .addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    const id =
+      document.getElementById("account-id").value;
+
+    const name =
+      document.getElementById("account-name").value.trim();
+
+    const email =
+      document.getElementById("account-email").value.trim();
+
+    const role =
+      document.getElementById("account-role").value;
+
+    const status =
+      document.getElementById("account-status").value;
+
+    if(id){
+
+      const account =
+        accounts.find(x => x.id === id);
+
+      if(account){
+
+        account.name = name;
+        account.email = email;
+        account.role = role;
+        account.status = status;
+
+      }
+
+    }else{
+
+      accounts.push({
+
+        id:
+          "ACC-" +
+          String(Date.now()).slice(-5),
+
+        name,
+        email,
+        role,
+        status,
+
+        created:
+          new Date().toISOString().split("T")[0],
+
+        lastAccess:"Never"
+
+      });
+
+    }
+
+    saveAccounts();
+    renderAccounts();
+    closeModal();
+
+  });
+
+function deleteAccount(id){
+
+  const account =
+    accounts.find(x => x.id === id);
+
+  if(!account) return;
+
+  if(
+    account.email ===
+    window.ADMIN_SESSION.email
+  ){
+
+    alert("You cannot delete the account currently in use.");
+    return;
+
+  }
+
+  const confirmed =
+    confirm(
+      "Delete this account?\n\n" +
+      account.email
+    );
+
+  if(!confirmed) return;
+
+  accounts =
+    accounts.filter(x => x.id !== id);
+
+  saveAccounts();
+  renderAccounts();
+
+}
+
+function formatDate(date){
+
+  if(!date) return "—";
+
+  const d = new Date(date);
+
+  if(isNaN(d)) return date;
+
+  return d.toLocaleDateString("en-GB",{
+    day:"2-digit",
+    month:"short",
+    year:"numeric"
+  });
+
+}
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+function toggleSidebar(){
+
+  document
+    .getElementById("sidebar")
+    .classList.toggle("open");
+
+}
+
+function logout(){
+
+  localStorage.removeItem(
+    "websiteDealsAdminSession"
+  );
+
+  window.location.href =
+    "index.html";
+
+}
+
+const session =
+  window.ADMIN_SESSION;
+
+const name =
+  session?.name ||
+  session?.email?.split("@")[0] ||
+  "Admin";
+
+document.getElementById("user-name").textContent =
+  name;
+
+document.getElementById("user-avatar").textContent =
+  name.charAt(0).toUpperCase();
+
+renderAccounts();
+
+</script>
+
+</body>
+</html>
