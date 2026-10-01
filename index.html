@@ -1,2862 +1,1902 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-    <meta
-        name="description"
-        content="A next-generation website marketplace for premium, ready-to-launch websites."
-    >
+  <title>Website Deals | Premium Ready-Made Websites</title>
 
-    <meta name="theme-color" content="#070707">
+  <meta
+    name="description"
+    content="Website Deals — Premium ready-made websites, business websites, restaurant websites, portfolio, e-commerce and monthly website packages."
+  >
 
-    <title>Website Marketplace — Launch Something Beautiful</title>
+  <meta
+    name="keywords"
+    content="website deals, ready made website, website marketplace, business website, restaurant website, ecommerce website, portfolio website, Bangladesh website"
+  >
 
-    <!-- =========================================================
-         GOOGLE FONTS
-    ========================================================== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta name="author" content="Website Deals">
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+  <!-- =========================================================
+       FAVICON
+  ========================================================== -->
+  <link
+    rel="icon"
+    type="image/png"
+    href="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
+  >
 
-    <!-- =========================================================
-         STYLESHEET
-    ========================================================== -->
-    <link rel="stylesheet" href="css/style.css">
+  <!-- =========================================================
+       GOOGLE FONTS
+  ========================================================== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- =========================================================
-         OPTIONAL FAVICON
-         পরে আপনার নিজের logo বসাতে পারবেন
-    ========================================================== -->
-    <link
-        rel="icon"
-        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='25' fill='%23070707'/%3E%3Ctext x='50' y='66' font-size='55' text-anchor='middle' fill='%23ffffff'%3EW%3C/text%3E%3C/svg%3E"
-    >
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- =========================================================
+       FONT AWESOME
+  ========================================================== -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  >
+
+  <!-- =========================================================
+       MAIN CSS
+  ========================================================== -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- =========================================================
+       EXTRA META
+  ========================================================== -->
+  <meta name="theme-color" content="#080909">
+  <meta name="color-scheme" content="dark">
+
 </head>
 
 <body>
 
-    <!-- =========================================================
-         GLOBAL CURSOR / BACKGROUND EFFECTS
-    ========================================================== -->
+  <!-- =========================================================
+       PAGE LOADER
+  ========================================================== -->
+  <div
+    class="page-loader"
+    id="page-loader"
+    aria-hidden="true"
+  >
+    <div class="loader-logo">
+      <img
+        src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
+        alt="Website Deals"
+      >
+    </div>
 
-    <div class="page-noise" aria-hidden="true"></div>
+    <div class="loader-spinner"></div>
 
-    <div class="ambient-light ambient-light-one" aria-hidden="true"></div>
-    <div class="ambient-light ambient-light-two" aria-hidden="true"></div>
+    <p>Loading Website Deals...</p>
+  </div>
 
-    <!-- =========================================================
-         HEADER
-    ========================================================== -->
 
-    <header class="site-header" id="siteHeader">
+  <!-- =========================================================
+       HEADER
+  ========================================================== -->
+  <header class="site-header" id="site-header">
 
-        <div class="container header-inner">
+    <div class="container header-inner">
 
-            <!-- LOGO -->
+      <!-- BRAND -->
+      <a
+        href="index.html"
+        class="brand"
+        aria-label="Website Deals Home"
+      >
+
+        <div class="brand-logo-wrap">
+          <img
+            src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
+            alt="Website Deals Logo"
+            class="brand-logo"
+          >
+        </div>
+
+        <span class="brand-text">
+          <span class="brand-name">
+            Website Deals
+          </span>
+
+          <span class="brand-tagline">
+            Premium Website Marketplace
+          </span>
+        </span>
+
+      </a>
+
+
+      <!-- DESKTOP NAVIGATION -->
+      <nav
+        class="desktop-nav"
+        aria-label="Main Navigation"
+      >
+
+        <a
+          href="#home"
+          class="nav-link active"
+        >
+          Home
+        </a>
+
+        <a
+          href="#websites"
+          class="nav-link"
+        >
+          Websites
+        </a>
+
+        <a
+          href="#categories"
+          class="nav-link"
+        >
+          Categories
+        </a>
+
+        <a
+          href="#how-it-works"
+          class="nav-link"
+        >
+          How It Works
+        </a>
+
+      </nav>
+
+
+      <!-- HEADER ACTIONS -->
+      <div class="header-actions">
+
+        <button
+          type="button"
+          class="icon-btn"
+          id="search-toggle"
+          aria-label="Search websites"
+          title="Search"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+
+
+        <a
+          href="#websites"
+          class="btn btn-primary header-cta"
+        >
+          <span>Explore Websites</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
+
+        <button
+          type="button"
+          class="mobile-menu-btn"
+          id="mobile-menu-btn"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- =======================================================
+         MOBILE NAVIGATION
+    ======================================================== -->
+    <div
+      class="mobile-nav"
+      id="mobile-nav"
+      aria-hidden="true"
+    >
+
+      <div class="mobile-nav-inner">
+
+        <a
+          href="#home"
+          class="mobile-nav-link"
+        >
+          <i class="fa-solid fa-house"></i>
+          <span>Home</span>
+        </a>
+
+        <a
+          href="#websites"
+          class="mobile-nav-link"
+        >
+          <i class="fa-solid fa-window-maximize"></i>
+          <span>Websites</span>
+        </a>
+
+        <a
+          href="#categories"
+          class="mobile-nav-link"
+        >
+          <i class="fa-solid fa-layer-group"></i>
+          <span>Categories</span>
+        </a>
+
+        <a
+          href="#how-it-works"
+          class="mobile-nav-link"
+        >
+          <i class="fa-solid fa-circle-info"></i>
+          <span>How It Works</span>
+        </a>
+
+        <a
+          href="#websites"
+          class="mobile-nav-link mobile-nav-cta"
+        >
+          <i class="fa-solid fa-arrow-right"></i>
+          <span>Explore Websites</span>
+        </a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================================================
+       SEARCH PANEL
+  ========================================================== -->
+  <section
+    class="search-panel"
+    id="search-panel"
+    aria-hidden="true"
+  >
+
+    <div class="container">
+
+      <div class="search-panel-inner">
+
+        <div class="search-heading">
+
+          <span class="eyebrow">
+            <i class="fa-solid fa-sparkles"></i>
+            FIND YOUR WEBSITE
+          </span>
+
+          <h2>
+            What are you looking for?
+          </h2>
+
+        </div>
+
+
+        <div class="search-input-wrap">
+
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+
+          <input
+            type="search"
+            id="website-search"
+            placeholder="Search business, restaurant, portfolio..."
+            autocomplete="off"
+          >
+
+          <button
+            type="button"
+            id="clear-search"
+            class="clear-search"
+            aria-label="Clear search"
+          >
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================================================
+       MAIN
+  ========================================================== -->
+  <main id="main-content">
+
+
+    <!-- =======================================================
+         HERO SECTION
+    ======================================================== -->
+    <section
+      class="hero-section"
+      id="home"
+    >
+
+      <div class="hero-background">
+
+        <div class="hero-glow hero-glow-one"></div>
+        <div class="hero-glow hero-glow-two"></div>
+        <div class="hero-grid"></div>
+
+      </div>
+
+
+      <div class="container hero-container">
+
+        <!-- HERO CONTENT -->
+        <div class="hero-content">
+
+          <div class="hero-eyebrow">
+
+            <span class="eyebrow-dot"></span>
+
+            <span>
+              Premium Digital Marketplace
+            </span>
+
+          </div>
+
+
+          <h1 class="hero-title">
+
+            আপনার ব্যবসার জন্য
+
+            <span class="gradient-text">
+              Ready-Made Website
+            </span>
+
+          </h1>
+
+
+          <p class="hero-description">
+
+            ডিজাইন, ডেভেলপমেন্ট ও লঞ্চের ঝামেলা ছাড়াই
+            আপনার ব্যবসার জন্য বেছে নিন একটি
+            premium ready-made website।
+
+          </p>
+
+
+          <div class="hero-actions">
+
             <a
-                href="#top"
-                class="brand"
-                aria-label="Website Marketplace Home"
+              href="#websites"
+              class="btn btn-primary btn-large"
             >
 
-                <span class="brand-mark">
-                    W
-                </span>
+              <span>
+                Explore Websites
+              </span>
 
-                <span class="brand-text">
-                    <strong>Website</strong>
-                    <span>Marketplace</span>
-                </span>
+              <i class="fa-solid fa-arrow-right"></i>
 
             </a>
 
 
-            <!-- DESKTOP NAVIGATION -->
-            <nav class="main-navigation" aria-label="Main Navigation">
-
-                <a href="#websites">
-                    Websites
-                </a>
-
-                <a href="#categories">
-                    Categories
-                </a>
-
-                <a href="#how-it-works">
-                    How it works
-                </a>
-
-                <a href="#why-us">
-                    Why us
-                </a>
-
-            </nav>
-
-
-            <!-- HEADER ACTIONS -->
-            <div class="header-actions">
-
-                <button
-                    class="country-selector"
-                    id="countrySelector"
-                    type="button"
-                    aria-label="Selected country"
-                >
-
-                    <span class="country-flag">
-                        🇧🇩
-                    </span>
-
-                    <span class="country-name">
-                        Bangladesh
-                    </span>
-
-                    <span class="country-chevron">
-                        ↓
-                    </span>
-
-                </button>
-
-
-                <a
-                    href="#websites"
-                    class="header-cta"
-                >
-                    Explore websites
-                </a>
-
-            </div>
-
-
-            <!-- MOBILE MENU BUTTON -->
-            <button
-                class="mobile-menu-button"
-                id="mobileMenuButton"
-                type="button"
-                aria-label="Open navigation"
-                aria-expanded="false"
+            <a
+              href="#how-it-works"
+              class="btn btn-secondary btn-large"
             >
 
-                <span></span>
-                <span></span>
-                <span></span>
+              <i class="fa-regular fa-circle-play"></i>
 
-            </button>
+              <span>
+                How It Works
+              </span>
+
+            </a>
+
+          </div>
+
+
+          <!-- TRUST ITEMS -->
+          <div class="hero-trust">
+
+            <div class="trust-item">
+
+              <span class="trust-icon">
+                <i class="fa-solid fa-mobile-screen-button"></i>
+              </span>
+
+              <span>
+                Responsive Design
+              </span>
+
+            </div>
+
+
+            <div class="trust-item">
+
+              <span class="trust-icon">
+                <i class="fa-solid fa-rocket"></i>
+              </span>
+
+              <span>
+                Ready to Launch
+              </span>
+
+            </div>
+
+
+            <div class="trust-item">
+
+              <span class="trust-icon">
+                <i class="fa-solid fa-bolt"></i>
+              </span>
+
+              <span>
+                Mobile Friendly
+              </span>
+
+            </div>
+
+          </div>
 
         </div>
 
 
-        <!-- MOBILE NAVIGATION -->
+        <!-- HERO VISUAL -->
+        <div class="hero-visual">
 
-        <div
-            class="mobile-navigation"
-            id="mobileNavigation"
-        >
+          <div class="hero-visual-glow"></div>
 
-            <div class="mobile-navigation-inner">
 
-                <a href="#websites">
-                    Websites
-                </a>
+          <!-- BROWSER WINDOW -->
+          <div class="hero-browser">
 
-                <a href="#categories">
-                    Categories
-                </a>
+            <div class="browser-topbar">
 
-                <a href="#how-it-works">
-                    How it works
-                </a>
+              <div class="browser-dots">
 
-                <a href="#why-us">
-                    Why us
-                </a>
+                <span></span>
+                <span></span>
+                <span></span>
 
-                <a href="#websites" class="mobile-nav-cta">
-                    Explore websites
-                </a>
+              </div>
 
-            </div>
 
-        </div>
+              <div class="browser-address">
 
-    </header>
-
-
-    <!-- =========================================================
-         MAIN
-    ========================================================== -->
-
-    <main id="top">
-
-
-        <!-- =====================================================
-             HERO SECTION
-        ====================================================== -->
-
-        <section class="hero-section">
-
-            <div class="hero-grid container">
-
-                <!-- HERO COPY -->
-
-                <div class="hero-copy">
-
-                    <div class="eyebrow">
-
-                        <span class="eyebrow-dot"></span>
-
-                        Premium websites for modern businesses
-
-                    </div>
-
-
-                    <h1>
-
-                        Your next
-                        <span class="hero-gradient-text">
-                            website
-                        </span>
-                        is already here.
-
-                    </h1>
-
-
-                    <p class="hero-description">
-
-                        Launch a beautiful, responsive website without
-                        starting from zero. Choose a design, preview it
-                        live and make it yours.
-
-                    </p>
-
-
-                    <div class="hero-actions">
-
-                        <a
-                            href="#websites"
-                            class="button button-primary"
-                        >
-
-                            <span>
-                                Explore websites
-                            </span>
-
-                            <span class="button-arrow">
-                                →
-                            </span>
-
-                        </a>
-
-
-                        <a
-                            href="#how-it-works"
-                            class="button button-secondary"
-                        >
-
-                            How it works
-
-                        </a>
-
-                    </div>
-
-
-                    <!-- TRUST LINE -->
-
-                    <div class="hero-trust">
-
-                        <div class="trust-avatars">
-
-                            <span>R</span>
-                            <span>A</span>
-                            <span>S</span>
-                            <span>M</span>
-
-                        </div>
-
-                        <div class="trust-copy">
-
-                            <strong>
-                                Ready to launch
-                            </strong>
-
-                            <span>
-                                Beautiful websites, made simple.
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- HERO VISUAL -->
-
-                <div class="hero-visual">
-
-                    <div class="hero-visual-glow"></div>
-
-
-                    <!-- FLOATING TOP LABEL -->
-
-                    <div class="floating-label floating-label-top">
-
-                        <span class="status-dot"></span>
-
-                        Live preview
-
-                    </div>
-
-
-                    <!-- MAIN WEBSITE MOCKUP -->
-
-                    <div class="hero-browser">
-
-                        <div class="browser-topbar">
-
-                            <div class="browser-controls">
-
-                                <span></span>
-                                <span></span>
-                                <span></span>
-
-                            </div>
-
-
-                            <div class="browser-address">
-
-                                yourbusiness.com
-
-                            </div>
-
-
-                            <div class="browser-menu">
-
-                                •••
-
-                            </div>
-
-                        </div>
-
-
-                        <div class="browser-content">
-
-                            <div class="mock-nav">
-
-                                <div class="mock-logo">
-                                    STUDIO
-                                </div>
-
-                                <div class="mock-nav-links">
-
-                                    <span>Home</span>
-                                    <span>Services</span>
-                                    <span>About</span>
-
-                                </div>
-
-                                <div class="mock-nav-button">
-                                    Start
-                                </div>
-
-                            </div>
-
-
-                            <div class="mock-hero">
-
-                                <div class="mock-hero-copy">
-
-                                    <span class="mock-small-label">
-                                        CREATIVE STUDIO
-                                    </span>
-
-                                    <h3>
-                                        Design that
-                                        <br>
-                                        moves people.
-                                    </h3>
-
-                                    <p>
-                                        A modern digital experience
-                                        designed for ambitious brands.
-                                    </p>
-
-                                    <div class="mock-button">
-                                        Explore
-                                    </div>
-
-                                </div>
-
-
-                                <div class="mock-art">
-
-                                    <div class="art-orbit"></div>
-
-                                    <div class="art-circle"></div>
-
-                                    <div class="art-card">
-
-                                        <span>
-                                            DIGITAL
-                                        </span>
-
-                                        <strong>
-                                            24
-                                        </strong>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                            <div class="mock-bottom-row">
-
-                                <span>
-                                    Brand Strategy
-                                </span>
-
-                                <span>
-                                    Digital Design
-                                </span>
-
-                                <span>
-                                    Development
-                                </span>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <!-- PRICE FLOAT -->
-
-                    <div class="floating-price">
-
-                        <span>
-                            From
-                        </span>
-
-                        <strong>
-                            ৳999
-                        </strong>
-
-                        <small>
-                            / month
-                        </small>
-
-                    </div>
-
-
-                    <!-- MOBILE PREVIEW FLOAT -->
-
-                    <div class="floating-device">
-
-                        <div class="device-screen">
-
-                            <div class="device-top"></div>
-
-                            <div class="device-line large"></div>
-                            <div class="device-line"></div>
-                            <div class="device-line short"></div>
-
-                            <div class="device-image"></div>
-
-                            <div class="device-button"></div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- HERO BOTTOM MARQUEE -->
-
-            <div class="hero-marquee">
-
-                <div class="marquee-track">
-
-                    <span>RESTAURANTS</span>
-                    <i>✦</i>
-
-                    <span>BUSINESS</span>
-                    <i>✦</i>
-
-                    <span>PORTFOLIO</span>
-                    <i>✦</i>
-
-                    <span>AGENCY</span>
-                    <i>✦</i>
-
-                    <span>EDUCATION</span>
-                    <i>✦</i>
-
-                    <span>HEALTHCARE</span>
-                    <i>✦</i>
-
-                    <span>E-COMMERCE</span>
-                    <i>✦</i>
-
-                    <span>RESTAURANTS</span>
-                    <i>✦</i>
-
-                    <span>BUSINESS</span>
-                    <i>✦</i>
-
-                    <span>PORTFOLIO</span>
-                    <i>✦</i>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             FEATURED SECTION
-        ====================================================== -->
-
-        <section
-            class="websites-section section-padding"
-            id="websites"
-        >
-
-            <div class="container">
-
-
-                <!-- SECTION HEADER -->
-
-                <div class="section-header">
-
-                    <div>
-
-                        <div class="section-kicker">
-                            CURATED FOR BANGLADESH
-                        </div>
-
-                        <h2>
-                            Websites worth
-                            <span>showing off.</span>
-                        </h2>
-
-                    </div>
-
-
-                    <div class="section-header-right">
-
-                        <p>
-                            Hand-picked designs built to make
-                            your business look instantly credible.
-                        </p>
-
-                        <a href="#all-websites" class="text-link">
-                            View all websites
-                            <span>→</span>
-                        </a>
-
-                    </div>
-
-                </div>
-
-
-                <!-- CATEGORY FILTER -->
-
-                <div
-                    class="category-filter"
-                    id="websiteFilters"
-                    role="tablist"
-                >
-
-                    <button
-                        class="filter-button active"
-                        data-filter="all"
-                        type="button"
-                    >
-                        All
-                    </button>
-
-                    <button
-                        class="filter-button"
-                        data-filter="business"
-                        type="button"
-                    >
-                        Business
-                    </button>
-
-                    <button
-                        class="filter-button"
-                        data-filter="restaurant"
-                        type="button"
-                    >
-                        Restaurant
-                    </button>
-
-                    <button
-                        class="filter-button"
-                        data-filter="agency"
-                        type="button"
-                    >
-                        Agency
-                    </button>
-
-                    <button
-                        class="filter-button"
-                        data-filter="education"
-                        type="button"
-                    >
-                        Education
-                    </button>
-
-                    <button
-                        class="filter-button"
-                        data-filter="healthcare"
-                        type="button"
-                    >
-                        Healthcare
-                    </button>
-
-                    <button
-                        class="filter-button"
-                        data-filter="portfolio"
-                        type="button"
-                    >
-                        Portfolio
-                    </button>
-
-                </div>
-
-
-                <!-- WEBSITE GRID -->
-
-                <div
-                    class="website-grid"
-                    id="website-list"
-                >
-
-
-                    <!-- =================================================
-                         WEBSITE CARD 01
-                         Firebase পরে এই structure ব্যবহার করবে
-                    ================================================== -->
-
-                    <article
-                        class="website-card website-card-large"
-                        data-category="restaurant"
-                        data-country="BD"
-                    >
-
-                        <div class="website-card-preview">
-
-                            <div class="preview-toolbar">
-
-                                <span class="preview-label">
-                                    LIVE PREVIEW
-                                </span>
-
-                                <span class="preview-device">
-                                    Desktop
-                                </span>
-
-                            </div>
-
-
-                            <div class="preview-window restaurant-preview">
-
-                                <div class="preview-nav">
-
-                                    <strong>
-                                        TABLE
-                                    </strong>
-
-                                    <span>Menu</span>
-                                    <span>About</span>
-                                    <span>Contact</span>
-
-                                </div>
-
-
-                                <div class="preview-hero">
-
-                                    <div>
-
-                                        <small>
-                                            FINE DINING
-                                        </small>
-
-                                        <h3>
-                                            Taste the
-                                            <br>
-                                            extraordinary.
-                                        </h3>
-
-                                        <button>
-                                            Reserve a table
-                                        </button>
-
-                                    </div>
-
-                                    <div class="preview-food-shape">
-                                        <span>01</span>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                            <button
-                                class="preview-overlay-button"
-                                type="button"
-                                data-preview="restaurant"
-                            >
-                                <span>↗</span>
-                                Open preview
-                            </button>
-
-                        </div>
-
-
-                        <div class="website-card-content">
-
-                            <div class="website-card-heading">
-
-                                <div>
-
-                                    <span class="website-category">
-                                        RESTAURANT
-                                    </span>
-
-                                    <h3>
-                                        Table — Restaurant
-                                    </h3>
-
-                                </div>
-
-                                <div class="website-price">
-
-                                    <strong>
-                                        ৳999
-                                    </strong>
-
-                                    <span>
-                                        / month
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <p>
-                                A refined restaurant experience
-                                designed for modern dining brands.
-                            </p>
-
-
-                            <div class="website-features">
-
-                                <span>Responsive</span>
-                                <span>Booking</span>
-                                <span>WhatsApp</span>
-
-                            </div>
-
-
-                            <div class="website-card-actions">
-
-                                <button
-                                    class="button button-dark-outline preview-button"
-                                    type="button"
-                                    data-preview="restaurant"
-                                >
-                                    Live preview
-                                </button>
-
-                                <button
-                                    class="button button-dark get-website-button"
-                                    type="button"
-                                    data-website-id="restaurant-01"
-                                    data-website-title="Table — Restaurant"
-                                    data-price="999"
-                                >
-                                    Get this website
-                                    <span>→</span>
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- =================================================
-                         WEBSITE CARD 02
-                    ================================================== -->
-
-                    <article
-                        class="website-card"
-                        data-category="business"
-                        data-country="BD"
-                    >
-
-                        <div class="website-card-preview">
-
-                            <div class="preview-toolbar">
-
-                                <span class="preview-label">
-                                    BUSINESS
-                                </span>
-
-                                <span class="preview-device">
-                                    Desktop
-                                </span>
-
-                            </div>
-
-
-                            <div class="preview-window business-preview">
-
-                                <div class="business-preview-top">
-
-                                    <span>
-                                        NORTH
-                                    </span>
-
-                                    <div>
-                                        About
-                                        Services
-                                        Contact
-                                    </div>
-
-                                </div>
-
-
-                                <div class="business-preview-main">
-
-                                    <small>
-                                        BUSINESS CONSULTING
-                                    </small>
-
-                                    <h3>
-                                        Make better
-                                        <br>
-                                        decisions.
-                                    </h3>
-
-                                    <div class="business-line"></div>
-
-                                    <p>
-                                        Strategy for businesses
-                                        ready for their next chapter.
-                                    </p>
-
-                                </div>
-
-
-                                <div class="business-number">
-                                    01
-                                </div>
-
-                            </div>
-
-
-                            <button
-                                class="preview-overlay-button"
-                                type="button"
-                                data-preview="business"
-                            >
-                                <span>↗</span>
-                                Open preview
-                            </button>
-
-                        </div>
-
-
-                        <div class="website-card-content">
-
-                            <div class="website-card-heading">
-
-                                <div>
-
-                                    <span class="website-category">
-                                        BUSINESS
-                                    </span>
-
-                                    <h3>
-                                        North Business
-                                    </h3>
-
-                                </div>
-
-                                <div class="website-price">
-
-                                    <strong>
-                                        ৳799
-                                    </strong>
-
-                                    <span>
-                                        / month
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <p>
-                                Clean corporate design for
-                                ambitious businesses.
-                            </p>
-
-
-                            <div class="website-features">
-
-                                <span>SEO Ready</span>
-                                <span>Responsive</span>
-                                <span>Fast</span>
-
-                            </div>
-
-
-                            <div class="website-card-actions">
-
-                                <button
-                                    class="button button-dark-outline preview-button"
-                                    type="button"
-                                    data-preview="business"
-                                >
-                                    Live preview
-                                </button>
-
-                                <button
-                                    class="button button-dark get-website-button"
-                                    type="button"
-                                    data-website-id="business-01"
-                                    data-website-title="North Business"
-                                    data-price="799"
-                                >
-                                    Get this website
-                                    <span>→</span>
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- =================================================
-                         WEBSITE CARD 03
-                    ================================================== -->
-
-                    <article
-                        class="website-card"
-                        data-category="agency"
-                        data-country="BD"
-                    >
-
-                        <div class="website-card-preview">
-
-                            <div class="preview-toolbar">
-
-                                <span class="preview-label">
-                                    CREATIVE
-                                </span>
-
-                                <span class="preview-device">
-                                    Desktop
-                                </span>
-
-                            </div>
-
-
-                            <div class="preview-window agency-preview">
-
-                                <div class="agency-orb"></div>
-
-                                <div class="agency-top">
-
-                                    <strong>
-                                        FORM
-                                    </strong>
-
-                                    <span>
-                                        MENU +
-                                    </span>
-
-                                </div>
-
-
-                                <div class="agency-center">
-
-                                    <small>
-                                        DIGITAL AGENCY
-                                    </small>
-
-                                    <h3>
-                                        Ideas
-                                        <br>
-                                        <em>made visible.</em>
-                                    </h3>
-
-                                </div>
-
-
-                                <div class="agency-footer">
-
-                                    <span>
-                                        New York — Dhaka
-                                    </span>
-
-                                    <span>
-                                        2026
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <button
-                                class="preview-overlay-button"
-                                type="button"
-                                data-preview="agency"
-                            >
-                                <span>↗</span>
-                                Open preview
-                            </button>
-
-                        </div>
-
-
-                        <div class="website-card-content">
-
-                            <div class="website-card-heading">
-
-                                <div>
-
-                                    <span class="website-category">
-                                        AGENCY
-                                    </span>
-
-                                    <h3>
-                                        Form Creative
-                                    </h3>
-
-                                </div>
-
-                                <div class="website-price">
-
-                                    <strong>
-                                        ৳1,299
-                                    </strong>
-
-                                    <span>
-                                        / month
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <p>
-                                Bold digital presence for creative
-                                studios and agencies.
-                            </p>
-
-
-                            <div class="website-features">
-
-                                <span>Premium UI</span>
-                                <span>Portfolio</span>
-                                <span>CMS Ready</span>
-
-                            </div>
-
-
-                            <div class="website-card-actions">
-
-                                <button
-                                    class="button button-dark-outline preview-button"
-                                    type="button"
-                                    data-preview="agency"
-                                >
-                                    Live preview
-                                </button>
-
-                                <button
-                                    class="button button-dark get-website-button"
-                                    type="button"
-                                    data-website-id="agency-01"
-                                    data-website-title="Form Creative"
-                                    data-price="1299"
-                                >
-                                    Get this website
-                                    <span>→</span>
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- =================================================
-                         WEBSITE CARD 04
-                    ================================================== -->
-
-                    <article
-                        class="website-card"
-                        data-category="education"
-                        data-country="BD"
-                    >
-
-                        <div class="website-card-preview">
-
-                            <div class="preview-toolbar">
-
-                                <span class="preview-label">
-                                    EDUCATION
-                                </span>
-
-                                <span class="preview-device">
-                                    Desktop
-                                </span>
-
-                            </div>
-
-
-                            <div class="preview-window education-preview">
-
-                                <div class="education-header">
-
-                                    <strong>
-                                        ACADEMY
-                                    </strong>
-
-                                    <span>
-                                        Learn differently.
-                                    </span>
-
-                                </div>
-
-
-                                <div class="education-main">
-
-                                    <small>
-                                        ONLINE LEARNING
-                                    </small>
-
-                                    <h3>
-                                        Build skills.
-                                        <br>
-                                        Build your future.
-                                    </h3>
-
-                                    <div class="education-cards">
-
-                                        <span>01</span>
-                                        <span>02</span>
-                                        <span>03</span>
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                            <button
-                                class="preview-overlay-button"
-                                type="button"
-                                data-preview="education"
-                            >
-                                <span>↗</span>
-                                Open preview
-                            </button>
-
-                        </div>
-
-
-                        <div class="website-card-content">
-
-                            <div class="website-card-heading">
-
-                                <div>
-
-                                    <span class="website-category">
-                                        EDUCATION
-                                    </span>
-
-                                    <h3>
-                                        Academy Pro
-                                    </h3>
-
-                                </div>
-
-                                <div class="website-price">
-
-                                    <strong>
-                                        ৳899
-                                    </strong>
-
-                                    <span>
-                                        / month
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <p>
-                                Modern education website for
-                                schools, academies and trainers.
-                            </p>
-
-
-                            <div class="website-features">
-
-                                <span>Courses</span>
-                                <span>Students</span>
-                                <span>Responsive</span>
-
-                            </div>
-
-
-                            <div class="website-card-actions">
-
-                                <button
-                                    class="button button-dark-outline preview-button"
-                                    type="button"
-                                    data-preview="education"
-                                >
-                                    Live preview
-                                </button>
-
-                                <button
-                                    class="button button-dark get-website-button"
-                                    type="button"
-                                    data-website-id="education-01"
-                                    data-website-title="Academy Pro"
-                                    data-price="899"
-                                >
-                                    Get this website
-                                    <span>→</span>
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- =================================================
-                         WEBSITE CARD 05
-                    ================================================== -->
-
-                    <article
-                        class="website-card"
-                        data-category="healthcare"
-                        data-country="BD"
-                    >
-
-                        <div class="website-card-preview">
-
-                            <div class="preview-toolbar">
-
-                                <span class="preview-label">
-                                    HEALTHCARE
-                                </span>
-
-                                <span class="preview-device">
-                                    Desktop
-                                </span>
-
-                            </div>
-
-
-                            <div class="preview-window healthcare-preview">
-
-                                <div class="healthcare-top">
-
-                                    <strong>
-                                        CARE+
-                                    </strong>
-
-                                    <span>
-                                        Your health,
-                                        our priority.
-                                    </span>
-
-                                </div>
-
-
-                                <div class="healthcare-main">
-
-                                    <div>
-
-                                        <small>
-                                            MODERN CLINIC
-                                        </small>
-
-                                        <h3>
-                                            Healthcare
-                                            <br>
-                                            made simpler.
-                                        </h3>
-
-                                        <button>
-                                            Book appointment
-                                        </button>
-
-                                    </div>
-
-                                    <div class="healthcare-circle">
-                                        +
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                            <button
-                                class="preview-overlay-button"
-                                type="button"
-                                data-preview="healthcare"
-                            >
-                                <span>↗</span>
-                                Open preview
-                            </button>
-
-                        </div>
-
-
-                        <div class="website-card-content">
-
-                            <div class="website-card-heading">
-
-                                <div>
-
-                                    <span class="website-category">
-                                        HEALTHCARE
-                                    </span>
-
-                                    <h3>
-                                        Care+ Clinic
-                                    </h3>
-
-                                </div>
-
-                                <div class="website-price">
-
-                                    <strong>
-                                        ৳899
-                                    </strong>
-
-                                    <span>
-                                        / month
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <p>
-                                Professional healthcare website
-                                with appointment-focused UX.
-                            </p>
-
-
-                            <div class="website-features">
-
-                                <span>Appointment</span>
-                                <span>Doctor Profile</span>
-                                <span>WhatsApp</span>
-
-                            </div>
-
-
-                            <div class="website-card-actions">
-
-                                <button
-                                    class="button button-dark-outline preview-button"
-                                    type="button"
-                                    data-preview="healthcare"
-                                >
-                                    Live preview
-                                </button>
-
-                                <button
-                                    class="button button-dark get-website-button"
-                                    type="button"
-                                    data-website-id="healthcare-01"
-                                    data-website-title="Care+ Clinic"
-                                    data-price="899"
-                                >
-                                    Get this website
-                                    <span>→</span>
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- =================================================
-                         WEBSITE CARD 06
-                    ================================================== -->
-
-                    <article
-                        class="website-card"
-                        data-category="portfolio"
-                        data-country="BD"
-                    >
-
-                        <div class="website-card-preview">
-
-                            <div class="preview-toolbar">
-
-                                <span class="preview-label">
-                                    PORTFOLIO
-                                </span>
-
-                                <span class="preview-device">
-                                    Desktop
-                                </span>
-
-                            </div>
-
-
-                            <div class="preview-window portfolio-preview">
-
-                                <div class="portfolio-top">
-
-                                    <span>
-                                        RAFI
-                                    </span>
-
-                                    <span>
-                                        DESIGNER / 2026
-                                    </span>
-
-                                </div>
-
-
-                                <div class="portfolio-main">
-
-                                    <small>
-                                        CREATIVE PORTFOLIO
-                                    </small>
-
-                                    <h3>
-                                        I create
-                                        <br>
-                                        <em>digital worlds.</em>
-                                    </h3>
-
-                                </div>
-
-
-                                <div class="portfolio-shape"></div>
-
-                            </div>
-
-
-                            <button
-                                class="preview-overlay-button"
-                                type="button"
-                                data-preview="portfolio"
-                            >
-                                <span>↗</span>
-                                Open preview
-                            </button>
-
-                        </div>
-
-
-                        <div class="website-card-content">
-
-                            <div class="website-card-heading">
-
-                                <div>
-
-                                    <span class="website-category">
-                                        PORTFOLIO
-                                    </span>
-
-                                    <h3>
-                                        Rafi Portfolio
-                                    </h3>
-
-                                </div>
-
-                                <div class="website-price">
-
-                                    <strong>
-                                        ৳699
-                                    </strong>
-
-                                    <span>
-                                        / month
-                                    </span>
-
-                                </div>
-
-                            </div>
-
-
-                            <p>
-                                A bold personal portfolio for
-                                designers, developers and creators.
-                            </p>
-
-
-                            <div class="website-features">
-
-                                <span>Projects</span>
-                                <span>About</span>
-                                <span>Contact</span>
-
-                            </div>
-
-
-                            <div class="website-card-actions">
-
-                                <button
-                                    class="button button-dark-outline preview-button"
-                                    type="button"
-                                    data-preview="portfolio"
-                                >
-                                    Live preview
-                                </button>
-
-                                <button
-                                    class="button button-dark get-website-button"
-                                    type="button"
-                                    data-website-id="portfolio-01"
-                                    data-website-title="Rafi Portfolio"
-                                    data-price="699"
-                                >
-                                    Get this website
-                                    <span>→</span>
-                                </button>
-
-                            </div>
-
-                        </div>
-
-                    </article>
-
-                </div>
-
-
-                <!-- EMPTY STATE -->
-
-                <div
-                    class="empty-state hidden"
-                    id="emptyWebsiteState"
-                >
-
-                    <div class="empty-icon">
-                        ◌
-                    </div>
-
-                    <h3>
-                        No websites found.
-                    </h3>
-
-                    <p>
-                        We're preparing something beautiful
-                        for this category.
-                    </p>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             DEVICE PREVIEW EXPERIENCE
-        ====================================================== -->
-
-        <section class="experience-section">
-
-            <div class="container">
-
-                <div class="experience-panel">
-
-                    <div class="experience-copy">
-
-                        <div class="section-kicker">
-                            SEE IT BEFORE YOU GET IT
-                        </div>
-
-                        <h2>
-                            Your website.
-                            <span>Every screen.</span>
-                        </h2>
-
-                        <p>
-                            Preview how your chosen website looks
-                            across desktop, tablet and mobile before
-                            you launch.
-                        </p>
-
-
-                        <div class="device-switcher" id="deviceSwitcher">
-
-                            <button
-                                type="button"
-                                class="device-switch active"
-                                data-device="desktop"
-                            >
-                                Desktop
-                            </button>
-
-                            <button
-                                type="button"
-                                class="device-switch"
-                                data-device="tablet"
-                            >
-                                Tablet
-                            </button>
-
-                            <button
-                                type="button"
-                                class="device-switch"
-                                data-device="mobile"
-                            >
-                                Mobile
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <div class="experience-device-area">
-
-                        <div
-                            class="showcase-device showcase-desktop"
-                            id="showcaseDevice"
-                        >
-
-                            <div class="showcase-browser-bar">
-
-                                <span></span>
-                                <span></span>
-                                <span></span>
-
-                            </div>
-
-
-                            <div class="showcase-screen">
-
-                                <div class="showcase-screen-nav">
-
-                                    <strong>
-                                        STUDIO
-                                    </strong>
-
-                                    <span>Work</span>
-                                    <span>About</span>
-                                    <span>Contact</span>
-
-                                </div>
-
-
-                                <div class="showcase-screen-content">
-
-                                    <small>
-                                        DIGITAL EXPERIENCE
-                                    </small>
-
-                                    <h3>
-                                        Make your
-                                        <br>
-                                        first impression
-                                        <br>
-                                        unforgettable.
-                                    </h3>
-
-                                    <div class="showcase-screen-button">
-                                        Explore
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             CATEGORIES
-        ====================================================== -->
-
-        <section
-            class="categories-section section-padding"
-            id="categories"
-        >
-
-            <div class="container">
-
-                <div class="section-header centered">
-
-                    <div>
-
-                        <div class="section-kicker">
-                            FIND YOUR FORMAT
-                        </div>
-
-                        <h2>
-                            Built for
-                            <span>every business.</span>
-                        </h2>
-
-                    </div>
-
-                </div>
-
-
-                <div class="category-grid">
-
-                    <a
-                        href="#websites"
-                        class="category-card"
-                        data-category-link="business"
-                    >
-
-                        <span class="category-number">
-                            01
-                        </span>
-
-                        <span class="category-icon">
-                            ◇
-                        </span>
-
-                        <strong>
-                            Business
-                        </strong>
-
-                        <span>
-                            24 websites
-                        </span>
-
-                        <b>↗</b>
-
-                    </a>
-
-
-                    <a
-                        href="#websites"
-                        class="category-card"
-                        data-category-link="restaurant"
-                    >
-
-                        <span class="category-number">
-                            02
-                        </span>
-
-                        <span class="category-icon">
-                            ◉
-                        </span>
-
-                        <strong>
-                            Restaurant
-                        </strong>
-
-                        <span>
-                            18 websites
-                        </span>
-
-                        <b>↗</b>
-
-                    </a>
-
-
-                    <a
-                        href="#websites"
-                        class="category-card"
-                        data-category-link="agency"
-                    >
-
-                        <span class="category-number">
-                            03
-                        </span>
-
-                        <span class="category-icon">
-                            ✦
-                        </span>
-
-                        <strong>
-                            Agency
-                        </strong>
-
-                        <span>
-                            16 websites
-                        </span>
-
-                        <b>↗</b>
-
-                    </a>
-
-
-                    <a
-                        href="#websites"
-                        class="category-card"
-                        data-category-link="education"
-                    >
-
-                        <span class="category-number">
-                            04
-                        </span>
-
-                        <span class="category-icon">
-                            □
-                        </span>
-
-                        <strong>
-                            Education
-                        </strong>
-
-                        <span>
-                            12 websites
-                        </span>
-
-                        <b>↗</b>
-
-                    </a>
-
-
-                    <a
-                        href="#websites"
-                        class="category-card"
-                        data-category-link="healthcare"
-                    >
-
-                        <span class="category-number">
-                            05
-                        </span>
-
-                        <span class="category-icon">
-                            +
-                        </span>
-
-                        <strong>
-                            Healthcare
-                        </strong>
-
-                        <span>
-                            10 websites
-                        </span>
-
-                        <b>↗</b>
-
-                    </a>
-
-
-                    <a
-                        href="#websites"
-                        class="category-card"
-                        data-category-link="portfolio"
-                    >
-
-                        <span class="category-number">
-                            06
-                        </span>
-
-                        <span class="category-icon">
-                            /
-                        </span>
-
-                        <strong>
-                            Portfolio
-                        </strong>
-
-                        <span>
-                            15 websites
-                        </span>
-
-                        <b>↗</b>
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             HOW IT WORKS
-        ====================================================== -->
-
-        <section
-            class="how-section section-padding"
-            id="how-it-works"
-        >
-
-            <div class="container">
-
-                <div class="section-header">
-
-                    <div>
-
-                        <div class="section-kicker">
-                            SIMPLE BY DESIGN
-                        </div>
-
-                        <h2>
-                            From idea to
-                            <span>online.</span>
-                        </h2>
-
-                    </div>
-
-                    <p class="section-header-description">
-                        No complicated process. Pick the website,
-                        tell us what you need and get ready to launch.
-                    </p>
-
-                </div>
-
-
-                <div class="steps-grid">
-
-
-                    <div class="step-card">
-
-                        <span class="step-number">
-                            01
-                        </span>
-
-                        <div class="step-icon">
-                            ◌
-                        </div>
-
-                        <h3>
-                            Choose
-                        </h3>
-
-                        <p>
-                            Explore our curated collection
-                            and find a design that fits your brand.
-                        </p>
-
-                    </div>
-
-
-                    <div class="step-card">
-
-                        <span class="step-number">
-                            02
-                        </span>
-
-                        <div class="step-icon">
-                            ↗
-                        </div>
-
-                        <h3>
-                            Preview
-                        </h3>
-
-                        <p>
-                            Experience the website on desktop,
-                            tablet and mobile before choosing.
-                        </p>
-
-                    </div>
-
-
-                    <div class="step-card">
-
-                        <span class="step-number">
-                            03
-                        </span>
-
-                        <div class="step-icon">
-                            +
-                        </div>
-
-                        <h3>
-                            Make it yours
-                        </h3>
-
-                        <p>
-                            Add your business details, content,
-                            contact information and branding.
-                        </p>
-
-                    </div>
-
-
-                    <div class="step-card">
-
-                        <span class="step-number">
-                            04
-                        </span>
-
-                        <div class="step-icon">
-                            →
-                        </div>
-
-                        <h3>
-                            Launch
-                        </h3>
-
-                        <p>
-                            Your new website goes live and
-                            your business is ready for the world.
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             WHY US
-        ====================================================== -->
-
-        <section
-            class="why-section section-padding"
-            id="why-us"
-        >
-
-            <div class="container">
-
-                <div class="why-layout">
-
-                    <div class="why-copy">
-
-                        <div class="section-kicker">
-                            WHY THIS MARKETPLACE
-                        </div>
-
-                        <h2>
-                            Don't build
-                            <span>from scratch.</span>
-                        </h2>
-
-                        <p>
-                            Great websites take time. We remove the
-                            slowest part of the process so you can
-                            focus on your business instead.
-                        </p>
-
-                        <a
-                            href="#websites"
-                            class="button button-dark"
-                        >
-                            Explore the collection
-                            <span>→</span>
-                        </a>
-
-                    </div>
-
-
-                    <div class="benefit-list">
-
-                        <div class="benefit-item">
-
-                            <span class="benefit-index">
-                                01
-                            </span>
-
-                            <div>
-
-                                <h3>
-                                    Premium by default
-                                </h3>
-
-                                <p>
-                                    Every design starts with
-                                    a strong visual foundation.
-                                </p>
-
-                            </div>
-
-                            <span class="benefit-arrow">
-                                ↗
-                            </span>
-
-                        </div>
-
-
-                        <div class="benefit-item">
-
-                            <span class="benefit-index">
-                                02
-                            </span>
-
-                            <div>
-
-                                <h3>
-                                    Mobile-first
-                                </h3>
-
-                                <p>
-                                    Your website looks great
-                                    on every screen size.
-                                </p>
-
-                            </div>
-
-                            <span class="benefit-arrow">
-                                ↗
-                            </span>
-
-                        </div>
-
-
-                        <div class="benefit-item">
-
-                            <span class="benefit-index">
-                                03
-                            </span>
-
-                            <div>
-
-                                <h3>
-                                    Launch faster
-                                </h3>
-
-                                <p>
-                                    Skip weeks of design and
-                                    development work.
-                                </p>
-
-                            </div>
-
-                            <span class="benefit-arrow">
-                                ↗
-                            </span>
-
-                        </div>
-
-
-                        <div class="benefit-item">
-
-                            <span class="benefit-index">
-                                04
-                            </span>
-
-                            <div>
-
-                                <h3>
-                                    Built to grow
-                                </h3>
-
-                                <p>
-                                    Start simple and upgrade
-                                    as your business grows.
-                                </p>
-
-                            </div>
-
-                            <span class="benefit-arrow">
-                                ↗
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             FINAL CTA
-        ====================================================== -->
-
-        <section class="final-cta-section">
-
-            <div class="container">
-
-                <div class="final-cta">
-
-                    <div class="final-cta-glow"></div>
-
-                    <div class="section-kicker">
-                        READY WHEN YOU ARE
-                    </div>
-
-                    <h2>
-                        Your next website
-                        <br>
-                        <span>starts here.</span>
-                    </h2>
-
-                    <p>
-                        Choose a design. Preview it.
-                        Make it yours.
-                    </p>
-
-                    <a
-                        href="#websites"
-                        class="button button-light"
-                    >
-                        Explore websites
-                        <span>→</span>
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================================================
-         FOOTER
-    ========================================================== -->
-
-    <footer class="site-footer">
-
-        <div class="container">
-
-            <div class="footer-top">
-
-                <div class="footer-brand">
-
-                    <a
-                        href="#top"
-                        class="brand footer-brand-link"
-                    >
-
-                        <span class="brand-mark">
-                            W
-                        </span>
-
-                        <span class="brand-text">
-
-                            <strong>
-                                Website
-                            </strong>
-
-                            <span>
-                                Marketplace
-                            </span>
-
-                        </span>
-
-                    </a>
-
-
-                    <p>
-                        Beautiful websites.
-                        Ready when you are.
-                    </p>
-
-                </div>
-
-
-                <div class="footer-links-group">
-
-                    <div>
-
-                        <span class="footer-heading">
-                            Marketplace
-                        </span>
-
-                        <a href="#websites">
-                            Websites
-                        </a>
-
-                        <a href="#categories">
-                            Categories
-                        </a>
-
-                        <a href="#how-it-works">
-                            How it works
-                        </a>
-
-                    </div>
-
-
-                    <div>
-
-                        <span class="footer-heading">
-                            Company
-                        </span>
-
-                        <a href="#why-us">
-                            Why us
-                        </a>
-
-                        <a href="#">
-                            Contact
-                        </a>
-
-                        <a href="#">
-                            FAQ
-                        </a>
-
-                    </div>
-
-
-                    <div>
-
-                        <span class="footer-heading">
-                            Legal
-                        </span>
-
-                        <a href="#">
-                            Privacy
-                        </a>
-
-                        <a href="#">
-                            Terms
-                        </a>
-
-                        <a href="#">
-                            Refund policy
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="footer-bottom">
+                <i class="fa-solid fa-lock"></i>
 
                 <span>
-                    © 2026 Website Marketplace.
-                    All rights reserved.
+                  yourbusiness.com
                 </span>
 
-                <span>
-                    Made for ambitious businesses.
-                </span>
+              </div>
+
+
+              <div class="browser-actions">
+
+                <i class="fa-solid fa-ellipsis"></i>
+
+              </div>
 
             </div>
 
-        </div>
 
-    </footer>
+            <div class="browser-page">
 
+              <div class="browser-page-header">
 
-    <!-- =========================================================
-         COUNTRY SELECTOR MODAL
-         Future Firebase / Geo-location integration ready
-    ========================================================== -->
+                <div class="mini-logo"></div>
 
-    <div
-        class="modal-overlay"
-        id="countryModal"
-        aria-hidden="true"
-    >
+                <div class="mini-nav">
 
-        <div
-            class="modal-box country-modal-box"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="countryModalTitle"
-        >
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                  <span></span>
 
-            <button
-                class="modal-close"
-                type="button"
-                id="countryModalClose"
-                aria-label="Close"
-            >
-                ×
-            </button>
+                </div>
+
+              </div>
 
 
-            <span class="modal-kicker">
-                YOUR MARKET
+              <div class="browser-page-content">
+
+                <div class="browser-copy">
+
+                  <span class="browser-small-line"></span>
+
+                  <div class="browser-big-line"></div>
+
+                  <div class="browser-big-line short"></div>
+
+                  <span class="browser-description-line"></span>
+                  <span class="browser-description-line small"></span>
+
+
+                  <div class="browser-buttons">
+
+                    <span></span>
+                    <span></span>
+
+                  </div>
+
+                </div>
+
+
+                <div class="browser-image">
+
+                  <div class="browser-image-inner">
+
+                    <i class="fa-solid fa-laptop-code"></i>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <div class="browser-cards">
+
+                <div></div>
+                <div></div>
+                <div></div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- FLOATING PRICE CARD -->
+          <div class="floating-card floating-price-card">
+
+            <div class="floating-card-icon">
+              <i class="fa-solid fa-tag"></i>
+            </div>
+
+            <div>
+
+              <span class="floating-label">
+                Starting From
+              </span>
+
+              <strong>
+                ৳999
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- FLOATING RESPONSIVE CARD -->
+          <div class="floating-card floating-responsive-card">
+
+            <div class="responsive-check">
+              <i class="fa-solid fa-check"></i>
+            </div>
+
+            <div>
+
+              <strong>
+                100% Responsive
+              </strong>
+
+              <span>
+                Desktop • Tablet • Mobile
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <!-- FLOATING CODE CARD -->
+          <div class="floating-code-card">
+
+            <span class="code-dot"></span>
+
+            <span>
+              Ready to Launch
             </span>
 
-            <h2 id="countryModalTitle">
-                Choose your country
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         STATS
+    ======================================================== -->
+    <section class="stats-section">
+
+      <div class="container">
+
+        <div class="stats-grid">
+
+
+          <div class="stat-item">
+
+            <div class="stat-icon">
+              <i class="fa-solid fa-globe"></i>
+            </div>
+
+            <div class="stat-content">
+
+              <strong>
+                100+
+              </strong>
+
+              <span>
+                Ready Websites
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="stat-item">
+
+            <div class="stat-icon">
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
+
+            <div class="stat-content">
+
+              <strong>
+                20+
+              </strong>
+
+              <span>
+                Website Categories
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="stat-item">
+
+            <div class="stat-icon">
+              <i class="fa-solid fa-mobile-screen"></i>
+            </div>
+
+            <div class="stat-content">
+
+              <strong>
+                100%
+              </strong>
+
+              <span>
+                Mobile Responsive
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="stat-item">
+
+            <div class="stat-icon">
+              <i class="fa-solid fa-clock"></i>
+            </div>
+
+            <div class="stat-content">
+
+              <strong>
+                24/7
+              </strong>
+
+              <span>
+                Online Marketplace
+              </span>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         MARKETPLACE
+    ======================================================== -->
+    <section
+      class="marketplace-section section-padding"
+      id="websites"
+    >
+
+      <div class="container">
+
+
+        <!-- MARKETPLACE HEADER -->
+        <div class="section-header marketplace-header">
+
+          <div class="section-heading">
+
+            <span class="eyebrow">
+              <i class="fa-solid fa-store"></i>
+              WEBSITE MARKETPLACE
+            </span>
+
+            <h2>
+              Choose Your
+              <span class="gradient-text">
+                Perfect Website
+              </span>
             </h2>
 
             <p>
-                We show websites and pricing available
-                for your selected market.
+              আপনার ব্যবসা বা ব্যক্তিগত ব্র্যান্ডের জন্য
+              ready-made premium website বেছে নিন।
             </p>
 
-
-            <div class="country-options">
-
-                <button
-                    type="button"
-                    class="country-option active"
-                    data-country="BD"
-                >
-
-                    <span class="country-option-flag">
-                        🇧🇩
-                    </span>
-
-                    <span>
-                        <strong>
-                            Bangladesh
-                        </strong>
-
-                        <small>
-                            BDT · ৳
-                        </small>
-                    </span>
-
-                    <span class="country-option-check">
-                        ✓
-                    </span>
-
-                </button>
+          </div>
 
 
-                <button
-                    type="button"
-                    class="country-option"
-                    data-country="INT"
-                >
+          <!-- COUNTRY STATUS -->
+          <div
+            class="country-status"
+            id="country-status"
+          >
 
-                    <span class="country-option-flag">
-                        🌎
-                    </span>
+            <span class="country-status-icon">
+              <i class="fa-solid fa-location-dot"></i>
+            </span>
 
-                    <span>
-                        <strong>
-                            International
-                        </strong>
+            <div>
 
-                        <small>
-                            Coming soon
-                        </small>
-                    </span>
+              <span class="country-status-label">
+                Available For
+              </span>
 
-                    <span class="country-option-check">
-                        →
-                    </span>
-
-                </button>
+              <strong id="country-status-text">
+                Bangladesh
+              </strong>
 
             </div>
+
+          </div>
 
         </div>
 
-    </div>
 
-
-    <!-- =========================================================
-         WEBSITE PREVIEW MODAL
-    ========================================================== -->
-
-    <div
-        class="modal-overlay preview-modal-overlay"
-        id="previewModal"
-        aria-hidden="true"
-    >
-
+        <!-- ===================================================
+             CATEGORY FILTERS
+        ==================================================== -->
         <div
-            class="preview-modal-box"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="previewModalTitle"
+          class="category-filter-wrapper"
+          id="categories"
         >
 
-            <div class="preview-modal-header">
-
-                <div>
-
-                    <span class="modal-kicker">
-                        LIVE EXPERIENCE
-                    </span>
-
-                    <h2 id="previewModalTitle">
-                        Website Preview
-                    </h2>
-
-                </div>
-
-
-                <button
-                    class="modal-close"
-                    type="button"
-                    id="previewModalClose"
-                    aria-label="Close preview"
-                >
-                    ×
-                </button>
-
-            </div>
-
-
-            <div class="preview-modal-toolbar">
-
-                <div class="preview-modal-devices">
-
-                    <button
-                        type="button"
-                        class="modal-device active"
-                        data-modal-device="desktop"
-                    >
-                        Desktop
-                    </button>
-
-                    <button
-                        type="button"
-                        class="modal-device"
-                        data-modal-device="tablet"
-                    >
-                        Tablet
-                    </button>
-
-                    <button
-                        type="button"
-                        class="modal-device"
-                        data-modal-device="mobile"
-                    >
-                        Mobile
-                    </button>
-
-                </div>
-
-
-                <span class="preview-live-status">
-
-                    <span></span>
-                    Live preview
-
-                </span>
-
-            </div>
-
-
-            <div class="preview-modal-stage">
-
-                <div
-                    class="modal-preview-frame"
-                    id="modalPreviewFrame"
-                >
-
-                    <div class="modal-preview-inner">
-
-                        <div class="modal-demo-nav">
-
-                            <strong>
-                                STUDIO
-                            </strong>
-
-                            <span>
-                                Work
-                            </span>
-
-                            <span>
-                                About
-                            </span>
-
-                            <span>
-                                Contact
-                            </span>
-
-                        </div>
-
-
-                        <div class="modal-demo-content">
-
-                            <span>
-                                PREMIUM WEBSITE
-                            </span>
-
-                            <h3 id="modalDemoTitle">
-                                Design that
-                                <br>
-                                moves people.
-                            </h3>
-
-                            <p>
-                                This is an interactive preview
-                                of the selected website.
-                            </p>
-
-                            <button type="button">
-                                Explore
-                            </button>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="preview-modal-footer">
-
-                <div>
-
-                    <strong id="modalWebsiteName">
-                        Website
-                    </strong>
-
-                    <span id="modalWebsitePrice">
-                        ৳999 / month
-                    </span>
-
-                </div>
-
-                <button
-                    type="button"
-                    class="button button-dark"
-                    id="previewGetWebsiteButton"
-                >
-                    Get this website
-                    <span>→</span>
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =========================================================
-         BUY / ORDER MODAL
-    ========================================================== -->
-
-    <div
-        class="modal-overlay"
-        id="buy-modal"
-        aria-hidden="true"
-    >
-
-        <div
-            class="modal-box buy-modal-box"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="buyModalTitle"
-        >
+          <div class="category-filter">
 
             <button
-                type="button"
-                class="modal-close"
-                id="cancel-buy-btn"
-                aria-label="Close order form"
+              type="button"
+              class="category-btn active"
+              data-category="all"
             >
-                ×
+              <i class="fa-solid fa-border-all"></i>
+              <span>All Websites</span>
             </button>
 
 
-            <div class="modal-kicker">
-                START YOUR WEBSITE
+            <button
+              type="button"
+              class="category-btn"
+              data-category="Business"
+            >
+              <i class="fa-solid fa-briefcase"></i>
+              <span>Business</span>
+            </button>
+
+
+            <button
+              type="button"
+              class="category-btn"
+              data-category="Restaurant"
+            >
+              <i class="fa-solid fa-utensils"></i>
+              <span>Restaurant</span>
+            </button>
+
+
+            <button
+              type="button"
+              class="category-btn"
+              data-category="Agency"
+            >
+              <i class="fa-solid fa-pen-ruler"></i>
+              <span>Agency</span>
+            </button>
+
+
+            <button
+              type="button"
+              class="category-btn"
+              data-category="E-Commerce"
+            >
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span>E-Commerce</span>
+            </button>
+
+
+            <button
+              type="button"
+              class="category-btn"
+              data-category="Portfolio"
+            >
+              <i class="fa-solid fa-user"></i>
+              <span>Portfolio</span>
+            </button>
+
+
+            <button
+              type="button"
+              class="category-btn"
+              data-category="Monthly Pack"
+            >
+              <i class="fa-solid fa-calendar-days"></i>
+              <span>Monthly Pack</span>
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- ===================================================
+             WEBSITE GRID
+        ==================================================== -->
+        <div
+          id="website-list"
+          class="website-grid"
+        >
+          <!-- main.js dynamically loads website cards here -->
+        </div>
+
+
+        <!-- ===================================================
+             EMPTY STATE
+        ==================================================== -->
+        <div
+          id="empty-state"
+          class="empty-state hidden"
+        >
+
+          <div class="empty-state-icon">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+          </div>
+
+          <h3>
+            কোনো Website পাওয়া যায়নি
+          </h3>
+
+          <p>
+            অন্য category অথবা অন্য keyword দিয়ে চেষ্টা করুন।
+          </p>
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            id="reset-filters"
+          >
+            <i class="fa-solid fa-rotate-left"></i>
+            Reset Filters
+          </button>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         HOW IT WORKS
+    ======================================================== -->
+    <section
+      class="how-section section-padding"
+      id="how-it-works"
+    >
+
+      <div class="container">
+
+
+        <div class="section-header centered">
+
+          <span class="eyebrow">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            SIMPLE PROCESS
+          </span>
+
+          <h2>
+            Website কেনা এখন
+            <span class="gradient-text">
+              সহজ
+            </span>
+          </h2>
+
+          <p>
+            আপনার পছন্দের website খুঁজে বের করুন,
+            অর্ডার করুন এবং launch করার জন্য প্রস্তুত হন।
+          </p>
+
+        </div>
+
+
+        <div class="steps-grid">
+
+
+          <!-- STEP 01 -->
+          <div class="step-card">
+
+            <div class="step-number">
+              01
             </div>
 
+            <div class="step-icon">
 
-            <h2 id="buyModalTitle">
-                Get this website.
+              <i class="fa-solid fa-magnifying-glass"></i>
+
+            </div>
+
+            <div class="step-content">
+
+              <h3>
+                Browse Websites
+              </h3>
+
+              <p>
+                আপনার প্রয়োজন অনুযায়ী বিভিন্ন
+                category থেকে website দেখুন।
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- STEP 02 -->
+          <div class="step-card">
+
+            <div class="step-number">
+              02
+            </div>
+
+            <div class="step-icon">
+
+              <i class="fa-solid fa-eye"></i>
+
+            </div>
+
+            <div class="step-content">
+
+              <h3>
+                Preview
+              </h3>
+
+              <p>
+                পছন্দের website-এর design,
+                layout এবং features দেখে নিন।
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- STEP 03 -->
+          <div class="step-card">
+
+            <div class="step-number">
+              03
+            </div>
+
+            <div class="step-icon">
+
+              <i class="fa-solid fa-cart-shopping"></i>
+
+            </div>
+
+            <div class="step-content">
+
+              <h3>
+                Place Order
+              </h3>
+
+              <p>
+                আপনার তথ্য দিয়ে সহজেই
+                website-এর জন্য order request করুন।
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <!-- STEP 04 -->
+          <div class="step-card">
+
+            <div class="step-number">
+              04
+            </div>
+
+            <div class="step-icon">
+
+              <i class="fa-solid fa-rocket"></i>
+
+            </div>
+
+            <div class="step-content">
+
+              <h3>
+                Launch
+              </h3>
+
+              <p>
+                প্রয়োজনীয় setup শেষ করে
+                আপনার website online করুন।
+              </p>
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         FEATURE SECTION
+    ======================================================== -->
+    <section class="feature-section section-padding">
+
+      <div class="container">
+
+        <div class="feature-box">
+
+
+          <div class="feature-content">
+
+            <span class="eyebrow">
+              <i class="fa-solid fa-bolt"></i>
+              BUILT FOR BUSINESS
+            </span>
+
+
+            <h2>
+              আপনার idea নয়,
+              <span class="gradient-text">
+                আপনার launch
+              </span>
+              গুরুত্বপূর্ণ।
             </h2>
 
 
-            <p
-                id="buy-website-title"
-                class="buy-website-title"
-            >
-                Website
+            <p>
+              Website Deals-এর ready-made websites এমনভাবে
+              তৈরি করা হয়েছে যাতে আপনি শুরু থেকেই একটি
+              professional digital presence নিয়ে এগিয়ে যেতে পারেন।
             </p>
 
 
-            <div class="buy-price-display">
+            <div class="feature-list">
+
+              <div class="feature-list-item">
 
                 <span>
-                    Monthly subscription
+                  <i class="fa-solid fa-check"></i>
                 </span>
 
-                <strong id="buy-price">
-                    ৳999
+                <strong>
+                  Professional UI Design
                 </strong>
 
-                <small>
-                    / month
-                </small>
+              </div>
+
+
+              <div class="feature-list-item">
+
+                <span>
+                  <i class="fa-solid fa-check"></i>
+                </span>
+
+                <strong>
+                  Fully Responsive Layout
+                </strong>
+
+              </div>
+
+
+              <div class="feature-list-item">
+
+                <span>
+                  <i class="fa-solid fa-check"></i>
+                </span>
+
+                <strong>
+                  Fast & Modern Structure
+                </strong>
+
+              </div>
+
+
+              <div class="feature-list-item">
+
+                <span>
+                  <i class="fa-solid fa-check"></i>
+                </span>
+
+                <strong>
+                  Ready for Customization
+                </strong>
+
+              </div>
 
             </div>
 
 
-            <p
-                id="buy-message"
-                class="form-message"
-            ></p>
-
-
-            <form
-                id="buy-form"
-                class="marketplace-form"
+            <a
+              href="#websites"
+              class="btn btn-primary"
             >
 
-                <input
-                    type="hidden"
-                    id="buy_website_id"
-                    name="website_id"
-                >
+              <span>
+                Browse Collection
+              </span>
+
+              <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+          </div>
 
 
-                <div class="form-field">
+          <!-- FEATURE VISUAL -->
+          <div class="feature-visual">
 
-                    <label for="buy_name">
-                        আপনার নাম
-                    </label>
+            <div class="feature-orbit orbit-one"></div>
+            <div class="feature-orbit orbit-two"></div>
 
-                    <input
-                        type="text"
-                        id="buy_name"
-                        name="name"
-                        required
-                        autocomplete="name"
-                        placeholder="যেমন: করিম উদ্দিন"
-                    >
+
+            <div class="feature-main-card">
+
+              <div class="feature-card-top">
+
+                <div class="feature-mini-brand">
+
+                  <div class="feature-mini-logo">
+                    <i class="fa-solid fa-code"></i>
+                  </div>
+
+                  <span>
+                    Website
+                  </span>
+
+                </div>
+
+                <span class="feature-live">
+                  LIVE
+                </span>
+
+              </div>
+
+
+              <div class="feature-card-screen">
+
+                <div class="screen-header">
+
+                  <span></span>
+                  <span></span>
+                  <span></span>
 
                 </div>
 
 
-                <div class="form-field">
+                <div class="screen-body">
 
-                    <label for="buy_email">
-                        ইমেইল
-                    </label>
+                  <div class="screen-text">
 
-                    <input
-                        type="email"
-                        id="buy_email"
-                        name="email"
-                        required
-                        autocomplete="email"
-                        placeholder="you@example.com"
-                    >
+                    <span></span>
+                    <strong></strong>
+                    <strong class="short"></strong>
 
-                </div>
+                    <div class="screen-button"></div>
+
+                  </div>
 
 
-                <div class="form-field">
+                  <div class="screen-art">
 
-                    <label for="buy_phone">
-                        ফোন নাম্বার
-                    </label>
+                    <div class="screen-art-circle"></div>
 
-                    <input
-                        type="tel"
-                        id="buy_phone"
-                        name="phone"
-                        required
-                        autocomplete="tel"
-                        placeholder="01XXXXXXXXX"
-                        pattern="01[0-9]{9}"
-                    >
+                  </div>
 
                 </div>
 
-
-                <div class="form-note">
-
-                    <span>✓</span>
-
-                    আপনার তথ্য নিরাপদে রাখা হবে।
-
-                </div>
+              </div>
 
 
-                <div class="modal-btn-row">
+              <div class="feature-card-bottom">
 
-                    <button
-                        type="button"
-                        id="cancel-buy-btn-secondary"
-                        class="button button-light-outline"
-                    >
-                        বাতিল
-                    </button>
+                <span>
+                  <i class="fa-solid fa-circle-check"></i>
+                  Responsive
+                </span>
+
+                <span>
+                  <i class="fa-solid fa-bolt"></i>
+                  Fast
+                </span>
+
+                <span>
+                  <i class="fa-solid fa-shield"></i>
+                  Modern
+                </span>
+
+              </div>
+
+            </div>
 
 
-                    <button
-                        type="submit"
-                        class="button button-dark"
-                    >
-                        Continue
-                        <span>→</span>
-                    </button>
+            <div class="feature-floating feature-floating-one">
 
-                </div>
+              <i class="fa-solid fa-code"></i>
 
-            </form>
+              <span>
+                Clean Code
+              </span>
+
+            </div>
+
+
+            <div class="feature-floating feature-floating-two">
+
+              <i class="fa-solid fa-mobile-screen"></i>
+
+              <span>
+                Responsive
+              </span>
+
+            </div>
+
+          </div>
+
 
         </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         CTA SECTION
+    ======================================================== -->
+    <section class="cta-section">
+
+      <div class="cta-background">
+
+        <div class="cta-glow"></div>
+
+        <div class="cta-grid"></div>
+
+      </div>
+
+
+      <div class="container">
+
+        <div class="cta-box">
+
+          <div class="cta-icon">
+
+            <i class="fa-solid fa-rocket"></i>
+
+          </div>
+
+
+          <span class="eyebrow">
+            READY TO START?
+          </span>
+
+
+          <h2>
+            আপনার next website
+            <span class="gradient-text">
+              আজই শুরু করুন।
+            </span>
+          </h2>
+
+
+          <p>
+            আপনার business-এর জন্য তৈরি করা
+            premium ready-made website collection
+            থেকে পছন্দের design খুঁজে নিন।
+          </p>
+
+
+          <div class="cta-actions">
+
+            <a
+              href="#websites"
+              class="btn btn-primary btn-large"
+            >
+
+              <span>
+                Explore Websites
+              </span>
+
+              <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================== -->
+  <footer class="site-footer">
+
+    <div class="container">
+
+
+      <div class="footer-main">
+
+
+        <!-- FOOTER BRAND -->
+        <div class="footer-brand">
+
+          <a
+            href="index.html"
+            class="footer-logo"
+          >
+
+            <div class="footer-logo-image">
+
+              <img
+                src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
+                alt="Website Deals Logo"
+              >
+
+            </div>
+
+
+            <div>
+
+              <strong>
+                Website Deals
+              </strong>
+
+              <span>
+                Premium Website Marketplace
+              </span>
+
+            </div>
+
+          </a>
+
+
+          <p>
+            আপনার business, brand অথবা personal project-এর
+            জন্য premium ready-made websites খুঁজে নিন
+            এক জায়গায়।
+          </p>
+
+
+          <!-- SOCIAL LINKS -->
+          <div class="social-links">
+
+            <a
+              href="#"
+              aria-label="Facebook"
+              class="social-link"
+            >
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+
+
+            <a
+              href="#"
+              aria-label="Instagram"
+              class="social-link"
+            >
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+
+
+            <a
+              href="#"
+              aria-label="YouTube"
+              class="social-link"
+            >
+              <i class="fa-brands fa-youtube"></i>
+            </a>
+
+
+            <a
+              href="#"
+              aria-label="LinkedIn"
+              class="social-link"
+            >
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- FOOTER COLUMN -->
+        <div class="footer-column">
+
+          <h3>
+            Marketplace
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="#websites">
+                All Websites
+              </a>
+            </li>
+
+            <li>
+              <a href="#categories">
+                Categories
+              </a>
+            </li>
+
+            <li>
+              <a href="#websites">
+                New Websites
+              </a>
+            </li>
+
+            <li>
+              <a href="#websites">
+                Monthly Packs
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- FOOTER COLUMN -->
+        <div class="footer-column">
+
+          <h3>
+            Company
+          </h3>
+
+          <ul>
+
+            <li>
+              <a href="#home">
+                About Website Deals
+              </a>
+            </li>
+
+            <li>
+              <a href="#how-it-works">
+                How It Works
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                Contact
+              </a>
+            </li>
+
+            <li>
+              <a href="#">
+                Support
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+
+
+        <!-- NEWSLETTER -->
+        <div class="footer-newsletter">
+
+          <h3>
+            Stay Updated
+          </h3>
+
+          <p>
+            নতুন website এবং marketplace updates
+            পেতে subscribe করুন।
+          </p>
+
+
+          <form
+            class="newsletter-form"
+            id="newsletter-form"
+          >
+
+            <input
+              type="email"
+              id="newsletter-email"
+              placeholder="আপনার Email"
+              required
+              autocomplete="email"
+            >
+
+            <button
+              type="submit"
+              aria-label="Subscribe"
+            >
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+          </form>
+
+
+          <small>
+            আমরা spam করি না।
+          </small>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- FOOTER BOTTOM -->
+      <div class="footer-bottom">
+
+        <p>
+          &copy; <span id="current-year">2026</span>
+          Website Deals.
+          সকল অধিকার সংরক্ষিত।
+        </p>
+
+
+        <div class="footer-bottom-links">
+
+          <a href="#">
+            Privacy Policy
+          </a>
+
+          <a href="#">
+            Terms
+          </a>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </footer>
+
+
+  <!-- =========================================================
+       BUY MODAL
+  ========================================================== -->
+  <div
+    class="modal-overlay hidden"
+    id="buy-modal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-box"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="buy-modal-title"
+    >
+
+
+      <!-- MODAL CLOSE -->
+      <button
+        type="button"
+        class="modal-close"
+        id="modal-close"
+        aria-label="Close modal"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+
+      <!-- MODAL HEADER -->
+      <div class="modal-header">
+
+        <div class="modal-icon">
+
+          <i class="fa-solid fa-cart-shopping"></i>
+
+        </div>
+
+
+        <div>
+
+          <span class="modal-eyebrow">
+            WEBSITE ORDER
+          </span>
+
+          <h2 id="buy-modal-title">
+            অর্ডার করুন
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <!-- SELECTED WEBSITE -->
+      <div class="selected-website">
+
+        <span class="selected-website-label">
+          Selected Website
+        </span>
+
+        <p
+          id="buy-website-title"
+          class="buy-website-title"
+        >
+          Website
+        </p>
+
+      </div>
+
+
+      <!-- FORM MESSAGE -->
+      <p
+        id="buy-message"
+        class="form-message"
+        aria-live="polite"
+      ></p>
+
+
+      <!-- BUY FORM -->
+      <form
+        id="buy-form"
+        class="admin-form"
+      >
+
+        <input
+          type="hidden"
+          id="buy_website_id"
+        >
+
+
+        <div class="form-group">
+
+          <label for="buy_name">
+            আপনার নাম
+            <span>*</span>
+          </label>
+
+          <div class="input-with-icon">
+
+            <i class="fa-regular fa-user"></i>
+
+            <input
+              type="text"
+              id="buy_name"
+              name="name"
+              required
+              placeholder="যেমন: করিম উদ্দিন"
+              autocomplete="name"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="buy_email">
+            ইমেইল
+            <span>*</span>
+          </label>
+
+          <div class="input-with-icon">
+
+            <i class="fa-regular fa-envelope"></i>
+
+            <input
+              type="email"
+              id="buy_email"
+              name="email"
+              required
+              placeholder="you@example.com"
+              autocomplete="email"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="buy_phone">
+            ফোন নাম্বার
+            <span>*</span>
+          </label>
+
+          <div class="input-with-icon">
+
+            <i class="fa-solid fa-phone"></i>
+
+            <input
+              type="tel"
+              id="buy_phone"
+              name="phone"
+              required
+              placeholder="01XXXXXXXXX"
+              pattern="01[0-9]{9}"
+              autocomplete="tel"
+            >
+
+          </div>
+
+        </div>
+
+
+        <!-- MODAL BUTTONS -->
+        <div class="modal-btn-row">
+
+          <button
+            type="button"
+            id="cancel-buy-btn"
+            class="btn btn-secondary"
+          >
+            <i class="fa-solid fa-xmark"></i>
+            <span>বাতিল</span>
+          </button>
+
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+          >
+
+            <span>
+              পেমেন্টে যান
+            </span>
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+          </button>
+
+        </div>
+
+      </form>
+
+
+      <div class="modal-security">
+
+        <i class="fa-solid fa-shield-halved"></i>
+
+        <span>
+          আপনার তথ্য নিরাপদে সংরক্ষণ করা হবে।
+        </span>
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       TOAST
+  ========================================================== -->
+  <div
+    class="toast"
+    id="toast"
+    aria-live="polite"
+    aria-hidden="true"
+  >
+
+    <div class="toast-icon">
+
+      <i class="fa-solid fa-check"></i>
 
     </div>
 
 
-    <!-- =========================================================
-         SCROLL TO TOP
-    ========================================================== -->
+    <div class="toast-content">
+
+      <strong id="toast-title">
+        Success
+      </strong>
+
+      <p id="toast-message">
+        Done successfully.
+      </p>
+
+    </div>
+
 
     <button
-        class="scroll-top"
-        id="scrollTop"
-        type="button"
-        aria-label="Scroll to top"
+      type="button"
+      class="toast-close"
+      id="toast-close"
+      aria-label="Close notification"
     >
-        ↑
+
+      <i class="fa-solid fa-xmark"></i>
+
     </button>
 
+  </div>
 
-    <!-- =========================================================
-         JAVASCRIPT
-    ========================================================== -->
 
-    <script src="js/main.js"></script>
+  <!-- =========================================================
+       BACK TO TOP
+  ========================================================== -->
+  <button
+    type="button"
+    class="back-to-top"
+    id="back-to-top"
+    aria-label="Back to top"
+    title="Back to top"
+  >
+
+    <i class="fa-solid fa-arrow-up"></i>
+
+  </button>
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================== -->
+  <script src="js/main.js"></script>
 
 </body>
 </html>
