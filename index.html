@@ -1,1919 +1,2862 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
 
-  <meta
-    name="description"
-    content="SNK AI Mentor Studio — Create AI teaching videos using your own avatar, voice and lesson scripts."
-  >
+    <meta
+        name="description"
+        content="A next-generation website marketplace for premium, ready-to-launch websites."
+    >
 
-  <title>AI Mentor Studio | SNK AI Mentor</title>
+    <meta name="theme-color" content="#070707">
 
-  <link rel="stylesheet" href="../style.css">
-  <link rel="stylesheet" href="ai-mentor.css">
+    <title>Website Marketplace — Launch Something Beautiful</title>
+
+    <!-- =========================================================
+         GOOGLE FONTS
+    ========================================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- =========================================================
+         STYLESHEET
+    ========================================================== -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- =========================================================
+         OPTIONAL FAVICON
+         পরে আপনার নিজের logo বসাতে পারবেন
+    ========================================================== -->
+    <link
+        rel="icon"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='25' fill='%23070707'/%3E%3Ctext x='50' y='66' font-size='55' text-anchor='middle' fill='%23ffffff'%3EW%3C/text%3E%3C/svg%3E"
+    >
 </head>
 
-<body class="ai-mentor-page">
+<body>
 
-  <!-- =====================================================
-       BACKGROUND
-  ====================================================== -->
+    <!-- =========================================================
+         GLOBAL CURSOR / BACKGROUND EFFECTS
+    ========================================================== -->
 
-  <div class="studio-bg" aria-hidden="true">
-    <div class="studio-grid"></div>
-    <div class="studio-glow studio-glow-one"></div>
-    <div class="studio-glow studio-glow-two"></div>
-    <div class="studio-noise"></div>
-  </div>
+    <div class="page-noise" aria-hidden="true"></div>
 
+    <div class="ambient-light ambient-light-one" aria-hidden="true"></div>
+    <div class="ambient-light ambient-light-two" aria-hidden="true"></div>
 
-  <!-- =====================================================
-       HEADER
-  ====================================================== -->
+    <!-- =========================================================
+         HEADER
+    ========================================================== -->
 
-  <header class="mentor-header">
+    <header class="site-header" id="siteHeader">
 
-    <div class="mentor-header-inner">
+        <div class="container header-inner">
 
-      <a href="../index.html" class="mentor-brand">
+            <!-- LOGO -->
+            <a
+                href="#top"
+                class="brand"
+                aria-label="Website Marketplace Home"
+            >
 
-        <div class="mentor-brand-mark">
-          <span>SNK</span>
-        </div>
-
-        <div class="mentor-brand-copy">
-          <strong>SNK AI Mentor</strong>
-          <small>AI Teaching Studio</small>
-        </div>
-
-      </a>
-
-
-      <div class="mentor-header-project">
-
-        <span class="project-label">
-          PROJECT
-        </span>
-
-        <input
-          type="text"
-          id="projectNameTop"
-          class="form-control"
-          value="My AI Lesson"
-          aria-label="Project name"
-        >
-
-      </div>
-
-
-      <div class="mentor-header-actions">
-
-        <button
-          type="button"
-          class="mentor-btn"
-          id="saveProjectBtn">
-          Save Project
-        </button>
-
-        <button
-          type="button"
-          class="mentor-btn mentor-btn-primary"
-          id="prepareVideoBtn">
-          Prepare Video
-        </button>
-
-      </div>
-
-    </div>
-
-  </header>
-
-
-  <!-- =====================================================
-       MAIN
-  ====================================================== -->
-
-  <main class="mentor-main">
-
-    <!-- ===================================================
-         HERO
-    ==================================================== -->
-
-    <section class="mentor-hero">
-
-      <div class="mentor-kicker">
-        AI Mentor Studio
-      </div>
-
-      <h1>
-        Build your AI teaching video.
-      </h1>
-
-      <p>
-        Upload your mentor video, add your voice sample,
-        write your lesson and configure the AI engine.
-        Everything is prepared from one professional workspace.
-      </p>
-
-    </section>
-
-
-    <!-- ===================================================
-         STATUS
-    ==================================================== -->
-
-    <div class="studio-status-bar">
-
-      <div class="studio-status">
-
-        <span class="studio-status-dot"></span>
-
-        <span id="studioStatus">
-          Ready to configure
-        </span>
-
-      </div>
-
-      <div>
-        <span
-          id="savedTime"
-          class="project-label">
-          Not saved yet
-        </span>
-      </div>
-
-    </div>
-
-
-    <!-- ===================================================
-         WORKFLOW
-    ==================================================== -->
-
-    <div class="workflow-strip">
-
-      <div class="workflow-step">
-
-        <div class="workflow-step-number">
-          01
-        </div>
-
-        <strong>
-          Your Face
-        </strong>
-
-        <span>
-          Upload mentor video
-        </span>
-
-      </div>
-
-
-      <div class="workflow-step">
-
-        <div class="workflow-step-number">
-          02
-        </div>
-
-        <strong>
-          Your Voice
-        </strong>
-
-        <span>
-          Add voice sample
-        </span>
-
-      </div>
-
-
-      <div class="workflow-step">
-
-        <div class="workflow-step-number">
-          03
-        </div>
-
-        <strong>
-          Lesson
-        </strong>
-
-        <span>
-          Write teaching script
-        </span>
-
-      </div>
-
-
-      <div class="workflow-step">
-
-        <div class="workflow-step-number">
-          04
-        </div>
-
-        <strong>
-          AI Video
-        </strong>
-
-        <span>
-          Generate final output
-        </span>
-
-      </div>
-
-    </div>
-
-
-    <!-- ===================================================
-         WORKSPACE
-    ==================================================== -->
-
-    <div class="mentor-workspace">
-
-
-      <!-- =================================================
-           LEFT CONTENT
-      ================================================== -->
-
-      <section class="mentor-content">
-
-
-        <!-- ===============================================
-             PROJECT
-        ================================================ -->
-
-        <article class="mentor-card">
-
-          <div class="mentor-card-header">
-
-            <div class="mentor-card-title">
-
-              <div class="mentor-card-icon">
-                ◈
-              </div>
-
-              <div>
-                <h2>
-                  Project
-                </h2>
-
-                <p>
-                  Give your lesson project a clear name.
-                </p>
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="form-grid">
-
-            <div class="form-group full">
-
-              <label
-                class="form-label"
-                for="projectName">
-                Project Name
-              </label>
-
-              <input
-                type="text"
-                id="projectName"
-                class="form-control"
-                value="My AI Lesson"
-                placeholder="Example: Digital Marketing Lesson 01"
-              >
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-        <!-- ===============================================
-             FACE VIDEO
-        ================================================ -->
-
-        <article class="mentor-card">
-
-          <div class="mentor-card-header">
-
-            <div class="mentor-card-title">
-
-              <div class="mentor-card-icon">
-                ◉
-              </div>
-
-              <div>
-                <h2>
-                  Your Mentor Video
-                </h2>
-
-                <p>
-                  Upload a clear video of yourself for the
-                  AI avatar preparation workflow.
-                </p>
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <input
-            type="file"
-            id="faceVideoInput"
-            accept="video/*"
-            hidden
-          >
-
-
-          <div
-            class="upload-zone"
-            id="faceUploadArea">
-
-            <div
-              class="upload-empty"
-              id="faceUploadEmpty">
-
-              <div class="upload-empty-icon">
-                ◉
-              </div>
-
-              <strong>
-                Upload your mentor video
-              </strong>
-
-              <p>
-                Use a clear front-facing video with
-                good lighting and minimal background noise.
-              </p>
-
-              <div class="upload-actions">
-
-                <button
-                  type="button"
-                  class="mentor-btn mentor-btn-primary"
-                  id="selectFaceVideoBtn">
-                  Select Video
-                </button>
-
-              </div>
-
-            </div>
-
-
-            <div
-              class="face-preview-wrapper"
-              id="facePreviewWrapper"
-              hidden>
-
-              <video
-                id="faceVideoPreview"
-                controls
-                playsinline>
-              </video>
-
-              <div class="preview-toolbar">
-
-                <span class="project-label">
-                  Mentor Video
+                <span class="brand-mark">
+                    W
                 </span>
 
-                <button
-                  type="button"
-                  class="mentor-btn"
-                  id="changeFaceVideoBtn">
-                  Change Video
-                </button>
+                <span class="brand-text">
+                    <strong>Website</strong>
+                    <span>Marketplace</span>
+                </span>
 
-              </div>
-
-            </div>
-
-          </div>
-
-        </article>
+            </a>
 
 
-        <!-- ===============================================
-             VOICE
-        ================================================ -->
+            <!-- DESKTOP NAVIGATION -->
+            <nav class="main-navigation" aria-label="Main Navigation">
 
-        <article class="mentor-card">
+                <a href="#websites">
+                    Websites
+                </a>
 
-          <div class="mentor-card-header">
+                <a href="#categories">
+                    Categories
+                </a>
 
-            <div class="mentor-card-title">
+                <a href="#how-it-works">
+                    How it works
+                </a>
 
-              <div class="mentor-card-icon">
-                ♪
-              </div>
+                <a href="#why-us">
+                    Why us
+                </a>
 
-              <div>
-                <h2>
-                  Your Voice
-                </h2>
-
-                <p>
-                  Add a clean voice sample for the
-                  AI voice workflow.
-                </p>
-              </div>
-
-            </div>
-
-          </div>
+            </nav>
 
 
-          <input
-            type="file"
-            id="voiceInput"
-            accept="audio/*"
-            hidden
-          >
-
-
-          <div
-            class="upload-zone"
-            id="voiceUploadArea">
-
-            <div
-              class="upload-empty"
-              id="voiceUploadEmpty">
-
-              <div class="upload-empty-icon">
-                ♪
-              </div>
-
-              <strong>
-                Upload voice sample
-              </strong>
-
-              <p>
-                WAV, MP3 or another supported audio format
-                can be used for the preparation workflow.
-              </p>
-
-              <div class="upload-actions">
+            <!-- HEADER ACTIONS -->
+            <div class="header-actions">
 
                 <button
-                  type="button"
-                  class="mentor-btn mentor-btn-primary"
-                  id="selectVoiceBtn">
-                  Select Audio
+                    class="country-selector"
+                    id="countrySelector"
+                    type="button"
+                    aria-label="Selected country"
+                >
+
+                    <span class="country-flag">
+                        🇧🇩
+                    </span>
+
+                    <span class="country-name">
+                        Bangladesh
+                    </span>
+
+                    <span class="country-chevron">
+                        ↓
+                    </span>
+
                 </button>
 
-              </div>
+
+                <a
+                    href="#websites"
+                    class="header-cta"
+                >
+                    Explore websites
+                </a>
 
             </div>
 
 
-            <div
-              class="voice-preview"
-              id="voicePreview"
-              hidden>
-
-              <div
-                class="voice-file-name"
-                id="voiceFileName">
-                No voice sample
-              </div>
-
-              <div
-                class="voice-file-meta"
-                id="voiceFileMeta">
-              </div>
-
-              <audio
-                id="voiceAudioPlayer"
-                controls>
-              </audio>
-
-              <div class="upload-actions">
-
-                <button
-                  type="button"
-                  class="mentor-btn"
-                  id="removeVoiceBtn">
-                  Remove
-                </button>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-        <!-- ===============================================
-             LESSON SCRIPT
-        ================================================ -->
-
-        <article class="mentor-card">
-
-          <div class="mentor-card-header">
-
-            <div class="mentor-card-title">
-
-              <div class="mentor-card-icon">
-                Aa
-              </div>
-
-              <div>
-                <h2>
-                  Lesson Script
-                </h2>
-
-                <p>
-                  Write exactly what your AI mentor should teach.
-                </p>
-              </div>
-
-            </div>
-
-
+            <!-- MOBILE MENU BUTTON -->
             <button
-              type="button"
-              class="mentor-btn"
-              id="clearScriptBtn">
-              Clear
+                class="mobile-menu-button"
+                id="mobileMenuButton"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+            >
+
+                <span></span>
+                <span></span>
+                <span></span>
+
             </button>
 
-          </div>
+        </div>
 
 
-          <div class="form-grid">
+        <!-- MOBILE NAVIGATION -->
 
-            <div class="form-group">
+        <div
+            class="mobile-navigation"
+            id="mobileNavigation"
+        >
 
-              <label
-                class="form-label"
-                for="scriptLanguage">
-                Language
-              </label>
+            <div class="mobile-navigation-inner">
 
-              <select
-                id="scriptLanguage"
-                class="form-select">
+                <a href="#websites">
+                    Websites
+                </a>
 
-                <option value="en">
-                  English
-                </option>
+                <a href="#categories">
+                    Categories
+                </a>
 
-                <option value="bn">
-                  বাংলা
-                </option>
+                <a href="#how-it-works">
+                    How it works
+                </a>
 
-                <option value="bn-en">
-                  Bangla + English
-                </option>
+                <a href="#why-us">
+                    Why us
+                </a>
 
-                <option value="hi">
-                  Hindi
-                </option>
-
-              </select>
+                <a href="#websites" class="mobile-nav-cta">
+                    Explore websites
+                </a>
 
             </div>
 
+        </div>
 
-            <div class="form-group">
+    </header>
 
-              <label
-                class="form-label"
-                for="scriptStyle">
-                Teaching Style
-              </label>
 
-              <select
-                id="scriptStyle"
-                class="form-select">
+    <!-- =========================================================
+         MAIN
+    ========================================================== -->
 
-                <option value="professional">
-                  Professional
-                </option>
+    <main id="top">
 
-                <option value="friendly">
-                  Friendly
-                </option>
 
-                <option value="energetic">
-                  Energetic
-                </option>
+        <!-- =====================================================
+             HERO SECTION
+        ====================================================== -->
 
-                <option value="storytelling">
-                  Storytelling
-                </option>
+        <section class="hero-section">
 
-                <option value="calm">
-                  Calm & Clear
-                </option>
+            <div class="hero-grid container">
 
-              </select>
+                <!-- HERO COPY -->
 
-            </div>
+                <div class="hero-copy">
 
+                    <div class="eyebrow">
 
-            <div class="form-group full">
+                        <span class="eyebrow-dot"></span>
 
-              <div class="script-editor">
+                        Premium websites for modern businesses
 
-                <label
-                  class="form-label"
-                  for="lessonScript">
+                    </div>
 
-                  Teaching Script
 
-                  <small>
-                    Auto-save enabled
-                  </small>
+                    <h1>
 
-                </label>
+                        Your next
+                        <span class="hero-gradient-text">
+                            website
+                        </span>
+                        is already here.
 
+                    </h1>
 
-                <textarea
-                  id="lessonScript"
-                  class="form-textarea"
-                  placeholder="Write your lesson here...
 
-Example:
+                    <p class="hero-description">
 
-Hello everyone. Welcome to today's lesson.
+                        Launch a beautiful, responsive website without
+                        starting from zero. Choose a design, preview it
+                        live and make it yours.
 
-In this class we are going to learn the basics of digital marketing.
+                    </p>
 
-Let's begin with the first concept..."
-                ></textarea>
 
+                    <div class="hero-actions">
 
-                <div class="script-meta">
+                        <a
+                            href="#websites"
+                            class="button button-primary"
+                        >
 
-                  <div class="script-meta-left">
+                            <span>
+                                Explore websites
+                            </span>
 
-                    <span>
-                      Words:
-                      <strong id="wordCount">0</strong>
-                    </span>
+                            <span class="button-arrow">
+                                →
+                            </span>
 
-                    <span>
-                      Characters:
-                      <strong id="charCount">0</strong>
-                    </span>
+                        </a>
 
-                  </div>
 
+                        <a
+                            href="#how-it-works"
+                            class="button button-secondary"
+                        >
 
-                  <div class="script-meta-right">
+                            How it works
 
-                    <span
-                      id="autosaveStatus"
-                      class="script-autosave">
-                      Auto-save ready
-                    </span>
+                        </a>
 
-                  </div>
+                    </div>
 
-                </div>
 
-              </div>
+                    <!-- TRUST LINE -->
 
-            </div>
+                    <div class="hero-trust">
 
-          </div>
+                        <div class="trust-avatars">
 
-        </article>
+                            <span>R</span>
+                            <span>A</span>
+                            <span>S</span>
+                            <span>M</span>
 
+                        </div>
 
-        <!-- ===============================================
-             VIDEO SETTINGS
-        ================================================ -->
+                        <div class="trust-copy">
 
-        <article class="mentor-card">
+                            <strong>
+                                Ready to launch
+                            </strong>
 
-          <div class="mentor-card-header">
+                            <span>
+                                Beautiful websites, made simple.
+                            </span>
 
-            <div class="mentor-card-title">
+                        </div>
 
-              <div class="mentor-card-icon">
-                ▣
-              </div>
-
-              <div>
-                <h2>
-                  Video Settings
-                </h2>
-
-                <p>
-                  Configure the final teaching video format.
-                </p>
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="settings-grid">
-
-            <div class="form-group">
-
-              <label
-                class="form-label"
-                for="videoFormat">
-                Format
-              </label>
-
-              <select
-                id="videoFormat"
-                class="form-select">
-
-                <option value="mp4">
-                  MP4
-                </option>
-
-                <option value="webm">
-                  WebM
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label
-                class="form-label"
-                for="videoResolution">
-                Resolution
-              </label>
-
-              <select
-                id="videoResolution"
-                class="form-select">
-
-                <option value="1080p">
-                  1080p
-                </option>
-
-                <option value="720p">
-                  720p
-                </option>
-
-                <option value="4k">
-                  4K
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label
-                class="form-label"
-                for="mentorPosition">
-                Mentor Position
-              </label>
-
-              <select
-                id="mentorPosition"
-                class="form-select">
-
-                <option value="right">
-                  Right
-                </option>
-
-                <option value="left">
-                  Left
-                </option>
-
-                <option value="center">
-                  Center
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label
-                class="form-label"
-                for="videoBackground">
-                Background
-              </label>
-
-              <select
-                id="videoBackground"
-                class="form-select">
-
-                <option value="studio">
-                  AI Studio
-                </option>
-
-                <option value="classroom">
-                  Classroom
-                </option>
-
-                <option value="office">
-                  Office
-                </option>
-
-                <option value="transparent">
-                  Transparent
-                </option>
-
-              </select>
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-        <!-- ===============================================
-             AI CONFIGURATION
-        ================================================ -->
-
-        <article
-          class="mentor-card ai-config-card">
-
-          <div class="mentor-card-header">
-
-            <div class="mentor-card-title">
-
-              <div class="mentor-card-icon">
-                ✦
-              </div>
-
-              <div>
-
-                <h2>
-                  AI Engine Configuration
-                </h2>
-
-                <p>
-                  Select Demo mode for testing or connect
-                  your own AI provider for live generation.
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div class="ai-config-badge">
-
-              <span
-                class="ai-config-badge-dot">
-              </span>
-
-              AI ENGINE
-
-            </div>
-
-          </div>
-
-
-          <div class="ai-config-layout">
-
-
-            <!-- =========================================
-                 MAIN CONFIG
-            ========================================== -->
-
-            <div class="ai-config-main">
-
-
-              <div class="ai-mode-selector">
-
-
-                <!-- DEMO -->
-
-                <label class="ai-mode-option">
-
-                  <input
-                    type="radio"
-                    name="aiMode"
-                    value="demo"
-                    data-ai-mode="demo"
-                    checked
-                  >
-
-                  <span class="ai-mode-box">
-
-                    <span class="ai-mode-icon">
-                      ◇
-                    </span>
-
-                    <strong>
-                      Demo Mode
-                    </strong>
-
-                    <span>
-                      Test the complete Studio workflow
-                      without a live AI provider.
-                    </span>
-
-                  </span>
-
-                </label>
-
-
-                <!-- LIVE -->
-
-                <label class="ai-mode-option">
-
-                  <input
-                    type="radio"
-                    name="aiMode"
-                    value="live"
-                    data-ai-mode="live"
-                  >
-
-                  <span class="ai-mode-box">
-
-                    <span class="ai-mode-icon">
-                      ⚡
-                    </span>
-
-                    <strong>
-                      Live Mode
-                    </strong>
-
-                    <span>
-                      Connect a real AI backend/provider
-                      for production generation.
-                    </span>
-
-                  </span>
-
-                </label>
-
-              </div>
-
-
-              <!-- PROVIDER -->
-
-              <div class="ai-provider-row">
-
-                <div class="ai-config-field">
-
-                  <label
-                    class="form-label"
-                    for="aiProvider">
-                    AI Provider
-                  </label>
-
-                  <select
-                    id="aiProvider"
-                    class="form-select">
-
-                    <option value="demo">
-                      Demo Engine
-                    </option>
-
-                    <option value="custom">
-                      Custom API
-                    </option>
-
-                    <option value="heygen">
-                      HeyGen
-                    </option>
-
-                    <option value="synthesia">
-                      Synthesia
-                    </option>
-
-                    <option value="d-id">
-                      D-ID
-                    </option>
-
-                  </select>
+                    </div>
 
                 </div>
 
 
-                <div class="ai-config-field">
+                <!-- HERO VISUAL -->
 
-                  <label
-                    class="form-label"
-                    for="aiBaseUrl">
-                    API Base URL
-                  </label>
+                <div class="hero-visual">
 
-                  <input
-                    type="url"
-                    id="aiBaseUrl"
-                    class="form-control"
-                    placeholder="https://your-api.example.com"
-                    autocomplete="off"
-                  >
+                    <div class="hero-visual-glow"></div>
+
+
+                    <!-- FLOATING TOP LABEL -->
+
+                    <div class="floating-label floating-label-top">
+
+                        <span class="status-dot"></span>
+
+                        Live preview
+
+                    </div>
+
+
+                    <!-- MAIN WEBSITE MOCKUP -->
+
+                    <div class="hero-browser">
+
+                        <div class="browser-topbar">
+
+                            <div class="browser-controls">
+
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                            </div>
+
+
+                            <div class="browser-address">
+
+                                yourbusiness.com
+
+                            </div>
+
+
+                            <div class="browser-menu">
+
+                                •••
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="browser-content">
+
+                            <div class="mock-nav">
+
+                                <div class="mock-logo">
+                                    STUDIO
+                                </div>
+
+                                <div class="mock-nav-links">
+
+                                    <span>Home</span>
+                                    <span>Services</span>
+                                    <span>About</span>
+
+                                </div>
+
+                                <div class="mock-nav-button">
+                                    Start
+                                </div>
+
+                            </div>
+
+
+                            <div class="mock-hero">
+
+                                <div class="mock-hero-copy">
+
+                                    <span class="mock-small-label">
+                                        CREATIVE STUDIO
+                                    </span>
+
+                                    <h3>
+                                        Design that
+                                        <br>
+                                        moves people.
+                                    </h3>
+
+                                    <p>
+                                        A modern digital experience
+                                        designed for ambitious brands.
+                                    </p>
+
+                                    <div class="mock-button">
+                                        Explore
+                                    </div>
+
+                                </div>
+
+
+                                <div class="mock-art">
+
+                                    <div class="art-orbit"></div>
+
+                                    <div class="art-circle"></div>
+
+                                    <div class="art-card">
+
+                                        <span>
+                                            DIGITAL
+                                        </span>
+
+                                        <strong>
+                                            24
+                                        </strong>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="mock-bottom-row">
+
+                                <span>
+                                    Brand Strategy
+                                </span>
+
+                                <span>
+                                    Digital Design
+                                </span>
+
+                                <span>
+                                    Development
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PRICE FLOAT -->
+
+                    <div class="floating-price">
+
+                        <span>
+                            From
+                        </span>
+
+                        <strong>
+                            ৳999
+                        </strong>
+
+                        <small>
+                            / month
+                        </small>
+
+                    </div>
+
+
+                    <!-- MOBILE PREVIEW FLOAT -->
+
+                    <div class="floating-device">
+
+                        <div class="device-screen">
+
+                            <div class="device-top"></div>
+
+                            <div class="device-line large"></div>
+                            <div class="device-line"></div>
+                            <div class="device-line short"></div>
+
+                            <div class="device-image"></div>
+
+                            <div class="device-button"></div>
+
+                        </div>
+
+                    </div>
 
                 </div>
-
-              </div>
-
-
-              <!-- API KEY -->
-
-              <div class="ai-config-field ai-live-only">
-
-                <label
-                  class="form-label"
-                  for="aiApiKey">
-
-                  API Key
-
-                  <small>
-                    Never share this key publicly
-                  </small>
-
-                </label>
-
-
-                <div class="ai-key-wrapper">
-
-                  <input
-                    type="password"
-                    id="aiApiKey"
-                    class="form-control"
-                    placeholder="Enter API key"
-                    autocomplete="new-password"
-                  >
-
-                  <button
-                    type="button"
-                    class="ai-key-toggle"
-                    id="toggleAIKeyBtn"
-                    data-ai-key-toggle>
-                    Show
-                  </button>
-
-                </div>
-
-              </div>
-
-
-              <!-- ENDPOINTS -->
-
-              <div class="ai-provider-row ai-live-only">
-
-                <div class="ai-config-field">
-
-                  <label
-                    class="form-label"
-                    for="aiGenerateEndpoint">
-                    Generate Endpoint
-                  </label>
-
-                  <input
-                    type="text"
-                    id="aiGenerateEndpoint"
-                    class="form-control"
-                    value="/api/ai/video/generate"
-                    autocomplete="off"
-                  >
-
-                </div>
-
-
-                <div class="ai-config-field">
-
-                  <label
-                    class="form-label"
-                    for="aiStatusEndpoint">
-                    Status Endpoint
-                  </label>
-
-                  <input
-                    type="text"
-                    id="aiStatusEndpoint"
-                    class="form-control"
-                    value="/api/ai/video/status"
-                    autocomplete="off"
-                  >
-
-                </div>
-
-              </div>
-
-
-              <!-- DEMO NOTE -->
-
-              <div
-                class="ai-demo-note ai-demo-only"
-                id="aiDemoNote">
-
-                <strong>
-                  Demo:
-                </strong>
-
-                <span>
-                  No API key or external provider is required.
-                  Use this mode to test your Studio workflow.
-                </span>
-
-              </div>
-
-
-              <!-- LIVE WARNING -->
-
-              <div
-                class="ai-live-warning ai-live-only"
-                id="aiLiveWarning"
-                hidden>
-
-                <div class="ai-live-warning-icon">
-                  !
-                </div>
-
-                <p>
-                  Live mode requires a real backend/provider.
-                  Do not place permanent production API keys
-                  inside public GitHub Pages code. Use a secure
-                  server-side API layer for production credentials.
-                </p>
-
-              </div>
-
-
-              <!-- ACTIONS -->
-
-              <div class="ai-connection-actions">
-
-                <button
-                  type="button"
-                  class="mentor-btn mentor-btn-primary"
-                  id="saveAIConfigBtn"
-                  data-ai-save>
-                  Save Configuration
-                </button>
-
-                <button
-                  type="button"
-                  class="mentor-btn"
-                  id="testAIConnectionBtn"
-                  data-ai-test>
-                  Test Connection
-                </button>
-
-                <button
-                  type="button"
-                  class="mentor-btn"
-                  id="resetAIConfigBtn"
-                  data-ai-reset>
-                  Reset
-                </button>
-
-              </div>
 
             </div>
 
 
-            <!-- =========================================
-                 CONNECTION SIDE
-            ========================================== -->
+            <!-- HERO BOTTOM MARQUEE -->
 
-            <div class="ai-config-side">
+            <div class="hero-marquee">
 
-              <div class="ai-connection-box">
+                <div class="marquee-track">
 
-                <div>
+                    <span>RESTAURANTS</span>
+                    <i>✦</i>
 
-                  <div class="ai-connection-top">
+                    <span>BUSINESS</span>
+                    <i>✦</i>
+
+                    <span>PORTFOLIO</span>
+                    <i>✦</i>
+
+                    <span>AGENCY</span>
+                    <i>✦</i>
+
+                    <span>EDUCATION</span>
+                    <i>✦</i>
+
+                    <span>HEALTHCARE</span>
+                    <i>✦</i>
+
+                    <span>E-COMMERCE</span>
+                    <i>✦</i>
+
+                    <span>RESTAURANTS</span>
+                    <i>✦</i>
+
+                    <span>BUSINESS</span>
+                    <i>✦</i>
+
+                    <span>PORTFOLIO</span>
+                    <i>✦</i>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             FEATURED SECTION
+        ====================================================== -->
+
+        <section
+            class="websites-section section-padding"
+            id="websites"
+        >
+
+            <div class="container">
+
+
+                <!-- SECTION HEADER -->
+
+                <div class="section-header">
 
                     <div>
 
-                      <div class="ai-connection-label">
-                        ENGINE STATUS
-                      </div>
+                        <div class="section-kicker">
+                            CURATED FOR BANGLADESH
+                        </div>
 
-                      <div
-                        id="aiConnectionStatus"
-                        class="ai-connection-status connected"
-                        data-ai-connection-status>
-                        Demo Engine Ready
-                      </div>
-
-                    </div>
-
-                  </div>
-
-
-                  <div class="ai-connection-details">
-
-                    <div class="ai-connection-detail">
-
-                      <span>
-                        Mode
-                      </span>
-
-                      <span
-                        id="aiConnectionMode"
-                        data-ai-connection-mode>
-                        Demo
-                      </span>
+                        <h2>
+                            Websites worth
+                            <span>showing off.</span>
+                        </h2>
 
                     </div>
 
 
-                    <div class="ai-connection-detail">
+                    <div class="section-header-right">
 
-                      <span>
-                        Provider
-                      </span>
+                        <p>
+                            Hand-picked designs built to make
+                            your business look instantly credible.
+                        </p>
 
-                      <span
-                        id="aiConnectionProvider"
-                        data-ai-connection-provider>
-                        Demo
-                      </span>
-
-                    </div>
-
-
-                    <div class="ai-connection-detail">
-
-                      <span>
-                        Endpoint
-                      </span>
-
-                      <span
-                        id="aiConnectionEndpoint"
-                        data-ai-connection-endpoint>
-                        Not configured
-                      </span>
+                        <a href="#all-websites" class="text-link">
+                            View all websites
+                            <span>→</span>
+                        </a>
 
                     </div>
-
-                  </div>
 
                 </div>
 
 
-                <div class="form-help">
-
-                  Demo mode works locally for interface testing.
-                  Live mode requires a configured backend.
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-        <!-- ===============================================
-             VIDEO GENERATION
-        ================================================ -->
-
-        <article class="mentor-card video-generation-card">
-
-          <div class="mentor-card-header">
-
-            <div class="mentor-card-title">
-
-              <div class="mentor-card-icon">
-                ✦
-              </div>
-
-              <div>
-
-                <h2>
-                  Generate AI Teaching Video
-                </h2>
-
-                <p>
-                  Review your project readiness before sending
-                  it to the selected AI engine.
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="generation-panel">
-
-            <div class="generation-summary">
-
-              <div class="generation-summary-item">
-
-                <span>
-                  Project
-                </span>
-
-                <strong id="generationProjectName">
-                  My AI Lesson
-                </strong>
-
-              </div>
-
-
-              <div class="generation-summary-item">
-
-                <span>
-                  Resolution
-                </span>
-
-                <strong id="generationResolution">
-                  1080p
-                </strong>
-
-              </div>
-
-
-              <div class="generation-summary-item">
-
-                <span>
-                  Format
-                </span>
-
-                <strong id="generationFormat">
-                  MP4
-                </strong>
-
-              </div>
-
-
-              <div class="generation-summary-item">
-
-                <span>
-                  Engine
-                </span>
-
-                <strong id="generationEngine">
-                  Demo
-                </strong>
-
-              </div>
-
-            </div>
-
-
-            <div class="generation-actions">
-
-              <button
-                type="button"
-                class="mentor-btn mentor-btn-primary mentor-generate-btn"
-                id="generateVideoBtn">
-
-                <span class="generate-btn-icon">
-                  ▶
-                </span>
-
-                Generate AI Video
-
-              </button>
-
-
-              <button
-                type="button"
-                class="mentor-btn"
-                id="cancelGenerationBtn"
-                hidden>
-
-                Cancel Generation
-
-              </button>
-
-            </div>
-
-
-            <div
-              class="generation-progress"
-              id="generationProgress"
-              hidden>
-
-              <div class="generation-progress-header">
-
-                <div>
-
-                  <strong>
-                    Preparing AI video
-                  </strong>
-
-                  <span id="resultMessage">
-                    Starting...
-                  </span>
-
-                </div>
-
-                <strong id="resultProgress">
-                  0%
-                </strong>
-
-              </div>
-
-
-              <div class="result-progress-track">
+                <!-- CATEGORY FILTER -->
 
                 <div
-                  class="result-progress-bar"
-                  id="resultProgressBar"
-                  style="width:0%">
-                </div>
+                    class="category-filter"
+                    id="websiteFilters"
+                    role="tablist"
+                >
 
-              </div>
+                    <button
+                        class="filter-button active"
+                        data-filter="all"
+                        type="button"
+                    >
+                        All
+                    </button>
 
-            </div>
+                    <button
+                        class="filter-button"
+                        data-filter="business"
+                        type="button"
+                    >
+                        Business
+                    </button>
 
+                    <button
+                        class="filter-button"
+                        data-filter="restaurant"
+                        type="button"
+                    >
+                        Restaurant
+                    </button>
 
-            <div
-              class="generation-status"
-              id="resultStatus"
-              aria-live="polite">
-              Ready to generate
-            </div>
+                    <button
+                        class="filter-button"
+                        data-filter="agency"
+                        type="button"
+                    >
+                        Agency
+                    </button>
 
-          </div>
+                    <button
+                        class="filter-button"
+                        data-filter="education"
+                        type="button"
+                    >
+                        Education
+                    </button>
 
-        </article>
+                    <button
+                        class="filter-button"
+                        data-filter="healthcare"
+                        type="button"
+                    >
+                        Healthcare
+                    </button>
 
-
-        <!-- ===============================================
-             VIDEO OUTPUT
-        ================================================ -->
-
-        <article class="mentor-card">
-
-          <div class="mentor-card-header">
-
-            <div class="mentor-card-title">
-
-              <div class="mentor-card-icon">
-                ▶
-              </div>
-
-              <div>
-
-                <h2>
-                  AI Video Output
-                </h2>
-
-                <p>
-                  Your generated teaching video will appear here.
-                </p>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div
-            class="video-output"
-            id="videoOutput">
-
-
-            <!-- EMPTY -->
-
-            <div
-              class="video-output-empty"
-              id="videoOutputEmpty">
-
-              <div class="video-output-empty-icon">
-                ▶
-              </div>
-
-              <h3>
-                No video generated yet
-              </h3>
-
-              <p>
-                Complete your mentor video, voice sample,
-                lesson script and AI configuration.
-                Then use Generate AI Video.
-              </p>
-
-            </div>
-
-
-            <!-- RESULT -->
-
-            <div
-              class="video-result"
-              id="videoResult"
-              hidden>
-
-              <div class="result-video-wrapper">
-
-                <video
-                  id="resultVideo"
-                  controls
-                  playsinline
-                  preload="metadata">
-                </video>
-
-              </div>
-
-
-              <div class="result-video-info">
-
-                <div>
-
-                  <span class="project-label">
-                    GENERATED VIDEO
-                  </span>
-
-                  <h3 id="resultVideoTitle">
-                    AI Teaching Video
-                  </h3>
+                    <button
+                        class="filter-button"
+                        data-filter="portfolio"
+                        type="button"
+                    >
+                        Portfolio
+                    </button>
 
                 </div>
 
 
-                <div class="result-video-actions">
+                <!-- WEBSITE GRID -->
 
-                  <a
-                    href="#"
-                    id="resultVideoLink"
-                    class="mentor-btn"
-                    target="_blank"
-                    rel="noopener"
-                    hidden>
-                    Open Video
-                  </a>
+                <div
+                    class="website-grid"
+                    id="website-list"
+                >
 
-                  <button
+
+                    <!-- =================================================
+                         WEBSITE CARD 01
+                         Firebase পরে এই structure ব্যবহার করবে
+                    ================================================== -->
+
+                    <article
+                        class="website-card website-card-large"
+                        data-category="restaurant"
+                        data-country="BD"
+                    >
+
+                        <div class="website-card-preview">
+
+                            <div class="preview-toolbar">
+
+                                <span class="preview-label">
+                                    LIVE PREVIEW
+                                </span>
+
+                                <span class="preview-device">
+                                    Desktop
+                                </span>
+
+                            </div>
+
+
+                            <div class="preview-window restaurant-preview">
+
+                                <div class="preview-nav">
+
+                                    <strong>
+                                        TABLE
+                                    </strong>
+
+                                    <span>Menu</span>
+                                    <span>About</span>
+                                    <span>Contact</span>
+
+                                </div>
+
+
+                                <div class="preview-hero">
+
+                                    <div>
+
+                                        <small>
+                                            FINE DINING
+                                        </small>
+
+                                        <h3>
+                                            Taste the
+                                            <br>
+                                            extraordinary.
+                                        </h3>
+
+                                        <button>
+                                            Reserve a table
+                                        </button>
+
+                                    </div>
+
+                                    <div class="preview-food-shape">
+                                        <span>01</span>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                class="preview-overlay-button"
+                                type="button"
+                                data-preview="restaurant"
+                            >
+                                <span>↗</span>
+                                Open preview
+                            </button>
+
+                        </div>
+
+
+                        <div class="website-card-content">
+
+                            <div class="website-card-heading">
+
+                                <div>
+
+                                    <span class="website-category">
+                                        RESTAURANT
+                                    </span>
+
+                                    <h3>
+                                        Table — Restaurant
+                                    </h3>
+
+                                </div>
+
+                                <div class="website-price">
+
+                                    <strong>
+                                        ৳999
+                                    </strong>
+
+                                    <span>
+                                        / month
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <p>
+                                A refined restaurant experience
+                                designed for modern dining brands.
+                            </p>
+
+
+                            <div class="website-features">
+
+                                <span>Responsive</span>
+                                <span>Booking</span>
+                                <span>WhatsApp</span>
+
+                            </div>
+
+
+                            <div class="website-card-actions">
+
+                                <button
+                                    class="button button-dark-outline preview-button"
+                                    type="button"
+                                    data-preview="restaurant"
+                                >
+                                    Live preview
+                                </button>
+
+                                <button
+                                    class="button button-dark get-website-button"
+                                    type="button"
+                                    data-website-id="restaurant-01"
+                                    data-website-title="Table — Restaurant"
+                                    data-price="999"
+                                >
+                                    Get this website
+                                    <span>→</span>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- =================================================
+                         WEBSITE CARD 02
+                    ================================================== -->
+
+                    <article
+                        class="website-card"
+                        data-category="business"
+                        data-country="BD"
+                    >
+
+                        <div class="website-card-preview">
+
+                            <div class="preview-toolbar">
+
+                                <span class="preview-label">
+                                    BUSINESS
+                                </span>
+
+                                <span class="preview-device">
+                                    Desktop
+                                </span>
+
+                            </div>
+
+
+                            <div class="preview-window business-preview">
+
+                                <div class="business-preview-top">
+
+                                    <span>
+                                        NORTH
+                                    </span>
+
+                                    <div>
+                                        About
+                                        Services
+                                        Contact
+                                    </div>
+
+                                </div>
+
+
+                                <div class="business-preview-main">
+
+                                    <small>
+                                        BUSINESS CONSULTING
+                                    </small>
+
+                                    <h3>
+                                        Make better
+                                        <br>
+                                        decisions.
+                                    </h3>
+
+                                    <div class="business-line"></div>
+
+                                    <p>
+                                        Strategy for businesses
+                                        ready for their next chapter.
+                                    </p>
+
+                                </div>
+
+
+                                <div class="business-number">
+                                    01
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                class="preview-overlay-button"
+                                type="button"
+                                data-preview="business"
+                            >
+                                <span>↗</span>
+                                Open preview
+                            </button>
+
+                        </div>
+
+
+                        <div class="website-card-content">
+
+                            <div class="website-card-heading">
+
+                                <div>
+
+                                    <span class="website-category">
+                                        BUSINESS
+                                    </span>
+
+                                    <h3>
+                                        North Business
+                                    </h3>
+
+                                </div>
+
+                                <div class="website-price">
+
+                                    <strong>
+                                        ৳799
+                                    </strong>
+
+                                    <span>
+                                        / month
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <p>
+                                Clean corporate design for
+                                ambitious businesses.
+                            </p>
+
+
+                            <div class="website-features">
+
+                                <span>SEO Ready</span>
+                                <span>Responsive</span>
+                                <span>Fast</span>
+
+                            </div>
+
+
+                            <div class="website-card-actions">
+
+                                <button
+                                    class="button button-dark-outline preview-button"
+                                    type="button"
+                                    data-preview="business"
+                                >
+                                    Live preview
+                                </button>
+
+                                <button
+                                    class="button button-dark get-website-button"
+                                    type="button"
+                                    data-website-id="business-01"
+                                    data-website-title="North Business"
+                                    data-price="799"
+                                >
+                                    Get this website
+                                    <span>→</span>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- =================================================
+                         WEBSITE CARD 03
+                    ================================================== -->
+
+                    <article
+                        class="website-card"
+                        data-category="agency"
+                        data-country="BD"
+                    >
+
+                        <div class="website-card-preview">
+
+                            <div class="preview-toolbar">
+
+                                <span class="preview-label">
+                                    CREATIVE
+                                </span>
+
+                                <span class="preview-device">
+                                    Desktop
+                                </span>
+
+                            </div>
+
+
+                            <div class="preview-window agency-preview">
+
+                                <div class="agency-orb"></div>
+
+                                <div class="agency-top">
+
+                                    <strong>
+                                        FORM
+                                    </strong>
+
+                                    <span>
+                                        MENU +
+                                    </span>
+
+                                </div>
+
+
+                                <div class="agency-center">
+
+                                    <small>
+                                        DIGITAL AGENCY
+                                    </small>
+
+                                    <h3>
+                                        Ideas
+                                        <br>
+                                        <em>made visible.</em>
+                                    </h3>
+
+                                </div>
+
+
+                                <div class="agency-footer">
+
+                                    <span>
+                                        New York — Dhaka
+                                    </span>
+
+                                    <span>
+                                        2026
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                class="preview-overlay-button"
+                                type="button"
+                                data-preview="agency"
+                            >
+                                <span>↗</span>
+                                Open preview
+                            </button>
+
+                        </div>
+
+
+                        <div class="website-card-content">
+
+                            <div class="website-card-heading">
+
+                                <div>
+
+                                    <span class="website-category">
+                                        AGENCY
+                                    </span>
+
+                                    <h3>
+                                        Form Creative
+                                    </h3>
+
+                                </div>
+
+                                <div class="website-price">
+
+                                    <strong>
+                                        ৳1,299
+                                    </strong>
+
+                                    <span>
+                                        / month
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <p>
+                                Bold digital presence for creative
+                                studios and agencies.
+                            </p>
+
+
+                            <div class="website-features">
+
+                                <span>Premium UI</span>
+                                <span>Portfolio</span>
+                                <span>CMS Ready</span>
+
+                            </div>
+
+
+                            <div class="website-card-actions">
+
+                                <button
+                                    class="button button-dark-outline preview-button"
+                                    type="button"
+                                    data-preview="agency"
+                                >
+                                    Live preview
+                                </button>
+
+                                <button
+                                    class="button button-dark get-website-button"
+                                    type="button"
+                                    data-website-id="agency-01"
+                                    data-website-title="Form Creative"
+                                    data-price="1299"
+                                >
+                                    Get this website
+                                    <span>→</span>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- =================================================
+                         WEBSITE CARD 04
+                    ================================================== -->
+
+                    <article
+                        class="website-card"
+                        data-category="education"
+                        data-country="BD"
+                    >
+
+                        <div class="website-card-preview">
+
+                            <div class="preview-toolbar">
+
+                                <span class="preview-label">
+                                    EDUCATION
+                                </span>
+
+                                <span class="preview-device">
+                                    Desktop
+                                </span>
+
+                            </div>
+
+
+                            <div class="preview-window education-preview">
+
+                                <div class="education-header">
+
+                                    <strong>
+                                        ACADEMY
+                                    </strong>
+
+                                    <span>
+                                        Learn differently.
+                                    </span>
+
+                                </div>
+
+
+                                <div class="education-main">
+
+                                    <small>
+                                        ONLINE LEARNING
+                                    </small>
+
+                                    <h3>
+                                        Build skills.
+                                        <br>
+                                        Build your future.
+                                    </h3>
+
+                                    <div class="education-cards">
+
+                                        <span>01</span>
+                                        <span>02</span>
+                                        <span>03</span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                class="preview-overlay-button"
+                                type="button"
+                                data-preview="education"
+                            >
+                                <span>↗</span>
+                                Open preview
+                            </button>
+
+                        </div>
+
+
+                        <div class="website-card-content">
+
+                            <div class="website-card-heading">
+
+                                <div>
+
+                                    <span class="website-category">
+                                        EDUCATION
+                                    </span>
+
+                                    <h3>
+                                        Academy Pro
+                                    </h3>
+
+                                </div>
+
+                                <div class="website-price">
+
+                                    <strong>
+                                        ৳899
+                                    </strong>
+
+                                    <span>
+                                        / month
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <p>
+                                Modern education website for
+                                schools, academies and trainers.
+                            </p>
+
+
+                            <div class="website-features">
+
+                                <span>Courses</span>
+                                <span>Students</span>
+                                <span>Responsive</span>
+
+                            </div>
+
+
+                            <div class="website-card-actions">
+
+                                <button
+                                    class="button button-dark-outline preview-button"
+                                    type="button"
+                                    data-preview="education"
+                                >
+                                    Live preview
+                                </button>
+
+                                <button
+                                    class="button button-dark get-website-button"
+                                    type="button"
+                                    data-website-id="education-01"
+                                    data-website-title="Academy Pro"
+                                    data-price="899"
+                                >
+                                    Get this website
+                                    <span>→</span>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- =================================================
+                         WEBSITE CARD 05
+                    ================================================== -->
+
+                    <article
+                        class="website-card"
+                        data-category="healthcare"
+                        data-country="BD"
+                    >
+
+                        <div class="website-card-preview">
+
+                            <div class="preview-toolbar">
+
+                                <span class="preview-label">
+                                    HEALTHCARE
+                                </span>
+
+                                <span class="preview-device">
+                                    Desktop
+                                </span>
+
+                            </div>
+
+
+                            <div class="preview-window healthcare-preview">
+
+                                <div class="healthcare-top">
+
+                                    <strong>
+                                        CARE+
+                                    </strong>
+
+                                    <span>
+                                        Your health,
+                                        our priority.
+                                    </span>
+
+                                </div>
+
+
+                                <div class="healthcare-main">
+
+                                    <div>
+
+                                        <small>
+                                            MODERN CLINIC
+                                        </small>
+
+                                        <h3>
+                                            Healthcare
+                                            <br>
+                                            made simpler.
+                                        </h3>
+
+                                        <button>
+                                            Book appointment
+                                        </button>
+
+                                    </div>
+
+                                    <div class="healthcare-circle">
+                                        +
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <button
+                                class="preview-overlay-button"
+                                type="button"
+                                data-preview="healthcare"
+                            >
+                                <span>↗</span>
+                                Open preview
+                            </button>
+
+                        </div>
+
+
+                        <div class="website-card-content">
+
+                            <div class="website-card-heading">
+
+                                <div>
+
+                                    <span class="website-category">
+                                        HEALTHCARE
+                                    </span>
+
+                                    <h3>
+                                        Care+ Clinic
+                                    </h3>
+
+                                </div>
+
+                                <div class="website-price">
+
+                                    <strong>
+                                        ৳899
+                                    </strong>
+
+                                    <span>
+                                        / month
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <p>
+                                Professional healthcare website
+                                with appointment-focused UX.
+                            </p>
+
+
+                            <div class="website-features">
+
+                                <span>Appointment</span>
+                                <span>Doctor Profile</span>
+                                <span>WhatsApp</span>
+
+                            </div>
+
+
+                            <div class="website-card-actions">
+
+                                <button
+                                    class="button button-dark-outline preview-button"
+                                    type="button"
+                                    data-preview="healthcare"
+                                >
+                                    Live preview
+                                </button>
+
+                                <button
+                                    class="button button-dark get-website-button"
+                                    type="button"
+                                    data-website-id="healthcare-01"
+                                    data-website-title="Care+ Clinic"
+                                    data-price="899"
+                                >
+                                    Get this website
+                                    <span>→</span>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- =================================================
+                         WEBSITE CARD 06
+                    ================================================== -->
+
+                    <article
+                        class="website-card"
+                        data-category="portfolio"
+                        data-country="BD"
+                    >
+
+                        <div class="website-card-preview">
+
+                            <div class="preview-toolbar">
+
+                                <span class="preview-label">
+                                    PORTFOLIO
+                                </span>
+
+                                <span class="preview-device">
+                                    Desktop
+                                </span>
+
+                            </div>
+
+
+                            <div class="preview-window portfolio-preview">
+
+                                <div class="portfolio-top">
+
+                                    <span>
+                                        RAFI
+                                    </span>
+
+                                    <span>
+                                        DESIGNER / 2026
+                                    </span>
+
+                                </div>
+
+
+                                <div class="portfolio-main">
+
+                                    <small>
+                                        CREATIVE PORTFOLIO
+                                    </small>
+
+                                    <h3>
+                                        I create
+                                        <br>
+                                        <em>digital worlds.</em>
+                                    </h3>
+
+                                </div>
+
+
+                                <div class="portfolio-shape"></div>
+
+                            </div>
+
+
+                            <button
+                                class="preview-overlay-button"
+                                type="button"
+                                data-preview="portfolio"
+                            >
+                                <span>↗</span>
+                                Open preview
+                            </button>
+
+                        </div>
+
+
+                        <div class="website-card-content">
+
+                            <div class="website-card-heading">
+
+                                <div>
+
+                                    <span class="website-category">
+                                        PORTFOLIO
+                                    </span>
+
+                                    <h3>
+                                        Rafi Portfolio
+                                    </h3>
+
+                                </div>
+
+                                <div class="website-price">
+
+                                    <strong>
+                                        ৳699
+                                    </strong>
+
+                                    <span>
+                                        / month
+                                    </span>
+
+                                </div>
+
+                            </div>
+
+
+                            <p>
+                                A bold personal portfolio for
+                                designers, developers and creators.
+                            </p>
+
+
+                            <div class="website-features">
+
+                                <span>Projects</span>
+                                <span>About</span>
+                                <span>Contact</span>
+
+                            </div>
+
+
+                            <div class="website-card-actions">
+
+                                <button
+                                    class="button button-dark-outline preview-button"
+                                    type="button"
+                                    data-preview="portfolio"
+                                >
+                                    Live preview
+                                </button>
+
+                                <button
+                                    class="button button-dark get-website-button"
+                                    type="button"
+                                    data-website-id="portfolio-01"
+                                    data-website-title="Rafi Portfolio"
+                                    data-price="699"
+                                >
+                                    Get this website
+                                    <span>→</span>
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+
+                </div>
+
+
+                <!-- EMPTY STATE -->
+
+                <div
+                    class="empty-state hidden"
+                    id="emptyWebsiteState"
+                >
+
+                    <div class="empty-icon">
+                        ◌
+                    </div>
+
+                    <h3>
+                        No websites found.
+                    </h3>
+
+                    <p>
+                        We're preparing something beautiful
+                        for this category.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             DEVICE PREVIEW EXPERIENCE
+        ====================================================== -->
+
+        <section class="experience-section">
+
+            <div class="container">
+
+                <div class="experience-panel">
+
+                    <div class="experience-copy">
+
+                        <div class="section-kicker">
+                            SEE IT BEFORE YOU GET IT
+                        </div>
+
+                        <h2>
+                            Your website.
+                            <span>Every screen.</span>
+                        </h2>
+
+                        <p>
+                            Preview how your chosen website looks
+                            across desktop, tablet and mobile before
+                            you launch.
+                        </p>
+
+
+                        <div class="device-switcher" id="deviceSwitcher">
+
+                            <button
+                                type="button"
+                                class="device-switch active"
+                                data-device="desktop"
+                            >
+                                Desktop
+                            </button>
+
+                            <button
+                                type="button"
+                                class="device-switch"
+                                data-device="tablet"
+                            >
+                                Tablet
+                            </button>
+
+                            <button
+                                type="button"
+                                class="device-switch"
+                                data-device="mobile"
+                            >
+                                Mobile
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="experience-device-area">
+
+                        <div
+                            class="showcase-device showcase-desktop"
+                            id="showcaseDevice"
+                        >
+
+                            <div class="showcase-browser-bar">
+
+                                <span></span>
+                                <span></span>
+                                <span></span>
+
+                            </div>
+
+
+                            <div class="showcase-screen">
+
+                                <div class="showcase-screen-nav">
+
+                                    <strong>
+                                        STUDIO
+                                    </strong>
+
+                                    <span>Work</span>
+                                    <span>About</span>
+                                    <span>Contact</span>
+
+                                </div>
+
+
+                                <div class="showcase-screen-content">
+
+                                    <small>
+                                        DIGITAL EXPERIENCE
+                                    </small>
+
+                                    <h3>
+                                        Make your
+                                        <br>
+                                        first impression
+                                        <br>
+                                        unforgettable.
+                                    </h3>
+
+                                    <div class="showcase-screen-button">
+                                        Explore
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             CATEGORIES
+        ====================================================== -->
+
+        <section
+            class="categories-section section-padding"
+            id="categories"
+        >
+
+            <div class="container">
+
+                <div class="section-header centered">
+
+                    <div>
+
+                        <div class="section-kicker">
+                            FIND YOUR FORMAT
+                        </div>
+
+                        <h2>
+                            Built for
+                            <span>every business.</span>
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="category-grid">
+
+                    <a
+                        href="#websites"
+                        class="category-card"
+                        data-category-link="business"
+                    >
+
+                        <span class="category-number">
+                            01
+                        </span>
+
+                        <span class="category-icon">
+                            ◇
+                        </span>
+
+                        <strong>
+                            Business
+                        </strong>
+
+                        <span>
+                            24 websites
+                        </span>
+
+                        <b>↗</b>
+
+                    </a>
+
+
+                    <a
+                        href="#websites"
+                        class="category-card"
+                        data-category-link="restaurant"
+                    >
+
+                        <span class="category-number">
+                            02
+                        </span>
+
+                        <span class="category-icon">
+                            ◉
+                        </span>
+
+                        <strong>
+                            Restaurant
+                        </strong>
+
+                        <span>
+                            18 websites
+                        </span>
+
+                        <b>↗</b>
+
+                    </a>
+
+
+                    <a
+                        href="#websites"
+                        class="category-card"
+                        data-category-link="agency"
+                    >
+
+                        <span class="category-number">
+                            03
+                        </span>
+
+                        <span class="category-icon">
+                            ✦
+                        </span>
+
+                        <strong>
+                            Agency
+                        </strong>
+
+                        <span>
+                            16 websites
+                        </span>
+
+                        <b>↗</b>
+
+                    </a>
+
+
+                    <a
+                        href="#websites"
+                        class="category-card"
+                        data-category-link="education"
+                    >
+
+                        <span class="category-number">
+                            04
+                        </span>
+
+                        <span class="category-icon">
+                            □
+                        </span>
+
+                        <strong>
+                            Education
+                        </strong>
+
+                        <span>
+                            12 websites
+                        </span>
+
+                        <b>↗</b>
+
+                    </a>
+
+
+                    <a
+                        href="#websites"
+                        class="category-card"
+                        data-category-link="healthcare"
+                    >
+
+                        <span class="category-number">
+                            05
+                        </span>
+
+                        <span class="category-icon">
+                            +
+                        </span>
+
+                        <strong>
+                            Healthcare
+                        </strong>
+
+                        <span>
+                            10 websites
+                        </span>
+
+                        <b>↗</b>
+
+                    </a>
+
+
+                    <a
+                        href="#websites"
+                        class="category-card"
+                        data-category-link="portfolio"
+                    >
+
+                        <span class="category-number">
+                            06
+                        </span>
+
+                        <span class="category-icon">
+                            /
+                        </span>
+
+                        <strong>
+                            Portfolio
+                        </strong>
+
+                        <span>
+                            15 websites
+                        </span>
+
+                        <b>↗</b>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             HOW IT WORKS
+        ====================================================== -->
+
+        <section
+            class="how-section section-padding"
+            id="how-it-works"
+        >
+
+            <div class="container">
+
+                <div class="section-header">
+
+                    <div>
+
+                        <div class="section-kicker">
+                            SIMPLE BY DESIGN
+                        </div>
+
+                        <h2>
+                            From idea to
+                            <span>online.</span>
+                        </h2>
+
+                    </div>
+
+                    <p class="section-header-description">
+                        No complicated process. Pick the website,
+                        tell us what you need and get ready to launch.
+                    </p>
+
+                </div>
+
+
+                <div class="steps-grid">
+
+
+                    <div class="step-card">
+
+                        <span class="step-number">
+                            01
+                        </span>
+
+                        <div class="step-icon">
+                            ◌
+                        </div>
+
+                        <h3>
+                            Choose
+                        </h3>
+
+                        <p>
+                            Explore our curated collection
+                            and find a design that fits your brand.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step-card">
+
+                        <span class="step-number">
+                            02
+                        </span>
+
+                        <div class="step-icon">
+                            ↗
+                        </div>
+
+                        <h3>
+                            Preview
+                        </h3>
+
+                        <p>
+                            Experience the website on desktop,
+                            tablet and mobile before choosing.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step-card">
+
+                        <span class="step-number">
+                            03
+                        </span>
+
+                        <div class="step-icon">
+                            +
+                        </div>
+
+                        <h3>
+                            Make it yours
+                        </h3>
+
+                        <p>
+                            Add your business details, content,
+                            contact information and branding.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step-card">
+
+                        <span class="step-number">
+                            04
+                        </span>
+
+                        <div class="step-icon">
+                            →
+                        </div>
+
+                        <h3>
+                            Launch
+                        </h3>
+
+                        <p>
+                            Your new website goes live and
+                            your business is ready for the world.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             WHY US
+        ====================================================== -->
+
+        <section
+            class="why-section section-padding"
+            id="why-us"
+        >
+
+            <div class="container">
+
+                <div class="why-layout">
+
+                    <div class="why-copy">
+
+                        <div class="section-kicker">
+                            WHY THIS MARKETPLACE
+                        </div>
+
+                        <h2>
+                            Don't build
+                            <span>from scratch.</span>
+                        </h2>
+
+                        <p>
+                            Great websites take time. We remove the
+                            slowest part of the process so you can
+                            focus on your business instead.
+                        </p>
+
+                        <a
+                            href="#websites"
+                            class="button button-dark"
+                        >
+                            Explore the collection
+                            <span>→</span>
+                        </a>
+
+                    </div>
+
+
+                    <div class="benefit-list">
+
+                        <div class="benefit-item">
+
+                            <span class="benefit-index">
+                                01
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Premium by default
+                                </h3>
+
+                                <p>
+                                    Every design starts with
+                                    a strong visual foundation.
+                                </p>
+
+                            </div>
+
+                            <span class="benefit-arrow">
+                                ↗
+                            </span>
+
+                        </div>
+
+
+                        <div class="benefit-item">
+
+                            <span class="benefit-index">
+                                02
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Mobile-first
+                                </h3>
+
+                                <p>
+                                    Your website looks great
+                                    on every screen size.
+                                </p>
+
+                            </div>
+
+                            <span class="benefit-arrow">
+                                ↗
+                            </span>
+
+                        </div>
+
+
+                        <div class="benefit-item">
+
+                            <span class="benefit-index">
+                                03
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Launch faster
+                                </h3>
+
+                                <p>
+                                    Skip weeks of design and
+                                    development work.
+                                </p>
+
+                            </div>
+
+                            <span class="benefit-arrow">
+                                ↗
+                            </span>
+
+                        </div>
+
+
+                        <div class="benefit-item">
+
+                            <span class="benefit-index">
+                                04
+                            </span>
+
+                            <div>
+
+                                <h3>
+                                    Built to grow
+                                </h3>
+
+                                <p>
+                                    Start simple and upgrade
+                                    as your business grows.
+                                </p>
+
+                            </div>
+
+                            <span class="benefit-arrow">
+                                ↗
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             FINAL CTA
+        ====================================================== -->
+
+        <section class="final-cta-section">
+
+            <div class="container">
+
+                <div class="final-cta">
+
+                    <div class="final-cta-glow"></div>
+
+                    <div class="section-kicker">
+                        READY WHEN YOU ARE
+                    </div>
+
+                    <h2>
+                        Your next website
+                        <br>
+                        <span>starts here.</span>
+                    </h2>
+
+                    <p>
+                        Choose a design. Preview it.
+                        Make it yours.
+                    </p>
+
+                    <a
+                        href="#websites"
+                        class="button button-light"
+                    >
+                        Explore websites
+                        <span>→</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer class="site-footer">
+
+        <div class="container">
+
+            <div class="footer-top">
+
+                <div class="footer-brand">
+
+                    <a
+                        href="#top"
+                        class="brand footer-brand-link"
+                    >
+
+                        <span class="brand-mark">
+                            W
+                        </span>
+
+                        <span class="brand-text">
+
+                            <strong>
+                                Website
+                            </strong>
+
+                            <span>
+                                Marketplace
+                            </span>
+
+                        </span>
+
+                    </a>
+
+
+                    <p>
+                        Beautiful websites.
+                        Ready when you are.
+                    </p>
+
+                </div>
+
+
+                <div class="footer-links-group">
+
+                    <div>
+
+                        <span class="footer-heading">
+                            Marketplace
+                        </span>
+
+                        <a href="#websites">
+                            Websites
+                        </a>
+
+                        <a href="#categories">
+                            Categories
+                        </a>
+
+                        <a href="#how-it-works">
+                            How it works
+                        </a>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="footer-heading">
+                            Company
+                        </span>
+
+                        <a href="#why-us">
+                            Why us
+                        </a>
+
+                        <a href="#">
+                            Contact
+                        </a>
+
+                        <a href="#">
+                            FAQ
+                        </a>
+
+                    </div>
+
+
+                    <div>
+
+                        <span class="footer-heading">
+                            Legal
+                        </span>
+
+                        <a href="#">
+                            Privacy
+                        </a>
+
+                        <a href="#">
+                            Terms
+                        </a>
+
+                        <a href="#">
+                            Refund policy
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <span>
+                    © 2026 Website Marketplace.
+                    All rights reserved.
+                </span>
+
+                <span>
+                    Made for ambitious businesses.
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================================================
+         COUNTRY SELECTOR MODAL
+         Future Firebase / Geo-location integration ready
+    ========================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="countryModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-box country-modal-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="countryModalTitle"
+        >
+
+            <button
+                class="modal-close"
+                type="button"
+                id="countryModalClose"
+                aria-label="Close"
+            >
+                ×
+            </button>
+
+
+            <span class="modal-kicker">
+                YOUR MARKET
+            </span>
+
+            <h2 id="countryModalTitle">
+                Choose your country
+            </h2>
+
+            <p>
+                We show websites and pricing available
+                for your selected market.
+            </p>
+
+
+            <div class="country-options">
+
+                <button
                     type="button"
-                    class="mentor-btn mentor-btn-primary"
-                    id="downloadVideoBtn">
-                    Download Video
-                  </button>
+                    class="country-option active"
+                    data-country="BD"
+                >
 
-                </div>
+                    <span class="country-option-flag">
+                        🇧🇩
+                    </span>
 
-              </div>
+                    <span>
+                        <strong>
+                            Bangladesh
+                        </strong>
 
-            </div>
+                        <small>
+                            BDT · ৳
+                        </small>
+                    </span>
 
+                    <span class="country-option-check">
+                        ✓
+                    </span>
 
-          </div>
-
-        </article>
-
-
-      </section>
-
-
-      <!-- =================================================
-           SIDEBAR
-      ================================================== -->
-
-      <aside class="mentor-sidebar">
+                </button>
 
 
-        <!-- ===============================================
-             READINESS
-        ================================================ -->
+                <button
+                    type="button"
+                    class="country-option"
+                    data-country="INT"
+                >
 
-        <div class="sidebar-card">
+                    <span class="country-option-flag">
+                        🌎
+                    </span>
 
-          <div class="readiness-header">
+                    <span>
+                        <strong>
+                            International
+                        </strong>
 
-            <div>
+                        <small>
+                            Coming soon
+                        </small>
+                    </span>
 
-              <h3>
-                Studio Readiness
-              </h3>
+                    <span class="country-option-check">
+                        →
+                    </span>
 
-              <p>
-                Complete all required inputs.
-              </p>
-
-            </div>
-
-            <div
-              class="readiness-percent"
-              id="readinessPercent">
-              0%
-            </div>
-
-          </div>
-
-
-          <div class="readiness-bar">
-
-            <div
-              class="readiness-progress"
-              id="readinessProgress">
-            </div>
-
-          </div>
-
-
-          <div class="readiness-list">
-
-
-            <div class="readiness-item">
-
-              <span
-                class="readiness-icon"
-                id="checkFace">
-                •
-              </span>
-
-              <span>
-                Mentor video
-              </span>
+                </button>
 
             </div>
-
-
-            <div class="readiness-item">
-
-              <span
-                class="readiness-icon"
-                id="checkVoice">
-                •
-              </span>
-
-              <span>
-                Voice sample
-              </span>
-
-            </div>
-
-
-            <div class="readiness-item">
-
-              <span
-                class="readiness-icon"
-                id="checkScript">
-                •
-              </span>
-
-              <span>
-                Lesson script
-              </span>
-
-            </div>
-
-
-            <div class="readiness-item">
-
-              <span
-                class="readiness-icon"
-                id="checkSettings">
-                •
-              </span>
-
-              <span>
-                Video + AI settings
-              </span>
-
-            </div>
-
-          </div>
 
         </div>
-
-
-        <!-- ===============================================
-             GENERATION QUICK ACTION
-        ================================================ -->
-
-        <div class="sidebar-card sidebar-generation-card">
-
-          <h3>
-            AI Generation
-          </h3>
-
-          <p>
-            When your Studio reaches 100% readiness,
-            you can start the video generation workflow.
-          </p>
-
-          <button
-            type="button"
-            class="mentor-btn mentor-btn-primary"
-            id="sidebarGenerateVideoBtn">
-            Generate Video
-          </button>
-
-        </div>
-
-
-        <!-- ===============================================
-             SAVE
-        ================================================ -->
-
-        <div class="sidebar-card save-project-card">
-
-          <h3>
-            Save Project
-          </h3>
-
-          <p>
-            Keep your current lesson configuration
-            available on this browser.
-          </p>
-
-
-          <div class="save-project-actions">
-
-            <button
-              type="button"
-              class="mentor-btn mentor-btn-primary"
-              id="sidebarSaveBtn">
-              Save Project
-            </button>
-
-            <button
-              type="button"
-              class="mentor-btn"
-              id="exportProjectBtn">
-              Export Project
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <!-- ===============================================
-             HELP
-        ================================================ -->
-
-        <div class="sidebar-card">
-
-          <h3>
-            How it works
-          </h3>
-
-          <p>
-            Follow these four steps to prepare your AI lesson.
-          </p>
-
-
-          <div class="help-list">
-
-
-            <div class="help-item">
-
-              <div class="help-number">
-                1
-              </div>
-
-              <div>
-
-                <strong>
-                  Add your face video
-                </strong>
-
-                <span>
-                  Upload a clear mentor video.
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <div class="help-item">
-
-              <div class="help-number">
-                2
-              </div>
-
-              <div>
-
-                <strong>
-                  Add your voice
-                </strong>
-
-                <span>
-                  Upload a clean voice sample.
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <div class="help-item">
-
-              <div class="help-number">
-                3
-              </div>
-
-              <div>
-
-                <strong>
-                  Write your lesson
-                </strong>
-
-                <span>
-                  Prepare the exact teaching script.
-                </span>
-
-              </div>
-
-            </div>
-
-
-            <div class="help-item">
-
-              <div class="help-number">
-                4
-              </div>
-
-              <div>
-
-                <strong>
-                  Generate
-                </strong>
-
-                <span>
-                  Send the prepared project to the AI engine.
-                </span>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- ===============================================
-             PROVIDER INFO
-        ================================================ -->
-
-        <div class="sidebar-card">
-
-          <h3>
-            Production Note
-          </h3>
-
-          <p>
-            GitHub Pages can host this Studio interface,
-            but real face/voice generation should run through
-            a secure backend or approved AI provider API.
-          </p>
-
-        </div>
-
-
-      </aside>
 
     </div>
 
-  </main>
+
+    <!-- =========================================================
+         WEBSITE PREVIEW MODAL
+    ========================================================== -->
+
+    <div
+        class="modal-overlay preview-modal-overlay"
+        id="previewModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="preview-modal-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="previewModalTitle"
+        >
+
+            <div class="preview-modal-header">
+
+                <div>
+
+                    <span class="modal-kicker">
+                        LIVE EXPERIENCE
+                    </span>
+
+                    <h2 id="previewModalTitle">
+                        Website Preview
+                    </h2>
+
+                </div>
 
 
-  <!-- =====================================================
-       TOAST
-  ====================================================== -->
+                <button
+                    class="modal-close"
+                    type="button"
+                    id="previewModalClose"
+                    aria-label="Close preview"
+                >
+                    ×
+                </button>
 
-  <div
-    class="mentor-toast"
-    id="mentorToast"
-    role="status"
-    aria-live="polite">
-
-    <span id="toastMessage"></span>
-
-  </div>
+            </div>
 
 
-  <!-- =====================================================
-       JAVASCRIPT
-  ====================================================== -->
+            <div class="preview-modal-toolbar">
 
-  <script src="../script.js"></script>
+                <div class="preview-modal-devices">
 
-  <script src="../ai/ai-config.js"></script>
+                    <button
+                        type="button"
+                        class="modal-device active"
+                        data-modal-device="desktop"
+                    >
+                        Desktop
+                    </button>
 
-  <script src="../ai/avatar.js"></script>
+                    <button
+                        type="button"
+                        class="modal-device"
+                        data-modal-device="tablet"
+                    >
+                        Tablet
+                    </button>
 
-  <script src="../ai/voice.js"></script>
+                    <button
+                        type="button"
+                        class="modal-device"
+                        data-modal-device="mobile"
+                    >
+                        Mobile
+                    </button>
 
-  <script src="../ai/video.js"></script>
+                </div>
 
-  <script src="ai-mentor.js"></script>
+
+                <span class="preview-live-status">
+
+                    <span></span>
+                    Live preview
+
+                </span>
+
+            </div>
+
+
+            <div class="preview-modal-stage">
+
+                <div
+                    class="modal-preview-frame"
+                    id="modalPreviewFrame"
+                >
+
+                    <div class="modal-preview-inner">
+
+                        <div class="modal-demo-nav">
+
+                            <strong>
+                                STUDIO
+                            </strong>
+
+                            <span>
+                                Work
+                            </span>
+
+                            <span>
+                                About
+                            </span>
+
+                            <span>
+                                Contact
+                            </span>
+
+                        </div>
+
+
+                        <div class="modal-demo-content">
+
+                            <span>
+                                PREMIUM WEBSITE
+                            </span>
+
+                            <h3 id="modalDemoTitle">
+                                Design that
+                                <br>
+                                moves people.
+                            </h3>
+
+                            <p>
+                                This is an interactive preview
+                                of the selected website.
+                            </p>
+
+                            <button type="button">
+                                Explore
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="preview-modal-footer">
+
+                <div>
+
+                    <strong id="modalWebsiteName">
+                        Website
+                    </strong>
+
+                    <span id="modalWebsitePrice">
+                        ৳999 / month
+                    </span>
+
+                </div>
+
+                <button
+                    type="button"
+                    class="button button-dark"
+                    id="previewGetWebsiteButton"
+                >
+                    Get this website
+                    <span>→</span>
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         BUY / ORDER MODAL
+    ========================================================== -->
+
+    <div
+        class="modal-overlay"
+        id="buy-modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-box buy-modal-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="buyModalTitle"
+        >
+
+            <button
+                type="button"
+                class="modal-close"
+                id="cancel-buy-btn"
+                aria-label="Close order form"
+            >
+                ×
+            </button>
+
+
+            <div class="modal-kicker">
+                START YOUR WEBSITE
+            </div>
+
+
+            <h2 id="buyModalTitle">
+                Get this website.
+            </h2>
+
+
+            <p
+                id="buy-website-title"
+                class="buy-website-title"
+            >
+                Website
+            </p>
+
+
+            <div class="buy-price-display">
+
+                <span>
+                    Monthly subscription
+                </span>
+
+                <strong id="buy-price">
+                    ৳999
+                </strong>
+
+                <small>
+                    / month
+                </small>
+
+            </div>
+
+
+            <p
+                id="buy-message"
+                class="form-message"
+            ></p>
+
+
+            <form
+                id="buy-form"
+                class="marketplace-form"
+            >
+
+                <input
+                    type="hidden"
+                    id="buy_website_id"
+                    name="website_id"
+                >
+
+
+                <div class="form-field">
+
+                    <label for="buy_name">
+                        আপনার নাম
+                    </label>
+
+                    <input
+                        type="text"
+                        id="buy_name"
+                        name="name"
+                        required
+                        autocomplete="name"
+                        placeholder="যেমন: করিম উদ্দিন"
+                    >
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="buy_email">
+                        ইমেইল
+                    </label>
+
+                    <input
+                        type="email"
+                        id="buy_email"
+                        name="email"
+                        required
+                        autocomplete="email"
+                        placeholder="you@example.com"
+                    >
+
+                </div>
+
+
+                <div class="form-field">
+
+                    <label for="buy_phone">
+                        ফোন নাম্বার
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="buy_phone"
+                        name="phone"
+                        required
+                        autocomplete="tel"
+                        placeholder="01XXXXXXXXX"
+                        pattern="01[0-9]{9}"
+                    >
+
+                </div>
+
+
+                <div class="form-note">
+
+                    <span>✓</span>
+
+                    আপনার তথ্য নিরাপদে রাখা হবে।
+
+                </div>
+
+
+                <div class="modal-btn-row">
+
+                    <button
+                        type="button"
+                        id="cancel-buy-btn-secondary"
+                        class="button button-light-outline"
+                    >
+                        বাতিল
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        class="button button-dark"
+                    >
+                        Continue
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================================
+         SCROLL TO TOP
+    ========================================================== -->
+
+    <button
+        class="scroll-top"
+        id="scrollTop"
+        type="button"
+        aria-label="Scroll to top"
+    >
+        ↑
+    </button>
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
+
+    <script src="js/main.js"></script>
 
 </body>
 </html>
