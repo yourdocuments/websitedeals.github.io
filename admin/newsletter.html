@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Newsletter | Website Deals Admin</title>
+  <meta name="description" content="Manage Website Deals newsletter subscribers.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <link rel="stylesheet" href="css/admin.css">
+
+  <style>
+    .page-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .newsletter-stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+      margin-bottom:24px;
+    }
+
+    .stat-card{
+      background:#fff;
+      border:1px solid #e7ece9;
+      border-radius:18px;
+      padding:20px;
+      box-shadow:0 8px 25px rgba(15,23,42,.05);
+    }
+
+    .stat-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:18px;
+    }
+
+    .stat-icon{
+      width:44px;
+      height:44px;
+      border-radius:13px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#e9f9ef;
+      color:#18a957;
+    }
+
+    .stat-label{
+      color:#718096;
+      font-size:13px;
+      font-weight:600;
+    }
+
+    .stat-value{
+      font-size:28px;
+      font-weight:800;
+      color:#10202b;
+    }
+
+    .toolbar{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+      margin-bottom:20px;
+    }
+
+    .search-box{
+      position:relative;
+      flex:1;
+      min-width:220px;
+    }
+
+    .search-box i{
+      position:absolute;
+      left:15px;
+      top:50%;
+      transform:translateY(-50%);
+      color:#8a969f;
+    }
+
+    .search-box input,
+    .filter-select{
+      height:46px;
+      border:1px solid #dfe6e2;
+      border-radius:12px;
+      background:#fff;
+      outline:none;
+      font-family:inherit;
+    }
+
+    .search-box input{
+      width:100%;
+      padding:0 16px 0 43px;
+    }
+
+    .filter-select{
+      min-width:170px;
+      padding:0 14px;
+    }
+
+    .table-card{
+      background:#fff;
+      border:1px solid #e7ece9;
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 8px 25px rgba(15,23,42,.05);
+    }
+
+    .table-wrap{
+      overflow-x:auto;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:850px;
+    }
+
+    th{
+      background:#f8faf9;
+      color:#64748b;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:.04em;
+      text-align:left;
+      padding:15px 18px;
+      border-bottom:1px solid #e7ece9;
+    }
+
+    td{
+      padding:17px 18px;
+      border-bottom:1px solid #eef2ef;
+      color:#26343d;
+      font-size:14px;
+    }
+
+    tr:last-child td{
+      border-bottom:0;
+    }
+
+    .subscriber{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .subscriber-avatar{
+      width:40px;
+      height:40px;
+      border-radius:12px;
+      background:#e9f9ef;
+      color:#18a957;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+    }
+
+    .subscriber-name{
+      font-weight:700;
+      color:#10202b;
+    }
+
+    .subscriber-email{
+      color:#718096;
+      font-size:12px;
+      margin-top:3px;
+    }
+
+    .status{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .status.active{
+      background:#eaf9ef;
+      color:#168345;
+    }
+
+    .status.unsubscribed{
+      background:#fff1f2;
+      color:#be123c;
+    }
+
+    .action-btn{
+      border:1px solid #dfe6e2;
+      background:#fff;
+      color:#34434d;
+      width:36px;
+      height:36px;
+      border-radius:10px;
+      cursor:pointer;
+      transition:.2s;
+    }
+
+    .action-btn:hover{
+      border-color:#18a957;
+      color:#18a957;
+    }
+
+    .empty{
+      text-align:center;
+      padding:55px 20px;
+      color:#718096;
+    }
+
+    .empty i{
+      font-size:42px;
+      margin-bottom:12px;
+      color:#b8c5be;
+    }
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(15,23,42,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:9999;
+    }
+
+    .modal.show{
+      display:flex;
+    }
+
+    .modal-box{
+      width:100%;
+      max-width:520px;
+      background:#fff;
+      border-radius:20px;
+      box-shadow:0 30px 80px rgba(0,0,0,.2);
+      overflow:hidden;
+    }
+
+    .modal-head{
+      padding:20px 22px;
+      border-bottom:1px solid #e7ece9;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .modal-head h3{
+      margin:0;
+      font-size:18px;
+    }
+
+    .modal-close{
+      border:0;
+      background:#f1f5f3;
+      width:36px;
+      height:36px;
+      border-radius:10px;
+      cursor:pointer;
+    }
+
+    .modal-body{
+      padding:22px;
+    }
+
+    .detail-row{
+      padding:12px 0;
+      border-bottom:1px solid #eef2ef;
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+    }
+
+    .detail-row:last-child{
+      border-bottom:0;
+    }
+
+    .detail-label{
+      color:#718096;
+    }
+
+    .detail-value{
+      font-weight:700;
+      text-align:right;
+    }
+
+    .btn-export{
+      border:0;
+      background:#18a957;
+      color:#fff;
+      height:46px;
+      padding:0 17px;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:700;
+      font-family:inherit;
+    }
+
+    .btn-export:hover{
+      background:#108344;
+    }
+
+    @media(max-width:1000px){
+      .newsletter-stats{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media(max-width:600px){
+      .newsletter-stats{
+        grid-template-columns:1fr;
+      }
+
+      .page-actions{
+        width:100%;
+      }
+
+      .btn-export{
+        width:100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<script>
+(function(){
+  const session = JSON.parse(localStorage.getItem("websiteDealsAdminSession") || "null");
+
+  if(!session){
+    window.location.href = "index.html";
+    return;
+  }
+
+  window.ADMIN_SESSION = session;
+})();
+</script>
+
+<div class="admin-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-brand">
+      <a href="dashboard.html">
+        <img
+          src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
+          alt="Website Deals"
+        >
+      </a>
+    </div>
+
+    <nav class="sidebar-nav">
+
+      <a href="dashboard.html">
+        <i class="fa-solid fa-grid-2"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="websites.html">
+        <i class="fa-solid fa-window-maximize"></i>
+        <span>Websites</span>
+      </a>
+
+      <a href="categories.html">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>Categories</span>
+      </a>
+
+      <a href="orders.html">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Orders</span>
+      </a>
+
+      <a href="customers.html">
+        <i class="fa-solid fa-users"></i>
+        <span>Customers</span>
+      </a>
+
+      <a href="newsletter.html" class="active">
+        <i class="fa-solid fa-envelope"></i>
+        <span>Newsletter</span>
+      </a>
+
+      <div class="sidebar-divider"></div>
+
+      <div id="privileged-nav" style="display:none;">
+        <div class="sidebar-section-title">Management</div>
+
+        <a href="admins.html">
+          <i class="fa-solid fa-user-shield"></i>
+          <span>Access Management</span>
+        </a>
+
+        <a href="settings.html">
+          <i class="fa-solid fa-sliders"></i>
+          <span>Settings</span>
+        </a>
+      </div>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+      <button class="logout-btn" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Logout</span>
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <header class="topbar">
+
+      <button class="mobile-menu-btn" onclick="toggleSidebar()">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+
+      <div class="topbar-title">
+        <span>Newsletter</span>
+      </div>
+
+      <div class="topbar-user">
+        <div class="user-avatar" id="user-avatar">A</div>
+        <div>
+          <strong id="user-name">Admin</strong>
+          <small>Administrator</small>
+        </div>
+      </div>
+
+    </header>
+
+    <section class="page-content">
+
+      <div class="page-header">
+
+        <div>
+          <div class="breadcrumb">
+            Dashboard / Newsletter
+          </div>
+
+          <h1>Newsletter Subscribers</h1>
+
+          <p>
+            Manage your marketplace newsletter audience.
+          </p>
+        </div>
+
+        <div class="page-actions">
+          <button class="btn-export" onclick="exportCSV()">
+            <i class="fa-solid fa-file-export"></i>
+            Export CSV
+          </button>
+        </div>
+
+      </div>
+
+      <!-- STATS -->
+      <div class="newsletter-stats">
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Total Subscribers</span>
+            <div class="stat-icon">
+              <i class="fa-solid fa-users"></i>
+            </div>
+          </div>
+          <div class="stat-value" id="total-subscribers">0</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Active Subscribers</span>
+            <div class="stat-icon">
+              <i class="fa-solid fa-user-check"></i>
+            </div>
+          </div>
+          <div class="stat-value" id="active-subscribers">0</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">New This Month</span>
+            <div class="stat-icon">
+              <i class="fa-solid fa-user-plus"></i>
+            </div>
+          </div>
+          <div class="stat-value" id="new-subscribers">0</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Unsubscribed</span>
+            <div class="stat-icon">
+              <i class="fa-solid fa-user-xmark"></i>
+            </div>
+          </div>
+          <div class="stat-value" id="unsubscribed-count">0</div>
+        </div>
+
+      </div>
+
+      <!-- TOOLBAR -->
+      <div class="toolbar">
+
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input
+            type="search"
+            id="subscriber-search"
+            placeholder="Search by name or email..."
+          >
+        </div>
+
+        <select class="filter-select" id="status-filter">
+          <option value="all">All Status</option>
+          <option value="active">Active</option>
+          <option value="unsubscribed">Unsubscribed</option>
+        </select>
+
+        <select class="filter-select" id="sort-filter">
+          <option value="newest">Newest First</option>
+          <option value="oldest">Oldest First</option>
+          <option value="name">Name A–Z</option>
+          <option value="email">Email A–Z</option>
+        </select>
+
+      </div>
+
+      <!-- TABLE -->
+      <div class="table-card">
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+              <tr>
+                <th>Subscriber</th>
+                <th>Email</th>
+                <th>Joined</th>
+                <th>Status</th>
+                <th>Source</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="subscriber-list"></tbody>
+
+          </table>
+
+        </div>
+
+        <div class="empty" id="empty-state" style="display:none;">
+          <i class="fa-regular fa-envelope"></i>
+          <h3>No subscribers found</h3>
+          <p>Try changing your search or filters.</p>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+<!-- MODAL -->
+<div class="modal" id="subscriber-modal">
+
+  <div class="modal-box">
+
+    <div class="modal-head">
+      <h3>Subscriber Details</h3>
+
+      <button class="modal-close" onclick="closeModal()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <div class="modal-body" id="subscriber-details"></div>
+
+  </div>
+
+</div>
+
+<script>
+
+const DEMO_SUBSCRIBERS = [
+  {
+    id:"SUB-1001",
+    name:"Rahim Ahmed",
+    email:"rahim@example.com",
+    date:"2026-09-30",
+    status:"active",
+    source:"Homepage"
+  },
+  {
+    id:"SUB-1002",
+    name:"Nusrat Jahan",
+    email:"nusrat@example.com",
+    date:"2026-09-28",
+    status:"active",
+    source:"Footer"
+  },
+  {
+    id:"SUB-1003",
+    name:"Sakib Hasan",
+    email:"sakib@example.com",
+    date:"2026-09-20",
+    status:"unsubscribed",
+    source:"Homepage"
+  }
+];
+
+function getSubscribers(){
+
+  let data = JSON.parse(
+    localStorage.getItem("websiteDealsSubscribers") || "null"
+  );
+
+  if(!Array.isArray(data) || !data.length){
+
+    data = DEMO_SUBSCRIBERS;
+
+    localStorage.setItem(
+      "websiteDealsSubscribers",
+      JSON.stringify(data)
+    );
+  }
+
+  return data;
+}
+
+let subscribers = getSubscribers();
+
+function render(){
+
+  const search =
+    document.getElementById("subscriber-search").value
+      .trim()
+      .toLowerCase();
+
+  const status =
+    document.getElementById("status-filter").value;
+
+  const sort =
+    document.getElementById("sort-filter").value;
+
+  let filtered = subscribers.filter(item => {
+
+    const matchesSearch =
+      !search ||
+      String(item.name || "").toLowerCase().includes(search) ||
+      String(item.email || "").toLowerCase().includes(search);
+
+    const matchesStatus =
+      status === "all" ||
+      item.status === status;
+
+    return matchesSearch && matchesStatus;
+  });
+
+  filtered.sort((a,b) => {
+
+    if(sort === "newest")
+      return new Date(b.date) - new Date(a.date);
+
+    if(sort === "oldest")
+      return new Date(a.date) - new Date(b.date);
+
+    if(sort === "name")
+      return String(a.name).localeCompare(String(b.name));
+
+    if(sort === "email")
+      return String(a.email).localeCompare(String(b.email));
+
+  });
+
+  const tbody =
+    document.getElementById("subscriber-list");
+
+  tbody.innerHTML = "";
+
+  document.getElementById("empty-state").style.display =
+    filtered.length ? "none" : "block";
+
+  filtered.forEach(item => {
+
+    const initial =
+      String(item.name || item.email || "?")
+        .charAt(0)
+        .toUpperCase();
+
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+      <td>
+        <div class="subscriber">
+          <div class="subscriber-avatar">${initial}</div>
+
+          <div>
+            <div class="subscriber-name">
+              ${escapeHTML(item.name || "Subscriber")}
+            </div>
+
+            <div class="subscriber-email">
+              ${escapeHTML(item.id || "")}
+            </div>
+          </div>
+        </div>
+      </td>
+
+      <td>${escapeHTML(item.email || "—")}</td>
+
+      <td>${formatDate(item.date)}</td>
+
+      <td>
+        <span class="status ${item.status === "active" ? "active" : "unsubscribed"}">
+          <i class="fa-solid ${item.status === "active" ? "fa-circle-check" : "fa-circle-xmark"}"></i>
+          ${item.status === "active" ? "Active" : "Unsubscribed"}
+        </span>
+      </td>
+
+      <td>${escapeHTML(item.source || "Website")}</td>
+
+      <td>
+        <button
+          class="action-btn"
+          title="View Details"
+          onclick="viewSubscriber('${item.id}')"
+        >
+          <i class="fa-solid fa-eye"></i>
+        </button>
+      </td>
+    `;
+
+    tbody.appendChild(tr);
+
+  });
+
+  updateStats();
+}
+
+function updateStats(){
+
+  const total = subscribers.length;
+
+  const active =
+    subscribers.filter(x => x.status === "active").length;
+
+  const unsubscribed =
+    subscribers.filter(x => x.status === "unsubscribed").length;
+
+  const now = new Date();
+
+  const newThisMonth =
+    subscribers.filter(x => {
+
+      const d = new Date(x.date);
+
+      return (
+        d.getMonth() === now.getMonth() &&
+        d.getFullYear() === now.getFullYear()
+      );
+
+    }).length;
+
+  document.getElementById("total-subscribers").textContent = total;
+  document.getElementById("active-subscribers").textContent = active;
+  document.getElementById("new-subscribers").textContent = newThisMonth;
+  document.getElementById("unsubscribed-count").textContent = unsubscribed;
+}
+
+function viewSubscriber(id){
+
+  const item =
+    subscribers.find(x => x.id === id);
+
+  if(!item) return;
+
+  document.getElementById("subscriber-details").innerHTML = `
+
+    <div class="detail-row">
+      <span class="detail-label">Subscriber ID</span>
+      <span class="detail-value">${escapeHTML(item.id)}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">Name</span>
+      <span class="detail-value">${escapeHTML(item.name || "—")}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">Email</span>
+      <span class="detail-value">${escapeHTML(item.email || "—")}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">Joined</span>
+      <span class="detail-value">${formatDate(item.date)}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">Source</span>
+      <span class="detail-value">${escapeHTML(item.source || "Website")}</span>
+    </div>
+
+    <div class="detail-row">
+      <span class="detail-label">Status</span>
+      <span class="detail-value">
+        ${item.status === "active" ? "Active" : "Unsubscribed"}
+      </span>
+    </div>
+  `;
+
+  document
+    .getElementById("subscriber-modal")
+    .classList.add("show");
+}
+
+function closeModal(){
+
+  document
+    .getElementById("subscriber-modal")
+    .classList.remove("show");
+}
+
+function exportCSV(){
+
+  if(!subscribers.length){
+    alert("No subscribers available.");
+    return;
+  }
+
+  const header =
+    ["ID","Name","Email","Joined","Status","Source"];
+
+  const rows =
+    subscribers.map(x => [
+      x.id,
+      x.name,
+      x.email,
+      x.date,
+      x.status,
+      x.source
+    ]);
+
+  const csv = [
+    header,
+    ...rows
+  ].map(row =>
+    row.map(value =>
+      `"${String(value ?? "").replace(/"/g,'""')}"`
+    ).join(",")
+  ).join("\n");
+
+  const blob =
+    new Blob([csv], {type:"text/csv;charset=utf-8;"});
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const a =
+    document.createElement("a");
+
+  a.href = url;
+  a.download = "website-deals-newsletter.csv";
+  a.click();
+
+  URL.revokeObjectURL(url);
+}
+
+function formatDate(date){
+
+  if(!date) return "—";
+
+  const d = new Date(date);
+
+  if(isNaN(d)) return date;
+
+  return d.toLocaleDateString("en-GB",{
+    day:"2-digit",
+    month:"short",
+    year:"numeric"
+  });
+}
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function toggleSidebar(){
+
+  document
+    .getElementById("sidebar")
+    .classList.toggle("open");
+}
+
+function logout(){
+
+  localStorage.removeItem("websiteDealsAdminSession");
+
+  window.location.href = "index.html";
+}
+
+function setupRole(){
+
+  const session = window.ADMIN_SESSION;
+
+  if(session && session.role === "superadmin"){
+
+    document.getElementById("privileged-nav").style.display = "block";
+
+  }
+
+  const name =
+    session?.name ||
+    session?.email?.split("@")[0] ||
+    "Admin";
+
+  document.getElementById("user-name").textContent = name;
+
+  document.getElementById("user-avatar").textContent =
+    name.charAt(0).toUpperCase();
+}
+
+document
+  .getElementById("subscriber-search")
+  .addEventListener("input", render);
+
+document
+  .getElementById("status-filter")
+  .addEventListener("change", render);
+
+document
+  .getElementById("sort-filter")
+  .addEventListener("change", render);
+
+document
+  .getElementById("subscriber-modal")
+  .addEventListener("click", function(e){
+
+    if(e.target === this){
+      closeModal();
+    }
+
+  });
+
+setupRole();
+render();
+
+</script>
+
+</body>
+</html>
