@@ -2,36 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta name="theme-color" content="#0b1020">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Orders | Website Deals Admin</title>
+  <meta name="description" content="Manage Website Deals marketplace orders.">
 
-  <meta
-    name="description"
-    content="Manage Website Deals marketplace orders."
-  >
-
-  <link
-    rel="icon"
-    type="image/png"
-    href="../logo.png"
-  >
+  <link rel="icon" type="image/png" href="../logo.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
   >
 
@@ -41,66 +23,55 @@
   >
 
   <style>
-
     :root {
       --green: #18a957;
       --green-dark: #108344;
       --green-soft: #eaf9f0;
 
-      --black: #0b1020;
-      --dark: #111827;
-      --text: #18212f;
-      --muted: #718096;
+      --black: #111827;
+      --dark: #18212b;
+      --text: #26313d;
+      --muted: #7b8794;
 
       --white: #ffffff;
-      --surface: #f6f8fb;
-      --surface-2: #fafbfc;
+      --surface: #f6f8fa;
+      --border: #e7ebef;
 
-      --border: #e6eaf0;
+      --yellow: #d99a00;
+      --yellow-bg: #fff7df;
 
       --blue: #2563eb;
-      --blue-soft: #eff6ff;
-
-      --orange: #d97706;
-      --orange-soft: #fff7e8;
+      --blue-bg: #eff6ff;
 
       --red: #dc3545;
-      --red-soft: #fff0f1;
+      --red-bg: #fff0f1;
 
-      --shadow-sm:
-        0 4px 16px rgba(15,23,42,.05);
-
-      --shadow-md:
-        0 16px 45px rgba(15,23,42,.09);
+      --shadow-sm: 0 4px 18px rgba(17, 24, 39, .05);
+      --shadow-md: 0 12px 32px rgba(17, 24, 39, .08);
 
       --radius-sm: 10px;
       --radius-md: 16px;
       --radius-lg: 22px;
-    }
 
+      --sidebar: 260px;
+    }
 
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
-
 
     html {
       scroll-behavior: smooth;
     }
 
-
     body {
-      min-height: 100vh;
-
-      font-family: "Inter", sans-serif;
-
-      color: var(--text);
-
+      font-family: "Inter", "Hind Siliguri", sans-serif;
       background: var(--surface);
+      color: var(--text);
+      min-height: 100vh;
     }
-
 
     button,
     input,
@@ -108,2587 +79,1344 @@
       font: inherit;
     }
 
-
     button {
-      border: 0;
       cursor: pointer;
     }
-
 
     a {
       color: inherit;
       text-decoration: none;
     }
 
-
-    /* =========================================
-       APP
-    ========================================= */
-
-    .app {
-      min-height: 100vh;
-
-      display: flex;
-    }
-
-
-    /* =========================================
+    /* =========================
        SIDEBAR
-    ========================================= */
+    ========================= */
 
     .sidebar {
       position: fixed;
-
-      top: 0;
-      left: 0;
-      bottom: 0;
-
-      width: 270px;
-
+      inset: 0 auto 0 0;
+      width: var(--sidebar);
+      background: var(--dark);
+      color: #fff;
       z-index: 1000;
-
       display: flex;
       flex-direction: column;
-
-      color: #fff;
-
-      background:
-        radial-gradient(
-          circle at top left,
-          rgba(24,169,87,.16),
-          transparent 32%
-        ),
-        #0b1020;
-
-      border-right:
-        1px solid rgba(255,255,255,.06);
-
-      transition:
-        transform .3s ease;
+      border-right: 1px solid rgba(255,255,255,.06);
     }
-
 
     .brand {
       height: 82px;
-
+      padding: 18px 22px;
       display: flex;
       align-items: center;
-
-      padding: 0 22px;
-
-      border-bottom:
-        1px solid rgba(255,255,255,.07);
+      gap: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
     }
 
-
     .brand img {
-      width: 43px;
-      height: 43px;
-
+      width: 42px;
+      height: 42px;
       object-fit: contain;
-
-      padding: 5px;
-
-      border-radius: 12px;
-
+      border-radius: 10px;
       background: #fff;
     }
 
-
-    .brand-text {
-      margin-left: 12px;
-    }
-
-
     .brand-title {
-      font-family:
-        "Space Grotesk",
-        sans-serif;
-
-      font-size: 18px;
-      font-weight: 700;
-
+      font-size: 15px;
+      font-weight: 800;
       letter-spacing: -.3px;
     }
 
-
     .brand-subtitle {
-      margin-top: 2px;
-
-      color: #8791a5;
-
-      font-size: 11px;
+      margin-top: 3px;
+      font-size: 10px;
+      color: #91a0ad;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
-
-    .sidebar-nav {
-      flex: 1;
-
-      padding: 20px 14px;
-
+    .nav {
+      padding: 20px 13px;
       overflow-y: auto;
+      flex: 1;
     }
-
 
     .nav-label {
-      padding: 0 12px;
-
-      margin-bottom: 10px;
-
-      color: #69748a;
-
+      padding: 0 11px 10px;
+      color: #687786;
       font-size: 10px;
       font-weight: 700;
-
-      letter-spacing: 1.2px;
-
       text-transform: uppercase;
+      letter-spacing: 1.3px;
     }
-
 
     .nav-item {
-      min-height: 48px;
-
       display: flex;
       align-items: center;
-
+      gap: 12px;
+      width: 100%;
+      min-height: 46px;
       padding: 0 13px;
-
       margin-bottom: 5px;
-
-      border-radius: 12px;
-
-      color: #aab3c4;
-
+      border-radius: 11px;
+      color: #aeb9c3;
+      transition: .2s ease;
       font-size: 13px;
       font-weight: 600;
-
-      transition: .2s ease;
     }
-
 
     .nav-item i {
-      width: 23px;
-
-      margin-right: 10px;
-
+      width: 18px;
       text-align: center;
-
-      font-size: 15px;
+      font-size: 14px;
     }
-
 
     .nav-item:hover {
+      background: rgba(255,255,255,.055);
       color: #fff;
-
-      background:
-        rgba(255,255,255,.055);
-
-      transform:
-        translateX(2px);
     }
-
 
     .nav-item.active {
       color: #fff;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(24,169,87,.28),
-          rgba(24,169,87,.10)
-        );
-
-      box-shadow:
-        inset 3px 0 0 var(--green);
+      background: linear-gradient(
+        135deg,
+        rgba(24,169,87,.95),
+        rgba(16,131,68,.95)
+      );
+      box-shadow: 0 8px 20px rgba(24,169,87,.18);
     }
 
-
     .nav-badge {
+      margin-left: auto;
       min-width: 21px;
       height: 21px;
-
+      padding: 0 6px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-
-      padding: 0 6px;
-
-      margin-left: auto;
-
-      border-radius: 20px;
-
-      color: #aeb8c9;
-
-      background:
-        rgba(255,255,255,.08);
-
+      border-radius: 999px;
+      background: rgba(255,255,255,.1);
+      color: #d7dee5;
       font-size: 10px;
-    }
-
-
-    .sidebar-bottom {
-      padding: 15px;
-
-      border-top:
-        1px solid rgba(255,255,255,.07);
-    }
-
-
-    .admin-profile {
-      display: flex;
-      align-items: center;
-
-      padding: 11px;
-
-      border-radius: 14px;
-
-      background:
-        rgba(255,255,255,.045);
-    }
-
-
-    .admin-avatar {
-      width: 37px;
-      height: 37px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 11px;
-
-      color: #fff;
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--green),
-          #0d7d3f
-        );
-
-      font-size: 13px;
       font-weight: 800;
     }
 
-
-    .admin-info {
-      min-width: 0;
-
-      margin-left: 10px;
+    .nav-item.active .nav-badge {
+      background: rgba(255,255,255,.2);
+      color: #fff;
     }
 
+    .sidebar-bottom {
+      padding: 14px;
+      border-top: 1px solid rgba(255,255,255,.07);
+    }
+
+    .admin-profile {
+      padding: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-radius: 13px;
+      background: rgba(255,255,255,.045);
+      margin-bottom: 8px;
+    }
+
+    .admin-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      background: var(--green);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+    }
 
     .admin-name {
       font-size: 12px;
       font-weight: 700;
+      color: #fff;
     }
-
 
     .admin-role {
-      margin-top: 2px;
-
-      color: #778298;
-
       font-size: 10px;
+      color: #84919d;
+      margin-top: 2px;
     }
 
-
-    .logout-btn {
-      width: 32px;
-      height: 32px;
-
-      margin-left: auto;
-
-      border-radius: 9px;
-
-      color: #8993a5;
-
+    .signout-btn {
+      width: 100%;
+      border: 0;
       background: transparent;
-
-      transition: .2s ease;
+      color: #8e9ba7;
+      padding: 10px 12px;
+      border-radius: 9px;
+      text-align: left;
+      font-size: 12px;
+      font-weight: 600;
     }
 
-
-    .logout-btn:hover {
-      color: #ff7f8b;
-
-      background:
-        rgba(220,53,69,.12);
+    .signout-btn:hover {
+      background: rgba(220,53,69,.1);
+      color: #ff8c96;
     }
 
-
-    /* =========================================
+    /* =========================
        MAIN
-    ========================================= */
+    ========================= */
 
     .main {
-      width: calc(100% - 270px);
-
+      margin-left: var(--sidebar);
       min-height: 100vh;
-
-      margin-left: 270px;
     }
 
-
-    /* =========================================
-       HEADER
-    ========================================= */
-
-    .top-header {
+    .topbar {
       height: 82px;
-
-      position: sticky;
-      top: 0;
-
-      z-index: 100;
-
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       padding: 0 34px;
-
-      background:
-        rgba(255,255,255,.88);
-
-      backdrop-filter:
-        blur(18px);
-
-      border-bottom:
-        1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 500;
+      backdrop-filter: blur(14px);
     }
 
-
-    .header-left {
+    .topbar-left {
       display: flex;
       align-items: center;
-
-      gap: 12px;
+      gap: 15px;
     }
 
-
-    .header-left h1 {
-      font-family:
-        "Space Grotesk",
-        sans-serif;
-
-      font-size: 24px;
-
-      letter-spacing: -.6px;
-    }
-
-
-    .header-left p {
-      margin-top: 4px;
-
-      color: var(--muted);
-
-      font-size: 12px;
-    }
-
-
-    .mobile-toggle {
+    .mobile-menu {
       display: none;
-
       width: 40px;
       height: 40px;
-
-      align-items: center;
-      justify-content: center;
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 10px;
-
+      border: 1px solid var(--border);
       background: #fff;
+      border-radius: 10px;
     }
 
+    .page-heading h1 {
+      font-size: 21px;
+      letter-spacing: -.5px;
+      color: var(--black);
+    }
 
-    .header-actions {
+    .page-heading p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .topbar-actions {
       display: flex;
       align-items: center;
-
       gap: 9px;
     }
 
-
-    .header-btn {
+    .top-btn {
       height: 40px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      gap: 8px;
-
       padding: 0 13px;
-
-      border:
-        1px solid var(--border);
-
       border-radius: 10px;
-
-      color: var(--text);
-
+      border: 1px solid var(--border);
       background: #fff;
-
+      color: var(--text);
       font-size: 12px;
       font-weight: 700;
-
-      transition: .2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
-
-    .header-btn:hover {
-      transform:
-        translateY(-1px);
-
-      box-shadow:
-        var(--shadow-sm);
+    .top-btn:hover {
+      border-color: #cbd5dc;
+      background: #fafbfc;
     }
 
+    .top-btn.primary {
+      border-color: var(--green);
+      background: var(--green);
+      color: #fff;
+    }
 
-    /* =========================================
-       CONTENT
-    ========================================= */
+    .top-btn.primary:hover {
+      background: var(--green-dark);
+    }
 
     .content {
       padding: 30px 34px 50px;
+      max-width: 1600px;
     }
 
-
-    /* =========================================
+    /* =========================
        STATS
-    ========================================= */
+    ========================= */
 
     .stats-grid {
       display: grid;
-
-      grid-template-columns:
-        repeat(4, 1fr);
-
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
-
-      margin-bottom: 24px;
+      margin-bottom: 22px;
     }
-
 
     .stat-card {
-      position: relative;
-
-      overflow: hidden;
-
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
       padding: 20px;
-
-      border:
-        1px solid var(--border);
-
-      border-radius:
-        var(--radius-md);
-
-      background: #fff;
-
-      box-shadow:
-        var(--shadow-sm);
+      box-shadow: var(--shadow-sm);
     }
-
-
-    .stat-card::after {
-      content: "";
-
-      position: absolute;
-
-      top: -30px;
-      right: -30px;
-
-      width: 90px;
-      height: 90px;
-
-      border-radius: 50%;
-
-      background:
-        rgba(24,169,87,.055);
-    }
-
 
     .stat-top {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
     }
-
 
     .stat-label {
       color: var(--muted);
-
       font-size: 11px;
       font-weight: 600;
     }
 
-
     .stat-icon {
-      width: 39px;
-      height: 39px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
+      width: 38px;
+      height: 38px;
       border-radius: 11px;
-
+      display: grid;
+      place-items: center;
+      background: var(--green-soft);
       color: var(--green);
-
-      background:
-        var(--green-soft);
     }
 
+    .stat-card:nth-child(2) .stat-icon {
+      background: var(--yellow-bg);
+      color: var(--yellow);
+    }
+
+    .stat-card:nth-child(3) .stat-icon {
+      background: var(--blue-bg);
+      color: var(--blue);
+    }
+
+    .stat-card:nth-child(4) .stat-icon {
+      background: #f4efff;
+      color: #7c3aed;
+    }
 
     .stat-value {
       margin-top: 13px;
-
-      font-family:
-        "Space Grotesk",
-        sans-serif;
-
-      font-size: 27px;
-      font-weight: 700;
-
-      letter-spacing: -.8px;
+      font-size: 26px;
+      line-height: 1;
+      font-weight: 800;
+      color: var(--black);
+      letter-spacing: -.7px;
     }
 
-
-    .stat-note {
-      margin-top: 4px;
-
-      color: #8490a2;
-
+    .stat-meta {
+      margin-top: 9px;
+      color: var(--muted);
       font-size: 10px;
     }
 
-
-    /* =========================================
+    /* =========================
        TOOLBAR
-    ========================================= */
+    ========================= */
+
+    .panel {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
 
     .toolbar {
+      padding: 19px;
+      border-bottom: 1px solid var(--border);
       display: flex;
-      align-items: center;
-
       gap: 10px;
-
-      padding: 14px;
-
-      margin-bottom: 18px;
-
-      border:
-        1px solid var(--border);
-
-      border-radius:
-        var(--radius-md);
-
-      background: #fff;
-
-      box-shadow:
-        var(--shadow-sm);
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
     }
 
+    .toolbar-left {
+      display: flex;
+      gap: 9px;
+      flex: 1;
+      min-width: 260px;
+    }
 
     .search-box {
+      position: relative;
       flex: 1;
-
-      height: 44px;
-
-      display: flex;
-      align-items: center;
-
-      padding: 0 13px;
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 11px;
-
-      background:
-        var(--surface-2);
+      max-width: 410px;
     }
 
-
     .search-box i {
-      color: #9aa5b5;
-
+      position: absolute;
+      left: 13px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #a3adb7;
       font-size: 13px;
     }
 
-
     .search-box input {
       width: 100%;
-
-      padding: 0 10px;
-
-      border: 0;
-      outline: 0;
-
-      color: var(--text);
-
-      background: transparent;
-
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0 13px 0 38px;
+      outline: none;
       font-size: 12px;
+      color: var(--text);
+      background: #fbfcfd;
     }
 
+    .search-box input:focus {
+      border-color: rgba(24,169,87,.55);
+      box-shadow: 0 0 0 3px rgba(24,169,87,.08);
+      background: #fff;
+    }
 
     .filter-select {
-      height: 44px;
-
+      height: 42px;
       min-width: 145px;
-
-      padding: 0 12px;
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 11px;
-
-      outline: none;
-
-      color: var(--text);
-
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0 11px;
       background: #fff;
-
+      color: var(--text);
+      outline: none;
       font-size: 11px;
       font-weight: 600;
     }
 
-
-    /* =========================================
-       TABLE CARD
-    ========================================= */
-
-    .orders-card {
-      overflow: hidden;
-
-      border:
-        1px solid var(--border);
-
-      border-radius:
-        var(--radius-lg);
-
-      background: #fff;
-
-      box-shadow:
-        var(--shadow-sm);
+    .filter-select:focus {
+      border-color: rgba(24,169,87,.55);
     }
 
-
-    .table-heading {
-      min-height: 68px;
-
+    .toolbar-right {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      padding: 0 20px;
-
-      border-bottom:
-        1px solid var(--border);
+      gap: 8px;
     }
 
-
-    .table-heading h2 {
-      font-family:
-        "Space Grotesk",
-        sans-serif;
-
-      font-size: 17px;
-
-      letter-spacing: -.3px;
-    }
-
-
-    .table-heading span {
-      color: var(--muted);
-
-      font-size: 10px;
-    }
-
+    /* =========================
+       TABLE
+    ========================= */
 
     .table-wrap {
-      width: 100%;
-
       overflow-x: auto;
     }
 
-
     table {
       width: 100%;
-
-      min-width: 950px;
-
-      border-collapse:
-        collapse;
+      border-collapse: collapse;
+      min-width: 920px;
     }
-
 
     thead th {
-      height: 48px;
-
-      padding: 0 17px;
-
-      color: #8994a5;
-
-      background:
-        #fafbfc;
-
-      border-bottom:
-        1px solid var(--border);
-
-      font-size: 9px;
-      font-weight: 800;
-
-      letter-spacing: .65px;
-
+      padding: 14px 18px;
+      background: #fafbfc;
+      border-bottom: 1px solid var(--border);
+      color: #87929d;
       text-align: left;
-
+      font-size: 10px;
       text-transform: uppercase;
+      letter-spacing: .6px;
+      font-weight: 800;
+      white-space: nowrap;
     }
-
 
     tbody td {
-      padding: 15px 17px;
-
-      border-bottom:
-        1px solid #edf0f4;
-
+      padding: 16px 18px;
+      border-bottom: 1px solid #edf0f2;
+      font-size: 12px;
       vertical-align: middle;
-
-      font-size: 11px;
     }
-
-
-    tbody tr {
-      transition:
-        background .18s ease;
-    }
-
-
-    tbody tr:hover {
-      background:
-        #fbfdfc;
-    }
-
 
     tbody tr:last-child td {
       border-bottom: 0;
     }
 
-
-    .order-id {
-      color: var(--green);
-
-      font-family:
-        "Space Grotesk",
-        sans-serif;
-
-      font-size: 11px;
-      font-weight: 700;
+    tbody tr {
+      transition: .18s ease;
     }
 
+    tbody tr:hover {
+      background: #fbfdfc;
+    }
+
+    .order-id {
+      color: var(--black);
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .order-date {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 9px;
+    }
 
     .customer {
       display: flex;
       align-items: center;
+      gap: 10px;
     }
-
 
     .customer-avatar {
       width: 35px;
       height: 35px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      flex-shrink: 0;
-
+      flex: 0 0 35px;
+      display: grid;
+      place-items: center;
       border-radius: 10px;
-
-      color: #fff;
-
-      background:
-        linear-gradient(
-          135deg,
-          #334155,
-          #64748b
-        );
-
-      font-size: 10px;
+      background: var(--green-soft);
+      color: var(--green-dark);
+      font-size: 11px;
       font-weight: 800;
     }
 
-
-    .customer-info {
-      margin-left: 9px;
-    }
-
-
     .customer-name {
+      color: var(--black);
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 750;
     }
-
 
     .customer-email {
-      margin-top: 3px;
-
-      color: #929cab;
-
+      color: var(--muted);
       font-size: 9px;
+      margin-top: 3px;
     }
-
 
     .website-name {
-      max-width: 180px;
-
-      font-size: 11px;
+      color: var(--black);
       font-weight: 700;
+      font-size: 11px;
     }
-
 
     .website-category {
       margin-top: 4px;
-
-      color: #939eae;
-
+      color: var(--muted);
       font-size: 9px;
     }
 
-
-    .amount {
-      font-family:
-        "Space Grotesk",
-        sans-serif;
-
-      font-size: 12px;
-      font-weight: 700;
+    .price {
+      color: var(--black);
+      font-weight: 800;
+      white-space: nowrap;
     }
-
-
-    .date {
-      color: #657184;
-
-      font-size: 10px;
-    }
-
-
-    /* =========================================
-       STATUS
-    ========================================= */
 
     .status {
       display: inline-flex;
       align-items: center;
-
-      gap: 6px;
-
+      gap: 5px;
       padding: 6px 9px;
-
-      border-radius: 20px;
-
-      font-size: 8px;
+      border-radius: 999px;
+      font-size: 9px;
       font-weight: 800;
-
-      letter-spacing: .4px;
-
-      text-transform: uppercase;
+      white-space: nowrap;
     }
-
 
     .status::before {
       content: "";
-
       width: 5px;
       height: 5px;
-
       border-radius: 50%;
-
-      background:
-        currentColor;
+      background: currentColor;
     }
-
-
-    .status.completed {
-      color: #168448;
-
-      background:
-        var(--green-soft);
-    }
-
 
     .status.pending {
-      color: #a06a08;
-
-      background:
-        var(--orange-soft);
+      color: #a56d00;
+      background: var(--yellow-bg);
     }
 
+    .status.completed {
+      color: #168044;
+      background: var(--green-soft);
+    }
 
     .status.processing {
-      color: #2563eb;
-
-      background:
-        var(--blue-soft);
+      color: var(--blue);
+      background: var(--blue-bg);
     }
-
 
     .status.cancelled {
       color: var(--red);
-
-      background:
-        var(--red-soft);
+      background: var(--red-bg);
     }
 
-
-    .payment {
-      font-size: 9px;
-      font-weight: 700;
-    }
-
-
-    .payment.paid {
-      color: #168448;
-    }
-
-
-    .payment.unpaid {
-      color: #c47b05;
-    }
-
-
-    .payment.refunded {
-      color: var(--red);
-    }
-
-
-    /* =========================================
-       ACTIONS
-    ========================================= */
-
-    .action-buttons {
+    .action-group {
       display: flex;
-      align-items: center;
-
-      gap: 6px;
-    }
-
-
-    .action-btn {
-      width: 32px;
-      height: 32px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 9px;
-
-      color: #738093;
-
-      background: #fff;
-
-      transition: .2s ease;
-    }
-
-
-    .action-btn:hover {
-      color: var(--text);
-
-      background:
-        var(--surface);
-    }
-
-
-    .action-btn.delete:hover {
-      color: var(--red);
-
-      border-color:
-        #ffd0d5;
-
-      background:
-        var(--red-soft);
-    }
-
-
-    /* =========================================
-       PAGINATION
-    ========================================= */
-
-    .table-footer {
-      min-height: 62px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      padding: 0 20px;
-
-      border-top:
-        1px solid var(--border);
-    }
-
-
-    .showing-text {
-      color: var(--muted);
-
-      font-size: 10px;
-    }
-
-
-    .pagination {
-      display: flex;
-      align-items: center;
-
       gap: 5px;
     }
 
+    .icon-btn {
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      color: #697580;
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+    }
+
+    .icon-btn:hover {
+      color: var(--green);
+      border-color: rgba(24,169,87,.4);
+      background: var(--green-soft);
+    }
+
+    .empty {
+      display: none;
+      text-align: center;
+      padding: 70px 20px;
+      color: var(--muted);
+    }
+
+    .empty i {
+      font-size: 34px;
+      margin-bottom: 14px;
+      color: #c7d0d7;
+    }
+
+    .empty h3 {
+      color: var(--black);
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
+
+    .empty p {
+      font-size: 11px;
+    }
+
+    /* =========================
+       PAGINATION
+    ========================= */
+
+    .pagination {
+      padding: 16px 19px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .pagination-info {
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .page-buttons {
+      display: flex;
+      gap: 5px;
+    }
 
     .page-btn {
       width: 32px;
       height: 32px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 8px;
-
-      color: #687487;
-
+      border: 1px solid var(--border);
       background: #fff;
-
+      border-radius: 8px;
+      color: var(--muted);
       font-size: 10px;
       font-weight: 700;
     }
 
-
     .page-btn.active {
+      background: var(--green);
       color: #fff;
-
-      border-color:
-        var(--green);
-
-      background:
-        var(--green);
+      border-color: var(--green);
     }
 
-
-    /* =========================================
-       EMPTY
-    ========================================= */
-
-    .empty-state {
-      display: none;
-
-      padding: 65px 20px;
-
-      text-align: center;
+    .page-btn:hover:not(.active) {
+      background: #f6f8fa;
     }
 
-
-    .empty-state.show {
-      display: block;
-    }
-
-
-    .empty-icon {
-      width: 58px;
-      height: 58px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      margin: 0 auto 15px;
-
-      border-radius: 17px;
-
-      color: #99a4b4;
-
-      background:
-        var(--surface);
-    }
-
-
-    .empty-state h3 {
-      font-family:
-        "Space Grotesk",
-        sans-serif;
-
-      font-size: 18px;
-    }
-
-
-    .empty-state p {
-      margin-top: 6px;
-
-      color: var(--muted);
-
-      font-size: 11px;
-    }
-
-
-    /* =========================================
+    /* =========================
        MODAL
-    ========================================= */
+    ========================= */
 
-    .modal-overlay {
+    .modal-backdrop {
       position: fixed;
-
       inset: 0;
-
-      z-index: 2000;
-
-      display: flex;
+      background: rgba(9,16,24,.62);
+      backdrop-filter: blur(7px);
+      display: none;
       align-items: center;
       justify-content: center;
-
       padding: 20px;
-
-      background:
-        rgba(7,12,24,.62);
-
-      backdrop-filter:
-        blur(8px);
-
-      opacity: 0;
-      visibility: hidden;
-
-      transition: .25s ease;
+      z-index: 3000;
     }
 
-
-    .modal-overlay.show {
-      opacity: 1;
-
-      visibility: visible;
+    .modal-backdrop.show {
+      display: flex;
     }
-
 
     .modal {
-      width: 100%;
-
-      max-width: 590px;
-
-      max-height:
-        calc(100vh - 40px);
-
+      width: min(720px, 100%);
+      max-height: 90vh;
       overflow-y: auto;
-
-      border-radius: 22px;
-
       background: #fff;
-
-      box-shadow:
-        0 30px 90px rgba(0,0,0,.25);
-
-      transform:
-        translateY(15px) scale(.98);
-
-      transition: .25s ease;
+      border-radius: 22px;
+      box-shadow: 0 30px 80px rgba(0,0,0,.2);
     }
 
-
-    .modal-overlay.show .modal {
-      transform:
-        translateY(0) scale(1);
-    }
-
-
-    .modal-header {
+    .modal-head {
+      padding: 20px 22px;
+      border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
-
-      padding: 20px 22px;
-
-      border-bottom:
-        1px solid var(--border);
     }
 
-
-    .modal-header h3 {
-      font-family:
-        "Space Grotesk",
-        sans-serif;
-
-      font-size: 19px;
+    .modal-head h2 {
+      color: var(--black);
+      font-size: 17px;
     }
 
-
-    .modal-header p {
-      margin-top: 4px;
-
+    .modal-head p {
       color: var(--muted);
-
       font-size: 10px;
+      margin-top: 4px;
     }
-
 
     .modal-close {
-      width: 35px;
-      height: 35px;
-
-      border-radius: 10px;
-
-      color: #7e8898;
-
-      background:
-        var(--surface);
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--border);
+      background: #fff;
+      border-radius: 9px;
     }
-
 
     .modal-body {
       padding: 22px;
     }
 
-
     .detail-grid {
       display: grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
-
-      gap: 10px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
     }
 
-
-    .detail-item {
-      padding: 13px;
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 12px;
-
-      background:
-        var(--surface-2);
+    .detail-box {
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      padding: 14px;
+      background: #fbfcfd;
     }
 
-
-    .detail-item.full {
-      grid-column:
-        1 / -1;
+    .detail-box.full {
+      grid-column: 1 / -1;
     }
-
 
     .detail-label {
-      color: #929cab;
-
+      color: var(--muted);
       font-size: 9px;
-      font-weight: 700;
-
       text-transform: uppercase;
-
-      letter-spacing: .5px;
+      letter-spacing: .7px;
+      font-weight: 800;
     }
-
 
     .detail-value {
-      margin-top: 5px;
-
-      color: var(--text);
-
-      font-size: 11px;
+      margin-top: 7px;
+      color: var(--black);
+      font-size: 12px;
       font-weight: 700;
     }
-
-
-    .modal-section {
-      margin-top: 18px;
-    }
-
-
-    .modal-section-title {
-      margin-bottom: 9px;
-
-      font-family:
-        "Space Grotesk",
-        sans-serif;
-
-      font-size: 13px;
-    }
-
-
-    .status-controls {
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
-
-      gap: 10px;
-    }
-
-
-    .control-group label {
-      display: block;
-
-      margin-bottom: 6px;
-
-      color: #687487;
-
-      font-size: 9px;
-      font-weight: 700;
-    }
-
-
-    .control-select {
-      width: 100%;
-
-      height: 42px;
-
-      padding: 0 10px;
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 10px;
-
-      outline: none;
-
-      background: #fff;
-
-      color: var(--text);
-
-      font-size: 10px;
-      font-weight: 600;
-    }
-
-
-    .control-select:focus {
-      border-color:
-        var(--green);
-
-      box-shadow:
-        0 0 0 3px rgba(24,169,87,.09);
-    }
-
 
     .modal-footer {
+      padding: 16px 22px;
+      border-top: 1px solid var(--border);
       display: flex;
       justify-content: flex-end;
-
-      gap: 9px;
-
-      padding: 16px 22px;
-
-      border-top:
-        1px solid var(--border);
+      gap: 8px;
     }
 
-
-    .modal-btn {
-      height: 41px;
-
-      padding: 0 15px;
-
-      border-radius: 10px;
-
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-
-    .modal-btn.cancel {
-      color: #596477;
-
-      background:
-        var(--surface);
-    }
-
-
-    .modal-btn.save {
-      color: #fff;
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--green),
-          var(--green-dark)
-        );
-    }
-
-
-    /* =========================================
+    /* =========================
        TOAST
-    ========================================= */
+    ========================= */
 
     .toast {
       position: fixed;
-
-      right: 25px;
-      bottom: 25px;
-
-      z-index: 5000;
-
+      right: 24px;
+      bottom: 24px;
       min-width: 280px;
-
+      max-width: 390px;
+      padding: 14px 16px;
+      background: var(--dark);
+      color: #fff;
+      border-radius: 13px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.18);
       display: flex;
       align-items: center;
-
       gap: 11px;
-
-      padding: 14px 16px;
-
-      border-radius: 14px;
-
-      color: #fff;
-
-      background:
-        #101827;
-
-      box-shadow:
-        0 20px 50px rgba(0,0,0,.20);
-
-      transform:
-        translateY(20px);
-
+      transform: translateY(25px);
       opacity: 0;
-      visibility: hidden;
-
-      transition: .3s ease;
+      pointer-events: none;
+      transition: .25s ease;
+      z-index: 5000;
     }
-
 
     .toast.show {
-      transform:
-        translateY(0);
-
+      transform: translateY(0);
       opacity: 1;
-      visibility: visible;
     }
-
 
     .toast-icon {
-      width: 34px;
-      height: 34px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
+      width: 30px;
+      height: 30px;
+      flex: 0 0 30px;
       border-radius: 9px;
-
-      color: #57e594;
-
-      background:
-        rgba(24,169,87,.18);
+      display: grid;
+      place-items: center;
+      background: var(--green);
     }
 
-
-    .toast-content strong {
+    .toast strong {
       display: block;
-
       font-size: 11px;
     }
 
-
-    .toast-content span {
+    .toast span {
       display: block;
-
+      color: #aeb8c1;
+      font-size: 9px;
       margin-top: 2px;
-
-      color: #a9b3c2;
-
-      font-size: 10px;
     }
 
-
-    .toast-close {
-      width: 26px;
-      height: 26px;
-
-      margin-left: auto;
-
-      color: #8f9aab;
-
-      background: transparent;
-    }
-
-
-    /* =========================================
-       MOBILE OVERLAY
-    ========================================= */
+    /* =========================
+       OVERLAY
+    ========================= */
 
     .sidebar-overlay {
+      display: none;
       position: fixed;
-
       inset: 0;
-
+      background: rgba(0,0,0,.45);
       z-index: 900;
-
-      background:
-        rgba(0,0,0,.45);
-
-      opacity: 0;
-      visibility: hidden;
-
-      transition: .25s ease;
     }
 
-
-    .sidebar-overlay.show {
-      opacity: 1;
-
-      visibility: visible;
-    }
-
-
-    /* =========================================
+    /* =========================
        RESPONSIVE
-    ========================================= */
+    ========================= */
 
-    @media (max-width: 1150px) {
-
+    @media (max-width: 1200px) {
       .stats-grid {
-        grid-template-columns:
-          repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
       }
-
     }
-
 
     @media (max-width: 900px) {
+      :root {
+        --sidebar: 250px;
+      }
 
       .sidebar {
-        transform:
-          translateX(-100%);
+        transform: translateX(-100%);
+        transition: .25s ease;
       }
-
 
       .sidebar.open {
-        transform:
-          translateX(0);
+        transform: translateX(0);
       }
 
+      .sidebar-overlay.show {
+        display: block;
+      }
 
       .main {
-        width: 100%;
-
         margin-left: 0;
       }
 
-
-      .mobile-toggle {
-        display: inline-flex;
+      .mobile-menu {
+        display: grid;
+        place-items: center;
       }
-
-
-      .top-header {
-        padding: 0 20px;
-      }
-
 
       .content {
-        padding: 25px 20px 40px;
+        padding: 24px 20px 40px;
       }
 
+      .topbar {
+        padding: 0 20px;
+      }
     }
 
-
-    @media (max-width: 700px) {
-
-      .toolbar {
-        flex-wrap: wrap;
-      }
-
-
-      .search-box {
-        flex-basis: 100%;
-      }
-
-
-      .filter-select {
-        flex: 1;
-
-        min-width: 0;
-      }
-
-
-      .table-heading {
-        padding: 0 15px;
-      }
-
-
-      .table-footer {
-        padding: 0 15px;
-      }
-
-    }
-
-
-    @media (max-width: 560px) {
-
+    @media (max-width: 650px) {
       .stats-grid {
-        grid-template-columns:
-          1fr 1fr;
-
-        gap: 9px;
+        grid-template-columns: 1fr;
       }
 
-
-      .stat-card {
-        padding: 14px;
+      .topbar {
+        height: 72px;
       }
 
-
-      .stat-value {
-        font-size: 21px;
-      }
-
-
-      .stat-icon {
-        width: 33px;
-        height: 33px;
-
-        font-size: 12px;
-      }
-
-
-      .stat-label {
-        font-size: 9px;
-      }
-
-
-      .header-left h1 {
-        font-size: 20px;
-      }
-
-
-      .header-left p {
-        font-size: 10px;
-      }
-
-
-      .header-btn span {
+      .topbar-actions .view-marketplace {
         display: none;
       }
 
+      .page-heading h1 {
+        font-size: 18px;
+      }
+
+      .page-heading p {
+        display: none;
+      }
 
       .content {
-        padding:
-          20px 14px 35px;
+        padding: 18px 14px 35px;
       }
 
-
-      .top-header {
-        height: 72px;
-
-        padding:
-          0 14px;
+      .toolbar {
+        align-items: stretch;
       }
 
+      .toolbar-left {
+        width: 100%;
+        flex-direction: column;
+      }
+
+      .search-box {
+        max-width: none;
+      }
+
+      .filter-select {
+        width: 100%;
+      }
+
+      .toolbar-right {
+        width: 100%;
+      }
+
+      .toolbar-right button {
+        flex: 1;
+      }
+
+      .pagination {
+        align-items: flex-start;
+        flex-direction: column;
+      }
 
       .detail-grid {
-        grid-template-columns:
-          1fr;
+        grid-template-columns: 1fr;
       }
 
-
-      .detail-item.full {
-        grid-column:
-          auto;
+      .detail-box.full {
+        grid-column: auto;
       }
-
-
-      .status-controls {
-        grid-template-columns:
-          1fr;
-      }
-
 
       .toast {
         left: 14px;
         right: 14px;
         bottom: 14px;
-
         min-width: 0;
       }
-
     }
-
   </style>
 </head>
 
-
 <body>
 
-  <div class="app">
+  <!-- =========================
+       SIDEBAR OVERLAY
+  ========================= -->
 
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- =========================================
-         SIDEBAR
-    ========================================== -->
+  <!-- =========================
+       SIDEBAR
+  ========================= -->
 
-    <aside
-      class="sidebar"
-      id="sidebar"
-    >
+  <aside class="sidebar" id="sidebar">
 
-      <div class="brand">
+    <div class="brand">
+      <img src="../logo.png" alt="Website Deals Logo">
+      <div>
+        <div class="brand-title">Website Deals</div>
+        <div class="brand-subtitle">Admin Portal</div>
+      </div>
+    </div>
 
-        <img
-          src="../logo.png"
-          alt="Website Deals"
-          onerror="this.style.display='none'"
-        >
+    <nav class="nav">
 
-        <div class="brand-text">
+      <div class="nav-label">Marketplace</div>
 
-          <div class="brand-title">
-            Website Deals
-          </div>
+      <a class="nav-item" href="dashboard.html">
+        <i class="fa-solid fa-grid-2"></i>
+        <span>Dashboard</span>
+      </a>
 
-          <div class="brand-subtitle">
-            Marketplace Admin
-          </div>
+      <a class="nav-item" href="websites.html">
+        <i class="fa-solid fa-globe"></i>
+        <span>Websites</span>
+        <span class="nav-badge">8</span>
+      </a>
 
+      <a class="nav-item" href="categories.html">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>Categories</span>
+      </a>
+
+      <a class="nav-item active" href="orders.html">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Orders</span>
+        <span class="nav-badge">12</span>
+      </a>
+
+      <a class="nav-item" href="customers.html">
+        <i class="fa-solid fa-users"></i>
+        <span>Customers</span>
+      </a>
+
+      <a class="nav-item" href="newsletter.html">
+        <i class="fa-solid fa-envelope"></i>
+        <span>Newsletter</span>
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <div class="admin-profile">
+        <div class="admin-avatar">AD</div>
+
+        <div>
+          <div class="admin-name">Administrator</div>
+          <div class="admin-role">Marketplace Admin</div>
+        </div>
+      </div>
+
+      <button class="signout-btn" id="signoutBtn">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        &nbsp; Sign Out
+      </button>
+
+    </div>
+
+  </aside>
+
+  <!-- =========================
+       MAIN
+  ========================= -->
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div class="topbar-left">
+
+        <button class="mobile-menu" id="mobileMenuBtn" aria-label="Open menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="page-heading">
+          <h1>Orders</h1>
+          <p>Manage marketplace purchases and customer orders.</p>
         </div>
 
       </div>
 
+      <div class="topbar-actions">
 
-      <nav class="sidebar-nav">
+        <a
+          href="../index.html"
+          class="top-btn view-marketplace"
+          target="_blank"
+        >
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          View Marketplace
+        </a>
 
-        <div class="nav-label">
-          Marketplace
+        <button class="top-btn" id="refreshBtn">
+          <i class="fa-solid fa-rotate"></i>
+          Refresh
+        </button>
+
+      </div>
+
+    </header>
+
+    <section class="content">
+
+      <!-- =========================
+           STATS
+      ========================= -->
+
+      <div class="stats-grid">
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Total Orders</span>
+
+            <div class="stat-icon">
+              <i class="fa-solid fa-bag-shopping"></i>
+            </div>
+          </div>
+
+          <div class="stat-value" id="totalOrders">428</div>
+          <div class="stat-meta">All marketplace orders</div>
         </div>
 
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Pending Orders</span>
 
-        <a
-          href="dashboard.html"
-          class="nav-item"
-        >
-          <i class="fa-solid fa-grid-2"></i>
-          <span>Dashboard</span>
-        </a>
-
-
-        <a
-          href="websites.html"
-          class="nav-item"
-        >
-          <i class="fa-solid fa-window-maximize"></i>
-          <span>Websites</span>
-          <span class="nav-badge">11</span>
-        </a>
-
-
-        <a
-          href="categories.html"
-          class="nav-item"
-        >
-          <i class="fa-solid fa-layer-group"></i>
-          <span>Categories</span>
-        </a>
-
-
-        <a
-          href="orders.html"
-          class="nav-item active"
-        >
-          <i class="fa-solid fa-bag-shopping"></i>
-          <span>Orders</span>
-          <span
-            class="nav-badge"
-            id="sidebar-order-count"
-          >
-            8
-          </span>
-        </a>
-
-
-        <a
-          href="customers.html"
-          class="nav-item"
-        >
-          <i class="fa-solid fa-users"></i>
-          <span>Customers</span>
-        </a>
-
-
-        <a
-          href="newsletter.html"
-          class="nav-item"
-        >
-          <i class="fa-regular fa-envelope"></i>
-          <span>Newsletter</span>
-        </a>
-
-      </nav>
-
-
-      <div class="sidebar-bottom">
-
-        <div class="admin-profile">
-
-          <div class="admin-avatar">
-            SN
+            <div class="stat-icon">
+              <i class="fa-solid fa-clock"></i>
+            </div>
           </div>
 
-          <div class="admin-info">
+          <div class="stat-value" id="pendingOrders">12</div>
+          <div class="stat-meta">Need attention</div>
+        </div>
 
-            <div class="admin-name">
-              Administrator
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Completed</span>
+
+            <div class="stat-icon">
+              <i class="fa-solid fa-circle-check"></i>
             </div>
-
-            <div class="admin-role">
-              Marketplace Admin
-            </div>
-
           </div>
 
+          <div class="stat-value" id="completedOrders">401</div>
+          <div class="stat-meta">Successfully processed</div>
+        </div>
 
-          <button
-            class="logout-btn"
-            id="logout-btn"
-            title="Sign Out"
-          >
-            <i
-              class="fa-solid fa-arrow-right-from-bracket"
-            ></i>
-          </button>
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Revenue</span>
 
+            <div class="stat-icon">
+              <i class="fa-solid fa-bangladeshi-taka-sign"></i>
+            </div>
+          </div>
+
+          <div class="stat-value" id="totalRevenue">৳8.42L</div>
+          <div class="stat-meta">Total order value</div>
         </div>
 
       </div>
 
-    </aside>
-
-
-    <div
-      class="sidebar-overlay"
-      id="sidebar-overlay"
-    ></div>
-
-
-    <!-- =========================================
-         MAIN
-    ========================================== -->
-
-    <main class="main">
-
-
-      <!-- HEADER -->
-
-      <header class="top-header">
-
-        <div class="header-left">
-
-          <button
-            class="mobile-toggle"
-            id="mobile-toggle"
-            aria-label="Open menu"
-          >
-            <i class="fa-solid fa-bars"></i>
-          </button>
-
-
-          <div>
-
-            <h1>
-              Orders
-            </h1>
-
-            <p>
-              Track purchases, payments and order status.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="header-actions">
-
-          <button
-            class="header-btn"
-            id="refresh-btn"
-          >
-            <i class="fa-solid fa-rotate"></i>
-            <span>Refresh</span>
-          </button>
-
-        </div>
-
-      </header>
-
-
-      <!-- CONTENT -->
-
-      <section class="content">
-
-
-        <!-- =====================================
-             STATS
-        ====================================== -->
-
-        <div class="stats-grid">
-
-
-          <div class="stat-card">
-
-            <div class="stat-top">
-
-              <div class="stat-label">
-                Total Orders
-              </div>
-
-              <div class="stat-icon">
-                <i class="fa-solid fa-bag-shopping"></i>
-              </div>
-
-            </div>
-
-            <div
-              class="stat-value"
-              id="total-orders"
-            >
-              8
-            </div>
-
-            <div class="stat-note">
-              All marketplace orders
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-top">
-
-              <div class="stat-label">
-                Completed
-              </div>
-
-              <div class="stat-icon">
-                <i class="fa-solid fa-circle-check"></i>
-              </div>
-
-            </div>
-
-            <div
-              class="stat-value"
-              id="completed-orders"
-            >
-              5
-            </div>
-
-            <div class="stat-note">
-              Successfully completed
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-top">
-
-              <div class="stat-label">
-                Pending
-              </div>
-
-              <div class="stat-icon">
-                <i class="fa-solid fa-clock"></i>
-              </div>
-
-            </div>
-
-            <div
-              class="stat-value"
-              id="pending-orders"
-            >
-              2
-            </div>
-
-            <div class="stat-note">
-              Need attention
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-top">
-
-              <div class="stat-label">
-                Revenue
-              </div>
-
-              <div class="stat-icon">
-                <i class="fa-solid fa-bangladeshi-taka-sign"></i>
-              </div>
-
-            </div>
-
-            <div
-              class="stat-value"
-              id="total-revenue"
-            >
-              ৳24.6K
-            </div>
-
-            <div class="stat-note">
-              From completed orders
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- =====================================
-             FILTER TOOLBAR
-        ====================================== -->
+      <!-- =========================
+           ORDER PANEL
+      ========================= -->
+
+      <div class="panel">
 
         <div class="toolbar">
 
-
-          <div class="search-box">
-
-            <i
-              class="fa-solid fa-magnifying-glass"
-            ></i>
-
-            <input
-              type="search"
-              id="order-search"
-              placeholder="Search order ID, customer or website..."
-              autocomplete="off"
-            >
-
-          </div>
-
-
-          <select
-            class="filter-select"
-            id="order-status-filter"
-          >
-
-            <option value="all">
-              All Order Status
-            </option>
-
-            <option value="completed">
-              Completed
-            </option>
-
-            <option value="pending">
-              Pending
-            </option>
-
-            <option value="processing">
-              Processing
-            </option>
-
-            <option value="cancelled">
-              Cancelled
-            </option>
-
-          </select>
-
-
-          <select
-            class="filter-select"
-            id="payment-filter"
-          >
-
-            <option value="all">
-              All Payments
-            </option>
-
-            <option value="paid">
-              Paid
-            </option>
-
-            <option value="unpaid">
-              Unpaid
-            </option>
-
-            <option value="refunded">
-              Refunded
-            </option>
-
-          </select>
-
-
-          <select
-            class="filter-select"
-            id="sort-filter"
-          >
-
-            <option value="newest">
-              Newest First
-            </option>
-
-            <option value="oldest">
-              Oldest First
-            </option>
-
-            <option value="highest">
-              Highest Amount
-            </option>
-
-            <option value="lowest">
-              Lowest Amount
-            </option>
-
-          </select>
-
-        </div>
-
-
-        <!-- =====================================
-             ORDERS
-        ====================================== -->
-
-        <div class="orders-card">
-
-
-          <div class="table-heading">
-
-            <div>
-
-              <h2>
-                Marketplace Orders
-              </h2>
-
-            </div>
-
-            <span id="result-count">
-              8 orders
-            </span>
-
-          </div>
-
-
-          <div class="table-wrap">
-
-            <table>
-
-              <thead>
-
-                <tr>
-
-                  <th>
-                    Order
-                  </th>
-
-                  <th>
-                    Customer
-                  </th>
-
-                  <th>
-                    Website
-                  </th>
-
-                  <th>
-                    Amount
-                  </th>
-
-                  <th>
-                    Payment
-                  </th>
-
-                  <th>
-                    Status
-                  </th>
-
-                  <th>
-                    Date
-                  </th>
-
-                  <th>
-                    Action
-                  </th>
-
-                </tr>
-
-              </thead>
-
-
-              <tbody
-                id="orders-table-body"
-              ></tbody>
-
-            </table>
-
-
-            <div
-              class="empty-state"
-              id="empty-state"
-            >
-
-              <div class="empty-icon">
-                <i
-                  class="fa-solid fa-receipt"
-                ></i>
-              </div>
-
-              <h3>
-                No orders found
-              </h3>
-
-              <p>
-                Try changing your search or filters.
-              </p>
-
-            </div>
-
-          </div>
-
-
-          <div class="table-footer">
-
-            <div
-              class="showing-text"
-              id="showing-text"
-            >
-              Showing 8 orders
-            </div>
-
-
-            <div class="pagination">
-
-              <button class="page-btn">
-                <i
-                  class="fa-solid fa-chevron-left"
-                ></i>
-              </button>
-
-              <button
-                class="page-btn active"
+          <div class="toolbar-left">
+
+            <div class="search-box">
+              <i class="fa-solid fa-magnifying-glass"></i>
+
+              <input
+                type="search"
+                id="orderSearch"
+                placeholder="Search order, customer or website..."
+                autocomplete="off"
               >
-                1
-              </button>
-
-              <button class="page-btn">
-                2
-              </button>
-
-              <button class="page-btn">
-                3
-              </button>
-
-              <button class="page-btn">
-                <i
-                  class="fa-solid fa-chevron-right"
-                ></i>
-              </button>
-
             </div>
+
+            <select class="filter-select" id="statusFilter">
+              <option value="all">All Status</option>
+              <option value="pending">Pending</option>
+              <option value="processing">Processing</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+
+            <select class="filter-select" id="sortFilter">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="high">Highest Value</option>
+              <option value="low">Lowest Value</option>
+            </select>
+
+          </div>
+
+          <div class="toolbar-right">
+
+            <button class="top-btn" id="exportBtn">
+              <i class="fa-solid fa-download"></i>
+              Export
+            </button>
 
           </div>
 
         </div>
 
-      </section>
+        <div class="table-wrap">
 
-    </main>
+          <table>
 
-  </div>
+            <thead>
+              <tr>
+                <th>Order</th>
+                <th>Customer</th>
+                <th>Website</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
 
+            <tbody id="ordersBody"></tbody>
 
-  <!-- =========================================
-       ORDER DETAILS MODAL
-  ========================================== -->
+          </table>
 
-  <div
-    class="modal-overlay"
-    id="order-modal"
-  >
+        </div>
+
+        <div class="empty" id="emptyState">
+          <i class="fa-solid fa-box-open"></i>
+          <h3>No orders found</h3>
+          <p>Try changing your search or filter.</p>
+        </div>
+
+        <div class="pagination">
+
+          <div class="pagination-info" id="paginationInfo">
+            Showing 1–8 of 428 orders
+          </div>
+
+          <div class="page-buttons">
+
+            <button class="page-btn" id="prevPage">
+              <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">4</button>
+
+            <button class="page-btn" id="nextPage">
+              <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =========================
+       ORDER DETAIL MODAL
+  ========================= -->
+
+  <div class="modal-backdrop" id="orderModal">
 
     <div class="modal">
 
-
-      <div class="modal-header">
+      <div class="modal-head">
 
         <div>
-
-          <h3>
-            Order Details
-          </h3>
-
-          <p id="modal-order-subtitle">
-            Order information
-          </p>
-
+          <h2>Order Details</h2>
+          <p id="modalOrderId">Order #WD-10428</p>
         </div>
 
-
-        <button
-          class="modal-close"
-          id="modal-close"
-        >
+        <button class="modal-close" id="modalClose">
           <i class="fa-solid fa-xmark"></i>
         </button>
 
       </div>
 
-
       <div class="modal-body">
-
 
         <div class="detail-grid">
 
-
-          <div class="detail-item">
-
-            <div class="detail-label">
-              Order ID
+          <div class="detail-box">
+            <div class="detail-label">Customer</div>
+            <div class="detail-value" id="modalCustomer">
+              Rahim Khan
             </div>
-
-            <div
-              class="detail-value"
-              id="detail-order-id"
-            >
-              —
-            </div>
-
           </div>
 
-
-          <div class="detail-item">
-
-            <div class="detail-label">
-              Date
+          <div class="detail-box">
+            <div class="detail-label">Email</div>
+            <div class="detail-value" id="modalEmail">
+              rahim@example.com
             </div>
-
-            <div
-              class="detail-value"
-              id="detail-date"
-            >
-              —
-            </div>
-
           </div>
 
-
-          <div class="detail-item">
-
-            <div class="detail-label">
-              Customer
+          <div class="detail-box">
+            <div class="detail-label">Phone</div>
+            <div class="detail-value" id="modalPhone">
+              +880 1712-000000
             </div>
-
-            <div
-              class="detail-value"
-              id="detail-customer"
-            >
-              —
-            </div>
-
           </div>
 
-
-          <div class="detail-item">
-
-            <div class="detail-label">
-              Email
+          <div class="detail-box">
+            <div class="detail-label">Order Date</div>
+            <div class="detail-value" id="modalDate">
+              01 Oct 2026
             </div>
-
-            <div
-              class="detail-value"
-              id="detail-email"
-            >
-              —
-            </div>
-
           </div>
 
-
-          <div class="detail-item">
-
-            <div class="detail-label">
-              Phone
+          <div class="detail-box">
+            <div class="detail-label">Website</div>
+            <div class="detail-value" id="modalWebsite">
+              Corporate Pro
             </div>
-
-            <div
-              class="detail-value"
-              id="detail-phone"
-            >
-              —
-            </div>
-
           </div>
 
-
-          <div class="detail-item">
-
-            <div class="detail-label">
-              Website
+          <div class="detail-box">
+            <div class="detail-label">Amount</div>
+            <div class="detail-value" id="modalAmount">
+              ৳999
             </div>
-
-            <div
-              class="detail-value"
-              id="detail-website"
-            >
-              —
-            </div>
-
           </div>
 
-
-          <div class="detail-item">
-
-            <div class="detail-label">
-              Amount
+          <div class="detail-box">
+            <div class="detail-label">Payment Status</div>
+            <div class="detail-value" id="modalPayment">
+              Pending confirmation
             </div>
-
-            <div
-              class="detail-value"
-              id="detail-amount"
-            >
-              —
-            </div>
-
           </div>
 
-
-          <div class="detail-item">
-
-            <div class="detail-label">
-              Payment
+          <div class="detail-box">
+            <div class="detail-label">Order Status</div>
+            <div class="detail-value" id="modalStatus">
+              Pending
             </div>
-
-            <div
-              class="detail-value"
-              id="detail-payment"
-            >
-              —
-            </div>
-
           </div>
 
-
-          <div class="detail-item full">
-
-            <div class="detail-label">
-              Customer Message
+          <div class="detail-box full">
+            <div class="detail-label">Customer Note</div>
+            <div class="detail-value" id="modalNote">
+              Customer requested website setup assistance.
             </div>
-
-            <div
-              class="detail-value"
-              id="detail-message"
-            >
-              No message provided.
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="modal-section">
-
-          <div class="modal-section-title">
-            Update Order
-          </div>
-
-
-          <div class="status-controls">
-
-
-            <div class="control-group">
-
-              <label>
-                Order Status
-              </label>
-
-              <select
-                class="control-select"
-                id="modal-order-status"
-              >
-
-                <option value="completed">
-                  Completed
-                </option>
-
-                <option value="pending">
-                  Pending
-                </option>
-
-                <option value="processing">
-                  Processing
-                </option>
-
-                <option value="cancelled">
-                  Cancelled
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <div class="control-group">
-
-              <label>
-                Payment Status
-              </label>
-
-              <select
-                class="control-select"
-                id="modal-payment-status"
-              >
-
-                <option value="paid">
-                  Paid
-                </option>
-
-                <option value="unpaid">
-                  Unpaid
-                </option>
-
-                <option value="refunded">
-                  Refunded
-                </option>
-
-              </select>
-
-            </div>
-
           </div>
 
         </div>
 
       </div>
-
 
       <div class="modal-footer">
 
-        <button
-          type="button"
-          class="modal-btn cancel"
-          id="cancel-modal"
-        >
+        <button class="top-btn" id="modalCancel">
           Close
         </button>
 
-        <button
-          type="button"
-          class="modal-btn save"
-          id="save-order"
-        >
+        <button class="top-btn primary" id="markCompleteBtn">
           <i class="fa-solid fa-check"></i>
-          Save Changes
+          Mark Completed
         </button>
 
       </div>
@@ -2697,1497 +1425,813 @@
 
   </div>
 
-
-  <!-- =========================================
+  <!-- =========================
        TOAST
-  ========================================== -->
+  ========================= -->
 
-  <div
-    class="toast"
-    id="toast"
-  >
+  <div class="toast" id="toast">
 
     <div class="toast-icon">
-
       <i class="fa-solid fa-check"></i>
-
     </div>
 
-
-    <div class="toast-content">
-
-      <strong id="toast-title">
-        Success
-      </strong>
-
-      <span id="toast-message">
-        Order updated successfully.
-      </span>
-
+    <div>
+      <strong id="toastTitle">Success</strong>
+      <span id="toastMessage">Action completed successfully.</span>
     </div>
-
-
-    <button
-      class="toast-close"
-      id="toast-close"
-    >
-      <i class="fa-solid fa-xmark"></i>
-    </button>
 
   </div>
 
-
   <script>
+    /* =========================================================
+       WEBSITE DEALS — ORDER MANAGEMENT
+       Demo/localStorage version
+       Firebase will be connected later.
+    ========================================================= */
 
-    /* =========================================
-       STORAGE
-    ========================================== */
-
-    const STORAGE_KEY =
-      "websiteDealsOrders";
-
-
-    /* =========================================
-       DEMO ORDERS
-    ========================================== */
-
-    const defaultOrders = [
-
+    const DEMO_ORDERS = [
       {
-        id: "WD-2026-00428",
+        id: "WD-10428",
         customer: "Rahim Khan",
         email: "rahim@example.com",
-        phone: "01712 345 678",
-        website: "Nova Business Pro",
+        phone: "+880 1712-000000",
+        website: "Corporate Pro",
         category: "Business",
-        amount: 2999,
-        payment: "unpaid",
+        amount: 999,
         status: "pending",
-        date: "2026-10-01",
-        message: "Please contact me before delivery."
+        payment: "Pending confirmation",
+        date: "01 Oct 2026",
+        timestamp: new Date("2026-10-01").getTime(),
+        note: "Customer requested website setup assistance."
       },
-
       {
-        id: "WD-2026-00427",
+        id: "WD-10427",
         customer: "Sara Ahmed",
         email: "sara@example.com",
-        phone: "01812 456 789",
-        website: "Restaurant Royale",
+        phone: "+880 1812-000001",
+        website: "Tasty Bites",
         category: "Restaurant",
-        amount: 3499,
-        payment: "paid",
+        amount: 1499,
         status: "completed",
-        date: "2026-10-01",
-        message: "Need the restaurant demo content."
+        payment: "Confirmed",
+        date: "30 Sep 2026",
+        timestamp: new Date("2026-09-30").getTime(),
+        note: "Restaurant website purchase."
       },
-
       {
-        id: "WD-2026-00426",
+        id: "WD-10426",
         customer: "Mahin Islam",
         email: "mahin@example.com",
-        phone: "01922 567 890",
-        website: "Creative Agency X",
+        phone: "+880 1912-000002",
+        website: "Creative Studio",
         category: "Agency",
-        amount: 3999,
-        payment: "paid",
+        amount: 1999,
         status: "completed",
-        date: "2026-09-30",
-        message: ""
+        payment: "Confirmed",
+        date: "29 Sep 2026",
+        timestamp: new Date("2026-09-29").getTime(),
+        note: "Agency website order."
       },
-
       {
-        id: "WD-2026-00425",
+        id: "WD-10425",
         customer: "Tanvir Ahmed",
         email: "tanvir@example.com",
-        phone: "01633 678 901",
-        website: "ShopEase Store",
+        phone: "+880 1612-000003",
+        website: "ShopEasy Store",
         category: "E-commerce",
-        amount: 4999,
-        payment: "unpaid",
+        amount: 2999,
         status: "processing",
-        date: "2026-09-30",
-        message: "I want to customize the homepage."
+        payment: "Confirmed",
+        date: "28 Sep 2026",
+        timestamp: new Date("2026-09-28").getTime(),
+        note: "Store setup is being processed."
       },
-
       {
-        id: "WD-2026-00424",
+        id: "WD-10424",
         customer: "Nusrat Jahan",
         email: "nusrat@example.com",
-        phone: "01744 789 012",
-        website: "Portfolio Studio",
+        phone: "+880 1512-000004",
+        website: "Personal Folio",
         category: "Portfolio",
-        amount: 1999,
-        payment: "paid",
+        amount: 999,
         status: "completed",
-        date: "2026-09-29",
-        message: ""
+        payment: "Confirmed",
+        date: "27 Sep 2026",
+        timestamp: new Date("2026-09-27").getTime(),
+        note: "Portfolio website purchase."
       },
-
       {
-        id: "WD-2026-00423",
-        customer: "Sakib Hasan",
-        email: "sakib@example.com",
-        phone: "01855 890 123",
-        website: "Business Prime",
-        category: "Business",
-        amount: 2999,
-        payment: "paid",
-        status: "completed",
-        date: "2026-09-28",
-        message: ""
-      },
-
-      {
-        id: "WD-2026-00422",
-        customer: "Mim Akter",
-        email: "mim@example.com",
-        phone: "01966 901 234",
-        website: "Foodie Restaurant",
-        category: "Restaurant",
-        amount: 3299,
-        payment: "refunded",
-        status: "cancelled",
-        date: "2026-09-27",
-        message: "Order cancelled by customer."
-      },
-
-      {
-        id: "WD-2026-00421",
+        id: "WD-10423",
         customer: "Arif Hossain",
         email: "arif@example.com",
-        phone: "01677 012 345",
-        website: "Agency Grid",
-        category: "Agency",
-        amount: 3799,
-        payment: "paid",
+        phone: "+880 1412-000005",
+        website: "Starter Monthly",
+        category: "Monthly",
+        amount: 999,
+        status: "pending",
+        payment: "Awaiting payment",
+        date: "26 Sep 2026",
+        timestamp: new Date("2026-09-26").getTime(),
+        note: "Monthly package inquiry."
+      },
+      {
+        id: "WD-10422",
+        customer: "Mim Akter",
+        email: "mim@example.com",
+        phone: "+880 1312-000006",
+        website: "Biz Launch",
+        category: "Business",
+        amount: 1299,
         status: "completed",
-        date: "2026-09-26",
-        message: ""
+        payment: "Confirmed",
+        date: "25 Sep 2026",
+        timestamp: new Date("2026-09-25").getTime(),
+        note: "Business landing website."
+      },
+      {
+        id: "WD-10421",
+        customer: "Sakib Hasan",
+        email: "sakib@example.com",
+        phone: "+880 1212-000007",
+        website: "Cafe Corner",
+        category: "Restaurant",
+        amount: 1199,
+        status: "cancelled",
+        payment: "Refunded",
+        date: "24 Sep 2026",
+        timestamp: new Date("2026-09-24").getTime(),
+        note: "Order cancelled by customer."
       }
-
     ];
 
-
     let orders = [];
+    let selectedOrder = null;
 
-    let currentOrderId = null;
+    const $ = id => document.getElementById(id);
 
-    let toastTimer;
-
-
-    /* =========================================
-       DOM
-    ========================================== */
-
-    const tableBody =
-      document.getElementById(
-        "orders-table-body"
-      );
-
-    const emptyState =
-      document.getElementById(
-        "empty-state"
-      );
-
-    const searchInput =
-      document.getElementById(
-        "order-search"
-      );
-
-    const statusFilter =
-      document.getElementById(
-        "order-status-filter"
-      );
-
-    const paymentFilter =
-      document.getElementById(
-        "payment-filter"
-      );
-
-    const sortFilter =
-      document.getElementById(
-        "sort-filter"
-      );
-
-    const resultCount =
-      document.getElementById(
-        "result-count"
-      );
-
-
-    const modal =
-      document.getElementById(
-        "order-modal"
-      );
-
-
-    /* =========================================
-       LOAD
-    ========================================== */
-
-    function loadOrders() {
-
-      try {
-
-        const saved =
-          localStorage.getItem(
-            STORAGE_KEY
-          );
-
-
-        if (saved) {
-
-          const parsed =
-            JSON.parse(saved);
-
-          /*
-            If an older version of the
-            marketplace stored orders in a
-            different shape, safely fall
-            back to demo records.
-          */
-
-          if (
-            Array.isArray(parsed) &&
-            parsed.length
-          ) {
-
-            orders =
-              normalizeOrders(parsed);
-
-          } else {
-
-            orders =
-              cloneDefaults();
-
-          }
-
-        } else {
-
-          orders =
-            cloneDefaults();
-
-          saveOrders();
-
-        }
-
-      } catch (error) {
-
-        orders =
-          cloneDefaults();
-
-      }
-
-    }
-
-
-    function cloneDefaults() {
-
-      return JSON.parse(
-        JSON.stringify(
-          defaultOrders
-        )
-      );
-
-    }
-
-
-    function normalizeOrders(data) {
-
-      return data.map(
-        (order, index) => {
-
-          return {
-
-            id:
-              order.id ||
-              order.orderId ||
-              `WD-DEMO-${index + 1}`,
-
-            customer:
-              order.customer ||
-              order.name ||
-              order.fullName ||
-              "Customer",
-
-            email:
-              order.email ||
-              "—",
-
-            phone:
-              order.phone ||
-              "—",
-
-            website:
-              order.website ||
-              order.websiteTitle ||
-              order.title ||
-              "Website",
-
-            category:
-              order.category ||
-              order.categoryLabel ||
-              "General",
-
-            amount:
-              Number(
-                order.amount ??
-                order.price ??
-                0
-              ),
-
-            payment:
-              order.payment ||
-              order.paymentStatus ||
-              "unpaid",
-
-            status:
-              order.status ||
-              order.orderStatus ||
-              "pending",
-
-            date:
-              order.date ||
-              order.createdAt ||
-              new Date().toISOString(),
-
-            message:
-              order.message ||
-              ""
-
-          };
-
-        }
-      );
-
-    }
-
-
-    function saveOrders() {
-
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(orders)
-      );
-
-    }
-
-
-    /* =========================================
+    /* =========================
        HELPERS
-    ========================================== */
+    ========================= */
 
     function escapeHTML(value) {
-
-      return String(value)
+      return String(value ?? "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
-
     }
-
 
     function formatPrice(value) {
-
-      return "৳" +
-        Number(value || 0)
-          .toLocaleString("en-BD");
-
+      return "৳" + Number(value || 0).toLocaleString("en-BD");
     }
 
-
-    function formatDate(value) {
-
-      const date =
-        new Date(value);
-
-      if (
-        Number.isNaN(
-          date.getTime()
-        )
-      ) {
-
-        return value || "—";
-
-      }
-
-
-      return date.toLocaleDateString(
-        "en-GB",
-        {
-          day: "2-digit",
-          month: "short",
-          year: "numeric"
-        }
-      );
-
+    function getInitials(name) {
+      return String(name || "Customer")
+        .split(" ")
+        .slice(0, 2)
+        .map(word => word.charAt(0))
+        .join("")
+        .toUpperCase();
     }
 
+    function statusLabel(status) {
+      const labels = {
+        pending: "Pending",
+        processing: "Processing",
+        completed: "Completed",
+        cancelled: "Cancelled"
+      };
 
-    function initials(name) {
-
-      const parts =
-        String(name)
-          .trim()
-          .split(/\s+/)
-          .filter(Boolean);
-
-      if (!parts.length) {
-        return "CU";
-      }
-
-      if (parts.length === 1) {
-
-        return parts[0]
-          .slice(0, 2)
-          .toUpperCase();
-
-      }
-
-      return (
-        parts[0][0] +
-        parts[parts.length - 1][0]
-      ).toUpperCase();
-
+      return labels[status] || status;
     }
 
+    function showToast(title, message) {
+      $("toastTitle").textContent = title;
+      $("toastMessage").textContent = message;
 
-    /* =========================================
-       TOAST
-    ========================================== */
+      $("toast").classList.add("show");
 
-    function showToast(
-      title,
-      message
-    ) {
+      clearTimeout(window.toastTimer);
 
-      const toast =
-        document.getElementById(
-          "toast"
-        );
-
-
-      document.getElementById(
-        "toast-title"
-      ).textContent = title;
-
-
-      document.getElementById(
-        "toast-message"
-      ).textContent = message;
-
-
-      toast.classList.add(
-        "show"
-      );
-
-
-      clearTimeout(
-        toastTimer
-      );
-
-
-      toastTimer =
-        setTimeout(
-          () => {
-
-            toast.classList.remove(
-              "show"
-            );
-
-          },
-          3200
-        );
-
+      window.toastTimer = setTimeout(() => {
+        $("toast").classList.remove("show");
+      }, 2800);
     }
 
+    /* =========================
+       LOCAL STORAGE
+    ========================= */
 
-    /* =========================================
-       FILTER
-    ========================================== */
+    function loadOrders() {
+      try {
+        const stored = localStorage.getItem("websiteDealsOrders");
 
-    function getFilteredOrders() {
+        if (stored) {
+          const parsed = JSON.parse(stored);
 
-      const query =
-        searchInput.value
-          .trim()
-          .toLowerCase();
+          if (Array.isArray(parsed) && parsed.length) {
+            orders = parsed.map((order, index) => ({
+              ...order,
+              id: order.id || `WD-${10428 - index}`,
+              customer: order.customer || order.name || "Customer",
+              email: order.email || "",
+              phone: order.phone || "",
+              website: order.website || order.websiteTitle || "Website",
+              category: order.category || "Website",
+              amount: Number(order.amount || order.price || 0),
+              status: order.status || "pending",
+              payment: order.payment || "Pending confirmation",
+              date: order.date || new Date().toLocaleDateString(),
+              timestamp: order.timestamp || Date.now(),
+              note: order.note || "No customer note."
+            }));
 
-
-      const selectedStatus =
-        statusFilter.value;
-
-
-      const selectedPayment =
-        paymentFilter.value;
-
-
-      let result =
-        orders.filter(
-          order => {
-
-            const searchable = [
-
-              order.id,
-              order.customer,
-              order.email,
-              order.website,
-              order.category
-
-            ]
-              .join(" ")
-              .toLowerCase();
-
-
-            const matchesSearch =
-              !query ||
-              searchable.includes(
-                query
-              );
-
-
-            const matchesStatus =
-              selectedStatus === "all" ||
-              order.status ===
-                selectedStatus;
-
-
-            const matchesPayment =
-              selectedPayment === "all" ||
-              order.payment ===
-                selectedPayment;
-
-
-            return (
-              matchesSearch &&
-              matchesStatus &&
-              matchesPayment
-            );
-
+            return;
           }
-        );
-
-
-      switch (
-        sortFilter.value
-      ) {
-
-        case "oldest":
-
-          result.sort(
-            (a, b) =>
-              new Date(a.date) -
-              new Date(b.date)
-          );
-
-          break;
-
-
-        case "highest":
-
-          result.sort(
-            (a, b) =>
-              Number(b.amount) -
-              Number(a.amount)
-          );
-
-          break;
-
-
-        case "lowest":
-
-          result.sort(
-            (a, b) =>
-              Number(a.amount) -
-              Number(b.amount)
-          );
-
-          break;
-
-
-        default:
-
-          result.sort(
-            (a, b) =>
-              new Date(b.date) -
-              new Date(a.date)
-          );
-
+        }
+      } catch (error) {
+        console.warn("Unable to load stored orders.", error);
       }
 
-
-      return result;
-
+      orders = [...DEMO_ORDERS];
     }
 
-
-    /* =========================================
-       RENDER
-    ========================================== */
-
-    function renderOrders() {
-
-      const data =
-        getFilteredOrders();
-
-
-      tableBody.innerHTML =
-        "";
-
-
-      resultCount.textContent =
-        `${data.length} ${
-          data.length === 1
-            ? "order"
-            : "orders"
-        }`;
-
-
-      document.getElementById(
-        "showing-text"
-      ).textContent =
-        `Showing ${data.length} ${
-          data.length === 1
-            ? "order"
-            : "orders"
-        }`;
-
-
-      if (!data.length) {
-
-        emptyState.classList.add(
-          "show"
+    function saveOrders() {
+      try {
+        localStorage.setItem(
+          "websiteDealsOrders",
+          JSON.stringify(orders)
         );
-
-      } else {
-
-        emptyState.classList.remove(
-          "show"
-        );
-
+      } catch (error) {
+        console.warn("Unable to save orders.", error);
       }
-
-
-      data.forEach(order => {
-
-        const row =
-          document.createElement(
-            "tr"
-          );
-
-
-        row.innerHTML = `
-
-          <td>
-
-            <div class="order-id">
-              ${escapeHTML(order.id)}
-            </div>
-
-          </td>
-
-
-          <td>
-
-            <div class="customer">
-
-              <div class="customer-avatar">
-                ${escapeHTML(
-                  initials(order.customer)
-                )}
-              </div>
-
-              <div class="customer-info">
-
-                <div class="customer-name">
-                  ${escapeHTML(
-                    order.customer
-                  )}
-                </div>
-
-                <div class="customer-email">
-                  ${escapeHTML(
-                    order.email
-                  )}
-                </div>
-
-              </div>
-
-            </div>
-
-          </td>
-
-
-          <td>
-
-            <div class="website-name">
-              ${escapeHTML(
-                order.website
-              )}
-            </div>
-
-            <div class="website-category">
-              ${escapeHTML(
-                order.category
-              )}
-            </div>
-
-          </td>
-
-
-          <td>
-
-            <div class="amount">
-              ${formatPrice(
-                order.amount
-              )}
-            </div>
-
-          </td>
-
-
-          <td>
-
-            <span
-              class="payment ${escapeHTML(
-                order.payment
-              )}"
-            >
-              ${
-                order.payment === "paid"
-                  ? "Paid"
-                  : order.payment === "refunded"
-                    ? "Refunded"
-                    : "Unpaid"
-              }
-            </span>
-
-          </td>
-
-
-          <td>
-
-            <span
-              class="status ${escapeHTML(
-                order.status
-              )}"
-            >
-              ${escapeHTML(
-                order.status
-              )}
-            </span>
-
-          </td>
-
-
-          <td>
-
-            <div class="date">
-              ${escapeHTML(
-                formatDate(order.date)
-              )}
-            </div>
-
-          </td>
-
-
-          <td>
-
-            <div class="action-buttons">
-
-              <button
-                class="action-btn"
-                data-view-order="${escapeHTML(
-                  order.id
-                )}"
-                title="View Order"
-              >
-                <i class="fa-regular fa-eye"></i>
-              </button>
-
-
-              <button
-                class="action-btn delete"
-                data-delete-order="${escapeHTML(
-                  order.id
-                )}"
-                title="Delete Order"
-              >
-                <i class="fa-regular fa-trash-can"></i>
-              </button>
-
-            </div>
-
-          </td>
-
-        `;
-
-
-        tableBody.appendChild(
-          row
-        );
-
-      });
-
-
-      updateStats();
-
     }
 
-
-    /* =========================================
+    /* =========================
        STATS
-    ========================================== */
+    ========================= */
 
     function updateStats() {
+      const total = orders.length;
 
-      const total =
-        orders.length;
+      const pending = orders.filter(
+        order => order.status === "pending"
+      ).length;
 
+      const completed = orders.filter(
+        order => order.status === "completed"
+      ).length;
 
-      const completed =
-        orders.filter(
-          order =>
-            order.status ===
-            "completed"
-        ).length;
+      const revenue = orders.reduce(
+        (sum, order) => {
+          if (
+            order.status !== "cancelled"
+          ) {
+            return sum + Number(order.amount || 0);
+          }
 
-
-      const pending =
-        orders.filter(
-          order =>
-            order.status ===
-            "pending"
-        ).length;
-
-
-      const revenue =
-        orders
-          .filter(
-            order =>
-              order.status ===
-              "completed" &&
-              order.payment ===
-              "paid"
-          )
-          .reduce(
-            (
-              sum,
-              order
-            ) =>
-              sum +
-              Number(
-                order.amount || 0
-              ),
-            0
-          );
-
-
-      document.getElementById(
-        "total-orders"
-      ).textContent =
-        total;
-
-
-      document.getElementById(
-        "completed-orders"
-      ).textContent =
-        completed;
-
-
-      document.getElementById(
-        "pending-orders"
-      ).textContent =
-        pending;
-
-
-      document.getElementById(
-        "total-revenue"
-      ).textContent =
-        revenue >= 1000
-          ? "৳" +
-            (
-              revenue / 1000
-            ).toFixed(1) +
-            "K"
-          : formatPrice(
-              revenue
-            );
-
-
-      document.getElementById(
-        "sidebar-order-count"
-      ).textContent =
-        pending;
-
-    }
-
-
-    /* =========================================
-       VIEW ORDER
-    ========================================== */
-
-    function openOrderModal(
-      id
-    ) {
-
-      const order =
-        orders.find(
-          item =>
-            item.id === id
-        );
-
-
-      if (!order) return;
-
-
-      currentOrderId =
-        id;
-
-
-      document.getElementById(
-        "modal-order-subtitle"
-      ).textContent =
-        `Order ${order.id}`;
-
-
-      document.getElementById(
-        "detail-order-id"
-      ).textContent =
-        order.id;
-
-
-      document.getElementById(
-        "detail-date"
-      ).textContent =
-        formatDate(
-          order.date
-        );
-
-
-      document.getElementById(
-        "detail-customer"
-      ).textContent =
-        order.customer;
-
-
-      document.getElementById(
-        "detail-email"
-      ).textContent =
-        order.email;
-
-
-      document.getElementById(
-        "detail-phone"
-      ).textContent =
-        order.phone;
-
-
-      document.getElementById(
-        "detail-website"
-      ).textContent =
-        order.website;
-
-
-      document.getElementById(
-        "detail-amount"
-      ).textContent =
-        formatPrice(
-          order.amount
-        );
-
-
-      document.getElementById(
-        "detail-payment"
-      ).textContent =
-        order.payment;
-
-
-      document.getElementById(
-        "detail-message"
-      ).textContent =
-        order.message ||
-        "No message provided.";
-
-
-      document.getElementById(
-        "modal-order-status"
-      ).value =
-        order.status;
-
-
-      document.getElementById(
-        "modal-payment-status"
-      ).value =
-        order.payment;
-
-
-      modal.classList.add(
-        "show"
+          return sum;
+        },
+        0
       );
 
+      $("totalOrders").textContent = total || 428;
+      $("pendingOrders").textContent = pending;
+      $("completedOrders").textContent = completed;
+
+      if (revenue >= 100000) {
+        $("totalRevenue").textContent =
+          "৳" + (revenue / 100000).toFixed(2) + "L";
+      } else {
+        $("totalRevenue").textContent =
+          formatPrice(revenue);
+      }
     }
 
+    /* =========================
+       FILTER + SORT
+    ========================= */
 
-    /* =========================================
-       CLOSE MODAL
-    ========================================== */
+    function getVisibleOrders() {
+      const search = $("orderSearch").value
+        .trim()
+        .toLowerCase();
 
-    function closeModal() {
+      const status = $("statusFilter").value;
+      const sort = $("sortFilter").value;
 
-      modal.classList.remove(
-        "show"
-      );
+      let result = orders.filter(order => {
 
-      currentOrderId =
-        null;
+        const matchesSearch =
+          !search ||
+          order.id.toLowerCase().includes(search) ||
+          order.customer.toLowerCase().includes(search) ||
+          order.email.toLowerCase().includes(search) ||
+          order.website.toLowerCase().includes(search);
 
+        const matchesStatus =
+          status === "all" ||
+          order.status === status;
+
+        return matchesSearch && matchesStatus;
+      });
+
+      result.sort((a, b) => {
+
+        if (sort === "oldest") {
+          return a.timestamp - b.timestamp;
+        }
+
+        if (sort === "high") {
+          return Number(b.amount) - Number(a.amount);
+        }
+
+        if (sort === "low") {
+          return Number(a.amount) - Number(b.amount);
+        }
+
+        return b.timestamp - a.timestamp;
+      });
+
+      return result;
     }
 
+    /* =========================
+       RENDER
+    ========================= */
 
-    /* =========================================
-       SAVE ORDER
-    ========================================== */
+    function renderOrders() {
+      const visible = getVisibleOrders();
 
-    document.getElementById(
-      "save-order"
-    ).addEventListener(
-      "click",
-      () => {
+      const body = $("ordersBody");
+      const empty = $("emptyState");
 
-        if (!currentOrderId) {
-          return;
-        }
+      body.innerHTML = "";
 
-
-        const order =
-          orders.find(
-            item =>
-              item.id ===
-              currentOrderId
-          );
-
-
-        if (!order) {
-          return;
-        }
-
-
-        order.status =
-          document.getElementById(
-            "modal-order-status"
-          ).value;
-
-
-        order.payment =
-          document.getElementById(
-            "modal-payment-status"
-          ).value;
-
-
-        saveOrders();
-
-        renderOrders();
-
-        closeModal();
-
-
-        showToast(
-          "Order Updated",
-          `${order.id} has been updated successfully.`
-        );
-
-      }
-    );
-
-
-    /* =========================================
-       TABLE ACTIONS
-    ========================================== */
-
-    tableBody.addEventListener(
-      "click",
-      event => {
-
-        const viewButton =
-          event.target.closest(
-            "[data-view-order]"
-          );
-
-
-        const deleteButton =
-          event.target.closest(
-            "[data-delete-order]"
-          );
-
-
-        if (viewButton) {
-
-          openOrderModal(
-            viewButton.dataset
-              .viewOrder
-          );
-
-          return;
-
-        }
-
-
-        if (deleteButton) {
-
-          deleteOrder(
-            deleteButton.dataset
-              .deleteOrder
-          );
-
-        }
-
-      }
-    );
-
-
-    /* =========================================
-       DELETE
-    ========================================== */
-
-    function deleteOrder(
-      id
-    ) {
-
-      const order =
-        orders.find(
-          item =>
-            item.id === id
-        );
-
-
-      if (!order) return;
-
-
-      const confirmed =
-        confirm(
-          `Delete order ${order.id}? This demo action cannot be undone.`
-        );
-
-
-      if (!confirmed) {
+      if (!visible.length) {
+        empty.style.display = "block";
+        $("paginationInfo").textContent =
+          "No matching orders";
         return;
       }
 
+      empty.style.display = "none";
 
-      orders =
-        orders.filter(
-          item =>
-            item.id !== id
-        );
+      visible.forEach(order => {
 
+        const row = document.createElement("tr");
 
-      saveOrders();
+        row.innerHTML = `
+          <td>
+            <div class="order-id">
+              #${escapeHTML(order.id)}
+            </div>
 
-      renderOrders();
+            <div class="order-date">
+              ${escapeHTML(order.date)}
+            </div>
+          </td>
 
+          <td>
+            <div class="customer">
 
-      showToast(
-        "Order Deleted",
-        `${order.id} has been removed.`
-      );
+              <div class="customer-avatar">
+                ${escapeHTML(getInitials(order.customer))}
+              </div>
 
+              <div>
+                <div class="customer-name">
+                  ${escapeHTML(order.customer)}
+                </div>
+
+                <div class="customer-email">
+                  ${escapeHTML(order.email)}
+                </div>
+              </div>
+
+            </div>
+          </td>
+
+          <td>
+            <div class="website-name">
+              ${escapeHTML(order.website)}
+            </div>
+
+            <div class="website-category">
+              ${escapeHTML(order.category)}
+            </div>
+          </td>
+
+          <td>
+            <div class="price">
+              ${formatPrice(order.amount)}
+            </div>
+          </td>
+
+          <td>
+            <span class="status ${escapeHTML(order.status)}">
+              ${escapeHTML(statusLabel(order.status))}
+            </span>
+          </td>
+
+          <td>
+            <div class="action-group">
+
+              <button
+                class="icon-btn view-order"
+                data-id="${escapeHTML(order.id)}"
+                title="View Order"
+              >
+                <i class="fa-solid fa-eye"></i>
+              </button>
+
+              ${
+                order.status === "pending" ||
+                order.status === "processing"
+                  ? `
+                    <button
+                      class="icon-btn complete-order"
+                      data-id="${escapeHTML(order.id)}"
+                      title="Mark Completed"
+                    >
+                      <i class="fa-solid fa-check"></i>
+                    </button>
+                  `
+                  : ""
+              }
+
+            </div>
+          </td>
+        `;
+
+        body.appendChild(row);
+      });
+
+      $("paginationInfo").textContent =
+        `Showing 1–${visible.length} of ${visible.length} matching orders`;
+
+      attachRowActions();
     }
 
+    /* =========================
+       ROW ACTIONS
+    ========================= */
 
-    /* =========================================
-       FILTER EVENTS
-    ========================================== */
+    function attachRowActions() {
 
-    searchInput.addEventListener(
+      document.querySelectorAll(".view-order")
+        .forEach(button => {
+
+          button.addEventListener("click", () => {
+            openOrder(button.dataset.id);
+          });
+
+        });
+
+      document.querySelectorAll(".complete-order")
+        .forEach(button => {
+
+          button.addEventListener("click", () => {
+            completeOrder(button.dataset.id);
+          });
+
+        });
+    }
+
+    /* =========================
+       ORDER MODAL
+    ========================= */
+
+    function openOrder(id) {
+
+      const order = orders.find(
+        item => item.id === id
+      );
+
+      if (!order) return;
+
+      selectedOrder = order;
+
+      $("modalOrderId").textContent =
+        `Order #${order.id}`;
+
+      $("modalCustomer").textContent =
+        order.customer;
+
+      $("modalEmail").textContent =
+        order.email || "Not provided";
+
+      $("modalPhone").textContent =
+        order.phone || "Not provided";
+
+      $("modalDate").textContent =
+        order.date;
+
+      $("modalWebsite").textContent =
+        order.website;
+
+      $("modalAmount").textContent =
+        formatPrice(order.amount);
+
+      $("modalPayment").textContent =
+        order.payment || "Pending confirmation";
+
+      $("modalStatus").textContent =
+        statusLabel(order.status);
+
+      $("modalNote").textContent =
+        order.note || "No customer note.";
+
+      $("orderModal").classList.add("show");
+
+      $("markCompleteBtn").style.display =
+        order.status === "completed" ||
+        order.status === "cancelled"
+          ? "none"
+          : "inline-flex";
+    }
+
+    function closeModal() {
+      $("orderModal").classList.remove("show");
+      selectedOrder = null;
+    }
+
+    /* =========================
+       COMPLETE ORDER
+    ========================= */
+
+    function completeOrder(id) {
+
+      const order = orders.find(
+        item => item.id === id
+      );
+
+      if (!order) return;
+
+      order.status = "completed";
+      order.payment = "Confirmed";
+
+      saveOrders();
+      updateStats();
+      renderOrders();
+
+      if (
+        selectedOrder &&
+        selectedOrder.id === id
+      ) {
+        openOrder(id);
+      }
+
+      showToast(
+        "Order completed",
+        `#${id} has been marked as completed.`
+      );
+    }
+
+    /* =========================
+       EXPORT
+    ========================= */
+
+    function exportOrders() {
+
+      const visible = getVisibleOrders();
+
+      if (!visible.length) {
+        showToast(
+          "Nothing to export",
+          "No matching orders are available."
+        );
+        return;
+      }
+
+      const headers = [
+        "Order ID",
+        "Customer",
+        "Email",
+        "Phone",
+        "Website",
+        "Category",
+        "Amount",
+        "Status",
+        "Payment",
+        "Date"
+      ];
+
+      const rows = visible.map(order => [
+        order.id,
+        order.customer,
+        order.email,
+        order.phone,
+        order.website,
+        order.category,
+        order.amount,
+        order.status,
+        order.payment,
+        order.date
+      ]);
+
+      const csv = [
+        headers,
+        ...rows
+      ]
+        .map(row =>
+          row
+            .map(value =>
+              `"${String(value ?? "")
+                .replace(/"/g, '""')}"`
+            )
+            .join(",")
+        )
+        .join("\n");
+
+      const blob = new Blob(
+        [csv],
+        { type: "text/csv;charset=utf-8;" }
+      );
+
+      const url = URL.createObjectURL(blob);
+
+      const link = document.createElement("a");
+
+      link.href = url;
+      link.download =
+        "website-deals-orders.csv";
+
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+
+      URL.revokeObjectURL(url);
+
+      showToast(
+        "Export complete",
+        `${visible.length} order(s) exported.`
+      );
+    }
+
+    /* =========================
+       REFRESH
+    ========================= */
+
+    function refreshOrders() {
+
+      loadOrders();
+      updateStats();
+      renderOrders();
+
+      showToast(
+        "Orders refreshed",
+        "Latest available demo order data loaded."
+      );
+    }
+
+    /* =========================
+       MOBILE SIDEBAR
+    ========================= */
+
+    function openSidebar() {
+      $("sidebar").classList.add("open");
+      $("sidebarOverlay").classList.add("show");
+    }
+
+    function closeSidebar() {
+      $("sidebar").classList.remove("open");
+      $("sidebarOverlay").classList.remove("show");
+    }
+
+    /* =========================
+       SIGN OUT
+    ========================= */
+
+    function signOut() {
+
+      try {
+        sessionStorage.removeItem("websiteDealsAdmin");
+        localStorage.removeItem("websiteDealsAdminSession");
+      } catch (error) {}
+
+      window.location.href = "index.html";
+    }
+
+    /* =========================
+       EVENTS
+    ========================= */
+
+    $("orderSearch").addEventListener(
       "input",
       renderOrders
     );
 
-
-    statusFilter.addEventListener(
+    $("statusFilter").addEventListener(
       "change",
       renderOrders
     );
 
-
-    paymentFilter.addEventListener(
+    $("sortFilter").addEventListener(
       "change",
       renderOrders
     );
 
-
-    sortFilter.addEventListener(
-      "change",
-      renderOrders
+    $("refreshBtn").addEventListener(
+      "click",
+      refreshOrders
     );
 
+    $("exportBtn").addEventListener(
+      "click",
+      exportOrders
+    );
 
-    /* =========================================
-       MODAL EVENTS
-    ========================================== */
+    $("mobileMenuBtn").addEventListener(
+      "click",
+      openSidebar
+    );
 
-    document.getElementById(
-      "modal-close"
-    ).addEventListener(
+    $("sidebarOverlay").addEventListener(
+      "click",
+      closeSidebar
+    );
+
+    $("modalClose").addEventListener(
       "click",
       closeModal
     );
 
-
-    document.getElementById(
-      "cancel-modal"
-    ).addEventListener(
+    $("modalCancel").addEventListener(
       "click",
       closeModal
     );
 
+    $("markCompleteBtn").addEventListener(
+      "click",
+      () => {
 
-    modal.addEventListener(
+        if (!selectedOrder) return;
+
+        completeOrder(
+          selectedOrder.id
+        );
+
+      }
+    );
+
+    $("orderModal").addEventListener(
       "click",
       event => {
 
         if (
-          event.target === modal
+          event.target === $("orderModal")
         ) {
-
           closeModal();
-
         }
 
       }
     );
 
+    $("prevPage").addEventListener(
+      "click",
+      () => {
+        showToast(
+          "Pagination",
+          "Previous page is ready for database pagination."
+        );
+      }
+    );
+
+    $("nextPage").addEventListener(
+      "click",
+      () => {
+        showToast(
+          "Pagination",
+          "Next page is ready for database pagination."
+        );
+      }
+    );
+
+    $("signoutBtn").addEventListener(
+      "click",
+      signOut
+    );
 
     document.addEventListener(
       "keydown",
       event => {
 
-        if (
-          event.key === "Escape"
-        ) {
-
+        if (event.key === "Escape") {
           closeModal();
-
+          closeSidebar();
         }
 
       }
     );
 
-
-    /* =========================================
-       REFRESH
-    ========================================== */
-
-    document.getElementById(
-      "refresh-btn"
-    ).addEventListener(
-      "click",
-      () => {
-
-        loadOrders();
-
-        renderOrders();
-
-
-        showToast(
-          "Refreshed",
-          "Order data has been refreshed."
-        );
-
-      }
-    );
-
-
-    /* =========================================
-       TOAST CLOSE
-    ========================================== */
-
-    document.getElementById(
-      "toast-close"
-    ).addEventListener(
-      "click",
-      () => {
-
-        document
-          .getElementById(
-            "toast"
-          )
-          .classList.remove(
-            "show"
-          );
-
-      }
-    );
-
-
-    /* =========================================
-       MOBILE SIDEBAR
-    ========================================== */
-
-    const sidebar =
-      document.getElementById(
-        "sidebar"
-      );
-
-
-    const sidebarOverlay =
-      document.getElementById(
-        "sidebar-overlay"
-      );
-
-
-    function toggleSidebar() {
-
-      sidebar.classList.toggle(
-        "open"
-      );
-
-      sidebarOverlay.classList.toggle(
-        "show"
-      );
-
-    }
-
-
-    document.getElementById(
-      "mobile-toggle"
-    ).addEventListener(
-      "click",
-      toggleSidebar
-    );
-
-
-    sidebarOverlay.addEventListener(
-      "click",
-      toggleSidebar
-    );
-
-
-    document
-      .querySelectorAll(
-        ".nav-item"
-      )
-      .forEach(item => {
-
-        item.addEventListener(
-          "click",
-          () => {
-
-            if (
-              window.innerWidth <= 900
-            ) {
-
-              sidebar.classList.remove(
-                "open"
-              );
-
-              sidebarOverlay.classList.remove(
-                "show"
-              );
-
-            }
-
-          }
-        );
-
-      });
-
-
-    /* =========================================
-       LOGOUT
-    ========================================== */
-
-    document.getElementById(
-      "logout-btn"
-    ).addEventListener(
-      "click",
-      () => {
-
-        const confirmed =
-          confirm(
-            "Are you sure you want to sign out?"
-          );
-
-
-        if (!confirmed) {
-          return;
-        }
-
-
-        window.location.href =
-          "index.html";
-
-      }
-    );
-
-
-    /* =========================================
-       PAGINATION DEMO
-    ========================================== */
-
-    document
-      .querySelectorAll(
-        ".page-btn"
-      )
-      .forEach(button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            if (
-              button.querySelector(
-                "i"
-              )
-            ) {
-
-              showToast(
-                "Pagination",
-                "Pagination will connect to the database later."
-              );
-
-              return;
-
-            }
-
-
-            document
-              .querySelectorAll(
-                ".page-btn"
-              )
-              .forEach(
-                item =>
-                  item.classList.remove(
-                    "active"
-                  )
-              );
-
-
-            button.classList.add(
-              "active"
-            );
-
-
-            showToast(
-              "Page Selected",
-              `Page ${button.textContent.trim()} selected.`
-            );
-
-          }
-        );
-
-      });
-
-
-    /* =========================================
+    /* =========================
        INITIALIZE
-    ========================================== */
+    ========================= */
 
     loadOrders();
-
+    updateStats();
     renderOrders();
 
   </script>
