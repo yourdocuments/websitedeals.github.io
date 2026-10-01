@@ -1,1170 +1,1691 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Access Management | Website Deals</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta
+    name="theme-color"
+    content="#0b1110"
+  >
 
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <meta
+    name="description"
+    content="Website Deals Admin Portal"
+  >
+
+  <title>Admin Login | Website Deals</title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="../logo.png"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   >
 
-  <link rel="stylesheet" href="css/admin.css">
-
   <style>
 
-    .access-stats{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
-      margin-bottom:24px;
+    :root {
+      --green: #18a957;
+      --green-dark: #108344;
+      --green-soft: #eaf9f0;
+
+      --black: #0b1110;
+      --black-2: #111918;
+      --text: #17211d;
+      --muted: #718079;
+
+      --white: #ffffff;
+      --surface: #f6f9f7;
+      --border: #e2e9e5;
+
+      --danger: #dc3545;
+
+      --shadow:
+        0 30px 80px rgba(10, 25, 18, .14);
+
+      --radius: 24px;
     }
 
-    .access-card{
-      background:#fff;
-      border:1px solid #e7ece9;
-      border-radius:18px;
-      padding:20px;
-      box-shadow:0 8px 25px rgba(15,23,42,.05);
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    .access-card-top{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      margin-bottom:16px;
+
+    html {
+      scroll-behavior: smooth;
     }
 
-    .access-icon{
-      width:44px;
-      height:44px;
-      border-radius:13px;
-      background:#e9f9ef;
-      color:#18a957;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(24, 169, 87, .13),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 90% 90%,
+          rgba(24, 169, 87, .09),
+          transparent 28%
+        ),
+        var(--surface);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 24px;
+
+      overflow-x: hidden;
     }
 
-    .access-label{
-      color:#718096;
-      font-size:13px;
-      font-weight:600;
+
+    /* =========================================
+       BACKGROUND
+       ========================================= */
+
+    .background-grid {
+      position: fixed;
+      inset: 0;
+
+      pointer-events: none;
+
+      opacity: .42;
+
+      background-image:
+        linear-gradient(
+          rgba(24, 169, 87, .035) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(24, 169, 87, .035) 1px,
+          transparent 1px
+        );
+
+      background-size: 42px 42px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent
+        );
     }
 
-    .access-value{
-      color:#10202b;
-      font-size:28px;
-      font-weight:800;
+
+    .orb {
+      position: fixed;
+
+      width: 260px;
+      height: 260px;
+
+      border-radius: 50%;
+
+      filter: blur(5px);
+
+      pointer-events: none;
+
+      opacity: .12;
     }
 
-    .table-card{
-      background:#fff;
-      border:1px solid #e7ece9;
-      border-radius:18px;
-      overflow:hidden;
-      box-shadow:0 8px 25px rgba(15,23,42,.05);
+
+    .orb-one {
+      top: -110px;
+      left: -90px;
+
+      background: var(--green);
     }
 
-    .table-header{
-      padding:20px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:15px;
-      border-bottom:1px solid #e7ece9;
+
+    .orb-two {
+      right: -120px;
+      bottom: -110px;
+
+      background: var(--green-dark);
     }
 
-    .table-header h2{
-      margin:0;
-      font-size:18px;
-      color:#10202b;
+
+    /* =========================================
+       MAIN
+       ========================================= */
+
+    .login-shell {
+      position: relative;
+
+      width: 100%;
+      max-width: 1080px;
+
+      min-height: 650px;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      background: var(--white);
+
+      border: 1px solid rgba(226, 233, 229, .9);
+
+      border-radius: 32px;
+
+      overflow: hidden;
+
+      box-shadow: var(--shadow);
+
+      z-index: 2;
     }
 
-    .table-header p{
-      margin:5px 0 0;
-      color:#718096;
-      font-size:13px;
+
+    /* =========================================
+       BRAND PANEL
+       ========================================= */
+
+    .brand-panel {
+      position: relative;
+
+      padding: 54px;
+
+      color: var(--white);
+
+      background:
+        radial-gradient(
+          circle at 80% 15%,
+          rgba(24, 169, 87, .34),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 20% 85%,
+          rgba(24, 169, 87, .16),
+          transparent 32%
+        ),
+        var(--black);
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      overflow: hidden;
     }
 
-    .btn-primary{
-      height:44px;
-      border:0;
-      background:#18a957;
-      color:#fff;
-      padding:0 16px;
-      border-radius:11px;
-      cursor:pointer;
-      font-family:inherit;
-      font-weight:700;
+
+    .brand-panel::before {
+      content: "";
+
+      position: absolute;
+
+      width: 420px;
+      height: 420px;
+
+      right: -190px;
+      top: -170px;
+
+      border: 1px solid
+        rgba(255, 255, 255, .08);
+
+      border-radius: 50%;
     }
 
-    .btn-primary:hover{
-      background:#108344;
+
+    .brand-panel::after {
+      content: "";
+
+      position: absolute;
+
+      width: 300px;
+      height: 300px;
+
+      left: -170px;
+      bottom: -170px;
+
+      border: 1px solid
+        rgba(24, 169, 87, .18);
+
+      border-radius: 50%;
     }
 
-    .table-wrap{
-      overflow-x:auto;
+
+    .brand-content {
+      position: relative;
+      z-index: 2;
     }
 
-    table{
-      width:100%;
-      min-width:850px;
-      border-collapse:collapse;
+
+    .logo-box {
+      width: 58px;
+      height: 58px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 17px;
+
+      background: var(--white);
+
+      padding: 9px;
+
+      margin-bottom: 34px;
+
+      box-shadow:
+        0 12px 35px
+        rgba(0, 0, 0, .18);
     }
 
-    th{
-      padding:15px 18px;
-      text-align:left;
-      background:#f8faf9;
-      color:#64748b;
-      font-size:12px;
-      text-transform:uppercase;
-      letter-spacing:.04em;
-      border-bottom:1px solid #e7ece9;
+
+    .logo-box img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
     }
 
-    td{
-      padding:17px 18px;
-      border-bottom:1px solid #eef2ef;
-      font-size:14px;
-      color:#26343d;
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 8px 12px;
+
+      border: 1px solid
+        rgba(255, 255, 255, .12);
+
+      background:
+        rgba(255, 255, 255, .055);
+
+      border-radius: 999px;
+
+      color: #b7c6be;
+
+      font-size: 11px;
+      font-weight: 700;
+
+      letter-spacing: .12em;
+      text-transform: uppercase;
+
+      margin-bottom: 20px;
     }
 
-    tr:last-child td{
-      border-bottom:0;
+
+    .eyebrow span {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 0 5px
+        rgba(24, 169, 87, .12);
     }
 
-    .person{
-      display:flex;
-      align-items:center;
-      gap:12px;
+
+    .brand-panel h1 {
+      max-width: 470px;
+
+      font-size: clamp(
+        38px,
+        5vw,
+        62px
+      );
+
+      line-height: .98;
+
+      letter-spacing: -.055em;
+
+      margin-bottom: 22px;
     }
 
-    .avatar{
-      width:42px;
-      height:42px;
-      border-radius:13px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      background:#10202b;
-      color:#fff;
-      font-weight:800;
+
+    .brand-panel h1 span {
+      color: #63dc95;
     }
 
-    .person strong{
-      display:block;
-      color:#10202b;
+
+    .brand-description {
+      max-width: 440px;
+
+      color: #a7b5ae;
+
+      font-size: 15px;
+
+      line-height: 1.75;
     }
 
-    .person small{
-      display:block;
-      color:#718096;
-      margin-top:3px;
+
+    /* =========================================
+       FEATURES
+       ========================================= */
+
+    .feature-list {
+      position: relative;
+      z-index: 2;
+
+      display: grid;
+      gap: 12px;
+
+      margin-top: 45px;
     }
 
-    .role-badge{
-      display:inline-flex;
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:700;
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+
+      color: #d6dfda;
+
+      font-size: 13px;
+      font-weight: 600;
     }
 
-    .role-owner{
-      background:#e9f9ef;
-      color:#168345;
+
+    .feature-icon {
+      width: 32px;
+      height: 32px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 10px;
+
+      color: #70df9b;
+
+      background:
+        rgba(24, 169, 87, .12);
+
+      border: 1px solid
+        rgba(24, 169, 87, .18);
     }
 
-    .role-admin{
-      background:#eef4ff;
-      color:#315fa8;
+
+    .brand-footer {
+      position: relative;
+      z-index: 2;
+
+      color: #718078;
+
+      font-size: 11px;
+      line-height: 1.7;
     }
 
-    .status{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      padding:6px 10px;
-      border-radius:999px;
-      font-size:12px;
-      font-weight:700;
+
+    /* =========================================
+       LOGIN PANEL
+       ========================================= */
+
+    .login-panel {
+      padding: 58px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .status.active{
-      background:#eaf9ef;
-      color:#168345;
+
+    .login-heading {
+      margin-bottom: 34px;
     }
 
-    .status.inactive{
-      background:#fff1f2;
-      color:#be123c;
+
+    .login-heading .small-title {
+      color: var(--green-dark);
+
+      font-size: 11px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+
+      letter-spacing: .13em;
+
+      margin-bottom: 10px;
     }
 
-    .actions{
-      display:flex;
-      gap:7px;
+
+    .login-heading h2 {
+      font-size: 32px;
+
+      letter-spacing: -.045em;
+
+      margin-bottom: 10px;
     }
 
-    .icon-btn{
-      width:36px;
-      height:36px;
-      border:1px solid #dfe6e2;
-      background:#fff;
-      border-radius:10px;
-      cursor:pointer;
-      color:#475569;
+
+    .login-heading p {
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.65;
     }
 
-    .icon-btn:hover{
-      border-color:#18a957;
-      color:#18a957;
+
+    /* =========================================
+       FORM
+       ========================================= */
+
+    .form-group {
+      margin-bottom: 19px;
     }
 
-    .icon-btn.danger:hover{
-      border-color:#ef4444;
-      color:#ef4444;
+
+    .form-label {
+      display: block;
+
+      margin-bottom: 9px;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      color: #34413b;
     }
 
-    .modal{
-      position:fixed;
-      inset:0;
-      background:rgba(15,23,42,.55);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-      z-index:9999;
+
+    .input-wrap {
+      position: relative;
     }
 
-    .modal.show{
-      display:flex;
+
+    .input-icon {
+      position: absolute;
+
+      left: 16px;
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      color: #829089;
+
+      font-size: 14px;
+
+      pointer-events: none;
     }
 
-    .modal-box{
-      width:100%;
-      max-width:520px;
-      background:#fff;
-      border-radius:20px;
-      overflow:hidden;
-      box-shadow:0 30px 80px rgba(0,0,0,.2);
+
+    .form-input {
+      width: 100%;
+
+      height: 54px;
+
+      padding:
+        0 48px 0 46px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 14px;
+
+      background: #fbfdfc;
+
+      outline: none;
+
+      color: var(--text);
+
+      font-family: inherit;
+
+      font-size: 14px;
+
+      transition:
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
     }
 
-    .modal-head{
-      padding:20px;
-      border-bottom:1px solid #e7ece9;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
+
+    .form-input::placeholder {
+      color: #a3aea8;
     }
 
-    .modal-head h3{
-      margin:0;
-      color:#10202b;
+
+    .form-input:focus {
+      background: var(--white);
+
+      border-color:
+        rgba(24, 169, 87, .65);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(24, 169, 87, .09);
     }
 
-    .modal-close{
-      border:0;
-      width:36px;
-      height:36px;
-      border-radius:10px;
-      background:#f1f5f3;
-      cursor:pointer;
+
+    .password-toggle {
+      position: absolute;
+
+      right: 15px;
+      top: 50%;
+
+      transform:
+        translateY(-50%);
+
+      width: 30px;
+      height: 30px;
+
+      border: 0;
+
+      background: transparent;
+
+      color: #84918a;
+
+      cursor: pointer;
     }
 
-    .modal-body{
-      padding:22px;
+
+    .password-toggle:hover {
+      color: var(--green-dark);
     }
 
-    .form-group{
-      margin-bottom:16px;
+
+    /* =========================================
+       OPTIONS
+       ========================================= */
+
+    .form-options {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+
+      margin: 4px 0 24px;
     }
 
-    .form-group label{
-      display:block;
-      margin-bottom:7px;
-      color:#34434d;
-      font-size:13px;
-      font-weight:700;
+
+    .remember {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      color: #66736c;
+
+      font-size: 12px;
+
+      cursor: pointer;
     }
 
-    .form-group input,
-    .form-group select{
-      width:100%;
-      height:45px;
-      padding:0 13px;
-      border:1px solid #dfe6e2;
-      border-radius:11px;
-      outline:none;
-      font-family:inherit;
-      background:#fff;
+
+    .remember input {
+      width: 15px;
+      height: 15px;
+
+      accent-color: var(--green);
+
+      cursor: pointer;
     }
 
-    .form-group input:focus,
-    .form-group select:focus{
-      border-color:#18a957;
-      box-shadow:0 0 0 3px rgba(24,169,87,.08);
+
+    .forgot-link {
+      color: var(--green-dark);
+
+      font-size: 12px;
+      font-weight: 700;
+
+      text-decoration: none;
     }
 
-    .modal-actions{
-      display:flex;
-      justify-content:flex-end;
-      gap:10px;
-      margin-top:20px;
+
+    .forgot-link:hover {
+      text-decoration: underline;
     }
 
-    .btn-secondary{
-      height:44px;
-      padding:0 15px;
-      border:1px solid #dfe6e2;
-      background:#fff;
-      border-radius:11px;
-      cursor:pointer;
-      font-family:inherit;
-      font-weight:600;
+
+    /* =========================================
+       LOGIN BUTTON
+       ========================================= */
+
+    .login-button {
+      width: 100%;
+
+      min-height: 55px;
+
+      border: 0;
+
+      border-radius: 15px;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--green),
+          var(--green-dark)
+        );
+
+      color: var(--white);
+
+      font-family: inherit;
+
+      font-size: 14px;
+      font-weight: 800;
+
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 10px;
+
+      box-shadow:
+        0 14px 28px
+        rgba(24, 169, 87, .20);
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        opacity .2s ease;
     }
 
-    .security-note{
-      margin-top:22px;
-      padding:16px;
-      background:#f8faf9;
-      border:1px solid #e7ece9;
-      border-radius:14px;
-      display:flex;
-      gap:12px;
-      color:#64748b;
-      font-size:13px;
-      line-height:1.6;
+
+    .login-button:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 18px 35px
+        rgba(24, 169, 87, .28);
     }
 
-    .security-note i{
-      color:#18a957;
-      margin-top:3px;
+
+    .login-button:active {
+      transform: translateY(0);
     }
 
-    @media(max-width:800px){
-      .access-stats{
-        grid-template-columns:1fr;
+
+    .login-button.loading {
+      pointer-events: none;
+
+      opacity: .75;
+    }
+
+
+    .login-button .spinner {
+      display: none;
+
+      width: 17px;
+      height: 17px;
+
+      border:
+        2px solid
+        rgba(255, 255, 255, .35);
+
+      border-top-color:
+        var(--white);
+
+      border-radius: 50%;
+
+      animation:
+        spin .7s linear infinite;
+    }
+
+
+    .login-button.loading .spinner {
+      display: block;
+    }
+
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+
+    /* =========================================
+       DEMO NOTICE
+       ========================================= */
+
+    .security-note {
+      margin-top: 22px;
+
+      padding: 14px 15px;
+
+      border:
+        1px solid #e8eee9;
+
+      border-radius: 14px;
+
+      background: #f8fbf9;
+
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 11px;
+    }
+
+
+    .security-note i {
+      color: var(--green-dark);
+
+      margin-top: 2px;
+    }
+
+
+    .security-note p {
+      color: #758179;
+
+      font-size: 11px;
+
+      line-height: 1.65;
+    }
+
+
+    /* =========================================
+       ERROR
+       ========================================= */
+
+    .login-error {
+      display: none;
+
+      padding: 12px 14px;
+
+      margin-bottom: 18px;
+
+      border:
+        1px solid
+        rgba(220, 53, 69, .18);
+
+      background:
+        rgba(220, 53, 69, .06);
+
+      color: var(--danger);
+
+      border-radius: 12px;
+
+      font-size: 12px;
+      font-weight: 600;
+
+      line-height: 1.5;
+    }
+
+
+    .login-error.show {
+      display: block;
+    }
+
+
+    /* =========================================
+       BOTTOM
+       ========================================= */
+
+    .back-home {
+      display: inline-flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 7px;
+
+      margin-top: 25px;
+
+      color: #7a8780;
+
+      font-size: 12px;
+      font-weight: 600;
+
+      text-decoration: none;
+    }
+
+
+    .back-home:hover {
+      color: var(--green-dark);
+    }
+
+
+    /* =========================================
+       TOAST
+       ========================================= */
+
+    .toast {
+      position: fixed;
+
+      right: 24px;
+      bottom: 24px;
+
+      z-index: 100;
+
+      width: min(
+        360px,
+        calc(100vw - 48px)
+      );
+
+      padding: 15px 17px;
+
+      background:
+        var(--black);
+
+      color: white;
+
+      border-radius: 15px;
+
+      box-shadow:
+        0 20px 50px
+        rgba(0, 0, 0, .2);
+
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+
+      transform:
+        translateY(25px);
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      transition:
+        opacity .25s ease,
+        transform .25s ease;
+    }
+
+
+    .toast.show {
+      opacity: 1;
+
+      transform:
+        translateY(0);
+    }
+
+
+    .toast-icon {
+      width: 32px;
+      height: 32px;
+
+      flex: 0 0 32px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 10px;
+
+      background:
+        rgba(24, 169, 87, .15);
+
+      color: #65df96;
+    }
+
+
+    .toast strong {
+      display: block;
+
+      font-size: 12px;
+
+      margin-bottom: 3px;
+    }
+
+
+    .toast p {
+      color: #aab6b0;
+
+      font-size: 11px;
+
+      line-height: 1.5;
+    }
+
+
+    /* =========================================
+       RESPONSIVE
+       ========================================= */
+
+    @media (max-width: 900px) {
+
+      .login-shell {
+        grid-template-columns: 1fr;
+
+        max-width: 560px;
       }
 
-      .table-header{
-        align-items:flex-start;
-        flex-direction:column;
+
+      .brand-panel {
+        min-height: 330px;
+
+        padding: 38px;
       }
 
-      .btn-primary{
-        width:100%;
+
+      .brand-panel h1 {
+        font-size: 40px;
       }
+
+
+      .feature-list {
+        grid-template-columns:
+          repeat(2, 1fr);
+
+        margin-top: 30px;
+      }
+
+
+      .brand-footer {
+        margin-top: 30px;
+      }
+
+
+      .login-panel {
+        padding: 42px 38px;
+      }
+
+    }
+
+
+    @media (max-width: 560px) {
+
+      body {
+        padding: 12px;
+      }
+
+
+      .login-shell {
+        border-radius: 23px;
+      }
+
+
+      .brand-panel {
+        min-height: auto;
+
+        padding: 30px 25px;
+      }
+
+
+      .logo-box {
+        width: 52px;
+        height: 52px;
+
+        margin-bottom: 25px;
+      }
+
+
+      .brand-panel h1 {
+        font-size: 35px;
+      }
+
+
+      .brand-description {
+        font-size: 13px;
+      }
+
+
+      .feature-list {
+        grid-template-columns: 1fr;
+
+        margin-top: 28px;
+      }
+
+
+      .brand-footer {
+        display: none;
+      }
+
+
+      .login-panel {
+        padding: 32px 25px;
+      }
+
+
+      .login-heading {
+        margin-bottom: 27px;
+      }
+
+
+      .login-heading h2 {
+        font-size: 27px;
+      }
+
+
+      .form-options {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+
+      .toast {
+        right: 12px;
+        bottom: 12px;
+
+        width:
+          calc(100vw - 24px);
+      }
+
+    }
+
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+
     }
 
   </style>
 </head>
 
+
 <body>
 
-<script>
-(function(){
+  <div class="background-grid"></div>
 
-  const session =
-    JSON.parse(
-      localStorage.getItem("websiteDealsAdminSession") || "null"
-    );
+  <div class="orb orb-one"></div>
+  <div class="orb orb-two"></div>
 
-  if(!session){
-    window.location.href = "index.html";
-    return;
-  }
 
-  if(session.role !== "superadmin"){
-    window.location.href = "dashboard.html";
-    return;
-  }
+  <main class="login-shell">
 
-  window.ADMIN_SESSION = session;
 
-})();
-</script>
+    <!-- =====================================
+         BRAND PANEL
+         ====================================== -->
 
-<div class="admin-layout">
+    <section class="brand-panel">
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar" id="sidebar">
+      <div class="brand-content">
 
-    <div class="sidebar-brand">
-      <a href="dashboard.html">
-        <img
-          src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
-          alt="Website Deals"
-        >
-      </a>
-    </div>
+        <div class="logo-box">
 
-    <nav class="sidebar-nav">
+          <img
+            src="../logo.png"
+            alt="Website Deals"
+          >
 
-      <a href="dashboard.html">
-        <i class="fa-solid fa-grid-2"></i>
-        <span>Dashboard</span>
-      </a>
-
-      <a href="websites.html">
-        <i class="fa-solid fa-window-maximize"></i>
-        <span>Websites</span>
-      </a>
-
-      <a href="categories.html">
-        <i class="fa-solid fa-layer-group"></i>
-        <span>Categories</span>
-      </a>
-
-      <a href="orders.html">
-        <i class="fa-solid fa-bag-shopping"></i>
-        <span>Orders</span>
-      </a>
-
-      <a href="customers.html">
-        <i class="fa-solid fa-users"></i>
-        <span>Customers</span>
-      </a>
-
-      <a href="newsletter.html">
-        <i class="fa-solid fa-envelope"></i>
-        <span>Newsletter</span>
-      </a>
-
-      <div class="sidebar-divider"></div>
-
-      <div class="sidebar-section-title">Management</div>
-
-      <a href="admins.html" class="active">
-        <i class="fa-solid fa-user-shield"></i>
-        <span>Access Management</span>
-      </a>
-
-      <a href="settings.html">
-        <i class="fa-solid fa-sliders"></i>
-        <span>Settings</span>
-      </a>
-
-    </nav>
-
-    <div class="sidebar-bottom">
-      <button class="logout-btn" onclick="logout()">
-        <i class="fa-solid fa-right-from-bracket"></i>
-        <span>Logout</span>
-      </button>
-    </div>
-
-  </aside>
-
-  <main class="main-content">
-
-    <header class="topbar">
-
-      <button class="mobile-menu-btn" onclick="toggleSidebar()">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-
-      <div class="topbar-title">
-        <span>Access Management</span>
-      </div>
-
-      <div class="topbar-user">
-        <div class="user-avatar" id="user-avatar">S</div>
-
-        <div>
-          <strong id="user-name">Admin</strong>
-          <small>Administrator</small>
         </div>
-      </div>
 
-    </header>
 
-    <section class="page-content">
+        <div class="eyebrow">
+          <span></span>
+          Secure Admin Portal
+        </div>
 
-      <div class="page-header">
 
-        <div>
+        <h1>
+          Manage your
+          <span>digital marketplace.</span>
+        </h1>
 
-          <div class="breadcrumb">
-            Dashboard / Access Management
+
+        <p class="brand-description">
+          Control websites, categories, orders,
+          customers and marketplace content
+          from one professional workspace.
+        </p>
+
+
+        <div class="feature-list">
+
+          <div class="feature">
+
+            <div class="feature-icon">
+              <i class="fa-solid fa-globe"></i>
+            </div>
+
+            Website Management
+
           </div>
 
-          <h1>Access Management</h1>
 
-          <p>
-            Manage authorized team accounts and access levels.
-          </p>
+          <div class="feature">
 
-        </div>
+            <div class="feature-icon">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </div>
 
-      </div>
+            Order Management
 
-      <!-- STATS -->
-      <div class="access-stats">
+          </div>
 
-        <div class="access-card">
 
-          <div class="access-card-top">
+          <div class="feature">
 
-            <span class="access-label">
-              Total Accounts
-            </span>
-
-            <div class="access-icon">
+            <div class="feature-icon">
               <i class="fa-solid fa-users"></i>
             </div>
 
+            Customer Management
+
           </div>
 
-          <div class="access-value" id="total-accounts">
-            0
-          </div>
 
-        </div>
+          <div class="feature">
 
-        <div class="access-card">
-
-          <div class="access-card-top">
-
-            <span class="access-label">
-              Active Accounts
-            </span>
-
-            <div class="access-icon">
-              <i class="fa-solid fa-user-check"></i>
+            <div class="feature-icon">
+              <i class="fa-solid fa-chart-line"></i>
             </div>
 
-          </div>
+            Marketplace Insights
 
-          <div class="access-value" id="active-accounts">
-            0
-          </div>
-
-        </div>
-
-        <div class="access-card">
-
-          <div class="access-card-top">
-
-            <span class="access-label">
-              Administrator Accounts
-            </span>
-
-            <div class="access-icon">
-              <i class="fa-solid fa-user-gear"></i>
-            </div>
-
-          </div>
-
-          <div class="access-value" id="admin-accounts">
-            0
           </div>
 
         </div>
 
       </div>
 
-      <!-- TABLE -->
-      <div class="table-card">
 
-        <div class="table-header">
+      <div class="brand-footer">
 
-          <div>
-            <h2>Authorized Accounts</h2>
+        Website Deals Admin Portal<br>
 
-            <p>
-              Accounts with access to the Website Deals admin portal.
-            </p>
-          </div>
-
-          <button
-            class="btn-primary"
-            onclick="openAddModal()"
-          >
-            <i class="fa-solid fa-plus"></i>
-            Add Account
-          </button>
-
-        </div>
-
-        <div class="table-wrap">
-
-          <table>
-
-            <thead>
-
-              <tr>
-                <th>User</th>
-                <th>Access Level</th>
-                <th>Status</th>
-                <th>Created</th>
-                <th>Last Access</th>
-                <th>Actions</th>
-              </tr>
-
-            </thead>
-
-            <tbody id="admin-list"></tbody>
-
-          </table>
-
-        </div>
-
-      </div>
-
-      <div class="security-note">
-
-        <i class="fa-solid fa-shield-halved"></i>
-
-        <div>
-          <strong>Security reminder</strong><br>
-          This browser-based version is for interface testing.
-          For production, use Firebase Authentication and Firestore
-          Security Rules so permissions cannot be bypassed by changing
-          browser storage or directly opening restricted URLs.
-        </div>
+        Premium Ready-Made Website Marketplace
 
       </div>
 
     </section>
 
+
+
+    <!-- =====================================
+         LOGIN PANEL
+         ====================================== -->
+
+    <section class="login-panel">
+
+      <div class="login-heading">
+
+        <div class="small-title">
+          Admin Access
+        </div>
+
+        <h2>
+          Welcome back.
+        </h2>
+
+        <p>
+          Sign in to continue to your
+          marketplace dashboard.
+        </p>
+
+      </div>
+
+
+      <div
+        id="login-error"
+        class="login-error"
+      ></div>
+
+
+      <form
+        id="login-form"
+        autocomplete="on"
+      >
+
+
+        <div class="form-group">
+
+          <label
+            class="form-label"
+            for="email"
+          >
+            Email Address
+          </label>
+
+
+          <div class="input-wrap">
+
+            <i
+              class="fa-regular fa-envelope input-icon"
+            ></i>
+
+
+            <input
+              id="email"
+              name="email"
+              class="form-input"
+              type="email"
+              placeholder="admin@example.com"
+              autocomplete="username"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+
+        <div class="form-group">
+
+          <label
+            class="form-label"
+            for="password"
+          >
+            Password
+          </label>
+
+
+          <div class="input-wrap">
+
+            <i
+              class="fa-solid fa-lock input-icon"
+            ></i>
+
+
+            <input
+              id="password"
+              name="password"
+              class="form-input"
+              type="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+
+
+            <button
+              type="button"
+              id="password-toggle"
+              class="password-toggle"
+              aria-label="Show password"
+            >
+              <i
+                class="fa-regular fa-eye"
+              ></i>
+            </button>
+
+          </div>
+
+        </div>
+
+
+
+        <div class="form-options">
+
+          <label class="remember">
+
+            <input
+              type="checkbox"
+              id="remember"
+              name="remember"
+            >
+
+            <span>
+              Remember me
+            </span>
+
+          </label>
+
+
+          <a
+            href="#"
+            class="forgot-link"
+            id="forgot-password"
+          >
+            Forgot password?
+          </a>
+
+        </div>
+
+
+
+        <button
+          type="submit"
+          class="login-button"
+          id="login-button"
+        >
+
+          <span>
+            Sign In
+          </span>
+
+          <i
+            class="fa-solid fa-arrow-right"
+          ></i>
+
+          <span class="spinner"></span>
+
+        </button>
+
+
+      </form>
+
+
+
+      <div class="security-note">
+
+        <i
+          class="fa-solid fa-shield-halved"
+        ></i>
+
+        <p>
+          Your account access is protected.
+          Only authorized users can access
+          the administration area.
+        </p>
+
+      </div>
+
+
+      <a
+        href="../index.html"
+        class="back-home"
+      >
+
+        <i class="fa-solid fa-arrow-left"></i>
+
+        Back to Website Deals
+
+      </a>
+
+    </section>
+
   </main>
 
-</div>
 
-<!-- ADD/EDIT MODAL -->
-<div class="modal" id="account-modal">
 
-  <div class="modal-box">
+  <!-- =====================================
+       TOAST
+       ====================================== -->
 
-    <div class="modal-head">
+  <div
+    id="toast"
+    class="toast"
+    role="status"
+    aria-live="polite"
+  >
 
-      <h3 id="modal-title">
-        Add Account
-      </h3>
+    <div class="toast-icon">
 
-      <button
-        class="modal-close"
-        onclick="closeModal()"
-      >
-        <i class="fa-solid fa-xmark"></i>
-      </button>
+      <i
+        class="fa-solid fa-circle-info"
+      ></i>
 
     </div>
 
-    <div class="modal-body">
 
-      <form id="account-form">
+    <div>
 
-        <input type="hidden" id="account-id">
+      <strong id="toast-title">
+        Notice
+      </strong>
 
-        <div class="form-group">
-
-          <label>Full Name</label>
-
-          <input
-            id="account-name"
-            type="text"
-            placeholder="Enter full name"
-            required
-          >
-
-        </div>
-
-        <div class="form-group">
-
-          <label>Email Address</label>
-
-          <input
-            id="account-email"
-            type="email"
-            placeholder="name@example.com"
-            required
-          >
-
-        </div>
-
-        <div class="form-group">
-
-          <label>Access Level</label>
-
-          <select id="account-role">
-
-            <option value="admin">
-              Administrator
-            </option>
-
-            <option value="superadmin">
-              Full Access
-            </option>
-
-          </select>
-
-        </div>
-
-        <div class="form-group">
-
-          <label>Status</label>
-
-          <select id="account-status">
-
-            <option value="active">
-              Active
-            </option>
-
-            <option value="inactive">
-              Inactive
-            </option>
-
-          </select>
-
-        </div>
-
-        <div class="modal-actions">
-
-          <button
-            type="button"
-            class="btn-secondary"
-            onclick="closeModal()"
-          >
-            Cancel
-          </button>
-
-          <button
-            type="submit"
-            class="btn-primary"
-          >
-            Save Account
-          </button>
-
-        </div>
-
-      </form>
+      <p id="toast-message">
+        Please check your information.
+      </p>
 
     </div>
 
   </div>
 
-</div>
 
-<script>
 
-const DEFAULT_ACCOUNTS = [
+  <script>
 
-  {
-    id:"ACC-001",
-    name:"Website Deals Owner",
-    email:"superadmin@websitedeals.com",
-    role:"superadmin",
-    status:"active",
-    created:"2026-09-01",
-    lastAccess:"Today"
-  },
+    /* =========================================
+       PASSWORD TOGGLE
+       ========================================= */
 
-  {
-    id:"ACC-002",
-    name:"Website Deals Admin",
-    email:"admin@websitedeals.com",
-    role:"admin",
-    status:"active",
-    created:"2026-09-05",
-    lastAccess:"Today"
-  }
+    const passwordInput =
+      document.getElementById("password");
 
-];
+    const passwordToggle =
+      document.getElementById("password-toggle");
 
-function getAccounts(){
 
-  let data =
-    JSON.parse(
-      localStorage.getItem("websiteDealsAccounts") || "null"
-    );
+    passwordToggle?.addEventListener(
+      "click",
+      () => {
 
-  if(!Array.isArray(data) || !data.length){
+        if (
+          passwordInput.type ===
+          "password"
+        ) {
 
-    data = DEFAULT_ACCOUNTS;
+          passwordInput.type =
+            "text";
 
-    localStorage.setItem(
-      "websiteDealsAccounts",
-      JSON.stringify(data)
-    );
+          passwordToggle.innerHTML =
+            '<i class="fa-regular fa-eye-slash"></i>';
 
-  }
+          passwordToggle.setAttribute(
+            "aria-label",
+            "Hide password"
+          );
 
-  return data;
-}
+        } else {
 
-let accounts = getAccounts();
+          passwordInput.type =
+            "password";
 
-function saveAccounts(){
+          passwordToggle.innerHTML =
+            '<i class="fa-regular fa-eye"></i>';
 
-  localStorage.setItem(
-    "websiteDealsAccounts",
-    JSON.stringify(accounts)
-  );
+          passwordToggle.setAttribute(
+            "aria-label",
+            "Show password"
+          );
 
-}
-
-function renderAccounts(){
-
-  const tbody =
-    document.getElementById("admin-list");
-
-  tbody.innerHTML = "";
-
-  accounts.forEach(account => {
-
-    const initial =
-      account.name.charAt(0).toUpperCase();
-
-    const tr =
-      document.createElement("tr");
-
-    tr.innerHTML = `
-
-      <td>
-
-        <div class="person">
-
-          <div class="avatar">
-            ${escapeHTML(initial)}
-          </div>
-
-          <div>
-
-            <strong>
-              ${escapeHTML(account.name)}
-            </strong>
-
-            <small>
-              ${escapeHTML(account.email)}
-            </small>
-
-          </div>
-
-        </div>
-
-      </td>
-
-      <td>
-
-        <span class="role-badge ${
-          account.role === "superadmin"
-            ? "role-owner"
-            : "role-admin"
-        }">
-
-          ${
-            account.role === "superadmin"
-              ? "Full Access"
-              : "Administrator"
-          }
-
-        </span>
-
-      </td>
-
-      <td>
-
-        <span class="status ${
-          account.status === "active"
-            ? "active"
-            : "inactive"
-        }">
-
-          <i class="fa-solid ${
-            account.status === "active"
-              ? "fa-circle-check"
-              : "fa-circle-xmark"
-          }"></i>
-
-          ${
-            account.status === "active"
-              ? "Active"
-              : "Inactive"
-          }
-
-        </span>
-
-      </td>
-
-      <td>
-        ${formatDate(account.created)}
-      </td>
-
-      <td>
-        ${escapeHTML(account.lastAccess || "—")}
-      </td>
-
-      <td>
-
-        <div class="actions">
-
-          <button
-            class="icon-btn"
-            title="Edit"
-            onclick="editAccount('${account.id}')"
-          >
-            <i class="fa-solid fa-pen"></i>
-          </button>
-
-          <button
-            class="icon-btn danger"
-            title="Delete"
-            onclick="deleteAccount('${account.id}')"
-          >
-            <i class="fa-solid fa-trash"></i>
-          </button>
-
-        </div>
-
-      </td>
-
-    `;
-
-    tbody.appendChild(tr);
-
-  });
-
-  updateStats();
-
-}
-
-function updateStats(){
-
-  document.getElementById("total-accounts").textContent =
-    accounts.length;
-
-  document.getElementById("active-accounts").textContent =
-    accounts.filter(x => x.status === "active").length;
-
-  document.getElementById("admin-accounts").textContent =
-    accounts.filter(x => x.role === "admin").length;
-
-}
-
-function openAddModal(){
-
-  document.getElementById("account-form").reset();
-
-  document.getElementById("account-id").value = "";
-
-  document.getElementById("modal-title").textContent =
-    "Add Account";
-
-  document
-    .getElementById("account-modal")
-    .classList.add("show");
-
-}
-
-function editAccount(id){
-
-  const account =
-    accounts.find(x => x.id === id);
-
-  if(!account) return;
-
-  document.getElementById("account-id").value =
-    account.id;
-
-  document.getElementById("account-name").value =
-    account.name;
-
-  document.getElementById("account-email").value =
-    account.email;
-
-  document.getElementById("account-role").value =
-    account.role;
-
-  document.getElementById("account-status").value =
-    account.status;
-
-  document.getElementById("modal-title").textContent =
-    "Edit Account";
-
-  document
-    .getElementById("account-modal")
-    .classList.add("show");
-
-}
-
-function closeModal(){
-
-  document
-    .getElementById("account-modal")
-    .classList.remove("show");
-
-}
-
-document
-  .getElementById("account-form")
-  .addEventListener("submit", function(e){
-
-    e.preventDefault();
-
-    const id =
-      document.getElementById("account-id").value;
-
-    const name =
-      document.getElementById("account-name").value.trim();
-
-    const email =
-      document.getElementById("account-email").value.trim();
-
-    const role =
-      document.getElementById("account-role").value;
-
-    const status =
-      document.getElementById("account-status").value;
-
-    if(id){
-
-      const account =
-        accounts.find(x => x.id === id);
-
-      if(account){
-
-        account.name = name;
-        account.email = email;
-        account.role = role;
-        account.status = status;
+        }
 
       }
+    );
 
-    }else{
 
-      accounts.push({
+    /* =========================================
+       TOAST
+       ========================================= */
 
-        id:
-          "ACC-" +
-          String(Date.now()).slice(-5),
+    const toast =
+      document.getElementById("toast");
 
-        name,
-        email,
-        role,
-        status,
+    const toastTitle =
+      document.getElementById("toast-title");
 
-        created:
-          new Date().toISOString().split("T")[0],
+    const toastMessage =
+      document.getElementById("toast-message");
 
-        lastAccess:"Never"
 
-      });
+    let toastTimer;
+
+
+    function showToast(
+      title,
+      message
+    ) {
+
+      if (!toast) return;
+
+      toastTitle.textContent =
+        title;
+
+      toastMessage.textContent =
+        message;
+
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+
+      toastTimer =
+        setTimeout(() => {
+
+          toast.classList.remove(
+            "show"
+          );
+
+        }, 4500);
 
     }
 
-    saveAccounts();
-    renderAccounts();
-    closeModal();
 
-  });
+    /* =========================================
+       FORGOT PASSWORD
+       ========================================= */
 
-function deleteAccount(id){
+    document
+      .getElementById("forgot-password")
+      ?.addEventListener(
+        "click",
+        event => {
 
-  const account =
-    accounts.find(x => x.id === id);
+          event.preventDefault();
 
-  if(!account) return;
+          const email =
+            document
+              .getElementById("email")
+              ?.value
+              .trim();
 
-  if(
-    account.email ===
-    window.ADMIN_SESSION.email
-  ){
 
-    alert("You cannot delete the account currently in use.");
-    return;
+          if (!email) {
 
-  }
+            showToast(
+              "Enter your email",
+              "Password reset করতে আগে আপনার email address দিন।"
+            );
 
-  const confirmed =
-    confirm(
-      "Delete this account?\n\n" +
-      account.email
+            document
+              .getElementById("email")
+              ?.focus();
+
+            return;
+
+          }
+
+
+          showToast(
+            "Password Reset",
+            "Production Firebase Authentication যুক্ত করার পর এখানে reset email পাঠানো হবে।"
+          );
+
+        }
+      );
+
+
+    /* =========================================
+       LOGIN
+       ========================================= */
+
+    const loginForm =
+      document.getElementById(
+        "login-form"
+      );
+
+    const loginButton =
+      document.getElementById(
+        "login-button"
+      );
+
+    const loginError =
+      document.getElementById(
+        "login-error"
+      );
+
+
+    loginForm?.addEventListener(
+      "submit",
+      event => {
+
+        event.preventDefault();
+
+
+        const email =
+          document
+            .getElementById("email")
+            .value
+            .trim();
+
+
+        const password =
+          document
+            .getElementById("password")
+            .value;
+
+
+        loginError.classList.remove(
+          "show"
+        );
+
+        loginButton.classList.add(
+          "loading"
+        );
+
+
+        /*
+         * DEMO LOGIN PLACEHOLDER
+         *
+         * Production version:
+         * Firebase Authentication
+         * + Firestore role checking
+         * will be connected here.
+         */
+
+
+        setTimeout(() => {
+
+          loginButton.classList.remove(
+            "loading"
+          );
+
+
+          if (
+            !email ||
+            !password
+          ) {
+
+            loginError.textContent =
+              "Email এবং password দুটোই প্রয়োজন।";
+
+            loginError.classList.add(
+              "show"
+            );
+
+            return;
+
+          }
+
+
+          /*
+           * এখনো Firebase Auth
+           * connect করা হয়নি।
+           */
+
+          showToast(
+            "Authentication Required",
+            "Firebase Authentication connect করার পর এখানে secure login চালু হবে।"
+          );
+
+
+        }, 700);
+
+      }
     );
 
-  if(!confirmed) return;
-
-  accounts =
-    accounts.filter(x => x.id !== id);
-
-  saveAccounts();
-  renderAccounts();
-
-}
-
-function formatDate(date){
-
-  if(!date) return "—";
-
-  const d = new Date(date);
-
-  if(isNaN(d)) return date;
-
-  return d.toLocaleDateString("en-GB",{
-    day:"2-digit",
-    month:"short",
-    year:"numeric"
-  });
-
-}
-
-function escapeHTML(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-function toggleSidebar(){
-
-  document
-    .getElementById("sidebar")
-    .classList.toggle("open");
-
-}
-
-function logout(){
-
-  localStorage.removeItem(
-    "websiteDealsAdminSession"
-  );
-
-  window.location.href =
-    "index.html";
-
-}
-
-const session =
-  window.ADMIN_SESSION;
-
-const name =
-  session?.name ||
-  session?.email?.split("@")[0] ||
-  "Admin";
-
-document.getElementById("user-name").textContent =
-  name;
-
-document.getElementById("user-avatar").textContent =
-  name.charAt(0).toUpperCase();
-
-renderAccounts();
-
-</script>
+  </script>
 
 </body>
 </html>
