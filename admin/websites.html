@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
@@ -12,35 +13,25 @@
     content="#07110c"
   >
 
-  <title>Website Listings | Website Deals</title>
+  <title>Websites Management | Website Deals Admin</title>
 
-  <link
-    rel="icon"
-    type="image/png"
-    href="../logo.png"
+  <meta
+    name="description"
+    content="Manage ready-made websites, prices, categories, sales and marketplace listings."
   >
 
-  <link
-    rel="stylesheet"
-    href="css/admin.css"
-  >
+  <link rel="icon" type="image/png" href="../logo.png">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
-
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Hind+Siliguri:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
 
+  <!-- Font Awesome -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -48,620 +39,1268 @@
 
   <style>
     /* =========================================================
-       WEBSITE LISTINGS
-    ========================================================= */
+       WEBSITE DEALS — ADMIN WEBSITES MANAGEMENT
+       Ultra Premium Admin UI
+       ========================================================= */
 
     :root {
-      --wl-green: #18a957;
-      --wl-green-dark: #108344;
-      --wl-green-soft: #eaf8f0;
-      --wl-danger: #dc3545;
-      --wl-danger-soft: #fff0f1;
-      --wl-warning: #d99000;
-      --wl-warning-soft: #fff7df;
-      --wl-blue: #2563eb;
-      --wl-blue-soft: #eff6ff;
-      --wl-text: #111827;
-      --wl-muted: #6b7280;
-      --wl-border: #e5e7eb;
-      --wl-surface: #ffffff;
-      --wl-soft: #f7f9f8;
-      --wl-radius: 18px;
-      --wl-shadow: 0 12px 35px rgba(15, 23, 42, .07);
+      --green: #18a957;
+      --green-dark: #108344;
+      --green-soft: #eaf9f0;
+
+      --black: #07110c;
+      --black-2: #0b1710;
+      --sidebar: #08120d;
+
+      --text: #132019;
+      --muted: #748078;
+
+      --white: #ffffff;
+      --surface: #f7faf8;
+      --surface-2: #f1f5f2;
+
+      --border: #e4ebe6;
+      --border-dark: rgba(255,255,255,.09);
+
+      --danger: #dc3545;
+      --danger-soft: #fff0f1;
+
+      --warning: #d89b00;
+      --warning-soft: #fff8df;
+
+      --success: #148447;
+      --success-soft: #eaf8f0;
+
+      --shadow-sm: 0 4px 16px rgba(9, 35, 20, .06);
+      --shadow-md: 0 14px 40px rgba(9, 35, 20, .09);
+      --shadow-lg: 0 24px 70px rgba(9, 35, 20, .14);
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 22px;
+
+      --sidebar-width: 270px;
     }
 
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
+      min-height: 100vh;
+      background: var(--surface);
+      color: var(--text);
       font-family: "Inter", "Hind Siliguri", sans-serif;
+      overflow-x: hidden;
     }
 
-    .websites-page {
-      min-width: 0;
+    button,
+    input,
+    select {
+      font: inherit;
     }
 
-    /* =========================================================
-       PAGE HEADER
-    ========================================================= */
-
-    .page-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 24px;
+    button {
+      border: 0;
+      cursor: pointer;
     }
 
-    .page-head-copy h1 {
-      margin: 0 0 7px;
-      font-size: 28px;
-      line-height: 1.15;
-      font-weight: 800;
-      color: var(--wl-text);
-      letter-spacing: -.5px;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .page-head-copy p {
-      margin: 0;
-      color: var(--wl-muted);
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .page-head-actions {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+    img {
+      display: block;
+      max-width: 100%;
     }
 
     /* =========================================================
-       STATS
-    ========================================================= */
+       APP
+       ========================================================= */
 
-    .listing-stats {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px;
-      margin-bottom: 20px;
+    .admin-app {
+      min-height: 100vh;
     }
 
-    .listing-stat {
-      background: var(--wl-surface);
-      border: 1px solid var(--wl-border);
-      border-radius: var(--wl-radius);
-      padding: 18px;
-      box-shadow: var(--wl-shadow);
-      min-width: 0;
+    /* =========================================================
+       SIDEBAR
+       ========================================================= */
+
+    .sidebar {
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      bottom: 0;
+
+      width: var(--sidebar-width);
+
+      display: flex;
+      flex-direction: column;
+
+      background:
+        radial-gradient(
+          circle at 15% 10%,
+          rgba(24,169,87,.14),
+          transparent 30%
+        ),
+        var(--sidebar);
+
+      border-right: 1px solid var(--border-dark);
+
+      color: #fff;
+
+      transition: transform .3s ease;
     }
 
-    .listing-stat-top {
+    .sidebar-top {
+      padding: 25px 20px 20px;
+    }
+
+    .brand {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       gap: 12px;
     }
 
-    .listing-stat-label {
-      color: var(--wl-muted);
-      font-size: 12px;
-      font-weight: 600;
-      margin-bottom: 7px;
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+
+      border-radius: 12px;
+
+      object-fit: contain;
+
+      background: #fff;
+
+      padding: 5px;
+
+      box-shadow:
+        0 8px 24px rgba(0,0,0,.22);
     }
 
-    .listing-stat-value {
-      font-size: 25px;
-      line-height: 1;
+    .brand-text {
+      min-width: 0;
+    }
+
+    .brand-title {
+      font-size: 15px;
       font-weight: 800;
-      color: var(--wl-text);
+      letter-spacing: -.3px;
     }
 
-    .listing-stat-icon {
+    .brand-subtitle {
+      margin-top: 3px;
+
+      color: #8fa198;
+
+      font-size: 11px;
+      font-weight: 500;
+    }
+
+    .sidebar-label {
+      margin: 26px 14px 10px;
+
+      color: #66756c;
+
+      font-size: 10px;
+      font-weight: 800;
+
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+    }
+
+    .sidebar-nav {
+      padding: 0 12px;
+
+      overflow-y: auto;
+    }
+
+    .nav-item {
+      position: relative;
+
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      width: 100%;
+
+      margin-bottom: 4px;
+      padding: 12px 13px;
+
+      border-radius: 12px;
+
+      color: #9baaa2;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease;
+    }
+
+    .nav-item i {
+      width: 18px;
+
+      color: #718078;
+
+      text-align: center;
+
+      font-size: 14px;
+
+      transition: color .2s ease;
+    }
+
+    .nav-item:hover {
+      color: #fff;
+      background: rgba(255,255,255,.055);
+      transform: translateX(2px);
+    }
+
+    .nav-item:hover i {
+      color: var(--green);
+    }
+
+    .nav-item.active {
+      color: #fff;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(24,169,87,.20),
+          rgba(24,169,87,.07)
+        );
+
+      box-shadow:
+        inset 0 0 0 1px rgba(24,169,87,.14);
+    }
+
+    .nav-item.active i {
+      color: var(--green);
+    }
+
+    .nav-item.active::before {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      top: 9px;
+      bottom: 9px;
+
+      width: 3px;
+
+      border-radius: 0 5px 5px 0;
+
+      background: var(--green);
+    }
+
+    .nav-badge {
+      margin-left: auto;
+
+      min-width: 23px;
+      height: 21px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 0 7px;
+
+      border-radius: 20px;
+
+      background: rgba(255,255,255,.08);
+
+      color: #9eaaa4;
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .nav-item.active .nav-badge {
+      background: rgba(24,169,87,.18);
+      color: #62dc96;
+    }
+
+    .sidebar-bottom {
+      margin-top: auto;
+
+      padding: 15px 14px 18px;
+
+      border-top: 1px solid var(--border-dark);
+    }
+
+    .admin-profile {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+
+      padding: 10px;
+
+      border-radius: 14px;
+
+      background: rgba(255,255,255,.035);
+    }
+
+    .admin-avatar {
+      width: 38px;
+      height: 38px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      flex: 0 0 auto;
+
+      border-radius: 12px;
+
+      background: var(--green);
+
+      color: #fff;
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .admin-info {
+      min-width: 0;
+    }
+
+    .admin-name {
+      color: #fff;
+
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .admin-role {
+      margin-top: 3px;
+
+      color: #74837a;
+
+      font-size: 10px;
+    }
+
+    .logout-btn {
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      margin-top: 9px;
+      padding: 10px;
+
+      border-radius: 11px;
+
+      background: transparent;
+
+      color: #7f8d85;
+
+      font-size: 11px;
+      font-weight: 600;
+
+      transition: .2s ease;
+    }
+
+    .logout-btn:hover {
+      background: rgba(220,53,69,.09);
+      color: #ff7885;
+    }
+
+    /* =========================================================
+       MAIN
+       ========================================================= */
+
+    .main {
+      min-height: 100vh;
+
+      margin-left: var(--sidebar-width);
+    }
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+
+    .top-header {
+      position: sticky;
+      z-index: 100;
+
+      top: 0;
+
+      height: 76px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 34px;
+
+      background: rgba(255,255,255,.90);
+
+      border-bottom: 1px solid var(--border);
+
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+
       width: 40px;
       height: 40px;
-      border-radius: 13px;
+
+      border-radius: 11px;
+
+      background: var(--surface-2);
+
+      color: var(--text);
+    }
+
+    .page-heading h1 {
+      font-size: 20px;
+      font-weight: 800;
+
+      letter-spacing: -.6px;
+    }
+
+    .page-heading p {
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 11px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 11px;
+
+      background: var(--surface);
+
+      border: 1px solid var(--border);
+
+      color: var(--muted);
+
+      transition: .2s ease;
+    }
+
+    .icon-btn:hover {
+      background: var(--green-soft);
+      border-color: rgba(24,169,87,.20);
+      color: var(--green-dark);
+    }
+
+    .marketplace-btn {
+      height: 40px;
+
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 0 14px;
+
+      border-radius: 11px;
+
+      background: var(--black);
+
+      color: #fff;
+
+      font-size: 11px;
+      font-weight: 700;
+
+      transition: .2s ease;
+    }
+
+    .marketplace-btn:hover {
+      background: var(--green-dark);
+      transform: translateY(-1px);
+    }
+
+    /* =========================================================
+       CONTENT
+       ========================================================= */
+
+    .content {
+      padding: 30px 34px 45px;
+    }
+
+    /* =========================================================
+       TOP STATS
+       ========================================================= */
+
+    .mini-stats {
       display: grid;
-      place-items: center;
-      background: var(--wl-green-soft);
-      color: var(--wl-green-dark);
-      flex: 0 0 auto;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+
+      margin-bottom: 22px;
     }
 
-    .listing-stat:nth-child(2) .listing-stat-icon {
-      background: var(--wl-blue-soft);
-      color: var(--wl-blue);
+    .mini-stat {
+      position: relative;
+
+      min-height: 105px;
+
+      padding: 18px;
+
+      overflow: hidden;
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-md);
+
+      background: #fff;
+
+      box-shadow: var(--shadow-sm);
     }
 
-    .listing-stat:nth-child(3) .listing-stat-icon {
-      background: var(--wl-warning-soft);
-      color: var(--wl-warning);
+    .mini-stat::after {
+      content: "";
+
+      position: absolute;
+
+      width: 90px;
+      height: 90px;
+
+      right: -38px;
+      bottom: -40px;
+
+      border-radius: 50%;
+
+      background: var(--green-soft);
     }
 
-    .listing-stat:nth-child(4) .listing-stat-icon {
-      background: #f4efff;
-      color: #7c3aed;
+    .mini-stat-label {
+      color: var(--muted);
+
+      font-size: 10px;
+      font-weight: 700;
+
+      text-transform: uppercase;
+      letter-spacing: .7px;
+    }
+
+    .mini-stat-value {
+      margin-top: 9px;
+
+      font-size: 25px;
+      font-weight: 800;
+
+      letter-spacing: -1px;
+    }
+
+    .mini-stat-note {
+      margin-top: 3px;
+
+      color: #8b9790;
+
+      font-size: 10px;
+    }
+
+    .mini-stat-icon {
+      position: absolute;
+      z-index: 2;
+
+      top: 16px;
+      right: 17px;
+
+      width: 34px;
+      height: 34px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 10px;
+
+      background: var(--green-soft);
+
+      color: var(--green-dark);
+
+      font-size: 13px;
     }
 
     /* =========================================================
        TOOLBAR
-    ========================================================= */
+       ========================================================= */
 
-    .listing-toolbar {
-      background: var(--wl-surface);
-      border: 1px solid var(--wl-border);
-      border-radius: var(--wl-radius);
-      padding: 15px;
-      box-shadow: var(--wl-shadow);
-      margin-bottom: 20px;
+    .management-card {
+      overflow: hidden;
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-lg);
+
+      background: #fff;
+
+      box-shadow: var(--shadow-sm);
     }
 
-    .listing-toolbar-main {
+    .management-head {
+      padding: 22px 23px 18px;
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .management-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .management-title h2 {
+      font-size: 17px;
+      font-weight: 800;
+
+      letter-spacing: -.4px;
+    }
+
+    .management-title p {
+      margin-top: 5px;
+
+      color: var(--muted);
+
+      font-size: 11px;
+    }
+
+    .add-btn {
+      height: 42px;
+
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 0 16px;
+
+      border-radius: 11px;
+
+      background: var(--green);
+
+      color: #fff;
+
+      font-size: 11px;
+      font-weight: 800;
+
+      box-shadow:
+        0 8px 20px rgba(24,169,87,.20);
+
+      transition: .2s ease;
+    }
+
+    .add-btn:hover {
+      background: var(--green-dark);
+      transform: translateY(-1px);
+    }
+
+    .filters {
       display: grid;
-      grid-template-columns: minmax(220px, 1fr) 190px 170px 170px;
+
+      grid-template-columns:
+        minmax(220px, 1.7fr)
+        minmax(150px, 1fr)
+        minmax(150px, 1fr)
+        auto;
+
       gap: 10px;
+
+      margin-top: 18px;
     }
 
     .search-box {
       position: relative;
-      min-width: 0;
     }
 
     .search-box i {
       position: absolute;
-      left: 14px;
+
+      left: 13px;
       top: 50%;
+
       transform: translateY(-50%);
-      color: #9ca3af;
+
+      color: #98a39d;
+
+      font-size: 12px;
+
       pointer-events: none;
     }
 
     .search-box input {
       width: 100%;
-      height: 44px;
-      padding: 0 42px;
-      border: 1px solid var(--wl-border);
-      border-radius: 12px;
-      background: #fff;
-      color: var(--wl-text);
+      height: 42px;
+
+      padding: 0 14px 0 36px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 11px;
+
       outline: none;
-      font: inherit;
-      font-size: 13px;
+
+      background: var(--surface);
+
+      color: var(--text);
+
+      font-size: 11px;
+
       transition: .2s ease;
     }
 
     .search-box input:focus {
-      border-color: rgba(24, 169, 87, .55);
-      box-shadow: 0 0 0 4px rgba(24, 169, 87, .08);
-    }
+      border-color: rgba(24,169,87,.40);
 
-    .search-clear {
-      position: absolute;
-      right: 10px;
-      top: 50%;
-      transform: translateY(-50%);
-      border: 0;
-      background: transparent;
-      color: #9ca3af;
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-      cursor: pointer;
-      display: none;
-    }
-
-    .search-clear:hover {
-      background: #f3f4f6;
-      color: #374151;
-    }
-
-    .filter-control {
-      width: 100%;
-      height: 44px;
-      padding: 0 13px;
-      border: 1px solid var(--wl-border);
-      border-radius: 12px;
       background: #fff;
-      color: var(--wl-text);
+
+      box-shadow:
+        0 0 0 3px rgba(24,169,87,.07);
+    }
+
+    .filter-select {
+      width: 100%;
+      height: 42px;
+
+      padding: 0 12px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 11px;
+
       outline: none;
-      font: inherit;
-      font-size: 13px;
+
+      background: var(--surface);
+
+      color: var(--text);
+
+      font-size: 11px;
+
       cursor: pointer;
     }
 
-    .filter-control:focus {
-      border-color: rgba(24, 169, 87, .55);
-      box-shadow: 0 0 0 4px rgba(24, 169, 87, .08);
+    .filter-select:focus {
+      border-color: rgba(24,169,87,.40);
     }
 
-    /* =========================================================
-       RESULTS BAR
-    ========================================================= */
+    .reset-btn {
+      height: 42px;
 
-    .results-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 13px;
-    }
-
-    .results-count {
-      color: var(--wl-muted);
-      font-size: 13px;
-    }
-
-    .results-count strong {
-      color: var(--wl-text);
-    }
-
-    .permission-note {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 7px;
-      font-size: 12px;
-      color: var(--wl-muted);
-    }
 
-    .permission-note i {
-      color: var(--wl-green);
-    }
+      padding: 0 13px;
 
-    /* =========================================================
-       WEBSITE GRID
-    ========================================================= */
+      border: 1px solid var(--border);
 
-    .website-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-    }
+      border-radius: 11px;
 
-    .website-card {
-      background: var(--wl-surface);
-      border: 1px solid var(--wl-border);
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: var(--wl-shadow);
-      transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        border-color .2s ease;
-      min-width: 0;
-    }
-
-    .website-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 18px 42px rgba(15, 23, 42, .10);
-      border-color: #d7e8dd;
-    }
-
-    .website-cover {
-      position: relative;
-      height: 188px;
-      background: #edf2ef;
-      overflow: hidden;
-    }
-
-    .website-cover img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      transition: transform .35s ease;
-    }
-
-    .website-card:hover .website-cover img {
-      transform: scale(1.035);
-    }
-
-    .website-cover::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0;
-      height: 70px;
-      background: linear-gradient(
-        to top,
-        rgba(0, 0, 0, .32),
-        transparent
-      );
-      pointer-events: none;
-    }
-
-    .website-badges {
-      position: absolute;
-      z-index: 2;
-      left: 12px;
-      top: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .website-badge {
-      display: inline-flex;
-      align-items: center;
-      min-height: 25px;
-      padding: 4px 8px;
-      border-radius: 999px;
-      font-size: 10px;
-      line-height: 1;
-      font-weight: 800;
-      letter-spacing: .2px;
-      text-transform: uppercase;
-      backdrop-filter: blur(8px);
-    }
-
-    .badge-new {
-      background: rgba(37, 99, 235, .94);
-      color: #fff;
-    }
-
-    .badge-popular {
-      background: rgba(24, 169, 87, .95);
-      color: #fff;
-    }
-
-    .badge-sale {
-      background: rgba(220, 53, 69, .95);
-      color: #fff;
-    }
-
-    .badge-featured {
-      background: rgba(124, 58, 237, .95);
-      color: #fff;
-    }
-
-    .badge-monthly {
-      background: rgba(217, 144, 0, .95);
-      color: #fff;
-    }
-
-    .badge-trending {
-      background: rgba(17, 24, 39, .9);
-      color: #fff;
-    }
-
-    .website-status {
-      position: absolute;
-      z-index: 3;
-      right: 12px;
-      top: 12px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 6px 9px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.94);
-      color: #166534;
-      font-size: 10px;
-      font-weight: 800;
-      box-shadow: 0 5px 15px rgba(0,0,0,.08);
-    }
-
-    .website-status.draft {
-      color: #92400e;
-    }
-
-    .website-status-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: currentColor;
-    }
-
-    .website-info {
-      padding: 17px;
-    }
-
-    .website-category {
-      color: var(--wl-green-dark);
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .7px;
-      margin-bottom: 7px;
-    }
-
-    .website-title {
-      margin: 0 0 7px;
-      color: var(--wl-text);
-      font-size: 17px;
-      line-height: 1.3;
-      font-weight: 800;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .website-description {
-      color: var(--wl-muted);
-      font-size: 12px;
-      line-height: 1.65;
-      height: 40px;
-      overflow: hidden;
-      margin-bottom: 13px;
-    }
-
-    .website-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding-bottom: 14px;
-      border-bottom: 1px solid #eef1ef;
-    }
-
-    .website-rating {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      color: #a16207;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .website-rating i {
-      color: #f59e0b;
-    }
-
-    .website-sales {
-      color: var(--wl-muted);
-      font-size: 11px;
-    }
-
-    .website-price {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    .price-label {
-      color: var(--wl-muted);
-      font-size: 10px;
-      margin-bottom: 2px;
-    }
-
-    .price-value {
-      color: var(--wl-text);
-      font-size: 19px;
-      line-height: 1;
-      font-weight: 800;
-    }
-
-    .price-value small {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--wl-muted);
-    }
-
-    .website-actions {
-      display: flex;
-      gap: 7px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .listing-action {
-      width: 36px;
-      height: 36px;
-      border: 1px solid var(--wl-border);
       background: #fff;
-      color: #4b5563;
-      border-radius: 10px;
-      cursor: pointer;
-      display: inline-grid;
-      place-items: center;
+
+      color: var(--muted);
+
+      font-size: 11px;
+      font-weight: 700;
+
+      white-space: nowrap;
+
       transition: .2s ease;
     }
 
-    .listing-action:hover {
-      border-color: #cddbd2;
-      background: var(--wl-soft);
-      color: var(--wl-text);
-    }
-
-    .listing-action.edit:hover {
-      color: var(--wl-green-dark);
-      border-color: #bce3ca;
-      background: var(--wl-green-soft);
-    }
-
-    .listing-action.preview:hover {
-      color: var(--wl-blue);
-      border-color: #c9dcff;
-      background: var(--wl-blue-soft);
-    }
-
-    .listing-action.delete {
-      color: #9f1239;
-    }
-
-    .listing-action.delete:hover {
-      color: var(--wl-danger);
-      border-color: #fecdd3;
-      background: var(--wl-danger-soft);
+    .reset-btn:hover {
+      background: var(--surface);
+      color: var(--text);
     }
 
     /* =========================================================
-       EMPTY STATE
-    ========================================================= */
+       TABLE
+       ========================================================= */
+
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    .website-table {
+      width: 100%;
+
+      border-collapse: collapse;
+
+      min-width: 940px;
+    }
+
+    .website-table th {
+      padding: 14px 18px;
+
+      background: #fbfcfb;
+
+      border-bottom: 1px solid var(--border);
+
+      color: #87928c;
+
+      font-size: 9px;
+      font-weight: 800;
+
+      letter-spacing: .7px;
+      text-transform: uppercase;
+
+      text-align: left;
+
+      white-space: nowrap;
+    }
+
+    .website-table td {
+      padding: 15px 18px;
+
+      border-bottom: 1px solid #edf1ee;
+
+      vertical-align: middle;
+
+      font-size: 11px;
+    }
+
+    .website-table tbody tr {
+      transition: background .18s ease;
+    }
+
+    .website-table tbody tr:hover {
+      background: #fbfdfb;
+    }
+
+    .website-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    /* =========================================================
+       WEBSITE PRODUCT
+       ========================================================= */
+
+    .product-cell {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      min-width: 245px;
+    }
+
+    .product-thumb {
+      position: relative;
+
+      width: 70px;
+      height: 50px;
+
+      flex: 0 0 auto;
+
+      overflow: hidden;
+
+      border-radius: 9px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #eaf2ed,
+          #dce8e0
+        );
+
+      border: 1px solid var(--border);
+    }
+
+    .product-thumb img {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+    .thumb-fallback {
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: var(--green-dark);
+
+      font-size: 16px;
+    }
+
+    .product-info {
+      min-width: 0;
+    }
+
+    .product-title {
+      max-width: 210px;
+
+      overflow: hidden;
+
+      color: var(--text);
+
+      font-size: 12px;
+      font-weight: 800;
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .product-id {
+      margin-top: 4px;
+
+      color: #99a39e;
+
+      font-size: 9px;
+      font-weight: 600;
+    }
+
+    .category-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+
+      padding: 6px 9px;
+
+      border-radius: 20px;
+
+      background: var(--surface-2);
+
+      color: #536159;
+
+      font-size: 9px;
+      font-weight: 700;
+
+      white-space: nowrap;
+    }
+
+    .category-pill i {
+      color: var(--green);
+      font-size: 9px;
+    }
+
+    .price-main {
+      color: var(--text);
+
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .price-old {
+      margin-top: 3px;
+
+      color: #a1aaa5;
+
+      font-size: 9px;
+
+      text-decoration: line-through;
+    }
+
+    .sales-number {
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .sales-label {
+      margin-top: 2px;
+
+      color: #99a39e;
+
+      font-size: 9px;
+    }
+
+    /* =========================================================
+       STATUS
+       ========================================================= */
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+
+      padding: 6px 9px;
+
+      border-radius: 20px;
+
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .status::before {
+      content: "";
+
+      width: 5px;
+      height: 5px;
+
+      border-radius: 50%;
+
+      background: currentColor;
+    }
+
+    .status.active {
+      background: var(--success-soft);
+      color: var(--success);
+    }
+
+    .status.draft {
+      background: var(--warning-soft);
+      color: var(--warning);
+    }
+
+    .status.archived {
+      background: #f0f2f1;
+      color: #78827d;
+    }
+
+    /* =========================================================
+       BADGES
+       ========================================================= */
+
+    .product-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .badge {
+      padding: 4px 6px;
+
+      border-radius: 5px;
+
+      background: var(--green-soft);
+
+      color: var(--green-dark);
+
+      font-size: 8px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+    }
+
+    .badge.sale {
+      background: #fff0f0;
+      color: #d14a57;
+    }
+
+    .badge.new {
+      background: #edf3ff;
+      color: #4169aa;
+    }
+
+    /* =========================================================
+       ACTIONS
+       ========================================================= */
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .action-btn {
+      width: 31px;
+      height: 31px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid var(--border);
+
+      border-radius: 8px;
+
+      background: #fff;
+
+      color: #77827c;
+
+      font-size: 10px;
+
+      transition: .18s ease;
+    }
+
+    .action-btn:hover {
+      background: var(--green-soft);
+      border-color: rgba(24,169,87,.18);
+      color: var(--green-dark);
+    }
+
+    .action-btn.danger:hover {
+      background: var(--danger-soft);
+      border-color: rgba(220,53,69,.15);
+      color: var(--danger);
+    }
+
+    /* =========================================================
+       EMPTY
+       ========================================================= */
 
     .empty-state {
       display: none;
-      text-align: center;
-      background: var(--wl-surface);
-      border: 1px dashed #d5ddd8;
-      border-radius: 18px;
-      padding: 55px 20px;
-    }
 
-    .empty-state.show {
-      display: block;
+      padding: 70px 25px;
+
+      text-align: center;
     }
 
     .empty-icon {
-      width: 62px;
-      height: 62px;
-      margin: 0 auto 14px;
-      border-radius: 18px;
-      display: grid;
-      place-items: center;
-      background: var(--wl-green-soft);
-      color: var(--wl-green-dark);
-      font-size: 22px;
+      width: 60px;
+      height: 60px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      margin: 0 auto 15px;
+
+      border-radius: 17px;
+
+      background: var(--surface-2);
+
+      color: #8b9690;
+
+      font-size: 21px;
     }
 
     .empty-state h3 {
-      margin: 0 0 6px;
-      color: var(--wl-text);
-      font-size: 18px;
+      font-size: 15px;
+      font-weight: 800;
     }
 
     .empty-state p {
-      margin: 0 auto 18px;
-      max-width: 470px;
-      color: var(--wl-muted);
-      font-size: 13px;
-      line-height: 1.7;
+      max-width: 380px;
+
+      margin: 7px auto 0;
+
+      color: var(--muted);
+
+      font-size: 11px;
+      line-height: 1.6;
     }
 
     /* =========================================================
-       DELETE MODAL
-    ========================================================= */
+       FOOTER INFO
+       ========================================================= */
 
-    .delete-modal {
+    .table-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 14px 18px;
+
+      border-top: 1px solid var(--border);
+
+      background: #fbfcfb;
+
+      color: var(--muted);
+
+      font-size: 10px;
+    }
+
+    .result-count strong {
+      color: var(--text);
+    }
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .page-btn {
+      width: 29px;
+      height: 29px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid var(--border);
+
+      border-radius: 7px;
+
+      background: #fff;
+
+      color: #77827c;
+
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .page-btn.active {
+      background: var(--green);
+      border-color: var(--green);
+
+      color: #fff;
+    }
+
+    /* =========================================================
+       MODAL
+       ========================================================= */
+
+    .modal {
       position: fixed;
+      z-index: 5000;
+
       inset: 0;
-      z-index: 9999;
+
       display: none;
       align-items: center;
       justify-content: center;
+
       padding: 20px;
-      background: rgba(15, 23, 42, .58);
-      backdrop-filter: blur(5px);
+
+      background: rgba(4,13,8,.60);
+
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
     }
 
-    .delete-modal.show {
+    .modal.show {
       display: flex;
     }
 
-    .delete-dialog {
-      width: min(440px, 100%);
-      background: #fff;
+    .modal-card {
+      width: min(430px, 100%);
+
+      overflow: hidden;
+
       border-radius: 20px;
-      padding: 25px;
-      box-shadow: 0 30px 90px rgba(0,0,0,.2);
-      animation: modalIn .18s ease;
+
+      background: #fff;
+
+      box-shadow: var(--shadow-lg);
+
+      animation: modalIn .22s ease;
     }
 
     @keyframes modalIn {
       from {
         opacity: 0;
-        transform: translateY(8px) scale(.98);
+        transform: translateY(12px) scale(.98);
       }
 
       to {
@@ -670,172 +1309,412 @@
       }
     }
 
-    .delete-icon {
-      width: 50px;
-      height: 50px;
-      border-radius: 15px;
-      display: grid;
-      place-items: center;
-      background: var(--wl-danger-soft);
-      color: var(--wl-danger);
-      font-size: 19px;
-      margin-bottom: 15px;
+    .modal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 20px;
+
+      border-bottom: 1px solid var(--border);
     }
 
-    .delete-dialog h3 {
-      margin: 0 0 7px;
-      color: var(--wl-text);
-      font-size: 19px;
-    }
-
-    .delete-dialog p {
-      margin: 0;
-      color: var(--wl-muted);
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    .delete-website-name {
-      color: var(--wl-text);
+    .modal-head h3 {
+      font-size: 16px;
       font-weight: 800;
     }
 
-    .delete-actions {
+    .modal-close {
+      width: 34px;
+      height: 34px;
+
+      border-radius: 9px;
+
+      background: var(--surface-2);
+
+      color: var(--muted);
+    }
+
+    .modal-body {
+      padding: 21px;
+    }
+
+    .modal-product {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      margin-bottom: 18px;
+      padding: 12px;
+
+      border-radius: 12px;
+
+      background: var(--surface);
+    }
+
+    .modal-product-thumb {
+      width: 60px;
+      height: 44px;
+
+      overflow: hidden;
+
+      border-radius: 8px;
+
+      background: var(--surface-2);
+    }
+
+    .modal-product-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-product-name {
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .modal-product-id {
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+    }
+
+    .warning-box {
+      padding: 12px;
+
+      border-radius: 11px;
+
+      background: var(--danger-soft);
+
+      color: #a92d39;
+
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .modal-actions {
       display: flex;
       justify-content: flex-end;
-      gap: 9px;
-      margin-top: 22px;
+      gap: 8px;
+
+      margin-top: 20px;
+    }
+
+    .modal-btn {
+      height: 38px;
+
+      padding: 0 14px;
+
+      border-radius: 10px;
+
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .modal-btn.cancel {
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    .modal-btn.delete {
+      background: var(--danger);
+      color: #fff;
     }
 
     /* =========================================================
        TOAST
-    ========================================================= */
+       ========================================================= */
 
-    .listing-toast {
+    .toast {
       position: fixed;
-      right: 22px;
-      bottom: 22px;
-      z-index: 10000;
+      z-index: 9000;
+
+      right: 25px;
+      bottom: 25px;
+
+      min-width: 280px;
+      max-width: 380px;
+
       display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 270px;
-      max-width: calc(100vw - 44px);
-      padding: 13px 15px;
-      border: 1px solid var(--wl-border);
-      border-radius: 13px;
+      align-items: flex-start;
+      gap: 11px;
+
+      padding: 14px 15px;
+
+      border: 1px solid var(--border);
+
+      border-radius: 14px;
+
       background: #fff;
-      color: var(--wl-text);
-      box-shadow: 0 18px 45px rgba(15, 23, 42, .14);
-      font-size: 13px;
+
+      box-shadow: var(--shadow-lg);
+
       transform: translateY(20px);
       opacity: 0;
-      pointer-events: none;
+      visibility: hidden;
+
       transition: .25s ease;
     }
 
-    .listing-toast.show {
+    .toast.show {
       transform: translateY(0);
       opacity: 1;
+      visibility: visible;
     }
 
-    .listing-toast.success i {
-      color: var(--wl-green);
+    .toast-icon {
+      width: 31px;
+      height: 31px;
+
+      flex: 0 0 auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 9px;
+
+      background: var(--green-soft);
+
+      color: var(--green-dark);
+
+      font-size: 11px;
     }
 
-    .listing-toast.error i {
-      color: var(--wl-danger);
+    .toast-text {
+      min-width: 0;
+    }
+
+    .toast-title {
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .toast-message {
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+      line-height: 1.5;
+    }
+
+    /* =========================================================
+       OVERLAY
+       ========================================================= */
+
+    .sidebar-overlay {
+      position: fixed;
+      z-index: 900;
+
+      inset: 0;
+
+      display: none;
+
+      background: rgba(4,13,8,.50);
+    }
+
+    .sidebar-overlay.show {
+      display: block;
     }
 
     /* =========================================================
        RESPONSIVE
-    ========================================================= */
+       ========================================================= */
 
-    @media (max-width: 1180px) {
-      .website-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    @media (max-width: 1200px) {
+
+      .mini-stats {
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .listing-toolbar-main {
-        grid-template-columns: minmax(220px, 1fr) 170px;
+      .filters {
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .reset-btn {
+        width: 100%;
       }
     }
 
-    @media (max-width: 900px) {
-      .listing-stats {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+    @media (max-width: 1024px) {
+
+      :root {
+        --sidebar-width: 250px;
       }
 
-      .listing-toolbar-main {
-        grid-template-columns: 1fr 1fr;
+      .content {
+        padding: 25px;
+      }
+
+      .top-header {
+        padding: 0 25px;
       }
     }
 
-    @media (max-width: 680px) {
-      .page-head {
-        flex-direction: column;
+    @media (max-width: 820px) {
+
+      .sidebar {
+        transform: translateX(-100%);
       }
 
-      .page-head-actions {
-        width: 100%;
+      .sidebar.open {
+        transform: translateX(0);
       }
 
-      .page-head-actions .admin-btn {
-        width: 100%;
+      .main {
+        margin-left: 0;
+      }
+
+      .mobile-menu-btn {
+        display: inline-flex;
+        align-items: center;
         justify-content: center;
       }
 
-      .listing-stats {
+      .marketplace-btn span {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+
+      .top-header {
+        height: 68px;
+
+        padding: 0 16px;
+      }
+
+      .page-heading h1 {
+        font-size: 17px;
+      }
+
+      .page-heading p {
+        display: none;
+      }
+
+      .header-actions {
+        gap: 6px;
+      }
+
+      .header-actions .icon-btn {
+        width: 36px;
+        height: 36px;
+      }
+
+      .marketplace-btn {
+        width: 36px;
+        padding: 0;
+
+        justify-content: center;
+      }
+
+      .content {
+        padding: 18px 14px 35px;
+      }
+
+      .mini-stats {
         grid-template-columns: 1fr 1fr;
+
         gap: 10px;
       }
 
-      .listing-stat {
+      .mini-stat {
+        min-height: 96px;
+
         padding: 14px;
       }
 
-      .listing-stat-value {
+      .mini-stat-value {
         font-size: 21px;
       }
 
-      .listing-toolbar-main {
+      .mini-stat-icon {
+        top: 13px;
+        right: 13px;
+
+        width: 29px;
+        height: 29px;
+      }
+
+      .management-head {
+        padding: 17px 14px;
+      }
+
+      .management-title-row {
+        align-items: flex-start;
+      }
+
+      .management-title h2 {
+        font-size: 15px;
+      }
+
+      .management-title p {
+        font-size: 10px;
+      }
+
+      .add-btn {
+        width: 42px;
+        padding: 0;
+
+        justify-content: center;
+      }
+
+      .add-btn span {
+        display: none;
+      }
+
+      .filters {
         grid-template-columns: 1fr;
       }
 
-      .results-bar {
+      .table-footer {
+        gap: 12px;
         align-items: flex-start;
         flex-direction: column;
       }
 
-      .website-grid {
-        grid-template-columns: 1fr;
-      }
+      .toast {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
 
-      .website-cover {
-        height: 205px;
-      }
-
-      .delete-actions {
-        flex-direction: column-reverse;
-      }
-
-      .delete-actions .admin-btn {
-        width: 100%;
-        justify-content: center;
+        min-width: 0;
       }
     }
 
-    @media (max-width: 430px) {
-      .listing-stats {
+    @media (max-width: 420px) {
+
+      .mini-stats {
         grid-template-columns: 1fr;
       }
 
-      .website-cover {
-        height: 190px;
+      .brand-title {
+        font-size: 14px;
       }
 
-      .website-info {
-        padding: 15px;
+      .brand-subtitle {
+        font-size: 10px;
+      }
+    }
+
+    /* =========================================================
+       REDUCED MOTION
+       ========================================================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
       }
     }
   </style>
@@ -847,122 +1726,129 @@
 
     <!-- =======================================================
          SIDEBAR
-    ======================================================== -->
-    <aside class="admin-sidebar" id="admin-sidebar">
+         ======================================================= -->
 
-      <div class="admin-brand">
-        <a href="../index.html" class="admin-brand-link">
+    <aside class="sidebar" id="sidebar">
+
+      <div class="sidebar-top">
+
+        <a href="dashboard.html" class="brand">
+
           <img
             src="../logo.png"
             alt="Website Deals"
-            class="admin-brand-logo"
+            class="brand-logo"
+            onerror="this.style.display='none'"
           >
 
-          <div>
-            <strong>Website Deals</strong>
-            <span>Admin Portal</span>
+          <div class="brand-text">
+            <div class="brand-title">
+              Website Deals
+            </div>
+
+            <div class="brand-subtitle">
+              Admin Marketplace
+            </div>
           </div>
+
         </a>
+
       </div>
 
-      <nav class="admin-nav">
 
-        <div class="admin-nav-label">
-          Workspace
+      <div class="sidebar-nav">
+
+        <div class="sidebar-label">
+          Main Menu
         </div>
 
         <a
           href="dashboard.html"
-          class="admin-nav-link"
+          class="nav-item"
         >
           <i class="fa-solid fa-grid-2"></i>
           <span>Dashboard</span>
         </a>
 
+
         <a
           href="websites.html"
-          class="admin-nav-link active"
+          class="nav-item active"
         >
-          <i class="fa-solid fa-globe"></i>
+          <i class="fa-solid fa-window-maximize"></i>
           <span>Websites</span>
+          <span class="nav-badge" id="sidebarWebsiteCount">11</span>
         </a>
+
 
         <a
           href="categories.html"
-          class="admin-nav-link"
+          class="nav-item"
         >
           <i class="fa-solid fa-layer-group"></i>
           <span>Categories</span>
         </a>
 
+
         <a
           href="orders.html"
-          class="admin-nav-link"
+          class="nav-item"
         >
           <i class="fa-solid fa-bag-shopping"></i>
           <span>Orders</span>
+          <span class="nav-badge">428</span>
         </a>
+
 
         <a
           href="customers.html"
-          class="admin-nav-link"
+          class="nav-item"
         >
           <i class="fa-solid fa-users"></i>
           <span>Customers</span>
         </a>
 
+
         <a
           href="newsletter.html"
-          class="admin-nav-link"
+          class="nav-item"
         >
           <i class="fa-solid fa-envelope"></i>
           <span>Newsletter</span>
         </a>
 
-        <div
-          class="admin-nav-label privileged-nav"
-          style="display:none;"
-        >
-          Administration
+      </div>
+
+
+      <div class="sidebar-bottom">
+
+        <div class="admin-profile">
+
+          <div class="admin-avatar">
+            AD
+          </div>
+
+          <div class="admin-info">
+
+            <div class="admin-name">
+              Administrator
+            </div>
+
+            <div class="admin-role">
+              Marketplace Admin
+            </div>
+
+          </div>
+
         </div>
 
-        <a
-          href="admins.html"
-          class="admin-nav-link privileged-nav"
-          style="display:none;"
-        >
-          <i class="fa-solid fa-user-shield"></i>
-          <span>Access Management</span>
-        </a>
-
-        <a
-          href="settings.html"
-          class="admin-nav-link privileged-nav"
-          style="display:none;"
-        >
-          <i class="fa-solid fa-sliders"></i>
-          <span>Settings</span>
-        </a>
-
-      </nav>
-
-      <div class="admin-sidebar-bottom">
-
-        <a
-          href="../index.html"
-          target="_blank"
-          class="admin-sidebar-link"
-        >
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          <span>View Marketplace</span>
-        </a>
 
         <button
           type="button"
-          class="admin-sidebar-link logout-button"
-          id="logout-button"
+          class="logout-btn"
+          id="logoutBtn"
         >
-          <i class="fa-solid fa-right-from-bracket"></i>
+          <i class="fa-solid fa-arrow-right-from-bracket"></i>
           <span>Sign Out</span>
         </button>
 
@@ -970,364 +1856,445 @@
 
     </aside>
 
+
+    <!-- =======================================================
+         SIDEBAR OVERLAY
+         ======================================================= -->
+
+    <div
+      class="sidebar-overlay"
+      id="sidebarOverlay"
+    ></div>
+
+
     <!-- =======================================================
          MAIN
-    ======================================================== -->
-    <main class="admin-main">
+         ======================================================= -->
 
-      <header class="admin-topbar">
+    <main class="main">
 
-        <div class="admin-topbar-left">
+      <!-- HEADER -->
+
+      <header class="top-header">
+
+        <div class="header-left">
 
           <button
             type="button"
-            class="admin-mobile-menu"
-            id="mobile-menu-button"
+            class="mobile-menu-btn"
+            id="mobileMenuBtn"
             aria-label="Open menu"
           >
             <i class="fa-solid fa-bars"></i>
           </button>
 
-          <div>
-            <span class="admin-topbar-eyebrow">
-              Marketplace
-            </span>
 
-            <strong>
-              Website Listings
-            </strong>
+          <div class="page-heading">
+
+            <h1>
+              Websites
+            </h1>
+
+            <p>
+              Manage marketplace website listings
+            </p>
+
           </div>
 
         </div>
 
-        <div class="admin-topbar-actions">
+
+        <div class="header-actions">
+
+          <button
+            type="button"
+            class="icon-btn"
+            id="refreshBtn"
+            title="Refresh"
+            aria-label="Refresh"
+          >
+            <i class="fa-solid fa-arrows-rotate"></i>
+          </button>
+
 
           <a
             href="../index.html"
             target="_blank"
-            class="admin-btn admin-btn-secondary"
+            class="marketplace-btn"
           >
-            <i class="fa-solid fa-eye"></i>
-            <span>Marketplace Preview</span>
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+            <span>View Marketplace</span>
           </a>
-
-          <button
-            type="button"
-            class="admin-avatar-button"
-            id="account-button"
-            aria-label="Account"
-          >
-            <span id="account-avatar">A</span>
-          </button>
 
         </div>
 
       </header>
 
-      <section class="admin-page websites-page">
 
-        <!-- PAGE HEADER -->
-        <div class="page-head">
+      <!-- CONTENT -->
 
-          <div class="page-head-copy">
+      <section class="content">
 
-            <h1>
-              Website Listings
-            </h1>
 
-            <p>
-              Manage marketplace websites, pricing, labels, previews and publishing status.
-            </p>
+        <!-- ===================================================
+             MINI STATS
+             =================================================== -->
 
-          </div>
+        <div class="mini-stats">
 
-          <div class="page-head-actions">
+          <div class="mini-stat">
 
-            <a
-              href="website-editor.html"
-              class="admin-btn admin-btn-primary"
+            <div class="mini-stat-label">
+              Total Websites
+            </div>
+
+            <div
+              class="mini-stat-value"
+              id="totalWebsites"
             >
-              <i class="fa-solid fa-plus"></i>
-              Add Website
-            </a>
+              11
+            </div>
 
-          </div>
+            <div class="mini-stat-note">
+              Marketplace listings
+            </div>
 
-        </div>
-
-        <!-- ===================================================
-             STATS
-        ==================================================== -->
-        <div class="listing-stats">
-
-          <div class="listing-stat">
-
-            <div class="listing-stat-top">
-
-              <div>
-                <div class="listing-stat-label">
-                  Total Websites
-                </div>
-
-                <div
-                  class="listing-stat-value"
-                  id="stat-total"
-                >
-                  0
-                </div>
-              </div>
-
-              <div class="listing-stat-icon">
-                <i class="fa-solid fa-globe"></i>
-              </div>
-
+            <div class="mini-stat-icon">
+              <i class="fa-solid fa-window-maximize"></i>
             </div>
 
           </div>
 
-          <div class="listing-stat">
 
-            <div class="listing-stat-top">
+          <div class="mini-stat">
 
-              <div>
-                <div class="listing-stat-label">
-                  Live Websites
-                </div>
+            <div class="mini-stat-label">
+              Active
+            </div>
 
-                <div
-                  class="listing-stat-value"
-                  id="stat-live"
-                >
-                  0
-                </div>
-              </div>
+            <div
+              class="mini-stat-value"
+              id="activeWebsites"
+            >
+              9
+            </div>
 
-              <div class="listing-stat-icon">
-                <i class="fa-solid fa-circle-check"></i>
-              </div>
+            <div class="mini-stat-note">
+              Currently published
+            </div>
 
+            <div class="mini-stat-icon">
+              <i class="fa-solid fa-circle-check"></i>
             </div>
 
           </div>
 
-          <div class="listing-stat">
 
-            <div class="listing-stat-top">
+          <div class="mini-stat">
 
-              <div>
-                <div class="listing-stat-label">
-                  Draft Websites
-                </div>
+            <div class="mini-stat-label">
+              Drafts
+            </div>
 
-                <div
-                  class="listing-stat-value"
-                  id="stat-draft"
-                >
-                  0
-                </div>
-              </div>
+            <div
+              class="mini-stat-value"
+              id="draftWebsites"
+            >
+              2
+            </div>
 
-              <div class="listing-stat-icon">
-                <i class="fa-solid fa-file-pen"></i>
-              </div>
+            <div class="mini-stat-note">
+              Waiting for publication
+            </div>
 
+            <div class="mini-stat-icon">
+              <i class="fa-solid fa-pen-ruler"></i>
             </div>
 
           </div>
 
-          <div class="listing-stat">
 
-            <div class="listing-stat-top">
+          <div class="mini-stat">
 
-              <div>
-                <div class="listing-stat-label">
-                  Total Sales
-                </div>
+            <div class="mini-stat-label">
+              Total Sales
+            </div>
 
-                <div
-                  class="listing-stat-value"
-                  id="stat-sales"
-                >
-                  0
-                </div>
-              </div>
+            <div
+              class="mini-stat-value"
+              id="totalSales"
+            >
+              428
+            </div>
 
-              <div class="listing-stat-icon">
-                <i class="fa-solid fa-chart-line"></i>
-              </div>
+            <div class="mini-stat-note">
+              Website purchases
+            </div>
 
+            <div class="mini-stat-icon">
+              <i class="fa-solid fa-chart-line"></i>
             </div>
 
           </div>
 
         </div>
 
+
         <!-- ===================================================
-             TOOLBAR
-        ==================================================== -->
-        <div class="listing-toolbar">
+             MANAGEMENT CARD
+             =================================================== -->
 
-          <div class="listing-toolbar-main">
+        <div class="management-card">
 
-            <div class="search-box">
 
-              <i class="fa-solid fa-magnifying-glass"></i>
+          <!-- MANAGEMENT HEADER -->
 
-              <input
-                type="search"
-                id="website-search"
-                placeholder="Search websites, category or ID..."
-                autocomplete="off"
+          <div class="management-head">
+
+            <div class="management-title-row">
+
+              <div class="management-title">
+
+                <h2>
+                  Website Listings
+                </h2>
+
+                <p>
+                  Add, edit, preview and manage your ready-made websites.
+                </p>
+
+              </div>
+
+
+              <a
+                href="website-editor.html"
+                class="add-btn"
               >
+                <i class="fa-solid fa-plus"></i>
+                <span>Add Website</span>
+              </a>
+
+            </div>
+
+
+            <!-- FILTERS -->
+
+            <div class="filters">
+
+              <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                  type="search"
+                  id="websiteSearch"
+                  placeholder="Search websites..."
+                  autocomplete="off"
+                >
+
+              </div>
+
+
+              <select
+                id="categoryFilter"
+                class="filter-select"
+              >
+                <option value="all">
+                  All Categories
+                </option>
+
+                <option value="business">
+                  Business
+                </option>
+
+                <option value="restaurant">
+                  Restaurant
+                </option>
+
+                <option value="agency">
+                  Agency
+                </option>
+
+                <option value="ecommerce">
+                  E-commerce
+                </option>
+
+                <option value="portfolio">
+                  Portfolio
+                </option>
+
+                <option value="monthly">
+                  Monthly
+                </option>
+              </select>
+
+
+              <select
+                id="statusFilter"
+                class="filter-select"
+              >
+                <option value="all">
+                  All Status
+                </option>
+
+                <option value="active">
+                  Active
+                </option>
+
+                <option value="draft">
+                  Draft
+                </option>
+
+                <option value="archived">
+                  Archived
+                </option>
+              </select>
+
 
               <button
                 type="button"
-                id="search-clear"
-                class="search-clear"
-                aria-label="Clear search"
+                class="reset-btn"
+                id="resetFilters"
               >
-                <i class="fa-solid fa-xmark"></i>
+                <i class="fa-solid fa-rotate-left"></i>
+                Reset
+
               </button>
 
             </div>
 
-            <select
-              id="category-filter"
-              class="filter-control"
+          </div>
+
+
+          <!-- =================================================
+               TABLE
+               ================================================= -->
+
+          <div class="table-wrap">
+
+            <table class="website-table">
+
+              <thead>
+
+                <tr>
+
+                  <th>
+                    Website
+                  </th>
+
+                  <th>
+                    Category
+                  </th>
+
+                  <th>
+                    Price
+                  </th>
+
+                  <th>
+                    Sales
+                  </th>
+
+                  <th>
+                    Status
+                  </th>
+
+                  <th>
+                    Badges
+                  </th>
+
+                  <th>
+                    Actions
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody id="websiteTableBody">
+                <!-- JS generated -->
+              </tbody>
+
+            </table>
+
+
+            <!-- EMPTY STATE -->
+
+            <div
+              class="empty-state"
+              id="emptyState"
             >
-              <option value="all">
-                All Categories
-              </option>
 
-              <option value="Business">
-                Business
-              </option>
+              <div class="empty-icon">
+                <i class="fa-regular fa-folder-open"></i>
+              </div>
 
-              <option value="Restaurant">
-                Restaurant
-              </option>
+              <h3>
+                No websites found
+              </h3>
 
-              <option value="Agency">
-                Agency
-              </option>
+              <p>
+                Try changing your search or filters to find another website listing.
+              </p>
 
-              <option value="E-commerce">
-                E-commerce
-              </option>
-
-              <option value="Portfolio">
-                Portfolio
-              </option>
-
-              <option value="Monthly">
-                Monthly
-              </option>
-            </select>
-
-            <select
-              id="status-filter"
-              class="filter-control"
-            >
-              <option value="all">
-                All Status
-              </option>
-
-              <option value="live">
-                Live
-              </option>
-
-              <option value="draft">
-                Draft
-              </option>
-            </select>
-
-            <select
-              id="sort-websites"
-              class="filter-control"
-            >
-              <option value="newest">
-                Newest First
-              </option>
-
-              <option value="oldest">
-                Oldest First
-              </option>
-
-              <option value="price-high">
-                Price: High → Low
-              </option>
-
-              <option value="price-low">
-                Price: Low → High
-              </option>
-
-              <option value="sales-high">
-                Sales: High → Low
-              </option>
-
-              <option value="name">
-                Name: A → Z
-              </option>
-            </select>
+            </div>
 
           </div>
 
-        </div>
 
-        <!-- RESULTS BAR -->
-        <div class="results-bar">
+          <!-- TABLE FOOTER -->
 
-          <div
-            class="results-count"
-            id="results-count"
-          >
-            Showing <strong>0</strong> websites
+          <div class="table-footer">
+
+            <div class="result-count">
+              Showing
+              <strong id="resultCount">8</strong>
+              websites
+            </div>
+
+
+            <div class="pagination">
+
+              <button
+                type="button"
+                class="page-btn"
+                aria-label="Previous page"
+              >
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+
+              <button
+                type="button"
+                class="page-btn active"
+              >
+                1
+              </button>
+
+              <button
+                type="button"
+                class="page-btn"
+              >
+                2
+              </button>
+
+              <button
+                type="button"
+                class="page-btn"
+              >
+                3
+              </button>
+
+              <button
+                type="button"
+                class="page-btn"
+                aria-label="Next page"
+              >
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+
+            </div>
+
           </div>
-
-          <div
-            class="permission-note"
-            id="permission-note"
-          >
-            <i class="fa-solid fa-shield-check"></i>
-            <span>Listing access enabled</span>
-          </div>
-
-        </div>
-
-        <!-- ===================================================
-             WEBSITE GRID
-        ==================================================== -->
-        <div
-          class="website-grid"
-          id="website-grid"
-        ></div>
-
-        <!-- EMPTY -->
-        <div
-          class="empty-state"
-          id="empty-state"
-        >
-
-          <div class="empty-icon">
-            <i class="fa-solid fa-globe"></i>
-          </div>
-
-          <h3>
-            No websites found
-          </h3>
-
-          <p>
-            No website listings match your current search or filters.
-            Try another search or create a new website listing.
-          </p>
-
-          <a
-            href="website-editor.html"
-            class="admin-btn admin-btn-primary"
-          >
-            <i class="fa-solid fa-plus"></i>
-            Add Website
-          </a>
 
         </div>
 
@@ -1337,55 +2304,98 @@
 
   </div>
 
+
   <!-- =========================================================
        DELETE MODAL
-  ========================================================== -->
+       ========================================================= -->
 
   <div
-    class="delete-modal"
-    id="delete-modal"
+    class="modal"
+    id="deleteModal"
     aria-hidden="true"
   >
 
-    <div class="delete-dialog">
+    <div class="modal-card">
 
-      <div class="delete-icon">
-        <i class="fa-solid fa-trash-can"></i>
+      <div class="modal-head">
+
+        <h3>
+          Delete Website
+        </h3>
+
+        <button
+          type="button"
+          class="modal-close"
+          id="closeDeleteModal"
+          aria-label="Close"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
       </div>
 
-      <h3>
-        Delete Website?
-      </h3>
 
-      <p>
-        You are about to permanently delete
-        <span
-          class="delete-website-name"
-          id="delete-website-name"
-        >
-          this website
-        </span>.
-        This action cannot be undone.
-      </p>
+      <div class="modal-body">
 
-      <div class="delete-actions">
+        <div class="modal-product">
 
-        <button
-          type="button"
-          class="admin-btn admin-btn-secondary"
-          id="delete-cancel"
-        >
-          Cancel
-        </button>
+          <div
+            class="modal-product-thumb"
+            id="deleteThumb"
+          >
+          </div>
 
-        <button
-          type="button"
-          class="admin-btn admin-btn-danger"
-          id="delete-confirm"
-        >
-          <i class="fa-solid fa-trash-can"></i>
-          Delete Website
-        </button>
+          <div>
+
+            <div
+              class="modal-product-name"
+              id="deleteWebsiteName"
+            >
+              Website
+            </div>
+
+            <div
+              class="modal-product-id"
+              id="deleteWebsiteId"
+            >
+              wd001
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="warning-box">
+
+          <i class="fa-solid fa-triangle-exclamation"></i>
+
+          This demo action removes the website from the current
+          browser session. In production, deletion should be
+          protected by your database authorization rules.
+
+        </div>
+
+
+        <div class="modal-actions">
+
+          <button
+            type="button"
+            class="modal-btn cancel"
+            id="cancelDelete"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="button"
+            class="modal-btn delete"
+            id="confirmDelete"
+          >
+            Delete Website
+          </button>
+
+        </div>
 
       </div>
 
@@ -1393,652 +2403,598 @@
 
   </div>
 
+
   <!-- =========================================================
        TOAST
-  ========================================================== -->
+       ========================================================= -->
 
   <div
-    class="listing-toast"
-    id="listing-toast"
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
   >
-    <i class="fa-solid fa-circle-check"></i>
-    <span id="listing-toast-message">
-      Done
-    </span>
+
+    <div class="toast-icon">
+      <i
+        class="fa-solid fa-check"
+        id="toastIcon"
+      ></i>
+    </div>
+
+    <div class="toast-text">
+
+      <div
+        class="toast-title"
+        id="toastTitle"
+      >
+        Success
+      </div>
+
+      <div
+        class="toast-message"
+        id="toastMessage"
+      >
+        Done.
+      </div>
+
+    </div>
+
   </div>
 
 
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
+
   <script>
-    /* =========================================================
-       WEBSITE DEALS — WEBSITE LISTINGS
-       Demo/localStorage version
-
-       Production:
-       Firebase Authentication + Firestore Security Rules
-       must enforce actual permissions.
-    ========================================================= */
-
-    "use strict";
 
     /* =========================================================
-       CONSTANTS
-    ========================================================= */
+       DEMO WEBSITE DATA
+       ========================================================= */
 
-    const SESSION_KEY = "websiteDealsAdminSession";
-    const WEBSITES_KEY = "websiteDealsWebsites";
+    const websites = [
 
-    const DEFAULT_WEBSITES = [
       {
-        id: "WD-001",
+        id: "wd001",
         title: "Nova Business Pro",
-        category: "Business",
-        price: 2499,
-        rating: 4.9,
-        sales: 42,
-        description: "Premium business website for modern companies and service brands.",
-        image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80",
-        status: "live",
-        labels: ["popular", "featured"],
-        liveUrl: "",
-        demoUrl: "",
-        deliveryType: "Digital Delivery",
-        createdAt: "2026-09-01T09:00:00",
-        updatedAt: "2026-09-30T10:00:00"
-      },
-
-      {
-        id: "WD-002",
-        title: "Restaurant Royale",
-        category: "Restaurant",
+        category: "business",
+        categoryLabel: "Business",
         price: 1999,
-        rating: 4.8,
-        sales: 27,
-        description: "Elegant restaurant website with menu, reservation and location sections.",
-        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
-        status: "live",
-        labels: ["new"],
-        liveUrl: "",
-        demoUrl: "",
-        deliveryType: "Digital Delivery",
-        createdAt: "2026-09-05T09:00:00",
-        updatedAt: "2026-09-29T10:00:00"
+        oldPrice: 2999,
+        sales: 86,
+        status: "active",
+        badges: ["Popular", "Sale"],
+        image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80"
       },
 
       {
-        id: "WD-003",
-        title: "Creative Agency X",
-        category: "Agency",
-        price: 2999,
-        rating: 4.9,
-        sales: 35,
-        description: "High-impact creative agency website built for digital teams and studios.",
-        image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80",
-        status: "live",
-        labels: ["popular", "trending"],
-        liveUrl: "",
-        demoUrl: "",
-        deliveryType: "Digital Delivery",
-        createdAt: "2026-09-08T09:00:00",
-        updatedAt: "2026-09-28T10:00:00"
-      },
-
-      {
-        id: "WD-004",
-        title: "ShopEase Store",
-        category: "E-commerce",
-        price: 3499,
-        rating: 4.8,
-        sales: 31,
-        description: "Modern online store experience for products, collections and promotions.",
-        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=1200&q=80",
-        status: "live",
-        labels: ["sale", "popular"],
-        liveUrl: "",
-        demoUrl: "",
-        deliveryType: "Digital Delivery",
-        createdAt: "2026-09-10T09:00:00",
-        updatedAt: "2026-09-27T10:00:00"
-      },
-
-      {
-        id: "WD-005",
-        title: "Personal Portfolio",
-        category: "Portfolio",
+        id: "wd002",
+        title: "Restaurant Royale",
+        category: "restaurant",
+        categoryLabel: "Restaurant",
         price: 1499,
-        rating: 4.7,
-        sales: 19,
-        description: "Clean personal portfolio for designers, developers and creators.",
-        image: "https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=1200&q=80",
-        status: "live",
-        labels: ["new"],
-        liveUrl: "",
-        demoUrl: "",
-        deliveryType: "Digital Delivery",
-        createdAt: "2026-09-15T09:00:00",
-        updatedAt: "2026-09-26T10:00:00"
+        oldPrice: 2199,
+        sales: 71,
+        status: "active",
+        badges: ["Popular"],
+        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=800&q=80"
       },
 
       {
-        id: "WD-006",
-        title: "Corporate Edge",
-        category: "Business",
-        price: 2799,
-        rating: 4.8,
-        sales: 16,
-        description: "Professional corporate website with a polished executive presentation.",
-        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80",
-        status: "draft",
-        labels: ["featured"],
-        liveUrl: "",
-        demoUrl: "",
-        deliveryType: "Digital Delivery",
-        createdAt: "2026-09-17T09:00:00",
-        updatedAt: "2026-09-25T10:00:00"
+        id: "wd003",
+        title: "Creative Agency X",
+        category: "agency",
+        categoryLabel: "Agency",
+        price: 2499,
+        oldPrice: 3499,
+        sales: 64,
+        status: "active",
+        badges: ["Popular", "Sale"],
+        image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80"
       },
 
       {
-        id: "WD-007",
+        id: "wd004",
+        title: "ShopEase Store",
+        category: "ecommerce",
+        categoryLabel: "E-commerce",
+        price: 2999,
+        oldPrice: 4499,
+        sales: 92,
+        status: "active",
+        badges: ["Popular", "Sale"],
+        image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80"
+      },
+
+      {
+        id: "wd005",
+        title: "Minimal Portfolio",
+        category: "portfolio",
+        categoryLabel: "Portfolio",
+        price: 1299,
+        oldPrice: 1799,
+        sales: 48,
+        status: "active",
+        badges: ["New"],
+        image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=800&q=80"
+      },
+
+      {
+        id: "wd006",
         title: "Foodie Restaurant",
-        category: "Restaurant",
-        price: 2199,
-        rating: 4.8,
-        sales: 24,
-        description: "Fresh restaurant landing page for cafes, food brands and dining businesses.",
-        image: "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1200&q=80",
-        status: "live",
-        labels: ["popular"],
-        liveUrl: "",
-        demoUrl: "",
-        deliveryType: "Digital Delivery",
-        createdAt: "2026-09-20T09:00:00",
-        updatedAt: "2026-09-24T10:00:00"
+        category: "restaurant",
+        categoryLabel: "Restaurant",
+        price: 1699,
+        oldPrice: 2399,
+        sales: 35,
+        status: "active",
+        badges: ["New"],
+        image: "https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=800&q=80"
       },
 
       {
-        id: "WD-008",
-        title: "Creator Studio",
-        category: "Portfolio",
-        price: 1799,
-        rating: 4.7,
-        sales: 14,
-        description: "Bold creator portfolio for photographers, video editors and digital artists.",
-        image: "https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&w=1200&q=80",
-        status: "live",
-        labels: ["new", "trending"],
-        liveUrl: "",
-        demoUrl: "",
-        deliveryType: "Digital Delivery",
-        createdAt: "2026-09-23T09:00:00",
-        updatedAt: "2026-09-23T10:00:00"
+        id: "wd007",
+        title: "Corporate Edge",
+        category: "business",
+        categoryLabel: "Business",
+        price: 2199,
+        oldPrice: 3199,
+        sales: 22,
+        status: "draft",
+        badges: ["Sale"],
+        image: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80"
+      },
+
+      {
+        id: "wd008",
+        title: "Digital Studio",
+        category: "agency",
+        categoryLabel: "Agency",
+        price: 1899,
+        oldPrice: 2799,
+        sales: 10,
+        status: "draft",
+        badges: ["New"],
+        image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80"
+      },
+
+      {
+        id: "wd009",
+        title: "Business Starter",
+        category: "business",
+        categoryLabel: "Business",
+        price: 999,
+        oldPrice: 1499,
+        sales: 31,
+        status: "active",
+        badges: ["Sale"],
+        image: "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=800&q=80"
+      },
+
+      {
+        id: "wd010",
+        title: "Personal Creator",
+        category: "portfolio",
+        categoryLabel: "Portfolio",
+        price: 1199,
+        oldPrice: 1699,
+        sales: 18,
+        status: "active",
+        badges: ["New"],
+        image: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80"
+      },
+
+      {
+        id: "wd011",
+        title: "Website Monthly",
+        category: "monthly",
+        categoryLabel: "Monthly",
+        price: 999,
+        oldPrice: null,
+        sales: 61,
+        status: "active",
+        badges: ["Monthly"],
+        image: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=800&q=80"
       }
+
     ];
 
-    /* =========================================================
-       STATE
-    ========================================================= */
-
-    let session = null;
-    let websites = [];
-    let filteredWebsites = [];
-    let pendingDeleteId = null;
 
     /* =========================================================
        DOM
-    ========================================================= */
+       ========================================================= */
 
-    const websiteGrid = document.getElementById("website-grid");
-    const emptyState = document.getElementById("empty-state");
+    const tableBody =
+      document.getElementById("websiteTableBody");
 
-    const searchInput = document.getElementById("website-search");
-    const searchClear = document.getElementById("search-clear");
+    const searchInput =
+      document.getElementById("websiteSearch");
 
-    const categoryFilter = document.getElementById("category-filter");
-    const statusFilter = document.getElementById("status-filter");
-    const sortWebsites = document.getElementById("sort-websites");
+    const categoryFilter =
+      document.getElementById("categoryFilter");
 
-    const resultsCount = document.getElementById("results-count");
+    const statusFilter =
+      document.getElementById("statusFilter");
 
-    const statTotal = document.getElementById("stat-total");
-    const statLive = document.getElementById("stat-live");
-    const statDraft = document.getElementById("stat-draft");
-    const statSales = document.getElementById("stat-sales");
+    const resetFilters =
+      document.getElementById("resetFilters");
 
-    const deleteModal = document.getElementById("delete-modal");
-    const deleteWebsiteName = document.getElementById("delete-website-name");
-    const deleteCancel = document.getElementById("delete-cancel");
-    const deleteConfirm = document.getElementById("delete-confirm");
+    const emptyState =
+      document.getElementById("emptyState");
 
-    const toast = document.getElementById("listing-toast");
-    const toastMessage = document.getElementById("listing-toast-message");
+    const resultCount =
+      document.getElementById("resultCount");
+
+    const totalWebsites =
+      document.getElementById("totalWebsites");
+
+    const activeWebsites =
+      document.getElementById("activeWebsites");
+
+    const draftWebsites =
+      document.getElementById("draftWebsites");
+
+    const totalSales =
+      document.getElementById("totalSales");
+
+    const sidebarWebsiteCount =
+      document.getElementById("sidebarWebsiteCount");
+
+    const toast =
+      document.getElementById("toast");
+
+    const toastTitle =
+      document.getElementById("toastTitle");
+
+    const toastMessage =
+      document.getElementById("toastMessage");
+
+    const toastIcon =
+      document.getElementById("toastIcon");
+
+    const deleteModal =
+      document.getElementById("deleteModal");
+
+    const deleteWebsiteName =
+      document.getElementById("deleteWebsiteName");
+
+    const deleteWebsiteId =
+      document.getElementById("deleteWebsiteId");
+
+    const deleteThumb =
+      document.getElementById("deleteThumb");
+
+    let websiteData = [...websites];
+
+    let pendingDeleteId = null;
+
 
     /* =========================================================
-       SESSION
-    ========================================================= */
+       CATEGORY ICON
+       ========================================================= */
 
-    function getSession() {
+    function getCategoryIcon(category) {
+
+      const icons = {
+        business: "fa-briefcase",
+        restaurant: "fa-utensils",
+        agency: "fa-wand-magic-sparkles",
+        ecommerce: "fa-cart-shopping",
+        portfolio: "fa-user",
+        monthly: "fa-calendar-days"
+      };
+
+      return icons[category] || "fa-globe";
+
+    }
+
+
+    /* =========================================================
+       PRICE FORMAT
+       ========================================================= */
+
+    function formatPrice(price) {
+
+      return "৳" + Number(price).toLocaleString("en-BD");
+
+    }
+
+
+    /* =========================================================
+       ESCAPE HTML
+       ========================================================= */
+
+    function escapeHTML(value) {
+
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+    }
+
+
+    /* =========================================================
+       LOAD LOCAL DATA
+       ========================================================= */
+
+    function loadLocalData() {
 
       try {
 
-        const raw = localStorage.getItem(SESSION_KEY);
+        const stored =
+          localStorage.getItem(
+            "websiteDealsAdminWebsites"
+          );
 
-        if (!raw) {
-          window.location.href = "index.html";
-          return null;
-        }
+        if (stored) {
 
-        const parsed = JSON.parse(raw);
+          const parsed = JSON.parse(stored);
 
-        if (!parsed || !parsed.email) {
-          window.location.href = "index.html";
-          return null;
-        }
-
-        return parsed;
-
-      } catch (error) {
-
-        console.error(error);
-
-        localStorage.removeItem(SESSION_KEY);
-        window.location.href = "index.html";
-
-        return null;
-      }
-    }
-
-    session = getSession();
-
-    if (!session) {
-      throw new Error("No admin session.");
-    }
-
-    /*
-      Internal permission flag.
-
-      The visible interface remains neutral.
-      Production authorization MUST also happen through
-      Firebase/Firestore security rules.
-    */
-    const canDelete = session.role === "superadmin";
-
-    /* =========================================================
-       PRIVILEGED NAV
-    ========================================================= */
-
-    function applyPrivilegedNavigation() {
-
-      document.querySelectorAll(".privileged-nav").forEach((element) => {
-
-        element.style.display = canDelete ? "" : "none";
-
-      });
-
-    }
-
-    applyPrivilegedNavigation();
-
-    /* =========================================================
-       ACCOUNT AVATAR
-    ========================================================= */
-
-    function updateAccountAvatar() {
-
-      const avatar = document.getElementById("account-avatar");
-
-      if (!avatar) {
-        return;
-      }
-
-      const name =
-        session.name ||
-        session.fullName ||
-        session.email ||
-        "A";
-
-      avatar.textContent =
-        name.trim().charAt(0).toUpperCase();
-
-    }
-
-    updateAccountAvatar();
-
-    /* =========================================================
-       STORAGE
-    ========================================================= */
-
-    function loadWebsites() {
-
-      try {
-
-        const raw = localStorage.getItem(WEBSITES_KEY);
-
-        if (!raw) {
-
-          websites = DEFAULT_WEBSITES.map(item => ({
-            ...item
-          }));
-
-          saveWebsites();
-
-          return;
+          if (Array.isArray(parsed)) {
+            websiteData = parsed;
+          }
 
         }
-
-        const parsed = JSON.parse(raw);
-
-        if (!Array.isArray(parsed)) {
-          throw new Error("Invalid website data.");
-        }
-
-        websites = parsed;
 
       } catch (error) {
 
         console.warn(
-          "Website data could not be loaded. Defaults restored.",
+          "Could not load local website data.",
           error
         );
 
-        websites = DEFAULT_WEBSITES.map(item => ({
-          ...item
-        }));
-
-        saveWebsites();
       }
 
     }
 
-    function saveWebsites() {
-
-      localStorage.setItem(
-        WEBSITES_KEY,
-        JSON.stringify(websites)
-      );
-
-    }
-
-    loadWebsites();
 
     /* =========================================================
-       NORMALIZE DATA
-    ========================================================= */
+       SAVE LOCAL DATA
+       ========================================================= */
 
-    function normalizeWebsite(item, index) {
+    function saveLocalData() {
 
-      const website = item || {};
+      try {
 
-      return {
+        localStorage.setItem(
+          "websiteDealsAdminWebsites",
+          JSON.stringify(websiteData)
+        );
 
-        id:
-          website.id ||
-          `WD-${String(index + 1).padStart(3, "0")}`,
+      } catch (error) {
 
-        title:
-          website.title ||
-          website.name ||
-          "Untitled Website",
+        console.warn(
+          "Could not save local website data.",
+          error
+        );
 
-        category:
-          website.category ||
-          "Business",
-
-        price:
-          Number(website.price) || 0,
-
-        rating:
-          Number(website.rating) || 0,
-
-        sales:
-          Number(
-            website.sales ??
-            website.orders ??
-            0
-          ) || 0,
-
-        description:
-          website.description ||
-          "Premium ready-made website.",
-
-        image:
-          website.image ||
-          website.imageUrl ||
-          "",
-
-        status:
-          website.status === "draft"
-            ? "draft"
-            : "live",
-
-        labels:
-          Array.isArray(website.labels)
-            ? website.labels
-            : [],
-
-        liveUrl:
-          website.liveUrl ||
-          "",
-
-        demoUrl:
-          website.demoUrl ||
-          "",
-
-        deliveryType:
-          website.deliveryType ||
-          "Digital Delivery",
-
-        createdAt:
-          website.createdAt ||
-          new Date().toISOString(),
-
-        updatedAt:
-          website.updatedAt ||
-          website.createdAt ||
-          new Date().toISOString()
-
-      };
+      }
 
     }
 
-    websites = websites.map(normalizeWebsite);
 
     /* =========================================================
-       HELPERS
-    ========================================================= */
+       CREATE TABLE ROW
+       ========================================================= */
 
-    function escapeHtml(value) {
+    function createWebsiteRow(site) {
 
-      return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-
-    }
-
-    function formatPrice(value) {
-
-      const number = Number(value) || 0;
-
-      return "৳" + number.toLocaleString("en-BD");
-
-    }
-
-    function formatDate(value) {
-
-      if (!value) {
-        return "—";
-      }
-
-      const date = new Date(value);
-
-      if (Number.isNaN(date.getTime())) {
-        return "—";
-      }
-
-      return date.toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric"
-      });
-
-    }
-
-    function getImage(website) {
-
-      if (website.image) {
-        return website.image;
-      }
-
-      return "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80";
-
-    }
-
-    function getLabels(website) {
-
-      const labels = Array.isArray(website.labels)
-        ? website.labels
+      const badges = Array.isArray(site.badges)
+        ? site.badges
         : [];
 
-      return labels
-        .map(label => String(label).toLowerCase());
+      const badgeHTML = badges.length
+        ? badges.map(function(badge) {
 
-    }
+            const badgeClass =
+              String(badge).toLowerCase();
 
-    function labelHtml(label) {
+            let className = "badge";
 
-      const labels = {
-        new: {
-          text: "New",
-          className: "badge-new"
-        },
+            if (badgeClass.includes("sale")) {
+              className += " sale";
+            }
 
-        popular: {
-          text: "Popular",
-          className: "badge-popular"
-        },
+            if (badgeClass.includes("new")) {
+              className += " new";
+            }
 
-        sale: {
-          text: "Sale",
-          className: "badge-sale"
-        },
+            return `
+              <span class="${className}">
+                ${escapeHTML(badge)}
+              </span>
+            `;
 
-        featured: {
-          text: "Featured",
-          className: "badge-featured"
-        },
+          }).join("")
+        : `
+          <span style="color:#9aa39e;font-size:9px;">
+            —
+          </span>
+        `;
 
-        monthly: {
-          text: "Monthly",
-          className: "badge-monthly"
-        },
 
-        trending: {
-          text: "Trending",
-          className: "badge-trending"
-        }
-      };
+      const oldPriceHTML =
+        site.oldPrice
+          ? `
+            <div class="price-old">
+              ${formatPrice(site.oldPrice)}
+            </div>
+          `
+          : "";
 
-      const config = labels[label];
-
-      if (!config) {
-        return "";
-      }
 
       return `
-        <span class="website-badge ${config.className}">
-          ${escapeHtml(config.text)}
-        </span>
+
+        <tr data-id="${escapeHTML(site.id)}">
+
+          <!-- WEBSITE -->
+
+          <td>
+
+            <div class="product-cell">
+
+              <div class="product-thumb">
+
+                <img
+                  src="${escapeHTML(site.image || "")}"
+                  alt="${escapeHTML(site.title)}"
+                  loading="lazy"
+                  onerror="
+                    this.style.display='none';
+                    this.parentElement.innerHTML='<div class=&quot;thumb-fallback&quot;><i class=&quot;fa-solid fa-globe&quot;></i></div>';
+                  "
+                >
+
+              </div>
+
+
+              <div class="product-info">
+
+                <div class="product-title">
+                  ${escapeHTML(site.title)}
+                </div>
+
+                <div class="product-id">
+                  ID: ${escapeHTML(site.id)}
+                </div>
+
+              </div>
+
+            </div>
+
+          </td>
+
+
+          <!-- CATEGORY -->
+
+          <td>
+
+            <span class="category-pill">
+
+              <i class="fa-solid ${getCategoryIcon(site.category)}"></i>
+
+              ${escapeHTML(site.categoryLabel)}
+
+            </span>
+
+          </td>
+
+
+          <!-- PRICE -->
+
+          <td>
+
+            <div class="price-main">
+              ${formatPrice(site.price)}
+            </div>
+
+            ${oldPriceHTML}
+
+          </td>
+
+
+          <!-- SALES -->
+
+          <td>
+
+            <div class="sales-number">
+              ${Number(site.sales || 0).toLocaleString()}
+            </div>
+
+            <div class="sales-label">
+              purchases
+            </div>
+
+          </td>
+
+
+          <!-- STATUS -->
+
+          <td>
+
+            <span class="status ${escapeHTML(site.status)}">
+
+              ${escapeHTML(
+                site.status.charAt(0).toUpperCase()
+                + site.status.slice(1)
+              )}
+
+            </span>
+
+          </td>
+
+
+          <!-- BADGES -->
+
+          <td>
+
+            <div class="product-badges">
+
+              ${badgeHTML}
+
+            </div>
+
+          </td>
+
+
+          <!-- ACTIONS -->
+
+          <td>
+
+            <div class="actions">
+
+              <button
+                type="button"
+                class="action-btn preview-btn"
+                data-id="${escapeHTML(site.id)}"
+                title="Preview"
+                aria-label="Preview"
+              >
+                <i class="fa-regular fa-eye"></i>
+              </button>
+
+
+              <button
+                type="button"
+                class="action-btn edit-btn"
+                data-id="${escapeHTML(site.id)}"
+                title="Edit"
+                aria-label="Edit"
+              >
+                <i class="fa-regular fa-pen-to-square"></i>
+              </button>
+
+
+              <button
+                type="button"
+                class="action-btn danger delete-btn"
+                data-id="${escapeHTML(site.id)}"
+                title="Delete"
+                aria-label="Delete"
+              >
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
+
+            </div>
+
+          </td>
+
+        </tr>
+
       `;
 
     }
 
-    function buildLabels(website) {
-
-      const labels = getLabels(website);
-
-      return labels
-        .slice(0, 3)
-        .map(labelHtml)
-        .join("");
-
-    }
-
-    function getPreviewUrl(website) {
-
-      const candidates = [
-        website.liveUrl,
-        website.demoUrl
-      ];
-
-      for (const url of candidates) {
-
-        if (!url) {
-          continue;
-        }
-
-        try {
-
-          const parsed = new URL(url);
-
-          if (
-            parsed.protocol === "http:" ||
-            parsed.protocol === "https:"
-          ) {
-            return parsed.href;
-          }
-
-        } catch (error) {
-          // Ignore invalid URL.
-        }
-
-      }
-
-      return "";
-
-    }
 
     /* =========================================================
-       STATS
-    ========================================================= */
+       FILTER DATA
+       ========================================================= */
 
-    function updateStats() {
-
-      const total = websites.length;
-
-      const live = websites.filter(
-        website => website.status === "live"
-      ).length;
-
-      const draft = websites.filter(
-        website => website.status === "draft"
-      ).length;
-
-      const sales = websites.reduce(
-        (sum, website) =>
-          sum + (Number(website.sales) || 0),
-        0
-      );
-
-      statTotal.textContent =
-        total.toLocaleString("en-BD");
-
-      statLive.textContent =
-        live.toLocaleString("en-BD");
-
-      statDraft.textContent =
-        draft.toLocaleString("en-BD");
-
-      statSales.textContent =
-        sales.toLocaleString("en-BD");
-
-    }
-
-    /* =========================================================
-       FILTER + SORT
-    ========================================================= */
-
-    function applyFilters() {
+    function getFilteredData() {
 
       const search =
         searchInput.value
@@ -2051,388 +3007,288 @@
       const status =
         statusFilter.value;
 
-      const sort =
-        sortWebsites.value;
 
-      filteredWebsites =
-        websites.filter((website) => {
+      return websiteData.filter(function(site) {
 
-          const searchableText = [
-            website.id,
-            website.title,
-            website.category,
-            website.description
+        const searchable =
+          [
+            site.id,
+            site.title,
+            site.category,
+            site.categoryLabel
           ]
             .join(" ")
             .toLowerCase();
 
-          const matchesSearch =
-            !search ||
-            searchableText.includes(search);
 
-          const matchesCategory =
-            category === "all" ||
-            website.category === category;
+        const matchesSearch =
+          !search ||
+          searchable.includes(search);
 
-          const matchesStatus =
-            status === "all" ||
-            website.status === status;
 
-          return (
-            matchesSearch &&
-            matchesCategory &&
-            matchesStatus
-          );
+        const matchesCategory =
+          category === "all" ||
+          site.category === category;
 
-        });
 
-      filteredWebsites.sort((a, b) => {
+        const matchesStatus =
+          status === "all" ||
+          site.status === status;
 
-        switch (sort) {
 
-          case "oldest":
-            return (
-              new Date(a.createdAt) -
-              new Date(b.createdAt)
-            );
-
-          case "price-high":
-            return (
-              Number(b.price) -
-              Number(a.price)
-            );
-
-          case "price-low":
-            return (
-              Number(a.price) -
-              Number(b.price)
-            );
-
-          case "sales-high":
-            return (
-              Number(b.sales) -
-              Number(a.sales)
-            );
-
-          case "name":
-            return String(a.title)
-              .localeCompare(
-                String(b.title)
-              );
-
-          case "newest":
-          default:
-            return (
-              new Date(b.createdAt) -
-              new Date(a.createdAt)
-            );
-
-        }
+        return (
+          matchesSearch &&
+          matchesCategory &&
+          matchesStatus
+        );
 
       });
 
-      renderWebsites();
-
     }
 
+
     /* =========================================================
-       RENDER
-    ========================================================= */
+       RENDER TABLE
+       ========================================================= */
 
-    function renderWebsites() {
+    function renderTable() {
 
-      websiteGrid.innerHTML = "";
+      const filtered =
+        getFilteredData();
 
-      resultsCount.innerHTML =
-        `Showing <strong>${filteredWebsites.length}</strong> websites`;
 
-      if (!filteredWebsites.length) {
+      tableBody.innerHTML =
+        filtered
+          .map(createWebsiteRow)
+          .join("");
 
-        emptyState.classList.add("show");
 
-        return;
+      resultCount.textContent =
+        filtered.length;
+
+
+      if (filtered.length === 0) {
+
+        emptyState.style.display =
+          "block";
+
+      } else {
+
+        emptyState.style.display =
+          "none";
 
       }
 
-      emptyState.classList.remove("show");
-
-      const fragment =
-        document.createDocumentFragment();
-
-      filteredWebsites.forEach((website) => {
-
-        const article =
-          document.createElement("article");
-
-        article.className =
-          "website-card";
-
-        article.dataset.id =
-          website.id;
-
-        const previewUrl =
-          getPreviewUrl(website);
-
-        const previewButton =
-          previewUrl
-            ? `
-              <button
-                type="button"
-                class="listing-action preview"
-                data-action="preview"
-                data-id="${escapeHtml(website.id)}"
-                title="Preview website"
-                aria-label="Preview website"
-              >
-                <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </button>
-            `
-            : `
-              <button
-                type="button"
-                class="listing-action preview"
-                data-action="preview"
-                data-id="${escapeHtml(website.id)}"
-                title="Preview website"
-                aria-label="Preview website"
-              >
-                <i class="fa-solid fa-eye"></i>
-              </button>
-            `;
-
-        const deleteButton =
-          canDelete
-            ? `
-              <button
-                type="button"
-                class="listing-action delete"
-                data-action="delete"
-                data-id="${escapeHtml(website.id)}"
-                title="Delete website"
-                aria-label="Delete website"
-              >
-                <i class="fa-solid fa-trash-can"></i>
-              </button>
-            `
-            : "";
-
-        article.innerHTML = `
-
-          <div class="website-cover">
-
-            <img
-              src="${escapeHtml(getImage(website))}"
-              alt="${escapeHtml(website.title)}"
-              loading="lazy"
-              data-fallback="true"
-            >
-
-            <div class="website-badges">
-              ${buildLabels(website)}
-            </div>
-
-            <div
-              class="website-status ${website.status === "draft" ? "draft" : ""}"
-            >
-              <span class="website-status-dot"></span>
-              ${website.status === "draft" ? "Draft" : "Live"}
-            </div>
-
-          </div>
-
-          <div class="website-info">
-
-            <div class="website-category">
-              ${escapeHtml(website.category)}
-            </div>
-
-            <h2 class="website-title">
-              ${escapeHtml(website.title)}
-            </h2>
-
-            <div class="website-description">
-              ${escapeHtml(website.description)}
-            </div>
-
-            <div class="website-meta">
-
-              <div class="website-rating">
-                <i class="fa-solid fa-star"></i>
-                ${Number(website.rating || 0).toFixed(1)}
-              </div>
-
-              <div class="website-sales">
-                ${Number(website.sales || 0).toLocaleString("en-BD")}
-                sales
-              </div>
-
-            </div>
-
-            <div class="website-price">
-
-              <div>
-
-                <div class="price-label">
-                  Starting price
-                </div>
-
-                <div class="price-value">
-                  ${formatPrice(website.price)}
-                </div>
-
-              </div>
-
-              <div class="website-actions">
-
-                ${previewButton}
-
-                <a
-                  href="website-editor.html?id=${encodeURIComponent(website.id)}"
-                  class="listing-action edit"
-                  title="Edit website"
-                  aria-label="Edit website"
-                >
-                  <i class="fa-solid fa-pen"></i>
-                </a>
-
-                ${deleteButton}
-
-              </div>
-
-            </div>
-
-          </div>
-        `;
-
-        fragment.appendChild(article);
-
-      });
-
-      websiteGrid.appendChild(fragment);
-
-      attachImageFallbacks();
-
     }
+
 
     /* =========================================================
-       IMAGE FALLBACK
-    ========================================================= */
+       UPDATE STATS
+       ========================================================= */
 
-    function attachImageFallbacks() {
+    function updateStats() {
 
-      document
-        .querySelectorAll(
-          '.website-cover img[data-fallback="true"]'
-        )
-        .forEach((image) => {
+      const total =
+        websiteData.length;
 
-          image.addEventListener(
-            "error",
-            function handleImageError() {
 
-              if (
-                image.dataset.fallbackApplied === "true"
-              ) {
-                return;
-              }
+      const active =
+        websiteData.filter(function(site) {
+          return site.status === "active";
+        }).length;
 
-              image.dataset.fallbackApplied = "true";
 
-              image.src =
-                "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80";
+      const drafts =
+        websiteData.filter(function(site) {
+          return site.status === "draft";
+        }).length;
 
-            },
-            {
-              once: true
-            }
-          );
 
-        });
+      const sales =
+        websiteData.reduce(function(sum, site) {
+
+          return sum + Number(site.sales || 0);
+
+        }, 0);
+
+
+      totalWebsites.textContent =
+        total;
+
+
+      activeWebsites.textContent =
+        active;
+
+
+      draftWebsites.textContent =
+        drafts;
+
+
+      totalSales.textContent =
+        sales.toLocaleString();
+
+
+      sidebarWebsiteCount.textContent =
+        total;
 
     }
+
+
+    /* =========================================================
+       TOAST
+       ========================================================= */
+
+    function showToast(
+      title,
+      message,
+      type = "success"
+    ) {
+
+      toastTitle.textContent =
+        title;
+
+      toastMessage.textContent =
+        message;
+
+
+      if (type === "error") {
+
+        toastIcon.className =
+          "fa-solid fa-triangle-exclamation";
+
+        toast.querySelector(".toast-icon").style.background =
+          "var(--danger-soft)";
+
+        toast.querySelector(".toast-icon").style.color =
+          "var(--danger)";
+
+      } else {
+
+        toastIcon.className =
+          "fa-solid fa-check";
+
+        toast.querySelector(".toast-icon").style.background =
+          "var(--green-soft)";
+
+        toast.querySelector(".toast-icon").style.color =
+          "var(--green-dark)";
+
+      }
+
+
+      toast.classList.add("show");
+
+
+      clearTimeout(
+        window.websiteDealsToastTimer
+      );
+
+
+      window.websiteDealsToastTimer =
+        setTimeout(function() {
+
+          toast.classList.remove("show");
+
+        }, 3000);
+
+    }
+
 
     /* =========================================================
        PREVIEW
-    ========================================================= */
+       ========================================================= */
 
     function previewWebsite(id) {
 
-      const website =
-        websites.find(
-          item => item.id === id
-        );
+      const site =
+        websiteData.find(function(item) {
+          return item.id === id;
+        });
 
-      if (!website) {
 
-        showToast(
-          "Website could not be found.",
-          "error"
-        );
+      if (!site) return;
 
-        return;
 
-      }
-
-      const url =
-        getPreviewUrl(website);
-
-      if (!url) {
-
-        showToast(
-          "No live or demo URL has been added yet.",
-          "error"
-        );
-
-        return;
-
-      }
-
-      window.open(
-        url,
-        "_blank",
-        "noopener,noreferrer"
+      showToast(
+        "Preview",
+        site.title + " preview is ready to connect.",
+        "success"
       );
+
+
+      /*
+        Production:
+        Replace this with the actual website preview URL.
+      */
+
+      if (
+        site.previewUrl &&
+        site.previewUrl !== "#"
+      ) {
+
+        window.open(
+          site.previewUrl,
+          "_blank",
+          "noopener,noreferrer"
+        );
+
+      }
 
     }
 
+
     /* =========================================================
-       DELETE
-    ========================================================= */
+       EDIT
+       ========================================================= */
+
+    function editWebsite(id) {
+
+      window.location.href =
+        "website-editor.html?id=" +
+        encodeURIComponent(id);
+
+    }
+
+
+    /* =========================================================
+       OPEN DELETE MODAL
+       ========================================================= */
 
     function openDeleteModal(id) {
 
-      /*
-        Double permission check.
+      const site =
+        websiteData.find(function(item) {
+          return item.id === id;
+        });
 
-        Hiding the button is NOT security.
-        This is only demo-side protection.
-      */
 
-      if (!canDelete) {
+      if (!site) return;
 
-        showToast(
-          "You do not have permission to delete listings.",
-          "error"
-        );
 
-        return;
+      pendingDeleteId = id;
 
-      }
-
-      const website =
-        websites.find(
-          item => item.id === id
-        );
-
-      if (!website) {
-        return;
-      }
-
-      pendingDeleteId =
-        website.id;
 
       deleteWebsiteName.textContent =
-        website.title;
+        site.title;
+
+
+      deleteWebsiteId.textContent =
+        "ID: " + site.id;
+
+
+      deleteThumb.innerHTML = `
+
+        <img
+          src="${escapeHTML(site.image || "")}"
+          alt=""
+          onerror="
+            this.style.display='none';
+            this.parentElement.innerHTML='<div class=&quot;thumb-fallback&quot;><i class=&quot;fa-solid fa-globe&quot;></i></div>';
+          "
+        >
+
+      `;
+
 
       deleteModal.classList.add("show");
 
@@ -2442,6 +3298,11 @@
       );
 
     }
+
+
+    /* =========================================================
+       CLOSE DELETE MODAL
+       ========================================================= */
 
     function closeDeleteModal() {
 
@@ -2456,244 +3317,200 @@
 
     }
 
-    function confirmDelete() {
 
-      if (!canDelete) {
+    /* =========================================================
+       DELETE WEBSITE
+       ========================================================= */
 
-        closeDeleteModal();
-
-        showToast(
-          "You do not have permission to delete listings.",
-          "error"
-        );
-
-        return;
-
-      }
+    function deleteWebsite() {
 
       if (!pendingDeleteId) {
         return;
       }
 
-      const target =
-        websites.find(
-          website =>
-            website.id === pendingDeleteId
-        );
 
-      if (!target) {
+      const site =
+        websiteData.find(function(item) {
+          return item.id === pendingDeleteId;
+        });
 
-        closeDeleteModal();
 
-        return;
+      websiteData =
+        websiteData.filter(function(item) {
+          return item.id !== pendingDeleteId;
+        });
 
-      }
 
-      websites =
-        websites.filter(
-          website =>
-            website.id !== pendingDeleteId
-        );
-
-      saveWebsites();
+      saveLocalData();
 
       updateStats();
 
-      applyFilters();
+      renderTable();
 
       closeDeleteModal();
 
+
       showToast(
-        "Website listing deleted successfully.",
+        "Website Deleted",
+        site
+          ? site.title + " has been removed from this demo."
+          : "Website has been removed.",
         "success"
       );
 
     }
 
+
     /* =========================================================
-       TOAST
-    ========================================================= */
+       EVENT DELEGATION
+       ========================================================= */
 
-    let toastTimer = null;
+    tableBody.addEventListener(
+      "click",
+      function(event) {
 
-    function showToast(
-      message,
-      type = "success"
-    ) {
+        const previewButton =
+          event.target.closest(".preview-btn");
 
-      clearTimeout(toastTimer);
+        const editButton =
+          event.target.closest(".edit-btn");
 
-      toast.classList.remove(
-        "success",
-        "error",
-        "show"
-      );
+        const deleteButton =
+          event.target.closest(".delete-btn");
 
-      toast.classList.add(type);
 
-      toastMessage.textContent =
-        message;
+        if (previewButton) {
 
-      const icon =
-        toast.querySelector("i");
+          previewWebsite(
+            previewButton.dataset.id
+          );
 
-      if (icon) {
+          return;
 
-        icon.className =
-          type === "error"
-            ? "fa-solid fa-circle-exclamation"
-            : "fa-solid fa-circle-check";
+        }
+
+
+        if (editButton) {
+
+          editWebsite(
+            editButton.dataset.id
+          );
+
+          return;
+
+        }
+
+
+        if (deleteButton) {
+
+          openDeleteModal(
+            deleteButton.dataset.id
+          );
+
+        }
 
       }
+    );
 
-      requestAnimationFrame(() => {
-
-        toast.classList.add("show");
-
-      });
-
-      toastTimer =
-        setTimeout(() => {
-
-          toast.classList.remove("show");
-
-        }, 3200);
-
-    }
 
     /* =========================================================
-       SEARCH CLEAR
-    ========================================================= */
-
-    function updateSearchClear() {
-
-      searchClear.style.display =
-        searchInput.value
-          ? "grid"
-          : "none";
-
-    }
+       FILTER EVENTS
+       ========================================================= */
 
     searchInput.addEventListener(
       "input",
-      () => {
-
-        updateSearchClear();
-
-        applyFilters();
-
-      }
+      renderTable
     );
 
-    searchClear.addEventListener(
-      "click",
-      () => {
-
-        searchInput.value = "";
-
-        updateSearchClear();
-
-        applyFilters();
-
-        searchInput.focus();
-
-      }
-    );
 
     categoryFilter.addEventListener(
       "change",
-      applyFilters
+      renderTable
     );
+
 
     statusFilter.addEventListener(
       "change",
-      applyFilters
+      renderTable
     );
 
-    sortWebsites.addEventListener(
-      "change",
-      applyFilters
-    );
 
-    /* =========================================================
-       CARD ACTIONS
-    ========================================================= */
-
-    websiteGrid.addEventListener(
+    resetFilters.addEventListener(
       "click",
-      (event) => {
+      function() {
 
-        const actionButton =
-          event.target.closest(
-            "[data-action]"
-          );
+        searchInput.value = "";
 
-        if (!actionButton) {
-          return;
-        }
+        categoryFilter.value = "all";
 
-        const action =
-          actionButton.dataset.action;
+        statusFilter.value = "all";
 
-        const id =
-          actionButton.dataset.id;
+        renderTable();
 
-        if (!id) {
-          return;
-        }
-
-        if (action === "preview") {
-
-          previewWebsite(id);
-
-        }
-
-        if (action === "delete") {
-
-          openDeleteModal(id);
-
-        }
+        showToast(
+          "Filters Reset",
+          "All website filters have been cleared."
+        );
 
       }
     );
 
+
     /* =========================================================
-       DELETE MODAL EVENTS
-    ========================================================= */
+       DELETE EVENTS
+       ========================================================= */
 
-    deleteCancel.addEventListener(
-      "click",
-      closeDeleteModal
-    );
+    document
+      .getElementById("closeDeleteModal")
+      .addEventListener(
+        "click",
+        closeDeleteModal
+      );
 
-    deleteConfirm.addEventListener(
-      "click",
-      confirmDelete
-    );
+
+    document
+      .getElementById("cancelDelete")
+      .addEventListener(
+        "click",
+        closeDeleteModal
+      );
+
+
+    document
+      .getElementById("confirmDelete")
+      .addEventListener(
+        "click",
+        deleteWebsite
+      );
+
 
     deleteModal.addEventListener(
       "click",
-      (event) => {
+      function(event) {
 
         if (
           event.target === deleteModal
         ) {
+
           closeDeleteModal();
+
         }
 
       }
     );
 
+
     /* =========================================================
-       ESCAPE
-    ========================================================= */
+       ESCAPE MODAL
+       ========================================================= */
 
     document.addEventListener(
       "keydown",
-      (event) => {
+      function(event) {
 
         if (
-          event.key === "Escape"
+          event.key === "Escape" &&
+          deleteModal.classList.contains("show")
         ) {
 
           closeDeleteModal();
@@ -2703,127 +3520,137 @@
       }
     );
 
+
     /* =========================================================
-       MOBILE SIDEBAR
-    ========================================================= */
+       REFRESH
+       ========================================================= */
 
-    const sidebar =
-      document.getElementById(
-        "admin-sidebar"
-      );
-
-    const mobileMenuButton =
-      document.getElementById(
-        "mobile-menu-button"
-      );
-
-    if (
-      mobileMenuButton &&
-      sidebar
-    ) {
-
-      mobileMenuButton.addEventListener(
+    document
+      .getElementById("refreshBtn")
+      .addEventListener(
         "click",
-        () => {
+        function() {
 
-          sidebar.classList.toggle(
-            "open"
+          renderTable();
+
+          updateStats();
+
+          showToast(
+            "Refreshed",
+            "Website listings have been refreshed."
           );
 
         }
       );
+
+
+    /* =========================================================
+       MOBILE SIDEBAR
+       ========================================================= */
+
+    const sidebar =
+      document.getElementById("sidebar");
+
+    const mobileMenuBtn =
+      document.getElementById("mobileMenuBtn");
+
+    const sidebarOverlay =
+      document.getElementById("sidebarOverlay");
+
+
+    function toggleSidebar() {
+
+      sidebar.classList.toggle("open");
+
+      sidebarOverlay.classList.toggle("show");
 
     }
 
-    document.addEventListener(
+
+    function closeSidebar() {
+
+      sidebar.classList.remove("open");
+
+      sidebarOverlay.classList.remove("show");
+
+    }
+
+
+    mobileMenuBtn.addEventListener(
       "click",
-      (event) => {
-
-        if (
-          window.innerWidth > 900 ||
-          !sidebar
-        ) {
-          return;
-        }
-
-        const clickedInsideSidebar =
-          sidebar.contains(event.target);
-
-        const clickedMenu =
-          mobileMenuButton &&
-          mobileMenuButton.contains(
-            event.target
-          );
-
-        if (
-          !clickedInsideSidebar &&
-          !clickedMenu
-        ) {
-
-          sidebar.classList.remove(
-            "open"
-          );
-
-        }
-
-      }
+      toggleSidebar
     );
+
+
+    sidebarOverlay.addEventListener(
+      "click",
+      closeSidebar
+    );
+
+
+    document
+      .querySelectorAll(".nav-item")
+      .forEach(function(item) {
+
+        item.addEventListener(
+          "click",
+          function() {
+
+            if (
+              window.innerWidth <= 820
+            ) {
+
+              closeSidebar();
+
+            }
+
+          }
+        );
+
+      });
+
 
     /* =========================================================
        LOGOUT
-    ========================================================= */
+       ========================================================= */
 
     document
-      .getElementById("logout-button")
+      .getElementById("logoutBtn")
       .addEventListener(
         "click",
-        () => {
+        function() {
 
-          localStorage.removeItem(
-            SESSION_KEY
-          );
-
-          window.location.href =
-            "index.html";
-
-        }
-      );
-
-    /* =========================================================
-       ACCOUNT BUTTON
-    ========================================================= */
-
-    document
-      .getElementById("account-button")
-      .addEventListener(
-        "click",
-        () => {
+          /*
+            Firebase Authentication logout
+            will be connected here later.
+          */
 
           showToast(
-            session.email
-              ? `Signed in as ${session.email}`
-              : "Account session active.",
-            "success"
+            "Signed Out",
+            "Demo logout action completed."
           );
+
+
+          setTimeout(function() {
+
+            window.location.href =
+              "index.html";
+
+          }, 900);
 
         }
       );
+
 
     /* =========================================================
        INITIALIZE
-    ========================================================= */
+       ========================================================= */
 
-    function initializePage() {
+    loadLocalData();
 
-      updateStats();
+    updateStats();
 
-      updateSearchClear();
-
-      applyFilters();
-
-    }
-
-    initializePage();
+    renderTable();
 
   </script>
 
