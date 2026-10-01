@@ -2,20 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Categories | Website Deals Admin</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#0b1020"
+  >
 
   <meta
     name="description"
-    content="Manage website categories for Website Deals marketplace."
+    content="Website Deals Admin — Category Management"
   >
 
-  <link rel="icon" type="image/png"
-    href="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png">
+  <title>Categories | Website Deals Admin</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    rel="icon"
+    type="image/png"
+    href="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
 
   <link
     href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
@@ -24,532 +44,699 @@
 
   <link
     rel="stylesheet"
+    href="css/admin.css"
+  >
+
+  <link
+    rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   >
 
-  <link rel="stylesheet" href="css/admin.css">
-
   <style>
-    .category-page {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
 
-    .page-intro {
+    /* =========================================================
+       CATEGORY PAGE
+    ========================================================= */
+
+    .category-toolbar {
       display: flex;
+      align-items: center;
       justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 22px;
+      flex-wrap: wrap;
+    }
+
+    .category-search {
+      position: relative;
+      flex: 1;
+      min-width: 240px;
+      max-width: 480px;
+    }
+
+    .category-search i {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--admin-muted);
+      pointer-events: none;
+    }
+
+    .category-search input {
+      width: 100%;
+      height: 46px;
+      padding: 0 16px 0 43px;
+    }
+
+    .category-actions {
+      display: flex;
       align-items: center;
-      gap: 20px;
-      margin-bottom: 28px;
-    }
-
-    .page-intro h1 {
-      margin: 0 0 7px;
-      font-size: 30px;
-      font-weight: 800;
-      letter-spacing: -0.7px;
-    }
-
-    .page-intro p {
-      margin: 0;
-      color: #7b8494;
-      font-size: 14px;
-    }
-
-    .primary-btn {
-      border: 0;
-      background: #18a957;
-      color: #fff;
-      min-height: 46px;
-      padding: 0 18px;
-      border-radius: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      transition: .2s ease;
-      box-shadow: 0 8px 20px rgba(24,169,87,.18);
-    }
-
-    .primary-btn:hover {
-      background: #108344;
-      transform: translateY(-1px);
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
     .category-stats {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-bottom: 25px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
     }
 
-    .stat-card {
-      background: #fff;
-      border: 1px solid #e8ecf1;
-      border-radius: 18px;
-      padding: 20px;
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      box-shadow: 0 8px 30px rgba(15,23,42,.04);
-    }
-
-    .stat-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: #effaf4;
-      color: #18a957;
-      display: grid;
-      place-items: center;
-      font-size: 19px;
-    }
-
-    .stat-card strong {
-      display: block;
-      font-size: 24px;
-      line-height: 1;
-      margin-bottom: 5px;
-    }
-
-    .stat-card span {
-      color: #7b8494;
-      font-size: 13px;
-    }
-
-    .category-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    .category-card {
-      background: #fff;
-      border: 1px solid #e8ecf1;
-      border-radius: 20px;
-      padding: 22px;
-      box-shadow: 0 8px 30px rgba(15,23,42,.04);
-      transition: .22s ease;
+    .category-stat {
       position: relative;
       overflow: hidden;
+      padding: 21px;
+      border: 1px solid var(--admin-border);
+      border-radius: var(--admin-radius-lg);
+      background: var(--admin-surface);
+      box-shadow: var(--admin-shadow-sm);
     }
 
-    .category-card:hover {
-      transform: translateY(-3px);
-      border-color: #cfe8d9;
-      box-shadow: 0 16px 38px rgba(15,23,42,.08);
-    }
-
-    .category-card::after {
+    .category-stat::after {
       content: "";
       position: absolute;
-      width: 100px;
-      height: 100px;
-      right: -45px;
-      top: -45px;
+      width: 90px;
+      height: 90px;
+      right: -35px;
+      bottom: -35px;
       border-radius: 50%;
-      background: #effaf4;
+      background: var(--admin-green-soft);
     }
 
-    .category-top {
+    .category-stat-top {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      align-items: flex-start;
-      gap: 15px;
-      position: relative;
-      z-index: 2;
+      gap: 12px;
+    }
+
+    .category-stat-icon {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: var(--admin-green-soft);
+      color: var(--admin-green-dark);
+      font-size: 17px;
+    }
+
+    .category-stat-label {
+      margin: 0 0 5px;
+      color: var(--admin-muted);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .category-stat-value {
+      margin: 0;
+      color: var(--admin-text);
+      font-size: 27px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .category-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--admin-border);
+      border-radius: var(--admin-radius-lg);
+      background: var(--admin-surface);
+      box-shadow: var(--admin-shadow-sm);
+    }
+
+    .category-table {
+      width: 100%;
+      min-width: 850px;
+      border-collapse: collapse;
+    }
+
+    .category-table th {
+      padding: 15px 18px;
+      background: var(--admin-surface-soft);
+      border-bottom: 1px solid var(--admin-border);
+      color: var(--admin-muted);
+      text-align: left;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      white-space: nowrap;
+    }
+
+    .category-table td {
+      padding: 17px 18px;
+      border-bottom: 1px solid var(--admin-border);
+      color: var(--admin-text-soft);
+      font-size: 14px;
+      vertical-align: middle;
+    }
+
+    .category-table tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .category-table tbody tr {
+      transition: var(--admin-transition);
+    }
+
+    .category-table tbody tr:hover {
+      background: var(--admin-surface-soft);
+    }
+
+    .category-name-cell {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      min-width: 220px;
     }
 
     .category-icon {
-      width: 54px;
-      height: 54px;
-      border-radius: 16px;
-      background: #f0faf4;
-      color: #18a957;
+      width: 45px;
+      height: 45px;
+      flex: 0 0 45px;
       display: grid;
       place-items: center;
-      font-size: 21px;
+      border-radius: 13px;
+      background: var(--admin-green-soft);
+      color: var(--admin-green-dark);
+      font-size: 17px;
     }
 
-    .category-menu {
-      position: relative;
-      z-index: 5;
-    }
-
-    .category-menu button {
-      width: 38px;
-      height: 38px;
-      border: 1px solid #e8ecf1;
-      background: #fff;
-      border-radius: 10px;
-      cursor: pointer;
-      color: #667085;
-    }
-
-    .category-menu button:hover {
-      color: #18a957;
-      border-color: #bfe3cd;
-    }
-
-    .category-content {
-      margin-top: 20px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .category-content h3 {
-      margin: 0 0 6px;
-      font-size: 18px;
-    }
-
-    .category-content p {
+    .category-name {
       margin: 0;
-      color: #7b8494;
-      font-size: 13px;
-      line-height: 1.65;
+      color: var(--admin-text);
+      font-weight: 700;
     }
 
-    .category-footer {
-      margin-top: 19px;
-      padding-top: 16px;
-      border-top: 1px solid #edf0f3;
-      display: flex;
-      justify-content: space-between;
+    .category-slug {
+      margin: 3px 0 0;
+      color: var(--admin-muted);
+      font-size: 12px;
+    }
+
+    .category-description {
+      max-width: 300px;
+      color: var(--admin-muted);
+      line-height: 1.5;
+    }
+
+    .status-badge {
+      display: inline-flex;
       align-items: center;
-      position: relative;
-      z-index: 2;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .status-badge.active {
+      background: var(--admin-green-soft);
+      color: var(--admin-green-dark);
+    }
+
+    .status-badge.inactive {
+      background: var(--admin-danger-soft);
+      color: var(--admin-danger);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
     }
 
     .website-count {
-      font-size: 13px;
-      color: #697386;
-    }
-
-    .website-count strong {
-      color: #101828;
-      font-size: 16px;
-    }
-
-    .status-pill {
-      font-size: 11px;
-      font-weight: 700;
-      padding: 6px 10px;
-      border-radius: 999px;
-      background: #ecfdf3;
-      color: #067647;
-    }
-
-    .modal-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(15,23,42,.55);
-      backdrop-filter: blur(6px);
-      display: none;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 20px;
-      z-index: 9999;
+      min-width: 36px;
+      height: 30px;
+      padding: 0 10px;
+      border-radius: 9px;
+      background: var(--admin-surface-soft);
+      border: 1px solid var(--admin-border);
+      color: var(--admin-text);
+      font-size: 12px;
+      font-weight: 700;
     }
 
-    .modal-backdrop.show {
+    .category-actions-cell {
       display: flex;
-    }
-
-    .category-modal {
-      width: min(520px, 100%);
-      background: #fff;
-      border-radius: 22px;
-      box-shadow: 0 30px 80px rgba(15,23,42,.2);
-      overflow: hidden;
-      animation: modalIn .2s ease;
-    }
-
-    @keyframes modalIn {
-      from {
-        opacity: 0;
-        transform: translateY(12px) scale(.98);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    .modal-head {
-      padding: 22px 24px;
-      border-bottom: 1px solid #edf0f3;
-      display: flex;
-      justify-content: space-between;
       align-items: center;
+      gap: 7px;
     }
 
-    .modal-head h2 {
-      margin: 0;
-      font-size: 20px;
-    }
-
-    .modal-close {
-      width: 38px;
-      height: 38px;
-      border: 0;
-      background: #f4f6f8;
-      color: #667085;
+    .icon-action {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--admin-border);
       border-radius: 10px;
+      background: var(--admin-surface);
+      color: var(--admin-muted);
       cursor: pointer;
-      font-size: 16px;
+      transition: var(--admin-transition);
     }
 
-    .modal-body {
-      padding: 24px;
+    .icon-action:hover {
+      color: var(--admin-text);
+      border-color: var(--admin-green);
+      background: var(--admin-green-soft);
+    }
+
+    .icon-action.danger:hover {
+      color: var(--admin-danger);
+      border-color: var(--admin-danger);
+      background: var(--admin-danger-soft);
+    }
+
+    .empty-category {
+      padding: 65px 20px;
+      text-align: center;
+    }
+
+    .empty-category-icon {
+      width: 68px;
+      height: 68px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      border-radius: 20px;
+      background: var(--admin-green-soft);
+      color: var(--admin-green-dark);
+      font-size: 25px;
+    }
+
+    .empty-category h3 {
+      margin: 0 0 8px;
+      color: var(--admin-text);
+      font-size: 18px;
+    }
+
+    .empty-category p {
+      max-width: 420px;
+      margin: 0 auto;
+      color: var(--admin-muted);
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       CATEGORY MODAL
+    ========================================================= */
+
+    .category-modal-form {
+      display: grid;
+      gap: 18px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
     }
 
     .form-group {
-      margin-bottom: 17px;
+      display: grid;
+      gap: 8px;
     }
 
     .form-group label {
-      display: block;
-      margin-bottom: 7px;
+      color: var(--admin-text);
       font-size: 13px;
       font-weight: 700;
-      color: #344054;
+    }
+
+    .form-group label span {
+      color: var(--admin-danger);
     }
 
     .form-group input,
     .form-group textarea,
     .form-group select {
       width: 100%;
-      border: 1px solid #dce1e7;
-      background: #fff;
-      border-radius: 11px;
-      padding: 12px 13px;
-      outline: none;
-      font-family: inherit;
-      font-size: 14px;
-      transition: .2s;
     }
 
     .form-group textarea {
-      min-height: 90px;
+      min-height: 105px;
       resize: vertical;
     }
 
-    .form-group input:focus,
-    .form-group textarea:focus,
-    .form-group select:focus {
-      border-color: #18a957;
-      box-shadow: 0 0 0 4px rgba(24,169,87,.09);
+    .icon-preview-row {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-top: 3px;
     }
 
-    .modal-actions {
+    .modal-icon-preview {
+      width: 45px;
+      height: 45px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      background: var(--admin-green-soft);
+      color: var(--admin-green-dark);
+      font-size: 17px;
+      flex: 0 0 45px;
+    }
+
+    .icon-preview-row small {
+      color: var(--admin-muted);
+      line-height: 1.5;
+    }
+
+    .modal-footer-actions {
       display: flex;
+      align-items: center;
       justify-content: flex-end;
       gap: 10px;
-      margin-top: 22px;
+      margin-top: 4px;
     }
 
-    .secondary-btn {
-      min-height: 44px;
-      padding: 0 17px;
-      border-radius: 11px;
-      border: 1px solid #dfe4ea;
-      background: #fff;
-      color: #344054;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .secondary-btn:hover {
-      background: #f8fafb;
-    }
-
-    .icon-picker {
-      display: grid;
-      grid-template-columns: repeat(8, 1fr);
-      gap: 8px;
-    }
-
-    .icon-option {
-      width: 42px;
-      height: 42px;
-      border: 1px solid #e1e6eb;
-      background: #fff;
-      border-radius: 10px;
-      cursor: pointer;
-      color: #667085;
-    }
-
-    .icon-option.active,
-    .icon-option:hover {
-      color: #18a957;
-      border-color: #18a957;
-      background: #effaf4;
-    }
-
-    .toast {
-      position: fixed;
-      right: 24px;
-      bottom: 24px;
-      background: #101828;
-      color: #fff;
-      padding: 13px 17px;
+    .delete-warning {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px;
+      margin-bottom: 18px;
+      border: 1px solid var(--admin-danger);
       border-radius: 12px;
-      font-size: 13px;
-      font-weight: 600;
-      box-shadow: 0 15px 35px rgba(15,23,42,.2);
-      opacity: 0;
-      transform: translateY(15px);
-      pointer-events: none;
-      transition: .25s ease;
-      z-index: 10000;
+      background: var(--admin-danger-soft);
+      color: var(--admin-danger);
     }
 
-    .toast.show {
-      opacity: 1;
-      transform: translateY(0);
+    .delete-warning i {
+      margin-top: 2px;
     }
+
+    .delete-warning p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
 
     @media (max-width: 1100px) {
-      .category-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
       .category-stats {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
     @media (max-width: 760px) {
-      .page-intro {
-        align-items: flex-start;
-        flex-direction: column;
+      .category-toolbar {
+        align-items: stretch;
       }
 
+      .category-search {
+        max-width: none;
+        width: 100%;
+      }
+
+      .category-actions {
+        width: 100%;
+      }
+
+      .category-actions .admin-btn {
+        flex: 1;
+        justify-content: center;
+      }
+
+      .category-stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .category-stat {
+        padding: 17px;
+      }
+
+      .category-stat-value {
+        font-size: 23px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 500px) {
       .category-stats {
         grid-template-columns: 1fr;
       }
 
-      .category-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .icon-picker {
-        grid-template-columns: repeat(6, 1fr);
-      }
-    }
-
-    @media (max-width: 480px) {
-      .icon-picker {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .modal-actions {
+      .modal-footer-actions {
         flex-direction: column-reverse;
       }
 
-      .modal-actions button {
+      .modal-footer-actions .admin-btn {
         width: 100%;
+        justify-content: center;
       }
     }
+
   </style>
 </head>
 
 <body>
 
-  <div class="admin-layout">
+  <!-- =======================================================
+       APP
+  ======================================================== -->
 
-    <!-- SIDEBAR -->
+  <div class="admin-app">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
     <aside class="admin-sidebar" id="admin-sidebar">
 
-      <div class="sidebar-brand">
-        <a href="../index.html">
+      <div class="admin-brand">
+
+        <a href="dashboard.html" class="admin-brand-link">
+
           <img
             src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
             alt="Website Deals"
+            class="admin-brand-logo"
+            onerror="this.style.display='none'"
           >
+
+          <div>
+            <strong>Website Deals</strong>
+            <span>Admin Portal</span>
+          </div>
+
         </a>
+
+        <button
+          class="admin-sidebar-close"
+          id="sidebar-close"
+          aria-label="Close sidebar"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
       </div>
 
-      <nav class="sidebar-nav">
+      <!-- Navigation -->
 
-        <div class="nav-label">MAIN</div>
+      <nav class="admin-nav">
 
-        <a href="dashboard.html" class="nav-item">
-          <i class="fa-solid fa-chart-pie"></i>
+        <div class="admin-nav-label">
+          Workspace
+        </div>
+
+        <a
+          href="dashboard.html"
+          class="admin-nav-link"
+        >
+          <i class="fa-solid fa-grid-2"></i>
           <span>Dashboard</span>
         </a>
 
-        <a href="websites.html" class="nav-item">
+        <a
+          href="websites.html"
+          class="admin-nav-link"
+        >
           <i class="fa-solid fa-globe"></i>
           <span>Websites</span>
         </a>
 
-        <a href="categories.html" class="nav-item active">
+        <a
+          href="categories.html"
+          class="admin-nav-link active"
+        >
           <i class="fa-solid fa-layer-group"></i>
           <span>Categories</span>
         </a>
 
-        <a href="orders.html" class="nav-item">
-          <i class="fa-solid fa-cart-shopping"></i>
+        <a
+          href="orders.html"
+          class="admin-nav-link"
+        >
+          <i class="fa-solid fa-bag-shopping"></i>
           <span>Orders</span>
         </a>
 
-        <a href="customers.html" class="nav-item">
+        <a
+          href="customers.html"
+          class="admin-nav-link"
+        >
           <i class="fa-solid fa-users"></i>
           <span>Customers</span>
         </a>
 
-        <a href="newsletter.html" class="nav-item">
+        <a
+          href="newsletter.html"
+          class="admin-nav-link"
+        >
           <i class="fa-solid fa-envelope"></i>
           <span>Newsletter</span>
         </a>
 
-        <div id="privileged-nav"></div>
+        <!-- Privileged Navigation -->
+
+        <div
+          class="admin-privileged-nav"
+          id="privileged-nav"
+          style="display:none;"
+        >
+
+          <div class="admin-nav-label">
+            Management
+          </div>
+
+          <a
+            href="admins.html"
+            class="admin-nav-link"
+          >
+            <i class="fa-solid fa-user-shield"></i>
+            <span>Access Management</span>
+          </a>
+
+          <a
+            href="settings.html"
+            class="admin-nav-link"
+          >
+            <i class="fa-solid fa-sliders"></i>
+            <span>Settings</span>
+          </a>
+
+        </div>
 
       </nav>
 
-      <div class="sidebar-bottom">
-        <a href="../index.html" class="nav-item">
+      <!-- Sidebar Bottom -->
+
+      <div class="admin-sidebar-bottom">
+
+        <a
+          href="../index.html"
+          class="admin-nav-link"
+          target="_blank"
+          rel="noopener"
+        >
           <i class="fa-solid fa-arrow-up-right-from-square"></i>
           <span>View Marketplace</span>
         </a>
 
-        <button class="nav-item logout-btn" id="logout-btn">
+        <button
+          class="admin-logout"
+          id="logout-btn"
+        >
           <i class="fa-solid fa-right-from-bracket"></i>
-          <span>Logout</span>
+          <span>Sign Out</span>
         </button>
+
       </div>
 
     </aside>
 
 
-    <!-- MAIN -->
+    <!-- =====================================================
+         MOBILE OVERLAY
+    ====================================================== -->
+
+    <div
+      class="admin-sidebar-overlay"
+      id="sidebar-overlay"
+    ></div>
+
+
+    <!-- =====================================================
+         MAIN
+    ====================================================== -->
+
     <main class="admin-main">
+
+      <!-- Topbar -->
 
       <header class="admin-topbar">
 
-        <button
-          class="mobile-menu-btn"
-          id="mobile-menu-btn"
-          aria-label="Open menu"
-        >
-          <i class="fa-solid fa-bars"></i>
-        </button>
+        <div class="admin-topbar-left">
 
-        <div class="topbar-title">
-          <span>Website Deals Admin</span>
-        </div>
-
-        <div class="admin-user">
-
-          <div class="admin-avatar">
-            <i class="fa-solid fa-user"></i>
-          </div>
+          <button
+            class="admin-menu-toggle"
+            id="menu-toggle"
+            aria-label="Open menu"
+          >
+            <i class="fa-solid fa-bars"></i>
+          </button>
 
           <div>
-            <strong id="admin-name">Admin</strong>
-            <small id="admin-email">admin@websitedeals.com</small>
+            <div class="admin-breadcrumb">
+              Marketplace
+              <span>/</span>
+              Categories
+            </div>
+
+            <h1 class="admin-topbar-title">
+              Category Management
+            </h1>
+          </div>
+
+        </div>
+
+
+        <div class="admin-topbar-right">
+
+          <a
+            href="../index.html"
+            target="_blank"
+            rel="noopener"
+            class="admin-topbar-icon"
+            title="View Marketplace"
+          >
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </a>
+
+          <div class="admin-user">
+
+            <div class="admin-user-avatar" id="user-avatar">
+              A
+            </div>
+
+            <div class="admin-user-info">
+
+              <strong id="user-name">
+                Administrator
+              </strong>
+
+              <span id="user-role">
+                Admin
+              </span>
+
+            </div>
+
           </div>
 
         </div>
@@ -557,113 +744,313 @@
       </header>
 
 
-      <div class="admin-content">
+      <!-- Page -->
 
-        <div class="category-page">
+      <section class="admin-page">
 
-          <!-- PAGE INTRO -->
-          <div class="page-intro">
+        <!-- Page Header -->
 
-            <div>
-              <h1>Categories</h1>
-              <p>
-                Organize your marketplace websites into clear categories.
-              </p>
+        <div class="admin-page-header">
+
+          <div>
+
+            <div class="admin-eyebrow">
+              Marketplace Structure
             </div>
 
-            <button class="primary-btn" id="add-category-btn">
-              <i class="fa-solid fa-plus"></i>
-              Add Category
-            </button>
+            <h2>
+              Categories
+            </h2>
+
+            <p>
+              Organize your website listings into clear marketplace categories.
+            </p>
 
           </div>
 
-
-          <!-- STATS -->
-          <div class="category-stats">
-
-            <div class="stat-card">
-              <div class="stat-icon">
-                <i class="fa-solid fa-layer-group"></i>
-              </div>
-
-              <div>
-                <strong id="total-categories">0</strong>
-                <span>Total Categories</span>
-              </div>
-            </div>
-
-
-            <div class="stat-card">
-              <div class="stat-icon">
-                <i class="fa-solid fa-globe"></i>
-              </div>
-
-              <div>
-                <strong id="total-websites">0</strong>
-                <span>Listed Websites</span>
-              </div>
-            </div>
-
-
-            <div class="stat-card">
-              <div class="stat-icon">
-                <i class="fa-solid fa-chart-line"></i>
-              </div>
-
-              <div>
-                <strong id="active-categories">0</strong>
-                <span>Active Categories</span>
-              </div>
-            </div>
-
-          </div>
-
-
-          <!-- CATEGORY GRID -->
-          <div class="category-grid" id="category-grid"></div>
+          <button
+            class="admin-btn admin-btn-primary"
+            id="add-category-btn"
+          >
+            <i class="fa-solid fa-plus"></i>
+            Add Category
+          </button>
 
         </div>
 
-      </div>
+
+        <!-- =================================================
+             STATS
+        ================================================== -->
+
+        <div class="category-stats">
+
+          <div class="category-stat">
+
+            <div class="category-stat-top">
+
+              <div>
+                <p class="category-stat-label">
+                  Total Categories
+                </p>
+
+                <h3
+                  class="category-stat-value"
+                  id="total-categories"
+                >
+                  0
+                </h3>
+              </div>
+
+              <div class="category-stat-icon">
+                <i class="fa-solid fa-layer-group"></i>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="category-stat">
+
+            <div class="category-stat-top">
+
+              <div>
+                <p class="category-stat-label">
+                  Active
+                </p>
+
+                <h3
+                  class="category-stat-value"
+                  id="active-categories"
+                >
+                  0
+                </h3>
+              </div>
+
+              <div class="category-stat-icon">
+                <i class="fa-solid fa-circle-check"></i>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="category-stat">
+
+            <div class="category-stat-top">
+
+              <div>
+                <p class="category-stat-label">
+                  Inactive
+                </p>
+
+                <h3
+                  class="category-stat-value"
+                  id="inactive-categories"
+                >
+                  0
+                </h3>
+              </div>
+
+              <div class="category-stat-icon">
+                <i class="fa-solid fa-circle-pause"></i>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="category-stat">
+
+            <div class="category-stat-top">
+
+              <div>
+                <p class="category-stat-label">
+                  Websites
+                </p>
+
+                <h3
+                  class="category-stat-value"
+                  id="total-websites"
+                >
+                  0
+                </h3>
+              </div>
+
+              <div class="category-stat-icon">
+                <i class="fa-solid fa-globe"></i>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TOOLBAR
+        ================================================== -->
+
+        <div class="category-toolbar">
+
+          <div class="category-search">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+              type="search"
+              id="category-search"
+              class="admin-input"
+              placeholder="Search categories..."
+              autocomplete="off"
+            >
+
+          </div>
+
+
+          <div class="category-actions">
+
+            <select
+              id="status-filter"
+              class="admin-select"
+            >
+              <option value="all">
+                All Status
+              </option>
+
+              <option value="active">
+                Active
+              </option>
+
+              <option value="inactive">
+                Inactive
+              </option>
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <!-- =================================================
+             TABLE
+        ================================================== -->
+
+        <div class="category-table-wrap">
+
+          <table class="category-table">
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Category
+                </th>
+
+                <th>
+                  Description
+                </th>
+
+                <th>
+                  Websites
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Updated
+                </th>
+
+                <th>
+                  Actions
+                </th>
+
+              </tr>
+
+            </thead>
+
+            <tbody id="category-list"></tbody>
+
+          </table>
+
+        </div>
+
+      </section>
 
     </main>
 
   </div>
 
 
-  <!-- CATEGORY MODAL -->
-  <div class="modal-backdrop" id="category-modal">
+  <!-- =======================================================
+       ADD / EDIT MODAL
+  ======================================================== -->
 
-    <div class="category-modal">
+  <div
+    class="admin-modal"
+    id="category-modal"
+    aria-hidden="true"
+  >
 
-      <div class="modal-head">
+    <div class="admin-modal-backdrop"></div>
 
-        <h2 id="modal-title">Add Category</h2>
+    <div class="admin-modal-dialog">
 
-        <button class="modal-close" id="close-modal">
+      <div class="admin-modal-header">
+
+        <div>
+
+          <div class="admin-eyebrow">
+            Marketplace
+          </div>
+
+          <h3 id="modal-title">
+            Add Category
+          </h3>
+
+        </div>
+
+        <button
+          class="admin-modal-close"
+          id="category-modal-close"
+          aria-label="Close"
+        >
           <i class="fa-solid fa-xmark"></i>
         </button>
 
       </div>
 
 
-      <div class="modal-body">
+      <form
+        id="category-form"
+        class="category-modal-form"
+      >
 
-        <form id="category-form">
+        <input
+          type="hidden"
+          id="category-id"
+        >
 
-          <input type="hidden" id="category-id">
 
+        <div class="form-row">
 
           <div class="form-group">
 
             <label for="category-name">
-              Category Name
+              Category Name <span>*</span>
             </label>
 
             <input
               type="text"
               id="category-name"
+              class="admin-input"
               placeholder="e.g. Business"
               required
             >
@@ -673,64 +1060,52 @@
 
           <div class="form-group">
 
-            <label for="category-description">
-              Description
+            <label for="category-slug">
+              Slug <span>*</span>
             </label>
 
-            <textarea
-              id="category-description"
-              placeholder="Short category description..."
-            ></textarea>
+            <input
+              type="text"
+              id="category-slug"
+              class="admin-input"
+              placeholder="business"
+              required
+            >
 
           </div>
 
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="category-description">
+            Description
+          </label>
+
+          <textarea
+            id="category-description"
+            class="admin-textarea"
+            placeholder="Short description for this category..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-row">
 
           <div class="form-group">
 
-            <label>
-              Category Icon
+            <label for="category-icon">
+              Font Awesome Icon
             </label>
 
-            <div class="icon-picker" id="icon-picker">
-
-              <button type="button" class="icon-option active" data-icon="fa-briefcase">
-                <i class="fa-solid fa-briefcase"></i>
-              </button>
-
-              <button type="button" class="icon-option" data-icon="fa-utensils">
-                <i class="fa-solid fa-utensils"></i>
-              </button>
-
-              <button type="button" class="icon-option" data-icon="fa-bullhorn">
-                <i class="fa-solid fa-bullhorn"></i>
-              </button>
-
-              <button type="button" class="icon-option" data-icon="fa-cart-shopping">
-                <i class="fa-solid fa-cart-shopping"></i>
-              </button>
-
-              <button type="button" class="icon-option" data-icon="fa-user">
-                <i class="fa-solid fa-user"></i>
-              </button>
-
-              <button type="button" class="icon-option" data-icon="fa-calendar">
-                <i class="fa-solid fa-calendar"></i>
-              </button>
-
-              <button type="button" class="icon-option" data-icon="fa-code">
-                <i class="fa-solid fa-code"></i>
-              </button>
-
-              <button type="button" class="icon-option" data-icon="fa-building">
-                <i class="fa-solid fa-building"></i>
-              </button>
-
-            </div>
-
             <input
-              type="hidden"
+              type="text"
               id="category-icon"
-              value="fa-briefcase"
+              class="admin-input"
+              placeholder="fa-solid fa-briefcase"
+              value="fa-solid fa-layer-group"
             >
 
           </div>
@@ -742,7 +1117,10 @@
               Status
             </label>
 
-            <select id="category-status">
+            <select
+              id="category-status"
+              class="admin-select"
+            >
 
               <option value="active">
                 Active
@@ -756,28 +1134,137 @@
 
           </div>
 
+        </div>
 
-          <div class="modal-actions">
 
-            <button
-              type="button"
-              class="secondary-btn"
-              id="cancel-modal"
-            >
-              Cancel
-            </button>
+        <div class="icon-preview-row">
 
-            <button
-              type="submit"
-              class="primary-btn"
-            >
-              <i class="fa-solid fa-check"></i>
-              Save Category
-            </button>
-
+          <div
+            class="modal-icon-preview"
+            id="modal-icon-preview"
+          >
+            <i class="fa-solid fa-layer-group"></i>
           </div>
 
-        </form>
+          <small>
+            Use any Font Awesome icon class, for example
+            <strong>fa-solid fa-briefcase</strong>.
+          </small>
+
+        </div>
+
+
+        <div class="modal-footer-actions">
+
+          <button
+            type="button"
+            class="admin-btn admin-btn-secondary"
+            id="category-cancel-btn"
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="admin-btn admin-btn-primary"
+          >
+            <i class="fa-solid fa-check"></i>
+            <span id="save-category-text">
+              Save Category
+            </span>
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =======================================================
+       DELETE MODAL
+  ======================================================== -->
+
+  <div
+    class="admin-modal"
+    id="delete-modal"
+    aria-hidden="true"
+  >
+
+    <div class="admin-modal-backdrop"></div>
+
+    <div class="admin-modal-dialog">
+
+      <div class="admin-modal-header">
+
+        <div>
+
+          <div class="admin-eyebrow">
+            Confirmation
+          </div>
+
+          <h3>
+            Delete Category
+          </h3>
+
+        </div>
+
+        <button
+          class="admin-modal-close"
+          id="delete-modal-close"
+          aria-label="Close"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+      </div>
+
+
+      <div class="delete-warning">
+
+        <i class="fa-solid fa-triangle-exclamation"></i>
+
+        <p>
+          Deleting a category will remove it from the category
+          management list. Existing website records will not be
+          deleted automatically.
+        </p>
+
+      </div>
+
+
+      <p
+        id="delete-category-message"
+        style="
+          color:var(--admin-text-soft);
+          line-height:1.6;
+          margin:0 0 20px;
+        "
+      >
+        Are you sure you want to delete this category?
+      </p>
+
+
+      <div class="modal-footer-actions">
+
+        <button
+          type="button"
+          class="admin-btn admin-btn-secondary"
+          id="delete-cancel-btn"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="admin-btn admin-btn-danger"
+          id="confirm-delete-btn"
+        >
+          <i class="fa-solid fa-trash"></i>
+          Delete Category
+        </button>
 
       </div>
 
@@ -786,798 +1273,1449 @@
   </div>
 
 
-  <!-- TOAST -->
-  <div class="toast" id="toast"></div>
+  <!-- =======================================================
+       TOAST
+  ======================================================== -->
+
+  <div
+    class="admin-toast"
+    id="admin-toast"
+    aria-live="polite"
+  >
+
+    <div class="admin-toast-icon">
+      <i class="fa-solid fa-check"></i>
+    </div>
+
+    <div>
+
+      <strong id="toast-title">
+        Success
+      </strong>
+
+      <span id="toast-message">
+        Done successfully.
+      </span>
+
+    </div>
+
+  </div>
 
 
-<script>
-(function () {
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
 
-  "use strict";
+  <script>
 
-  /* =========================================================
-     SESSION
-  ========================================================= */
+    /* =======================================================
+       CONFIG
+    ======================================================== */
 
-  const sessionKey = "websiteDealsAdminSession";
-  const session = JSON.parse(
-    sessionStorage.getItem(sessionKey) || "null"
-  );
-
-  if (!session) {
-    window.location.href = "index.html";
-    return;
-  }
+    const CATEGORY_KEY = "websiteDealsCategories";
+    const WEBSITE_KEY = "websiteDealsWebsites";
+    const SESSION_KEY = "websiteDealsAdminSession";
 
 
-  /* =========================================================
-     ADMIN INFO
-  ========================================================= */
+    /* =======================================================
+       SESSION
+    ======================================================== */
 
-  const adminName = document.getElementById("admin-name");
-  const adminEmail = document.getElementById("admin-email");
+    const sessionRaw = localStorage.getItem(SESSION_KEY);
 
-  if (adminName) {
-    adminName.textContent =
-      session.name ||
-      (session.role === "superadmin" ? "Administrator" : "Admin");
-  }
-
-  if (adminEmail) {
-    adminEmail.textContent =
-      session.email ||
-      "admin@websitedeals.com";
-  }
-
-
-  /* =========================================================
-     PRIVILEGED NAV
-  ========================================================= */
-
-  const privilegedNav =
-    document.getElementById("privileged-nav");
-
-  if (
-    privilegedNav &&
-    session.role === "superadmin"
-  ) {
-
-    privilegedNav.innerHTML = `
-      <div class="nav-label">MANAGEMENT</div>
-
-      <a href="admins.html" class="nav-item">
-        <i class="fa-solid fa-user-shield"></i>
-        <span>Access Management</span>
-      </a>
-
-      <a href="settings.html" class="nav-item">
-        <i class="fa-solid fa-gear"></i>
-        <span>Settings</span>
-      </a>
-    `;
-  }
-
-
-  /* =========================================================
-     DEFAULT CATEGORIES
-  ========================================================= */
-
-  const defaultCategories = [
-
-    {
-      id: "business",
-      name: "Business",
-      description: "Professional websites for companies and businesses.",
-      icon: "fa-briefcase",
-      status: "active"
-    },
-
-    {
-      id: "restaurant",
-      name: "Restaurant",
-      description: "Modern websites for restaurants, cafés and food brands.",
-      icon: "fa-utensils",
-      status: "active"
-    },
-
-    {
-      id: "agency",
-      name: "Agency",
-      description: "Creative websites for digital and creative agencies.",
-      icon: "fa-bullhorn",
-      status: "active"
-    },
-
-    {
-      id: "ecommerce",
-      name: "E-commerce",
-      description: "Ready-made online stores for selling products.",
-      icon: "fa-cart-shopping",
-      status: "active"
-    },
-
-    {
-      id: "portfolio",
-      name: "Portfolio",
-      description: "Personal portfolio websites for creators and professionals.",
-      icon: "fa-user",
-      status: "active"
-    },
-
-    {
-      id: "monthly",
-      name: "Monthly",
-      description: "Affordable website packages with monthly payment.",
-      icon: "fa-calendar",
-      status: "active"
+    if (!sessionRaw) {
+      window.location.href = "index.html";
     }
 
-  ];
+    let session = null;
+
+    try {
+      session = JSON.parse(sessionRaw);
+    } catch (error) {
+      localStorage.removeItem(SESSION_KEY);
+      window.location.href = "index.html";
+    }
 
 
-  const categoryStorageKey =
-    "websiteDealsCategories";
+    /* =======================================================
+       USER UI
+    ======================================================== */
+
+    if (session) {
+
+      const userName =
+        session.name ||
+        session.fullName ||
+        session.email?.split("@")[0] ||
+        "Administrator";
+
+      const userRole =
+        session.role === "superadmin"
+          ? "Administrator"
+          : "Admin";
+
+      document.getElementById("user-name").textContent =
+        userName;
+
+      document.getElementById("user-role").textContent =
+        userRole;
+
+      document.getElementById("user-avatar").textContent =
+        userName.charAt(0).toUpperCase();
 
 
-  let categories =
-    JSON.parse(
-      localStorage.getItem(categoryStorageKey) || "null"
-    );
+      /*
+       * Privileged navigation is only shown
+       * to the account with full access.
+       */
+
+      if (session.role === "superadmin") {
+
+        document.getElementById(
+          "privileged-nav"
+        ).style.display = "block";
+
+      }
+
+    }
 
 
-  if (!Array.isArray(categories)) {
+    /* =======================================================
+       DEFAULT CATEGORIES
+    ======================================================== */
 
-    categories = defaultCategories;
+    const defaultCategories = [
 
-    localStorage.setItem(
-      categoryStorageKey,
-      JSON.stringify(categories)
-    );
+      {
+        id: "CAT-001",
+        name: "Business",
+        slug: "business",
+        description:
+          "Professional websites for companies, startups and business brands.",
+        icon: "fa-solid fa-briefcase",
+        status: "active",
+        created: "2026-09-01",
+        updated: "2026-09-30"
+      },
 
-  }
+      {
+        id: "CAT-002",
+        name: "Restaurant",
+        slug: "restaurant",
+        description:
+          "Modern websites for restaurants, cafes, food brands and dining businesses.",
+        icon: "fa-solid fa-utensils",
+        status: "active",
+        created: "2026-09-01",
+        updated: "2026-09-30"
+      },
+
+      {
+        id: "CAT-003",
+        name: "Agency",
+        slug: "agency",
+        description:
+          "Creative and professional agency website templates.",
+        icon: "fa-solid fa-building",
+        status: "active",
+        created: "2026-09-01",
+        updated: "2026-09-29"
+      },
+
+      {
+        id: "CAT-004",
+        name: "E-commerce",
+        slug: "ecommerce",
+        description:
+          "Ready-made online store websites for products and digital commerce.",
+        icon: "fa-solid fa-cart-shopping",
+        status: "active",
+        created: "2026-09-01",
+        updated: "2026-09-29"
+      },
+
+      {
+        id: "CAT-005",
+        name: "Portfolio",
+        slug: "portfolio",
+        description:
+          "Personal, creator, designer and professional portfolio websites.",
+        icon: "fa-solid fa-user-tie",
+        status: "active",
+        created: "2026-09-01",
+        updated: "2026-09-28"
+      },
+
+      {
+        id: "CAT-006",
+        name: "Monthly",
+        slug: "monthly",
+        description:
+          "Affordable ready-made websites available with a monthly package.",
+        icon: "fa-solid fa-calendar-days",
+        status: "active",
+        created: "2026-09-01",
+        updated: "2026-09-28"
+      }
+
+    ];
 
 
-  /* =========================================================
-     DOM
-  ========================================================= */
+    /* =======================================================
+       LOAD DATA
+    ======================================================== */
 
-  const grid =
-    document.getElementById("category-grid");
-
-  const totalCategories =
-    document.getElementById("total-categories");
-
-  const totalWebsites =
-    document.getElementById("total-websites");
-
-  const activeCategories =
-    document.getElementById("active-categories");
-
-  const modal =
-    document.getElementById("category-modal");
-
-  const modalTitle =
-    document.getElementById("modal-title");
-
-  const form =
-    document.getElementById("category-form");
-
-  const categoryId =
-    document.getElementById("category-id");
-
-  const categoryName =
-    document.getElementById("category-name");
-
-  const categoryDescription =
-    document.getElementById("category-description");
-
-  const categoryIcon =
-    document.getElementById("category-icon");
-
-  const categoryStatus =
-    document.getElementById("category-status");
-
-  const toast =
-    document.getElementById("toast");
-
-
-  /* =========================================================
-     WEBSITE COUNT
-  ========================================================= */
-
-  function getWebsiteCount(categoryName) {
-
-    const websites =
+    let categories =
       JSON.parse(
-        localStorage.getItem("websiteDealsWebsites") || "[]"
-      );
-
-    return websites.filter(function (website) {
-
-      return String(
-        website.category || ""
-      ).toLowerCase() ===
-      String(categoryName || "").toLowerCase();
-
-    }).length;
-
-  }
-
-
-  /* =========================================================
-     RENDER
-  ========================================================= */
-
-  function renderCategories() {
-
-    grid.innerHTML = "";
-
-    totalCategories.textContent =
-      categories.length;
-
-    activeCategories.textContent =
-      categories.filter(function (item) {
-        return item.status === "active";
-      }).length;
-
-
-    const websites =
-      JSON.parse(
-        localStorage.getItem("websiteDealsWebsites") || "[]"
-      );
-
-    totalWebsites.textContent =
-      websites.length;
+        localStorage.getItem(CATEGORY_KEY)
+      ) || [];
 
 
     if (!categories.length) {
 
-      grid.innerHTML = `
-        <div style="
-          grid-column:1/-1;
-          background:#fff;
-          border:1px solid #e8ecf1;
-          border-radius:20px;
-          padding:50px 25px;
-          text-align:center;
-          color:#7b8494;
-        ">
-          <i
-            class="fa-solid fa-layer-group"
-            style="
-              font-size:35px;
-              margin-bottom:15px;
-              color:#18a957;
-            "
-          ></i>
+      categories = defaultCategories;
 
-          <h3 style="
-            margin:0 0 6px;
-            color:#101828;
-          ">
-            No categories yet
-          </h3>
+      saveCategories();
 
-          <p style="margin:0;">
-            Add your first marketplace category.
-          </p>
-        </div>
-      `;
-
-      return;
     }
 
 
-    categories.forEach(function (category) {
-
-      const count =
-        getWebsiteCount(category.name);
-
-      const card =
-        document.createElement("div");
-
-      card.className =
-        "category-card";
-
-      card.innerHTML = `
-
-        <div class="category-top">
-
-          <div class="category-icon">
-            <i class="fa-solid ${escapeHtml(category.icon)}"></i>
-          </div>
-
-          <div class="category-menu">
-
-            <button
-              type="button"
-              title="Edit category"
-              data-edit="${escapeHtml(category.id)}"
-            >
-              <i class="fa-solid fa-pen"></i>
-            </button>
-
-          </div>
-
-        </div>
+    let websites =
+      JSON.parse(
+        localStorage.getItem(WEBSITE_KEY)
+      ) || [];
 
 
-        <div class="category-content">
+    /* =======================================================
+       ELEMENTS
+    ======================================================== */
 
-          <h3>
-            ${escapeHtml(category.name)}
-          </h3>
+    const categoryList =
+      document.getElementById("category-list");
 
-          <p>
-            ${escapeHtml(
-              category.description ||
-              "No description available."
-            )}
-          </p>
+    const searchInput =
+      document.getElementById("category-search");
 
-        </div>
+    const statusFilter =
+      document.getElementById("status-filter");
 
+    const categoryModal =
+      document.getElementById("category-modal");
 
-        <div class="category-footer">
+    const deleteModal =
+      document.getElementById("delete-modal");
 
-          <div class="website-count">
-            <strong>${count}</strong>
-            website${count === 1 ? "" : "s"}
-          </div>
+    const categoryForm =
+      document.getElementById("category-form");
 
-          <span class="status-pill"
-            style="
-              ${
-                category.status === "active"
-                ? ""
-                : "background:#fef3f2;color:#b42318;"
-              }
-            "
-          >
-            ${
-              category.status === "active"
-              ? "Active"
-              : "Inactive"
-            }
-          </span>
+    const categoryId =
+      document.getElementById("category-id");
 
-        </div>
-      `;
+    const categoryName =
+      document.getElementById("category-name");
 
+    const categorySlug =
+      document.getElementById("category-slug");
 
-      grid.appendChild(card);
+    const categoryDescription =
+      document.getElementById("category-description");
 
-    });
+    const categoryIcon =
+      document.getElementById("category-icon");
 
+    const categoryStatus =
+      document.getElementById("category-status");
 
-    document
-      .querySelectorAll("[data-edit]")
-      .forEach(function (button) {
+    const modalTitle =
+      document.getElementById("modal-title");
 
-        button.addEventListener(
-          "click",
-          function () {
+    const saveCategoryText =
+      document.getElementById("save-category-text");
 
-            openEditModal(
-              this.getAttribute("data-edit")
-            );
-
-          }
-        );
-
-      });
-
-  }
+    const modalIconPreview =
+      document.getElementById("modal-icon-preview");
 
 
-  /* =========================================================
-     OPEN ADD
-  ========================================================= */
+    /* =======================================================
+       SAVE
+    ======================================================== */
 
-  function openAddModal() {
+    function saveCategories() {
 
-    modalTitle.textContent =
-      "Add Category";
-
-    form.reset();
-
-    categoryId.value = "";
-
-    categoryIcon.value =
-      "fa-briefcase";
-
-    categoryStatus.value =
-      "active";
-
-
-    document
-      .querySelectorAll(".icon-option")
-      .forEach(function (button) {
-
-        button.classList.remove("active");
-
-      });
-
-
-    const firstIcon =
-      document.querySelector(
-        '.icon-option[data-icon="fa-briefcase"]'
+      localStorage.setItem(
+        CATEGORY_KEY,
+        JSON.stringify(categories)
       );
 
-    if (firstIcon) {
-      firstIcon.classList.add("active");
     }
 
 
-    modal.classList.add("show");
+    /* =======================================================
+       SAVE WEBSITES
+    ======================================================== */
 
-    setTimeout(function () {
-      categoryName.focus();
-    }, 100);
+    function saveWebsites() {
 
-  }
+      localStorage.setItem(
+        WEBSITE_KEY,
+        JSON.stringify(websites)
+      );
 
-
-  /* =========================================================
-     OPEN EDIT
-  ========================================================= */
-
-  function openEditModal(id) {
-
-    const category =
-      categories.find(function (item) {
-        return item.id === id;
-      });
-
-    if (!category) return;
+    }
 
 
-    modalTitle.textContent =
-      "Edit Category";
+    /* =======================================================
+       ESCAPE HTML
+    ======================================================== */
 
-    categoryId.value =
-      category.id;
+    function escapeHTML(value) {
 
-    categoryName.value =
-      category.name;
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 
-    categoryDescription.value =
-      category.description || "";
-
-    categoryIcon.value =
-      category.icon || "fa-briefcase";
-
-    categoryStatus.value =
-      category.status || "active";
+    }
 
 
-    document
-      .querySelectorAll(".icon-option")
-      .forEach(function (button) {
+    /* =======================================================
+       WEBSITE COUNT
+    ======================================================== */
 
-        button.classList.toggle(
-          "active",
-          button.dataset.icon === categoryIcon.value
+    function getWebsiteCount(category) {
+
+      const categoryName =
+        String(category.name || "")
+          .trim()
+          .toLowerCase();
+
+      const categorySlugValue =
+        String(category.slug || "")
+          .trim()
+          .toLowerCase();
+
+      return websites.filter(site => {
+
+        const siteCategory =
+          String(site.category || "")
+            .trim()
+            .toLowerCase();
+
+        return (
+          siteCategory === categoryName ||
+          siteCategory === categorySlugValue
         );
 
-      });
-
-
-    modal.classList.add("show");
-
-    setTimeout(function () {
-      categoryName.focus();
-    }, 100);
-
-  }
-
-
-  /* =========================================================
-     CLOSE MODAL
-  ========================================================= */
-
-  function closeModal() {
-    modal.classList.remove("show");
-  }
-
-
-  /* =========================================================
-     ADD BUTTON
-  ========================================================= */
-
-  document
-    .getElementById("add-category-btn")
-    .addEventListener(
-      "click",
-      openAddModal
-    );
-
-
-  document
-    .getElementById("close-modal")
-    .addEventListener(
-      "click",
-      closeModal
-    );
-
-
-  document
-    .getElementById("cancel-modal")
-    .addEventListener(
-      "click",
-      closeModal
-    );
-
-
-  modal.addEventListener(
-    "click",
-    function (event) {
-
-      if (event.target === modal) {
-        closeModal();
-      }
+      }).length;
 
     }
-  );
 
 
-  /* =========================================================
-     ICON PICKER
-  ========================================================= */
+    /* =======================================================
+       DATE FORMAT
+    ======================================================== */
 
-  document
-    .querySelectorAll(".icon-option")
-    .forEach(function (button) {
+    function formatDate(dateValue) {
 
-      button.addEventListener(
-        "click",
-        function () {
+      if (!dateValue) {
+        return "—";
+      }
 
-          document
-            .querySelectorAll(".icon-option")
-            .forEach(function (item) {
-              item.classList.remove("active");
-            });
+      const date =
+        new Date(dateValue);
 
+      if (Number.isNaN(date.getTime())) {
+        return dateValue;
+      }
 
-          this.classList.add("active");
-
-          categoryIcon.value =
-            this.dataset.icon;
-
+      return date.toLocaleDateString(
+        "en-GB",
+        {
+          day: "2-digit",
+          month: "short",
+          year: "numeric"
         }
       );
 
-    });
+    }
 
 
-  /* =========================================================
-     SAVE CATEGORY
-  ========================================================= */
+    /* =======================================================
+       UPDATE STATS
+    ======================================================== */
 
-  form.addEventListener(
-    "submit",
-    function (event) {
+    function updateStats() {
 
-      event.preventDefault();
+      const total =
+        categories.length;
 
+      const active =
+        categories.filter(
+          item => item.status === "active"
+        ).length;
 
-      const name =
-        categoryName.value.trim();
+      const inactive =
+        categories.filter(
+          item => item.status !== "active"
+        ).length;
 
-      const description =
-        categoryDescription.value.trim();
+      document.getElementById(
+        "total-categories"
+      ).textContent = total;
 
-      const icon =
-        categoryIcon.value ||
-        "fa-briefcase";
+      document.getElementById(
+        "active-categories"
+      ).textContent = active;
 
-      const status =
-        categoryStatus.value;
+      document.getElementById(
+        "inactive-categories"
+      ).textContent = inactive;
 
+      document.getElementById(
+        "total-websites"
+      ).textContent = websites.length;
 
-      if (!name) {
-
-        showToast(
-          "Please enter a category name."
-        );
-
-        categoryName.focus();
-
-        return;
-      }
-
-
-      const editingId =
-        categoryId.value;
+    }
 
 
-      const duplicate =
-        categories.some(function (item) {
+    /* =======================================================
+       RENDER
+    ======================================================== */
+
+    function renderCategories() {
+
+      const query =
+        searchInput.value
+          .trim()
+          .toLowerCase();
+
+      const selectedStatus =
+        statusFilter.value;
+
+
+      const filtered =
+        categories.filter(category => {
+
+          const matchesSearch =
+            !query ||
+            category.name
+              .toLowerCase()
+              .includes(query) ||
+            category.slug
+              .toLowerCase()
+              .includes(query) ||
+            category.description
+              .toLowerCase()
+              .includes(query);
+
+
+          const matchesStatus =
+            selectedStatus === "all" ||
+            category.status === selectedStatus;
+
 
           return (
-            item.name.toLowerCase() ===
-            name.toLowerCase() &&
-            item.id !== editingId
+            matchesSearch &&
+            matchesStatus
           );
 
         });
 
 
-      if (duplicate) {
+      if (!filtered.length) {
 
-        showToast(
-          "This category already exists."
-        );
+        categoryList.innerHTML = `
+
+          <tr>
+
+            <td colspan="6">
+
+              <div class="empty-category">
+
+                <div class="empty-category-icon">
+                  <i class="fa-solid fa-layer-group"></i>
+                </div>
+
+                <h3>
+                  No categories found
+                </h3>
+
+                <p>
+                  Try changing your search or status filter,
+                  or create a new category.
+                </p>
+
+              </div>
+
+            </td>
+
+          </tr>
+
+        `;
 
         return;
+
       }
 
 
-      if (editingId) {
+      categoryList.innerHTML =
+        filtered.map(category => {
 
-        const index =
-          categories.findIndex(
-            function (item) {
-              return item.id === editingId;
-            }
+          const websiteCount =
+            getWebsiteCount(category);
+
+          const isActive =
+            category.status === "active";
+
+
+          return `
+
+            <tr>
+
+              <td>
+
+                <div class="category-name-cell">
+
+                  <div class="category-icon">
+
+                    <i class="${escapeHTML(
+                      category.icon ||
+                      "fa-solid fa-layer-group"
+                    )}"></i>
+
+                  </div>
+
+                  <div>
+
+                    <p class="category-name">
+                      ${escapeHTML(category.name)}
+                    </p>
+
+                    <p class="category-slug">
+                      /${escapeHTML(category.slug)}
+                    </p>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+
+              <td>
+
+                <div class="category-description">
+
+                  ${escapeHTML(
+                    category.description ||
+                    "No description added."
+                  )}
+
+                </div>
+
+              </td>
+
+
+              <td>
+
+                <span class="website-count">
+                  ${websiteCount}
+                </span>
+
+              </td>
+
+
+              <td>
+
+                <button
+                  type="button"
+                  class="status-badge ${
+                    isActive
+                      ? "active"
+                      : "inactive"
+                  }"
+                  onclick="toggleCategoryStatus('${category.id}')"
+                  title="Click to change status"
+                  style="
+                    border:0;
+                    cursor:pointer;
+                  "
+                >
+
+                  <span class="status-dot"></span>
+
+                  ${
+                    isActive
+                      ? "Active"
+                      : "Inactive"
+                  }
+
+                </button>
+
+              </td>
+
+
+              <td>
+                ${formatDate(category.updated)}
+              </td>
+
+
+              <td>
+
+                <div class="category-actions-cell">
+
+                  <button
+                    type="button"
+                    class="icon-action"
+                    onclick="editCategory('${category.id}')"
+                    title="Edit category"
+                  >
+                    <i class="fa-solid fa-pen"></i>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="icon-action"
+                    onclick="toggleCategoryStatus('${category.id}')"
+                    title="${
+                      isActive
+                        ? "Deactivate"
+                        : "Activate"
+                    } category"
+                  >
+                    <i class="fa-solid ${
+                      isActive
+                        ? "fa-pause"
+                        : "fa-play"
+                    }"></i>
+                  </button>
+
+                  <button
+                    type="button"
+                    class="icon-action danger"
+                    onclick="openDeleteModal('${category.id}')"
+                    title="Delete category"
+                  >
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          `;
+
+        }).join("");
+
+    }
+
+
+    /* =======================================================
+       OPEN CATEGORY MODAL
+    ======================================================== */
+
+    function openCategoryModal(
+      category = null
+    ) {
+
+      categoryForm.reset();
+
+      categoryId.value = "";
+
+      categoryStatus.value =
+        "active";
+
+      categoryIcon.value =
+        "fa-solid fa-layer-group";
+
+      updateIconPreview();
+
+
+      if (category) {
+
+        modalTitle.textContent =
+          "Edit Category";
+
+        saveCategoryText.textContent =
+          "Update Category";
+
+        categoryId.value =
+          category.id;
+
+        categoryName.value =
+          category.name;
+
+        categorySlug.value =
+          category.slug;
+
+        categoryDescription.value =
+          category.description || "";
+
+        categoryIcon.value =
+          category.icon ||
+          "fa-solid fa-layer-group";
+
+        categoryStatus.value =
+          category.status ||
+          "active";
+
+        updateIconPreview();
+
+      } else {
+
+        modalTitle.textContent =
+          "Add Category";
+
+        saveCategoryText.textContent =
+          "Save Category";
+
+      }
+
+
+      categoryModal.classList.add("show");
+
+      categoryModal.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+
+      setTimeout(() => {
+        categoryName.focus();
+      }, 100);
+
+    }
+
+
+    /* =======================================================
+       CLOSE CATEGORY MODAL
+    ======================================================== */
+
+    function closeCategoryModal() {
+
+      categoryModal.classList.remove(
+        "show"
+      );
+
+      categoryModal.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+    }
+
+
+    /* =======================================================
+       EDIT CATEGORY
+    ======================================================== */
+
+    window.editCategory =
+      function(id) {
+
+        const category =
+          categories.find(
+            item => item.id === id
           );
 
+        if (!category) {
+          return;
+        }
 
-        if (index !== -1) {
+        openCategoryModal(
+          category
+        );
 
-          categories[index] = {
+      };
 
-            ...categories[index],
 
-            name,
-            description,
-            icon,
-            status
+    /* =======================================================
+       AUTO SLUG
+    ======================================================== */
 
-          };
+    categoryName.addEventListener(
+      "input",
+      () => {
+
+        if (
+          !categoryId.value
+        ) {
+
+          categorySlug.value =
+            slugify(
+              categoryName.value
+            );
+
+        }
+
+      }
+    );
+
+
+    function slugify(value) {
+
+      return String(value || "")
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9\s-]/g, "")
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-");
+
+    }
+
+
+    /* =======================================================
+       ICON PREVIEW
+    ======================================================== */
+
+    function updateIconPreview() {
+
+      const icon =
+        categoryIcon.value.trim() ||
+        "fa-solid fa-layer-group";
+
+      modalIconPreview.innerHTML =
+        `<i class="${escapeHTML(icon)}"></i>`;
+
+    }
+
+
+    categoryIcon.addEventListener(
+      "input",
+      updateIconPreview
+    );
+
+
+    /* =======================================================
+       SAVE CATEGORY
+    ======================================================== */
+
+    categoryForm.addEventListener(
+      "submit",
+      event => {
+
+        event.preventDefault();
+
+
+        const name =
+          categoryName.value.trim();
+
+        const slug =
+          categorySlug.value.trim();
+
+        const description =
+          categoryDescription.value.trim();
+
+        const icon =
+          categoryIcon.value.trim() ||
+          "fa-solid fa-layer-group";
+
+        const status =
+          categoryStatus.value;
+
+
+        if (!name || !slug) {
+
+          showToast(
+            "Required",
+            "Please enter category name and slug.",
+            "error"
+          );
+
+          return;
 
         }
 
 
+        const duplicate =
+          categories.some(category => {
+
+            return (
+              category.slug.toLowerCase() ===
+              slug.toLowerCase() &&
+              category.id !==
+              categoryId.value
+            );
+
+          });
+
+
+        if (duplicate) {
+
+          showToast(
+            "Duplicate Slug",
+            "This category slug already exists.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const now =
+          new Date()
+            .toISOString()
+            .slice(0, 10);
+
+
+        if (categoryId.value) {
+
+          const index =
+            categories.findIndex(
+              category =>
+                category.id ===
+                categoryId.value
+            );
+
+
+          if (index !== -1) {
+
+            categories[index] = {
+
+              ...categories[index],
+
+              name,
+              slug,
+              description,
+              icon,
+              status,
+              updated: now
+
+            };
+
+          }
+
+
+          showToast(
+            "Category Updated",
+            `${name} has been updated successfully.`
+          );
+
+        } else {
+
+          const newCategory = {
+
+            id:
+              "CAT-" +
+              Date.now()
+                .toString(36)
+                .toUpperCase(),
+
+            name,
+            slug,
+            description,
+            icon,
+            status,
+            created: now,
+            updated: now
+
+          };
+
+
+          categories.unshift(
+            newCategory
+          );
+
+
+          showToast(
+            "Category Created",
+            `${name} has been added successfully.`
+          );
+
+        }
+
+
+        saveCategories();
+
+        updateStats();
+
+        renderCategories();
+
+        closeCategoryModal();
+
+      }
+    );
+
+
+    /* =======================================================
+       TOGGLE STATUS
+    ======================================================== */
+
+    window.toggleCategoryStatus =
+      function(id) {
+
+        const category =
+          categories.find(
+            item => item.id === id
+          );
+
+        if (!category) {
+          return;
+        }
+
+
+        category.status =
+          category.status === "active"
+            ? "inactive"
+            : "active";
+
+
+        category.updated =
+          new Date()
+            .toISOString()
+            .slice(0, 10);
+
+
+        saveCategories();
+
+        updateStats();
+
+        renderCategories();
+
+
         showToast(
-          "Category updated successfully."
+          "Status Updated",
+          `${category.name} is now ${
+            category.status === "active"
+              ? "active"
+              : "inactive"
+          }.`
         );
+
+      };
+
+
+    /* =======================================================
+       DELETE
+    ======================================================== */
+
+    let pendingDeleteId = null;
+
+
+    window.openDeleteModal =
+      function(id) {
+
+        const category =
+          categories.find(
+            item => item.id === id
+          );
+
+        if (!category) {
+          return;
+        }
+
+
+        pendingDeleteId =
+          id;
+
+
+        const count =
+          getWebsiteCount(category);
+
+
+        document.getElementById(
+          "delete-category-message"
+        ).innerHTML = `
+
+          Are you sure you want to delete
+          <strong>
+            ${escapeHTML(category.name)}
+          </strong>?
+
+          ${
+            count > 0
+              ? `<br><br>
+                 <strong>${count}</strong>
+                 website${
+                   count === 1
+                     ? ""
+                     : "s"
+                 }
+                 currently use this category.`
+              : ""
+          }
+
+        `;
+
+
+        deleteModal.classList.add(
+          "show"
+        );
+
+        deleteModal.setAttribute(
+          "aria-hidden",
+          "false"
+        );
+
+      };
+
+
+    function closeDeleteModal() {
+
+      deleteModal.classList.remove(
+        "show"
+      );
+
+      deleteModal.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+      pendingDeleteId = null;
+
+    }
+
+
+    /* =======================================================
+       CONFIRM DELETE
+    ======================================================== */
+
+    document.getElementById(
+      "confirm-delete-btn"
+    ).addEventListener(
+      "click",
+      () => {
+
+        if (!pendingDeleteId) {
+          return;
+        }
+
+
+        const category =
+          categories.find(
+            item =>
+              item.id ===
+              pendingDeleteId
+          );
+
+
+        categories =
+          categories.filter(
+            item =>
+              item.id !==
+              pendingDeleteId
+          );
+
+
+        saveCategories();
+
+        updateStats();
+
+        renderCategories();
+
+        closeDeleteModal();
+
+
+        showToast(
+          "Category Deleted",
+          category
+            ? `${category.name} has been deleted.`
+            : "Category deleted successfully."
+        );
+
+      }
+    );
+
+
+    /* =======================================================
+       SEARCH / FILTER
+    ======================================================== */
+
+    searchInput.addEventListener(
+      "input",
+      renderCategories
+    );
+
+    statusFilter.addEventListener(
+      "change",
+      renderCategories
+    );
+
+
+    /* =======================================================
+       ADD BUTTON
+    ======================================================== */
+
+    document.getElementById(
+      "add-category-btn"
+    ).addEventListener(
+      "click",
+      () => {
+
+        openCategoryModal();
+
+      }
+    );
+
+
+    /* =======================================================
+       MODAL CLOSE EVENTS
+    ======================================================== */
+
+    document.getElementById(
+      "category-modal-close"
+    ).addEventListener(
+      "click",
+      closeCategoryModal
+    );
+
+
+    document.getElementById(
+      "category-cancel-btn"
+    ).addEventListener(
+      "click",
+      closeCategoryModal
+    );
+
+
+    document.getElementById(
+      "delete-modal-close"
+    ).addEventListener(
+      "click",
+      closeDeleteModal
+    );
+
+
+    document.getElementById(
+      "delete-cancel-btn"
+    ).addEventListener(
+      "click",
+      closeDeleteModal
+    );
+
+
+    document.querySelectorAll(
+      ".admin-modal-backdrop"
+    ).forEach(backdrop => {
+
+      backdrop.addEventListener(
+        "click",
+        () => {
+
+          const parent =
+            backdrop.closest(
+              ".admin-modal"
+            );
+
+          if (!parent) {
+            return;
+          }
+
+          parent.classList.remove(
+            "show"
+          );
+
+          parent.setAttribute(
+            "aria-hidden",
+            "true"
+          );
+
+        }
+      );
+
+    });
+
+
+    /* =======================================================
+       ESC KEY
+    ======================================================== */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (event.key !== "Escape") {
+          return;
+        }
+
+        closeCategoryModal();
+
+        closeDeleteModal();
+
+      }
+    );
+
+
+    /* =======================================================
+       TOAST
+    ======================================================== */
+
+    let toastTimer;
+
+
+    function showToast(
+      title,
+      message,
+      type = "success"
+    ) {
+
+      const toast =
+        document.getElementById(
+          "admin-toast"
+        );
+
+      const toastTitle =
+        document.getElementById(
+          "toast-title"
+        );
+
+      const toastMessage =
+        document.getElementById(
+          "toast-message"
+        );
+
+      const toastIcon =
+        toast.querySelector(
+          ".admin-toast-icon i"
+        );
+
+
+      toastTitle.textContent =
+        title;
+
+      toastMessage.textContent =
+        message;
+
+
+      if (type === "error") {
+
+        toastIcon.className =
+          "fa-solid fa-circle-exclamation";
 
       } else {
 
-        const newCategory = {
-
-          id:
-            "cat_" +
-            Date.now(),
-
-          name,
-          description,
-          icon,
-          status
-
-        };
-
-
-        categories.push(
-          newCategory
-        );
-
-
-        showToast(
-          "Category added successfully."
-        );
+        toastIcon.className =
+          "fa-solid fa-check";
 
       }
 
 
-      localStorage.setItem(
-        categoryStorageKey,
-        JSON.stringify(categories)
+      toast.classList.add(
+        "show"
       );
 
 
-      renderCategories();
-
-      closeModal();
-
-    }
-  );
+      clearTimeout(
+        toastTimer
+      );
 
 
-  /* =========================================================
-     TOAST
-  ========================================================= */
+      toastTimer =
+        setTimeout(
+          () => {
 
-  let toastTimer;
+            toast.classList.remove(
+              "show"
+            );
 
-
-  function showToast(message) {
-
-    clearTimeout(toastTimer);
-
-    toast.textContent =
-      message;
-
-    toast.classList.add("show");
-
-
-    toastTimer =
-      setTimeout(function () {
-
-        toast.classList.remove("show");
-
-      }, 2600);
-
-  }
-
-
-  /* =========================================================
-     ESCAPE HTML
-  ========================================================= */
-
-  function escapeHtml(value) {
-
-    return String(value)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-
-  }
-
-
-  /* =========================================================
-     MOBILE SIDEBAR
-  ========================================================= */
-
-  const mobileMenuBtn =
-    document.getElementById(
-      "mobile-menu-btn"
-    );
-
-  const sidebar =
-    document.getElementById(
-      "admin-sidebar"
-    );
-
-
-  if (mobileMenuBtn && sidebar) {
-
-    mobileMenuBtn.addEventListener(
-      "click",
-      function () {
-
-        sidebar.classList.toggle(
-          "open"
+          },
+          3200
         );
 
-      }
+    }
+
+
+    /* =======================================================
+       SIDEBAR
+    ======================================================== */
+
+    const sidebar =
+      document.getElementById(
+        "admin-sidebar"
+      );
+
+    const sidebarOverlay =
+      document.getElementById(
+        "sidebar-overlay"
+      );
+
+
+    function openSidebar() {
+
+      sidebar.classList.add(
+        "open"
+      );
+
+      sidebarOverlay.classList.add(
+        "show"
+      );
+
+    }
+
+
+    function closeSidebar() {
+
+      sidebar.classList.remove(
+        "open"
+      );
+
+      sidebarOverlay.classList.remove(
+        "show"
+      );
+
+    }
+
+
+    document.getElementById(
+      "menu-toggle"
+    ).addEventListener(
+      "click",
+      openSidebar
     );
 
-  }
+
+    document.getElementById(
+      "sidebar-close"
+    ).addEventListener(
+      "click",
+      closeSidebar
+    );
 
 
-  /* =========================================================
-     LOGOUT
-  ========================================================= */
+    sidebarOverlay.addEventListener(
+      "click",
+      closeSidebar
+    );
 
-  const logoutBtn =
+
+    document.querySelectorAll(
+      ".admin-nav-link"
+    ).forEach(link => {
+
+      link.addEventListener(
+        "click",
+        () => {
+
+          if (
+            window.innerWidth <= 900
+          ) {
+
+            closeSidebar();
+
+          }
+
+        }
+      );
+
+    });
+
+
+    /* =======================================================
+       LOGOUT
+    ======================================================== */
+
     document.getElementById(
       "logout-btn"
-    );
-
-
-  if (logoutBtn) {
-
-    logoutBtn.addEventListener(
+    ).addEventListener(
       "click",
-      function () {
+      () => {
 
-        sessionStorage.removeItem(
-          sessionKey
+        localStorage.removeItem(
+          SESSION_KEY
         );
 
         window.location.href =
@@ -1586,38 +2724,40 @@
       }
     );
 
-  }
+
+    /* =======================================================
+       INITIAL RENDER
+    ======================================================== */
+
+    updateStats();
+
+    renderCategories();
 
 
-  /* =========================================================
-     ESC KEY
-  ========================================================= */
+    /* =======================================================
+       DEMO NOTE
+    ======================================================== */
 
-  document.addEventListener(
-    "keydown",
-    function (event) {
+    /*
+      IMPORTANT:
 
-      if (
-        event.key === "Escape" &&
-        modal.classList.contains("show")
-      ) {
+      This page currently uses localStorage for demonstration.
 
-        closeModal();
+      Production version should use:
 
-      }
+      Firebase Authentication
+              +
+      Firestore
+              +
+      Firestore Security Rules
 
-    }
-  );
+      The UI role check above is NOT a security boundary.
 
+      Direct URL access and database operations must also
+      be protected by server/database authorization rules.
+    */
 
-  /* =========================================================
-     INITIALIZE
-  ========================================================= */
-
-  renderCategories();
-
-})();
-</script>
+  </script>
 
 </body>
 </html>
