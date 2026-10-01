@@ -8,26 +8,22 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <meta
-    name="theme-color"
-    content="#0b1020"
-  >
+  <meta name="theme-color" content="#0b1020">
+
+  <title>Orders | Website Deals Admin</title>
 
   <meta
     name="description"
-    content="Website Deals Admin — Order Management"
+    content="Manage Website Deals marketplace orders."
   >
-
-  <title>Orders | Website Deals Admin</title>
 
   <link
     rel="icon"
     type="image/png"
-    href="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
+    href="../logo.png"
   >
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
-
   <link
     rel="preconnect"
     href="https://fonts.gstatic.com"
@@ -35,13 +31,8 @@
   >
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
     rel="stylesheet"
-  >
-
-  <link
-    rel="stylesheet"
-    href="css/admin.css"
   >
 
   <link
@@ -51,557 +42,1782 @@
 
   <style>
 
-    /* =========================================================
-       ORDER PAGE
-    ========================================================= */
+    :root {
+      --green: #18a957;
+      --green-dark: #108344;
+      --green-soft: #eaf9f0;
 
-    .order-toolbar {
+      --black: #0b1020;
+      --dark: #111827;
+      --text: #18212f;
+      --muted: #718096;
+
+      --white: #ffffff;
+      --surface: #f6f8fb;
+      --surface-2: #fafbfc;
+
+      --border: #e6eaf0;
+
+      --blue: #2563eb;
+      --blue-soft: #eff6ff;
+
+      --orange: #d97706;
+      --orange-soft: #fff7e8;
+
+      --red: #dc3545;
+      --red-soft: #fff0f1;
+
+      --shadow-sm:
+        0 4px 16px rgba(15,23,42,.05);
+
+      --shadow-md:
+        0 16px 45px rgba(15,23,42,.09);
+
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 22px;
+    }
+
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    body {
+      min-height: 100vh;
+
+      font-family: "Inter", sans-serif;
+
+      color: var(--text);
+
+      background: var(--surface);
+    }
+
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+
+    button {
+      border: 0;
+      cursor: pointer;
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    /* =========================================
+       APP
+    ========================================= */
+
+    .app {
+      min-height: 100vh;
+
+      display: flex;
+    }
+
+
+    /* =========================================
+       SIDEBAR
+    ========================================= */
+
+    .sidebar {
+      position: fixed;
+
+      top: 0;
+      left: 0;
+      bottom: 0;
+
+      width: 270px;
+
+      z-index: 1000;
+
+      display: flex;
+      flex-direction: column;
+
+      color: #fff;
+
+      background:
+        radial-gradient(
+          circle at top left,
+          rgba(24,169,87,.16),
+          transparent 32%
+        ),
+        #0b1020;
+
+      border-right:
+        1px solid rgba(255,255,255,.06);
+
+      transition:
+        transform .3s ease;
+    }
+
+
+    .brand {
+      height: 82px;
+
+      display: flex;
+      align-items: center;
+
+      padding: 0 22px;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.07);
+    }
+
+
+    .brand img {
+      width: 43px;
+      height: 43px;
+
+      object-fit: contain;
+
+      padding: 5px;
+
+      border-radius: 12px;
+
+      background: #fff;
+    }
+
+
+    .brand-text {
+      margin-left: 12px;
+    }
+
+
+    .brand-title {
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size: 18px;
+      font-weight: 700;
+
+      letter-spacing: -.3px;
+    }
+
+
+    .brand-subtitle {
+      margin-top: 2px;
+
+      color: #8791a5;
+
+      font-size: 11px;
+    }
+
+
+    .sidebar-nav {
+      flex: 1;
+
+      padding: 20px 14px;
+
+      overflow-y: auto;
+    }
+
+
+    .nav-label {
+      padding: 0 12px;
+
+      margin-bottom: 10px;
+
+      color: #69748a;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      letter-spacing: 1.2px;
+
+      text-transform: uppercase;
+    }
+
+
+    .nav-item {
+      min-height: 48px;
+
+      display: flex;
+      align-items: center;
+
+      padding: 0 13px;
+
+      margin-bottom: 5px;
+
+      border-radius: 12px;
+
+      color: #aab3c4;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      transition: .2s ease;
+    }
+
+
+    .nav-item i {
+      width: 23px;
+
+      margin-right: 10px;
+
+      text-align: center;
+
+      font-size: 15px;
+    }
+
+
+    .nav-item:hover {
+      color: #fff;
+
+      background:
+        rgba(255,255,255,.055);
+
+      transform:
+        translateX(2px);
+    }
+
+
+    .nav-item.active {
+      color: #fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(24,169,87,.28),
+          rgba(24,169,87,.10)
+        );
+
+      box-shadow:
+        inset 3px 0 0 var(--green);
+    }
+
+
+    .nav-badge {
+      min-width: 21px;
+      height: 21px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 0 6px;
+
+      margin-left: auto;
+
+      border-radius: 20px;
+
+      color: #aeb8c9;
+
+      background:
+        rgba(255,255,255,.08);
+
+      font-size: 10px;
+    }
+
+
+    .sidebar-bottom {
+      padding: 15px;
+
+      border-top:
+        1px solid rgba(255,255,255,.07);
+    }
+
+
+    .admin-profile {
+      display: flex;
+      align-items: center;
+
+      padding: 11px;
+
+      border-radius: 14px;
+
+      background:
+        rgba(255,255,255,.045);
+    }
+
+
+    .admin-avatar {
+      width: 37px;
+      height: 37px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 11px;
+
+      color: #fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--green),
+          #0d7d3f
+        );
+
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+
+    .admin-info {
+      min-width: 0;
+
+      margin-left: 10px;
+    }
+
+
+    .admin-name {
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+
+    .admin-role {
+      margin-top: 2px;
+
+      color: #778298;
+
+      font-size: 10px;
+    }
+
+
+    .logout-btn {
+      width: 32px;
+      height: 32px;
+
+      margin-left: auto;
+
+      border-radius: 9px;
+
+      color: #8993a5;
+
+      background: transparent;
+
+      transition: .2s ease;
+    }
+
+
+    .logout-btn:hover {
+      color: #ff7f8b;
+
+      background:
+        rgba(220,53,69,.12);
+    }
+
+
+    /* =========================================
+       MAIN
+    ========================================= */
+
+    .main {
+      width: calc(100% - 270px);
+
+      min-height: 100vh;
+
+      margin-left: 270px;
+    }
+
+
+    /* =========================================
+       HEADER
+    ========================================= */
+
+    .top-header {
+      height: 82px;
+
+      position: sticky;
+      top: 0;
+
+      z-index: 100;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 22px;
+
+      padding: 0 34px;
+
+      background:
+        rgba(255,255,255,.88);
+
+      backdrop-filter:
+        blur(18px);
+
+      border-bottom:
+        1px solid var(--border);
     }
 
-    .order-search {
-      position: relative;
-      flex: 1;
-      min-width: 240px;
-      max-width: 470px;
-    }
 
-    .order-search i {
-      position: absolute;
-      left: 15px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--admin-muted);
-      pointer-events: none;
-    }
-
-    .order-search input {
-      width: 100%;
-      height: 46px;
-      padding-left: 43px;
-    }
-
-    .order-filters {
+    .header-left {
       display: flex;
       align-items: center;
-      gap: 9px;
-      flex-wrap: wrap;
+
+      gap: 12px;
     }
 
-    .order-stats {
+
+    .header-left h1 {
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size: 24px;
+
+      letter-spacing: -.6px;
+    }
+
+
+    .header-left p {
+      margin-top: 4px;
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+
+    .mobile-toggle {
+      display: none;
+
+      width: 40px;
+      height: 40px;
+
+      align-items: center;
+      justify-content: center;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 10px;
+
+      background: #fff;
+    }
+
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+
+      gap: 9px;
+    }
+
+
+    .header-btn {
+      height: 40px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 8px;
+
+      padding: 0 13px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 10px;
+
+      color: var(--text);
+
+      background: #fff;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      transition: .2s ease;
+    }
+
+
+    .header-btn:hover {
+      transform:
+        translateY(-1px);
+
+      box-shadow:
+        var(--shadow-sm);
+    }
+
+
+    /* =========================================
+       CONTENT
+    ========================================= */
+
+    .content {
+      padding: 30px 34px 50px;
+    }
+
+
+    /* =========================================
+       STATS
+    ========================================= */
+
+    .stats-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
       gap: 16px;
+
       margin-bottom: 24px;
     }
 
-    .order-stat {
+
+    .stat-card {
       position: relative;
+
       overflow: hidden;
-      padding: 21px;
-      border: 1px solid var(--admin-border);
-      border-radius: var(--admin-radius-lg);
-      background: var(--admin-surface);
-      box-shadow: var(--admin-shadow-sm);
+
+      padding: 20px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        var(--radius-md);
+
+      background: #fff;
+
+      box-shadow:
+        var(--shadow-sm);
     }
 
-    .order-stat::after {
+
+    .stat-card::after {
       content: "";
+
       position: absolute;
-      right: -34px;
-      bottom: -34px;
-      width: 95px;
-      height: 95px;
+
+      top: -30px;
+      right: -30px;
+
+      width: 90px;
+      height: 90px;
+
       border-radius: 50%;
-      background: var(--admin-green-soft);
+
+      background:
+        rgba(24,169,87,.055);
     }
 
-    .order-stat-top {
+
+    .stat-top {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 15px;
     }
 
-    .order-stat-label {
-      margin: 0 0 6px;
-      color: var(--admin-muted);
-      font-size: 13px;
+
+    .stat-label {
+      color: var(--muted);
+
+      font-size: 11px;
       font-weight: 600;
     }
 
-    .order-stat-value {
-      margin: 0;
-      color: var(--admin-text);
+
+    .stat-icon {
+      width: 39px;
+      height: 39px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 11px;
+
+      color: var(--green);
+
+      background:
+        var(--green-soft);
+    }
+
+
+    .stat-value {
+      margin-top: 13px;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
       font-size: 27px;
-      line-height: 1.1;
-      font-weight: 800;
-    }
-
-    .order-stat-icon {
-      width: 44px;
-      height: 44px;
-      display: grid;
-      place-items: center;
-      border-radius: 13px;
-      background: var(--admin-green-soft);
-      color: var(--admin-green-dark);
-      font-size: 17px;
-    }
-
-    /* =========================================================
-       TABLE
-    ========================================================= */
-
-    .order-table-wrap {
-      overflow-x: auto;
-      border: 1px solid var(--admin-border);
-      border-radius: var(--admin-radius-lg);
-      background: var(--admin-surface);
-      box-shadow: var(--admin-shadow-sm);
-    }
-
-    .order-table {
-      width: 100%;
-      min-width: 1050px;
-      border-collapse: collapse;
-    }
-
-    .order-table th {
-      padding: 15px 18px;
-      background: var(--admin-surface-soft);
-      border-bottom: 1px solid var(--admin-border);
-      color: var(--admin-muted);
-      text-align: left;
-      font-size: 11px;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      white-space: nowrap;
+
+      letter-spacing: -.8px;
     }
 
-    .order-table td {
-      padding: 17px 18px;
-      border-bottom: 1px solid var(--admin-border);
-      color: var(--admin-text-soft);
+
+    .stat-note {
+      margin-top: 4px;
+
+      color: #8490a2;
+
+      font-size: 10px;
+    }
+
+
+    /* =========================================
+       TOOLBAR
+    ========================================= */
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 14px;
+
+      margin-bottom: 18px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        var(--radius-md);
+
+      background: #fff;
+
+      box-shadow:
+        var(--shadow-sm);
+    }
+
+
+    .search-box {
+      flex: 1;
+
+      height: 44px;
+
+      display: flex;
+      align-items: center;
+
+      padding: 0 13px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 11px;
+
+      background:
+        var(--surface-2);
+    }
+
+
+    .search-box i {
+      color: #9aa5b5;
+
       font-size: 13px;
-      vertical-align: middle;
     }
 
-    .order-table tbody tr:last-child td {
+
+    .search-box input {
+      width: 100%;
+
+      padding: 0 10px;
+
+      border: 0;
+      outline: 0;
+
+      color: var(--text);
+
+      background: transparent;
+
+      font-size: 12px;
+    }
+
+
+    .filter-select {
+      height: 44px;
+
+      min-width: 145px;
+
+      padding: 0 12px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 11px;
+
+      outline: none;
+
+      color: var(--text);
+
+      background: #fff;
+
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+
+    /* =========================================
+       TABLE CARD
+    ========================================= */
+
+    .orders-card {
+      overflow: hidden;
+
+      border:
+        1px solid var(--border);
+
+      border-radius:
+        var(--radius-lg);
+
+      background: #fff;
+
+      box-shadow:
+        var(--shadow-sm);
+    }
+
+
+    .table-heading {
+      min-height: 68px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 20px;
+
+      border-bottom:
+        1px solid var(--border);
+    }
+
+
+    .table-heading h2 {
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size: 17px;
+
+      letter-spacing: -.3px;
+    }
+
+
+    .table-heading span {
+      color: var(--muted);
+
+      font-size: 10px;
+    }
+
+
+    .table-wrap {
+      width: 100%;
+
+      overflow-x: auto;
+    }
+
+
+    table {
+      width: 100%;
+
+      min-width: 950px;
+
+      border-collapse:
+        collapse;
+    }
+
+
+    thead th {
+      height: 48px;
+
+      padding: 0 17px;
+
+      color: #8994a5;
+
+      background:
+        #fafbfc;
+
+      border-bottom:
+        1px solid var(--border);
+
+      font-size: 9px;
+      font-weight: 800;
+
+      letter-spacing: .65px;
+
+      text-align: left;
+
+      text-transform: uppercase;
+    }
+
+
+    tbody td {
+      padding: 15px 17px;
+
+      border-bottom:
+        1px solid #edf0f4;
+
+      vertical-align: middle;
+
+      font-size: 11px;
+    }
+
+
+    tbody tr {
+      transition:
+        background .18s ease;
+    }
+
+
+    tbody tr:hover {
+      background:
+        #fbfdfc;
+    }
+
+
+    tbody tr:last-child td {
       border-bottom: 0;
     }
 
-    .order-table tbody tr {
-      transition: var(--admin-transition);
-    }
-
-    .order-table tbody tr:hover {
-      background: var(--admin-surface-soft);
-    }
 
     .order-id {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      color: var(--admin-text);
-      font-size: 12px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
+      color: var(--green);
 
-    .order-id i {
-      color: var(--admin-green);
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
       font-size: 11px;
+      font-weight: 700;
     }
 
-    .customer-cell {
+
+    .customer {
       display: flex;
       align-items: center;
-      gap: 11px;
-      min-width: 180px;
     }
+
 
     .customer-avatar {
-      width: 38px;
-      height: 38px;
-      flex: 0 0 38px;
-      display: grid;
-      place-items: center;
-      border-radius: 11px;
-      background: var(--admin-green-soft);
-      color: var(--admin-green-dark);
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .customer-name {
-      margin: 0;
-      color: var(--admin-text);
-      font-weight: 700;
-    }
-
-    .customer-email {
-      margin: 3px 0 0;
-      color: var(--admin-muted);
-      font-size: 11px;
-    }
-
-    .website-cell {
-      min-width: 170px;
-    }
-
-    .website-title {
-      margin: 0;
-      color: var(--admin-text);
-      font-weight: 700;
-    }
-
-    .website-category {
-      margin: 3px 0 0;
-      color: var(--admin-muted);
-      font-size: 11px;
-    }
-
-    .amount {
-      color: var(--admin-text);
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    /* =========================================================
-       BADGES
-    ========================================================= */
-
-    .order-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .order-badge .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: currentColor;
-    }
-
-    .payment-paid {
-      background: var(--admin-green-soft);
-      color: var(--admin-green-dark);
-    }
-
-    .payment-pending {
-      background: #fff7df;
-      color: #9a6b00;
-    }
-
-    .payment-failed {
-      background: var(--admin-danger-soft);
-      color: var(--admin-danger);
-    }
-
-    .payment-refunded {
-      background: #f0f1f5;
-      color: #666b78;
-    }
-
-    .status-completed {
-      background: var(--admin-green-soft);
-      color: var(--admin-green-dark);
-    }
-
-    .status-processing {
-      background: #eef5ff;
-      color: #3369b7;
-    }
-
-    .status-pending {
-      background: #fff7df;
-      color: #9a6b00;
-    }
-
-    .status-cancelled {
-      background: var(--admin-danger-soft);
-      color: var(--admin-danger);
-    }
-
-    /* =========================================================
-       ACTIONS
-    ========================================================= */
-
-    .order-actions {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .icon-action {
       width: 35px;
       height: 35px;
-      display: grid;
-      place-items: center;
-      border: 1px solid var(--admin-border);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      flex-shrink: 0;
+
       border-radius: 10px;
-      background: var(--admin-surface);
-      color: var(--admin-muted);
-      cursor: pointer;
-      transition: var(--admin-transition);
+
+      color: #fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          #334155,
+          #64748b
+        );
+
+      font-size: 10px;
+      font-weight: 800;
     }
 
-    .icon-action:hover {
-      color: var(--admin-text);
-      border-color: var(--admin-green);
-      background: var(--admin-green-soft);
+
+    .customer-info {
+      margin-left: 9px;
     }
 
-    .icon-action.danger:hover {
-      color: var(--admin-danger);
-      border-color: var(--admin-danger);
-      background: var(--admin-danger-soft);
+
+    .customer-name {
+      font-size: 11px;
+      font-weight: 700;
     }
 
-    /* =========================================================
+
+    .customer-email {
+      margin-top: 3px;
+
+      color: #929cab;
+
+      font-size: 9px;
+    }
+
+
+    .website-name {
+      max-width: 180px;
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+
+    .website-category {
+      margin-top: 4px;
+
+      color: #939eae;
+
+      font-size: 9px;
+    }
+
+
+    .amount {
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+
+    .date {
+      color: #657184;
+
+      font-size: 10px;
+    }
+
+
+    /* =========================================
+       STATUS
+    ========================================= */
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+
+      gap: 6px;
+
+      padding: 6px 9px;
+
+      border-radius: 20px;
+
+      font-size: 8px;
+      font-weight: 800;
+
+      letter-spacing: .4px;
+
+      text-transform: uppercase;
+    }
+
+
+    .status::before {
+      content: "";
+
+      width: 5px;
+      height: 5px;
+
+      border-radius: 50%;
+
+      background:
+        currentColor;
+    }
+
+
+    .status.completed {
+      color: #168448;
+
+      background:
+        var(--green-soft);
+    }
+
+
+    .status.pending {
+      color: #a06a08;
+
+      background:
+        var(--orange-soft);
+    }
+
+
+    .status.processing {
+      color: #2563eb;
+
+      background:
+        var(--blue-soft);
+    }
+
+
+    .status.cancelled {
+      color: var(--red);
+
+      background:
+        var(--red-soft);
+    }
+
+
+    .payment {
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+
+    .payment.paid {
+      color: #168448;
+    }
+
+
+    .payment.unpaid {
+      color: #c47b05;
+    }
+
+
+    .payment.refunded {
+      color: var(--red);
+    }
+
+
+    /* =========================================
+       ACTIONS
+    ========================================= */
+
+    .action-buttons {
+      display: flex;
+      align-items: center;
+
+      gap: 6px;
+    }
+
+
+    .action-btn {
+      width: 32px;
+      height: 32px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 9px;
+
+      color: #738093;
+
+      background: #fff;
+
+      transition: .2s ease;
+    }
+
+
+    .action-btn:hover {
+      color: var(--text);
+
+      background:
+        var(--surface);
+    }
+
+
+    .action-btn.delete:hover {
+      color: var(--red);
+
+      border-color:
+        #ffd0d5;
+
+      background:
+        var(--red-soft);
+    }
+
+
+    /* =========================================
+       PAGINATION
+    ========================================= */
+
+    .table-footer {
+      min-height: 62px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 20px;
+
+      border-top:
+        1px solid var(--border);
+    }
+
+
+    .showing-text {
+      color: var(--muted);
+
+      font-size: 10px;
+    }
+
+
+    .pagination {
+      display: flex;
+      align-items: center;
+
+      gap: 5px;
+    }
+
+
+    .page-btn {
+      width: 32px;
+      height: 32px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 8px;
+
+      color: #687487;
+
+      background: #fff;
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+
+    .page-btn.active {
+      color: #fff;
+
+      border-color:
+        var(--green);
+
+      background:
+        var(--green);
+    }
+
+
+    /* =========================================
        EMPTY
-    ========================================================= */
+    ========================================= */
 
-    .empty-orders {
-      padding: 70px 20px;
+    .empty-state {
+      display: none;
+
+      padding: 65px 20px;
+
       text-align: center;
     }
 
-    .empty-orders-icon {
-      width: 70px;
-      height: 70px;
-      display: grid;
-      place-items: center;
-      margin: 0 auto 17px;
-      border-radius: 21px;
-      background: var(--admin-green-soft);
-      color: var(--admin-green-dark);
-      font-size: 25px;
+
+    .empty-state.show {
+      display: block;
     }
 
-    .empty-orders h3 {
-      margin: 0 0 8px;
-      color: var(--admin-text);
+
+    .empty-icon {
+      width: 58px;
+      height: 58px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      margin: 0 auto 15px;
+
+      border-radius: 17px;
+
+      color: #99a4b4;
+
+      background:
+        var(--surface);
+    }
+
+
+    .empty-state h3 {
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
       font-size: 18px;
     }
 
-    .empty-orders p {
-      max-width: 430px;
-      margin: 0 auto;
-      color: var(--admin-muted);
-      line-height: 1.6;
+
+    .empty-state p {
+      margin-top: 6px;
+
+      color: var(--muted);
+
+      font-size: 11px;
     }
 
-    /* =========================================================
+
+    /* =========================================
        MODAL
-    ========================================================= */
+    ========================================= */
 
-    .order-detail-grid {
+    .modal-overlay {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 2000;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      background:
+        rgba(7,12,24,.62);
+
+      backdrop-filter:
+        blur(8px);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition: .25s ease;
+    }
+
+
+    .modal-overlay.show {
+      opacity: 1;
+
+      visibility: visible;
+    }
+
+
+    .modal {
+      width: 100%;
+
+      max-width: 590px;
+
+      max-height:
+        calc(100vh - 40px);
+
+      overflow-y: auto;
+
+      border-radius: 22px;
+
+      background: #fff;
+
+      box-shadow:
+        0 30px 90px rgba(0,0,0,.25);
+
+      transform:
+        translateY(15px) scale(.98);
+
+      transition: .25s ease;
+    }
+
+
+    .modal-overlay.show .modal {
+      transform:
+        translateY(0) scale(1);
+    }
+
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 20px 22px;
+
+      border-bottom:
+        1px solid var(--border);
+    }
+
+
+    .modal-header h3 {
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size: 19px;
+    }
+
+
+    .modal-header p {
+      margin-top: 4px;
+
+      color: var(--muted);
+
+      font-size: 10px;
+    }
+
+
+    .modal-close {
+      width: 35px;
+      height: 35px;
+
+      border-radius: 10px;
+
+      color: #7e8898;
+
+      background:
+        var(--surface);
+    }
+
+
+    .modal-body {
+      padding: 22px;
+    }
+
+
+    .detail-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin-bottom: 20px;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 10px;
     }
 
-    .detail-box {
-      padding: 15px;
-      border: 1px solid var(--admin-border);
-      border-radius: 13px;
-      background: var(--admin-surface-soft);
+
+    .detail-item {
+      padding: 13px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 12px;
+
+      background:
+        var(--surface-2);
     }
+
+
+    .detail-item.full {
+      grid-column:
+        1 / -1;
+    }
+
 
     .detail-label {
-      margin: 0 0 6px;
-      color: var(--admin-muted);
-      font-size: 11px;
+      color: #929cab;
+
+      font-size: 9px;
       font-weight: 700;
+
       text-transform: uppercase;
-      letter-spacing: .04em;
+
+      letter-spacing: .5px;
     }
+
 
     .detail-value {
-      margin: 0;
-      color: var(--admin-text);
-      font-size: 14px;
+      margin-top: 5px;
+
+      color: var(--text);
+
+      font-size: 11px;
       font-weight: 700;
-      word-break: break-word;
     }
 
-    .order-product-card {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      padding: 15px;
-      margin-bottom: 20px;
-      border: 1px solid var(--admin-border);
-      border-radius: 14px;
-      background: var(--admin-surface);
+
+    .modal-section {
+      margin-top: 18px;
     }
 
-    .order-product-image {
-      width: 65px;
-      height: 65px;
-      flex: 0 0 65px;
-      overflow: hidden;
-      border-radius: 12px;
-      background: var(--admin-surface-soft);
+
+    .modal-section-title {
+      margin-bottom: 9px;
+
+      font-family:
+        "Space Grotesk",
+        sans-serif;
+
+      font-size: 13px;
     }
 
-    .order-product-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
 
-    .order-product-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .order-product-info h4 {
-      margin: 0 0 4px;
-      color: var(--admin-text);
-      font-size: 14px;
-    }
-
-    .order-product-info p {
-      margin: 0;
-      color: var(--admin-muted);
-      font-size: 12px;
-    }
-
-    .order-product-price {
-      color: var(--admin-text);
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .status-editor {
+    .status-controls {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 13px;
-      margin-bottom: 20px;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 10px;
     }
 
-    .detail-section-title {
-      margin: 0 0 13px;
-      color: var(--admin-text);
-      font-size: 13px;
-      font-weight: 800;
+
+    .control-group label {
+      display: block;
+
+      margin-bottom: 6px;
+
+      color: #687487;
+
+      font-size: 9px;
+      font-weight: 700;
     }
 
-    .order-note {
-      min-height: 90px;
-      resize: vertical;
+
+    .control-select {
+      width: 100%;
+
+      height: 42px;
+
+      padding: 0 10px;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 10px;
+
+      outline: none;
+
+      background: #fff;
+
+      color: var(--text);
+
+      font-size: 10px;
+      font-weight: 600;
     }
 
-    .modal-footer-actions {
+
+    .control-select:focus {
+      border-color:
+        var(--green);
+
+      box-shadow:
+        0 0 0 3px rgba(24,169,87,.09);
+    }
+
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+
+      gap: 9px;
+
+      padding: 16px 22px;
+
+      border-top:
+        1px solid var(--border);
+    }
+
+
+    .modal-btn {
+      height: 41px;
+
+      padding: 0 15px;
+
+      border-radius: 10px;
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+
+    .modal-btn.cancel {
+      color: #596477;
+
+      background:
+        var(--surface);
+    }
+
+
+    .modal-btn.save {
+      color: #fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--green),
+          var(--green-dark)
+        );
+    }
+
+
+    /* =========================================
+       TOAST
+    ========================================= */
+
+    .toast {
+      position: fixed;
+
+      right: 25px;
+      bottom: 25px;
+
+      z-index: 5000;
+
+      min-width: 280px;
+
       display: flex;
       align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
-      margin-top: 4px;
+
+      gap: 11px;
+
+      padding: 14px 16px;
+
+      border-radius: 14px;
+
+      color: #fff;
+
+      background:
+        #101827;
+
+      box-shadow:
+        0 20px 50px rgba(0,0,0,.20);
+
+      transform:
+        translateY(20px);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition: .3s ease;
     }
 
-    /* =========================================================
-       DELETE WARNING
-    ========================================================= */
 
-    .delete-warning {
+    .toast.show {
+      transform:
+        translateY(0);
+
+      opacity: 1;
+      visibility: visible;
+    }
+
+
+    .toast-icon {
+      width: 34px;
+      height: 34px;
+
       display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      padding: 14px;
-      margin-bottom: 18px;
-      border: 1px solid var(--admin-danger);
-      border-radius: 12px;
-      background: var(--admin-danger-soft);
-      color: var(--admin-danger);
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 9px;
+
+      color: #57e594;
+
+      background:
+        rgba(24,169,87,.18);
     }
 
-    .delete-warning p {
-      margin: 0;
-      font-size: 13px;
-      line-height: 1.6;
+
+    .toast-content strong {
+      display: block;
+
+      font-size: 11px;
     }
 
-    /* =========================================================
+
+    .toast-content span {
+      display: block;
+
+      margin-top: 2px;
+
+      color: #a9b3c2;
+
+      font-size: 10px;
+    }
+
+
+    .toast-close {
+      width: 26px;
+      height: 26px;
+
+      margin-left: auto;
+
+      color: #8f9aab;
+
+      background: transparent;
+    }
+
+
+    /* =========================================
+       MOBILE OVERLAY
+    ========================================= */
+
+    .sidebar-overlay {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 900;
+
+      background:
+        rgba(0,0,0,.45);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition: .25s ease;
+    }
+
+
+    .sidebar-overlay.show {
+      opacity: 1;
+
+      visibility: visible;
+    }
+
+
+    /* =========================================
        RESPONSIVE
-    ========================================================= */
+    ========================================= */
 
-    @media (max-width: 1100px) {
+    @media (max-width: 1150px) {
 
-      .order-stats {
-        grid-template-columns: repeat(2, 1fr);
+      .stats-grid {
+        grid-template-columns:
+          repeat(2, 1fr);
       }
 
     }
 
-    @media (max-width: 760px) {
 
-      .order-toolbar {
-        align-items: stretch;
+    @media (max-width: 900px) {
+
+      .sidebar {
+        transform:
+          translateX(-100%);
       }
 
-      .order-search {
-        max-width: none;
+
+      .sidebar.open {
+        transform:
+          translateX(0);
+      }
+
+
+      .main {
         width: 100%;
+
+        margin-left: 0;
       }
 
-      .order-filters {
-        width: 100%;
+
+      .mobile-toggle {
+        display: inline-flex;
       }
 
-      .order-filters .admin-select,
-      .order-filters .admin-btn {
+
+      .top-header {
+        padding: 0 20px;
+      }
+
+
+      .content {
+        padding: 25px 20px 40px;
+      }
+
+    }
+
+
+    @media (max-width: 700px) {
+
+      .toolbar {
+        flex-wrap: wrap;
+      }
+
+
+      .search-box {
+        flex-basis: 100%;
+      }
+
+
+      .filter-select {
         flex: 1;
+
+        min-width: 0;
       }
 
-      .order-detail-grid,
-      .status-editor {
-        grid-template-columns: 1fr;
+
+      .table-heading {
+        padding: 0 15px;
       }
 
-      .order-stats {
-        gap: 12px;
-      }
 
-      .order-stat {
-        padding: 17px;
-      }
-
-      .order-stat-value {
-        font-size: 23px;
+      .table-footer {
+        padding: 0 15px;
       }
 
     }
 
-    @media (max-width: 500px) {
 
-      .order-stats {
-        grid-template-columns: 1fr;
+    @media (max-width: 560px) {
+
+      .stats-grid {
+        grid-template-columns:
+          1fr 1fr;
+
+        gap: 9px;
       }
 
-      .modal-footer-actions {
-        flex-direction: column-reverse;
+
+      .stat-card {
+        padding: 14px;
       }
 
-      .modal-footer-actions .admin-btn {
-        width: 100%;
-        justify-content: center;
+
+      .stat-value {
+        font-size: 21px;
+      }
+
+
+      .stat-icon {
+        width: 33px;
+        height: 33px;
+
+        font-size: 12px;
+      }
+
+
+      .stat-label {
+        font-size: 9px;
+      }
+
+
+      .header-left h1 {
+        font-size: 20px;
+      }
+
+
+      .header-left p {
+        font-size: 10px;
+      }
+
+
+      .header-btn span {
+        display: none;
+      }
+
+
+      .content {
+        padding:
+          20px 14px 35px;
+      }
+
+
+      .top-header {
+        height: 72px;
+
+        padding:
+          0 14px;
+      }
+
+
+      .detail-grid {
+        grid-template-columns:
+          1fr;
+      }
+
+
+      .detail-item.full {
+        grid-column:
+          auto;
+      }
+
+
+      .status-controls {
+        grid-template-columns:
+          1fr;
+      }
+
+
+      .toast {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+
+        min-width: 0;
       }
 
     }
@@ -609,409 +1825,329 @@
   </style>
 </head>
 
+
 <body>
 
-  <!-- =======================================================
-       ADMIN APP
-  ======================================================== -->
+  <div class="app">
 
-  <div class="admin-app">
 
-    <!-- =====================================================
+    <!-- =========================================
          SIDEBAR
-    ====================================================== -->
+    ========================================== -->
 
     <aside
-      class="admin-sidebar"
-      id="admin-sidebar"
+      class="sidebar"
+      id="sidebar"
     >
 
-      <div class="admin-brand">
+      <div class="brand">
 
-        <a
-          href="dashboard.html"
-          class="admin-brand-link"
+        <img
+          src="../logo.png"
+          alt="Website Deals"
+          onerror="this.style.display='none'"
         >
 
-          <img
-            src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
-            alt="Website Deals"
-            class="admin-brand-logo"
-            onerror="this.style.display='none'"
-          >
+        <div class="brand-text">
 
-          <div>
-            <strong>Website Deals</strong>
-            <span>Admin Portal</span>
+          <div class="brand-title">
+            Website Deals
           </div>
 
-        </a>
+          <div class="brand-subtitle">
+            Marketplace Admin
+          </div>
 
-        <button
-          class="admin-sidebar-close"
-          id="sidebar-close"
-          aria-label="Close sidebar"
-        >
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+        </div>
 
       </div>
 
 
-      <!-- Navigation -->
+      <nav class="sidebar-nav">
 
-      <nav class="admin-nav">
-
-        <div class="admin-nav-label">
-          Workspace
+        <div class="nav-label">
+          Marketplace
         </div>
+
 
         <a
           href="dashboard.html"
-          class="admin-nav-link"
+          class="nav-item"
         >
           <i class="fa-solid fa-grid-2"></i>
           <span>Dashboard</span>
         </a>
 
+
         <a
           href="websites.html"
-          class="admin-nav-link"
+          class="nav-item"
         >
-          <i class="fa-solid fa-globe"></i>
+          <i class="fa-solid fa-window-maximize"></i>
           <span>Websites</span>
+          <span class="nav-badge">11</span>
         </a>
+
 
         <a
           href="categories.html"
-          class="admin-nav-link"
+          class="nav-item"
         >
           <i class="fa-solid fa-layer-group"></i>
           <span>Categories</span>
         </a>
 
+
         <a
           href="orders.html"
-          class="admin-nav-link active"
+          class="nav-item active"
         >
           <i class="fa-solid fa-bag-shopping"></i>
           <span>Orders</span>
+          <span
+            class="nav-badge"
+            id="sidebar-order-count"
+          >
+            8
+          </span>
         </a>
+
 
         <a
           href="customers.html"
-          class="admin-nav-link"
+          class="nav-item"
         >
           <i class="fa-solid fa-users"></i>
           <span>Customers</span>
         </a>
 
+
         <a
           href="newsletter.html"
-          class="admin-nav-link"
+          class="nav-item"
         >
-          <i class="fa-solid fa-envelope"></i>
+          <i class="fa-regular fa-envelope"></i>
           <span>Newsletter</span>
         </a>
-
-
-        <!-- Privileged Navigation -->
-
-        <div
-          class="admin-privileged-nav"
-          id="privileged-nav"
-          style="display:none;"
-        >
-
-          <div class="admin-nav-label">
-            Management
-          </div>
-
-          <a
-            href="admins.html"
-            class="admin-nav-link"
-          >
-            <i class="fa-solid fa-user-shield"></i>
-            <span>Access Management</span>
-          </a>
-
-          <a
-            href="settings.html"
-            class="admin-nav-link"
-          >
-            <i class="fa-solid fa-sliders"></i>
-            <span>Settings</span>
-          </a>
-
-        </div>
 
       </nav>
 
 
-      <!-- Sidebar Bottom -->
+      <div class="sidebar-bottom">
 
-      <div class="admin-sidebar-bottom">
+        <div class="admin-profile">
 
-        <a
-          href="../index.html"
-          target="_blank"
-          rel="noopener"
-          class="admin-nav-link"
-        >
-          <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          <span>View Marketplace</span>
-        </a>
+          <div class="admin-avatar">
+            SN
+          </div>
 
-        <button
-          class="admin-logout"
-          id="logout-btn"
-        >
-          <i class="fa-solid fa-right-from-bracket"></i>
-          <span>Sign Out</span>
-        </button>
+          <div class="admin-info">
+
+            <div class="admin-name">
+              Administrator
+            </div>
+
+            <div class="admin-role">
+              Marketplace Admin
+            </div>
+
+          </div>
+
+
+          <button
+            class="logout-btn"
+            id="logout-btn"
+            title="Sign Out"
+          >
+            <i
+              class="fa-solid fa-arrow-right-from-bracket"
+            ></i>
+          </button>
+
+        </div>
 
       </div>
 
     </aside>
 
 
-    <!-- =====================================================
-         OVERLAY
-    ====================================================== -->
-
     <div
-      class="admin-sidebar-overlay"
+      class="sidebar-overlay"
       id="sidebar-overlay"
     ></div>
 
 
-    <!-- =====================================================
+    <!-- =========================================
          MAIN
-    ====================================================== -->
+    ========================================== -->
 
-    <main class="admin-main">
+    <main class="main">
 
-      <!-- TOPBAR -->
 
-      <header class="admin-topbar">
+      <!-- HEADER -->
 
-        <div class="admin-topbar-left">
+      <header class="top-header">
+
+        <div class="header-left">
 
           <button
-            class="admin-menu-toggle"
-            id="menu-toggle"
+            class="mobile-toggle"
+            id="mobile-toggle"
             aria-label="Open menu"
           >
             <i class="fa-solid fa-bars"></i>
           </button>
 
+
           <div>
 
-            <div class="admin-breadcrumb">
-              Marketplace
-              <span>/</span>
+            <h1>
               Orders
-            </div>
-
-            <h1 class="admin-topbar-title">
-              Order Management
             </h1>
+
+            <p>
+              Track purchases, payments and order status.
+            </p>
 
           </div>
 
         </div>
 
 
-        <div class="admin-topbar-right">
+        <div class="header-actions">
 
-          <a
-            href="../index.html"
-            target="_blank"
-            rel="noopener"
-            class="admin-topbar-icon"
-            title="View Marketplace"
+          <button
+            class="header-btn"
+            id="refresh-btn"
           >
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-          </a>
-
-          <div class="admin-user">
-
-            <div
-              class="admin-user-avatar"
-              id="user-avatar"
-            >
-              A
-            </div>
-
-            <div class="admin-user-info">
-
-              <strong id="user-name">
-                Administrator
-              </strong>
-
-              <span id="user-role">
-                Admin
-              </span>
-
-            </div>
-
-          </div>
+            <i class="fa-solid fa-rotate"></i>
+            <span>Refresh</span>
+          </button>
 
         </div>
 
       </header>
 
 
-      <!-- ===================================================
-           PAGE
-      ==================================================== -->
+      <!-- CONTENT -->
 
-      <section class="admin-page">
-
-        <!-- PAGE HEADER -->
-
-        <div class="admin-page-header">
-
-          <div>
-
-            <div class="admin-eyebrow">
-              Sales & Customers
-            </div>
-
-            <h2>
-              Orders
-            </h2>
-
-            <p>
-              Manage website purchases, payments and delivery status.
-            </p>
-
-          </div>
-
-          <button
-            class="admin-btn admin-btn-secondary"
-            id="export-orders-btn"
-          >
-            <i class="fa-solid fa-file-csv"></i>
-            Export CSV
-          </button>
-
-        </div>
+      <section class="content">
 
 
-        <!-- =================================================
+        <!-- =====================================
              STATS
-        ================================================== -->
+        ====================================== -->
 
-        <div class="order-stats">
+        <div class="stats-grid">
 
-          <div class="order-stat">
 
-            <div class="order-stat-top">
+          <div class="stat-card">
 
-              <div>
+            <div class="stat-top">
 
-                <p class="order-stat-label">
-                  Total Orders
-                </p>
-
-                <h3
-                  class="order-stat-value"
-                  id="stat-total"
-                >
-                  0
-                </h3>
-
+              <div class="stat-label">
+                Total Orders
               </div>
 
-              <div class="order-stat-icon">
+              <div class="stat-icon">
                 <i class="fa-solid fa-bag-shopping"></i>
               </div>
 
             </div>
 
+            <div
+              class="stat-value"
+              id="total-orders"
+            >
+              8
+            </div>
+
+            <div class="stat-note">
+              All marketplace orders
+            </div>
+
           </div>
 
 
-          <div class="order-stat">
+          <div class="stat-card">
 
-            <div class="order-stat-top">
+            <div class="stat-top">
 
-              <div>
-
-                <p class="order-stat-label">
-                  Paid Orders
-                </p>
-
-                <h3
-                  class="order-stat-value"
-                  id="stat-paid"
-                >
-                  0
-                </h3>
-
+              <div class="stat-label">
+                Completed
               </div>
 
-              <div class="order-stat-icon">
+              <div class="stat-icon">
                 <i class="fa-solid fa-circle-check"></i>
               </div>
 
             </div>
 
-          </div>
+            <div
+              class="stat-value"
+              id="completed-orders"
+            >
+              5
+            </div>
 
-
-          <div class="order-stat">
-
-            <div class="order-stat-top">
-
-              <div>
-
-                <p class="order-stat-label">
-                  Pending
-                </p>
-
-                <h3
-                  class="order-stat-value"
-                  id="stat-pending"
-                >
-                  0
-                </h3>
-
-              </div>
-
-              <div class="order-stat-icon">
-                <i class="fa-solid fa-clock"></i>
-              </div>
-
+            <div class="stat-note">
+              Successfully completed
             </div>
 
           </div>
 
 
-          <div class="order-stat">
+          <div class="stat-card">
 
-            <div class="order-stat-top">
+            <div class="stat-top">
 
-              <div>
-
-                <p class="order-stat-label">
-                  Revenue
-                </p>
-
-                <h3
-                  class="order-stat-value"
-                  id="stat-revenue"
-                >
-                  ৳0
-                </h3>
-
+              <div class="stat-label">
+                Pending
               </div>
 
-              <div class="order-stat-icon">
+              <div class="stat-icon">
+                <i class="fa-solid fa-clock"></i>
+              </div>
+
+            </div>
+
+            <div
+              class="stat-value"
+              id="pending-orders"
+            >
+              2
+            </div>
+
+            <div class="stat-note">
+              Need attention
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <div class="stat-label">
+                Revenue
+              </div>
+
+              <div class="stat-icon">
                 <i class="fa-solid fa-bangladeshi-taka-sign"></i>
               </div>
 
+            </div>
+
+            <div
+              class="stat-value"
+              id="total-revenue"
+            >
+              ৳24.6K
+            </div>
+
+            <div class="stat-note">
+              From completed orders
             </div>
 
           </div>
@@ -1019,168 +2155,248 @@
         </div>
 
 
-        <!-- =================================================
-             TOOLBAR
-        ================================================== -->
+        <!-- =====================================
+             FILTER TOOLBAR
+        ====================================== -->
 
-        <div class="order-toolbar">
+        <div class="toolbar">
 
-          <div class="order-search">
 
-            <i class="fa-solid fa-magnifying-glass"></i>
+          <div class="search-box">
+
+            <i
+              class="fa-solid fa-magnifying-glass"
+            ></i>
 
             <input
               type="search"
               id="order-search"
-              class="admin-input"
-              placeholder="Search order, customer, email or website..."
+              placeholder="Search order ID, customer or website..."
               autocomplete="off"
             >
 
           </div>
 
 
-          <div class="order-filters">
+          <select
+            class="filter-select"
+            id="order-status-filter"
+          >
 
-            <select
-              id="payment-filter"
-              class="admin-select"
-            >
+            <option value="all">
+              All Order Status
+            </option>
 
-              <option value="all">
-                All Payments
-              </option>
+            <option value="completed">
+              Completed
+            </option>
 
-              <option value="paid">
-                Paid
-              </option>
+            <option value="pending">
+              Pending
+            </option>
 
-              <option value="pending">
-                Pending
-              </option>
+            <option value="processing">
+              Processing
+            </option>
 
-              <option value="failed">
-                Failed
-              </option>
+            <option value="cancelled">
+              Cancelled
+            </option>
 
-              <option value="refunded">
-                Refunded
-              </option>
-
-            </select>
+          </select>
 
 
-            <select
-              id="status-filter"
-              class="admin-select"
-            >
+          <select
+            class="filter-select"
+            id="payment-filter"
+          >
 
-              <option value="all">
-                All Status
-              </option>
+            <option value="all">
+              All Payments
+            </option>
 
-              <option value="pending">
-                Pending
-              </option>
+            <option value="paid">
+              Paid
+            </option>
 
-              <option value="processing">
-                Processing
-              </option>
+            <option value="unpaid">
+              Unpaid
+            </option>
 
-              <option value="completed">
-                Completed
-              </option>
+            <option value="refunded">
+              Refunded
+            </option>
 
-              <option value="cancelled">
-                Cancelled
-              </option>
-
-            </select>
+          </select>
 
 
-            <select
-              id="sort-orders"
-              class="admin-select"
-            >
+          <select
+            class="filter-select"
+            id="sort-filter"
+          >
 
-              <option value="newest">
-                Newest
-              </option>
+            <option value="newest">
+              Newest First
+            </option>
 
-              <option value="oldest">
-                Oldest
-              </option>
+            <option value="oldest">
+              Oldest First
+            </option>
 
-              <option value="highest">
-                Highest Amount
-              </option>
+            <option value="highest">
+              Highest Amount
+            </option>
 
-              <option value="lowest">
-                Lowest Amount
-              </option>
+            <option value="lowest">
+              Lowest Amount
+            </option>
 
-              <option value="customer">
-                Customer A–Z
-              </option>
-
-            </select>
-
-          </div>
+          </select>
 
         </div>
 
 
-        <!-- =================================================
-             TABLE
-        ================================================== -->
+        <!-- =====================================
+             ORDERS
+        ====================================== -->
 
-        <div class="order-table-wrap">
+        <div class="orders-card">
 
-          <table class="order-table">
 
-            <thead>
+          <div class="table-heading">
 
-              <tr>
+            <div>
 
-                <th>
-                  Order
-                </th>
+              <h2>
+                Marketplace Orders
+              </h2>
 
-                <th>
-                  Customer
-                </th>
+            </div>
 
-                <th>
-                  Website
-                </th>
+            <span id="result-count">
+              8 orders
+            </span>
 
-                <th>
-                  Amount
-                </th>
+          </div>
 
-                <th>
-                  Payment
-                </th>
 
-                <th>
-                  Order Status
-                </th>
+          <div class="table-wrap">
 
-                <th>
-                  Date
-                </th>
+            <table>
 
-                <th>
-                  Actions
-                </th>
+              <thead>
 
-              </tr>
+                <tr>
 
-            </thead>
+                  <th>
+                    Order
+                  </th>
 
-            <tbody id="order-list"></tbody>
+                  <th>
+                    Customer
+                  </th>
 
-          </table>
+                  <th>
+                    Website
+                  </th>
+
+                  <th>
+                    Amount
+                  </th>
+
+                  <th>
+                    Payment
+                  </th>
+
+                  <th>
+                    Status
+                  </th>
+
+                  <th>
+                    Date
+                  </th>
+
+                  <th>
+                    Action
+                  </th>
+
+                </tr>
+
+              </thead>
+
+
+              <tbody
+                id="orders-table-body"
+              ></tbody>
+
+            </table>
+
+
+            <div
+              class="empty-state"
+              id="empty-state"
+            >
+
+              <div class="empty-icon">
+                <i
+                  class="fa-solid fa-receipt"
+                ></i>
+              </div>
+
+              <h3>
+                No orders found
+              </h3>
+
+              <p>
+                Try changing your search or filters.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="table-footer">
+
+            <div
+              class="showing-text"
+              id="showing-text"
+            >
+              Showing 8 orders
+            </div>
+
+
+            <div class="pagination">
+
+              <button class="page-btn">
+                <i
+                  class="fa-solid fa-chevron-left"
+                ></i>
+              </button>
+
+              <button
+                class="page-btn active"
+              >
+                1
+              </button>
+
+              <button class="page-btn">
+                2
+              </button>
+
+              <button class="page-btn">
+                3
+              </button>
+
+              <button class="page-btn">
+                <i
+                  class="fa-solid fa-chevron-right"
+                ></i>
+              </button>
+
+            </div>
+
+          </div>
 
         </div>
 
@@ -1191,84 +2407,36 @@
   </div>
 
 
-  <!-- =======================================================
-       ORDER DETAIL MODAL
-  ======================================================== -->
+  <!-- =========================================
+       ORDER DETAILS MODAL
+  ========================================== -->
 
   <div
-    class="admin-modal"
+    class="modal-overlay"
     id="order-modal"
-    aria-hidden="true"
   >
 
-    <div class="admin-modal-backdrop"></div>
-
-    <div class="admin-modal-dialog">
-
-      <div class="admin-modal-header">
-
-        <div>
-
-          <div class="admin-eyebrow">
-            Order Details
-          </div>
-
-          <h3 id="order-modal-title">
-            Order
-          </h3>
-
-        </div>
-
-        <button
-          class="admin-modal-close"
-          id="order-modal-close"
-          aria-label="Close"
-        >
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-
-      </div>
+    <div class="modal">
 
 
-      <div id="order-detail-content"></div>
-
-    </div>
-
-  </div>
-
-
-  <!-- =======================================================
-       DELETE MODAL
-  ======================================================== -->
-
-  <div
-    class="admin-modal"
-    id="delete-modal"
-    aria-hidden="true"
-  >
-
-    <div class="admin-modal-backdrop"></div>
-
-    <div class="admin-modal-dialog">
-
-      <div class="admin-modal-header">
+      <div class="modal-header">
 
         <div>
-
-          <div class="admin-eyebrow">
-            Confirmation
-          </div>
 
           <h3>
-            Delete Order
+            Order Details
           </h3>
+
+          <p id="modal-order-subtitle">
+            Order information
+          </p>
 
         </div>
 
+
         <button
-          class="admin-modal-close"
-          id="delete-modal-close"
-          aria-label="Close"
+          class="modal-close"
+          id="modal-close"
         >
           <i class="fa-solid fa-xmark"></i>
         </button>
@@ -1276,47 +2444,251 @@
       </div>
 
 
-      <div class="delete-warning">
+      <div class="modal-body">
 
-        <i class="fa-solid fa-triangle-exclamation"></i>
 
-        <p>
-          This action permanently removes the order from
-          the local demo database.
-        </p>
+        <div class="detail-grid">
+
+
+          <div class="detail-item">
+
+            <div class="detail-label">
+              Order ID
+            </div>
+
+            <div
+              class="detail-value"
+              id="detail-order-id"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detail-item">
+
+            <div class="detail-label">
+              Date
+            </div>
+
+            <div
+              class="detail-value"
+              id="detail-date"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detail-item">
+
+            <div class="detail-label">
+              Customer
+            </div>
+
+            <div
+              class="detail-value"
+              id="detail-customer"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detail-item">
+
+            <div class="detail-label">
+              Email
+            </div>
+
+            <div
+              class="detail-value"
+              id="detail-email"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detail-item">
+
+            <div class="detail-label">
+              Phone
+            </div>
+
+            <div
+              class="detail-value"
+              id="detail-phone"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detail-item">
+
+            <div class="detail-label">
+              Website
+            </div>
+
+            <div
+              class="detail-value"
+              id="detail-website"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detail-item">
+
+            <div class="detail-label">
+              Amount
+            </div>
+
+            <div
+              class="detail-value"
+              id="detail-amount"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detail-item">
+
+            <div class="detail-label">
+              Payment
+            </div>
+
+            <div
+              class="detail-value"
+              id="detail-payment"
+            >
+              —
+            </div>
+
+          </div>
+
+
+          <div class="detail-item full">
+
+            <div class="detail-label">
+              Customer Message
+            </div>
+
+            <div
+              class="detail-value"
+              id="detail-message"
+            >
+              No message provided.
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="modal-section">
+
+          <div class="modal-section-title">
+            Update Order
+          </div>
+
+
+          <div class="status-controls">
+
+
+            <div class="control-group">
+
+              <label>
+                Order Status
+              </label>
+
+              <select
+                class="control-select"
+                id="modal-order-status"
+              >
+
+                <option value="completed">
+                  Completed
+                </option>
+
+                <option value="pending">
+                  Pending
+                </option>
+
+                <option value="processing">
+                  Processing
+                </option>
+
+                <option value="cancelled">
+                  Cancelled
+                </option>
+
+              </select>
+
+            </div>
+
+
+            <div class="control-group">
+
+              <label>
+                Payment Status
+              </label>
+
+              <select
+                class="control-select"
+                id="modal-payment-status"
+              >
+
+                <option value="paid">
+                  Paid
+                </option>
+
+                <option value="unpaid">
+                  Unpaid
+                </option>
+
+                <option value="refunded">
+                  Refunded
+                </option>
+
+              </select>
+
+            </div>
+
+          </div>
+
+        </div>
 
       </div>
 
 
-      <p
-        id="delete-order-message"
-        style="
-          color:var(--admin-text-soft);
-          line-height:1.6;
-          margin:0 0 20px;
-        "
-      >
-        Are you sure you want to delete this order?
-      </p>
-
-
-      <div class="modal-footer-actions">
+      <div class="modal-footer">
 
         <button
           type="button"
-          class="admin-btn admin-btn-secondary"
-          id="delete-cancel-btn"
+          class="modal-btn cancel"
+          id="cancel-modal"
         >
-          Cancel
+          Close
         </button>
 
         <button
           type="button"
-          class="admin-btn admin-btn-danger"
-          id="confirm-delete-btn"
+          class="modal-btn save"
+          id="save-order"
         >
-          <i class="fa-solid fa-trash"></i>
-          Delete Order
+          <i class="fa-solid fa-check"></i>
+          Save Changes
         </button>
 
       </div>
@@ -1326,269 +2698,205 @@
   </div>
 
 
-  <!-- =======================================================
+  <!-- =========================================
        TOAST
-  ======================================================== -->
+  ========================================== -->
 
   <div
-    class="admin-toast"
-    id="admin-toast"
-    aria-live="polite"
+    class="toast"
+    id="toast"
   >
 
-    <div class="admin-toast-icon">
+    <div class="toast-icon">
 
       <i class="fa-solid fa-check"></i>
 
     </div>
 
-    <div>
+
+    <div class="toast-content">
 
       <strong id="toast-title">
         Success
       </strong>
 
       <span id="toast-message">
-        Done successfully.
+        Order updated successfully.
       </span>
 
     </div>
 
+
+    <button
+      class="toast-close"
+      id="toast-close"
+    >
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
   </div>
 
 
-  <!-- =======================================================
-       JAVASCRIPT
-  ======================================================== -->
-
   <script>
 
-    /* =======================================================
-       CONFIG
-    ======================================================== */
+    /* =========================================
+       STORAGE
+    ========================================== */
 
-    const ORDER_KEY =
+    const STORAGE_KEY =
       "websiteDealsOrders";
 
-    const WEBSITE_KEY =
-      "websiteDealsWebsites";
 
-    const SESSION_KEY =
-      "websiteDealsAdminSession";
-
-
-    /* =======================================================
-       SESSION
-    ======================================================== */
-
-    const sessionRaw =
-      localStorage.getItem(
-        SESSION_KEY
-      );
-
-    if (!sessionRaw) {
-
-      window.location.href =
-        "index.html";
-
-    }
-
-
-    let session = null;
-
-    try {
-
-      session =
-        JSON.parse(sessionRaw);
-
-    } catch (error) {
-
-      localStorage.removeItem(
-        SESSION_KEY
-      );
-
-      window.location.href =
-        "index.html";
-
-    }
-
-
-    /* =======================================================
-       USER
-    ======================================================== */
-
-    if (session) {
-
-      const userName =
-        session.name ||
-        session.fullName ||
-        session.email?.split("@")[0] ||
-        "Administrator";
-
-      document.getElementById(
-        "user-name"
-      ).textContent =
-        userName;
-
-      document.getElementById(
-        "user-role"
-      ).textContent =
-        session.role === "superadmin"
-          ? "Administrator"
-          : "Admin";
-
-      document.getElementById(
-        "user-avatar"
-      ).textContent =
-        userName
-          .charAt(0)
-          .toUpperCase();
-
-
-      if (
-        session.role === "superadmin"
-      ) {
-
-        document.getElementById(
-          "privileged-nav"
-        ).style.display =
-          "block";
-
-      }
-
-    }
-
-
-    /* =======================================================
-       DEFAULT ORDERS
-    ======================================================== */
+    /* =========================================
+       DEMO ORDERS
+    ========================================== */
 
     const defaultOrders = [
 
       {
-        id: "WD-1001",
-        name: "Rahim Ahmed",
+        id: "WD-2026-00428",
+        customer: "Rahim Khan",
         email: "rahim@example.com",
-        phone: "01700000000",
-        websiteId: "WD-001",
+        phone: "01712 345 678",
         website: "Nova Business Pro",
         category: "Business",
-        amount: 2499,
-        paymentStatus: "paid",
-        orderStatus: "completed",
-        date: "2026-09-30",
-        note: "Customer requested standard delivery."
+        amount: 2999,
+        payment: "unpaid",
+        status: "pending",
+        date: "2026-10-01",
+        message: "Please contact me before delivery."
       },
 
       {
-        id: "WD-1002",
-        name: "Nusrat Jahan",
-        email: "nusrat@example.com",
-        phone: "01800000000",
-        websiteId: "WD-002",
+        id: "WD-2026-00427",
+        customer: "Sara Ahmed",
+        email: "sara@example.com",
+        phone: "01812 456 789",
         website: "Restaurant Royale",
         category: "Restaurant",
-        amount: 1999,
-        paymentStatus: "pending",
-        orderStatus: "pending",
-        date: "2026-09-30",
-        note: ""
+        amount: 3499,
+        payment: "paid",
+        status: "completed",
+        date: "2026-10-01",
+        message: "Need the restaurant demo content."
       },
 
       {
-        id: "WD-1003",
-        name: "Sakib Hasan",
-        email: "sakib@example.com",
-        phone: "01900000000",
-        websiteId: "WD-003",
+        id: "WD-2026-00426",
+        customer: "Mahin Islam",
+        email: "mahin@example.com",
+        phone: "01922 567 890",
         website: "Creative Agency X",
         category: "Agency",
-        amount: 2999,
-        paymentStatus: "paid",
-        orderStatus: "processing",
-        date: "2026-09-29",
-        note: "Preparing website files."
+        amount: 3999,
+        payment: "paid",
+        status: "completed",
+        date: "2026-09-30",
+        message: ""
       },
 
       {
-        id: "WD-1004",
-        name: "Mim Akter",
-        email: "mim@example.com",
-        phone: "01600000000",
-        websiteId: "WD-004",
+        id: "WD-2026-00425",
+        customer: "Tanvir Ahmed",
+        email: "tanvir@example.com",
+        phone: "01633 678 901",
         website: "ShopEase Store",
         category: "E-commerce",
-        amount: 3499,
-        paymentStatus: "paid",
-        orderStatus: "processing",
-        date: "2026-09-28",
-        note: "Store customization requested."
+        amount: 4999,
+        payment: "unpaid",
+        status: "processing",
+        date: "2026-09-30",
+        message: "I want to customize the homepage."
       },
 
       {
-        id: "WD-1005",
-        name: "Tanvir Hossain",
-        email: "tanvir@example.com",
-        phone: "01500000000",
-        websiteId: "WD-005",
-        website: "Personal Portfolio",
+        id: "WD-2026-00424",
+        customer: "Nusrat Jahan",
+        email: "nusrat@example.com",
+        phone: "01744 789 012",
+        website: "Portfolio Studio",
         category: "Portfolio",
-        amount: 1499,
-        paymentStatus: "failed",
-        orderStatus: "cancelled",
+        amount: 1999,
+        payment: "paid",
+        status: "completed",
+        date: "2026-09-29",
+        message: ""
+      },
+
+      {
+        id: "WD-2026-00423",
+        customer: "Sakib Hasan",
+        email: "sakib@example.com",
+        phone: "01855 890 123",
+        website: "Business Prime",
+        category: "Business",
+        amount: 2999,
+        payment: "paid",
+        status: "completed",
+        date: "2026-09-28",
+        message: ""
+      },
+
+      {
+        id: "WD-2026-00422",
+        customer: "Mim Akter",
+        email: "mim@example.com",
+        phone: "01966 901 234",
+        website: "Foodie Restaurant",
+        category: "Restaurant",
+        amount: 3299,
+        payment: "refunded",
+        status: "cancelled",
         date: "2026-09-27",
-        note: "Payment gateway transaction failed."
+        message: "Order cancelled by customer."
+      },
+
+      {
+        id: "WD-2026-00421",
+        customer: "Arif Hossain",
+        email: "arif@example.com",
+        phone: "01677 012 345",
+        website: "Agency Grid",
+        category: "Agency",
+        amount: 3799,
+        payment: "paid",
+        status: "completed",
+        date: "2026-09-26",
+        message: ""
       }
 
     ];
 
 
-    /* =======================================================
-       LOAD ORDERS
-    ======================================================== */
+    let orders = [];
 
-    let orders =
-      JSON.parse(
-        localStorage.getItem(
-          ORDER_KEY
-        )
-      ) || [];
+    let currentOrderId = null;
+
+    let toastTimer;
 
 
-    if (!orders.length) {
+    /* =========================================
+       DOM
+    ========================================== */
 
-      orders =
-        defaultOrders;
-
-      saveOrders();
-
-    }
-
-
-    /* =======================================================
-       WEBSITES
-    ======================================================== */
-
-    let websites =
-      JSON.parse(
-        localStorage.getItem(
-          WEBSITE_KEY
-        )
-      ) || [];
-
-
-    /* =======================================================
-       ELEMENTS
-    ======================================================== */
-
-    const orderList =
+    const tableBody =
       document.getElementById(
-        "order-list"
+        "orders-table-body"
       );
 
-    const orderSearch =
+    const emptyState =
+      document.getElementById(
+        "empty-state"
+      );
+
+    const searchInput =
       document.getElementById(
         "order-search"
+      );
+
+    const statusFilter =
+      document.getElementById(
+        "order-status-filter"
       );
 
     const paymentFilter =
@@ -1596,81 +2904,201 @@
         "payment-filter"
       );
 
-    const statusFilter =
+    const sortFilter =
       document.getElementById(
-        "status-filter"
+        "sort-filter"
       );
 
-    const sortOrders =
+    const resultCount =
       document.getElementById(
-        "sort-orders"
+        "result-count"
       );
 
-    const orderModal =
+
+    const modal =
       document.getElementById(
         "order-modal"
       );
 
-    const deleteModal =
-      document.getElementById(
-        "delete-modal"
+
+    /* =========================================
+       LOAD
+    ========================================== */
+
+    function loadOrders() {
+
+      try {
+
+        const saved =
+          localStorage.getItem(
+            STORAGE_KEY
+          );
+
+
+        if (saved) {
+
+          const parsed =
+            JSON.parse(saved);
+
+          /*
+            If an older version of the
+            marketplace stored orders in a
+            different shape, safely fall
+            back to demo records.
+          */
+
+          if (
+            Array.isArray(parsed) &&
+            parsed.length
+          ) {
+
+            orders =
+              normalizeOrders(parsed);
+
+          } else {
+
+            orders =
+              cloneDefaults();
+
+          }
+
+        } else {
+
+          orders =
+            cloneDefaults();
+
+          saveOrders();
+
+        }
+
+      } catch (error) {
+
+        orders =
+          cloneDefaults();
+
+      }
+
+    }
+
+
+    function cloneDefaults() {
+
+      return JSON.parse(
+        JSON.stringify(
+          defaultOrders
+        )
       );
 
+    }
 
-    /* =======================================================
-       SAVE
-    ======================================================== */
+
+    function normalizeOrders(data) {
+
+      return data.map(
+        (order, index) => {
+
+          return {
+
+            id:
+              order.id ||
+              order.orderId ||
+              `WD-DEMO-${index + 1}`,
+
+            customer:
+              order.customer ||
+              order.name ||
+              order.fullName ||
+              "Customer",
+
+            email:
+              order.email ||
+              "—",
+
+            phone:
+              order.phone ||
+              "—",
+
+            website:
+              order.website ||
+              order.websiteTitle ||
+              order.title ||
+              "Website",
+
+            category:
+              order.category ||
+              order.categoryLabel ||
+              "General",
+
+            amount:
+              Number(
+                order.amount ??
+                order.price ??
+                0
+              ),
+
+            payment:
+              order.payment ||
+              order.paymentStatus ||
+              "unpaid",
+
+            status:
+              order.status ||
+              order.orderStatus ||
+              "pending",
+
+            date:
+              order.date ||
+              order.createdAt ||
+              new Date().toISOString(),
+
+            message:
+              order.message ||
+              ""
+
+          };
+
+        }
+      );
+
+    }
+
 
     function saveOrders() {
 
       localStorage.setItem(
-        ORDER_KEY,
+        STORAGE_KEY,
         JSON.stringify(orders)
       );
 
     }
 
 
-    /* =======================================================
-       ESCAPE HTML
-    ======================================================== */
+    /* =========================================
+       HELPERS
+    ========================================== */
 
     function escapeHTML(value) {
 
-      return String(value ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
     }
 
 
-    /* =======================================================
-       FORMAT MONEY
-    ======================================================== */
-
-    function formatMoney(amount) {
+    function formatPrice(value) {
 
       return "৳" +
-        Number(amount || 0)
-          .toLocaleString(
-            "en-BD"
-          );
+        Number(value || 0)
+          .toLocaleString("en-BD");
 
     }
 
 
-    /* =======================================================
-       FORMAT DATE
-    ======================================================== */
-
     function formatDate(value) {
-
-      if (!value) {
-        return "—";
-      }
 
       const date =
         new Date(value);
@@ -1681,9 +3109,10 @@
         )
       ) {
 
-        return value;
+        return value || "—";
 
       }
+
 
       return date.toLocaleDateString(
         "en-GB",
@@ -1697,112 +3126,420 @@
     }
 
 
-    /* =======================================================
-       GET INITIALS
-    ======================================================== */
-
     function initials(name) {
 
-      return String(name || "A")
-        .trim()
-        .split(/\s+/)
-        .slice(0, 2)
-        .map(
-          word =>
-            word
-              .charAt(0)
-              .toUpperCase()
-        )
-        .join("");
+      const parts =
+        String(name)
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean);
+
+      if (!parts.length) {
+        return "CU";
+      }
+
+      if (parts.length === 1) {
+
+        return parts[0]
+          .slice(0, 2)
+          .toUpperCase();
+
+      }
+
+      return (
+        parts[0][0] +
+        parts[parts.length - 1][0]
+      ).toUpperCase();
 
     }
 
 
-    /* =======================================================
-       PAYMENT BADGE
-    ======================================================== */
+    /* =========================================
+       TOAST
+    ========================================== */
 
-    function paymentBadge(status) {
+    function showToast(
+      title,
+      message
+    ) {
 
-      const value =
-        String(status || "pending")
+      const toast =
+        document.getElementById(
+          "toast"
+        );
+
+
+      document.getElementById(
+        "toast-title"
+      ).textContent = title;
+
+
+      document.getElementById(
+        "toast-message"
+      ).textContent = message;
+
+
+      toast.classList.add(
+        "show"
+      );
+
+
+      clearTimeout(
+        toastTimer
+      );
+
+
+      toastTimer =
+        setTimeout(
+          () => {
+
+            toast.classList.remove(
+              "show"
+            );
+
+          },
+          3200
+        );
+
+    }
+
+
+    /* =========================================
+       FILTER
+    ========================================== */
+
+    function getFilteredOrders() {
+
+      const query =
+        searchInput.value
+          .trim()
           .toLowerCase();
 
 
-      const labels = {
-
-        paid: "Paid",
-        pending: "Pending",
-        failed: "Failed",
-        refunded: "Refunded"
-
-      };
+      const selectedStatus =
+        statusFilter.value;
 
 
-      return `
+      const selectedPayment =
+        paymentFilter.value;
 
-        <span
-          class="order-badge payment-${escapeHTML(value)}"
-        >
 
-          <span class="dot"></span>
+      let result =
+        orders.filter(
+          order => {
 
-          ${
-            labels[value] ||
-            escapeHTML(value)
+            const searchable = [
+
+              order.id,
+              order.customer,
+              order.email,
+              order.website,
+              order.category
+
+            ]
+              .join(" ")
+              .toLowerCase();
+
+
+            const matchesSearch =
+              !query ||
+              searchable.includes(
+                query
+              );
+
+
+            const matchesStatus =
+              selectedStatus === "all" ||
+              order.status ===
+                selectedStatus;
+
+
+            const matchesPayment =
+              selectedPayment === "all" ||
+              order.payment ===
+                selectedPayment;
+
+
+            return (
+              matchesSearch &&
+              matchesStatus &&
+              matchesPayment
+            );
+
           }
+        );
 
-        </span>
 
-      `;
+      switch (
+        sortFilter.value
+      ) {
+
+        case "oldest":
+
+          result.sort(
+            (a, b) =>
+              new Date(a.date) -
+              new Date(b.date)
+          );
+
+          break;
+
+
+        case "highest":
+
+          result.sort(
+            (a, b) =>
+              Number(b.amount) -
+              Number(a.amount)
+          );
+
+          break;
+
+
+        case "lowest":
+
+          result.sort(
+            (a, b) =>
+              Number(a.amount) -
+              Number(b.amount)
+          );
+
+          break;
+
+
+        default:
+
+          result.sort(
+            (a, b) =>
+              new Date(b.date) -
+              new Date(a.date)
+          );
+
+      }
+
+
+      return result;
 
     }
 
 
-    /* =======================================================
-       ORDER STATUS BADGE
-    ======================================================== */
+    /* =========================================
+       RENDER
+    ========================================== */
 
-    function orderStatusBadge(status) {
+    function renderOrders() {
 
-      const value =
-        String(status || "pending")
-          .toLowerCase();
-
-
-      const labels = {
-
-        pending: "Pending",
-        processing: "Processing",
-        completed: "Completed",
-        cancelled: "Cancelled"
-
-      };
+      const data =
+        getFilteredOrders();
 
 
-      return `
+      tableBody.innerHTML =
+        "";
 
-        <span
-          class="order-badge status-${escapeHTML(value)}"
-        >
 
-          <span class="dot"></span>
+      resultCount.textContent =
+        `${data.length} ${
+          data.length === 1
+            ? "order"
+            : "orders"
+        }`;
 
-          ${
-            labels[value] ||
-            escapeHTML(value)
-          }
 
-        </span>
+      document.getElementById(
+        "showing-text"
+      ).textContent =
+        `Showing ${data.length} ${
+          data.length === 1
+            ? "order"
+            : "orders"
+        }`;
 
-      `;
+
+      if (!data.length) {
+
+        emptyState.classList.add(
+          "show"
+        );
+
+      } else {
+
+        emptyState.classList.remove(
+          "show"
+        );
+
+      }
+
+
+      data.forEach(order => {
+
+        const row =
+          document.createElement(
+            "tr"
+          );
+
+
+        row.innerHTML = `
+
+          <td>
+
+            <div class="order-id">
+              ${escapeHTML(order.id)}
+            </div>
+
+          </td>
+
+
+          <td>
+
+            <div class="customer">
+
+              <div class="customer-avatar">
+                ${escapeHTML(
+                  initials(order.customer)
+                )}
+              </div>
+
+              <div class="customer-info">
+
+                <div class="customer-name">
+                  ${escapeHTML(
+                    order.customer
+                  )}
+                </div>
+
+                <div class="customer-email">
+                  ${escapeHTML(
+                    order.email
+                  )}
+                </div>
+
+              </div>
+
+            </div>
+
+          </td>
+
+
+          <td>
+
+            <div class="website-name">
+              ${escapeHTML(
+                order.website
+              )}
+            </div>
+
+            <div class="website-category">
+              ${escapeHTML(
+                order.category
+              )}
+            </div>
+
+          </td>
+
+
+          <td>
+
+            <div class="amount">
+              ${formatPrice(
+                order.amount
+              )}
+            </div>
+
+          </td>
+
+
+          <td>
+
+            <span
+              class="payment ${escapeHTML(
+                order.payment
+              )}"
+            >
+              ${
+                order.payment === "paid"
+                  ? "Paid"
+                  : order.payment === "refunded"
+                    ? "Refunded"
+                    : "Unpaid"
+              }
+            </span>
+
+          </td>
+
+
+          <td>
+
+            <span
+              class="status ${escapeHTML(
+                order.status
+              )}"
+            >
+              ${escapeHTML(
+                order.status
+              )}
+            </span>
+
+          </td>
+
+
+          <td>
+
+            <div class="date">
+              ${escapeHTML(
+                formatDate(order.date)
+              )}
+            </div>
+
+          </td>
+
+
+          <td>
+
+            <div class="action-buttons">
+
+              <button
+                class="action-btn"
+                data-view-order="${escapeHTML(
+                  order.id
+                )}"
+                title="View Order"
+              >
+                <i class="fa-regular fa-eye"></i>
+              </button>
+
+
+              <button
+                class="action-btn delete"
+                data-delete-order="${escapeHTML(
+                  order.id
+                )}"
+                title="Delete Order"
+              >
+                <i class="fa-regular fa-trash-can"></i>
+              </button>
+
+            </div>
+
+          </td>
+
+        `;
+
+
+        tableBody.appendChild(
+          row
+        );
+
+      });
+
+
+      updateStats();
 
     }
 
 
-    /* =======================================================
-       UPDATE STATS
-    ======================================================== */
+    /* =========================================
+       STATS
+    ========================================== */
 
     function updateStats() {
 
@@ -1810,20 +3547,18 @@
         orders.length;
 
 
-      const paid =
+      const completed =
         orders.filter(
           order =>
-            order.paymentStatus ===
-            "paid"
+            order.status ===
+            "completed"
         ).length;
 
 
       const pending =
         orders.filter(
           order =>
-            order.paymentStatus ===
-            "pending" ||
-            order.orderStatus ===
+            order.status ===
             "pending"
         ).length;
 
@@ -1832,11 +3567,16 @@
         orders
           .filter(
             order =>
-              order.paymentStatus ===
+              order.status ===
+              "completed" &&
+              order.payment ===
               "paid"
           )
           .reduce(
-            (sum, order) =>
+            (
+              sum,
+              order
+            ) =>
               sum +
               Number(
                 order.amount || 0
@@ -1846,379 +3586,187 @@
 
 
       document.getElementById(
-        "stat-total"
+        "total-orders"
       ).textContent =
         total;
 
-      document.getElementById(
-        "stat-paid"
-      ).textContent =
-        paid;
 
       document.getElementById(
-        "stat-pending"
+        "completed-orders"
+      ).textContent =
+        completed;
+
+
+      document.getElementById(
+        "pending-orders"
       ).textContent =
         pending;
 
+
       document.getElementById(
-        "stat-revenue"
+        "total-revenue"
       ).textContent =
-        formatMoney(revenue);
-
-    }
-
-
-    /* =======================================================
-       FILTER + SORT
-    ======================================================== */
-
-    function getFilteredOrders() {
-
-      const query =
-        orderSearch.value
-          .trim()
-          .toLowerCase();
-
-
-      const payment =
-        paymentFilter.value;
-
-
-      const status =
-        statusFilter.value;
-
-
-      const sort =
-        sortOrders.value;
-
-
-      let result =
-        orders.filter(order => {
-
-          const searchable = [
-
-            order.id,
-            order.name,
-            order.email,
-            order.phone,
-            order.website,
-            order.category
-
-          ]
-            .join(" ")
-            .toLowerCase();
-
-
-          const matchesSearch =
-            !query ||
-            searchable.includes(
-              query
+        revenue >= 1000
+          ? "৳" +
+            (
+              revenue / 1000
+            ).toFixed(1) +
+            "K"
+          : formatPrice(
+              revenue
             );
 
 
-          const matchesPayment =
-            payment === "all" ||
-            order.paymentStatus ===
-            payment;
-
-
-          const matchesStatus =
-            status === "all" ||
-            order.orderStatus ===
-            status;
-
-
-          return (
-            matchesSearch &&
-            matchesPayment &&
-            matchesStatus
-          );
-
-        });
-
-
-      result.sort(
-        (a, b) => {
-
-          if (sort === "newest") {
-
-            return new Date(b.date) -
-              new Date(a.date);
-
-          }
-
-          if (sort === "oldest") {
-
-            return new Date(a.date) -
-              new Date(b.date);
-
-          }
-
-          if (sort === "highest") {
-
-            return Number(b.amount || 0) -
-              Number(a.amount || 0);
-
-          }
-
-          if (sort === "lowest") {
-
-            return Number(a.amount || 0) -
-              Number(b.amount || 0);
-
-          }
-
-          if (sort === "customer") {
-
-            return String(a.name || "")
-              .localeCompare(
-                String(b.name || "")
-              );
-
-          }
-
-          return 0;
-
-        }
-      );
-
-
-      return result;
+      document.getElementById(
+        "sidebar-order-count"
+      ).textContent =
+        pending;
 
     }
 
 
-    /* =======================================================
-       GET WEBSITE IMAGE
-    ======================================================== */
-
-    function getWebsiteImage(order) {
-
-      const site =
-        websites.find(
-          website =>
-            website.id ===
-              order.websiteId ||
-            website.title ===
-              order.website
-        );
-
-
-      return (
-        site?.image ||
-        site?.imageUrl ||
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80"
-      );
-
-    }
-
-
-    /* =======================================================
-       RENDER
-    ======================================================== */
-
-    function renderOrders() {
-
-      const filtered =
-        getFilteredOrders();
-
-
-      if (!filtered.length) {
-
-        orderList.innerHTML = `
-
-          <tr>
-
-            <td colspan="8">
-
-              <div class="empty-orders">
-
-                <div class="empty-orders-icon">
-                  <i class="fa-solid fa-bag-shopping"></i>
-                </div>
-
-                <h3>
-                  No orders found
-                </h3>
-
-                <p>
-                  Try changing your search or filters.
-                  New marketplace orders will appear here.
-                </p>
-
-              </div>
-
-            </td>
-
-          </tr>
-
-        `;
-
-        return;
-
-      }
-
-
-      orderList.innerHTML =
-        filtered.map(order => {
-
-          return `
-
-            <tr>
-
-              <td>
-
-                <span class="order-id">
-
-                  <i class="fa-solid fa-hashtag"></i>
-
-                  ${escapeHTML(order.id)}
-
-                </span>
-
-              </td>
-
-
-              <td>
-
-                <div class="customer-cell">
-
-                  <div class="customer-avatar">
-                    ${escapeHTML(
-                      initials(order.name)
-                    )}
-                  </div>
-
-                  <div>
-
-                    <p class="customer-name">
-                      ${escapeHTML(
-                        order.name
-                      )}
-                    </p>
-
-                    <p class="customer-email">
-                      ${escapeHTML(
-                        order.email
-                      )}
-                    </p>
-
-                  </div>
-
-                </div>
-
-              </td>
-
-
-              <td>
-
-                <div class="website-cell">
-
-                  <p class="website-title">
-                    ${escapeHTML(
-                      order.website
-                    )}
-                  </p>
-
-                  <p class="website-category">
-                    ${escapeHTML(
-                      order.category ||
-                      "Website"
-                    )}
-                  </p>
-
-                </div>
-
-              </td>
-
-
-              <td>
-
-                <span class="amount">
-                  ${formatMoney(
-                    order.amount
-                  )}
-                </span>
-
-              </td>
-
-
-              <td>
-                ${paymentBadge(
-                  order.paymentStatus
-                )}
-              </td>
-
-
-              <td>
-                ${orderStatusBadge(
-                  order.orderStatus
-                )}
-              </td>
-
-
-              <td>
-                ${formatDate(
-                  order.date
-                )}
-              </td>
-
-
-              <td>
-
-                <div class="order-actions">
-
-                  <button
-                    type="button"
-                    class="icon-action"
-                    onclick="viewOrder('${escapeHTML(order.id)}')"
-                    title="View order"
-                  >
-                    <i class="fa-solid fa-eye"></i>
-                  </button>
-
-                  <button
-                    type="button"
-                    class="icon-action"
-                    onclick="quickProcessOrder('${escapeHTML(order.id)}')"
-                    title="Process order"
-                  >
-                    <i class="fa-solid fa-arrow-right"></i>
-                  </button>
-
-                  <button
-                    type="button"
-                    class="icon-action danger"
-                    onclick="openDeleteOrder('${escapeHTML(order.id)}')"
-                    title="Delete order"
-                  >
-                    <i class="fa-solid fa-trash"></i>
-                  </button>
-
-                </div>
-
-              </td>
-
-            </tr>
-
-          `;
-
-        }).join("");
-
-    }
-
-
-    /* =======================================================
+    /* =========================================
        VIEW ORDER
-    ======================================================== */
+    ========================================== */
 
-    window.viewOrder =
-      function(id) {
+    function openOrderModal(
+      id
+    ) {
+
+      const order =
+        orders.find(
+          item =>
+            item.id === id
+        );
+
+
+      if (!order) return;
+
+
+      currentOrderId =
+        id;
+
+
+      document.getElementById(
+        "modal-order-subtitle"
+      ).textContent =
+        `Order ${order.id}`;
+
+
+      document.getElementById(
+        "detail-order-id"
+      ).textContent =
+        order.id;
+
+
+      document.getElementById(
+        "detail-date"
+      ).textContent =
+        formatDate(
+          order.date
+        );
+
+
+      document.getElementById(
+        "detail-customer"
+      ).textContent =
+        order.customer;
+
+
+      document.getElementById(
+        "detail-email"
+      ).textContent =
+        order.email;
+
+
+      document.getElementById(
+        "detail-phone"
+      ).textContent =
+        order.phone;
+
+
+      document.getElementById(
+        "detail-website"
+      ).textContent =
+        order.website;
+
+
+      document.getElementById(
+        "detail-amount"
+      ).textContent =
+        formatPrice(
+          order.amount
+        );
+
+
+      document.getElementById(
+        "detail-payment"
+      ).textContent =
+        order.payment;
+
+
+      document.getElementById(
+        "detail-message"
+      ).textContent =
+        order.message ||
+        "No message provided.";
+
+
+      document.getElementById(
+        "modal-order-status"
+      ).value =
+        order.status;
+
+
+      document.getElementById(
+        "modal-payment-status"
+      ).value =
+        order.payment;
+
+
+      modal.classList.add(
+        "show"
+      );
+
+    }
+
+
+    /* =========================================
+       CLOSE MODAL
+    ========================================== */
+
+    function closeModal() {
+
+      modal.classList.remove(
+        "show"
+      );
+
+      currentOrderId =
+        null;
+
+    }
+
+
+    /* =========================================
+       SAVE ORDER
+    ========================================== */
+
+    document.getElementById(
+      "save-order"
+    ).addEventListener(
+      "click",
+      () => {
+
+        if (!currentOrderId) {
+          return;
+        }
+
 
         const order =
           orders.find(
             item =>
-              item.id === id
+              item.id ===
+              currentOrderId
           );
 
 
@@ -2227,314 +3775,23 @@
         }
 
 
-        document.getElementById(
-          "order-modal-title"
-        ).textContent =
-          order.id;
-
-
-        const image =
-          getWebsiteImage(order);
-
-
-        document.getElementById(
-          "order-detail-content"
-        ).innerHTML = `
-
-          <div class="order-product-card">
-
-            <div class="order-product-image">
-
-              <img
-                src="${escapeHTML(image)}"
-                alt="${escapeHTML(order.website)}"
-                onerror="
-                  this.src='https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80'
-                "
-              >
-
-            </div>
-
-            <div class="order-product-info">
-
-              <h4>
-                ${escapeHTML(
-                  order.website
-                )}
-              </h4>
-
-              <p>
-                ${escapeHTML(
-                  order.category ||
-                  "Website"
-                )}
-              </p>
-
-            </div>
-
-            <div class="order-product-price">
-              ${formatMoney(
-                order.amount
-              )}
-            </div>
-
-          </div>
-
-
-          <h4 class="detail-section-title">
-            Customer Information
-          </h4>
-
-          <div class="order-detail-grid">
-
-            <div class="detail-box">
-
-              <p class="detail-label">
-                Full Name
-              </p>
-
-              <p class="detail-value">
-                ${escapeHTML(
-                  order.name
-                )}
-              </p>
-
-            </div>
-
-            <div class="detail-box">
-
-              <p class="detail-label">
-                Email
-              </p>
-
-              <p class="detail-value">
-                ${escapeHTML(
-                  order.email
-                )}
-              </p>
-
-            </div>
-
-            <div class="detail-box">
-
-              <p class="detail-label">
-                Phone
-              </p>
-
-              <p class="detail-value">
-                ${escapeHTML(
-                  order.phone ||
-                  "Not provided"
-                )}
-              </p>
-
-            </div>
-
-            <div class="detail-box">
-
-              <p class="detail-label">
-                Order Date
-              </p>
-
-              <p class="detail-value">
-                ${formatDate(
-                  order.date
-                )}
-              </p>
-
-            </div>
-
-          </div>
-
-
-          <h4 class="detail-section-title">
-            Order Status
-          </h4>
-
-          <div class="status-editor">
-
-            <div class="form-group">
-
-              <label>
-                Payment Status
-              </label>
-
-              <select
-                id="modal-payment-status"
-                class="admin-select"
-              >
-
-                <option value="paid">
-                  Paid
-                </option>
-
-                <option value="pending">
-                  Pending
-                </option>
-
-                <option value="failed">
-                  Failed
-                </option>
-
-                <option value="refunded">
-                  Refunded
-                </option>
-
-              </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Order Status
-              </label>
-
-              <select
-                id="modal-order-status"
-                class="admin-select"
-              >
-
-                <option value="pending">
-                  Pending
-                </option>
-
-                <option value="processing">
-                  Processing
-                </option>
-
-                <option value="completed">
-                  Completed
-                </option>
-
-                <option value="cancelled">
-                  Cancelled
-                </option>
-
-              </select>
-
-            </div>
-
-          </div>
-
-
-          <div class="form-group">
-
-            <label>
-              Internal Note
-            </label>
-
-            <textarea
-              id="modal-order-note"
-              class="admin-textarea order-note"
-              placeholder="Add an internal note..."
-            >${escapeHTML(
-              order.note || ""
-            )}</textarea>
-
-          </div>
-
-
-          <div class="modal-footer-actions">
-
-            <button
-              type="button"
-              class="admin-btn admin-btn-secondary"
-              onclick="closeOrderModal()"
-            >
-              Close
-            </button>
-
-            <button
-              type="button"
-              class="admin-btn admin-btn-primary"
-              onclick="saveOrderChanges('${escapeHTML(order.id)}')"
-            >
-              <i class="fa-solid fa-check"></i>
-              Save Changes
-            </button>
-
-          </div>
-
-        `;
-
-
-        document.getElementById(
-          "modal-payment-status"
-        ).value =
-          order.paymentStatus ||
-          "pending";
-
-
-        document.getElementById(
-          "modal-order-status"
-        ).value =
-          order.orderStatus ||
-          "pending";
-
-
-        orderModal.classList.add(
-          "show"
-        );
-
-        orderModal.setAttribute(
-          "aria-hidden",
-          "false"
-        );
-
-      };
-
-
-    /* =======================================================
-       SAVE ORDER CHANGES
-    ======================================================== */
-
-    window.saveOrderChanges =
-      function(id) {
-
-        const order =
-          orders.find(
-            item =>
-              item.id === id
-          );
-
-
-        if (!order) {
-          return;
-        }
-
-
-        order.paymentStatus =
-          document.getElementById(
-            "modal-payment-status"
-          ).value;
-
-
-        order.orderStatus =
+        order.status =
           document.getElementById(
             "modal-order-status"
           ).value;
 
 
-        order.note =
+        order.payment =
           document.getElementById(
-            "modal-order-note"
-          ).value.trim();
-
-
-        order.updated =
-          new Date()
-            .toISOString();
+            "modal-payment-status"
+          ).value;
 
 
         saveOrders();
 
-        updateStats();
-
         renderOrders();
 
-        closeOrderModal();
+        closeModal();
 
 
         showToast(
@@ -2542,461 +3799,239 @@
           `${order.id} has been updated successfully.`
         );
 
-      };
-
-
-    /* =======================================================
-       QUICK PROCESS
-    ======================================================== */
-
-    window.quickProcessOrder =
-      function(id) {
-
-        const order =
-          orders.find(
-            item =>
-              item.id === id
-          );
-
-
-        if (!order) {
-          return;
-        }
-
-
-        if (
-          order.orderStatus ===
-          "pending"
-        ) {
-
-          order.orderStatus =
-            "processing";
-
-          order.paymentStatus =
-            order.paymentStatus ===
-            "pending"
-              ? "pending"
-              : order.paymentStatus;
-
-        } else if (
-          order.orderStatus ===
-          "processing"
-        ) {
-
-          order.orderStatus =
-            "completed";
-
-          if (
-            order.paymentStatus ===
-            "pending"
-          ) {
-
-            order.paymentStatus =
-              "paid";
-
-          }
-
-        } else {
-
-          order.orderStatus =
-            "pending";
-
-        }
-
-
-        order.updated =
-          new Date()
-            .toISOString();
-
-
-        saveOrders();
-
-        updateStats();
-
-        renderOrders();
-
-
-        showToast(
-          "Order Updated",
-          `${order.id} status is now ${order.orderStatus}.`
-        );
-
-      };
-
-
-    /* =======================================================
-       CLOSE ORDER MODAL
-    ======================================================== */
-
-    window.closeOrderModal =
-      function() {
-
-        orderModal.classList.remove(
-          "show"
-        );
-
-        orderModal.setAttribute(
-          "aria-hidden",
-          "true"
-        );
-
-      };
-
-
-    document.getElementById(
-      "order-modal-close"
-    ).addEventListener(
-      "click",
-      closeOrderModal
+      }
     );
 
 
-    /* =======================================================
-       DELETE
-    ======================================================== */
+    /* =========================================
+       TABLE ACTIONS
+    ========================================== */
 
-    let pendingDeleteId = null;
-
-
-    window.openDeleteOrder =
-      function(id) {
-
-        const order =
-          orders.find(
-            item =>
-              item.id === id
-          );
-
-
-        if (!order) {
-          return;
-        }
-
-
-        pendingDeleteId =
-          id;
-
-
-        document.getElementById(
-          "delete-order-message"
-        ).innerHTML = `
-
-          Are you sure you want to delete
-          <strong>
-            ${escapeHTML(order.id)}
-          </strong>
-
-          from
-
-          <strong>
-            ${escapeHTML(order.name)}
-          </strong>'s
-          order history?
-
-        `;
-
-
-        deleteModal.classList.add(
-          "show"
-        );
-
-        deleteModal.setAttribute(
-          "aria-hidden",
-          "false"
-        );
-
-      };
-
-
-    function closeDeleteModal() {
-
-      deleteModal.classList.remove(
-        "show"
-      );
-
-      deleteModal.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
-      pendingDeleteId =
-        null;
-
-    }
-
-
-    document.getElementById(
-      "confirm-delete-btn"
-    ).addEventListener(
+    tableBody.addEventListener(
       "click",
-      () => {
+      event => {
 
-        if (!pendingDeleteId) {
+        const viewButton =
+          event.target.closest(
+            "[data-view-order]"
+          );
+
+
+        const deleteButton =
+          event.target.closest(
+            "[data-delete-order]"
+          );
+
+
+        if (viewButton) {
+
+          openOrderModal(
+            viewButton.dataset
+              .viewOrder
+          );
+
           return;
+
         }
 
 
-        const deleted =
-          orders.find(
-            item =>
-              item.id ===
-              pendingDeleteId
+        if (deleteButton) {
+
+          deleteOrder(
+            deleteButton.dataset
+              .deleteOrder
           );
 
-
-        orders =
-          orders.filter(
-            item =>
-              item.id !==
-              pendingDeleteId
-          );
-
-
-        saveOrders();
-
-        updateStats();
-
-        renderOrders();
-
-        closeDeleteModal();
-
-
-        showToast(
-          "Order Deleted",
-          deleted
-            ? `${deleted.id} has been deleted.`
-            : "Order deleted successfully."
-        );
+        }
 
       }
     );
 
 
-    /* =======================================================
-       MODAL CLOSE
-    ======================================================== */
+    /* =========================================
+       DELETE
+    ========================================== */
 
-    document.getElementById(
-      "delete-modal-close"
-    ).addEventListener(
-      "click",
-      closeDeleteModal
-    );
+    function deleteOrder(
+      id
+    ) {
 
-
-    document.getElementById(
-      "delete-cancel-btn"
-    ).addEventListener(
-      "click",
-      closeDeleteModal
-    );
+      const order =
+        orders.find(
+          item =>
+            item.id === id
+        );
 
 
-    document.querySelectorAll(
-      ".admin-modal-backdrop"
-    ).forEach(backdrop => {
-
-      backdrop.addEventListener(
-        "click",
-        () => {
-
-          const modal =
-            backdrop.closest(
-              ".admin-modal"
-            );
+      if (!order) return;
 
 
-          if (!modal) {
-            return;
-          }
+      const confirmed =
+        confirm(
+          `Delete order ${order.id}? This demo action cannot be undone.`
+        );
 
 
-          modal.classList.remove(
-            "show"
-          );
+      if (!confirmed) {
+        return;
+      }
 
-          modal.setAttribute(
-            "aria-hidden",
-            "true"
-          );
 
-        }
+      orders =
+        orders.filter(
+          item =>
+            item.id !== id
+        );
+
+
+      saveOrders();
+
+      renderOrders();
+
+
+      showToast(
+        "Order Deleted",
+        `${order.id} has been removed.`
       );
 
-    });
+    }
 
 
-    /* =======================================================
-       SEARCH / FILTER
-    ======================================================== */
+    /* =========================================
+       FILTER EVENTS
+    ========================================== */
 
-    orderSearch.addEventListener(
+    searchInput.addEventListener(
       "input",
       renderOrders
     );
 
-    paymentFilter.addEventListener(
-      "change",
-      renderOrders
-    );
 
     statusFilter.addEventListener(
       "change",
       renderOrders
     );
 
-    sortOrders.addEventListener(
+
+    paymentFilter.addEventListener(
       "change",
       renderOrders
     );
 
 
-    /* =======================================================
-       EXPORT CSV
-    ======================================================== */
+    sortFilter.addEventListener(
+      "change",
+      renderOrders
+    );
+
+
+    /* =========================================
+       MODAL EVENTS
+    ========================================== */
 
     document.getElementById(
-      "export-orders-btn"
+      "modal-close"
+    ).addEventListener(
+      "click",
+      closeModal
+    );
+
+
+    document.getElementById(
+      "cancel-modal"
+    ).addEventListener(
+      "click",
+      closeModal
+    );
+
+
+    modal.addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target === modal
+        ) {
+
+          closeModal();
+
+        }
+
+      }
+    );
+
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closeModal();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       REFRESH
+    ========================================== */
+
+    document.getElementById(
+      "refresh-btn"
     ).addEventListener(
       "click",
       () => {
 
-        const data =
-          getFilteredOrders();
+        loadOrders();
 
-
-        if (!data.length) {
-
-          showToast(
-            "Nothing to Export",
-            "There are no orders matching the current filters.",
-            "error"
-          );
-
-          return;
-
-        }
-
-
-        const headers = [
-
-          "Order ID",
-          "Customer",
-          "Email",
-          "Phone",
-          "Website",
-          "Category",
-          "Amount",
-          "Payment Status",
-          "Order Status",
-          "Date",
-          "Note"
-
-        ];
-
-
-        const rows =
-          data.map(order => [
-
-            order.id,
-            order.name,
-            order.email,
-            order.phone || "",
-            order.website,
-            order.category || "",
-            order.amount,
-            order.paymentStatus,
-            order.orderStatus,
-            order.date,
-            order.note || ""
-
-          ]);
-
-
-        const csv = [
-
-          headers,
-          ...rows
-
-        ]
-          .map(
-            row =>
-              row.map(
-                value =>
-                  `"${String(value ?? "")
-                    .replaceAll(
-                      '"',
-                      '""'
-                    )}"`
-              ).join(",")
-          )
-          .join("\n");
-
-
-        const blob =
-          new Blob(
-            [
-              "\uFEFF" +
-              csv
-            ],
-            {
-              type:
-                "text/csv;charset=utf-8;"
-            }
-          );
-
-
-        const url =
-          URL.createObjectURL(
-            blob
-          );
-
-
-        const link =
-          document.createElement(
-            "a"
-          );
-
-
-        link.href =
-          url;
-
-        link.download =
-          `website-deals-orders-${new Date()
-            .toISOString()
-            .slice(0, 10)}.csv`;
-
-
-        document.body.appendChild(
-          link
-        );
-
-        link.click();
-
-        link.remove();
-
-        URL.revokeObjectURL(
-          url
-        );
+        renderOrders();
 
 
         showToast(
-          "Export Complete",
-          `${data.length} order${data.length === 1 ? "" : "s"} exported successfully.`
+          "Refreshed",
+          "Order data has been refreshed."
         );
 
       }
     );
 
 
-    /* =======================================================
-       SIDEBAR
-    ======================================================== */
+    /* =========================================
+       TOAST CLOSE
+    ========================================== */
+
+    document.getElementById(
+      "toast-close"
+    ).addEventListener(
+      "click",
+      () => {
+
+        document
+          .getElementById(
+            "toast"
+          )
+          .classList.remove(
+            "show"
+          );
+
+      }
+    );
+
+
+    /* =========================================
+       MOBILE SIDEBAR
+    ========================================== */
 
     const sidebar =
       document.getElementById(
-        "admin-sidebar"
+        "sidebar"
       );
+
 
     const sidebarOverlay =
       document.getElementById(
@@ -3004,26 +4039,13 @@
       );
 
 
-    function openSidebar() {
+    function toggleSidebar() {
 
-      sidebar.classList.add(
+      sidebar.classList.toggle(
         "open"
       );
 
-      sidebarOverlay.classList.add(
-        "show"
-      );
-
-    }
-
-
-    function closeSidebar() {
-
-      sidebar.classList.remove(
-        "open"
-      );
-
-      sidebarOverlay.classList.remove(
+      sidebarOverlay.classList.toggle(
         "show"
       );
 
@@ -3031,52 +4053,52 @@
 
 
     document.getElementById(
-      "menu-toggle"
+      "mobile-toggle"
     ).addEventListener(
       "click",
-      openSidebar
-    );
-
-
-    document.getElementById(
-      "sidebar-close"
-    ).addEventListener(
-      "click",
-      closeSidebar
+      toggleSidebar
     );
 
 
     sidebarOverlay.addEventListener(
       "click",
-      closeSidebar
+      toggleSidebar
     );
 
 
-    document.querySelectorAll(
-      ".admin-nav-link"
-    ).forEach(link => {
+    document
+      .querySelectorAll(
+        ".nav-item"
+      )
+      .forEach(item => {
 
-      link.addEventListener(
-        "click",
-        () => {
+        item.addEventListener(
+          "click",
+          () => {
 
-          if (
-            window.innerWidth <= 900
-          ) {
+            if (
+              window.innerWidth <= 900
+            ) {
 
-            closeSidebar();
+              sidebar.classList.remove(
+                "open"
+              );
+
+              sidebarOverlay.classList.remove(
+                "show"
+              );
+
+            }
 
           }
+        );
 
-        }
-      );
-
-    });
+      });
 
 
-    /* =======================================================
+    /* =========================================
        LOGOUT
-    ======================================================== */
+    ========================================== */
 
     document.getElementById(
       "logout-btn"
@@ -3084,9 +4106,16 @@
       "click",
       () => {
 
-        localStorage.removeItem(
-          SESSION_KEY
-        );
+        const confirmed =
+          confirm(
+            "Are you sure you want to sign out?"
+          );
+
+
+        if (!confirmed) {
+          return;
+        }
+
 
         window.location.href =
           "index.html";
@@ -3095,68 +4124,71 @@
     );
 
 
-    /* =======================================================
-       ESC KEY
-    ======================================================== */
+    /* =========================================
+       PAGINATION DEMO
+    ========================================== */
 
-    document.addEventListener(
-      "keydown",
-      event => {
+    document
+      .querySelectorAll(
+        ".page-btn"
+      )
+      .forEach(button => {
 
-        if (
-          event.key !==
-          "Escape"
-        ) {
-          return;
-        }
+        button.addEventListener(
+          "click",
+          () => {
+
+            if (
+              button.querySelector(
+                "i"
+              )
+            ) {
+
+              showToast(
+                "Pagination",
+                "Pagination will connect to the database later."
+              );
+
+              return;
+
+            }
 
 
-        closeOrderModal();
+            document
+              .querySelectorAll(
+                ".page-btn"
+              )
+              .forEach(
+                item =>
+                  item.classList.remove(
+                    "active"
+                  )
+              );
 
-        closeDeleteModal();
 
-      }
-    );
+            button.classList.add(
+              "active"
+            );
 
 
-    /* =======================================================
+            showToast(
+              "Page Selected",
+              `Page ${button.textContent.trim()} selected.`
+            );
+
+          }
+        );
+
+      });
+
+
+    /* =========================================
        INITIALIZE
-    ======================================================== */
+    ========================================== */
 
-    updateStats();
+    loadOrders();
 
     renderOrders();
-
-
-    /* =======================================================
-       PRODUCTION NOTE
-    ======================================================== */
-
-    /*
-      DEVELOPMENT VERSION:
-
-      Orders are stored in:
-
-      localStorage
-      -----------------------
-      websiteDealsOrders
-
-
-      PRODUCTION VERSION:
-
-      Firebase Authentication
-              +
-      Firestore
-              +
-      Firestore Security Rules
-              +
-      Payment Gateway Verification
-              +
-      Server-side authorization
-
-      Never trust localStorage for real payment,
-      order ownership, admin permissions or financial data.
-    */
 
   </script>
 
