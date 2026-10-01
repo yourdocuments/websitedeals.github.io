@@ -2,43 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="theme-color"
-    content="#0b1110"
-  >
-
+  <title>Admin Management | Website Deals</title>
   <meta
     name="description"
-    content="Website Deals Admin Portal"
+    content="Super Admin management panel for Website Deals."
   >
 
-  <title>Admin Login | Website Deals</title>
+  <link rel="icon" type="image/png" href="../logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    rel="icon"
-    type="image/png"
-    href="../logo.png"
-  >
-
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
-
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
   >
 
@@ -48,1644 +26,3178 @@
   >
 
   <style>
+    :root{
+      --green:#18a957;
+      --green-dark:#108344;
+      --green-soft:#eaf9f0;
 
-    :root {
-      --green: #18a957;
-      --green-dark: #108344;
-      --green-soft: #eaf9f0;
+      --dark:#0d1410;
+      --dark-2:#151e18;
+      --text:#182019;
+      --muted:#748078;
 
-      --black: #0b1110;
-      --black-2: #111918;
-      --text: #17211d;
-      --muted: #718079;
+      --white:#fff;
+      --surface:#f6f9f7;
+      --border:#e3e9e5;
 
-      --white: #ffffff;
-      --surface: #f6f9f7;
-      --border: #e2e9e5;
+      --gold:#c99524;
+      --gold-soft:#fff8e5;
 
-      --danger: #dc3545;
+      --danger:#dc3545;
+      --danger-soft:#fff0f1;
 
-      --shadow:
-        0 30px 80px rgba(10, 25, 18, .14);
+      --blue:#2563eb;
+      --blue-soft:#eff5ff;
 
-      --radius: 24px;
+      --shadow:0 12px 40px rgba(15,25,18,.07);
+      --shadow-lg:0 25px 80px rgba(10,18,13,.15);
+
+      --radius:18px;
+      --sidebar:260px;
     }
 
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-
-    html {
-      scroll-behavior: smooth;
+    html{
+      scroll-behavior:smooth;
     }
 
+    body{
+      min-height:100vh;
+      background:var(--surface);
+      color:var(--text);
+      font-family:"Inter","Hind Siliguri",sans-serif;
+    }
 
-    body {
-      min-height: 100vh;
-      font-family: "Inter", sans-serif;
-      color: var(--text);
+    button,
+    input,
+    select{
+      font:inherit;
+    }
+
+    button{
+      cursor:pointer;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    /* =================================
+       SIDEBAR
+    ================================= */
+
+    .sidebar{
+      position:fixed;
+      inset:0 auto 0 0;
+      width:var(--sidebar);
       background:
-        radial-gradient(
-          circle at 10% 10%,
-          rgba(24, 169, 87, .13),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 90% 90%,
-          rgba(24, 169, 87, .09),
-          transparent 28%
-        ),
-        var(--surface);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 24px;
-
-      overflow-x: hidden;
-    }
-
-
-    /* =========================================
-       BACKGROUND
-       ========================================= */
-
-    .background-grid {
-      position: fixed;
-      inset: 0;
-
-      pointer-events: none;
-
-      opacity: .42;
-
-      background-image:
         linear-gradient(
-          rgba(24, 169, 87, .035) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(24, 169, 87, .035) 1px,
-          transparent 1px
+          180deg,
+          #101812 0%,
+          #0b110d 100%
         );
-
-      background-size: 42px 42px;
-
-      mask-image:
-        linear-gradient(
-          to bottom,
-          black,
-          transparent
-        );
+      color:#fff;
+      z-index:1000;
+      display:flex;
+      flex-direction:column;
+      border-right:1px solid rgba(255,255,255,.06);
     }
 
-
-    .orb {
-      position: fixed;
-
-      width: 260px;
-      height: 260px;
-
-      border-radius: 50%;
-
-      filter: blur(5px);
-
-      pointer-events: none;
-
-      opacity: .12;
+    .brand{
+      height:78px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:0 22px;
+      border-bottom:1px solid rgba(255,255,255,.07);
     }
 
-
-    .orb-one {
-      top: -110px;
-      left: -90px;
-
-      background: var(--green);
+    .brand img{
+      width:42px;
+      height:42px;
+      padding:4px;
+      background:#fff;
+      border-radius:10px;
+      object-fit:contain;
     }
 
-
-    .orb-two {
-      right: -120px;
-      bottom: -110px;
-
-      background: var(--green-dark);
+    .brand-title{
+      font-size:15px;
+      font-weight:800;
+      letter-spacing:-.3px;
     }
 
-
-    /* =========================================
-       MAIN
-       ========================================= */
-
-    .login-shell {
-      position: relative;
-
-      width: 100%;
-      max-width: 1080px;
-
-      min-height: 650px;
-
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-
-      background: var(--white);
-
-      border: 1px solid rgba(226, 233, 229, .9);
-
-      border-radius: 32px;
-
-      overflow: hidden;
-
-      box-shadow: var(--shadow);
-
-      z-index: 2;
+    .brand-subtitle{
+      margin-top:3px;
+      color:#7f8b83;
+      font-size:9px;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
     }
 
-
-    /* =========================================
-       BRAND PANEL
-       ========================================= */
-
-    .brand-panel {
-      position: relative;
-
-      padding: 54px;
-
-      color: var(--white);
-
-      background:
-        radial-gradient(
-          circle at 80% 15%,
-          rgba(24, 169, 87, .34),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 20% 85%,
-          rgba(24, 169, 87, .16),
-          transparent 32%
-        ),
-        var(--black);
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-
-      overflow: hidden;
+    .nav{
+      flex:1;
+      overflow-y:auto;
+      padding:18px 13px;
     }
 
-
-    .brand-panel::before {
-      content: "";
-
-      position: absolute;
-
-      width: 420px;
-      height: 420px;
-
-      right: -190px;
-      top: -170px;
-
-      border: 1px solid
-        rgba(255, 255, 255, .08);
-
-      border-radius: 50%;
+    .nav-label{
+      padding:10px 12px 8px;
+      color:#626d66;
+      font-size:9px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:1.3px;
     }
 
-
-    .brand-panel::after {
-      content: "";
-
-      position: absolute;
-
-      width: 300px;
-      height: 300px;
-
-      left: -170px;
-      bottom: -170px;
-
-      border: 1px solid
-        rgba(24, 169, 87, .18);
-
-      border-radius: 50%;
+    .nav-item{
+      min-height:45px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:0 13px;
+      margin-bottom:5px;
+      border-radius:12px;
+      color:#aab4ad;
+      font-size:12px;
+      font-weight:600;
+      transition:.2s ease;
     }
 
-
-    .brand-content {
-      position: relative;
-      z-index: 2;
+    .nav-item i{
+      width:19px;
+      text-align:center;
+      font-size:13px;
     }
 
-
-    .logo-box {
-      width: 58px;
-      height: 58px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 17px;
-
-      background: var(--white);
-
-      padding: 9px;
-
-      margin-bottom: 34px;
-
-      box-shadow:
-        0 12px 35px
-        rgba(0, 0, 0, .18);
+    .nav-item:hover{
+      background:rgba(255,255,255,.05);
+      color:#fff;
     }
 
-
-    .logo-box img {
-      width: 100%;
-      height: 100%;
-
-      object-fit: contain;
-    }
-
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-
-      padding: 8px 12px;
-
-      border: 1px solid
-        rgba(255, 255, 255, .12);
-
-      background:
-        rgba(255, 255, 255, .055);
-
-      border-radius: 999px;
-
-      color: #b7c6be;
-
-      font-size: 11px;
-      font-weight: 700;
-
-      letter-spacing: .12em;
-      text-transform: uppercase;
-
-      margin-bottom: 20px;
-    }
-
-
-    .eyebrow span {
-      width: 7px;
-      height: 7px;
-
-      border-radius: 50%;
-
-      background: var(--green);
-
-      box-shadow:
-        0 0 0 5px
-        rgba(24, 169, 87, .12);
-    }
-
-
-    .brand-panel h1 {
-      max-width: 470px;
-
-      font-size: clamp(
-        38px,
-        5vw,
-        62px
-      );
-
-      line-height: .98;
-
-      letter-spacing: -.055em;
-
-      margin-bottom: 22px;
-    }
-
-
-    .brand-panel h1 span {
-      color: #63dc95;
-    }
-
-
-    .brand-description {
-      max-width: 440px;
-
-      color: #a7b5ae;
-
-      font-size: 15px;
-
-      line-height: 1.75;
-    }
-
-
-    /* =========================================
-       FEATURES
-       ========================================= */
-
-    .feature-list {
-      position: relative;
-      z-index: 2;
-
-      display: grid;
-      gap: 12px;
-
-      margin-top: 45px;
-    }
-
-
-    .feature {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-
-      color: #d6dfda;
-
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-
-    .feature-icon {
-      width: 32px;
-      height: 32px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 10px;
-
-      color: #70df9b;
-
-      background:
-        rgba(24, 169, 87, .12);
-
-      border: 1px solid
-        rgba(24, 169, 87, .18);
-    }
-
-
-    .brand-footer {
-      position: relative;
-      z-index: 2;
-
-      color: #718078;
-
-      font-size: 11px;
-      line-height: 1.7;
-    }
-
-
-    /* =========================================
-       LOGIN PANEL
-       ========================================= */
-
-    .login-panel {
-      padding: 58px;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-
-    .login-heading {
-      margin-bottom: 34px;
-    }
-
-
-    .login-heading .small-title {
-      color: var(--green-dark);
-
-      font-size: 11px;
-      font-weight: 800;
-
-      text-transform: uppercase;
-
-      letter-spacing: .13em;
-
-      margin-bottom: 10px;
-    }
-
-
-    .login-heading h2 {
-      font-size: 32px;
-
-      letter-spacing: -.045em;
-
-      margin-bottom: 10px;
-    }
-
-
-    .login-heading p {
-      color: var(--muted);
-
-      font-size: 14px;
-
-      line-height: 1.65;
-    }
-
-
-    /* =========================================
-       FORM
-       ========================================= */
-
-    .form-group {
-      margin-bottom: 19px;
-    }
-
-
-    .form-label {
-      display: block;
-
-      margin-bottom: 9px;
-
-      font-size: 12px;
-      font-weight: 700;
-
-      color: #34413b;
-    }
-
-
-    .input-wrap {
-      position: relative;
-    }
-
-
-    .input-icon {
-      position: absolute;
-
-      left: 16px;
-      top: 50%;
-
-      transform:
-        translateY(-50%);
-
-      color: #829089;
-
-      font-size: 14px;
-
-      pointer-events: none;
-    }
-
-
-    .form-input {
-      width: 100%;
-
-      height: 54px;
-
-      padding:
-        0 48px 0 46px;
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 14px;
-
-      background: #fbfdfc;
-
-      outline: none;
-
-      color: var(--text);
-
-      font-family: inherit;
-
-      font-size: 14px;
-
-      transition:
-        border-color .2s ease,
-        box-shadow .2s ease,
-        background .2s ease;
-    }
-
-
-    .form-input::placeholder {
-      color: #a3aea8;
-    }
-
-
-    .form-input:focus {
-      background: var(--white);
-
-      border-color:
-        rgba(24, 169, 87, .65);
-
-      box-shadow:
-        0 0 0 4px
-        rgba(24, 169, 87, .09);
-    }
-
-
-    .password-toggle {
-      position: absolute;
-
-      right: 15px;
-      top: 50%;
-
-      transform:
-        translateY(-50%);
-
-      width: 30px;
-      height: 30px;
-
-      border: 0;
-
-      background: transparent;
-
-      color: #84918a;
-
-      cursor: pointer;
-    }
-
-
-    .password-toggle:hover {
-      color: var(--green-dark);
-    }
-
-
-    /* =========================================
-       OPTIONS
-       ========================================= */
-
-    .form-options {
-      display: flex;
-
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 15px;
-
-      margin: 4px 0 24px;
-    }
-
-
-    .remember {
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 8px;
-
-      color: #66736c;
-
-      font-size: 12px;
-
-      cursor: pointer;
-    }
-
-
-    .remember input {
-      width: 15px;
-      height: 15px;
-
-      accent-color: var(--green);
-
-      cursor: pointer;
-    }
-
-
-    .forgot-link {
-      color: var(--green-dark);
-
-      font-size: 12px;
-      font-weight: 700;
-
-      text-decoration: none;
-    }
-
-
-    .forgot-link:hover {
-      text-decoration: underline;
-    }
-
-
-    /* =========================================
-       LOGIN BUTTON
-       ========================================= */
-
-    .login-button {
-      width: 100%;
-
-      min-height: 55px;
-
-      border: 0;
-
-      border-radius: 15px;
-
+    .nav-item.active{
+      color:#fff;
       background:
         linear-gradient(
           135deg,
-          var(--green),
-          var(--green-dark)
+          rgba(24,169,87,.23),
+          rgba(24,169,87,.07)
         );
-
-      color: var(--white);
-
-      font-family: inherit;
-
-      font-size: 14px;
-      font-weight: 800;
-
-      cursor: pointer;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      gap: 10px;
-
       box-shadow:
-        0 14px 28px
-        rgba(24, 169, 87, .20);
-
-      transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        opacity .2s ease;
+        inset 3px 0 0 var(--green);
     }
 
-
-    .login-button:hover {
-      transform: translateY(-2px);
-
-      box-shadow:
-        0 18px 35px
-        rgba(24, 169, 87, .28);
+    .nav-item .badge{
+      margin-left:auto;
+      padding:4px 7px;
+      min-width:22px;
+      text-align:center;
+      border-radius:20px;
+      background:rgba(255,255,255,.08);
+      color:#9ba69f;
+      font-size:9px;
     }
 
-
-    .login-button:active {
-      transform: translateY(0);
+    .nav-item.active .badge{
+      background:var(--green);
+      color:#fff;
     }
 
-
-    .login-button.loading {
-      pointer-events: none;
-
-      opacity: .75;
+    .security-label{
+      margin:14px 10px 8px;
+      padding:8px 10px;
+      border-radius:9px;
+      color:#c9a24d;
+      background:rgba(201,149,36,.08);
+      border:1px solid rgba(201,149,36,.12);
+      font-size:8px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:1px;
     }
 
-
-    .login-button .spinner {
-      display: none;
-
-      width: 17px;
-      height: 17px;
-
-      border:
-        2px solid
-        rgba(255, 255, 255, .35);
-
-      border-top-color:
-        var(--white);
-
-      border-radius: 50%;
-
-      animation:
-        spin .7s linear infinite;
+    .sidebar-bottom{
+      padding:14px;
+      border-top:1px solid rgba(255,255,255,.07);
     }
 
-
-    .login-button.loading .spinner {
-      display: block;
+    .profile{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:11px;
+      border-radius:13px;
+      background:rgba(255,255,255,.045);
+      margin-bottom:9px;
     }
 
+    .avatar{
+      width:36px;
+      height:36px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:linear-gradient(135deg,#d6aa45,#a87916);
+      color:#fff;
+      font-size:11px;
+      font-weight:800;
+    }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
+    .profile strong{
+      display:block;
+      font-size:11px;
+    }
+
+    .profile span{
+      display:block;
+      margin-top:2px;
+      color:#77837b;
+      font-size:9px;
+    }
+
+    .signout{
+      width:100%;
+      border:0;
+      background:transparent;
+      color:#8d9890;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:10px;
+      font-size:11px;
+      text-align:left;
+    }
+
+    .signout:hover{
+      background:rgba(220,53,69,.1);
+      color:#ff7883;
+    }
+
+    /* =================================
+       MAIN
+    ================================= */
+
+    .main{
+      min-height:100vh;
+      margin-left:var(--sidebar);
+    }
+
+    .topbar{
+      height:78px;
+      position:sticky;
+      top:0;
+      z-index:100;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:0 30px;
+      background:rgba(255,255,255,.95);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .top-left{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .mobile-menu{
+      width:40px;
+      height:40px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+      display:none;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .heading h1{
+      font-size:20px;
+      letter-spacing:-.6px;
+    }
+
+    .heading p{
+      margin-top:4px;
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .btn{
+      height:40px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:0 14px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+      color:#4d5951;
+      font-size:10px;
+      font-weight:700;
+      transition:.2s;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      border-color:#c5cec8;
+    }
+
+    .btn.primary{
+      background:var(--green);
+      color:#fff;
+      border-color:var(--green);
+      box-shadow:0 8px 20px rgba(24,169,87,.18);
+    }
+
+    .btn.primary:hover{
+      background:var(--green-dark);
+    }
+
+    .btn.gold{
+      background:var(--gold);
+      border-color:var(--gold);
+      color:#fff;
+    }
+
+    /* =================================
+       CONTENT
+    ================================= */
+
+    .content{
+      max-width:1600px;
+      margin:auto;
+      padding:30px;
+    }
+
+    /* =================================
+       SECURITY BANNER
+    ================================= */
+
+    .security-banner{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:16px 18px;
+      margin-bottom:20px;
+      border-radius:16px;
+      background:
+        linear-gradient(
+          135deg,
+          #fffaf0,
+          #fffdf8
+        );
+      border:1px solid #f0dfb3;
+    }
+
+    .security-icon{
+      width:42px;
+      height:42px;
+      flex:none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:12px;
+      background:var(--gold-soft);
+      color:var(--gold);
+    }
+
+    .security-banner strong{
+      display:block;
+      font-size:11px;
+    }
+
+    .security-banner p{
+      margin-top:4px;
+      color:#766b51;
+      font-size:9px;
+      line-height:1.5;
+    }
+
+    .security-pill{
+      margin-left:auto;
+      flex:none;
+      padding:7px 10px;
+      border-radius:20px;
+      color:#8d6919;
+      background:#fff4ce;
+      font-size:9px;
+      font-weight:800;
+    }
+
+    /* =================================
+       STATS
+    ================================= */
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:17px;
+      margin-bottom:22px;
+    }
+
+    .stat{
+      position:relative;
+      overflow:hidden;
+      padding:20px;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .stat::after{
+      content:"";
+      position:absolute;
+      right:-40px;
+      top:-40px;
+      width:100px;
+      height:100px;
+      border-radius:50%;
+      background:var(--green-soft);
+    }
+
+    .stat-top{
+      position:relative;
+      z-index:1;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .stat-icon{
+      width:42px;
+      height:42px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:12px;
+      background:var(--green-soft);
+      color:var(--green-dark);
+    }
+
+    .stat-tag{
+      padding:5px 8px;
+      border-radius:20px;
+      color:var(--green-dark);
+      background:var(--green-soft);
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .stat-value{
+      margin-top:16px;
+      font-size:26px;
+      font-weight:800;
+      letter-spacing:-1px;
+    }
+
+    .stat-label{
+      margin-top:7px;
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    /* =================================
+       PANEL
+    ================================= */
+
+    .panel{
+      overflow:hidden;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      box-shadow:var(--shadow);
+    }
+
+    .panel-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      flex-wrap:wrap;
+      padding:20px 22px;
+      border-bottom:1px solid var(--border);
+    }
+
+    .panel-title h2{
+      font-size:15px;
+      letter-spacing:-.3px;
+    }
+
+    .panel-title p{
+      margin-top:4px;
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .toolbar{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .search{
+      position:relative;
+      width:230px;
+      height:39px;
+    }
+
+    .search i{
+      position:absolute;
+      left:12px;
+      top:50%;
+      transform:translateY(-50%);
+      color:#9aa49e;
+      font-size:11px;
+      pointer-events:none;
+    }
+
+    .search input{
+      width:100%;
+      height:100%;
+      padding:0 12px 0 34px;
+      outline:none;
+      border:1px solid var(--border);
+      border-radius:10px;
+      font-size:10px;
+    }
+
+    .search input:focus{
+      border-color:#89cfa5;
+      box-shadow:0 0 0 3px rgba(24,169,87,.08);
+    }
+
+    .select{
+      height:39px;
+      padding:0 11px;
+      outline:none;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+      color:#526057;
+      font-size:10px;
+    }
+
+    /* =================================
+       TABLE
+    ================================= */
+
+    .table-wrap{
+      overflow-x:auto;
+    }
+
+    table{
+      width:100%;
+      min-width:950px;
+      border-collapse:collapse;
+    }
+
+    thead th{
+      padding:13px 18px;
+      background:#fafcfb;
+      color:#7d8881;
+      border-bottom:1px solid var(--border);
+      text-align:left;
+      font-size:8px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      white-space:nowrap;
+    }
+
+    tbody td{
+      padding:15px 18px;
+      border-bottom:1px solid #eef1ef;
+      font-size:10px;
+      vertical-align:middle;
+    }
+
+    tbody tr:hover{
+      background:#fbfdfc;
+    }
+
+    tbody tr:last-child td{
+      border-bottom:0;
+    }
+
+    .admin-cell{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      min-width:190px;
+    }
+
+    .admin-avatar{
+      width:37px;
+      height:37px;
+      border-radius:11px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:#edf4ef;
+      color:var(--green-dark);
+      font-size:10px;
+      font-weight:800;
+      flex:none;
+    }
+
+    .admin-name{
+      font-weight:800;
+      color:#1a241d;
+    }
+
+    .admin-email{
+      margin-top:3px;
+      color:var(--muted);
+      font-size:8px;
+    }
+
+    .role{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      padding:6px 9px;
+      border-radius:20px;
+      font-size:8px;
+      font-weight:800;
+    }
+
+    .role.super{
+      color:#8d6815;
+      background:var(--gold-soft);
+    }
+
+    .role.admin{
+      color:var(--green-dark);
+      background:var(--green-soft);
+    }
+
+    .role.manager{
+      color:#2859b8;
+      background:var(--blue-soft);
+    }
+
+    .status{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:5px 8px;
+      border-radius:20px;
+      font-size:8px;
+      font-weight:800;
+    }
+
+    .status::before{
+      content:"";
+      width:5px;
+      height:5px;
+      border-radius:50%;
+      background:currentColor;
+    }
+
+    .status.active{
+      color:#13854a;
+      background:#eaf9f0;
+    }
+
+    .status.inactive{
+      color:#9a741c;
+      background:#fff7df;
+    }
+
+    .last-login{
+      color:#59655d;
+      white-space:nowrap;
+    }
+
+    .actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:6px;
+    }
+
+    .icon-btn{
+      width:32px;
+      height:32px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid var(--border);
+      border-radius:8px;
+      background:#fff;
+      color:#667169;
+      font-size:10px;
+      transition:.2s;
+    }
+
+    .icon-btn:hover{
+      transform:translateY(-1px);
+      border-color:#bfc9c2;
+    }
+
+    .icon-btn.edit:hover{
+      color:var(--green-dark);
+      background:var(--green-soft);
+      border-color:#bce5cb;
+    }
+
+    .icon-btn.delete:hover{
+      color:var(--danger);
+      background:var(--danger-soft);
+      border-color:#f0c0c5;
+    }
+
+    .icon-btn.lock:hover{
+      color:#9a741c;
+      background:var(--gold-soft);
+      border-color:#eddcae;
+    }
+
+    /* =================================
+       EMPTY
+    ================================= */
+
+    .empty{
+      display:none;
+      padding:60px 20px;
+      text-align:center;
+    }
+
+    .empty-icon{
+      width:58px;
+      height:58px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      margin:0 auto 15px;
+      border-radius:16px;
+      background:#f0f4f1;
+      color:#9ca69f;
+      font-size:19px;
+    }
+
+    .empty h3{
+      font-size:14px;
+    }
+
+    .empty p{
+      margin-top:5px;
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    /* =================================
+       MODAL
+    ================================= */
+
+    .modal{
+      position:fixed;
+      inset:0;
+      z-index:2000;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      background:rgba(7,12,9,.65);
+      backdrop-filter:blur(9px);
+    }
+
+    .modal.show{
+      display:flex;
+    }
+
+    .modal-box{
+      width:min(540px,100%);
+      max-height:90vh;
+      overflow:auto;
+      background:#fff;
+      border-radius:22px;
+      box-shadow:var(--shadow-lg);
+      animation:modalIn .2s ease;
+    }
+
+    @keyframes modalIn{
+      from{
+        opacity:0;
+        transform:translateY(12px) scale(.98);
+      }
+      to{
+        opacity:1;
+        transform:none;
       }
     }
 
-
-    /* =========================================
-       DEMO NOTICE
-       ========================================= */
-
-    .security-note {
-      margin-top: 22px;
-
-      padding: 14px 15px;
-
-      border:
-        1px solid #e8eee9;
-
-      border-radius: 14px;
-
-      background: #f8fbf9;
-
-      display: flex;
-
-      align-items: flex-start;
-
-      gap: 11px;
+    .modal-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:20px 22px;
+      border-bottom:1px solid var(--border);
     }
 
-
-    .security-note i {
-      color: var(--green-dark);
-
-      margin-top: 2px;
+    .modal-head h3{
+      font-size:16px;
     }
 
-
-    .security-note p {
-      color: #758179;
-
-      font-size: 11px;
-
-      line-height: 1.65;
+    .modal-head p{
+      margin-top:3px;
+      color:var(--muted);
+      font-size:9px;
     }
 
-
-    /* =========================================
-       ERROR
-       ========================================= */
-
-    .login-error {
-      display: none;
-
-      padding: 12px 14px;
-
-      margin-bottom: 18px;
-
-      border:
-        1px solid
-        rgba(220, 53, 69, .18);
-
-      background:
-        rgba(220, 53, 69, .06);
-
-      color: var(--danger);
-
-      border-radius: 12px;
-
-      font-size: 12px;
-      font-weight: 600;
-
-      line-height: 1.5;
+    .modal-close{
+      width:34px;
+      height:34px;
+      border:1px solid var(--border);
+      border-radius:9px;
+      background:#fff;
+      color:#69736d;
     }
 
-
-    .login-error.show {
-      display: block;
+    .modal-body{
+      padding:22px;
     }
 
-
-    /* =========================================
-       BOTTOM
-       ========================================= */
-
-    .back-home {
-      display: inline-flex;
-
-      align-items: center;
-      justify-content: center;
-
-      gap: 7px;
-
-      margin-top: 25px;
-
-      color: #7a8780;
-
-      font-size: 12px;
-      font-weight: 600;
-
-      text-decoration: none;
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
     }
 
-
-    .back-home:hover {
-      color: var(--green-dark);
+    .field.full{
+      grid-column:1 / -1;
     }
 
+    .label{
+      display:block;
+      margin-bottom:7px;
+      color:#3d4841;
+      font-size:9px;
+      font-weight:800;
+    }
 
-    /* =========================================
+    .input,
+    .form-select{
+      width:100%;
+      height:42px;
+      padding:0 11px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      outline:none;
+      background:#fff;
+      color:var(--text);
+      font-size:10px;
+    }
+
+    .input:focus,
+    .form-select:focus{
+      border-color:#89cfa5;
+      box-shadow:0 0 0 3px rgba(24,169,87,.08);
+    }
+
+    .permission-box{
+      margin-top:16px;
+      padding:13px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fafcfb;
+    }
+
+    .permission-title{
+      margin-bottom:10px;
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .permissions{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+
+    .permission{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:8px;
+      border:1px solid #e8ece9;
+      border-radius:8px;
+      background:#fff;
+      color:#566159;
+      font-size:9px;
+    }
+
+    .permission input{
+      accent-color:var(--green);
+    }
+
+    .modal-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:8px;
+      padding:15px 22px;
+      border-top:1px solid var(--border);
+    }
+
+    /* =================================
        TOAST
-       ========================================= */
+    ================================= */
 
-    .toast {
-      position: fixed;
-
-      right: 24px;
-      bottom: 24px;
-
-      z-index: 100;
-
-      width: min(
-        360px,
-        calc(100vw - 48px)
-      );
-
-      padding: 15px 17px;
-
-      background:
-        var(--black);
-
-      color: white;
-
-      border-radius: 15px;
-
-      box-shadow:
-        0 20px 50px
-        rgba(0, 0, 0, .2);
-
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-
-      transform:
-        translateY(25px);
-
-      opacity: 0;
-
-      pointer-events: none;
-
-      transition:
-        opacity .25s ease,
-        transform .25s ease;
+    .toast{
+      position:fixed;
+      right:24px;
+      bottom:24px;
+      z-index:3000;
+      width:min(360px,calc(100% - 30px));
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      padding:14px;
+      background:#111914;
+      color:#fff;
+      border-radius:13px;
+      box-shadow:var(--shadow-lg);
+      opacity:0;
+      transform:translateY(20px);
+      pointer-events:none;
+      transition:.25s ease;
     }
 
-
-    .toast.show {
-      opacity: 1;
-
-      transform:
-        translateY(0);
+    .toast.show{
+      opacity:1;
+      transform:none;
     }
 
-
-    .toast-icon {
-      width: 32px;
-      height: 32px;
-
-      flex: 0 0 32px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 10px;
-
-      background:
-        rgba(24, 169, 87, .15);
-
-      color: #65df96;
+    .toast-icon{
+      width:30px;
+      height:30px;
+      flex:none;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:9px;
+      background:rgba(24,169,87,.15);
+      color:#55d68c;
     }
 
-
-    .toast strong {
-      display: block;
-
-      font-size: 12px;
-
-      margin-bottom: 3px;
+    .toast strong{
+      display:block;
+      font-size:10px;
     }
 
-
-    .toast p {
-      color: #aab6b0;
-
-      font-size: 11px;
-
-      line-height: 1.5;
+    .toast p{
+      margin-top:3px;
+      color:#9ba69e;
+      font-size:9px;
+      line-height:1.5;
     }
 
+    .toast-close{
+      margin-left:auto;
+      border:0;
+      background:transparent;
+      color:#7f8b83;
+    }
 
-    /* =========================================
+    /* =================================
+       OVERLAY
+    ================================= */
+
+    .overlay{
+      position:fixed;
+      inset:0;
+      z-index:900;
+      display:none;
+      background:rgba(0,0,0,.45);
+    }
+
+    .overlay.show{
+      display:block;
+    }
+
+    /* =================================
        RESPONSIVE
-       ========================================= */
+    ================================= */
 
-    @media (max-width: 900px) {
+    @media(max-width:1200px){
 
-      .login-shell {
-        grid-template-columns: 1fr;
-
-        max-width: 560px;
-      }
-
-
-      .brand-panel {
-        min-height: 330px;
-
-        padding: 38px;
-      }
-
-
-      .brand-panel h1 {
-        font-size: 40px;
-      }
-
-
-      .feature-list {
-        grid-template-columns:
-          repeat(2, 1fr);
-
-        margin-top: 30px;
-      }
-
-
-      .brand-footer {
-        margin-top: 30px;
-      }
-
-
-      .login-panel {
-        padding: 42px 38px;
+      .stats{
+        grid-template-columns:repeat(2,1fr);
       }
 
     }
 
+    @media(max-width:760px){
 
-    @media (max-width: 560px) {
-
-      body {
-        padding: 12px;
+      .sidebar{
+        transform:translateX(-100%);
+        transition:.25s ease;
       }
 
-
-      .login-shell {
-        border-radius: 23px;
+      .sidebar.open{
+        transform:none;
       }
 
-
-      .brand-panel {
-        min-height: auto;
-
-        padding: 30px 25px;
+      .main{
+        margin-left:0;
       }
 
-
-      .logo-box {
-        width: 52px;
-        height: 52px;
-
-        margin-bottom: 25px;
+      .mobile-menu{
+        display:flex;
       }
 
-
-      .brand-panel h1 {
-        font-size: 35px;
+      .topbar{
+        height:70px;
+        padding:0 18px;
       }
 
-
-      .brand-description {
-        font-size: 13px;
+      .content{
+        padding:20px 16px;
       }
 
-
-      .feature-list {
-        grid-template-columns: 1fr;
-
-        margin-top: 28px;
+      .security-banner{
+        align-items:flex-start;
       }
 
-
-      .brand-footer {
-        display: none;
+      .security-pill{
+        display:none;
       }
 
-
-      .login-panel {
-        padding: 32px 25px;
+      .heading p{
+        display:none;
       }
 
-
-      .login-heading {
-        margin-bottom: 27px;
+      .top-actions .btn span{
+        display:none;
       }
 
-
-      .login-heading h2 {
-        font-size: 27px;
-      }
-
-
-      .form-options {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-
-      .toast {
-        right: 12px;
-        bottom: 12px;
-
-        width:
-          calc(100vw - 24px);
+      .top-actions .btn{
+        width:40px;
+        padding:0;
       }
 
     }
 
+    @media(max-width:560px){
 
-    @media (prefers-reduced-motion: reduce) {
+      .stats{
+        gap:11px;
+      }
 
-      *,
-      *::before,
-      *::after {
-        scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
+      .stat{
+        padding:15px;
+        border-radius:14px;
+      }
+
+      .stat-value{
+        font-size:21px;
+      }
+
+      .stat-label{
+        font-size:8px;
+      }
+
+      .stat-icon{
+        width:36px;
+        height:36px;
+      }
+
+      .panel-header{
+        padding:16px;
+      }
+
+      .toolbar{
+        width:100%;
+      }
+
+      .search{
+        width:100%;
+      }
+
+      .select{
+        flex:1;
+      }
+
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+
+      .field.full{
+        grid-column:auto;
+      }
+
+      .permissions{
+        grid-template-columns:1fr;
+      }
+
+      .modal-body{
+        padding:17px;
+      }
+
+      .modal-actions{
+        padding:14px 17px;
+      }
+
+      .security-banner{
+        padding:13px;
       }
 
     }
 
+    @media(max-width:380px){
+
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+    }
   </style>
 </head>
 
-
 <body>
 
-  <div class="background-grid"></div>
+<div class="app">
 
-  <div class="orb orb-one"></div>
-  <div class="orb orb-two"></div>
+  <!-- =================================
+       SIDEBAR
+  ================================= -->
+  <aside class="sidebar" id="sidebar">
 
+    <div class="brand">
 
-  <main class="login-shell">
+      <img src="../logo.png" alt="Website Deals">
 
-
-    <!-- =====================================
-         BRAND PANEL
-         ====================================== -->
-
-    <section class="brand-panel">
-
-      <div class="brand-content">
-
-        <div class="logo-box">
-
-          <img
-            src="../logo.png"
-            alt="Website Deals"
-          >
-
+      <div>
+        <div class="brand-title">
+          Website Deals
         </div>
 
+        <div class="brand-subtitle">
+          Control Center
+        </div>
+      </div>
 
-        <div class="eyebrow">
-          <span></span>
-          Secure Admin Portal
+    </div>
+
+
+    <nav class="nav">
+
+      <div class="nav-label">
+        Main
+      </div>
+
+      <a href="dashboard.html" class="nav-item">
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="websites.html" class="nav-item">
+        <i class="fa-solid fa-globe"></i>
+        <span>Websites</span>
+        <span class="badge">11</span>
+      </a>
+
+      <a href="categories.html" class="nav-item">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>Categories</span>
+      </a>
+
+      <a href="orders.html" class="nav-item">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Orders</span>
+        <span class="badge">8</span>
+      </a>
+
+      <a href="customers.html" class="nav-item">
+        <i class="fa-solid fa-users"></i>
+        <span>Customers</span>
+      </a>
+
+      <a href="newsletter.html" class="nav-item">
+        <i class="fa-solid fa-envelope"></i>
+        <span>Newsletter</span>
+      </a>
+
+
+      <div class="security-label">
+        <i class="fa-solid fa-shield-halved"></i>
+        Restricted Controls
+      </div>
+
+
+      <a href="admins.html" class="nav-item active">
+        <i class="fa-solid fa-user-shield"></i>
+        <span>Admin Management</span>
+      </a>
+
+      <a href="settings.html" class="nav-item">
+        <i class="fa-solid fa-sliders"></i>
+        <span>System Settings</span>
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+      <div class="profile">
+
+        <div class="avatar">
+          SA
         </div>
 
-
-        <h1>
-          Manage your
-          <span>digital marketplace.</span>
-        </h1>
-
-
-        <p class="brand-description">
-          Control websites, categories, orders,
-          customers and marketplace content
-          from one professional workspace.
-        </p>
-
-
-        <div class="feature-list">
-
-          <div class="feature">
-
-            <div class="feature-icon">
-              <i class="fa-solid fa-globe"></i>
-            </div>
-
-            Website Management
-
-          </div>
-
-
-          <div class="feature">
-
-            <div class="feature-icon">
-              <i class="fa-solid fa-cart-shopping"></i>
-            </div>
-
-            Order Management
-
-          </div>
-
-
-          <div class="feature">
-
-            <div class="feature-icon">
-              <i class="fa-solid fa-users"></i>
-            </div>
-
-            Customer Management
-
-          </div>
-
-
-          <div class="feature">
-
-            <div class="feature-icon">
-              <i class="fa-solid fa-chart-line"></i>
-            </div>
-
-            Marketplace Insights
-
-          </div>
-
+        <div>
+          <strong>Super Admin</strong>
+          <span>Full System Access</span>
         </div>
 
       </div>
 
+      <button class="signout" id="signout">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span>Sign Out</span>
+      </button>
 
-      <div class="brand-footer">
+    </div>
 
-        Website Deals Admin Portal<br>
-
-        Premium Ready-Made Website Marketplace
-
-      </div>
-
-    </section>
+  </aside>
 
 
-
-    <!-- =====================================
-         LOGIN PANEL
-         ====================================== -->
-
-    <section class="login-panel">
-
-      <div class="login-heading">
-
-        <div class="small-title">
-          Admin Access
-        </div>
-
-        <h2>
-          Welcome back.
-        </h2>
-
-        <p>
-          Sign in to continue to your
-          marketplace dashboard.
-        </p>
-
-      </div>
+  <div class="overlay" id="overlay"></div>
 
 
-      <div
-        id="login-error"
-        class="login-error"
-      ></div>
+  <!-- =================================
+       MAIN
+  ================================= -->
+  <main class="main">
 
+    <header class="topbar">
 
-      <form
-        id="login-form"
-        autocomplete="on"
-      >
+      <div class="top-left">
 
-
-        <div class="form-group">
-
-          <label
-            class="form-label"
-            for="email"
-          >
-            Email Address
-          </label>
-
-
-          <div class="input-wrap">
-
-            <i
-              class="fa-regular fa-envelope input-icon"
-            ></i>
-
-
-            <input
-              id="email"
-              name="email"
-              class="form-input"
-              type="email"
-              placeholder="admin@example.com"
-              autocomplete="username"
-              required
-            >
-
-          </div>
-
-        </div>
-
-
-
-        <div class="form-group">
-
-          <label
-            class="form-label"
-            for="password"
-          >
-            Password
-          </label>
-
-
-          <div class="input-wrap">
-
-            <i
-              class="fa-solid fa-lock input-icon"
-            ></i>
-
-
-            <input
-              id="password"
-              name="password"
-              class="form-input"
-              type="password"
-              placeholder="Enter your password"
-              autocomplete="current-password"
-              required
-            >
-
-
-            <button
-              type="button"
-              id="password-toggle"
-              class="password-toggle"
-              aria-label="Show password"
-            >
-              <i
-                class="fa-regular fa-eye"
-              ></i>
-            </button>
-
-          </div>
-
-        </div>
-
-
-
-        <div class="form-options">
-
-          <label class="remember">
-
-            <input
-              type="checkbox"
-              id="remember"
-              name="remember"
-            >
-
-            <span>
-              Remember me
-            </span>
-
-          </label>
-
-
-          <a
-            href="#"
-            class="forgot-link"
-            id="forgot-password"
-          >
-            Forgot password?
-          </a>
-
-        </div>
-
-
-
-        <button
-          type="submit"
-          class="login-button"
-          id="login-button"
-        >
-
-          <span>
-            Sign In
-          </span>
-
-          <i
-            class="fa-solid fa-arrow-right"
-          ></i>
-
-          <span class="spinner"></span>
-
+        <button class="mobile-menu" id="mobile-menu">
+          <i class="fa-solid fa-bars"></i>
         </button>
 
+        <div class="heading">
 
-      </form>
+          <h1>
+            Admin Management
+          </h1>
 
+          <p>
+            Manage authorized marketplace administrators
+          </p>
 
-
-      <div class="security-note">
-
-        <i
-          class="fa-solid fa-shield-halved"
-        ></i>
-
-        <p>
-          Your account access is protected.
-          Only authorized users can access
-          the administration area.
-        </p>
+        </div>
 
       </div>
 
 
-      <a
-        href="../index.html"
-        class="back-home"
-      >
+      <div class="top-actions">
 
-        <i class="fa-solid fa-arrow-left"></i>
+        <button class="btn" id="refresh-btn">
+          <i class="fa-solid fa-rotate"></i>
+          <span>Refresh</span>
+        </button>
 
-        Back to Website Deals
+        <button class="btn primary" id="add-admin-btn">
+          <i class="fa-solid fa-user-plus"></i>
+          <span>Add Admin</span>
+        </button>
 
-      </a>
+      </div>
+
+    </header>
+
+
+    <section class="content">
+
+
+      <!-- =================================
+           SECURITY
+      ================================= -->
+
+      <div class="security-banner">
+
+        <div class="security-icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <div>
+
+          <strong>
+            Restricted Administration Area
+          </strong>
+
+          <p>
+            Changes made here can affect access to the Website Deals
+            administration system. Review administrator permissions carefully.
+          </p>
+
+        </div>
+
+        <span class="security-pill">
+          SUPER ADMIN
+        </span>
+
+      </div>
+
+
+      <!-- =================================
+           STATS
+      ================================= -->
+
+      <div class="stats">
+
+        <div class="stat">
+
+          <div class="stat-top">
+
+            <div class="stat-icon">
+              <i class="fa-solid fa-user-shield"></i>
+            </div>
+
+            <span class="stat-tag">
+              Total
+            </span>
+
+          </div>
+
+          <div
+            class="stat-value"
+            id="total-admins"
+          >
+            0
+          </div>
+
+          <div class="stat-label">
+            Administrators
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-top">
+
+            <div class="stat-icon">
+              <i class="fa-solid fa-user-check"></i>
+            </div>
+
+            <span class="stat-tag">
+              Active
+            </span>
+
+          </div>
+
+          <div
+            class="stat-value"
+            id="active-admins"
+          >
+            0
+          </div>
+
+          <div class="stat-label">
+            Active Administrators
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-top">
+
+            <div class="stat-icon">
+              <i class="fa-solid fa-user-tie"></i>
+            </div>
+
+            <span class="stat-tag">
+              Roles
+            </span>
+
+          </div>
+
+          <div
+            class="stat-value"
+            id="role-count"
+          >
+            0
+          </div>
+
+          <div class="stat-label">
+            Assigned Roles
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-top">
+
+            <div class="stat-icon">
+              <i class="fa-solid fa-clock-rotate-left"></i>
+            </div>
+
+            <span class="stat-tag">
+              Activity
+            </span>
+
+          </div>
+
+          <div
+            class="stat-value"
+            id="active-today"
+          >
+            0
+          </div>
+
+          <div class="stat-label">
+            Logged In Recently
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================
+           ADMIN TABLE
+      ================================= -->
+
+      <div class="panel">
+
+        <div class="panel-header">
+
+          <div class="panel-title">
+
+            <h2>
+              Administrators
+            </h2>
+
+            <p>
+              Authorized accounts with dashboard access
+            </p>
+
+          </div>
+
+
+          <div class="toolbar">
+
+            <div class="search">
+
+              <i class="fa-solid fa-magnifying-glass"></i>
+
+              <input
+                type="search"
+                id="search"
+                placeholder="Search admin..."
+                autocomplete="off"
+              >
+
+            </div>
+
+
+            <select
+              class="select"
+              id="role-filter"
+            >
+
+              <option value="all">
+                All Roles
+              </option>
+
+              <option value="admin">
+                Admin
+              </option>
+
+              <option value="manager">
+                Manager
+              </option>
+
+              <option value="super">
+                Super Admin
+              </option>
+
+            </select>
+
+
+            <select
+              class="select"
+              id="status-filter"
+            >
+
+              <option value="all">
+                All Status
+              </option>
+
+              <option value="active">
+                Active
+              </option>
+
+              <option value="inactive">
+                Inactive
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Administrator
+                </th>
+
+                <th>
+                  Role
+                </th>
+
+                <th>
+                  Status
+                </th>
+
+                <th>
+                  Last Login
+                </th>
+
+                <th>
+                  Created
+                </th>
+
+                <th style="text-align:right;">
+                  Actions
+                </th>
+
+              </tr>
+
+            </thead>
+
+            <tbody id="admin-table"></tbody>
+
+          </table>
+
+        </div>
+
+
+        <div class="empty" id="empty">
+
+          <div class="empty-icon">
+            <i class="fa-solid fa-user-slash"></i>
+          </div>
+
+          <h3>
+            No administrators found
+          </h3>
+
+          <p>
+            Try changing your search or filters.
+          </p>
+
+        </div>
+
+      </div>
 
     </section>
 
   </main>
 
+</div>
 
 
-  <!-- =====================================
-       TOAST
-       ====================================== -->
+<!-- =================================
+     ADD / EDIT MODAL
+================================= -->
 
-  <div
-    id="toast"
-    class="toast"
-    role="status"
-    aria-live="polite"
-  >
+<div class="modal" id="admin-modal">
 
-    <div class="toast-icon">
+  <div class="modal-box">
 
-      <i
-        class="fa-solid fa-circle-info"
-      ></i>
+    <div class="modal-head">
+
+      <div>
+
+        <h3 id="modal-title">
+          Add Administrator
+        </h3>
+
+        <p>
+          Configure administrator access
+        </p>
+
+      </div>
+
+      <button
+        class="modal-close"
+        id="modal-close"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
 
     </div>
 
 
-    <div>
+    <form id="admin-form">
 
-      <strong id="toast-title">
-        Notice
-      </strong>
+      <div class="modal-body">
 
-      <p id="toast-message">
-        Please check your information.
-      </p>
+        <input
+          type="hidden"
+          id="admin-id"
+        >
 
-    </div>
+
+        <div class="form-grid">
+
+          <div class="field">
+
+            <label class="label">
+              Full Name
+            </label>
+
+            <input
+              class="input"
+              type="text"
+              id="admin-name"
+              placeholder="Administrator name"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label class="label">
+              Email Address
+            </label>
+
+            <input
+              class="input"
+              type="email"
+              id="admin-email"
+              placeholder="admin@example.com"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label class="label">
+              Role
+            </label>
+
+            <select
+              class="form-select"
+              id="admin-role"
+            >
+
+              <option value="admin">
+                Admin
+              </option>
+
+              <option value="manager">
+                Manager
+              </option>
+
+              <option value="super">
+                Super Admin
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label class="label">
+              Status
+            </label>
+
+            <select
+              class="form-select"
+              id="admin-status"
+            >
+
+              <option value="active">
+                Active
+              </option>
+
+              <option value="inactive">
+                Inactive
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="permission-box">
+
+          <div class="permission-title">
+            Permissions
+          </div>
+
+
+          <div class="permissions">
+
+            <label class="permission">
+              <input
+                type="checkbox"
+                value="websites"
+                checked
+              >
+              Website Management
+            </label>
+
+
+            <label class="permission">
+              <input
+                type="checkbox"
+                value="categories"
+                checked
+              >
+              Categories
+            </label>
+
+
+            <label class="permission">
+              <input
+                type="checkbox"
+                value="orders"
+                checked
+              >
+              Orders
+            </label>
+
+
+            <label class="permission">
+              <input
+                type="checkbox"
+                value="customers"
+                checked
+              >
+              Customers
+            </label>
+
+
+            <label class="permission">
+              <input
+                type="checkbox"
+                value="newsletter"
+              >
+              Newsletter
+            </label>
+
+
+            <label class="permission">
+              <input
+                type="checkbox"
+                value="reports"
+              >
+              Reports
+            </label>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="modal-actions">
+
+        <button
+          type="button"
+          class="btn"
+          id="cancel-btn"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="btn primary"
+        >
+          <i class="fa-solid fa-check"></i>
+          Save Administrator
+        </button>
+
+      </div>
+
+    </form>
 
   </div>
 
+</div>
 
 
-  <script>
+<!-- =================================
+     TOAST
+================================= -->
 
-    /* =========================================
-       PASSWORD TOGGLE
-       ========================================= */
+<div class="toast" id="toast">
 
-    const passwordInput =
-      document.getElementById("password");
+  <div class="toast-icon">
+    <i class="fa-solid fa-check"></i>
+  </div>
 
-    const passwordToggle =
-      document.getElementById("password-toggle");
+  <div>
+
+    <strong id="toast-title">
+      Success
+    </strong>
+
+    <p id="toast-message">
+      Done.
+    </p>
+
+  </div>
+
+  <button
+    class="toast-close"
+    id="toast-close"
+  >
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+
+</div>
 
 
-    passwordToggle?.addEventListener(
-      "click",
-      () => {
+<script>
+/* =========================================================
+   WEBSITE DEALS
+   SUPER ADMIN MANAGEMENT
+   DEMO MODE
+========================================================= */
 
-        if (
-          passwordInput.type ===
-          "password"
-        ) {
+const STORAGE_KEY =
+  "websiteDealsAdmins";
 
-          passwordInput.type =
-            "text";
 
-          passwordToggle.innerHTML =
-            '<i class="fa-regular fa-eye-slash"></i>';
+const defaultAdmins = [
 
-          passwordToggle.setAttribute(
-            "aria-label",
-            "Hide password"
-          );
+  {
+    id:"ADM001",
+    name:"Shah Neil Khan",
+    email:"superadmin@example.com",
+    role:"super",
+    status:"active",
+    lastLogin:"2026-10-01",
+    created:"2026-01-15",
+    permissions:[
+      "websites",
+      "categories",
+      "orders",
+      "customers",
+      "newsletter",
+      "reports"
+    ]
+  },
 
-        } else {
+  {
+    id:"ADM002",
+    name:"Marketplace Admin",
+    email:"admin@example.com",
+    role:"admin",
+    status:"active",
+    lastLogin:"2026-09-30",
+    created:"2026-06-12",
+    permissions:[
+      "websites",
+      "categories",
+      "orders",
+      "customers"
+    ]
+  },
 
-          passwordInput.type =
-            "password";
+  {
+    id:"ADM003",
+    name:"Operations Manager",
+    email:"manager@example.com",
+    role:"manager",
+    status:"active",
+    lastLogin:"2026-09-29",
+    created:"2026-07-03",
+    permissions:[
+      "orders",
+      "customers"
+    ]
+  },
 
-          passwordToggle.innerHTML =
-            '<i class="fa-regular fa-eye"></i>';
+  {
+    id:"ADM004",
+    name:"Content Admin",
+    email:"content@example.com",
+    role:"admin",
+    status:"inactive",
+    lastLogin:"2026-08-21",
+    created:"2026-07-18",
+    permissions:[
+      "websites",
+      "newsletter"
+    ]
+  }
 
-          passwordToggle.setAttribute(
-            "aria-label",
-            "Show password"
-          );
+];
 
-        }
 
+let admins = [];
+
+let toastTimer = null;
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const sidebar =
+  document.getElementById("sidebar");
+
+const overlay =
+  document.getElementById("overlay");
+
+const table =
+  document.getElementById("admin-table");
+
+const empty =
+  document.getElementById("empty");
+
+const search =
+  document.getElementById("search");
+
+const roleFilter =
+  document.getElementById("role-filter");
+
+const statusFilter =
+  document.getElementById("status-filter");
+
+const modal =
+  document.getElementById("admin-modal");
+
+const modalTitle =
+  document.getElementById("modal-title");
+
+const form =
+  document.getElementById("admin-form");
+
+const adminId =
+  document.getElementById("admin-id");
+
+const adminName =
+  document.getElementById("admin-name");
+
+const adminEmail =
+  document.getElementById("admin-email");
+
+const adminRole =
+  document.getElementById("admin-role");
+
+const adminStatus =
+  document.getElementById("admin-status");
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function initials(name){
+
+  const parts =
+    String(name)
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+
+  if(!parts.length){
+    return "?";
+  }
+
+  if(parts.length === 1){
+    return parts[0]
+      .slice(0,2)
+      .toUpperCase();
+  }
+
+  return (
+    parts[0][0] +
+    parts[parts.length - 1][0]
+  ).toUpperCase();
+
+}
+
+
+function formatDate(value){
+
+  if(!value){
+    return "—";
+  }
+
+  const date =
+    new Date(value + "T00:00:00");
+
+  if(Number.isNaN(date.getTime())){
+    return value;
+  }
+
+  return date.toLocaleDateString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+function loadAdmins(){
+
+  try{
+
+    const stored =
+      localStorage.getItem(STORAGE_KEY);
+
+    if(stored){
+
+      const parsed =
+        JSON.parse(stored);
+
+      if(Array.isArray(parsed)){
+
+        admins = parsed;
+
+        return;
       }
+
+    }
+
+  }catch(error){
+
+    console.warn(
+      "Admin storage error:",
+      error
     );
 
+  }
 
-    /* =========================================
-       TOAST
-       ========================================= */
+  admins = [...defaultAdmins];
 
-    const toast =
-      document.getElementById("toast");
+  saveAdmins();
 
-    const toastTitle =
-      document.getElementById("toast-title");
-
-    const toastMessage =
-      document.getElementById("toast-message");
+}
 
 
-    let toastTimer;
+function saveAdmins(){
+
+  try{
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(admins)
+    );
+
+  }catch(error){
+
+    console.warn(
+      "Could not save admins:",
+      error
+    );
+
+  }
+
+}
 
 
-    function showToast(
-      title,
-      message
-    ) {
+/* =========================================================
+   ROLE
+========================================================= */
 
-      if (!toast) return;
+function roleLabel(role){
 
-      toastTitle.textContent =
-        title;
+  if(role === "super"){
+    return "Super Admin";
+  }
 
-      toastMessage.textContent =
-        message;
+  if(role === "manager"){
+    return "Manager";
+  }
 
-      toast.classList.add("show");
+  return "Admin";
 
-      clearTimeout(toastTimer);
+}
 
-      toastTimer =
-        setTimeout(() => {
 
-          toast.classList.remove(
-            "show"
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+  const total =
+    admins.length;
+
+  const active =
+    admins.filter(
+      item => item.status === "active"
+    ).length;
+
+  const roles =
+    new Set(
+      admins.map(item => item.role)
+    ).size;
+
+  const recent =
+    admins.filter(item => {
+
+      if(!item.lastLogin){
+        return false;
+      }
+
+      const login =
+        new Date(
+          item.lastLogin + "T00:00:00"
+        );
+
+      const now =
+        new Date();
+
+      const difference =
+        now.getTime() -
+        login.getTime();
+
+      const days =
+        difference /
+        (1000 * 60 * 60 * 24);
+
+      return days <= 7;
+
+    }).length;
+
+
+  document.getElementById(
+    "total-admins"
+  ).textContent = total;
+
+
+  document.getElementById(
+    "active-admins"
+  ).textContent = active;
+
+
+  document.getElementById(
+    "role-count"
+  ).textContent = roles;
+
+
+  document.getElementById(
+    "active-today"
+  ).textContent = recent;
+
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function getFilteredAdmins(){
+
+  const query =
+    search.value
+      .trim()
+      .toLowerCase();
+
+  const role =
+    roleFilter.value;
+
+  const status =
+    statusFilter.value;
+
+
+  return admins.filter(item => {
+
+    const matchesSearch =
+      !query ||
+      item.name.toLowerCase().includes(query) ||
+      item.email.toLowerCase().includes(query) ||
+      item.id.toLowerCase().includes(query);
+
+    const matchesRole =
+      role === "all" ||
+      item.role === role;
+
+    const matchesStatus =
+      status === "all" ||
+      item.status === status;
+
+    return (
+      matchesSearch &&
+      matchesRole &&
+      matchesStatus
+    );
+
+  });
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderAdmins(){
+
+  const list =
+    getFilteredAdmins();
+
+  table.innerHTML = "";
+
+
+  if(!list.length){
+
+    table.parentElement.style.display =
+      "none";
+
+    empty.style.display =
+      "block";
+
+    return;
+
+  }
+
+
+  table.parentElement.style.display =
+    "table";
+
+  empty.style.display =
+    "none";
+
+
+  list.forEach(item => {
+
+    const row =
+      document.createElement("tr");
+
+
+    row.innerHTML = `
+
+      <td>
+
+        <div class="admin-cell">
+
+          <div class="admin-avatar">
+            ${escapeHTML(initials(item.name))}
+          </div>
+
+          <div>
+
+            <div class="admin-name">
+              ${escapeHTML(item.name)}
+            </div>
+
+            <div class="admin-email">
+              ${escapeHTML(item.email)}
+            </div>
+
+          </div>
+
+        </div>
+
+      </td>
+
+
+      <td>
+
+        <span class="role ${item.role}">
+
+          <i class="fa-solid ${
+            item.role === "super"
+              ? "fa-crown"
+              : item.role === "manager"
+                ? "fa-user-tie"
+                : "fa-user-shield"
+          }"></i>
+
+          ${escapeHTML(roleLabel(item.role))}
+
+        </span>
+
+      </td>
+
+
+      <td>
+
+        <span class="status ${
+          item.status === "active"
+            ? "active"
+            : "inactive"
+        }">
+
+          ${
+            item.status === "active"
+              ? "Active"
+              : "Inactive"
+          }
+
+        </span>
+
+      </td>
+
+
+      <td>
+
+        <span class="last-login">
+          ${formatDate(item.lastLogin)}
+        </span>
+
+      </td>
+
+
+      <td>
+
+        <span class="last-login">
+          ${formatDate(item.created)}
+        </span>
+
+      </td>
+
+
+      <td>
+
+        <div class="actions">
+
+          <button
+            class="icon-btn edit"
+            title="Edit"
+            data-action="edit"
+            data-id="${escapeHTML(item.id)}"
+          >
+            <i class="fa-solid fa-pen"></i>
+          </button>
+
+
+          ${
+            item.role !== "super"
+              ? `
+                <button
+                  class="icon-btn lock"
+                  title="${
+                    item.status === "active"
+                      ? "Deactivate"
+                      : "Activate"
+                  }"
+                  data-action="toggle"
+                  data-id="${escapeHTML(item.id)}"
+                >
+                  <i class="fa-solid ${
+                    item.status === "active"
+                      ? "fa-lock"
+                      : "fa-lock-open"
+                  }"></i>
+                </button>
+              `
+              : ""
+          }
+
+
+          ${
+            item.role !== "super"
+              ? `
+                <button
+                  class="icon-btn delete"
+                  title="Delete"
+                  data-action="delete"
+                  data-id="${escapeHTML(item.id)}"
+                >
+                  <i class="fa-solid fa-trash"></i>
+                </button>
+              `
+              : ""
+          }
+
+        </div>
+
+      </td>
+
+    `;
+
+
+    table.appendChild(row);
+
+  });
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openAddModal(){
+
+  modalTitle.textContent =
+    "Add Administrator";
+
+  form.reset();
+
+  adminId.value = "";
+
+  adminRole.value =
+    "admin";
+
+  adminStatus.value =
+    "active";
+
+
+  document.querySelectorAll(
+    ".permission input"
+  ).forEach(input => {
+
+    input.checked =
+      [
+        "websites",
+        "categories",
+        "orders",
+        "customers"
+      ].includes(input.value);
+
+  });
+
+
+  modal.classList.add("show");
+
+}
+
+
+function openEditModal(id){
+
+  const admin =
+    admins.find(
+      item => item.id === id
+    );
+
+  if(!admin){
+    return;
+  }
+
+
+  modalTitle.textContent =
+    "Edit Administrator";
+
+  adminId.value =
+    admin.id;
+
+  adminName.value =
+    admin.name;
+
+  adminEmail.value =
+    admin.email;
+
+  adminRole.value =
+    admin.role;
+
+  adminStatus.value =
+    admin.status;
+
+
+  document.querySelectorAll(
+    ".permission input"
+  ).forEach(input => {
+
+    input.checked =
+      Array.isArray(admin.permissions) &&
+      admin.permissions.includes(
+        input.value
+      );
+
+  });
+
+
+  modal.classList.add("show");
+
+}
+
+
+function closeModal(){
+
+  modal.classList.remove("show");
+
+  form.reset();
+
+  adminId.value = "";
+
+}
+
+
+/* =========================================================
+   SAVE ADMIN
+========================================================= */
+
+form.addEventListener(
+  "submit",
+  function(event){
+
+    event.preventDefault();
+
+
+    const id =
+      adminId.value.trim();
+
+    const name =
+      adminName.value.trim();
+
+    const email =
+      adminEmail.value.trim();
+
+    const role =
+      adminRole.value;
+
+    const status =
+      adminStatus.value;
+
+
+    if(!name || !email){
+
+      showToast(
+        "Validation",
+        "Please enter the administrator name and email."
+      );
+
+      return;
+    }
+
+
+    const duplicate =
+      admins.find(
+        item =>
+          item.email.toLowerCase() ===
+            email.toLowerCase() &&
+          item.id !== id
+      );
+
+
+    if(duplicate){
+
+      showToast(
+        "Email Exists",
+        "An administrator already uses this email."
+      );
+
+      return;
+    }
+
+
+    const permissions =
+      Array.from(
+        document.querySelectorAll(
+          ".permission input:checked"
+        )
+      ).map(
+        input => input.value
+      );
+
+
+    if(id){
+
+      const index =
+        admins.findIndex(
+          item => item.id === id
+        );
+
+
+      if(index !== -1){
+
+        const current =
+          admins[index];
+
+
+        /*
+          Prevent accidentally changing
+          the primary Super Admin role
+          in demo mode.
+        */
+
+        if(
+          current.role === "super" &&
+          role !== "super"
+        ){
+
+          showToast(
+            "Protected Account",
+            "The primary Super Admin role cannot be downgraded here."
           );
 
-        }, 4500);
+          return;
+        }
+
+
+        admins[index] = {
+
+          ...current,
+
+          name,
+          email,
+          role,
+          status,
+          permissions,
+
+          updated:
+            new Date()
+              .toISOString()
+              .slice(0,10)
+
+        };
+
+      }
+
+
+      showToast(
+        "Admin Updated",
+        `${name}'s access settings were updated.`
+      );
+
+
+    }else{
+
+      const newAdmin = {
+
+        id:
+          generateAdminId(),
+
+        name,
+        email,
+        role,
+        status,
+
+        lastLogin:"—",
+
+        created:
+          new Date()
+            .toISOString()
+            .slice(0,10),
+
+        permissions
+
+      };
+
+
+      admins.unshift(
+        newAdmin
+      );
+
+
+      showToast(
+        "Admin Created",
+        `${name} was added successfully.`
+      );
 
     }
 
 
-    /* =========================================
-       FORGOT PASSWORD
-       ========================================= */
+    saveAdmins();
 
-    document
-      .getElementById("forgot-password")
-      ?.addEventListener(
-        "click",
-        event => {
+    updateStats();
 
-          event.preventDefault();
+    renderAdmins();
 
-          const email =
-            document
-              .getElementById("email")
-              ?.value
-              .trim();
+    closeModal();
+
+  }
+);
 
 
-          if (!email) {
+/* =========================================================
+   ID
+========================================================= */
 
-            showToast(
-              "Enter your email",
-              "Password reset করতে আগে আপনার email address দিন।"
-            );
+function generateAdminId(){
 
-            document
-              .getElementById("email")
-              ?.focus();
+  let number =
+    admins.length + 1;
 
-            return;
-
-          }
+  let id =
+    "ADM" +
+    String(number).padStart(3,"0");
 
 
-          showToast(
-            "Password Reset",
-            "Production Firebase Authentication যুক্ত করার পর এখানে reset email পাঠানো হবে।"
-          );
+  while(
+    admins.some(
+      item => item.id === id
+    )
+  ){
 
-        }
+    number++;
+
+    id =
+      "ADM" +
+      String(number).padStart(3,"0");
+
+  }
+
+
+  return id;
+
+}
+
+
+/* =========================================================
+   TOGGLE STATUS
+========================================================= */
+
+function toggleAdmin(id){
+
+  const admin =
+    admins.find(
+      item => item.id === id
+    );
+
+  if(!admin){
+    return;
+  }
+
+
+  if(admin.role === "super"){
+
+    showToast(
+      "Protected Account",
+      "The primary Super Admin cannot be deactivated."
+    );
+
+    return;
+  }
+
+
+  const nextStatus =
+    admin.status === "active"
+      ? "inactive"
+      : "active";
+
+
+  admin.status =
+    nextStatus;
+
+
+  saveAdmins();
+
+  updateStats();
+
+  renderAdmins();
+
+
+  showToast(
+    nextStatus === "active"
+      ? "Admin Activated"
+      : "Admin Deactivated",
+    `${admin.name} is now ${nextStatus}.`
+  );
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+function deleteAdmin(id){
+
+  const admin =
+    admins.find(
+      item => item.id === id
+    );
+
+  if(!admin){
+    return;
+  }
+
+
+  if(admin.role === "super"){
+
+    showToast(
+      "Protected Account",
+      "The primary Super Admin cannot be deleted."
+    );
+
+    return;
+  }
+
+
+  const confirmed =
+    window.confirm(
+      `Delete administrator "${admin.name}"?`
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  admins =
+    admins.filter(
+      item => item.id !== id
+    );
+
+
+  saveAdmins();
+
+  updateStats();
+
+  renderAdmins();
+
+
+  showToast(
+    "Admin Deleted",
+    `${admin.name} was removed from the admin list.`
+  );
+
+}
+
+
+/* =========================================================
+   TABLE ACTIONS
+========================================================= */
+
+table.addEventListener(
+  "click",
+  function(event){
+
+    const button =
+      event.target.closest(
+        "[data-action]"
       );
 
+    if(!button){
+      return;
+    }
 
-    /* =========================================
-       LOGIN
-       ========================================= */
 
-    const loginForm =
-      document.getElementById(
-        "login-form"
+    const action =
+      button.dataset.action;
+
+    const id =
+      button.dataset.id;
+
+
+    if(action === "edit"){
+      openEditModal(id);
+    }
+
+
+    if(action === "toggle"){
+      toggleAdmin(id);
+    }
+
+
+    if(action === "delete"){
+      deleteAdmin(id);
+    }
+
+  }
+);
+
+
+/* =========================================================
+   FILTER EVENTS
+========================================================= */
+
+search.addEventListener(
+  "input",
+  renderAdmins
+);
+
+roleFilter.addEventListener(
+  "change",
+  renderAdmins
+);
+
+statusFilter.addEventListener(
+  "change",
+  renderAdmins
+);
+
+
+/* =========================================================
+   MODAL EVENTS
+========================================================= */
+
+document
+  .getElementById("add-admin-btn")
+  .addEventListener(
+    "click",
+    openAddModal
+  );
+
+
+document
+  .getElementById("modal-close")
+  .addEventListener(
+    "click",
+    closeModal
+  );
+
+
+document
+  .getElementById("cancel-btn")
+  .addEventListener(
+    "click",
+    closeModal
+  );
+
+
+modal.addEventListener(
+  "click",
+  function(event){
+
+    if(event.target === modal){
+      closeModal();
+    }
+
+  }
+);
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+document
+  .getElementById("refresh-btn")
+  .addEventListener(
+    "click",
+    function(){
+
+      loadAdmins();
+
+      updateStats();
+
+      renderAdmins();
+
+      showToast(
+        "Refreshed",
+        "Administrator data has been refreshed."
       );
 
-    const loginButton =
-      document.getElementById(
-        "login-button"
+    }
+  );
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+document
+  .getElementById("mobile-menu")
+  .addEventListener(
+    "click",
+    function(){
+
+      sidebar.classList.toggle(
+        "open"
       );
 
-    const loginError =
-      document.getElementById(
-        "login-error"
+      overlay.classList.toggle(
+        "show"
       );
 
-
-    loginForm?.addEventListener(
-      "submit",
-      event => {
-
-        event.preventDefault();
+    }
+  );
 
 
-        const email =
-          document
-            .getElementById("email")
-            .value
-            .trim();
+overlay.addEventListener(
+  "click",
+  function(){
+
+    sidebar.classList.remove(
+      "open"
+    );
+
+    overlay.classList.remove(
+      "show"
+    );
+
+  }
+);
 
 
-        const password =
-          document
-            .getElementById("password")
-            .value;
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "Escape"){
+
+      closeModal();
+
+      sidebar.classList.remove(
+        "open"
+      );
+
+      overlay.classList.remove(
+        "show"
+      );
+
+    }
+
+  }
+);
 
 
-        loginError.classList.remove(
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(
+  title,
+  message
+){
+
+  document.getElementById(
+    "toast-title"
+  ).textContent = title;
+
+
+  document.getElementById(
+    "toast-message"
+  ).textContent = message;
+
+
+  const toast =
+    document.getElementById("toast");
+
+
+  toast.classList.add("show");
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      function(){
+
+        toast.classList.remove(
           "show"
         );
 
-        loginButton.classList.add(
-          "loading"
+      },
+      3200
+    );
+
+}
+
+
+document
+  .getElementById("toast-close")
+  .addEventListener(
+    "click",
+    function(){
+
+      document
+        .getElementById("toast")
+        .classList.remove("show");
+
+    }
+  );
+
+
+/* =========================================================
+   SIGN OUT
+========================================================= */
+
+document
+  .getElementById("signout")
+  .addEventListener(
+    "click",
+    function(){
+
+      const confirmed =
+        window.confirm(
+          "Are you sure you want to sign out?"
         );
 
 
-        /*
-         * DEMO LOGIN PLACEHOLDER
-         *
-         * Production version:
-         * Firebase Authentication
-         * + Firestore role checking
-         * will be connected here.
-         */
-
-
-        setTimeout(() => {
-
-          loginButton.classList.remove(
-            "loading"
-          );
-
-
-          if (
-            !email ||
-            !password
-          ) {
-
-            loginError.textContent =
-              "Email এবং password দুটোই প্রয়োজন।";
-
-            loginError.classList.add(
-              "show"
-            );
-
-            return;
-
-          }
-
-
-          /*
-           * এখনো Firebase Auth
-           * connect করা হয়নি।
-           */
-
-          showToast(
-            "Authentication Required",
-            "Firebase Authentication connect করার পর এখানে secure login চালু হবে।"
-          );
-
-
-        }, 700);
-
+      if(!confirmed){
+        return;
       }
-    );
 
-  </script>
+
+      window.location.href =
+        "index.html";
+
+    }
+  );
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+loadAdmins();
+
+updateStats();
+
+renderAdmins();
+
+</script>
 
 </body>
 </html>
