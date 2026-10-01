@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
 
@@ -8,148 +8,2062 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+  <title>Website Deals — Premium Ready-Made Websites</title>
+
+  <meta
+    name="description"
+    content="Discover premium ready-made websites for business, restaurants, agencies, e-commerce, portfolios and more."
+  >
+
   <meta
     name="theme-color"
     content="#ffffff"
   >
 
-  <meta
-    name="description"
-    content="Website Deals — Premium ready-made websites for business, restaurants, agencies, e-commerce and portfolios. Starting from ৳999."
-  >
-
-  <meta
-    name="keywords"
-    content="website deals, ready made website, website marketplace, Bangladesh website, premium website, business website, restaurant website"
-  >
-
-  <meta
-    name="author"
-    content="Website Deals"
-  >
-
-  <title>Website Deals | Premium Ready-Made Websites</title>
+  <link rel="icon" href="logo.png">
 
   <!-- =====================================================
-       FAVICON
-       ===================================================== -->
+       FONTS
+  ====================================================== -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    rel="icon"
-    type="image/png"
-    href="logo.png"
-  >
-
-  <!-- =====================================================
-       GOOGLE FONTS
-       ===================================================== -->
-
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
-
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Hind+Siliguri:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
 
   <!-- =====================================================
-       FONT AWESOME
-       ===================================================== -->
+       ICONS
+  ====================================================== -->
 
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    crossorigin="anonymous"
-    referrerpolicy="no-referrer"
   >
 
   <!-- =====================================================
        MAIN CSS
-       ===================================================== -->
+  ====================================================== -->
 
-  <link
-    rel="stylesheet"
-    href="css/style.css"
-  >
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+
+    /* =====================================================
+       ULTRA PREMIUM HOMEPAGE OVERRIDES
+    ====================================================== */
+
+    :root {
+      --wd-green: #18a957;
+      --wd-green-dark: #108344;
+      --wd-green-soft: #eaf9f0;
+      --wd-black: #101512;
+      --wd-muted: #68736d;
+      --wd-border: #e7ebe8;
+      --wd-bg: #ffffff;
+      --wd-soft: #f7f9f8;
+      --wd-shadow:
+        0 25px 70px rgba(16, 21, 18, .08);
+      --wd-shadow-hover:
+        0 35px 90px rgba(16, 21, 18, .15);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: #fff;
+      color: var(--wd-black);
+      font-family: Inter, "Hind Siliguri", sans-serif;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* =====================================================
+       TOP MARKETPLACE BAR
+    ====================================================== */
+
+    .premium-topbar {
+      min-height: 38px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #101512;
+      color: #fff;
+      font-size: 11px;
+      letter-spacing: .2px;
+    }
+
+    .premium-topbar-inner {
+      width: min(1240px, 100%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .premium-topbar-left,
+    .premium-topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .premium-topbar strong {
+      color: #fff;
+    }
+
+    .premium-topbar .green {
+      color: #73e7a2;
+    }
+
+    .premium-topbar a {
+      opacity: .82;
+      transition: .2s ease;
+    }
+
+    .premium-topbar a:hover {
+      opacity: 1;
+      color: #73e7a2;
+    }
+
+    /* =====================================================
+       HEADER
+    ====================================================== */
+
+    .premium-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.88);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(231,235,232,.85);
+    }
+
+    .premium-header-inner {
+      width: min(1240px, calc(100% - 40px));
+      min-height: 74px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .premium-brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      flex-shrink: 0;
+    }
+
+    .premium-brand img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
+
+    .premium-brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .premium-brand-text strong {
+      font-size: 16px;
+      letter-spacing: -.4px;
+    }
+
+    .premium-brand-text span {
+      margin-top: 5px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--wd-green);
+    }
+
+    .premium-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .premium-nav a {
+      padding: 9px 11px;
+      border-radius: 9px;
+      color: #56605b;
+      font-size: 12px;
+      font-weight: 600;
+      transition: .2s ease;
+    }
+
+    .premium-nav a:hover {
+      background: var(--wd-green-soft);
+      color: var(--wd-green-dark);
+    }
+
+    .premium-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .header-search-button {
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--wd-border);
+      background: #fff;
+      border-radius: 11px;
+      cursor: pointer;
+      color: #56605b;
+      transition: .2s ease;
+    }
+
+    .header-search-button:hover {
+      border-color: #b8dfc7;
+      background: var(--wd-green-soft);
+      color: var(--wd-green-dark);
+    }
+
+    .header-account {
+      height: 40px;
+      padding: 0 14px;
+      border: 1px solid var(--wd-border);
+      border-radius: 11px;
+      background: #fff;
+      color: #303934;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .header-explore {
+      height: 40px;
+      padding: 0 16px;
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--wd-green);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      box-shadow: 0 9px 25px rgba(24,169,87,.22);
+      transition: .25s ease;
+    }
+
+    .header-explore:hover {
+      background: var(--wd-green-dark);
+      transform: translateY(-1px);
+    }
+
+    .premium-mobile-menu {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--wd-border);
+      background: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    /* =====================================================
+       HERO
+    ====================================================== */
+
+    .premium-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 78px 0 85px;
+      background:
+        radial-gradient(
+          circle at 82% 20%,
+          rgba(24,169,87,.12),
+          transparent 31%
+        ),
+        radial-gradient(
+          circle at 12% 80%,
+          rgba(24,169,87,.07),
+          transparent 28%
+        ),
+        #fff;
+    }
+
+    .hero-grid {
+      width: min(1240px, calc(100% - 40px));
+      margin: auto;
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      align-items: center;
+      gap: 65px;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border: 1px solid #ccebd8;
+      border-radius: 999px;
+      background: rgba(234,249,240,.75);
+      color: var(--wd-green-dark);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+
+    .hero-eyebrow i {
+      font-size: 9px;
+    }
+
+    .hero-copy h1 {
+      margin: 20px 0 18px;
+      max-width: 650px;
+      font-size: clamp(46px, 5.3vw, 76px);
+      line-height: .98;
+      letter-spacing: -4.2px;
+      font-weight: 900;
+    }
+
+    .hero-copy h1 span {
+      color: var(--wd-green);
+    }
+
+    .hero-copy p {
+      max-width: 570px;
+      margin: 0;
+      color: var(--wd-muted);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+
+    .hero-search {
+      margin-top: 28px;
+      width: min(580px, 100%);
+      padding: 7px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid #dfe7e2;
+      border-radius: 15px;
+      background: #fff;
+      box-shadow:
+        0 16px 45px rgba(16,21,18,.08),
+        0 2px 8px rgba(16,21,18,.03);
+    }
+
+    .hero-search-icon {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--wd-green);
+    }
+
+    .hero-search input {
+      min-width: 0;
+      flex: 1;
+      height: 44px;
+      border: 0;
+      outline: 0;
+      color: var(--wd-black);
+      background: transparent;
+      font-size: 13px;
+    }
+
+    .hero-search select {
+      height: 44px;
+      border: 0;
+      border-left: 1px solid var(--wd-border);
+      outline: 0;
+      padding: 0 12px;
+      color: #5d6862;
+      background: #fff;
+      font-size: 12px;
+    }
+
+    .hero-search button {
+      height: 44px;
+      padding: 0 19px;
+      border: 0;
+      border-radius: 10px;
+      background: var(--wd-green);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .hero-search button:hover {
+      background: var(--wd-green-dark);
+    }
+
+    .hero-trust {
+      margin-top: 22px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      color: #727c76;
+      font-size: 11px;
+    }
+
+    .hero-trust span {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .hero-trust i {
+      color: var(--wd-green);
+    }
+
+    /* =====================================================
+       HERO BROWSER
+    ====================================================== */
+
+    .hero-visual {
+      position: relative;
+      min-width: 0;
+    }
+
+    .browser-window {
+      position: relative;
+      border: 1px solid #dfe6e1;
+      border-radius: 20px;
+      background: #fff;
+      overflow: hidden;
+      box-shadow:
+        0 40px 100px rgba(15,22,18,.15),
+        0 10px 25px rgba(15,22,18,.06);
+      transform: perspective(1200px) rotateY(-3deg) rotateX(2deg);
+      transition: transform .5s ease;
+    }
+
+    .browser-window:hover {
+      transform: perspective(1200px) rotateY(0) rotateX(0) translateY(-5px);
+    }
+
+    .browser-toolbar {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 15px;
+      border-bottom: 1px solid #edf0ee;
+      background: #fafbfa;
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .browser-dots i {
+      width: 8px;
+      height: 8px;
+      display: block;
+      border-radius: 50%;
+      background: #d4dad6;
+    }
+
+    .browser-address {
+      height: 27px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
+      border-radius: 7px;
+      background: #f0f3f1;
+      color: #8b948e;
+      font-size: 9px;
+    }
+
+    .browser-address i {
+      margin-right: 6px;
+      color: var(--wd-green);
+    }
+
+    .browser-preview {
+      position: relative;
+      min-height: 375px;
+      overflow: hidden;
+      background:
+        linear-gradient(
+          135deg,
+          #11251b,
+          #163e2a
+        );
+    }
+
+    .browser-preview::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(0,0,0,.42),
+          rgba(0,0,0,.04)
+        );
+    }
+
+    .browser-preview-content {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      padding: 32px;
+      color: #fff;
+    }
+
+    .preview-mini-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .preview-mini-logo {
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .preview-mini-links {
+      display: flex;
+      gap: 14px;
+      font-size: 8px;
+      opacity: .8;
+    }
+
+    .preview-main {
+      max-width: 380px;
+      margin-top: 78px;
+    }
+
+    .preview-main small {
+      color: #a9efc5;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .preview-main h3 {
+      margin: 10px 0 12px;
+      font-size: 38px;
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .preview-main p {
+      max-width: 280px;
+      margin: 0;
+      font-size: 9px;
+      line-height: 1.7;
+      opacity: .72;
+    }
+
+    .preview-button {
+      margin-top: 18px;
+      width: fit-content;
+      padding: 9px 13px;
+      border-radius: 7px;
+      background: #fff;
+      color: #173c28;
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .preview-floating-card {
+      position: absolute;
+      z-index: 4;
+      right: 25px;
+      bottom: 24px;
+      width: 145px;
+      padding: 13px;
+      border: 1px solid rgba(255,255,255,.24);
+      border-radius: 12px;
+      background: rgba(255,255,255,.13);
+      backdrop-filter: blur(15px);
+      color: #fff;
+      box-shadow: 0 15px 35px rgba(0,0,0,.18);
+    }
+
+    .preview-floating-card span {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 8px;
+      opacity: .65;
+    }
+
+    .preview-floating-card strong {
+      font-size: 16px;
+    }
+
+    .hero-floating-badge {
+      position: absolute;
+      z-index: 10;
+      left: -24px;
+      bottom: 35px;
+      padding: 12px 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid #e4ebe7;
+      border-radius: 13px;
+      background: rgba(255,255,255,.94);
+      box-shadow: 0 18px 40px rgba(15,22,18,.12);
+      animation: floatCard 4s ease-in-out infinite;
+    }
+
+    .hero-floating-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--wd-green-soft);
+      color: var(--wd-green);
+    }
+
+    .hero-floating-badge strong {
+      display: block;
+      font-size: 11px;
+    }
+
+    .hero-floating-badge span {
+      display: block;
+      margin-top: 2px;
+      color: #7c857f;
+      font-size: 9px;
+    }
+
+    @keyframes floatCard {
+      0%,100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-8px);
+      }
+    }
+
+    /* =====================================================
+       STATS STRIP
+    ====================================================== */
+
+    .premium-stats {
+      border-top: 1px solid var(--wd-border);
+      border-bottom: 1px solid var(--wd-border);
+      background: #fff;
+    }
+
+    .premium-stats-inner {
+      width: min(1100px, calc(100% - 40px));
+      margin: auto;
+      min-height: 100px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .premium-stat {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      text-align: center;
+    }
+
+    .premium-stat:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 25%;
+      height: 50%;
+      width: 1px;
+      background: var(--wd-border);
+    }
+
+    .premium-stat strong {
+      font-size: 20px;
+      letter-spacing: -.5px;
+    }
+
+    .premium-stat span {
+      color: #778079;
+      font-size: 10px;
+    }
+
+    /* =====================================================
+       SECTION SYSTEM
+    ====================================================== */
+
+    .premium-section {
+      padding: 95px 0;
+    }
+
+    .premium-section.soft {
+      background: #f8faf9;
+    }
+
+    .premium-container {
+      width: min(1240px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 25px;
+      margin-bottom: 34px;
+    }
+
+    .section-kicker {
+      margin-bottom: 8px;
+      color: var(--wd-green-dark);
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(28px, 3vw, 42px);
+      line-height: 1.08;
+      letter-spacing: -1.7px;
+    }
+
+    .section-heading p {
+      max-width: 430px;
+      margin: 0;
+      color: var(--wd-muted);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .section-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--wd-green-dark);
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    /* =====================================================
+       CATEGORY CARDS
+    ====================================================== */
+
+    .premium-category-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+
+    .premium-category-card {
+      position: relative;
+      min-height: 150px;
+      padding: 19px;
+      border: 1px solid var(--wd-border);
+      border-radius: 17px;
+      background: #fff;
+      overflow: hidden;
+      transition: .3s ease;
+    }
+
+    .premium-category-card::after {
+      content: "";
+      position: absolute;
+      right: -30px;
+      bottom: -30px;
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: var(--wd-green-soft);
+      opacity: .7;
+      transition: .3s ease;
+    }
+
+    .premium-category-card:hover {
+      border-color: #bfe5cc;
+      transform: translateY(-6px);
+      box-shadow: var(--wd-shadow);
+    }
+
+    .premium-category-card:hover::after {
+      transform: scale(1.4);
+    }
+
+    .category-icon-premium {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--wd-green-soft);
+      color: var(--wd-green-dark);
+      margin-bottom: 22px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .premium-category-card strong {
+      position: relative;
+      z-index: 2;
+      display: block;
+      font-size: 13px;
+    }
+
+    .premium-category-card span {
+      position: relative;
+      z-index: 2;
+      display: block;
+      margin-top: 5px;
+      color: #7b847e;
+      font-size: 9px;
+    }
+
+    /* =====================================================
+       MARKETPLACE TOOLBAR
+    ====================================================== */
+
+    .marketplace-panel {
+      border: 1px solid var(--wd-border);
+      border-radius: 23px;
+      background: #fff;
+      box-shadow: 0 20px 60px rgba(16,21,18,.055);
+      overflow: hidden;
+    }
+
+    .marketplace-toolbar {
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      border-bottom: 1px solid var(--wd-border);
+      background: #fcfdfc;
+    }
+
+    .marketplace-toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .marketplace-toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .premium-filter {
+      height: 37px;
+      padding: 0 12px;
+      border: 1px solid var(--wd-border);
+      border-radius: 9px;
+      background: #fff;
+      color: #55605a;
+      outline: none;
+      font-size: 10px;
+      cursor: pointer;
+    }
+
+    .premium-filter:focus {
+      border-color: #a9d9b9;
+    }
+
+    .marketplace-list-wrap {
+      padding: 25px;
+    }
+
+    /* =====================================================
+       WEBSITE CARDS
+    ====================================================== */
+
+    .premium-website-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 20px;
+    }
+
+    .premium-website-card {
+      position: relative;
+      border: 1px solid var(--wd-border);
+      border-radius: 18px;
+      background: #fff;
+      overflow: hidden;
+      transition: .35s ease;
+    }
+
+    .premium-website-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--wd-shadow-hover);
+      border-color: #c8e6d2;
+    }
+
+    .premium-website-preview {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #edf1ee;
+    }
+
+    .premium-website-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .55s ease;
+    }
+
+    .premium-website-card:hover
+    .premium-website-preview img {
+      transform: scale(1.045);
+    }
+
+    .premium-browser-mini {
+      position: absolute;
+      inset: 12px;
+      overflow: hidden;
+      border-radius: 11px;
+      border: 1px solid rgba(255,255,255,.5);
+      box-shadow: 0 15px 35px rgba(0,0,0,.16);
+    }
+
+    .premium-browser-mini-top {
+      height: 22px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0 7px;
+      background: rgba(255,255,255,.94);
+    }
+
+    .premium-browser-mini-top i {
+      width: 4px;
+      height: 4px;
+      display: block;
+      border-radius: 50%;
+      background: #c7cec9;
+    }
+
+    .premium-browser-mini-body {
+      height: calc(100% - 22px);
+      background: #e8ece9;
+    }
+
+    .premium-browser-mini-body img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .premium-card-badges {
+      position: absolute;
+      top: 22px;
+      left: 22px;
+      z-index: 5;
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+
+    .premium-badge {
+      padding: 5px 8px;
+      border-radius: 6px;
+      background: rgba(16,21,18,.83);
+      color: #fff;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+    }
+
+    .premium-badge.green {
+      background: var(--wd-green);
+    }
+
+    .premium-badge.sale {
+      background: #f1a51b;
+    }
+
+    .premium-card-preview {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      z-index: 5;
+      width: 37px;
+      height: 37px;
+      border: 1px solid rgba(255,255,255,.6);
+      border-radius: 10px;
+      background: rgba(255,255,255,.94);
+      color: var(--wd-black);
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0,0,0,.12);
+      transition: .2s ease;
+    }
+
+    .premium-card-preview:hover {
+      color: var(--wd-green-dark);
+      transform: scale(1.06);
+    }
+
+    .premium-card-body {
+      padding: 18px;
+    }
+
+    .premium-card-category {
+      color: var(--wd-green-dark);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .premium-card-title {
+      margin: 7px 0 6px;
+      font-size: 16px;
+      letter-spacing: -.4px;
+    }
+
+    .premium-card-description {
+      min-height: 35px;
+      margin: 0;
+      color: #7a847e;
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .premium-card-meta {
+      margin-top: 15px;
+      padding-top: 14px;
+      border-top: 1px solid #edf0ee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .premium-rating {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .premium-rating i {
+      color: #f2aa22;
+    }
+
+    .premium-sales {
+      color: #818a85;
+      font-size: 9px;
+    }
+
+    .premium-price-row {
+      margin-top: 14px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .premium-price small {
+      display: block;
+      margin-bottom: 2px;
+      color: #88918b;
+      font-size: 8px;
+    }
+
+    .premium-price strong {
+      font-size: 20px;
+      letter-spacing: -.7px;
+    }
+
+    .premium-buy {
+      height: 38px;
+      padding: 0 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 0;
+      border-radius: 9px;
+      background: var(--wd-black);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .premium-buy:hover {
+      background: var(--wd-green);
+    }
+
+    /* =====================================================
+       DYNAMIC CONTAINER COMPATIBILITY
+    ====================================================== */
+
+    #website-list,
+    #popular-list,
+    #new-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      gap: 20px;
+    }
+
+    #website-list > *,
+    #popular-list > *,
+    #new-list > * {
+      min-width: 0;
+    }
+
+    #empty-state {
+      grid-column: 1 / -1;
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* =====================================================
+       FEATURE COLLECTION
+    ====================================================== */
+
+    .collection-section {
+      padding-top: 25px;
+    }
+
+    .collection-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .collection-card {
+      position: relative;
+      min-height: 235px;
+      padding: 25px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #101512;
+      color: #fff;
+    }
+
+    .collection-card:nth-child(2) {
+      background: #163e2a;
+    }
+
+    .collection-card:nth-child(3) {
+      background: #eef8f1;
+      color: var(--wd-black);
+    }
+
+    .collection-card::after {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      right: -65px;
+      bottom: -75px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.07);
+    }
+
+    .collection-card i {
+      font-size: 22px;
+      color: #6ee99d;
+    }
+
+    .collection-card h3 {
+      position: relative;
+      z-index: 2;
+      max-width: 240px;
+      margin: 35px 0 8px;
+      font-size: 22px;
+      line-height: 1.1;
+      letter-spacing: -.8px;
+    }
+
+    .collection-card p {
+      position: relative;
+      z-index: 2;
+      max-width: 270px;
+      margin: 0;
+      color: rgba(255,255,255,.65);
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    .collection-card:nth-child(3) p {
+      color: #718078;
+    }
+
+    /* =====================================================
+       MONTHLY PACKAGE
+    ====================================================== */
+
+    .monthly-section {
+      padding: 100px 0;
+      background:
+        radial-gradient(
+          circle at 15% 30%,
+          rgba(24,169,87,.18),
+          transparent 30%
+        ),
+        #101512;
+      color: #fff;
+    }
+
+    .monthly-container {
+      width: min(1100px, calc(100% - 40px));
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 75px;
+      align-items: center;
+    }
+
+    .monthly-copy .section-kicker {
+      color: #6ee99d;
+    }
+
+    .monthly-copy h2 {
+      max-width: 600px;
+      margin: 0;
+      font-size: clamp(34px, 4vw, 55px);
+      line-height: 1;
+      letter-spacing: -2.5px;
+    }
+
+    .monthly-copy p {
+      max-width: 550px;
+      margin: 20px 0 0;
+      color: rgba(255,255,255,.62);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .monthly-features {
+      margin-top: 25px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 11px;
+    }
+
+    .monthly-feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,.78);
+      font-size: 10px;
+    }
+
+    .monthly-feature i {
+      color: #6ee99d;
+    }
+
+    .monthly-card {
+      position: relative;
+      padding: 28px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 22px;
+      background: rgba(255,255,255,.065);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 35px 70px rgba(0,0,0,.28);
+    }
+
+    .monthly-card-label {
+      display: inline-flex;
+      padding: 6px 9px;
+      border-radius: 7px;
+      background: rgba(110,233,157,.12);
+      color: #6ee99d;
+      font-size: 8px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    .monthly-card h3 {
+      margin: 20px 0 6px;
+      font-size: 23px;
+    }
+
+    .monthly-price {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      margin-top: 15px;
+    }
+
+    .monthly-price strong {
+      font-size: 43px;
+      letter-spacing: -2px;
+    }
+
+    .monthly-price span {
+      color: rgba(255,255,255,.55);
+      font-size: 10px;
+    }
+
+    .monthly-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 25px 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .monthly-card li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,.7);
+      font-size: 10px;
+    }
+
+    .monthly-card li i {
+      color: #6ee99d;
+    }
+
+    .monthly-cta {
+      width: 100%;
+      height: 45px;
+      border: 0;
+      border-radius: 10px;
+      background: #fff;
+      color: #101512;
+      font-weight: 900;
+      font-size: 11px;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .monthly-cta:hover {
+      background: #6ee99d;
+    }
+
+    /* =====================================================
+       WHY US
+    ====================================================== */
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .why-card {
+      padding: 27px;
+      border: 1px solid var(--wd-border);
+      border-radius: 18px;
+      background: #fff;
+      transition: .3s ease;
+    }
+
+    .why-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--wd-shadow);
+    }
+
+    .why-number {
+      color: #a7b0aa;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .why-icon {
+      width: 46px;
+      height: 46px;
+      margin: 25px 0 18px;
+      border-radius: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--wd-green-soft);
+      color: var(--wd-green-dark);
+    }
+
+    .why-card h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .why-card p {
+      margin: 0;
+      color: var(--wd-muted);
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    /* =====================================================
+       CTA
+    ====================================================== */
+
+    .premium-cta {
+      padding: 100px 0;
+      background: #f7faf8;
+    }
+
+    .cta-box {
+      position: relative;
+      overflow: hidden;
+      width: min(1100px, calc(100% - 40px));
+      margin: auto;
+      padding: 70px;
+      border-radius: 25px;
+      background:
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(110,233,157,.22),
+          transparent 30%
+        ),
+        #eaf8f0;
+      text-align: center;
+    }
+
+    .cta-box h2 {
+      max-width: 650px;
+      margin: auto;
+      font-size: clamp(32px, 4vw, 50px);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .cta-box p {
+      max-width: 500px;
+      margin: 18px auto 0;
+      color: #69756e;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .cta-buttons {
+      margin-top: 27px;
+      display: flex;
+      justify-content: center;
+      gap: 9px;
+      flex-wrap: wrap;
+    }
+
+    .cta-primary,
+    .cta-secondary {
+      min-height: 43px;
+      padding: 0 18px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .cta-primary {
+      background: var(--wd-green);
+      color: #fff;
+    }
+
+    .cta-secondary {
+      border: 1px solid #cbded1;
+      background: rgba(255,255,255,.6);
+      color: #25302a;
+    }
+
+    /* =====================================================
+       NEWSLETTER
+    ====================================================== */
+
+    .premium-newsletter {
+      padding: 70px 0;
+      border-top: 1px solid var(--wd-border);
+      background: #fff;
+    }
+
+    .newsletter-inner {
+      width: min(900px, calc(100% - 40px));
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .newsletter-copy h3 {
+      margin: 0 0 6px;
+      font-size: 20px;
+      letter-spacing: -.6px;
+    }
+
+    .newsletter-copy p {
+      margin: 0;
+      color: var(--wd-muted);
+      font-size: 10px;
+    }
+
+    .newsletter-form {
+      width: min(420px, 100%);
+      display: flex;
+      padding: 5px;
+      border: 1px solid var(--wd-border);
+      border-radius: 11px;
+      background: #fff;
+    }
+
+    .newsletter-form input {
+      min-width: 0;
+      flex: 1;
+      border: 0;
+      outline: 0;
+      padding: 0 10px;
+      font-size: 10px;
+    }
+
+    .newsletter-form button {
+      height: 36px;
+      padding: 0 13px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--wd-green);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    /* =====================================================
+       FOOTER
+    ====================================================== */
+
+    .premium-footer {
+      padding: 60px 0 25px;
+      background: #101512;
+      color: #fff;
+    }
+
+    .footer-inner {
+      width: min(1240px, calc(100% - 40px));
+      margin: auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.6fr repeat(3, 1fr);
+      gap: 50px;
+      padding-bottom: 45px;
+    }
+
+    .footer-brand {
+      max-width: 300px;
+    }
+
+    .footer-brand a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-brand img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      background: #fff;
+      border-radius: 9px;
+    }
+
+    .footer-brand strong {
+      font-size: 16px;
+    }
+
+    .footer-brand p {
+      margin: 18px 0 0;
+      color: rgba(255,255,255,.5);
+      font-size: 10px;
+      line-height: 1.8;
+    }
+
+    .footer-col h4 {
+      margin: 0 0 16px;
+      font-size: 10px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .footer-col a {
+      display: block;
+      margin: 10px 0;
+      color: rgba(255,255,255,.52);
+      font-size: 10px;
+      transition: .2s ease;
+    }
+
+    .footer-col a:hover {
+      color: #6ee99d;
+    }
+
+    .footer-bottom {
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.09);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: rgba(255,255,255,.4);
+      font-size: 9px;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 7px;
+    }
+
+    .footer-social a {
+      width: 31px;
+      height: 31px;
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,.55);
+    }
+
+    .footer-social a:hover {
+      color: #6ee99d;
+      border-color: rgba(110,233,157,.4);
+    }
+
+    /* =====================================================
+       SEARCH OVERLAY
+    ====================================================== */
+
+    .premium-search-panel {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: none;
+      background: rgba(10,14,12,.62);
+      backdrop-filter: blur(12px);
+      padding: 90px 20px;
+    }
+
+    .premium-search-panel.show {
+      display: block;
+    }
+
+    .premium-search-modal {
+      width: min(760px, 100%);
+      margin: auto;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 40px 100px rgba(0,0,0,.25);
+      overflow: hidden;
+    }
+
+    .premium-search-head {
+      padding: 20px;
+      display: flex;
+      gap: 10px;
+      border-bottom: 1px solid var(--wd-border);
+    }
+
+    .premium-search-head input {
+      flex: 1;
+      min-width: 0;
+      height: 48px;
+      border: 1px solid var(--wd-border);
+      border-radius: 10px;
+      outline: none;
+      padding: 0 14px;
+    }
+
+    .premium-search-close {
+      width: 48px;
+      border: 1px solid var(--wd-border);
+      border-radius: 10px;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    /* =====================================================
+       BUY MODAL
+    ====================================================== */
+
+    #buy-modal {
+      backdrop-filter: blur(8px);
+    }
+
+    /* =====================================================
+       MOBILE
+    ====================================================== */
+
+    @media (max-width: 1100px) {
+
+      .premium-nav {
+        display: none;
+      }
+
+      .premium-mobile-menu {
+        display: block;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 55px;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-eyebrow,
+      .hero-search {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-trust {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        width: min(760px, 100%);
+        margin: auto;
+      }
+
+      .premium-category-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .premium-website-grid,
+      #website-list,
+      #popular-list,
+      #new-list {
+        grid-template-columns: repeat(2, minmax(0,1fr));
+      }
+
+      .monthly-container {
+        grid-template-columns: 1fr;
+        gap: 45px;
+      }
+
+      .monthly-card {
+        width: min(430px, 100%);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1.5fr 1fr 1fr;
+      }
+
+      .footer-grid .footer-col:last-child {
+        display: none;
+      }
+    }
+
+    @media (max-width: 760px) {
+
+      .premium-topbar {
+        padding: 0 14px;
+      }
+
+      .premium-topbar-left {
+        display: none;
+      }
+
+      .premium-topbar-inner {
+        justify-content: center;
+      }
+
+      .premium-header-inner {
+        width: min(100% - 24px, 1240px);
+        min-height: 66px;
+      }
+
+      .header-account,
+      .header-explore {
+        display: none;
+      }
+
+      .premium-hero {
+        padding: 58px 0 65px;
+      }
+
+      .hero-grid {
+        width: min(100% - 28px, 1240px);
+      }
+
+      .hero-copy h1 {
+        font-size: clamp(41px, 13vw, 61px);
+        letter-spacing: -3px;
+      }
+
+      .hero-copy p {
+        font-size: 13px;
+      }
+
+      .hero-search {
+        display: grid;
+        grid-template-columns: 1fr;
+        padding: 8px;
+      }
+
+      .hero-search-icon {
+        display: none;
+      }
+
+      .hero-search select {
+        border: 1px solid var(--wd-border);
+        border-radius: 8px;
+      }
+
+      .hero-search button {
+        width: 100%;
+      }
+
+      .browser-preview {
+        min-height: 300px;
+      }
+
+      .preview-main {
+        margin-top: 48px;
+      }
+
+      .preview-main h3 {
+        font-size: 28px;
+      }
+
+      .hero-floating-badge {
+        left: 12px;
+        bottom: -16px;
+      }
+
+      .premium-stats-inner {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .premium-stat {
+        min-height: 85px;
+      }
+
+      .premium-stat:nth-child(2)::after {
+        display: none;
+      }
+
+      .premium-section {
+        padding: 70px 0;
+      }
+
+      .premium-container {
+        width: min(100% - 28px, 1240px);
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .premium-category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .marketplace-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .marketplace-toolbar-right {
+        width: 100%;
+      }
+
+      .premium-filter {
+        flex: 1;
+      }
+
+      .marketplace-list-wrap {
+        padding: 14px;
+      }
+
+      .premium-website-grid,
+      #website-list,
+      #popular-list,
+      #new-list {
+        grid-template-columns: 1fr;
+      }
+
+      .collection-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .monthly-container {
+        width: min(100% - 28px, 1100px);
+      }
+
+      .monthly-features {
+        grid-template-columns: 1fr;
+      }
+
+      .cta-box {
+        width: min(100% - 28px, 1100px);
+        padding: 48px 22px;
+      }
+
+      .newsletter-inner {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 35px;
+      }
+
+      .footer-grid .footer-brand {
+        grid-column: 1 / -1;
+      }
+
+      .footer-grid .footer-col:last-child {
+        display: block;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 430px) {
+
+      .premium-category-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .premium-category-card {
+        min-height: 135px;
+        padding: 15px;
+      }
+
+      .category-icon-premium {
+        width: 37px;
+        height: 37px;
+        margin-bottom: 18px;
+      }
+
+      .browser-toolbar {
+        height: 40px;
+      }
+
+      .browser-preview {
+        min-height: 260px;
+      }
+
+      .browser-preview-content {
+        padding: 22px;
+      }
+
+      .preview-mini-links {
+        display: none;
+      }
+
+      .preview-main {
+        margin-top: 48px;
+      }
+
+      .preview-floating-card {
+        display: none;
+      }
+    }
+
+  </style>
 </head>
 
 <body>
 
   <!-- =====================================================
-       PAGE LOADER
-       ===================================================== -->
+       TOP BAR
+  ====================================================== -->
 
-  <div
-    class="page-loader"
-    id="page-loader"
-    aria-hidden="true"
-  >
-    <div class="loader-inner">
-      <div class="loader-logo">
-        WD
-      </div>
+  <div class="premium-topbar">
 
-      <div class="loader-line"></div>
+    <div class="premium-topbar-inner">
 
-      <span>
-        Loading premium websites...
-      </span>
-    </div>
-  </div>
+      <div class="premium-topbar-left">
 
-
-  <!-- =====================================================
-       TOP MARKETPLACE BAR
-       ===================================================== -->
-
-  <div class="top-market-bar">
-
-    <div class="container top-market-inner">
-
-      <div class="top-market-left">
-
-        <span class="top-market-item">
-          <i class="fa-solid fa-circle-check"></i>
+        <span>
+          <i class="fa-solid fa-circle-check green"></i>
           Premium Website Marketplace
         </span>
 
-        <span class="top-market-item top-market-price">
-          Ready-made websites from ৳999
+        <span>
+          Ready-made websites from
+          <strong>৳999</strong>
         </span>
 
       </div>
 
+      <div class="premium-topbar-right">
 
-      <div class="top-market-right">
-
-        <a
-          href="#"
-          class="top-market-link"
-          data-action="seller"
-        >
-          Become a Seller
+        <a href="#websites">
+          Explore Websites
         </a>
 
-        <a
-          href="#"
-          class="top-market-link"
-          data-action="help"
-        >
-          Help Center
+        <a href="#monthly">
+          Monthly
         </a>
 
-        <span class="country-selector">
-          <span class="country-flag">🇧🇩</span>
+        <span>
+          <i class="fa-solid fa-location-dot"></i>
           Bangladesh
-          <i class="fa-solid fa-chevron-down"></i>
         </span>
 
       </div>
@@ -158,142 +2072,88 @@
 
   </div>
 
-
   <!-- =====================================================
-       MAIN HEADER
-       ===================================================== -->
+       HEADER
+  ====================================================== -->
 
-  <header
-    class="main-header"
-    id="main-header"
-  >
+  <header class="premium-header">
 
-    <div class="container header-inner">
-
-      <!-- LOGO -->
+    <div class="premium-header-inner">
 
       <a
         href="index.html"
-        class="brand"
-        aria-label="Website Deals Home"
+        class="premium-brand"
       >
 
         <img
           src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
           alt="Website Deals"
-          class="brand-logo"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
         >
 
-        <span
-          class="brand-fallback"
-          style="display:none;"
-        >
-          WD
-        </span>
-
-        <span class="brand-text">
-
-          <strong>
-            Website
-          </strong>
-
-          <span>
-            Deals
-          </span>
-
-        </span>
+        <div class="premium-brand-text">
+          <strong>Website Deals</strong>
+          <span>Ready. Launch. Grow.</span>
+        </div>
 
       </a>
 
+      <nav class="premium-nav">
 
-      <!-- DESKTOP NAV -->
-
-      <nav
-        class="main-nav"
-        id="main-nav"
-        aria-label="Main navigation"
-      >
-
-        <a
-          href="#websites"
-          class="nav-link active"
-        >
+        <a href="#websites">
           Websites
         </a>
 
-        <a
-          href="#categories"
-          class="nav-link"
-        >
+        <a href="#categories">
           Categories
         </a>
 
-        <a
-          href="#popular"
-          class="nav-link"
-        >
+        <a href="#popular">
           Popular
         </a>
 
-        <a
-          href="#new-websites"
-          class="nav-link"
-        >
+        <a href="#new">
           New
         </a>
 
-        <a
-          href="#monthly"
-          class="nav-link"
-        >
+        <a href="#monthly">
           Monthly
         </a>
 
       </nav>
 
-
-      <!-- HEADER ACTIONS -->
-
-      <div class="header-actions">
+      <div class="premium-header-actions">
 
         <button
           type="button"
           class="header-search-button"
           id="open-search"
-          aria-label="Search websites"
+          aria-label="Search"
         >
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
-
 
         <a
           href="#websites"
           class="header-explore"
         >
           Explore
+          <i class="fa-solid fa-arrow-right"></i>
         </a>
 
-
-        <button
-          type="button"
-          class="account-button"
-          id="account-button"
-          aria-label="Account"
+        <a
+          href="#"
+          class="header-account"
+          id="account-link"
         >
           <i class="fa-regular fa-user"></i>
-          <span>
-            Account
-          </span>
-        </button>
-
+          Account
+        </a>
 
         <button
           type="button"
-          class="mobile-menu-button"
-          id="mobile-menu-button"
-          aria-label="Open menu"
-          aria-expanded="false"
+          class="premium-mobile-menu"
+          id="premium-mobile-menu"
+          aria-label="Menu"
         >
           <i class="fa-solid fa-bars"></i>
         </button>
@@ -304,294 +2164,51 @@
 
   </header>
 
-
-  <!-- =====================================================
-       SEARCH OVERLAY
-       ===================================================== -->
-
-  <section
-    class="search-panel"
-    id="search-panel"
-    aria-hidden="true"
-  >
-
-    <div class="container search-panel-inner">
-
-      <div class="search-panel-header">
-
-        <div>
-
-          <span class="section-kicker">
-            Website Search
-          </span>
-
-          <h2>
-            Find your next website
-          </h2>
-
-        </div>
-
-        <button
-          type="button"
-          class="search-close"
-          id="close-search"
-          aria-label="Close search"
-        >
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-
-      </div>
-
-
-      <div class="search-box-large">
-
-        <i class="fa-solid fa-magnifying-glass"></i>
-
-        <input
-          type="search"
-          id="website-search"
-          placeholder="Search business, restaurant, agency, portfolio..."
-          autocomplete="off"
-        >
-
-        <button
-          type="button"
-          id="clear-search"
-          aria-label="Clear search"
-        >
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-
-      </div>
-
-
-      <div class="search-suggestions">
-
-        <span>
-          Popular:
-        </span>
-
-        <button
-          type="button"
-          data-search-term="Business"
-        >
-          Business
-        </button>
-
-        <button
-          type="button"
-          data-search-term="Restaurant"
-        >
-          Restaurant
-        </button>
-
-        <button
-          type="button"
-          data-search-term="Agency"
-        >
-          Agency
-        </button>
-
-        <button
-          type="button"
-          data-search-term="Portfolio"
-        >
-          Portfolio
-        </button>
-
-        <button
-          type="button"
-          data-search-term="E-commerce"
-        >
-          E-commerce
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =====================================================
-       MOBILE NAVIGATION
-       ===================================================== -->
-
-  <div
-    class="mobile-nav-overlay"
-    id="mobile-nav-overlay"
-  ></div>
-
-
-  <aside
-    class="mobile-nav"
-    id="mobile-nav"
-    aria-hidden="true"
-  >
-
-    <div class="mobile-nav-header">
-
-      <a
-        href="index.html"
-        class="brand"
-      >
-
-        <span class="brand-fallback">
-          WD
-        </span>
-
-        <span class="brand-text">
-
-          <strong>
-            Website
-          </strong>
-
-          <span>
-            Deals
-          </span>
-
-        </span>
-
-      </a>
-
-
-      <button
-        type="button"
-        id="mobile-nav-close"
-        class="mobile-nav-close"
-        aria-label="Close menu"
-      >
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-
-    </div>
-
-
-    <nav class="mobile-nav-links">
-
-      <a href="#websites">
-        <i class="fa-solid fa-layer-group"></i>
-        Websites
-      </a>
-
-      <a href="#categories">
-        <i class="fa-solid fa-grid-2"></i>
-        Categories
-      </a>
-
-      <a href="#popular">
-        <i class="fa-solid fa-fire"></i>
-        Popular
-      </a>
-
-      <a href="#new-websites">
-        <i class="fa-solid fa-sparkles"></i>
-        New Websites
-      </a>
-
-      <a href="#monthly">
-        <i class="fa-solid fa-calendar-days"></i>
-        Monthly
-      </a>
-
-    </nav>
-
-
-    <div class="mobile-nav-bottom">
-
-      <a
-        href="#"
-        data-action="seller"
-        class="mobile-nav-secondary"
-      >
-        Become a Seller
-      </a>
-
-      <a
-        href="#"
-        data-action="help"
-        class="mobile-nav-secondary"
-      >
-        Help Center
-      </a>
-
-    </div>
-
-  </aside>
-
-
   <!-- =====================================================
        HERO
-       ===================================================== -->
+  ====================================================== -->
 
   <main>
 
-    <section class="hero">
+    <section class="premium-hero">
 
-      <div class="hero-background-shape hero-shape-one"></div>
-      <div class="hero-background-shape hero-shape-two"></div>
+      <div class="hero-grid">
 
-      <div class="container hero-grid">
+        <div class="hero-copy">
 
-        <!-- HERO COPY -->
-
-        <div class="hero-content">
-
-          <div class="hero-badge">
-
-            <span class="hero-badge-dot"></span>
-
-            Premium websites. Ready today.
-
+          <div class="hero-eyebrow">
+            <i class="fa-solid fa-sparkles"></i>
+            Premium websites. Ready to launch.
           </div>
 
-
-          <h1 class="hero-title">
-
+          <h1>
             Your next website
-            <span>
-              is already built.
-            </span>
-
+            is already
+            <span>built.</span>
           </h1>
 
-
-          <p class="hero-description">
-
-            Discover professionally designed, ready-made websites
-            for businesses, restaurants, agencies, creators and
-            online stores.
-
+          <p>
+            Discover professionally designed websites you can
+            preview, purchase and launch faster — without starting
+            everything from zero.
           </p>
 
+          <div class="hero-search">
 
-          <!-- HERO SEARCH -->
-
-          <form
-            class="hero-search"
-            id="hero-search-form"
-          >
-
-            <div class="hero-search-input">
-
+            <div class="hero-search-icon">
               <i class="fa-solid fa-magnifying-glass"></i>
-
-              <input
-                type="search"
-                id="hero-search"
-                placeholder="What kind of website do you need?"
-                autocomplete="off"
-              >
-
             </div>
 
-
-            <select
-              id="hero-category"
-              aria-label="Website category"
+            <input
+              type="search"
+              id="hero-search"
+              placeholder="Search websites..."
+              autocomplete="off"
             >
 
-              <option value="">
+            <select id="hero-category">
+
+              <option value="all">
                 All Categories
               </option>
 
@@ -621,129 +2238,49 @@
 
             </select>
 
-
             <button
-              type="submit"
-              class="hero-search-button"
+              type="button"
+              id="hero-search-button"
             >
               Search
-              <i class="fa-solid fa-arrow-right"></i>
             </button>
-
-          </form>
-
-
-          <!-- POPULAR SEARCHES -->
-
-          <div class="hero-popular">
-
-            <span>
-              Popular:
-            </span>
-
-            <a href="#websites" data-category-link="business">
-              Business
-            </a>
-
-            <a href="#websites" data-category-link="restaurant">
-              Restaurant
-            </a>
-
-            <a href="#websites" data-category-link="agency">
-              Agency
-            </a>
-
-            <a href="#websites" data-category-link="portfolio">
-              Portfolio
-            </a>
 
           </div>
 
+          <div class="hero-trust">
 
-          <!-- HERO STATS -->
+            <span>
+              <i class="fa-solid fa-check"></i>
+              Ready-made
+            </span>
 
-          <div class="hero-stats">
+            <span>
+              <i class="fa-solid fa-check"></i>
+              Responsive
+            </span>
 
-            <div class="hero-stat">
-
-              <strong>
-                100+
-              </strong>
-
-              <span>
-                Website Designs
-              </span>
-
-            </div>
-
-
-            <div class="hero-stat">
-
-              <strong>
-                ৳999
-              </strong>
-
-              <span>
-                Starting Price
-              </span>
-
-            </div>
-
-
-            <div class="hero-stat">
-
-              <strong>
-                24/7
-              </strong>
-
-              <span>
-                Online Access
-              </span>
-
-            </div>
+            <span>
+              <i class="fa-solid fa-check"></i>
+              Preview before buying
+            </span>
 
           </div>
 
         </div>
 
-
-        <!-- HERO BROWSER PREVIEW -->
+        <!-- HERO BROWSER -->
 
         <div class="hero-visual">
 
-          <div class="hero-floating-card hero-floating-top">
-
-            <div class="floating-icon">
-              <i class="fa-solid fa-bolt"></i>
-            </div>
-
-            <div>
-
-              <strong>
-                Ready to launch
-              </strong>
-
-              <span>
-                No design from scratch
-              </span>
-
-            </div>
-
-          </div>
-
-
           <div class="browser-window">
 
-            <div class="browser-top">
+            <div class="browser-toolbar">
 
               <div class="browser-dots">
-
-                <span></span>
-                <span></span>
-                <span></span>
-
+                <i></i>
+                <i></i>
+                <i></i>
               </div>
-
 
               <div class="browser-address">
 
@@ -753,63 +2290,60 @@
 
               </div>
 
-
-              <div class="browser-actions">
-
-                <i class="fa-solid fa-ellipsis"></i>
-
-              </div>
-
             </div>
 
+            <div class="browser-preview">
 
-            <div class="browser-screen">
+              <div class="browser-preview-content">
 
-              <div class="browser-screen-nav">
+                <div class="preview-mini-nav">
 
-                <div class="browser-logo"></div>
+                  <div class="preview-mini-logo">
+                    NOVA
+                  </div>
 
-                <div class="browser-nav-lines">
+                  <div class="preview-mini-links">
+                    <span>Home</span>
+                    <span>About</span>
+                    <span>Services</span>
+                    <span>Contact</span>
+                  </div>
 
-                  <span></span>
-                  <span></span>
-                  <span></span>
+                </div>
+
+                <div class="preview-main">
+
+                  <small>
+                    BUSINESS WEBSITE
+                  </small>
+
+                  <h3>
+                    Build something
+                    people remember.
+                  </h3>
+
+                  <p>
+                    A polished digital presence designed
+                    for modern businesses ready to grow.
+                  </p>
+
+                  <div class="preview-button">
+                    Explore Website
+                  </div>
 
                 </div>
 
               </div>
 
+              <div class="preview-floating-card">
 
-              <div class="browser-screen-content">
+                <span>
+                  Starting from
+                </span>
 
-                <div class="browser-screen-copy">
-
-                  <span></span>
-
-                  <div></div>
-                  <div></div>
-                  <div></div>
-
-                  <button></button>
-
-                </div>
-
-
-                <div class="browser-screen-image">
-
-                  <div class="screen-image-shape"></div>
-
-                </div>
-
-              </div>
-
-
-              <div class="browser-screen-bottom">
-
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+                <strong>
+                  ৳2,499
+                </strong>
 
               </div>
 
@@ -817,23 +2351,20 @@
 
           </div>
 
+          <div class="hero-floating-badge">
 
-          <div class="hero-floating-card hero-floating-bottom">
-
-            <div class="floating-avatar">
-              <i class="fa-solid fa-check"></i>
+            <div class="hero-floating-icon">
+              <i class="fa-solid fa-bolt"></i>
             </div>
 
             <div>
-
               <strong>
-                Simple purchase
+                Launch faster
               </strong>
 
               <span>
-                Preview → Buy → Launch
+                Skip the blank canvas
               </span>
-
             </div>
 
           </div>
@@ -844,394 +2375,206 @@
 
     </section>
 
-
     <!-- ===================================================
-         TRUST STRIP
-         =================================================== -->
+         STATS
+    ==================================================== -->
 
-    <section class="trust-strip">
+    <section class="premium-stats">
 
-      <div class="container trust-inner">
+      <div class="premium-stats-inner">
 
-        <div class="trust-item">
-
-          <i class="fa-solid fa-shield-halved"></i>
-
-          <div>
-
-            <strong>
-              Secure Purchase
-            </strong>
-
-            <span>
-              Safe checkout process
-            </span>
-
-          </div>
-
+        <div class="premium-stat">
+          <strong>50+</strong>
+          <span>Ready-made websites</span>
         </div>
 
-
-        <div class="trust-item">
-
-          <i class="fa-solid fa-bolt"></i>
-
-          <div>
-
-            <strong>
-              Ready to Launch
-            </strong>
-
-            <span>
-              Skip the long design process
-            </span>
-
-          </div>
-
+        <div class="premium-stat">
+          <strong>6+</strong>
+          <span>Website categories</span>
         </div>
 
-
-        <div class="trust-item">
-
-          <i class="fa-solid fa-mobile-screen-button"></i>
-
-          <div>
-
-            <strong>
-              Responsive Design
-            </strong>
-
-            <span>
-              Mobile, tablet & desktop
-            </span>
-
-          </div>
-
+        <div class="premium-stat">
+          <strong>৳999</strong>
+          <span>Starting price</span>
         </div>
 
-
-        <div class="trust-item">
-
-          <i class="fa-solid fa-headset"></i>
-
-          <div>
-
-            <strong>
-              Support Available
-            </strong>
-
-            <span>
-              We're here when you need us
-            </span>
-
-          </div>
-
+        <div class="premium-stat">
+          <strong>24/7</strong>
+          <span>Marketplace access</span>
         </div>
 
       </div>
 
     </section>
 
-
     <!-- ===================================================
          CATEGORIES
-         =================================================== -->
+    ==================================================== -->
 
     <section
-      class="section categories-section"
+      class="premium-section"
       id="categories"
     >
 
-      <div class="container">
+      <div class="premium-container">
 
-        <div class="section-heading-row">
+        <div class="section-heading">
 
-          <div class="section-heading">
-
-            <span class="section-kicker">
-              Explore Marketplace
-            </span>
+          <div>
+            <div class="section-kicker">
+              Browse by category
+            </div>
 
             <h2>
-              Find a website for
-              <span>every idea.</span>
+              Find the right starting point.
             </h2>
-
-            <p>
-              Browse our growing collection of premium
-              ready-made website designs.
-            </p>
-
           </div>
 
+          <p>
+            Explore professionally structured website concepts
+            organized around the kind of business or project you are building.
+          </p>
+
+        </div>
+
+        <div class="premium-category-grid">
 
           <a
             href="#websites"
-            class="section-link"
+            class="premium-category-card"
+            data-category="business"
           >
-            View all websites
-            <i class="fa-solid fa-arrow-right"></i>
+
+            <div class="category-icon-premium">
+              <i class="fa-solid fa-briefcase"></i>
+            </div>
+
+            <strong>Business</strong>
+            <span>Professional presence</span>
+
+          </a>
+
+          <a
+            href="#websites"
+            class="premium-category-card"
+            data-category="restaurant"
+          >
+
+            <div class="category-icon-premium">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+
+            <strong>Restaurant</strong>
+            <span>Food & hospitality</span>
+
+          </a>
+
+          <a
+            href="#websites"
+            class="premium-category-card"
+            data-category="agency"
+          >
+
+            <div class="category-icon-premium">
+              <i class="fa-solid fa-bullseye"></i>
+            </div>
+
+            <strong>Agency</strong>
+            <span>Creative services</span>
+
+          </a>
+
+          <a
+            href="#websites"
+            class="premium-category-card"
+            data-category="ecommerce"
+          >
+
+            <div class="category-icon-premium">
+              <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+
+            <strong>E-commerce</strong>
+            <span>Sell online</span>
+
+          </a>
+
+          <a
+            href="#websites"
+            class="premium-category-card"
+            data-category="portfolio"
+          >
+
+            <div class="category-icon-premium">
+              <i class="fa-solid fa-user-tie"></i>
+            </div>
+
+            <strong>Portfolio</strong>
+            <span>Showcase your work</span>
+
+          </a>
+
+          <a
+            href="#monthly"
+            class="premium-category-card"
+          >
+
+            <div class="category-icon-premium">
+              <i class="fa-solid fa-calendar-days"></i>
+            </div>
+
+            <strong>Monthly</strong>
+            <span>Simple monthly plan</span>
+
           </a>
 
         </div>
 
-
-        <div class="category-grid">
-
-          <!-- BUSINESS -->
-
-          <button
-            type="button"
-            class="category-card"
-            data-category-link="business"
-          >
-
-            <div class="category-icon">
-              <i class="fa-solid fa-building"></i>
-            </div>
-
-            <div class="category-info">
-
-              <h3>
-                Business
-              </h3>
-
-              <p>
-                Corporate & company websites
-              </p>
-
-            </div>
-
-            <span class="category-arrow">
-              <i class="fa-solid fa-arrow-up-right"></i>
-            </span>
-
-          </button>
-
-
-          <!-- RESTAURANT -->
-
-          <button
-            type="button"
-            class="category-card"
-            data-category-link="restaurant"
-          >
-
-            <div class="category-icon">
-              <i class="fa-solid fa-utensils"></i>
-            </div>
-
-            <div class="category-info">
-
-              <h3>
-                Restaurant
-              </h3>
-
-              <p>
-                Food & restaurant websites
-              </p>
-
-            </div>
-
-            <span class="category-arrow">
-              <i class="fa-solid fa-arrow-up-right"></i>
-            </span>
-
-          </button>
-
-
-          <!-- AGENCY -->
-
-          <button
-            type="button"
-            class="category-card"
-            data-category-link="agency"
-          >
-
-            <div class="category-icon">
-              <i class="fa-solid fa-pen-ruler"></i>
-            </div>
-
-            <div class="category-info">
-
-              <h3>
-                Agency
-              </h3>
-
-              <p>
-                Creative & digital agencies
-              </p>
-
-            </div>
-
-            <span class="category-arrow">
-              <i class="fa-solid fa-arrow-up-right"></i>
-            </span>
-
-          </button>
-
-
-          <!-- E-COMMERCE -->
-
-          <button
-            type="button"
-            class="category-card"
-            data-category-link="ecommerce"
-          >
-
-            <div class="category-icon">
-              <i class="fa-solid fa-cart-shopping"></i>
-            </div>
-
-            <div class="category-info">
-
-              <h3>
-                E-commerce
-              </h3>
-
-              <p>
-                Online stores & shops
-              </p>
-
-            </div>
-
-            <span class="category-arrow">
-              <i class="fa-solid fa-arrow-up-right"></i>
-            </span>
-
-          </button>
-
-
-          <!-- PORTFOLIO -->
-
-          <button
-            type="button"
-            class="category-card"
-            data-category-link="portfolio"
-          >
-
-            <div class="category-icon">
-              <i class="fa-solid fa-user-tie"></i>
-            </div>
-
-            <div class="category-info">
-
-              <h3>
-                Portfolio
-              </h3>
-
-              <p>
-                Personal & creator sites
-              </p>
-
-            </div>
-
-            <span class="category-arrow">
-              <i class="fa-solid fa-arrow-up-right"></i>
-            </span>
-
-          </button>
-
-
-          <!-- MONTHLY -->
-
-          <button
-            type="button"
-            class="category-card"
-            data-category-link="monthly"
-          >
-
-            <div class="category-icon">
-              <i class="fa-solid fa-calendar-days"></i>
-            </div>
-
-            <div class="category-info">
-
-              <h3>
-                Monthly
-              </h3>
-
-              <p>
-                Flexible monthly website plans
-              </p>
-
-            </div>
-
-            <span class="category-arrow">
-              <i class="fa-solid fa-arrow-up-right"></i>
-            </span>
-
-          </button>
-
-        </div>
-
       </div>
 
     </section>
 
-
     <!-- ===================================================
          MARKETPLACE
-         =================================================== -->
+    ==================================================== -->
 
     <section
-      class="section marketplace-section"
+      class="premium-section soft"
       id="websites"
     >
 
-      <div class="container">
+      <div class="premium-container">
 
-        <div class="section-heading-row">
+        <div class="section-heading">
 
-          <div class="section-heading">
-
-            <span class="section-kicker">
+          <div>
+            <div class="section-kicker">
               Marketplace
-            </span>
+            </div>
 
             <h2>
-              Premium websites,
-              <span>ready to go.</span>
+              Websites worth launching.
             </h2>
-
-            <p>
-              Choose a design, preview it and start your
-              order in just a few steps.
-            </p>
-
           </div>
+
+          <p>
+            Preview the design, compare your options and choose
+            a ready-made foundation for your next digital project.
+          </p>
 
         </div>
 
+        <div class="marketplace-panel">
 
-        <!-- MARKETPLACE TOOLS -->
+          <div class="marketplace-toolbar">
 
-        <div class="marketplace-tools">
+            <div class="marketplace-toolbar-left">
 
-          <div class="marketplace-results">
-
-            <strong>
-              Websites
-            </strong>
-
-            <span id="country-status">
-              Showing available designs
-            </span>
-
-          </div>
-
-
-          <div class="marketplace-controls">
-
-            <div class="filter-control">
-
-              <label for="category-filter">
-                Category
-              </label>
-
-              <select id="category-filter">
-
-                <option value="">
+              <select
+                id="category-filter"
+                class="premium-filter"
+              >
+                <option value="all">
                   All Categories
                 </option>
 
@@ -1258,20 +2601,12 @@
                 <option value="monthly">
                   Monthly
                 </option>
-
               </select>
 
-            </div>
-
-
-            <div class="filter-control">
-
-              <label for="sort-websites">
-                Sort
-              </label>
-
-              <select id="sort-websites">
-
+              <select
+                id="sort-websites"
+                class="premium-filter"
+              >
                 <option value="featured">
                   Featured
                 </option>
@@ -1291,54 +2626,333 @@
                 <option value="price-high">
                   Price: High to Low
                 </option>
-
               </select>
 
+            </div>
+
+            <div class="marketplace-toolbar-right">
+
+              <span
+                id="country-status"
+                style="
+                  color:#7b857f;
+                  font-size:9px;
+                "
+              >
+                <i class="fa-solid fa-circle-check"
+                   style="color:#18a957;"></i>
+                Ready to browse
+              </span>
+
+            </div>
+
+          </div>
+
+          <div class="marketplace-list-wrap">
+
+            <div
+              id="website-list"
+              class="premium-website-grid"
+            ></div>
+
+            <div
+              id="empty-state"
+              style="display:none;"
+            >
+              <div style="text-align:center;padding:55px 20px;">
+
+                <div
+                  style="
+                    width:55px;
+                    height:55px;
+                    margin:auto;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    border-radius:16px;
+                    background:#eaf9f0;
+                    color:#18a957;
+                    font-size:19px;
+                  "
+                >
+                  <i class="fa-solid fa-window-maximize"></i>
+                </div>
+
+                <h3 style="margin:15px 0 6px;">
+                  No websites found
+                </h3>
+
+                <p
+                  style="
+                    margin:0;
+                    color:#7b857f;
+                    font-size:11px;
+                  "
+                >
+                  Try another category or search term.
+                </p>
+
+              </div>
             </div>
 
           </div>
 
         </div>
 
+      </div>
 
-        <!-- WEBSITE LIST -->
+    </section>
 
-        <div
-          class="website-grid"
-          id="website-list"
-        >
-          <!-- JavaScript renders website cards here -->
+    <!-- ===================================================
+         POPULAR
+    ==================================================== -->
+
+    <section
+      class="premium-section"
+      id="popular"
+    >
+
+      <div class="premium-container">
+
+        <div class="section-heading">
+
+          <div>
+            <div class="section-kicker">
+              Popular right now
+            </div>
+
+            <h2>
+              Built for attention.
+            </h2>
+          </div>
+
+          <a
+            href="#websites"
+            class="section-link"
+          >
+            View marketplace
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
         </div>
 
-
-        <!-- EMPTY STATE -->
-
         <div
-          class="empty-state"
-          id="empty-state"
-          hidden
-        >
+          id="popular-list"
+          class="premium-website-grid"
+        ></div>
 
-          <div class="empty-icon">
+      </div>
 
-            <i class="fa-solid fa-magnifying-glass"></i>
+    </section>
+
+    <!-- ===================================================
+         COLLECTIONS
+    ==================================================== -->
+
+    <section class="premium-section soft">
+
+      <div class="premium-container">
+
+        <div class="collection-strip">
+
+          <div class="collection-card">
+
+            <i class="fa-solid fa-fire"></i>
+
+            <h3>
+              Trending designs.
+            </h3>
+
+            <p>
+              Discover marketplace favorites that are
+              getting attention right now.
+            </p>
 
           </div>
 
-          <h3>
-            No websites found
-          </h3>
+          <div class="collection-card">
+
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+            <h3>
+              Freshly added.
+            </h3>
+
+            <p>
+              New website concepts for businesses,
+              creators and digital brands.
+            </p>
+
+          </div>
+
+          <div class="collection-card">
+
+            <i class="fa-solid fa-bolt"></i>
+
+            <h3>
+              Ready to launch.
+            </h3>
+
+            <p>
+              Start from a polished foundation instead
+              of an empty screen.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ===================================================
+         NEW
+    ==================================================== -->
+
+    <section
+      class="premium-section collection-section"
+      id="new"
+    >
+
+      <div class="premium-container">
+
+        <div class="section-heading">
+
+          <div>
+            <div class="section-kicker">
+              Fresh collection
+            </div>
+
+            <h2>
+              New to the marketplace.
+            </h2>
+          </div>
+
+          <a
+            href="#websites"
+            class="section-link"
+          >
+            Explore all
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+        </div>
+
+        <div
+          id="new-list"
+          class="premium-website-grid"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <!-- ===================================================
+         MONTHLY
+    ==================================================== -->
+
+    <section
+      class="monthly-section"
+      id="monthly"
+    >
+
+      <div class="monthly-container">
+
+        <div class="monthly-copy">
+
+          <div class="section-kicker">
+            Monthly websites
+          </div>
+
+          <h2>
+            Need a website without the big upfront cost?
+          </h2>
 
           <p>
-            Try another keyword or category.
+            Choose a ready-made website through a simple
+            monthly package and get started without turning
+            your launch into a large one-time expense.
           </p>
+
+          <div class="monthly-features">
+
+            <div class="monthly-feature">
+              <i class="fa-solid fa-check"></i>
+              Ready-made website
+            </div>
+
+            <div class="monthly-feature">
+              <i class="fa-solid fa-check"></i>
+              Responsive design
+            </div>
+
+            <div class="monthly-feature">
+              <i class="fa-solid fa-check"></i>
+              Professional layout
+            </div>
+
+            <div class="monthly-feature">
+              <i class="fa-solid fa-check"></i>
+              Easy to get started
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="monthly-card">
+
+          <div class="monthly-card-label">
+            Monthly Package
+          </div>
+
+          <h3>
+            Launch Package
+          </h3>
+
+          <div class="monthly-price">
+
+            <strong>
+              ৳999
+            </strong>
+
+            <span>
+              / month
+            </span>
+
+          </div>
+
+          <ul>
+
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              Ready-made website
+            </li>
+
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              Mobile responsive
+            </li>
+
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              Premium marketplace designs
+            </li>
+
+            <li>
+              <i class="fa-solid fa-circle-check"></i>
+              Simple launch process
+            </li>
+
+          </ul>
 
           <button
             type="button"
-            class="btn btn-primary"
-            id="reset-filters"
+            class="monthly-cta"
+            onclick="document.getElementById('websites').scrollIntoView({behavior:'smooth'})"
           >
-            Reset Filters
+            Explore Monthly Websites
           </button>
 
         </div>
@@ -1347,263 +2961,33 @@
 
     </section>
 
-
     <!-- ===================================================
-         POPULAR
-         =================================================== -->
+         WHY
+    ==================================================== -->
 
-    <section
-      class="section alternate-section"
-      id="popular"
-    >
+    <section class="premium-section">
 
-      <div class="container">
+      <div class="premium-container">
 
-        <div class="section-heading-row">
+        <div class="section-heading">
 
-          <div class="section-heading">
-
-            <span class="section-kicker">
-              Most Popular
-            </span>
-
-            <h2>
-              Designs people
-              <span>are exploring.</span>
-            </h2>
-
-            <p>
-              Discover some of the marketplace's most
-              popular website templates.
-            </p>
-
-          </div>
-
-
-          <a
-            href="#websites"
-            class="section-link"
-          >
-            Explore marketplace
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-
-        </div>
-
-
-        <div
-          class="website-grid"
-          id="popular-list"
-        >
-          <!-- JavaScript renders popular websites -->
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         NEW WEBSITES
-         =================================================== -->
-
-    <section
-      class="section"
-      id="new-websites"
-    >
-
-      <div class="container">
-
-        <div class="section-heading-row">
-
-          <div class="section-heading">
-
-            <span class="section-kicker">
-              Fresh Collection
-            </span>
-
-            <h2>
-              Just added to the
-              <span>marketplace.</span>
-            </h2>
-
-            <p>
-              Fresh designs for new projects and new ideas.
-            </p>
-
-          </div>
-
-
-          <a
-            href="#websites"
-            class="section-link"
-          >
-            See all new designs
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-
-        </div>
-
-
-        <div
-          class="website-grid"
-          id="new-list"
-        >
-          <!-- JavaScript renders new websites -->
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         MONTHLY PACKAGE
-         =================================================== -->
-
-    <section
-      class="section monthly-section"
-      id="monthly"
-    >
-
-      <div class="container">
-
-        <div class="monthly-card">
-
-          <div class="monthly-content">
-
-            <span class="monthly-badge">
-
-              <i class="fa-solid fa-calendar-check"></i>
-
-              Flexible Monthly Plan
-
-            </span>
-
-
-            <h2>
-              Need a website without
-              the bigger upfront cost?
-            </h2>
-
-
-            <p>
-              Choose a ready-made website and pay monthly.
-              A simple way to get your online presence moving.
-            </p>
-
-
-            <div class="monthly-price">
-
-              <strong>
-                ৳999
-              </strong>
-
-              <span>
-                / month
-              </span>
-
+          <div>
+            <div class="section-kicker">
+              Why Website Deals
             </div>
 
-
-            <div class="monthly-features">
-
-              <span>
-                <i class="fa-solid fa-check"></i>
-                Ready-made design
-              </span>
-
-              <span>
-                <i class="fa-solid fa-check"></i>
-                Responsive layout
-              </span>
-
-              <span>
-                <i class="fa-solid fa-check"></i>
-                Simple setup
-              </span>
-
-            </div>
-
-
-            <a
-              href="#websites"
-              class="btn btn-light"
-            >
-              Explore Monthly Websites
-              <i class="fa-solid fa-arrow-right"></i>
-            </a>
-
+            <h2>
+              Less starting over.
+              More moving forward.
+            </h2>
           </div>
-
-
-          <div class="monthly-visual">
-
-            <div class="monthly-circle monthly-circle-one"></div>
-            <div class="monthly-circle monthly-circle-two"></div>
-
-
-            <div class="monthly-device">
-
-              <div class="monthly-device-top">
-
-                <span></span>
-                <span></span>
-                <span></span>
-
-              </div>
-
-
-              <div class="monthly-device-body">
-
-                <div></div>
-                <div></div>
-                <div></div>
-
-                <span></span>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         WHY WEBSITE DEALS
-         =================================================== -->
-
-    <section
-      class="section why-section"
-      id="why"
-    >
-
-      <div class="container">
-
-        <div class="section-heading centered">
-
-          <span class="section-kicker">
-            Why Website Deals
-          </span>
-
-          <h2>
-            Less waiting.
-            <span>More launching.</span>
-          </h2>
 
           <p>
-            Everything you need to move from idea to online
-            presence faster.
+            Everything is designed around helping you move
+            from idea to a professional online presence faster.
           </p>
 
         </div>
-
 
         <div class="why-grid">
 
@@ -1614,202 +2998,61 @@
             </div>
 
             <div class="why-icon">
-              <i class="fa-solid fa-clock"></i>
-            </div>
-
-            <h3>
-              Save Time
-            </h3>
-
-            <p>
-              Start with a professionally designed website
-              instead of building every screen from zero.
-            </p>
-
-          </article>
-
-
-          <article class="why-card">
-
-            <div class="why-number">
-              02
-            </div>
-
-            <div class="why-icon">
-              <i class="fa-solid fa-wallet"></i>
-            </div>
-
-            <h3>
-              Clear Pricing
-            </h3>
-
-            <p>
-              Browse ready-made options with transparent
-              starting prices before placing your order.
-            </p>
-
-          </article>
-
-
-          <article class="why-card">
-
-            <div class="why-number">
-              03
-            </div>
-
-            <div class="why-icon">
-              <i class="fa-solid fa-display"></i>
-            </div>
-
-            <h3>
-              Modern Designs
-            </h3>
-
-            <p>
-              Explore polished layouts designed for modern
-              businesses, creators and digital brands.
-            </p>
-
-          </article>
-
-
-          <article class="why-card">
-
-            <div class="why-number">
-              04
-            </div>
-
-            <div class="why-icon">
-              <i class="fa-solid fa-arrow-up-right-dots"></i>
-            </div>
-
-            <h3>
-              Ready to Grow
-            </h3>
-
-            <p>
-              Choose a strong starting point that can evolve
-              as your business grows.
-            </p>
-
-          </article>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- ===================================================
-         HOW IT WORKS
-         =================================================== -->
-
-    <section
-      class="section how-section"
-      id="how-it-works"
-    >
-
-      <div class="container">
-
-        <div class="section-heading centered">
-
-          <span class="section-kicker">
-            Simple Process
-          </span>
-
-          <h2>
-            From browsing to
-            <span>launch.</span>
-          </h2>
-
-          <p>
-            Your website journey can be as simple as three steps.
-          </p>
-
-        </div>
-
-
-        <div class="steps-grid">
-
-          <div class="step-card">
-
-            <div class="step-number">
-              01
-            </div>
-
-            <div class="step-icon">
-              <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-
-            <h3>
-              Browse
-            </h3>
-
-            <p>
-              Find a website that matches your business,
-              project or personal brand.
-            </p>
-
-          </div>
-
-
-          <div class="step-connector">
-
-            <i class="fa-solid fa-arrow-right"></i>
-
-          </div>
-
-
-          <div class="step-card">
-
-            <div class="step-number">
-              02
-            </div>
-
-            <div class="step-icon">
               <i class="fa-solid fa-eye"></i>
             </div>
 
             <h3>
-              Preview
+              Preview first
             </h3>
 
             <p>
-              Review the design and details before deciding
-              which website you want.
+              Explore the visual direction before deciding
+              which website is right for your project.
             </p>
 
-          </div>
+          </article>
 
+          <article class="why-card">
 
-          <div class="step-connector">
+            <div class="why-number">
+              02
+            </div>
 
-            <i class="fa-solid fa-arrow-right"></i>
+            <div class="why-icon">
+              <i class="fa-solid fa-layer-group"></i>
+            </div>
 
-          </div>
+            <h3>
+              Professional foundation
+            </h3>
 
+            <p>
+              Start with an already structured website concept
+              instead of designing every section from scratch.
+            </p>
 
-          <div class="step-card">
+          </article>
 
-            <div class="step-number">
+          <article class="why-card">
+
+            <div class="why-number">
               03
             </div>
 
-            <div class="step-icon">
+            <div class="why-icon">
               <i class="fa-solid fa-rocket"></i>
             </div>
 
             <h3>
-              Launch
+              Launch faster
             </h3>
 
             <p>
-              Submit your order and move forward with your
-              new online presence.
+              Choose your direction, complete your order and
+              move toward launch with less unnecessary friction.
             </p>
 
-          </div>
+          </article>
 
         </div>
 
@@ -1817,58 +3060,87 @@
 
     </section>
 
-
     <!-- ===================================================
          CTA
-         =================================================== -->
+    ==================================================== -->
 
-    <section class="cta-section">
+    <section class="premium-cta">
 
-      <div class="container">
+      <div class="cta-box">
 
-        <div class="cta-card">
+        <div class="section-kicker">
+          Start building
+        </div>
 
-          <div class="cta-glow"></div>
+        <h2>
+          Your next website doesn't have to start from zero.
+        </h2>
 
-          <div class="cta-content">
+        <p>
+          Explore the collection and find a professional
+          starting point for your next project.
+        </p>
 
-            <span class="cta-kicker">
-              Ready when you are
-            </span>
+        <div class="cta-buttons">
 
-            <h2>
-              Stop planning.
-              Start building.
-            </h2>
+          <a
+            href="#websites"
+            class="cta-primary"
+          >
+            Browse Websites
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
 
-            <p>
-              Explore premium ready-made websites and find
-              the right starting point for your next project.
-            </p>
-
-
-            <div class="cta-actions">
-
-              <a
-                href="#websites"
-                class="btn btn-light"
-              >
-                Explore Websites
-                <i class="fa-solid fa-arrow-right"></i>
-              </a>
-
-              <a
-                href="#categories"
-                class="btn btn-outline-light"
-              >
-                Browse Categories
-              </a>
-
-            </div>
-
-          </div>
+          <a
+            href="#categories"
+            class="cta-secondary"
+          >
+            Browse Categories
+          </a>
 
         </div>
+
+      </div>
+
+    </section>
+
+    <!-- ===================================================
+         NEWSLETTER
+    ==================================================== -->
+
+    <section class="premium-newsletter">
+
+      <div class="newsletter-inner">
+
+        <div class="newsletter-copy">
+
+          <h3>
+            Get new website drops.
+          </h3>
+
+          <p>
+            New designs, marketplace updates and selected deals.
+          </p>
+
+        </div>
+
+        <form
+          class="newsletter-form"
+          id="newsletter-form"
+        >
+
+          <input
+            type="email"
+            id="newsletter-email"
+            placeholder="Your email address"
+            required
+          >
+
+          <button type="submit">
+            Subscribe
+          </button>
+
+        </form>
 
       </div>
 
@@ -1876,81 +3148,44 @@
 
   </main>
 
-
   <!-- =====================================================
        FOOTER
-       ===================================================== -->
+  ====================================================== -->
 
-  <footer class="site-footer">
+  <footer class="premium-footer">
 
-    <div class="container">
+    <div class="footer-inner">
 
       <div class="footer-grid">
 
-        <!-- BRAND -->
+        <div class="footer-brand">
 
-        <div class="footer-brand-column">
+          <a href="index.html">
 
-          <a
-            href="index.html"
-            class="footer-brand"
-          >
+            <img
+              src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
+              alt="Website Deals"
+            >
 
-            <span class="footer-logo">
-              WD
-            </span>
-
-            <span class="footer-brand-name">
+            <strong>
               Website Deals
-            </span>
+            </strong>
 
           </a>
 
-
           <p>
-            Premium ready-made websites for businesses,
-            creators, agencies and online stores.
+            A premium marketplace for ready-made websites.
+            Find your starting point, preview the design and
+            move faster toward launch.
           </p>
-
-
-          <div class="footer-socials">
-
-            <a
-              href="#"
-              aria-label="Facebook"
-              data-action="social"
-            >
-              <i class="fa-brands fa-facebook-f"></i>
-            </a>
-
-            <a
-              href="#"
-              aria-label="Instagram"
-              data-action="social"
-            >
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-
-            <a
-              href="#"
-              aria-label="LinkedIn"
-              data-action="social"
-            >
-              <i class="fa-brands fa-linkedin-in"></i>
-            </a>
-
-          </div>
 
         </div>
 
+        <div class="footer-col">
 
-        <!-- MARKETPLACE -->
-
-        <div class="footer-column">
-
-          <h3>
+          <h4>
             Marketplace
-          </h3>
+          </h4>
 
           <a href="#websites">
             All Websites
@@ -1960,170 +3195,85 @@
             Popular
           </a>
 
-          <a href="#new-websites">
-            New Websites
+          <a href="#new">
+            New
           </a>
 
           <a href="#monthly">
-            Monthly Plans
+            Monthly
           </a>
 
         </div>
 
+        <div class="footer-col">
 
-        <!-- CATEGORIES -->
-
-        <div class="footer-column">
-
-          <h3>
+          <h4>
             Categories
-          </h3>
+          </h4>
 
-          <a
-            href="#websites"
-            data-category-link="business"
-          >
+          <a href="#websites">
             Business
           </a>
 
-          <a
-            href="#websites"
-            data-category-link="restaurant"
-          >
+          <a href="#websites">
             Restaurant
           </a>
 
-          <a
-            href="#websites"
-            data-category-link="agency"
-          >
+          <a href="#websites">
             Agency
           </a>
 
-          <a
-            href="#websites"
-            data-category-link="ecommerce"
-          >
+          <a href="#websites">
             E-commerce
           </a>
 
-          <a
-            href="#websites"
-            data-category-link="portfolio"
-          >
-            Portfolio
-          </a>
-
         </div>
 
+        <div class="footer-col">
 
-        <!-- COMPANY -->
-
-        <div class="footer-column">
-
-          <h3>
+          <h4>
             Company
-          </h3>
+          </h4>
 
-          <a href="#why">
-            Why Website Deals
+          <a href="#categories">
+            Categories
           </a>
 
-          <a href="#how-it-works">
-            How It Works
+          <a href="#monthly">
+            Monthly Plan
           </a>
 
-          <a
-            href="#"
-            data-action="help"
-          >
+          <a href="#newsletter-form">
+            Newsletter
+          </a>
+
+          <a href="#">
             Help Center
           </a>
-
-          <a
-            href="#"
-            data-action="seller"
-          >
-            Become a Seller
-          </a>
-
-        </div>
-
-
-        <!-- NEWSLETTER -->
-
-        <div class="footer-newsletter">
-
-          <h3>
-            Stay in the loop
-          </h3>
-
-          <p>
-            Get updates about new website designs,
-            deals and marketplace launches.
-          </p>
-
-
-          <form
-            class="newsletter-form"
-            id="newsletter-form"
-          >
-
-            <input
-              type="text"
-              id="newsletter-name"
-              placeholder="Your name"
-              autocomplete="name"
-            >
-
-            <div class="newsletter-input-row">
-
-              <input
-                type="email"
-                id="newsletter-email"
-                placeholder="Email address"
-                autocomplete="email"
-                required
-              >
-
-              <button
-                type="submit"
-                aria-label="Subscribe"
-              >
-                <i class="fa-solid fa-arrow-right"></i>
-              </button>
-
-            </div>
-
-          </form>
 
         </div>
 
       </div>
 
-
-      <!-- FOOTER BOTTOM -->
-
       <div class="footer-bottom">
 
-        <p>
-          © <span id="current-year">2026</span>
+        <span>
+          © <span id="footer-year">2026</span>
           Website Deals. All rights reserved.
-        </p>
+        </span>
 
+        <div class="footer-social">
 
-        <div class="footer-bottom-links">
-
-          <a href="#">
-            Privacy
+          <a href="#" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
           </a>
 
-          <a href="#">
-            Terms
+          <a href="#" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
           </a>
 
-          <a href="#">
-            Refund Policy
+          <a href="#" aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin-in"></i>
           </a>
 
         </div>
@@ -2134,102 +3284,88 @@
 
   </footer>
 
-
   <!-- =====================================================
-       BUY MODAL
-       ===================================================== -->
+       SEARCH PANEL
+  ====================================================== -->
 
   <div
-    class="buy-modal"
+    class="premium-search-panel"
+    id="search-panel"
+  >
+
+    <div class="premium-search-modal">
+
+      <div class="premium-search-head">
+
+        <input
+          type="search"
+          id="website-search"
+          placeholder="Search websites, categories..."
+          autocomplete="off"
+        >
+
+        <button
+          type="button"
+          class="premium-search-close"
+          id="close-search"
+          aria-label="Close search"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =====================================================
+       EXISTING BUY MODAL
+       IDs preserved for js/main.js
+  ====================================================== -->
+
+  <div
+    class="modal"
     id="buy-modal"
     aria-hidden="true"
   >
 
-    <div
-      class="buy-modal-backdrop"
-      data-close-buy-modal
-    ></div>
+    <div class="modal-backdrop"></div>
 
-
-    <div
-      class="buy-modal-dialog"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="buy-modal-title"
-    >
+    <div class="modal-dialog">
 
       <button
         type="button"
-        class="buy-modal-close"
-        id="close-buy-modal"
+        class="modal-close"
+        id="buy-modal-close"
         aria-label="Close"
       >
         <i class="fa-solid fa-xmark"></i>
       </button>
 
+      <div class="modal-content">
 
-      <div class="buy-modal-header">
+        <div class="modal-icon">
+          <i class="fa-solid fa-cart-shopping"></i>
+        </div>
 
-        <span class="modal-kicker">
-          Start your order
-        </span>
-
-        <h2 id="buy-modal-title">
+        <h2>
           Get this website
         </h2>
 
         <p>
-          Enter your details and we'll use them to
-          process your website request.
+          Enter your details and we'll use them to process
+          your website request.
         </p>
 
-      </div>
+        <form id="buy-form">
 
-
-      <form
-        id="buy-form"
-        class="buy-form"
-      >
-
-        <input
-          type="hidden"
-          id="buy_website_id"
-          name="website_id"
-        >
-
-
-        <div class="buy-selected-website">
-
-          <div
-            class="buy-selected-image"
-            id="buy-selected-image"
+          <input
+            type="hidden"
+            id="buy_website_id"
           >
-          </div>
-
-
-          <div class="buy-selected-info">
-
-            <span>
-              Selected Website
-            </span>
-
-            <strong id="buy-selected-title">
-              Website
-            </strong>
-
-            <b id="buy-selected-price">
-              ৳0
-            </b>
-
-          </div>
-
-        </div>
-
-
-        <div class="form-grid">
 
           <div class="form-group">
-
             <label for="buy_name">
               Full Name
             </label>
@@ -2237,17 +3373,25 @@
             <input
               type="text"
               id="buy_name"
-              name="name"
-              placeholder="Enter your full name"
-              autocomplete="name"
               required
+              placeholder="Your full name"
             >
-
           </div>
 
+          <div class="form-group">
+            <label for="buy_email">
+              Email Address
+            </label>
+
+            <input
+              type="email"
+              id="buy_email"
+              required
+              placeholder="you@example.com"
+            >
+          </div>
 
           <div class="form-group">
-
             <label for="buy_phone">
               Phone Number
             </label>
@@ -2255,182 +3399,249 @@
             <input
               type="tel"
               id="buy_phone"
-              name="phone"
-              placeholder="01XXXXXXXXX"
-              autocomplete="tel"
               required
+              placeholder="01XXXXXXXXX"
             >
-
           </div>
 
-        </div>
-
-
-        <div class="form-group">
-
-          <label for="buy_email">
-            Email Address
-          </label>
-
-          <input
-            type="email"
-            id="buy_email"
-            name="email"
-            placeholder="you@example.com"
-            autocomplete="email"
-            required
+          <button
+            type="submit"
+            class="modal-submit"
           >
+            Continue
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
 
-        </div>
+        </form>
 
-
-        <div class="form-group">
-
-          <label for="buy_note">
-            Project Note
-            <span>
-              Optional
-            </span>
-          </label>
-
-          <textarea
-            id="buy_note"
-            name="note"
-            rows="4"
-            placeholder="Tell us anything important about your website..."
-          ></textarea>
-
-        </div>
-
-
-        <div class="buy-form-note">
-
-          <i class="fa-solid fa-shield-halved"></i>
-
-          Your information is used only to process
-          your website request.
-
-        </div>
-
-
-        <button
-          type="submit"
-          class="btn btn-primary buy-submit"
-        >
-
-          Submit Website Request
-
-          <i class="fa-solid fa-arrow-right"></i>
-
-        </button>
-
-      </form>
-
-    </div>
-
-  </div>
-
-
-  <!-- =====================================================
-       ACCOUNT MODAL
-       ===================================================== -->
-
-  <div
-    class="account-modal"
-    id="account-modal"
-    aria-hidden="true"
-  >
-
-    <div
-      class="account-modal-backdrop"
-      data-close-account
-    ></div>
-
-
-    <div class="account-modal-dialog">
-
-      <button
-        type="button"
-        class="account-modal-close"
-        id="close-account-modal"
-        aria-label="Close"
-      >
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-
-
-      <div class="account-modal-icon">
-        <i class="fa-regular fa-user"></i>
       </div>
 
-
-      <h2>
-        Your Website Journey
-      </h2>
-
-
-      <p>
-        Account features are coming soon.
-        For now, you can explore websites and
-        submit an order request directly.
-      </p>
-
-
-      <a
-        href="#websites"
-        class="btn btn-primary"
-        data-close-account
-      >
-        Explore Websites
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
-
     </div>
 
   </div>
-
 
   <!-- =====================================================
        TOAST
-       ===================================================== -->
+  ====================================================== -->
 
   <div
     class="toast"
     id="toast"
-    role="status"
-    aria-live="polite"
   >
-
     <i class="fa-solid fa-circle-check"></i>
-
-    <span id="toast-message">
-      Done
-    </span>
-
+    <span></span>
   </div>
-
 
   <!-- =====================================================
        BACK TO TOP
-       ===================================================== -->
+  ====================================================== -->
 
   <button
     type="button"
-    class="back-to-top"
     id="back-to-top"
     aria-label="Back to top"
   >
-
     <i class="fa-solid fa-arrow-up"></i>
-
   </button>
 
-
   <!-- =====================================================
-       MAIN JAVASCRIPT
-       ===================================================== -->
+       MAIN JS
+  ====================================================== -->
 
   <script src="js/main.js"></script>
+
+  <!-- =====================================================
+       PREMIUM UI JS
+  ====================================================== -->
+
+  <script>
+
+    /* =====================================================
+       SEARCH PANEL
+    ====================================================== */
+
+    const openSearch =
+      document.getElementById("open-search");
+
+    const closeSearch =
+      document.getElementById("close-search");
+
+    const searchPanel =
+      document.getElementById("search-panel");
+
+    const websiteSearch =
+      document.getElementById("website-search");
+
+    function openPremiumSearch() {
+
+      searchPanel.classList.add("show");
+
+      document.body.style.overflow = "hidden";
+
+      setTimeout(() => {
+        websiteSearch?.focus();
+      }, 100);
+
+    }
+
+    function closePremiumSearch() {
+
+      searchPanel.classList.remove("show");
+
+      document.body.style.overflow = "";
+
+    }
+
+    openSearch?.addEventListener(
+      "click",
+      openPremiumSearch
+    );
+
+    closeSearch?.addEventListener(
+      "click",
+      closePremiumSearch
+    );
+
+    searchPanel?.addEventListener(
+      "click",
+      event => {
+
+        if (event.target === searchPanel) {
+          closePremiumSearch();
+        }
+
+      }
+    );
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (event.key === "Escape") {
+          closePremiumSearch();
+        }
+
+      }
+    );
+
+    /* =====================================================
+       CATEGORY CLICK
+    ====================================================== */
+
+    document
+      .querySelectorAll(".premium-category-card[data-category]")
+      .forEach(card => {
+
+        card.addEventListener("click", () => {
+
+          const category =
+            card.dataset.category;
+
+          const categoryFilter =
+            document.getElementById("category-filter");
+
+          if (categoryFilter) {
+
+            categoryFilter.value =
+              category;
+
+            categoryFilter.dispatchEvent(
+              new Event("change")
+            );
+
+          }
+
+        });
+
+      });
+
+    /* =====================================================
+       MOBILE MENU
+    ====================================================== */
+
+    const mobileMenu =
+      document.getElementById(
+        "premium-mobile-menu"
+      );
+
+    const nav =
+      document.querySelector(".premium-nav");
+
+    mobileMenu?.addEventListener(
+      "click",
+      () => {
+
+        if (!nav) return;
+
+        const isOpen =
+          nav.classList.contains("mobile-open");
+
+        nav.classList.toggle(
+          "mobile-open",
+          !isOpen
+        );
+
+      }
+    );
+
+    /* =====================================================
+       YEAR
+    ====================================================== */
+
+    const footerYear =
+      document.getElementById("footer-year");
+
+    if (footerYear) {
+      footerYear.textContent =
+        new Date().getFullYear();
+    }
+
+    /* =====================================================
+       SMOOTH INTERNAL LINKS
+    ====================================================== */
+
+    document
+      .querySelectorAll('a[href^="#"]')
+      .forEach(link => {
+
+        link.addEventListener(
+          "click",
+          event => {
+
+            const targetId =
+              link.getAttribute("href");
+
+            if (
+              !targetId ||
+              targetId === "#"
+            ) {
+              return;
+            }
+
+            const target =
+              document.querySelector(targetId);
+
+            if (!target) return;
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+
+            if (nav) {
+              nav.classList.remove(
+                "mobile-open"
+              );
+            }
+
+          }
+        );
+
+      });
+
+  </script>
 
 </body>
 </html>
