@@ -8,39 +8,46 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <meta name="theme-color" content="#ffffff">
+  <meta
+    name="theme-color"
+    content="#ffffff"
+  >
 
   <meta
     name="description"
-    content="Website Deals — Premium ready-made websites for businesses, restaurants, agencies, portfolios and e-commerce."
+    content="Website Deals — Premium ready-made websites for business, restaurants, agencies, e-commerce and portfolios. Starting from ৳999."
   >
 
   <meta
     name="keywords"
-    content="ready made website, website marketplace, business website, restaurant website, ecommerce website, portfolio website, Bangladesh website"
+    content="website deals, ready made website, website marketplace, Bangladesh website, premium website, business website, restaurant website"
   >
 
-  <meta name="author" content="Website Deals">
+  <meta
+    name="author"
+    content="Website Deals"
+  >
 
-  <title>Website Deals — Premium Ready-Made Websites</title>
+  <title>Website Deals | Premium Ready-Made Websites</title>
 
-
-  <!-- =========================================
+  <!-- =====================================================
        FAVICON
-  ========================================== -->
+       ===================================================== -->
 
   <link
     rel="icon"
     type="image/png"
-    href="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
+    href="logo.png"
   >
 
-
-  <!-- =========================================
+  <!-- =====================================================
        GOOGLE FONTS
-  ========================================== -->
+       ===================================================== -->
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
 
   <link
     rel="preconnect"
@@ -53,67 +60,55 @@
     rel="stylesheet"
   >
 
-
-  <!-- =========================================
+  <!-- =====================================================
        FONT AWESOME
-  ========================================== -->
+       ===================================================== -->
 
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
   >
 
-
-  <!-- =========================================
+  <!-- =====================================================
        MAIN CSS
-  ========================================== -->
+       ===================================================== -->
 
   <link
     rel="stylesheet"
     href="css/style.css"
   >
-
 </head>
-
 
 <body>
 
-
-  <!-- =========================================
+  <!-- =====================================================
        PAGE LOADER
-  ========================================== -->
+       ===================================================== -->
 
   <div
     class="page-loader"
     id="page-loader"
+    aria-hidden="true"
   >
-
     <div class="loader-inner">
-
       <div class="loader-logo">
-
-        <img
-          src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
-          alt="Website Deals"
-        >
-
+        WD
       </div>
 
-      <div class="loader-spinner"></div>
+      <div class="loader-line"></div>
 
-      <p>
-        Loading Website Deals...
-      </p>
-
+      <span>
+        Loading premium websites...
+      </span>
     </div>
-
   </div>
 
 
-
-  <!-- =========================================
+  <!-- =====================================================
        TOP MARKETPLACE BAR
-  ========================================== -->
+       ===================================================== -->
 
   <div class="top-market-bar">
 
@@ -121,16 +116,13 @@
 
       <div class="top-market-left">
 
-        <span>
-          <i class="fa-solid fa-bolt"></i>
+        <span class="top-market-item">
+          <i class="fa-solid fa-circle-check"></i>
           Premium Website Marketplace
         </span>
 
-        <span class="top-divider"></span>
-
-        <span>
-          Ready-made websites from
-          <strong>৳999</strong>
+        <span class="top-market-item top-market-price">
+          Ready-made websites from ৳999
         </span>
 
       </div>
@@ -138,18 +130,27 @@
 
       <div class="top-market-right">
 
-        <a href="#">
+        <a
+          href="#"
+          class="top-market-link"
+          data-action="seller"
+        >
           Become a Seller
         </a>
 
-        <a href="#">
+        <a
+          href="#"
+          class="top-market-link"
+          data-action="help"
+        >
           Help Center
         </a>
 
-        <a href="#">
+        <span class="country-selector">
+          <span class="country-flag">🇧🇩</span>
           Bangladesh
           <i class="fa-solid fa-chevron-down"></i>
-        </a>
+        </span>
 
       </div>
 
@@ -158,91 +159,93 @@
   </div>
 
 
-
-  <!-- =========================================
+  <!-- =====================================================
        MAIN HEADER
-  ========================================== -->
+       ===================================================== -->
 
   <header
-    class="site-header"
-    id="site-header"
+    class="main-header"
+    id="main-header"
   >
 
     <div class="container header-inner">
 
-
-      <!-- BRAND -->
+      <!-- LOGO -->
 
       <a
         href="index.html"
         class="brand"
+        aria-label="Website Deals Home"
       >
 
-        <div class="brand-logo">
+        <img
+          src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
+          alt="Website Deals"
+          class="brand-logo"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"
+        >
 
-          <img
-            src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
-            alt="Website Deals Logo"
-          >
+        <span
+          class="brand-fallback"
+          style="display:none;"
+        >
+          WD
+        </span>
 
-        </div>
-
-
-        <div class="brand-info">
+        <span class="brand-text">
 
           <strong>
-            Website Deals
+            Website
           </strong>
 
           <span>
-            Premium Website Marketplace
+            Deals
           </span>
 
-        </div>
+        </span>
 
       </a>
-
 
 
       <!-- DESKTOP NAV -->
 
       <nav
         class="main-nav"
-        aria-label="Main Navigation"
+        id="main-nav"
+        aria-label="Main navigation"
       >
 
         <a
           href="#websites"
-          class="nav-item active"
+          class="nav-link active"
         >
           Websites
         </a>
 
         <a
           href="#categories"
-          class="nav-item"
+          class="nav-link"
         >
           Categories
-          <i class="fa-solid fa-chevron-down"></i>
         </a>
 
         <a
           href="#popular"
-          class="nav-item"
+          class="nav-link"
         >
           Popular
         </a>
 
         <a
           href="#new-websites"
-          class="nav-item"
+          class="nav-link"
         >
           New
         </a>
 
         <a
           href="#monthly"
-          class="nav-item"
+          class="nav-link"
         >
           Monthly
         </a>
@@ -250,27 +253,23 @@
       </nav>
 
 
-
       <!-- HEADER ACTIONS -->
 
       <div class="header-actions">
 
-
         <button
           type="button"
-          class="header-search-btn"
-          id="search-toggle"
-          aria-label="Search"
+          class="header-search-button"
+          id="open-search"
+          aria-label="Search websites"
         >
-
           <i class="fa-solid fa-magnifying-glass"></i>
-
         </button>
 
 
         <a
           href="#websites"
-          class="sell-link"
+          class="header-explore"
         >
           Explore
         </a>
@@ -278,51 +277,205 @@
 
         <button
           type="button"
-          class="account-btn"
+          class="account-button"
+          id="account-button"
           aria-label="Account"
         >
-
           <i class="fa-regular fa-user"></i>
-
+          <span>
+            Account
+          </span>
         </button>
 
 
         <button
           type="button"
-          class="mobile-menu-btn"
-          id="mobile-menu-btn"
+          class="mobile-menu-button"
+          id="mobile-menu-button"
           aria-label="Open menu"
           aria-expanded="false"
         >
-
-          <span></span>
-          <span></span>
-          <span></span>
-
+          <i class="fa-solid fa-bars"></i>
         </button>
 
       </div>
 
     </div>
 
+  </header>
 
 
-    <!-- =======================================
-         MOBILE NAV
-    ======================================== -->
+  <!-- =====================================================
+       SEARCH OVERLAY
+       ===================================================== -->
 
-    <nav
-      class="mobile-nav"
-      id="mobile-nav"
-    >
+  <section
+    class="search-panel"
+    id="search-panel"
+    aria-hidden="true"
+  >
+
+    <div class="container search-panel-inner">
+
+      <div class="search-panel-header">
+
+        <div>
+
+          <span class="section-kicker">
+            Website Search
+          </span>
+
+          <h2>
+            Find your next website
+          </h2>
+
+        </div>
+
+        <button
+          type="button"
+          class="search-close"
+          id="close-search"
+          aria-label="Close search"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+      </div>
+
+
+      <div class="search-box-large">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+          type="search"
+          id="website-search"
+          placeholder="Search business, restaurant, agency, portfolio..."
+          autocomplete="off"
+        >
+
+        <button
+          type="button"
+          id="clear-search"
+          aria-label="Clear search"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+      </div>
+
+
+      <div class="search-suggestions">
+
+        <span>
+          Popular:
+        </span>
+
+        <button
+          type="button"
+          data-search-term="Business"
+        >
+          Business
+        </button>
+
+        <button
+          type="button"
+          data-search-term="Restaurant"
+        >
+          Restaurant
+        </button>
+
+        <button
+          type="button"
+          data-search-term="Agency"
+        >
+          Agency
+        </button>
+
+        <button
+          type="button"
+          data-search-term="Portfolio"
+        >
+          Portfolio
+        </button>
+
+        <button
+          type="button"
+          data-search-term="E-commerce"
+        >
+          E-commerce
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       MOBILE NAVIGATION
+       ===================================================== -->
+
+  <div
+    class="mobile-nav-overlay"
+    id="mobile-nav-overlay"
+  ></div>
+
+
+  <aside
+    class="mobile-nav"
+    id="mobile-nav"
+    aria-hidden="true"
+  >
+
+    <div class="mobile-nav-header">
+
+      <a
+        href="index.html"
+        class="brand"
+      >
+
+        <span class="brand-fallback">
+          WD
+        </span>
+
+        <span class="brand-text">
+
+          <strong>
+            Website
+          </strong>
+
+          <span>
+            Deals
+          </span>
+
+        </span>
+
+      </a>
+
+
+      <button
+        type="button"
+        id="mobile-nav-close"
+        class="mobile-nav-close"
+        aria-label="Close menu"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+    </div>
+
+
+    <nav class="mobile-nav-links">
 
       <a href="#websites">
-        <i class="fa-solid fa-globe"></i>
+        <i class="fa-solid fa-layer-group"></i>
         Websites
       </a>
 
       <a href="#categories">
-        <i class="fa-solid fa-layer-group"></i>
+        <i class="fa-solid fa-grid-2"></i>
         Categories
       </a>
 
@@ -341,107 +494,83 @@
         Monthly
       </a>
 
-      <a href="#">
-        <i class="fa-regular fa-circle-question"></i>
+    </nav>
+
+
+    <div class="mobile-nav-bottom">
+
+      <a
+        href="#"
+        data-action="seller"
+        class="mobile-nav-secondary"
+      >
+        Become a Seller
+      </a>
+
+      <a
+        href="#"
+        data-action="help"
+        class="mobile-nav-secondary"
+      >
         Help Center
       </a>
 
-    </nav>
-
-  </header>
-
-
-
-  <!-- =========================================
-       SEARCH OVERLAY
-  ========================================== -->
-
-  <div
-    class="search-overlay"
-    id="search-panel"
-  >
-
-    <div class="container">
-
-      <div class="large-search-box">
-
-        <i class="fa-solid fa-magnifying-glass"></i>
-
-        <input
-          type="search"
-          id="website-search"
-          placeholder="Search websites, business, restaurant, portfolio..."
-          autocomplete="off"
-        >
-
-        <button
-          type="button"
-          id="clear-search"
-          aria-label="Clear search"
-        >
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-
-      </div>
-
     </div>
 
-  </div>
+  </aside>
 
 
-
-  <!-- =========================================
-       MAIN
-  ========================================== -->
+  <!-- =====================================================
+       HERO
+       ===================================================== -->
 
   <main>
 
+    <section class="hero">
 
+      <div class="hero-background-shape hero-shape-one"></div>
+      <div class="hero-background-shape hero-shape-two"></div>
 
-    <!-- =======================================
-         MARKETPLACE HERO
-    ======================================== -->
+      <div class="container hero-grid">
 
-    <section class="marketplace-hero">
+        <!-- HERO COPY -->
 
-      <div class="hero-pattern"></div>
-
-      <div class="container hero-inner">
-
-
-        <div class="hero-copy">
+        <div class="hero-content">
 
           <div class="hero-badge">
 
-            <span></span>
+            <span class="hero-badge-dot"></span>
 
-            Bangladesh's Ready-Made Website Marketplace
+            Premium websites. Ready today.
 
           </div>
 
 
-          <h1>
+          <h1 class="hero-title">
 
-            Find a website
-            <br>
-
-            <span>ready to launch.</span>
+            Your next website
+            <span>
+              is already built.
+            </span>
 
           </h1>
 
 
-          <p>
+          <p class="hero-description">
 
-            আপনার business-এর জন্য professional
-            ready-made website খুঁজুন, preview করুন
-            এবং দ্রুত online launch করুন।
+            Discover professionally designed, ready-made websites
+            for businesses, restaurants, agencies, creators and
+            online stores.
 
           </p>
 
 
-          <!-- MAIN SEARCH -->
+          <!-- HERO SEARCH -->
 
-          <div class="hero-search">
+          <form
+            class="hero-search"
+            id="hero-search-form"
+          >
 
             <div class="hero-search-input">
 
@@ -450,7 +579,7 @@
               <input
                 type="search"
                 id="hero-search"
-                placeholder="What kind of website are you looking for?"
+                placeholder="What kind of website do you need?"
                 autocomplete="off"
               >
 
@@ -459,10 +588,10 @@
 
             <select
               id="hero-category"
-              aria-label="Select category"
+              aria-label="Website category"
             >
 
-              <option value="all">
+              <option value="">
                 All Categories
               </option>
 
@@ -479,7 +608,7 @@
               </option>
 
               <option value="ecommerce">
-                E-Commerce
+                E-commerce
               </option>
 
               <option value="portfolio">
@@ -487,63 +616,125 @@
               </option>
 
               <option value="monthly">
-                Monthly Pack
+                Monthly
               </option>
 
             </select>
 
 
             <button
-              type="button"
-              id="hero-search-btn"
+              type="submit"
+              class="hero-search-button"
             >
-
               Search
-
               <i class="fa-solid fa-arrow-right"></i>
-
             </button>
 
-          </div>
+          </form>
 
 
           <!-- POPULAR SEARCHES -->
 
-          <div class="popular-searches">
+          <div class="hero-popular">
 
             <span>
               Popular:
             </span>
 
-            <a href="#websites">
+            <a href="#websites" data-category-link="business">
               Business
             </a>
 
-            <a href="#websites">
+            <a href="#websites" data-category-link="restaurant">
               Restaurant
             </a>
 
-            <a href="#websites">
+            <a href="#websites" data-category-link="agency">
+              Agency
+            </a>
+
+            <a href="#websites" data-category-link="portfolio">
               Portfolio
             </a>
 
-            <a href="#websites">
-              E-Commerce
-            </a>
+          </div>
+
+
+          <!-- HERO STATS -->
+
+          <div class="hero-stats">
+
+            <div class="hero-stat">
+
+              <strong>
+                100+
+              </strong>
+
+              <span>
+                Website Designs
+              </span>
+
+            </div>
+
+
+            <div class="hero-stat">
+
+              <strong>
+                ৳999
+              </strong>
+
+              <span>
+                Starting Price
+              </span>
+
+            </div>
+
+
+            <div class="hero-stat">
+
+              <strong>
+                24/7
+              </strong>
+
+              <span>
+                Online Access
+              </span>
+
+            </div>
 
           </div>
 
         </div>
 
 
+        <!-- HERO BROWSER PREVIEW -->
 
-        <!-- HERO VISUAL -->
+        <div class="hero-visual">
 
-        <div class="hero-market-visual">
+          <div class="hero-floating-card hero-floating-top">
 
-          <div class="hero-browser">
+            <div class="floating-icon">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
 
-            <div class="browser-header">
+            <div>
+
+              <strong>
+                Ready to launch
+              </strong>
+
+              <span>
+                No design from scratch
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="browser-window">
+
+            <div class="browser-top">
 
               <div class="browser-dots">
 
@@ -554,26 +745,31 @@
               </div>
 
 
-              <div class="browser-url">
+              <div class="browser-address">
 
                 <i class="fa-solid fa-lock"></i>
 
-                yourbusiness.com
+                preview.websitedeals.com
+
+              </div>
+
+
+              <div class="browser-actions">
+
+                <i class="fa-solid fa-ellipsis"></i>
 
               </div>
 
             </div>
 
 
-            <div class="browser-preview">
+            <div class="browser-screen">
 
-              <div class="preview-nav">
+              <div class="browser-screen-nav">
 
-                <div class="preview-logo">
-                  YOUR BRAND
-                </div>
+                <div class="browser-logo"></div>
 
-                <div class="preview-nav-lines">
+                <div class="browser-nav-lines">
 
                   <span></span>
                   <span></span>
@@ -584,34 +780,33 @@
               </div>
 
 
-              <div class="preview-hero-content">
+              <div class="browser-screen-content">
 
-                <div class="preview-copy">
+                <div class="browser-screen-copy">
 
                   <span></span>
-
-                  <strong></strong>
-
-                  <strong class="short"></strong>
-
-                  <p></p>
 
                   <div></div>
+                  <div></div>
+                  <div></div>
+
+                  <button></button>
 
                 </div>
 
 
-                <div class="preview-image">
+                <div class="browser-screen-image">
 
-                  <i class="fa-solid fa-code"></i>
+                  <div class="screen-image-shape"></div>
 
                 </div>
 
               </div>
 
 
-              <div class="preview-product-row">
+              <div class="browser-screen-bottom">
 
+                <span></span>
                 <span></span>
                 <span></span>
                 <span></span>
@@ -623,60 +818,20 @@
           </div>
 
 
-          <!-- FLOATING PRODUCT CARD -->
+          <div class="hero-floating-card hero-floating-bottom">
 
-          <div class="hero-product-card">
-
-            <div class="product-card-image">
-
-              <div class="fake-browser">
-
-                <div class="fake-top"></div>
-
-                <div class="fake-content">
-
-                  <span></span>
-                  <span></span>
-                  <span></span>
-
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <div class="hero-product-info">
-
-              <span>
-                Business Website
-              </span>
-
-              <strong>
-                ৳1,999
-              </strong>
-
-            </div>
-
-          </div>
-
-
-          <!-- HERO STAT -->
-
-          <div class="hero-floating-stat">
-
-            <div class="stat-check">
+            <div class="floating-avatar">
               <i class="fa-solid fa-check"></i>
             </div>
 
             <div>
 
               <strong>
-                Ready to Launch
+                Simple purchase
               </strong>
 
               <span>
-                Professional websites
+                Preview → Buy → Launch
               </span>
 
             </div>
@@ -690,43 +845,132 @@
     </section>
 
 
+    <!-- ===================================================
+         TRUST STRIP
+         =================================================== -->
 
-    <!-- =======================================
-         CATEGORY DISCOVERY
-    ======================================== -->
+    <section class="trust-strip">
+
+      <div class="container trust-inner">
+
+        <div class="trust-item">
+
+          <i class="fa-solid fa-shield-halved"></i>
+
+          <div>
+
+            <strong>
+              Secure Purchase
+            </strong>
+
+            <span>
+              Safe checkout process
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="trust-item">
+
+          <i class="fa-solid fa-bolt"></i>
+
+          <div>
+
+            <strong>
+              Ready to Launch
+            </strong>
+
+            <span>
+              Skip the long design process
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="trust-item">
+
+          <i class="fa-solid fa-mobile-screen-button"></i>
+
+          <div>
+
+            <strong>
+              Responsive Design
+            </strong>
+
+            <span>
+              Mobile, tablet & desktop
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="trust-item">
+
+          <i class="fa-solid fa-headset"></i>
+
+          <div>
+
+            <strong>
+              Support Available
+            </strong>
+
+            <span>
+              We're here when you need us
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         CATEGORIES
+         =================================================== -->
 
     <section
-      class="category-section"
+      class="section categories-section"
       id="categories"
     >
 
       <div class="container">
 
+        <div class="section-heading-row">
 
-        <div class="section-topline">
+          <div class="section-heading">
 
-          <div>
-
-            <span class="eyebrow">
-              BROWSE BY CATEGORY
+            <span class="section-kicker">
+              Explore Marketplace
             </span>
 
             <h2>
-              Find what you need
+              Find a website for
+              <span>every idea.</span>
             </h2>
+
+            <p>
+              Browse our growing collection of premium
+              ready-made website designs.
+            </p>
 
           </div>
 
 
           <a
             href="#websites"
-            class="view-all"
+            class="section-link"
           >
-
-            View All
-
+            View all websites
             <i class="fa-solid fa-arrow-right"></i>
-
           </a>
 
         </div>
@@ -734,9 +978,10 @@
 
         <div class="category-grid">
 
+          <!-- BUSINESS -->
 
-          <a
-            href="#websites"
+          <button
+            type="button"
             class="category-card"
             data-category-link="business"
           >
@@ -745,18 +990,29 @@
               <i class="fa-solid fa-building"></i>
             </div>
 
-            <div>
-              <strong>Business</strong>
-              <span>Corporate & Business</span>
+            <div class="category-info">
+
+              <h3>
+                Business
+              </h3>
+
+              <p>
+                Corporate & company websites
+              </p>
+
             </div>
 
-            <i class="fa-solid fa-arrow-right category-arrow"></i>
+            <span class="category-arrow">
+              <i class="fa-solid fa-arrow-up-right"></i>
+            </span>
 
-          </a>
+          </button>
 
 
-          <a
-            href="#websites"
+          <!-- RESTAURANT -->
+
+          <button
+            type="button"
             class="category-card"
             data-category-link="restaurant"
           >
@@ -765,38 +1021,60 @@
               <i class="fa-solid fa-utensils"></i>
             </div>
 
-            <div>
-              <strong>Restaurant</strong>
-              <span>Food & Restaurant</span>
+            <div class="category-info">
+
+              <h3>
+                Restaurant
+              </h3>
+
+              <p>
+                Food & restaurant websites
+              </p>
+
             </div>
 
-            <i class="fa-solid fa-arrow-right category-arrow"></i>
+            <span class="category-arrow">
+              <i class="fa-solid fa-arrow-up-right"></i>
+            </span>
 
-          </a>
+          </button>
 
 
-          <a
-            href="#websites"
+          <!-- AGENCY -->
+
+          <button
+            type="button"
             class="category-card"
             data-category-link="agency"
           >
 
             <div class="category-icon">
-              <i class="fa-solid fa-bolt"></i>
+              <i class="fa-solid fa-pen-ruler"></i>
             </div>
 
-            <div>
-              <strong>Agency</strong>
-              <span>Creative & Digital</span>
+            <div class="category-info">
+
+              <h3>
+                Agency
+              </h3>
+
+              <p>
+                Creative & digital agencies
+              </p>
+
             </div>
 
-            <i class="fa-solid fa-arrow-right category-arrow"></i>
+            <span class="category-arrow">
+              <i class="fa-solid fa-arrow-up-right"></i>
+            </span>
 
-          </a>
+          </button>
 
 
-          <a
-            href="#websites"
+          <!-- E-COMMERCE -->
+
+          <button
+            type="button"
             class="category-card"
             data-category-link="ecommerce"
           >
@@ -805,38 +1083,60 @@
               <i class="fa-solid fa-cart-shopping"></i>
             </div>
 
-            <div>
-              <strong>E-Commerce</strong>
-              <span>Online Store</span>
+            <div class="category-info">
+
+              <h3>
+                E-commerce
+              </h3>
+
+              <p>
+                Online stores & shops
+              </p>
+
             </div>
 
-            <i class="fa-solid fa-arrow-right category-arrow"></i>
+            <span class="category-arrow">
+              <i class="fa-solid fa-arrow-up-right"></i>
+            </span>
 
-          </a>
+          </button>
 
 
-          <a
-            href="#websites"
+          <!-- PORTFOLIO -->
+
+          <button
+            type="button"
             class="category-card"
             data-category-link="portfolio"
           >
 
             <div class="category-icon">
-              <i class="fa-solid fa-user"></i>
+              <i class="fa-solid fa-user-tie"></i>
             </div>
 
-            <div>
-              <strong>Portfolio</strong>
-              <span>Personal & Portfolio</span>
+            <div class="category-info">
+
+              <h3>
+                Portfolio
+              </h3>
+
+              <p>
+                Personal & creator sites
+              </p>
+
             </div>
 
-            <i class="fa-solid fa-arrow-right category-arrow"></i>
+            <span class="category-arrow">
+              <i class="fa-solid fa-arrow-up-right"></i>
+            </span>
 
-          </a>
+          </button>
 
 
-          <a
-            href="#websites"
+          <!-- MONTHLY -->
+
+          <button
+            type="button"
             class="category-card"
             data-category-link="monthly"
           >
@@ -845,14 +1145,23 @@
               <i class="fa-solid fa-calendar-days"></i>
             </div>
 
-            <div>
-              <strong>Monthly Pack</strong>
-              <span>Website as a Service</span>
+            <div class="category-info">
+
+              <h3>
+                Monthly
+              </h3>
+
+              <p>
+                Flexible monthly website plans
+              </p>
+
             </div>
 
-            <i class="fa-solid fa-arrow-right category-arrow"></i>
+            <span class="category-arrow">
+              <i class="fa-solid fa-arrow-up-right"></i>
+            </span>
 
-          </a>
+          </button>
 
         </div>
 
@@ -861,174 +1170,153 @@
     </section>
 
 
-
-    <!-- =======================================
+    <!-- ===================================================
          MARKETPLACE
-    ======================================== -->
+         =================================================== -->
 
     <section
-      class="marketplace-section"
+      class="section marketplace-section"
       id="websites"
     >
 
       <div class="container">
 
+        <div class="section-heading-row">
 
-        <!-- SECTION HEADER -->
+          <div class="section-heading">
 
-        <div class="section-topline marketplace-heading">
-
-          <div>
-
-            <span class="eyebrow">
-              WEBSITE MARKETPLACE
+            <span class="section-kicker">
+              Marketplace
             </span>
 
             <h2>
-              Explore premium websites
+              Premium websites,
+              <span>ready to go.</span>
             </h2>
 
             <p>
-              Ready-made design থেকে আপনার
-              business-এর জন্য perfect website বেছে নিন।
+              Choose a design, preview it and start your
+              order in just a few steps.
             </p>
+
+          </div>
+
+        </div>
+
+
+        <!-- MARKETPLACE TOOLS -->
+
+        <div class="marketplace-tools">
+
+          <div class="marketplace-results">
+
+            <strong>
+              Websites
+            </strong>
+
+            <span id="country-status">
+              Showing available designs
+            </span>
 
           </div>
 
 
           <div class="marketplace-controls">
 
-            <div
-              class="country-status"
-              id="country-status"
-            >
+            <div class="filter-control">
 
-              <i class="fa-solid fa-location-dot"></i>
+              <label for="category-filter">
+                Category
+              </label>
 
-              <span>
-                Bangladesh
-              </span>
+              <select id="category-filter">
+
+                <option value="">
+                  All Categories
+                </option>
+
+                <option value="business">
+                  Business
+                </option>
+
+                <option value="restaurant">
+                  Restaurant
+                </option>
+
+                <option value="agency">
+                  Agency
+                </option>
+
+                <option value="ecommerce">
+                  E-commerce
+                </option>
+
+                <option value="portfolio">
+                  Portfolio
+                </option>
+
+                <option value="monthly">
+                  Monthly
+                </option>
+
+              </select>
 
             </div>
 
 
-            <select
-              id="sort-websites"
-              aria-label="Sort websites"
-            >
+            <div class="filter-control">
 
-              <option value="featured">
-                Sort: Featured
-              </option>
+              <label for="sort-websites">
+                Sort
+              </label>
 
-              <option value="newest">
-                Newest
-              </option>
+              <select id="sort-websites">
 
-              <option value="price-low">
-                Price: Low to High
-              </option>
+                <option value="featured">
+                  Featured
+                </option>
 
-              <option value="price-high">
-                Price: High to Low
-              </option>
+                <option value="newest">
+                  Newest
+                </option>
 
-            </select>
+                <option value="popular">
+                  Popular
+                </option>
+
+                <option value="price-low">
+                  Price: Low to High
+                </option>
+
+                <option value="price-high">
+                  Price: High to Low
+                </option>
+
+              </select>
+
+            </div>
 
           </div>
 
         </div>
 
 
-
-        <!-- CATEGORY FILTER -->
-
-        <div
-          class="marketplace-filter"
-          id="category-filter"
-        >
-
-          <button
-            type="button"
-            class="filter-btn active"
-            data-category="all"
-          >
-            All
-          </button>
-
-          <button
-            type="button"
-            class="filter-btn"
-            data-category="business"
-          >
-            Business
-          </button>
-
-          <button
-            type="button"
-            class="filter-btn"
-            data-category="restaurant"
-          >
-            Restaurant
-          </button>
-
-          <button
-            type="button"
-            class="filter-btn"
-            data-category="agency"
-          >
-            Agency
-          </button>
-
-          <button
-            type="button"
-            class="filter-btn"
-            data-category="ecommerce"
-          >
-            E-Commerce
-          </button>
-
-          <button
-            type="button"
-            class="filter-btn"
-            data-category="portfolio"
-          >
-            Portfolio
-          </button>
-
-          <button
-            type="button"
-            class="filter-btn"
-            data-category="monthly"
-          >
-            Monthly
-          </button>
-
-        </div>
-
-
-
-        <!-- WEBSITE GRID -->
+        <!-- WEBSITE LIST -->
 
         <div
           class="website-grid"
           id="website-list"
         >
-
-          <!--
-            Website cards will be dynamically
-            generated by js/main.js
-          -->
-
+          <!-- JavaScript renders website cards here -->
         </div>
-
 
 
         <!-- EMPTY STATE -->
 
         <div
-          class="empty-state hidden"
+          class="empty-state"
           id="empty-state"
+          hidden
         >
 
           <div class="empty-icon">
@@ -1037,27 +1325,20 @@
 
           </div>
 
-
           <h3>
-            কোনো Website পাওয়া যায়নি
+            No websites found
           </h3>
 
-
           <p>
-            অন্য category অথবা অন্য keyword দিয়ে চেষ্টা করুন।
+            Try another keyword or category.
           </p>
-
 
           <button
             type="button"
-            class="reset-btn"
+            class="btn btn-primary"
             id="reset-filters"
           >
-
-            <i class="fa-solid fa-rotate-left"></i>
-
             Reset Filters
-
           </button>
 
         </div>
@@ -1067,92 +1348,33 @@
     </section>
 
 
-
-    <!-- =======================================
-         POPULAR WEBSITES
-    ======================================== -->
+    <!-- ===================================================
+         POPULAR
+         =================================================== -->
 
     <section
-      class="popular-section"
+      class="section alternate-section"
       id="popular"
     >
 
       <div class="container">
 
+        <div class="section-heading-row">
 
-        <div class="section-topline">
+          <div class="section-heading">
 
-          <div>
-
-            <span class="eyebrow">
-              MOST POPULAR
+            <span class="section-kicker">
+              Most Popular
             </span>
 
             <h2>
-              Popular this month
-            </h2>
-
-          </div>
-
-
-          <a
-            href="#websites"
-            class="view-all"
-          >
-
-            Explore All
-
-            <i class="fa-solid fa-arrow-right"></i>
-
-          </a>
-
-        </div>
-
-
-        <div
-          class="popular-grid"
-          id="popular-list"
-        >
-
-          <!--
-            Popular website cards can be
-            loaded dynamically by main.js
-          -->
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-
-    <!-- =======================================
-         NEW WEBSITES
-    ======================================== -->
-
-    <section
-      class="new-section"
-      id="new-websites"
-    >
-
-      <div class="container">
-
-
-        <div class="section-topline">
-
-          <div>
-
-            <span class="eyebrow">
-              JUST ARRIVED
-            </span>
-
-            <h2>
-              New websites
+              Designs people
+              <span>are exploring.</span>
             </h2>
 
             <p>
-              আমাদের marketplace-এর latest additions।
+              Discover some of the marketplace's most
+              popular website templates.
             </p>
 
           </div>
@@ -1160,25 +1382,20 @@
 
           <a
             href="#websites"
-            class="view-all"
+            class="section-link"
           >
-
-            View All
-
+            Explore marketplace
             <i class="fa-solid fa-arrow-right"></i>
-
           </a>
 
         </div>
 
 
         <div
-          class="new-grid"
-          id="new-list"
+          class="website-grid"
+          id="popular-list"
         >
-
-          <!-- Dynamic new website cards -->
-
+          <!-- JavaScript renders popular websites -->
         </div>
 
       </div>
@@ -1186,13 +1403,66 @@
     </section>
 
 
-
-    <!-- =======================================
-         MONTHLY PACK
-    ======================================== -->
+    <!-- ===================================================
+         NEW WEBSITES
+         =================================================== -->
 
     <section
-      class="monthly-section"
+      class="section"
+      id="new-websites"
+    >
+
+      <div class="container">
+
+        <div class="section-heading-row">
+
+          <div class="section-heading">
+
+            <span class="section-kicker">
+              Fresh Collection
+            </span>
+
+            <h2>
+              Just added to the
+              <span>marketplace.</span>
+            </h2>
+
+            <p>
+              Fresh designs for new projects and new ideas.
+            </p>
+
+          </div>
+
+
+          <a
+            href="#websites"
+            class="section-link"
+          >
+            See all new designs
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+
+        </div>
+
+
+        <div
+          class="website-grid"
+          id="new-list"
+        >
+          <!-- JavaScript renders new websites -->
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         MONTHLY PACKAGE
+         =================================================== -->
+
+    <section
+      class="section monthly-section"
       id="monthly"
     >
 
@@ -1200,68 +1470,30 @@
 
         <div class="monthly-card">
 
-
           <div class="monthly-content">
 
-            <span class="eyebrow">
-              WEBSITE AS A SERVICE
+            <span class="monthly-badge">
+
+              <i class="fa-solid fa-calendar-check"></i>
+
+              Flexible Monthly Plan
+
             </span>
 
 
             <h2>
-              Website কিনতে হবে না।
-              <span>Monthly চালান।</span>
+              Need a website without
+              the bigger upfront cost?
             </h2>
 
 
             <p>
-              একবারে বড় investment না করে monthly package-এর
-              মাধ্যমে professional website ব্যবহার করুন।
+              Choose a ready-made website and pay monthly.
+              A simple way to get your online presence moving.
             </p>
 
 
-            <div class="monthly-features">
-
-              <span>
-                <i class="fa-solid fa-check"></i>
-                Hosting
-              </span>
-
-              <span>
-                <i class="fa-solid fa-check"></i>
-                Responsive Website
-              </span>
-
-              <span>
-                <i class="fa-solid fa-check"></i>
-                Basic Support
-              </span>
-
-            </div>
-
-
-            <a
-              href="#websites"
-              class="btn-primary"
-            >
-
-              Explore Monthly Packs
-
-              <i class="fa-solid fa-arrow-right"></i>
-
-            </a>
-
-          </div>
-
-
-
-          <div class="monthly-visual">
-
-            <div class="price-circle">
-
-              <small>
-                From
-              </small>
+            <div class="monthly-price">
 
               <strong>
                 ৳999
@@ -1274,9 +1506,65 @@
             </div>
 
 
-            <div class="monthly-ring ring-one"></div>
-            <div class="monthly-ring ring-two"></div>
-            <div class="monthly-ring ring-three"></div>
+            <div class="monthly-features">
+
+              <span>
+                <i class="fa-solid fa-check"></i>
+                Ready-made design
+              </span>
+
+              <span>
+                <i class="fa-solid fa-check"></i>
+                Responsive layout
+              </span>
+
+              <span>
+                <i class="fa-solid fa-check"></i>
+                Simple setup
+              </span>
+
+            </div>
+
+
+            <a
+              href="#websites"
+              class="btn btn-light"
+            >
+              Explore Monthly Websites
+              <i class="fa-solid fa-arrow-right"></i>
+            </a>
+
+          </div>
+
+
+          <div class="monthly-visual">
+
+            <div class="monthly-circle monthly-circle-one"></div>
+            <div class="monthly-circle monthly-circle-two"></div>
+
+
+            <div class="monthly-device">
+
+              <div class="monthly-device-top">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+              </div>
+
+
+              <div class="monthly-device-body">
+
+                <div></div>
+                <div></div>
+                <div></div>
+
+                <span></span>
+
+              </div>
+
+            </div>
 
           </div>
 
@@ -1287,111 +1575,124 @@
     </section>
 
 
-
-    <!-- =======================================
+    <!-- ===================================================
          WHY WEBSITE DEALS
-    ======================================== -->
+         =================================================== -->
 
-    <section class="why-section">
+    <section
+      class="section why-section"
+      id="why"
+    >
 
       <div class="container">
 
+        <div class="section-heading centered">
 
-        <div class="section-topline centered">
+          <span class="section-kicker">
+            Why Website Deals
+          </span>
 
-          <div>
+          <h2>
+            Less waiting.
+            <span>More launching.</span>
+          </h2>
 
-            <span class="eyebrow">
-              WHY WEBSITE DEALS
-            </span>
-
-            <h2>
-              Built for faster launches
-            </h2>
-
-            <p>
-              আপনার business online নেওয়ার journey
-              সহজ করার জন্য everything in one place।
-            </p>
-
-          </div>
+          <p>
+            Everything you need to move from idea to online
+            presence faster.
+          </p>
 
         </div>
 
 
         <div class="why-grid">
 
+          <article class="why-card">
 
-          <div class="why-card">
+            <div class="why-number">
+              01
+            </div>
 
             <div class="why-icon">
-              <i class="fa-solid fa-palette"></i>
+              <i class="fa-solid fa-clock"></i>
             </div>
 
             <h3>
-              Professional Design
+              Save Time
             </h3>
 
             <p>
-              Modern এবং professional UI দিয়ে
-              আপনার business-এর digital presence তৈরি করুন।
+              Start with a professionally designed website
+              instead of building every screen from zero.
             </p>
 
-          </div>
+          </article>
 
 
-          <div class="why-card">
+          <article class="why-card">
+
+            <div class="why-number">
+              02
+            </div>
 
             <div class="why-icon">
-              <i class="fa-solid fa-bolt"></i>
+              <i class="fa-solid fa-wallet"></i>
             </div>
 
             <h3>
-              Faster Launch
+              Clear Pricing
             </h3>
 
             <p>
-              Zero থেকে website design করার বদলে
-              ready-made solution দিয়ে দ্রুত শুরু করুন।
+              Browse ready-made options with transparent
+              starting prices before placing your order.
             </p>
 
-          </div>
+          </article>
 
 
-          <div class="why-card">
+          <article class="why-card">
+
+            <div class="why-number">
+              03
+            </div>
 
             <div class="why-icon">
-              <i class="fa-solid fa-mobile-screen"></i>
+              <i class="fa-solid fa-display"></i>
             </div>
 
             <h3>
-              Fully Responsive
+              Modern Designs
             </h3>
 
             <p>
-              Desktop, tablet এবং mobile—
-              প্রতিটি device-এর জন্য responsive experience।
+              Explore polished layouts designed for modern
+              businesses, creators and digital brands.
             </p>
 
-          </div>
+          </article>
 
 
-          <div class="why-card">
+          <article class="why-card">
+
+            <div class="why-number">
+              04
+            </div>
 
             <div class="why-icon">
-              <i class="fa-solid fa-code"></i>
+              <i class="fa-solid fa-arrow-up-right-dots"></i>
             </div>
 
             <h3>
-              Easy to Customize
+              Ready to Grow
             </h3>
 
             <p>
-              আপনার logo, text, images এবং brand information
-              সহজেই পরিবর্তন করা যাবে।
+              Choose a strong starting point that can evolve
+              as your business grows.
             </p>
 
-          </div>
+          </article>
 
         </div>
 
@@ -1400,46 +1701,44 @@
     </section>
 
 
-
-    <!-- =======================================
+    <!-- ===================================================
          HOW IT WORKS
-    ======================================== -->
+         =================================================== -->
 
     <section
-      class="process-section"
+      class="section how-section"
       id="how-it-works"
     >
 
       <div class="container">
 
+        <div class="section-heading centered">
 
-        <div class="section-topline centered">
+          <span class="section-kicker">
+            Simple Process
+          </span>
 
-          <div>
+          <h2>
+            From browsing to
+            <span>launch.</span>
+          </h2>
 
-            <span class="eyebrow">
-              SIMPLE PROCESS
-            </span>
-
-            <h2>
-              From browse to launch
-            </h2>
-
-          </div>
+          <p>
+            Your website journey can be as simple as three steps.
+          </p>
 
         </div>
 
 
-        <div class="process-grid">
+        <div class="steps-grid">
 
+          <div class="step-card">
 
-          <div class="process-step">
-
-            <div class="process-number">
+            <div class="step-number">
               01
             </div>
 
-            <div class="process-icon">
+            <div class="step-icon">
               <i class="fa-solid fa-magnifying-glass"></i>
             </div>
 
@@ -1448,22 +1747,27 @@
             </h3>
 
             <p>
-              আপনার প্রয়োজন অনুযায়ী website খুঁজুন।
+              Find a website that matches your business,
+              project or personal brand.
             </p>
 
           </div>
 
 
-          <div class="process-line"></div>
+          <div class="step-connector">
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+          </div>
 
 
-          <div class="process-step">
+          <div class="step-card">
 
-            <div class="process-number">
+            <div class="step-number">
               02
             </div>
 
-            <div class="process-icon">
+            <div class="step-icon">
               <i class="fa-solid fa-eye"></i>
             </div>
 
@@ -1472,46 +1776,27 @@
             </h3>
 
             <p>
-              Live preview দেখে design যাচাই করুন।
+              Review the design and details before deciding
+              which website you want.
             </p>
 
           </div>
 
 
-          <div class="process-line"></div>
+          <div class="step-connector">
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+          </div>
 
 
-          <div class="process-step">
+          <div class="step-card">
 
-            <div class="process-number">
+            <div class="step-number">
               03
             </div>
 
-            <div class="process-icon">
-              <i class="fa-solid fa-cart-shopping"></i>
-            </div>
-
-            <h3>
-              Order
-            </h3>
-
-            <p>
-              আপনার পছন্দের website-এর order দিন।
-            </p>
-
-          </div>
-
-
-          <div class="process-line"></div>
-
-
-          <div class="process-step">
-
-            <div class="process-number">
-              04
-            </div>
-
-            <div class="process-icon">
+            <div class="step-icon">
               <i class="fa-solid fa-rocket"></i>
             </div>
 
@@ -1520,7 +1805,8 @@
             </h3>
 
             <p>
-              Customize করে business launch করুন।
+              Submit your order and move forward with your
+              new online presence.
             </p>
 
           </div>
@@ -1532,49 +1818,53 @@
     </section>
 
 
+    <!-- ===================================================
+         CTA
+         =================================================== -->
 
-    <!-- =======================================
-         FINAL CTA
-    ======================================== -->
-
-    <section class="final-cta">
+    <section class="cta-section">
 
       <div class="container">
 
-        <div class="final-cta-card">
+        <div class="cta-card">
 
           <div class="cta-glow"></div>
 
+          <div class="cta-content">
 
-          <div class="final-cta-content">
-
-            <span class="eyebrow">
-              READY TO BUILD?
+            <span class="cta-kicker">
+              Ready when you are
             </span>
 
-
             <h2>
-              Your website is
-              <span>closer than you think.</span>
+              Stop planning.
+              Start building.
             </h2>
 
-
             <p>
-              Premium ready-made website থেকে
-              আপনার next digital project শুরু করুন।
+              Explore premium ready-made websites and find
+              the right starting point for your next project.
             </p>
 
 
-            <a
-              href="#websites"
-              class="btn-primary"
-            >
+            <div class="cta-actions">
 
-              Explore Websites
+              <a
+                href="#websites"
+                class="btn btn-light"
+              >
+                Explore Websites
+                <i class="fa-solid fa-arrow-right"></i>
+              </a>
 
-              <i class="fa-solid fa-arrow-right"></i>
+              <a
+                href="#categories"
+                class="btn btn-outline-light"
+              >
+                Browse Categories
+              </a>
 
-            </a>
+            </div>
 
           </div>
 
@@ -1587,56 +1877,39 @@
   </main>
 
 
-
-  <!-- =========================================
+  <!-- =====================================================
        FOOTER
-  ========================================== -->
+       ===================================================== -->
 
   <footer class="site-footer">
 
     <div class="container">
 
-
-      <div class="footer-main">
-
+      <div class="footer-grid">
 
         <!-- BRAND -->
 
-        <div class="footer-brand">
+        <div class="footer-brand-column">
 
           <a
             href="index.html"
-            class="brand"
+            class="footer-brand"
           >
 
-            <div class="brand-logo">
+            <span class="footer-logo">
+              WD
+            </span>
 
-              <img
-                src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
-                alt="Website Deals"
-              >
-
-            </div>
-
-
-            <div class="brand-info">
-
-              <strong>
-                Website Deals
-              </strong>
-
-              <span>
-                Premium Website Marketplace
-              </span>
-
-            </div>
+            <span class="footer-brand-name">
+              Website Deals
+            </span>
 
           </a>
 
 
           <p>
-            Ready-made premium websites-এর marketplace।
-            আপনার business online launch করুন আরও দ্রুত।
+            Premium ready-made websites for businesses,
+            creators, agencies and online stores.
           </p>
 
 
@@ -1645,6 +1918,7 @@
             <a
               href="#"
               aria-label="Facebook"
+              data-action="social"
             >
               <i class="fa-brands fa-facebook-f"></i>
             </a>
@@ -1652,20 +1926,15 @@
             <a
               href="#"
               aria-label="Instagram"
+              data-action="social"
             >
               <i class="fa-brands fa-instagram"></i>
             </a>
 
             <a
               href="#"
-              aria-label="YouTube"
-            >
-              <i class="fa-brands fa-youtube"></i>
-            </a>
-
-            <a
-              href="#"
               aria-label="LinkedIn"
+              data-action="social"
             >
               <i class="fa-brands fa-linkedin-in"></i>
             </a>
@@ -1673,7 +1942,6 @@
           </div>
 
         </div>
-
 
 
         <!-- MARKETPLACE -->
@@ -1688,12 +1956,8 @@
             All Websites
           </a>
 
-          <a href="#categories">
-            Categories
-          </a>
-
           <a href="#popular">
-            Popular Websites
+            Popular
           </a>
 
           <a href="#new-websites">
@@ -1701,11 +1965,56 @@
           </a>
 
           <a href="#monthly">
-            Monthly Packs
+            Monthly Plans
           </a>
 
         </div>
 
+
+        <!-- CATEGORIES -->
+
+        <div class="footer-column">
+
+          <h3>
+            Categories
+          </h3>
+
+          <a
+            href="#websites"
+            data-category-link="business"
+          >
+            Business
+          </a>
+
+          <a
+            href="#websites"
+            data-category-link="restaurant"
+          >
+            Restaurant
+          </a>
+
+          <a
+            href="#websites"
+            data-category-link="agency"
+          >
+            Agency
+          </a>
+
+          <a
+            href="#websites"
+            data-category-link="ecommerce"
+          >
+            E-commerce
+          </a>
+
+          <a
+            href="#websites"
+            data-category-link="portfolio"
+          >
+            Portfolio
+          </a>
+
+        </div>
 
 
         <!-- COMPANY -->
@@ -1716,28 +2025,29 @@
             Company
           </h3>
 
-          <a href="#">
-            About Us
+          <a href="#why">
+            Why Website Deals
           </a>
 
           <a href="#how-it-works">
             How It Works
           </a>
 
-          <a href="#">
-            Contact
+          <a
+            href="#"
+            data-action="help"
+          >
+            Help Center
           </a>
 
-          <a href="#">
-            Support
-          </a>
-
-          <a href="#">
+          <a
+            href="#"
+            data-action="seller"
+          >
             Become a Seller
           </a>
 
         </div>
-
 
 
         <!-- NEWSLETTER -->
@@ -1748,75 +2058,72 @@
             Stay in the loop
           </h3>
 
-
           <p>
-            নতুন website, deals এবং marketplace
-            updates সরাসরি আপনার inbox-এ।
+            Get updates about new website designs,
+            deals and marketplace launches.
           </p>
 
 
           <form
-            id="newsletter-form"
             class="newsletter-form"
+            id="newsletter-form"
           >
 
             <input
-              type="email"
-              id="newsletter-email"
-              placeholder="Email address"
-              autocomplete="email"
-              required
+              type="text"
+              id="newsletter-name"
+              placeholder="Your name"
+              autocomplete="name"
             >
 
+            <div class="newsletter-input-row">
 
-            <button
-              type="submit"
-              aria-label="Subscribe"
-            >
+              <input
+                type="email"
+                id="newsletter-email"
+                placeholder="Email address"
+                autocomplete="email"
+                required
+              >
 
-              <i class="fa-solid fa-arrow-right"></i>
+              <button
+                type="submit"
+                aria-label="Subscribe"
+              >
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
 
-            </button>
+            </div>
 
           </form>
-
-
-          <small>
-            No spam. Unsubscribe anytime.
-          </small>
 
         </div>
 
       </div>
 
 
-
       <!-- FOOTER BOTTOM -->
 
       <div class="footer-bottom">
 
-
         <p>
-
-          ©
-          <span id="current-year">
-            2026
-          </span>
-
-          Website Deals.
-          সকল অধিকার সংরক্ষিত।
-
+          © <span id="current-year">2026</span>
+          Website Deals. All rights reserved.
         </p>
 
 
         <div class="footer-bottom-links">
 
           <a href="#">
-            Privacy Policy
+            Privacy
           </a>
 
           <a href="#">
             Terms
+          </a>
+
+          <a href="#">
+            Refund Policy
           </a>
 
         </div>
@@ -1828,87 +2135,60 @@
   </footer>
 
 
-
-  <!-- =========================================
+  <!-- =====================================================
        BUY MODAL
-  ========================================== -->
+       ===================================================== -->
 
   <div
-    class="modal-overlay hidden"
+    class="buy-modal"
     id="buy-modal"
     aria-hidden="true"
   >
 
     <div
-      class="modal-box"
+      class="buy-modal-backdrop"
+      data-close-buy-modal
+    ></div>
+
+
+    <div
+      class="buy-modal-dialog"
       role="dialog"
       aria-modal="true"
       aria-labelledby="buy-modal-title"
     >
 
-
       <button
         type="button"
-        class="modal-close"
-        id="modal-close"
+        class="buy-modal-close"
+        id="close-buy-modal"
         aria-label="Close"
       >
-
         <i class="fa-solid fa-xmark"></i>
-
       </button>
 
 
+      <div class="buy-modal-header">
 
-      <div class="modal-header">
-
-        <div class="modal-icon">
-
-          <i class="fa-solid fa-cart-shopping"></i>
-
-        </div>
-
-
-        <div>
-
-          <span class="eyebrow">
-            WEBSITE ORDER
-          </span>
-
-          <h2 id="buy-modal-title">
-            অর্ডার করুন
-          </h2>
-
-        </div>
-
-      </div>
-
-
-
-      <div class="selected-website">
-
-        <span>
-          Selected Website
+        <span class="modal-kicker">
+          Start your order
         </span>
 
-        <strong id="buy-website-title">
-          Website
-        </strong>
+        <h2 id="buy-modal-title">
+          Get this website
+        </h2>
+
+        <p>
+          Enter your details and we'll use them to
+          process your website request.
+        </p>
 
       </div>
-
-
-
-      <div
-        class="modal-message"
-        id="buy-message"
-      ></div>
-
 
 
       <form
         id="buy-form"
-        class="admin-form"
+        class="buy-form"
       >
 
         <input
@@ -1918,19 +2198,70 @@
         >
 
 
-        <div class="form-group">
+        <div class="buy-selected-website">
 
-          <label for="buy_name">
-            আপনার নাম
-          </label>
-
-          <input
-            type="text"
-            id="buy_name"
-            name="name"
-            placeholder="আপনার পূর্ণ নাম"
-            required
+          <div
+            class="buy-selected-image"
+            id="buy-selected-image"
           >
+          </div>
+
+
+          <div class="buy-selected-info">
+
+            <span>
+              Selected Website
+            </span>
+
+            <strong id="buy-selected-title">
+              Website
+            </strong>
+
+            <b id="buy-selected-price">
+              ৳0
+            </b>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label for="buy_name">
+              Full Name
+            </label>
+
+            <input
+              type="text"
+              id="buy_name"
+              name="name"
+              placeholder="Enter your full name"
+              autocomplete="name"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="buy_phone">
+              Phone Number
+            </label>
+
+            <input
+              type="tel"
+              id="buy_phone"
+              name="phone"
+              placeholder="01XXXXXXXXX"
+              autocomplete="tel"
+              required
+            >
+
+          </div>
 
         </div>
 
@@ -1945,7 +2276,7 @@
             type="email"
             id="buy_email"
             name="email"
-            placeholder="your@email.com"
+            placeholder="you@example.com"
             autocomplete="email"
             required
           >
@@ -1955,59 +2286,43 @@
 
         <div class="form-group">
 
-          <label for="buy_phone">
-            Mobile Number
+          <label for="buy_note">
+            Project Note
+            <span>
+              Optional
+            </span>
           </label>
 
-          <input
-            type="tel"
-            id="buy_phone"
-            name="phone"
-            placeholder="01XXXXXXXXX"
-            pattern="01[0-9]{9}"
-            maxlength="11"
-            required
-          >
+          <textarea
+            id="buy_note"
+            name="note"
+            rows="4"
+            placeholder="Tell us anything important about your website..."
+          ></textarea>
 
         </div>
 
 
-
-        <div class="modal-actions">
-
-          <button
-            type="button"
-            class="btn-secondary"
-            id="cancel-buy-btn"
-          >
-            Cancel
-          </button>
-
-
-          <button
-            type="submit"
-            class="btn-primary"
-          >
-
-            পেমেন্টে যান
-
-            <i class="fa-solid fa-arrow-right"></i>
-
-          </button>
-
-        </div>
-
-
-
-        <div class="security-note">
+        <div class="buy-form-note">
 
           <i class="fa-solid fa-shield-halved"></i>
 
-          <span>
-            আপনার তথ্য নিরাপদে রাখা হবে।
-          </span>
+          Your information is used only to process
+          your website request.
 
         </div>
+
+
+        <button
+          type="submit"
+          class="btn btn-primary buy-submit"
+        >
+
+          Submit Website Request
+
+          <i class="fa-solid fa-arrow-right"></i>
+
+        </button>
 
       </form>
 
@@ -2016,10 +2331,68 @@
   </div>
 
 
+  <!-- =====================================================
+       ACCOUNT MODAL
+       ===================================================== -->
 
-  <!-- =========================================
+  <div
+    class="account-modal"
+    id="account-modal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="account-modal-backdrop"
+      data-close-account
+    ></div>
+
+
+    <div class="account-modal-dialog">
+
+      <button
+        type="button"
+        class="account-modal-close"
+        id="close-account-modal"
+        aria-label="Close"
+      >
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+
+      <div class="account-modal-icon">
+        <i class="fa-regular fa-user"></i>
+      </div>
+
+
+      <h2>
+        Your Website Journey
+      </h2>
+
+
+      <p>
+        Account features are coming soon.
+        For now, you can explore websites and
+        submit an order request directly.
+      </p>
+
+
+      <a
+        href="#websites"
+        class="btn btn-primary"
+        data-close-account
+      >
+        Explore Websites
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
        TOAST
-  ========================================== -->
+       ===================================================== -->
 
   <div
     class="toast"
@@ -2028,43 +2401,18 @@
     aria-live="polite"
   >
 
-    <div class="toast-icon">
+    <i class="fa-solid fa-circle-check"></i>
 
-      <i class="fa-solid fa-check"></i>
-
-    </div>
-
-
-    <div class="toast-content">
-
-      <strong id="toast-title">
-        Success
-      </strong>
-
-      <span id="toast-message">
-        Done successfully.
-      </span>
-
-    </div>
-
-
-    <button
-      type="button"
-      id="toast-close"
-      aria-label="Close"
-    >
-
-      <i class="fa-solid fa-xmark"></i>
-
-    </button>
+    <span id="toast-message">
+      Done
+    </span>
 
   </div>
 
 
-
-  <!-- =========================================
+  <!-- =====================================================
        BACK TO TOP
-  ========================================== -->
+       ===================================================== -->
 
   <button
     type="button"
@@ -2078,10 +2426,9 @@
   </button>
 
 
-
-  <!-- =========================================
-       JAVASCRIPT
-  ========================================== -->
+  <!-- =====================================================
+       MAIN JAVASCRIPT
+       ===================================================== -->
 
   <script src="js/main.js"></script>
 
