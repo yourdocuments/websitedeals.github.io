@@ -299,3 +299,24 @@ body::before{content:"";position:fixed;inset:0;z-index:1;pointer-events:none;opa
 @keyframes rise{from{opacity:0;transform:translateY(34px) scale(.98)}to{opacity:1;transform:none}}}
 @media(max-width:1000px){.hero-browser{transform:none}.brand-logo img{width:46px;height:46px}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ===== WHATSAPP + LIVE PREVIEW ===== */
+.wa-float{position:fixed;z-index:850;left:20px;bottom:20px;display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;padding:12px 18px 12px 14px;border-radius:40px;font-weight:700;font-size:14px;box-shadow:0 12px 30px #25d36659,inset 0 1px 0 #ffffff55;transition:transform .2s}
+.wa-float i{font-size:24px}.wa-float:hover{transform:translateY(-3px) scale(1.03)}
+.wa-float::before{content:"";position:absolute;inset:0;border-radius:inherit;border:2px solid #25d366;animation:waPing 2.2s infinite}
+@keyframes waPing{to{transform:scale(1.35);opacity:0}}
+.preview-overlay{position:fixed;inset:0;z-index:3500;display:none;background:#070c14e6;backdrop-filter:blur(6px);padding:16px}
+.preview-overlay.open{display:block}
+.preview-box{height:100%;display:flex;flex-direction:column;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 40px 100px #0008}
+.preview-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid var(--bd);flex-wrap:wrap}
+.preview-devices{display:flex;gap:4px;background:var(--bg);padding:4px;border-radius:10px}
+.preview-devices button{width:36px;height:32px;border-radius:7px;background:none;color:var(--mu)}
+.preview-devices button.on{background:#fff;color:var(--gd);box-shadow:0 1px 4px #0002}
+.preview-actions{display:flex;align-items:center;gap:8px}
+.preview-actions a{padding:8px 12px;border:1px solid var(--bd);border-radius:9px;font-size:13px;font-weight:600}
+#pv-buy{background:var(--g);color:#fff;padding:9px 16px;border-radius:9px;font-weight:700}
+#pv-close{width:36px;height:36px;border-radius:9px;background:var(--bg)}
+.preview-stage{position:relative;flex:1;background:#e9edf1;display:flex;justify-content:center;overflow:auto}
+.preview-stage iframe{width:100%;height:100%;border:0;background:#fff;transition:width .3s;max-width:100%}
+.preview-empty{position:absolute;inset:0;display:none;place-items:center;color:var(--mu)}
+@media(max-width:640px){.wa-float span{display:none}.wa-float{padding:13px}.preview-overlay{padding:0}.preview-box{border-radius:0}}

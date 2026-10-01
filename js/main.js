@@ -14,6 +14,9 @@
     { id: 8, title: 'Cafe Corner', category: 'Restaurant', price: 1199, rating: 4.7, sales: 70, added: 1, desc: 'Warm, modern cafe website.', url: '#', color: ['#92400e', '#f59e0b'], icon: 'fa-mug-hot' }
   ];
 
+  var WA_NUMBER = '8801705633700';
+  function waLink(text) { return 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text); }
+
   var $ = function (id) { return document.getElementById(id); };
   var state = { q: '', cat: '', sort: 'featured' };
 
@@ -28,7 +31,7 @@
       '<div class="website-meta"><span class="website-price">৳' + w.price.toLocaleString('en-US') +
       (w.monthly ? '<small> /mo</small>' : '') + '</span>' +
       '<span class="website-rating"><i class="fa-solid fa-star"></i> ' + w.rating + '</span></div>' +
-      '<div class="website-actions"><a class="btn-preview" href="' + esc(w.url) + '" target="_blank" rel="noopener">Preview</a>' +
+      '<div class="website-actions"><button class="btn-preview" type="button" data-preview="' + w.id + '">Live preview</button>' +
       '<button class="btn-buy" type="button" data-buy="' + w.id + '">Buy now</button></div></div></article>';
   }
 
@@ -79,8 +82,61 @@
 
   function togglePanel(el, open) { el.classList.toggle('open', open); el.setAttribute('aria-hidden', String(!open)); }
 
+  function injectExtras() {
+    var wa = document.createElement('a');
+    wa.className = 'wa-float';
+    wa.href = waLink('Hello Website Deals! I want to know about your websites.');
+    wa.target = '_blank'; wa.rel = 'noopener'; wa.setAttribute('aria-label', 'Chat on WhatsApp');
+    wa.innerHTML = '<i class="fa-brands fa-whatsapp"></i><span>Chat with us</span>';
+    document.body.appendChild(wa);
+
+    var pv = document.createElement('div');
+    pv.className = 'preview-overlay'; pv.id = 'preview-modal';
+    pv.innerHTML = '<div class="preview-box"><div class="preview-bar">' +
+      '<strong id="pv-title"></strong>' +
+      '<div class="preview-devices"><button data-w="100%" class="on" title="Desktop"><i class="fa-solid fa-desktop"></i></button>' +
+      '<button data-w="768px" title="Tablet"><i class="fa-solid fa-tablet-screen-button"></i></button>' +
+      '<button data-w="390px" title="Mobile"><i class="fa-solid fa-mobile-screen"></i></button></div>' +
+      '<div class="preview-actions"><a id="pv-open" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> Open</a>' +
+      '<button id="pv-buy" type="button">Buy now</button><button id="pv-close" type="button" aria-label="Close"><i class="fa-solid fa-xmark"></i></button></div></div>' +
+      '<div class="preview-stage"><iframe id="pv-frame" title="Preview" loading="lazy"></iframe>' +
+      '<div class="preview-empty" id="pv-empty">Preview link ekhono add kora hoyni.</div></div></div>';
+    document.body.appendChild(pv);
+
+    var frame = $('pv-frame'), empty = $('pv-empty'), cur = null;
+    function closePv() { pv.classList.remove('open'); frame.src = 'about:blank'; document.body.style.overflow = ''; }
+    window.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-preview]');
+      if (!b) return;
+      cur = WEBSITES.filter(function (x) { return String(x.id) === b.dataset.preview; })[0];
+      if (!cur) return;
+      $('pv-title').textContent = cur.title;
+      var ok = cur.url && cur.url !== '#';
+      empty.style.display = ok ? 'none' : 'grid';
+      frame.style.display = ok ? 'block' : 'none';
+      frame.src = ok ? cur.url : 'about:blank';
+      $('pv-open').href = ok ? cur.url : '#';
+      pv.classList.add('open'); document.body.style.overflow = 'hidden';
+    });
+    pv.addEventListener('click', function (e) {
+      var d = e.target.closest('.preview-devices button');
+      if (d) {
+        pv.querySelectorAll('.preview-devices button').forEach(function (x) { x.classList.remove('on'); });
+        d.classList.add('on'); frame.style.width = d.dataset.w; return;
+      }
+      if (e.target === pv) closePv();
+    });
+    $('pv-close').onclick = closePv;
+    $('pv-buy').onclick = function () {
+      if (!cur) return; var id = cur.id; closePv();
+      $('buy_website_id').value = id; $('buy-modal').classList.add('open');
+    };
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closePv(); });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     render();
+    injectExtras();
     $('footer-year').textContent = new Date().getFullYear();
 
     // loader
@@ -153,8 +209,12 @@
       };
       // TODO: ekhane order pathao (Firebase / Supabase / API / WhatsApp)
       console.log('Order:', data);
+      var w = WEBSITES.filter(function (x) { return String(x.id) === data.website_id; })[0];
+      var msg = 'Hello Website Deals! I want to buy: ' + (w ? w.title + ' (৳' + w.price + ')' : '') +
+        '\nName: ' + data.name + '\nEmail: ' + data.email + '\nPhone: ' + data.phone;
       this.reset(); closeModal();
-      toast('Order received! Amra shiggroi jogajog korbo.');
+      toast('Opening WhatsApp to confirm your order...');
+      window.open(waLink(msg), '_blank', 'noopener');
     });
 
     // newsletter
