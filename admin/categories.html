@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Categories | Website Deals Admin</title>
+
+  <meta
+    name="description"
+    content="Manage website categories for Website Deals marketplace."
+  >
+
+  <link rel="icon" type="image/png"
+    href="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <link rel="stylesheet" href="css/admin.css">
+
+  <style>
+    .category-page {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .page-intro {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .page-intro h1 {
+      margin: 0 0 7px;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.7px;
+    }
+
+    .page-intro p {
+      margin: 0;
+      color: #7b8494;
+      font-size: 14px;
+    }
+
+    .primary-btn {
+      border: 0;
+      background: #18a957;
+      color: #fff;
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      transition: .2s ease;
+      box-shadow: 0 8px 20px rgba(24,169,87,.18);
+    }
+
+    .primary-btn:hover {
+      background: #108344;
+      transform: translateY(-1px);
+    }
+
+    .category-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 25px;
+    }
+
+    .stat-card {
+      background: #fff;
+      border: 1px solid #e8ecf1;
+      border-radius: 18px;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      box-shadow: 0 8px 30px rgba(15,23,42,.04);
+    }
+
+    .stat-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: #effaf4;
+      color: #18a957;
+      display: grid;
+      place-items: center;
+      font-size: 19px;
+    }
+
+    .stat-card strong {
+      display: block;
+      font-size: 24px;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .stat-card span {
+      color: #7b8494;
+      font-size: 13px;
+    }
+
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .category-card {
+      background: #fff;
+      border: 1px solid #e8ecf1;
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 8px 30px rgba(15,23,42,.04);
+      transition: .22s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .category-card:hover {
+      transform: translateY(-3px);
+      border-color: #cfe8d9;
+      box-shadow: 0 16px 38px rgba(15,23,42,.08);
+    }
+
+    .category-card::after {
+      content: "";
+      position: absolute;
+      width: 100px;
+      height: 100px;
+      right: -45px;
+      top: -45px;
+      border-radius: 50%;
+      background: #effaf4;
+    }
+
+    .category-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 15px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .category-icon {
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: #f0faf4;
+      color: #18a957;
+      display: grid;
+      place-items: center;
+      font-size: 21px;
+    }
+
+    .category-menu {
+      position: relative;
+      z-index: 5;
+    }
+
+    .category-menu button {
+      width: 38px;
+      height: 38px;
+      border: 1px solid #e8ecf1;
+      background: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      color: #667085;
+    }
+
+    .category-menu button:hover {
+      color: #18a957;
+      border-color: #bfe3cd;
+    }
+
+    .category-content {
+      margin-top: 20px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .category-content h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+    }
+
+    .category-content p {
+      margin: 0;
+      color: #7b8494;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .category-footer {
+      margin-top: 19px;
+      padding-top: 16px;
+      border-top: 1px solid #edf0f3;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .website-count {
+      font-size: 13px;
+      color: #697386;
+    }
+
+    .website-count strong {
+      color: #101828;
+      font-size: 16px;
+    }
+
+    .status-pill {
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #ecfdf3;
+      color: #067647;
+    }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(15,23,42,.55);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 9999;
+    }
+
+    .modal-backdrop.show {
+      display: flex;
+    }
+
+    .category-modal {
+      width: min(520px, 100%);
+      background: #fff;
+      border-radius: 22px;
+      box-shadow: 0 30px 80px rgba(15,23,42,.2);
+      overflow: hidden;
+      animation: modalIn .2s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .modal-head {
+      padding: 22px 24px;
+      border-bottom: 1px solid #edf0f3;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-head h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .modal-close {
+      width: 38px;
+      height: 38px;
+      border: 0;
+      background: #f4f6f8;
+      color: #667085;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .modal-body {
+      padding: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #344054;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      border: 1px solid #dce1e7;
+      background: #fff;
+      border-radius: 11px;
+      padding: 12px 13px;
+      outline: none;
+      font-family: inherit;
+      font-size: 14px;
+      transition: .2s;
+    }
+
+    .form-group textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: #18a957;
+      box-shadow: 0 0 0 4px rgba(24,169,87,.09);
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .secondary-btn {
+      min-height: 44px;
+      padding: 0 17px;
+      border-radius: 11px;
+      border: 1px solid #dfe4ea;
+      background: #fff;
+      color: #344054;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .secondary-btn:hover {
+      background: #f8fafb;
+    }
+
+    .icon-picker {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 8px;
+    }
+
+    .icon-option {
+      width: 42px;
+      height: 42px;
+      border: 1px solid #e1e6eb;
+      background: #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      color: #667085;
+    }
+
+    .icon-option.active,
+    .icon-option:hover {
+      color: #18a957;
+      border-color: #18a957;
+      background: #effaf4;
+    }
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      background: #101828;
+      color: #fff;
+      padding: 13px 17px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 15px 35px rgba(15,23,42,.2);
+      opacity: 0;
+      transform: translateY(15px);
+      pointer-events: none;
+      transition: .25s ease;
+      z-index: 10000;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+      .category-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .category-stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .page-intro {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .category-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .category-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .icon-picker {
+        grid-template-columns: repeat(6, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .icon-picker {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .modal-actions {
+        flex-direction: column-reverse;
+      }
+
+      .modal-actions button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="admin-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="admin-sidebar" id="admin-sidebar">
+
+      <div class="sidebar-brand">
+        <a href="../index.html">
+          <img
+            src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
+            alt="Website Deals"
+          >
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+
+        <div class="nav-label">MAIN</div>
+
+        <a href="dashboard.html" class="nav-item">
+          <i class="fa-solid fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="websites.html" class="nav-item">
+          <i class="fa-solid fa-globe"></i>
+          <span>Websites</span>
+        </a>
+
+        <a href="categories.html" class="nav-item active">
+          <i class="fa-solid fa-layer-group"></i>
+          <span>Categories</span>
+        </a>
+
+        <a href="orders.html" class="nav-item">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span>Orders</span>
+        </a>
+
+        <a href="customers.html" class="nav-item">
+          <i class="fa-solid fa-users"></i>
+          <span>Customers</span>
+        </a>
+
+        <a href="newsletter.html" class="nav-item">
+          <i class="fa-solid fa-envelope"></i>
+          <span>Newsletter</span>
+        </a>
+
+        <div id="privileged-nav"></div>
+
+      </nav>
+
+      <div class="sidebar-bottom">
+        <a href="../index.html" class="nav-item">
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <span>View Marketplace</span>
+        </a>
+
+        <button class="nav-item logout-btn" id="logout-btn">
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="admin-main">
+
+      <header class="admin-topbar">
+
+        <button
+          class="mobile-menu-btn"
+          id="mobile-menu-btn"
+          aria-label="Open menu"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+        <div class="topbar-title">
+          <span>Website Deals Admin</span>
+        </div>
+
+        <div class="admin-user">
+
+          <div class="admin-avatar">
+            <i class="fa-solid fa-user"></i>
+          </div>
+
+          <div>
+            <strong id="admin-name">Admin</strong>
+            <small id="admin-email">admin@websitedeals.com</small>
+          </div>
+
+        </div>
+
+      </header>
+
+
+      <div class="admin-content">
+
+        <div class="category-page">
+
+          <!-- PAGE INTRO -->
+          <div class="page-intro">
+
+            <div>
+              <h1>Categories</h1>
+              <p>
+                Organize your marketplace websites into clear categories.
+              </p>
+            </div>
+
+            <button class="primary-btn" id="add-category-btn">
+              <i class="fa-solid fa-plus"></i>
+              Add Category
+            </button>
+
+          </div>
+
+
+          <!-- STATS -->
+          <div class="category-stats">
+
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fa-solid fa-layer-group"></i>
+              </div>
+
+              <div>
+                <strong id="total-categories">0</strong>
+                <span>Total Categories</span>
+              </div>
+            </div>
+
+
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fa-solid fa-globe"></i>
+              </div>
+
+              <div>
+                <strong id="total-websites">0</strong>
+                <span>Listed Websites</span>
+              </div>
+            </div>
+
+
+            <div class="stat-card">
+              <div class="stat-icon">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+
+              <div>
+                <strong id="active-categories">0</strong>
+                <span>Active Categories</span>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- CATEGORY GRID -->
+          <div class="category-grid" id="category-grid"></div>
+
+        </div>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- CATEGORY MODAL -->
+  <div class="modal-backdrop" id="category-modal">
+
+    <div class="category-modal">
+
+      <div class="modal-head">
+
+        <h2 id="modal-title">Add Category</h2>
+
+        <button class="modal-close" id="close-modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <form id="category-form">
+
+          <input type="hidden" id="category-id">
+
+
+          <div class="form-group">
+
+            <label for="category-name">
+              Category Name
+            </label>
+
+            <input
+              type="text"
+              id="category-name"
+              placeholder="e.g. Business"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="category-description">
+              Description
+            </label>
+
+            <textarea
+              id="category-description"
+              placeholder="Short category description..."
+            ></textarea>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label>
+              Category Icon
+            </label>
+
+            <div class="icon-picker" id="icon-picker">
+
+              <button type="button" class="icon-option active" data-icon="fa-briefcase">
+                <i class="fa-solid fa-briefcase"></i>
+              </button>
+
+              <button type="button" class="icon-option" data-icon="fa-utensils">
+                <i class="fa-solid fa-utensils"></i>
+              </button>
+
+              <button type="button" class="icon-option" data-icon="fa-bullhorn">
+                <i class="fa-solid fa-bullhorn"></i>
+              </button>
+
+              <button type="button" class="icon-option" data-icon="fa-cart-shopping">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </button>
+
+              <button type="button" class="icon-option" data-icon="fa-user">
+                <i class="fa-solid fa-user"></i>
+              </button>
+
+              <button type="button" class="icon-option" data-icon="fa-calendar">
+                <i class="fa-solid fa-calendar"></i>
+              </button>
+
+              <button type="button" class="icon-option" data-icon="fa-code">
+                <i class="fa-solid fa-code"></i>
+              </button>
+
+              <button type="button" class="icon-option" data-icon="fa-building">
+                <i class="fa-solid fa-building"></i>
+              </button>
+
+            </div>
+
+            <input
+              type="hidden"
+              id="category-icon"
+              value="fa-briefcase"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="category-status">
+              Status
+            </label>
+
+            <select id="category-status">
+
+              <option value="active">
+                Active
+              </option>
+
+              <option value="inactive">
+                Inactive
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="modal-actions">
+
+            <button
+              type="button"
+              class="secondary-btn"
+              id="cancel-modal"
+            >
+              Cancel
+            </button>
+
+            <button
+              type="submit"
+              class="primary-btn"
+            >
+              <i class="fa-solid fa-check"></i>
+              Save Category
+            </button>
+
+          </div>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+
+<script>
+(function () {
+
+  "use strict";
+
+  /* =========================================================
+     SESSION
+  ========================================================= */
+
+  const sessionKey = "websiteDealsAdminSession";
+  const session = JSON.parse(
+    sessionStorage.getItem(sessionKey) || "null"
+  );
+
+  if (!session) {
+    window.location.href = "index.html";
+    return;
+  }
+
+
+  /* =========================================================
+     ADMIN INFO
+  ========================================================= */
+
+  const adminName = document.getElementById("admin-name");
+  const adminEmail = document.getElementById("admin-email");
+
+  if (adminName) {
+    adminName.textContent =
+      session.name ||
+      (session.role === "superadmin" ? "Administrator" : "Admin");
+  }
+
+  if (adminEmail) {
+    adminEmail.textContent =
+      session.email ||
+      "admin@websitedeals.com";
+  }
+
+
+  /* =========================================================
+     PRIVILEGED NAV
+  ========================================================= */
+
+  const privilegedNav =
+    document.getElementById("privileged-nav");
+
+  if (
+    privilegedNav &&
+    session.role === "superadmin"
+  ) {
+
+    privilegedNav.innerHTML = `
+      <div class="nav-label">MANAGEMENT</div>
+
+      <a href="admins.html" class="nav-item">
+        <i class="fa-solid fa-user-shield"></i>
+        <span>Access Management</span>
+      </a>
+
+      <a href="settings.html" class="nav-item">
+        <i class="fa-solid fa-gear"></i>
+        <span>Settings</span>
+      </a>
+    `;
+  }
+
+
+  /* =========================================================
+     DEFAULT CATEGORIES
+  ========================================================= */
+
+  const defaultCategories = [
+
+    {
+      id: "business",
+      name: "Business",
+      description: "Professional websites for companies and businesses.",
+      icon: "fa-briefcase",
+      status: "active"
+    },
+
+    {
+      id: "restaurant",
+      name: "Restaurant",
+      description: "Modern websites for restaurants, cafés and food brands.",
+      icon: "fa-utensils",
+      status: "active"
+    },
+
+    {
+      id: "agency",
+      name: "Agency",
+      description: "Creative websites for digital and creative agencies.",
+      icon: "fa-bullhorn",
+      status: "active"
+    },
+
+    {
+      id: "ecommerce",
+      name: "E-commerce",
+      description: "Ready-made online stores for selling products.",
+      icon: "fa-cart-shopping",
+      status: "active"
+    },
+
+    {
+      id: "portfolio",
+      name: "Portfolio",
+      description: "Personal portfolio websites for creators and professionals.",
+      icon: "fa-user",
+      status: "active"
+    },
+
+    {
+      id: "monthly",
+      name: "Monthly",
+      description: "Affordable website packages with monthly payment.",
+      icon: "fa-calendar",
+      status: "active"
+    }
+
+  ];
+
+
+  const categoryStorageKey =
+    "websiteDealsCategories";
+
+
+  let categories =
+    JSON.parse(
+      localStorage.getItem(categoryStorageKey) || "null"
+    );
+
+
+  if (!Array.isArray(categories)) {
+
+    categories = defaultCategories;
+
+    localStorage.setItem(
+      categoryStorageKey,
+      JSON.stringify(categories)
+    );
+
+  }
+
+
+  /* =========================================================
+     DOM
+  ========================================================= */
+
+  const grid =
+    document.getElementById("category-grid");
+
+  const totalCategories =
+    document.getElementById("total-categories");
+
+  const totalWebsites =
+    document.getElementById("total-websites");
+
+  const activeCategories =
+    document.getElementById("active-categories");
+
+  const modal =
+    document.getElementById("category-modal");
+
+  const modalTitle =
+    document.getElementById("modal-title");
+
+  const form =
+    document.getElementById("category-form");
+
+  const categoryId =
+    document.getElementById("category-id");
+
+  const categoryName =
+    document.getElementById("category-name");
+
+  const categoryDescription =
+    document.getElementById("category-description");
+
+  const categoryIcon =
+    document.getElementById("category-icon");
+
+  const categoryStatus =
+    document.getElementById("category-status");
+
+  const toast =
+    document.getElementById("toast");
+
+
+  /* =========================================================
+     WEBSITE COUNT
+  ========================================================= */
+
+  function getWebsiteCount(categoryName) {
+
+    const websites =
+      JSON.parse(
+        localStorage.getItem("websiteDealsWebsites") || "[]"
+      );
+
+    return websites.filter(function (website) {
+
+      return String(
+        website.category || ""
+      ).toLowerCase() ===
+      String(categoryName || "").toLowerCase();
+
+    }).length;
+
+  }
+
+
+  /* =========================================================
+     RENDER
+  ========================================================= */
+
+  function renderCategories() {
+
+    grid.innerHTML = "";
+
+    totalCategories.textContent =
+      categories.length;
+
+    activeCategories.textContent =
+      categories.filter(function (item) {
+        return item.status === "active";
+      }).length;
+
+
+    const websites =
+      JSON.parse(
+        localStorage.getItem("websiteDealsWebsites") || "[]"
+      );
+
+    totalWebsites.textContent =
+      websites.length;
+
+
+    if (!categories.length) {
+
+      grid.innerHTML = `
+        <div style="
+          grid-column:1/-1;
+          background:#fff;
+          border:1px solid #e8ecf1;
+          border-radius:20px;
+          padding:50px 25px;
+          text-align:center;
+          color:#7b8494;
+        ">
+          <i
+            class="fa-solid fa-layer-group"
+            style="
+              font-size:35px;
+              margin-bottom:15px;
+              color:#18a957;
+            "
+          ></i>
+
+          <h3 style="
+            margin:0 0 6px;
+            color:#101828;
+          ">
+            No categories yet
+          </h3>
+
+          <p style="margin:0;">
+            Add your first marketplace category.
+          </p>
+        </div>
+      `;
+
+      return;
+    }
+
+
+    categories.forEach(function (category) {
+
+      const count =
+        getWebsiteCount(category.name);
+
+      const card =
+        document.createElement("div");
+
+      card.className =
+        "category-card";
+
+      card.innerHTML = `
+
+        <div class="category-top">
+
+          <div class="category-icon">
+            <i class="fa-solid ${escapeHtml(category.icon)}"></i>
+          </div>
+
+          <div class="category-menu">
+
+            <button
+              type="button"
+              title="Edit category"
+              data-edit="${escapeHtml(category.id)}"
+            >
+              <i class="fa-solid fa-pen"></i>
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div class="category-content">
+
+          <h3>
+            ${escapeHtml(category.name)}
+          </h3>
+
+          <p>
+            ${escapeHtml(
+              category.description ||
+              "No description available."
+            )}
+          </p>
+
+        </div>
+
+
+        <div class="category-footer">
+
+          <div class="website-count">
+            <strong>${count}</strong>
+            website${count === 1 ? "" : "s"}
+          </div>
+
+          <span class="status-pill"
+            style="
+              ${
+                category.status === "active"
+                ? ""
+                : "background:#fef3f2;color:#b42318;"
+              }
+            "
+          >
+            ${
+              category.status === "active"
+              ? "Active"
+              : "Inactive"
+            }
+          </span>
+
+        </div>
+      `;
+
+
+      grid.appendChild(card);
+
+    });
+
+
+    document
+      .querySelectorAll("[data-edit]")
+      .forEach(function (button) {
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            openEditModal(
+              this.getAttribute("data-edit")
+            );
+
+          }
+        );
+
+      });
+
+  }
+
+
+  /* =========================================================
+     OPEN ADD
+  ========================================================= */
+
+  function openAddModal() {
+
+    modalTitle.textContent =
+      "Add Category";
+
+    form.reset();
+
+    categoryId.value = "";
+
+    categoryIcon.value =
+      "fa-briefcase";
+
+    categoryStatus.value =
+      "active";
+
+
+    document
+      .querySelectorAll(".icon-option")
+      .forEach(function (button) {
+
+        button.classList.remove("active");
+
+      });
+
+
+    const firstIcon =
+      document.querySelector(
+        '.icon-option[data-icon="fa-briefcase"]'
+      );
+
+    if (firstIcon) {
+      firstIcon.classList.add("active");
+    }
+
+
+    modal.classList.add("show");
+
+    setTimeout(function () {
+      categoryName.focus();
+    }, 100);
+
+  }
+
+
+  /* =========================================================
+     OPEN EDIT
+  ========================================================= */
+
+  function openEditModal(id) {
+
+    const category =
+      categories.find(function (item) {
+        return item.id === id;
+      });
+
+    if (!category) return;
+
+
+    modalTitle.textContent =
+      "Edit Category";
+
+    categoryId.value =
+      category.id;
+
+    categoryName.value =
+      category.name;
+
+    categoryDescription.value =
+      category.description || "";
+
+    categoryIcon.value =
+      category.icon || "fa-briefcase";
+
+    categoryStatus.value =
+      category.status || "active";
+
+
+    document
+      .querySelectorAll(".icon-option")
+      .forEach(function (button) {
+
+        button.classList.toggle(
+          "active",
+          button.dataset.icon === categoryIcon.value
+        );
+
+      });
+
+
+    modal.classList.add("show");
+
+    setTimeout(function () {
+      categoryName.focus();
+    }, 100);
+
+  }
+
+
+  /* =========================================================
+     CLOSE MODAL
+  ========================================================= */
+
+  function closeModal() {
+    modal.classList.remove("show");
+  }
+
+
+  /* =========================================================
+     ADD BUTTON
+  ========================================================= */
+
+  document
+    .getElementById("add-category-btn")
+    .addEventListener(
+      "click",
+      openAddModal
+    );
+
+
+  document
+    .getElementById("close-modal")
+    .addEventListener(
+      "click",
+      closeModal
+    );
+
+
+  document
+    .getElementById("cancel-modal")
+    .addEventListener(
+      "click",
+      closeModal
+    );
+
+
+  modal.addEventListener(
+    "click",
+    function (event) {
+
+      if (event.target === modal) {
+        closeModal();
+      }
+
+    }
+  );
+
+
+  /* =========================================================
+     ICON PICKER
+  ========================================================= */
+
+  document
+    .querySelectorAll(".icon-option")
+    .forEach(function (button) {
+
+      button.addEventListener(
+        "click",
+        function () {
+
+          document
+            .querySelectorAll(".icon-option")
+            .forEach(function (item) {
+              item.classList.remove("active");
+            });
+
+
+          this.classList.add("active");
+
+          categoryIcon.value =
+            this.dataset.icon;
+
+        }
+      );
+
+    });
+
+
+  /* =========================================================
+     SAVE CATEGORY
+  ========================================================= */
+
+  form.addEventListener(
+    "submit",
+    function (event) {
+
+      event.preventDefault();
+
+
+      const name =
+        categoryName.value.trim();
+
+      const description =
+        categoryDescription.value.trim();
+
+      const icon =
+        categoryIcon.value ||
+        "fa-briefcase";
+
+      const status =
+        categoryStatus.value;
+
+
+      if (!name) {
+
+        showToast(
+          "Please enter a category name."
+        );
+
+        categoryName.focus();
+
+        return;
+      }
+
+
+      const editingId =
+        categoryId.value;
+
+
+      const duplicate =
+        categories.some(function (item) {
+
+          return (
+            item.name.toLowerCase() ===
+            name.toLowerCase() &&
+            item.id !== editingId
+          );
+
+        });
+
+
+      if (duplicate) {
+
+        showToast(
+          "This category already exists."
+        );
+
+        return;
+      }
+
+
+      if (editingId) {
+
+        const index =
+          categories.findIndex(
+            function (item) {
+              return item.id === editingId;
+            }
+          );
+
+
+        if (index !== -1) {
+
+          categories[index] = {
+
+            ...categories[index],
+
+            name,
+            description,
+            icon,
+            status
+
+          };
+
+        }
+
+
+        showToast(
+          "Category updated successfully."
+        );
+
+      } else {
+
+        const newCategory = {
+
+          id:
+            "cat_" +
+            Date.now(),
+
+          name,
+          description,
+          icon,
+          status
+
+        };
+
+
+        categories.push(
+          newCategory
+        );
+
+
+        showToast(
+          "Category added successfully."
+        );
+
+      }
+
+
+      localStorage.setItem(
+        categoryStorageKey,
+        JSON.stringify(categories)
+      );
+
+
+      renderCategories();
+
+      closeModal();
+
+    }
+  );
+
+
+  /* =========================================================
+     TOAST
+  ========================================================= */
+
+  let toastTimer;
+
+
+  function showToast(message) {
+
+    clearTimeout(toastTimer);
+
+    toast.textContent =
+      message;
+
+    toast.classList.add("show");
+
+
+    toastTimer =
+      setTimeout(function () {
+
+        toast.classList.remove("show");
+
+      }, 2600);
+
+  }
+
+
+  /* =========================================================
+     ESCAPE HTML
+  ========================================================= */
+
+  function escapeHtml(value) {
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  /* =========================================================
+     MOBILE SIDEBAR
+  ========================================================= */
+
+  const mobileMenuBtn =
+    document.getElementById(
+      "mobile-menu-btn"
+    );
+
+  const sidebar =
+    document.getElementById(
+      "admin-sidebar"
+    );
+
+
+  if (mobileMenuBtn && sidebar) {
+
+    mobileMenuBtn.addEventListener(
+      "click",
+      function () {
+
+        sidebar.classList.toggle(
+          "open"
+        );
+
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     LOGOUT
+  ========================================================= */
+
+  const logoutBtn =
+    document.getElementById(
+      "logout-btn"
+    );
+
+
+  if (logoutBtn) {
+
+    logoutBtn.addEventListener(
+      "click",
+      function () {
+
+        sessionStorage.removeItem(
+          sessionKey
+        );
+
+        window.location.href =
+          "index.html";
+
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     ESC KEY
+  ========================================================= */
+
+  document.addEventListener(
+    "keydown",
+    function (event) {
+
+      if (
+        event.key === "Escape" &&
+        modal.classList.contains("show")
+      ) {
+
+        closeModal();
+
+      }
+
+    }
+  );
+
+
+  /* =========================================================
+     INITIALIZE
+  ========================================================= */
+
+  renderCategories();
+
+})();
+</script>
+
+</body>
+</html>
