@@ -1,0 +1,3635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>System Settings | Website Deals</title>
+
+  <meta
+    name="description"
+    content="Website Deals Super Admin system settings and control center."
+  >
+
+  <link rel="icon" type="image/png" href="../logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  >
+
+  <style>
+    :root{
+      --green:#18a957;
+      --green-dark:#108344;
+      --green-soft:#eaf9f0;
+
+      --dark:#0d1410;
+      --dark-2:#151e18;
+
+      --text:#182019;
+      --muted:#748078;
+
+      --white:#fff;
+      --surface:#f6f9f7;
+      --border:#e3e9e5;
+
+      --gold:#c99524;
+      --gold-soft:#fff8e5;
+
+      --danger:#dc3545;
+      --danger-soft:#fff0f1;
+
+      --blue:#2563eb;
+      --blue-soft:#eff5ff;
+
+      --shadow:0 12px 40px rgba(15,25,18,.07);
+      --shadow-lg:0 25px 80px rgba(10,18,13,.15);
+
+      --radius:18px;
+      --sidebar:260px;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      background:var(--surface);
+      color:var(--text);
+      font-family:"Inter","Hind Siliguri",sans-serif;
+    }
+
+    button,
+    input,
+    select,
+    textarea{
+      font:inherit;
+    }
+
+    button{
+      cursor:pointer;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    /* =========================================
+       SIDEBAR
+    ========================================= */
+
+    .sidebar{
+      position:fixed;
+      inset:0 auto 0 0;
+      width:var(--sidebar);
+      z-index:1000;
+
+      display:flex;
+      flex-direction:column;
+
+      color:#fff;
+
+      background:
+        linear-gradient(
+          180deg,
+          #101812 0%,
+          #0b110d 100%
+        );
+
+      border-right:1px solid rgba(255,255,255,.06);
+    }
+
+    .brand{
+      height:78px;
+
+      display:flex;
+      align-items:center;
+
+      gap:12px;
+      padding:0 22px;
+
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+
+    .brand img{
+      width:42px;
+      height:42px;
+
+      padding:4px;
+
+      object-fit:contain;
+
+      background:#fff;
+      border-radius:10px;
+    }
+
+    .brand-title{
+      font-size:15px;
+      font-weight:800;
+      letter-spacing:-.3px;
+    }
+
+    .brand-subtitle{
+      margin-top:3px;
+
+      color:#7f8b83;
+
+      font-size:9px;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+    }
+
+    .nav{
+      flex:1;
+
+      overflow-y:auto;
+
+      padding:18px 13px;
+    }
+
+    .nav-label{
+      padding:10px 12px 8px;
+
+      color:#626d66;
+
+      font-size:9px;
+      font-weight:800;
+
+      text-transform:uppercase;
+      letter-spacing:1.3px;
+    }
+
+    .nav-item{
+      min-height:45px;
+
+      display:flex;
+      align-items:center;
+
+      gap:12px;
+
+      margin-bottom:5px;
+      padding:0 13px;
+
+      color:#aab4ad;
+
+      border-radius:12px;
+
+      font-size:12px;
+      font-weight:600;
+
+      transition:.2s ease;
+    }
+
+    .nav-item i{
+      width:19px;
+
+      text-align:center;
+
+      font-size:13px;
+    }
+
+    .nav-item:hover{
+      color:#fff;
+
+      background:rgba(255,255,255,.05);
+    }
+
+    .nav-item.active{
+      color:#fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(24,169,87,.23),
+          rgba(24,169,87,.07)
+        );
+
+      box-shadow:
+        inset 3px 0 0 var(--green);
+    }
+
+    .nav-item .badge{
+      min-width:22px;
+
+      margin-left:auto;
+      padding:4px 7px;
+
+      text-align:center;
+
+      color:#9ba69f;
+      background:rgba(255,255,255,.08);
+
+      border-radius:20px;
+
+      font-size:9px;
+    }
+
+    .nav-item.active .badge{
+      color:#fff;
+      background:var(--green);
+    }
+
+    .security-label{
+      margin:14px 10px 8px;
+      padding:8px 10px;
+
+      color:#c9a24d;
+
+      background:rgba(201,149,36,.08);
+
+      border:1px solid rgba(201,149,36,.12);
+      border-radius:9px;
+
+      font-size:8px;
+      font-weight:800;
+
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+
+    .sidebar-bottom{
+      padding:14px;
+
+      border-top:1px solid rgba(255,255,255,.07);
+    }
+
+    .profile{
+      display:flex;
+      align-items:center;
+
+      gap:10px;
+
+      margin-bottom:9px;
+      padding:11px;
+
+      background:rgba(255,255,255,.045);
+
+      border-radius:13px;
+    }
+
+    .avatar{
+      width:36px;
+      height:36px;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      color:#fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          #d6aa45,
+          #a87916
+        );
+
+      border-radius:50%;
+
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .profile strong{
+      display:block;
+      font-size:11px;
+    }
+
+    .profile span{
+      display:block;
+
+      margin-top:2px;
+
+      color:#77837b;
+
+      font-size:9px;
+    }
+
+    .signout{
+      width:100%;
+
+      display:flex;
+      align-items:center;
+
+      gap:10px;
+
+      padding:10px 12px;
+
+      color:#8d9890;
+
+      background:transparent;
+
+      border:0;
+      border-radius:10px;
+
+      font-size:11px;
+
+      text-align:left;
+    }
+
+    .signout:hover{
+      color:#ff7883;
+      background:rgba(220,53,69,.1);
+    }
+
+    /* =========================================
+       MAIN
+    ========================================= */
+
+    .main{
+      min-height:100vh;
+      margin-left:var(--sidebar);
+    }
+
+    .topbar{
+      height:78px;
+
+      position:sticky;
+      top:0;
+
+      z-index:100;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      gap:20px;
+
+      padding:0 30px;
+
+      background:rgba(255,255,255,.95);
+
+      backdrop-filter:blur(18px);
+
+      border-bottom:1px solid var(--border);
+    }
+
+    .top-left{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .mobile-menu{
+      width:40px;
+      height:40px;
+
+      display:none;
+      align-items:center;
+      justify-content:center;
+
+      color:var(--text);
+      background:#fff;
+
+      border:1px solid var(--border);
+      border-radius:10px;
+    }
+
+    .heading h1{
+      font-size:20px;
+      letter-spacing:-.6px;
+    }
+
+    .heading p{
+      margin-top:4px;
+
+      color:var(--muted);
+
+      font-size:10px;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .btn{
+      height:40px;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      gap:8px;
+
+      padding:0 14px;
+
+      color:#4d5951;
+      background:#fff;
+
+      border:1px solid var(--border);
+      border-radius:10px;
+
+      font-size:10px;
+      font-weight:700;
+
+      transition:.2s;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      border-color:#c5cec8;
+    }
+
+    .btn.primary{
+      color:#fff;
+      background:var(--green);
+      border-color:var(--green);
+
+      box-shadow:
+        0 8px 20px rgba(24,169,87,.18);
+    }
+
+    .btn.primary:hover{
+      background:var(--green-dark);
+    }
+
+    .btn.danger{
+      color:var(--danger);
+      background:var(--danger-soft);
+      border-color:#f2c7cb;
+    }
+
+    /* =========================================
+       CONTENT
+    ========================================= */
+
+    .content{
+      max-width:1550px;
+      margin:auto;
+
+      padding:30px;
+    }
+
+    .security-banner{
+      display:flex;
+      align-items:center;
+
+      gap:14px;
+
+      margin-bottom:20px;
+      padding:16px 18px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fffaf0,
+          #fffdf8
+        );
+
+      border:1px solid #f0dfb3;
+      border-radius:16px;
+    }
+
+    .security-icon{
+      width:42px;
+      height:42px;
+
+      flex:none;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      color:var(--gold);
+      background:var(--gold-soft);
+
+      border-radius:12px;
+    }
+
+    .security-banner strong{
+      display:block;
+      font-size:11px;
+    }
+
+    .security-banner p{
+      margin-top:4px;
+
+      color:#766b51;
+
+      font-size:9px;
+      line-height:1.5;
+    }
+
+    .security-pill{
+      margin-left:auto;
+
+      flex:none;
+
+      padding:7px 10px;
+
+      color:#8d6919;
+      background:#fff4ce;
+
+      border-radius:20px;
+
+      font-size:9px;
+      font-weight:800;
+    }
+
+    /* =========================================
+       SETTINGS GRID
+    ========================================= */
+
+    .settings-grid{
+      display:grid;
+
+      grid-template-columns:
+        225px
+        minmax(0,1fr);
+
+      gap:20px;
+
+      align-items:start;
+    }
+
+    /* =========================================
+       SETTINGS NAV
+    ========================================= */
+
+    .settings-nav{
+      position:sticky;
+      top:98px;
+
+      padding:10px;
+
+      background:#fff;
+
+      border:1px solid var(--border);
+      border-radius:18px;
+
+      box-shadow:var(--shadow);
+    }
+
+    .settings-nav-title{
+      padding:10px 11px 9px;
+
+      color:#929b95;
+
+      font-size:8px;
+      font-weight:800;
+
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+
+    .settings-link{
+      width:100%;
+
+      display:flex;
+      align-items:center;
+
+      gap:10px;
+
+      padding:11px;
+
+      color:#67726b;
+
+      background:transparent;
+
+      border:0;
+      border-radius:10px;
+
+      font-size:9px;
+      font-weight:700;
+
+      text-align:left;
+
+      transition:.2s;
+    }
+
+    .settings-link i{
+      width:18px;
+
+      text-align:center;
+    }
+
+    .settings-link:hover{
+      color:var(--green-dark);
+      background:var(--green-soft);
+    }
+
+    .settings-link.active{
+      color:var(--green-dark);
+      background:var(--green-soft);
+    }
+
+    /* =========================================
+       SETTINGS CONTENT
+    ========================================= */
+
+    .settings-content{
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .section{
+      scroll-margin-top:100px;
+
+      overflow:hidden;
+
+      background:#fff;
+
+      border:1px solid var(--border);
+      border-radius:18px;
+
+      box-shadow:var(--shadow);
+    }
+
+    .section-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      gap:15px;
+
+      padding:19px 21px;
+
+      border-bottom:1px solid var(--border);
+    }
+
+    .section-heading{
+      display:flex;
+      align-items:center;
+
+      gap:11px;
+    }
+
+    .section-icon{
+      width:38px;
+      height:38px;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      color:var(--green-dark);
+      background:var(--green-soft);
+
+      border-radius:11px;
+    }
+
+    .section-heading h2{
+      font-size:14px;
+      letter-spacing:-.2px;
+    }
+
+    .section-heading p{
+      margin-top:3px;
+
+      color:var(--muted);
+
+      font-size:9px;
+    }
+
+    .section-body{
+      padding:21px;
+    }
+
+    /* =========================================
+       FORM
+    ========================================= */
+
+    .form-grid{
+      display:grid;
+
+      grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+      gap:15px;
+    }
+
+    .field.full{
+      grid-column:1 / -1;
+    }
+
+    .label{
+      display:block;
+
+      margin-bottom:7px;
+
+      color:#3d4841;
+
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .input,
+    .select,
+    .textarea{
+      width:100%;
+
+      outline:none;
+
+      color:var(--text);
+      background:#fff;
+
+      border:1px solid var(--border);
+      border-radius:10px;
+
+      font-size:10px;
+
+      transition:.2s;
+    }
+
+    .input,
+    .select{
+      height:42px;
+      padding:0 11px;
+    }
+
+    .textarea{
+      min-height:90px;
+      padding:11px;
+
+      resize:vertical;
+      line-height:1.6;
+    }
+
+    .input:focus,
+    .select:focus,
+    .textarea:focus{
+      border-color:#89cfa5;
+
+      box-shadow:
+        0 0 0 3px rgba(24,169,87,.08);
+    }
+
+    .field-help{
+      margin-top:6px;
+
+      color:#9aa39d;
+
+      font-size:8px;
+      line-height:1.5;
+    }
+
+    /* =========================================
+       TOGGLE
+    ========================================= */
+
+    .toggle-list{
+      display:flex;
+      flex-direction:column;
+    }
+
+    .toggle-row{
+      min-height:62px;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      gap:20px;
+
+      padding:13px 0;
+
+      border-bottom:1px solid #edf1ee;
+    }
+
+    .toggle-row:first-child{
+      padding-top:0;
+    }
+
+    .toggle-row:last-child{
+      padding-bottom:0;
+      border-bottom:0;
+    }
+
+    .toggle-info strong{
+      display:block;
+
+      color:#27312b;
+
+      font-size:10px;
+    }
+
+    .toggle-info span{
+      display:block;
+
+      margin-top:4px;
+
+      color:var(--muted);
+
+      font-size:8px;
+      line-height:1.5;
+    }
+
+    .switch{
+      position:relative;
+
+      width:42px;
+      height:23px;
+
+      flex:none;
+    }
+
+    .switch input{
+      width:0;
+      height:0;
+      opacity:0;
+    }
+
+    .slider{
+      position:absolute;
+      inset:0;
+
+      cursor:pointer;
+
+      background:#d9dfdb;
+
+      border-radius:30px;
+
+      transition:.2s;
+    }
+
+    .slider::before{
+      content:"";
+
+      position:absolute;
+
+      width:17px;
+      height:17px;
+
+      left:3px;
+      top:3px;
+
+      background:#fff;
+
+      border-radius:50%;
+
+      box-shadow:0 2px 6px rgba(0,0,0,.14);
+
+      transition:.2s;
+    }
+
+    .switch input:checked + .slider{
+      background:var(--green);
+    }
+
+    .switch input:checked + .slider::before{
+      transform:translateX(19px);
+    }
+
+    /* =========================================
+       DANGER
+    ========================================= */
+
+    .danger-section{
+      border-color:#f0c8cc;
+    }
+
+    .danger-section .section-icon{
+      color:var(--danger);
+      background:var(--danger-soft);
+    }
+
+    .danger-box{
+      padding:15px;
+
+      background:#fff7f8;
+
+      border:1px solid #f4dadd;
+      border-radius:12px;
+    }
+
+    .danger-box strong{
+      display:block;
+
+      color:#8f2530;
+
+      font-size:10px;
+    }
+
+    .danger-box p{
+      margin-top:5px;
+
+      color:#9c6067;
+
+      font-size:8px;
+      line-height:1.6;
+    }
+
+    .danger-actions{
+      display:flex;
+      flex-wrap:wrap;
+
+      gap:8px;
+
+      margin-top:12px;
+    }
+
+    /* =========================================
+       SAVE BAR
+    ========================================= */
+
+    .save-bar{
+      position:sticky;
+      bottom:15px;
+
+      z-index:50;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      gap:15px;
+
+      padding:13px 15px;
+
+      background:rgba(17,25,20,.96);
+
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+
+      box-shadow:var(--shadow-lg);
+
+      backdrop-filter:blur(15px);
+    }
+
+    .save-info{
+      display:flex;
+      align-items:center;
+
+      gap:9px;
+
+      color:#d7dfda;
+
+      font-size:9px;
+    }
+
+    .save-dot{
+      width:7px;
+      height:7px;
+
+      background:#52d98a;
+
+      border-radius:50%;
+
+      box-shadow:
+        0 0 0 4px rgba(82,217,138,.1);
+    }
+
+    .save-actions{
+      display:flex;
+      gap:8px;
+    }
+
+    .save-bar .btn{
+      color:#c5cec8;
+      background:#1b251f;
+      border-color:#303b34;
+    }
+
+    .save-bar .btn.primary{
+      color:#fff;
+      background:var(--green);
+      border-color:var(--green);
+    }
+
+    /* =========================================
+       TOAST
+    ========================================= */
+
+    .toast{
+      position:fixed;
+
+      right:24px;
+      bottom:24px;
+
+      z-index:3000;
+
+      width:min(360px,calc(100% - 30px));
+
+      display:flex;
+      align-items:flex-start;
+
+      gap:10px;
+
+      padding:14px;
+
+      color:#fff;
+      background:#111914;
+
+      border-radius:13px;
+
+      box-shadow:var(--shadow-lg);
+
+      opacity:0;
+      transform:translateY(20px);
+
+      pointer-events:none;
+
+      transition:.25s ease;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:none;
+    }
+
+    .toast-icon{
+      width:30px;
+      height:30px;
+
+      flex:none;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+
+      color:#55d68c;
+      background:rgba(24,169,87,.15);
+
+      border-radius:9px;
+    }
+
+    .toast strong{
+      display:block;
+      font-size:10px;
+    }
+
+    .toast p{
+      margin-top:3px;
+
+      color:#9ba69e;
+
+      font-size:9px;
+      line-height:1.5;
+    }
+
+    .toast-close{
+      margin-left:auto;
+
+      color:#7f8b83;
+      background:transparent;
+
+      border:0;
+    }
+
+    /* =========================================
+       OVERLAY
+    ========================================= */
+
+    .overlay{
+      position:fixed;
+      inset:0;
+
+      z-index:900;
+
+      display:none;
+
+      background:rgba(0,0,0,.45);
+    }
+
+    .overlay.show{
+      display:block;
+    }
+
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
+
+    @media(max-width:1050px){
+
+      .settings-grid{
+        grid-template-columns:1fr;
+      }
+
+      .settings-nav{
+        position:static;
+
+        display:flex;
+
+        overflow-x:auto;
+
+        gap:5px;
+
+        padding:8px;
+      }
+
+      .settings-nav-title{
+        display:none;
+      }
+
+      .settings-link{
+        flex:none;
+      }
+
+    }
+
+    @media(max-width:760px){
+
+      .sidebar{
+        transform:translateX(-100%);
+
+        transition:.25s ease;
+      }
+
+      .sidebar.open{
+        transform:none;
+      }
+
+      .main{
+        margin-left:0;
+      }
+
+      .mobile-menu{
+        display:flex;
+      }
+
+      .topbar{
+        height:70px;
+        padding:0 18px;
+      }
+
+      .content{
+        padding:20px 16px;
+      }
+
+      .heading p{
+        display:none;
+      }
+
+      .top-actions .btn span{
+        display:none;
+      }
+
+      .top-actions .btn{
+        width:40px;
+        padding:0;
+      }
+
+      .security-pill{
+        display:none;
+      }
+
+    }
+
+    @media(max-width:600px){
+
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+
+      .field.full{
+        grid-column:auto;
+      }
+
+      .section-head{
+        padding:16px;
+      }
+
+      .section-body{
+        padding:16px;
+      }
+
+      .save-bar{
+        align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .save-actions{
+        width:100%;
+      }
+
+      .save-actions .btn{
+        flex:1;
+      }
+
+    }
+
+    @media(max-width:430px){
+
+      .security-banner{
+        align-items:flex-start;
+        padding:13px;
+      }
+
+      .section-heading p{
+        display:none;
+      }
+
+      .settings-link{
+        padding:9px;
+      }
+
+      .settings-link span{
+        display:none;
+      }
+
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="app">
+
+  <!-- =========================================
+       SIDEBAR
+  ========================================= -->
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+
+      <img
+        src="../logo.png"
+        alt="Website Deals"
+      >
+
+      <div>
+
+        <div class="brand-title">
+          Website Deals
+        </div>
+
+        <div class="brand-subtitle">
+          Control Center
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <nav class="nav">
+
+      <div class="nav-label">
+        Main
+      </div>
+
+      <a
+        href="dashboard.html"
+        class="nav-item"
+      >
+        <i class="fa-solid fa-chart-pie"></i>
+        <span>Dashboard</span>
+      </a>
+
+
+      <a
+        href="websites.html"
+        class="nav-item"
+      >
+        <i class="fa-solid fa-globe"></i>
+        <span>Websites</span>
+        <span class="badge">11</span>
+      </a>
+
+
+      <a
+        href="categories.html"
+        class="nav-item"
+      >
+        <i class="fa-solid fa-layer-group"></i>
+        <span>Categories</span>
+      </a>
+
+
+      <a
+        href="orders.html"
+        class="nav-item"
+      >
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Orders</span>
+        <span class="badge">8</span>
+      </a>
+
+
+      <a
+        href="customers.html"
+        class="nav-item"
+      >
+        <i class="fa-solid fa-users"></i>
+        <span>Customers</span>
+      </a>
+
+
+      <a
+        href="newsletter.html"
+        class="nav-item"
+      >
+        <i class="fa-solid fa-envelope"></i>
+        <span>Newsletter</span>
+      </a>
+
+
+      <div class="security-label">
+        <i class="fa-solid fa-shield-halved"></i>
+        Restricted Controls
+      </div>
+
+
+      <a
+        href="admins.html"
+        class="nav-item"
+      >
+        <i class="fa-solid fa-user-shield"></i>
+        <span>Admin Management</span>
+      </a>
+
+
+      <a
+        href="settings.html"
+        class="nav-item active"
+      >
+        <i class="fa-solid fa-sliders"></i>
+        <span>System Settings</span>
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+      <div class="profile">
+
+        <div class="avatar">
+          SA
+        </div>
+
+        <div>
+
+          <strong>
+            Super Admin
+          </strong>
+
+          <span>
+            Full System Access
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <button
+        class="signout"
+        id="signout"
+      >
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <span>Sign Out</span>
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <div
+    class="overlay"
+    id="overlay"
+  ></div>
+
+
+  <!-- =========================================
+       MAIN
+  ========================================= -->
+
+  <main class="main">
+
+    <header class="topbar">
+
+      <div class="top-left">
+
+        <button
+          class="mobile-menu"
+          id="mobile-menu"
+        >
+          <i class="fa-solid fa-bars"></i>
+        </button>
+
+
+        <div class="heading">
+
+          <h1>
+            System Settings
+          </h1>
+
+          <p>
+            Configure marketplace-wide settings and controls
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="top-actions">
+
+        <button
+          class="btn"
+          id="reset-btn"
+        >
+          <i class="fa-solid fa-rotate-left"></i>
+          <span>Reset</span>
+        </button>
+
+
+        <a
+          href="../index.html"
+          target="_blank"
+          class="btn"
+        >
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          <span>Marketplace</span>
+        </a>
+
+      </div>
+
+    </header>
+
+
+    <section class="content">
+
+
+      <!-- =========================================
+           SECURITY
+      ========================================= -->
+
+      <div class="security-banner">
+
+        <div class="security-icon">
+          <i class="fa-solid fa-shield-halved"></i>
+        </div>
+
+        <div>
+
+          <strong>
+            Super Admin Control Center
+          </strong>
+
+          <p>
+            These settings can affect the entire marketplace.
+            Changes should be reviewed before publishing.
+          </p>
+
+        </div>
+
+        <span class="security-pill">
+          RESTRICTED
+        </span>
+
+      </div>
+
+
+      <!-- =========================================
+           SETTINGS LAYOUT
+      ========================================= -->
+
+      <div class="settings-grid">
+
+
+        <!-- SETTINGS NAV -->
+
+        <aside class="settings-nav">
+
+          <div class="settings-nav-title">
+            Settings
+          </div>
+
+
+          <button
+            class="settings-link active"
+            data-target="general"
+          >
+            <i class="fa-solid fa-store"></i>
+            <span>General</span>
+          </button>
+
+
+          <button
+            class="settings-link"
+            data-target="marketplace"
+          >
+            <i class="fa-solid fa-shop"></i>
+            <span>Marketplace</span>
+          </button>
+
+
+          <button
+            class="settings-link"
+            data-target="orders"
+          >
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span>Orders</span>
+          </button>
+
+
+          <button
+            class="settings-link"
+            data-target="notifications"
+          >
+            <i class="fa-solid fa-bell"></i>
+            <span>Notifications</span>
+          </button>
+
+
+          <button
+            class="settings-link"
+            data-target="maintenance"
+          >
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+            <span>Maintenance</span>
+          </button>
+
+
+          <button
+            class="settings-link"
+            data-target="security"
+          >
+            <i class="fa-solid fa-lock"></i>
+            <span>Security</span>
+          </button>
+
+
+          <button
+            class="settings-link"
+            data-target="danger"
+          >
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>Danger Zone</span>
+          </button>
+
+        </aside>
+
+
+        <!-- SETTINGS CONTENT -->
+
+        <div class="settings-content">
+
+
+          <!-- =========================================
+               GENERAL
+          ========================================= -->
+
+          <section
+            class="section"
+            id="general"
+          >
+
+            <div class="section-head">
+
+              <div class="section-heading">
+
+                <div class="section-icon">
+                  <i class="fa-solid fa-store"></i>
+                </div>
+
+                <div>
+
+                  <h2>
+                    General Information
+                  </h2>
+
+                  <p>
+                    Basic marketplace identity and contact information
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="section-body">
+
+              <div class="form-grid">
+
+                <div class="field">
+
+                  <label class="label">
+                    Marketplace Name
+                  </label>
+
+                  <input
+                    class="input"
+                    id="marketplace-name"
+                    type="text"
+                    value="Website Deals"
+                  >
+
+                </div>
+
+
+                <div class="field">
+
+                  <label class="label">
+                    Marketplace Tagline
+                  </label>
+
+                  <input
+                    class="input"
+                    id="marketplace-tagline"
+                    type="text"
+                    value="Premium Ready-Made Websites"
+                  >
+
+                </div>
+
+
+                <div class="field">
+
+                  <label class="label">
+                    Support Email
+                  </label>
+
+                  <input
+                    class="input"
+                    id="support-email"
+                    type="email"
+                    value="support@websitedeals.com"
+                  >
+
+                </div>
+
+
+                <div class="field">
+
+                  <label class="label">
+                    Support Phone
+                  </label>
+
+                  <input
+                    class="input"
+                    id="support-phone"
+                    type="text"
+                    value="+880 1XXX-XXXXXX"
+                  >
+
+                </div>
+
+
+                <div class="field full">
+
+                  <label class="label">
+                    Marketplace Description
+                  </label>
+
+                  <textarea
+                    class="textarea"
+                    id="marketplace-description"
+                  >Premium ready-made websites for businesses, restaurants, agencies, portfolios and online stores.</textarea>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- =========================================
+               MARKETPLACE
+          ========================================= -->
+
+          <section
+            class="section"
+            id="marketplace"
+          >
+
+            <div class="section-head">
+
+              <div class="section-heading">
+
+                <div class="section-icon">
+                  <i class="fa-solid fa-shop"></i>
+                </div>
+
+                <div>
+
+                  <h2>
+                    Marketplace Settings
+                  </h2>
+
+                  <p>
+                    Configure public marketplace behavior
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="section-body">
+
+              <div class="form-grid">
+
+                <div class="field">
+
+                  <label class="label">
+                    Currency
+                  </label>
+
+                  <select
+                    class="select"
+                    id="currency"
+                  >
+
+                    <option value="BDT" selected>
+                      BDT — ৳
+                    </option>
+
+                    <option value="USD">
+                      USD — $
+                    </option>
+
+                    <option value="INR">
+                      INR — ₹
+                    </option>
+
+                  </select>
+
+                </div>
+
+
+                <div class="field">
+
+                  <label class="label">
+                    Starting Price
+                  </label>
+
+                  <input
+                    class="input"
+                    id="starting-price"
+                    type="number"
+                    value="999"
+                    min="0"
+                  >
+
+                </div>
+
+              </div>
+
+
+              <div
+                class="toggle-list"
+                style="margin-top:20px;"
+              >
+
+                <div class="toggle-row">
+
+                  <div class="toggle-info">
+
+                    <strong>
+                      Marketplace Enabled
+                    </strong>
+
+                    <span>
+                      Allow visitors to browse and purchase websites.
+                    </span>
+
+                  </div>
+
+                  <label class="switch">
+
+                    <input
+                      id="marketplace-enabled"
+                      type="checkbox"
+                      checked
+                    >
+
+                    <span class="slider"></span>
+
+                  </label>
+
+                </div>
+
+
+                <div class="toggle-row">
+
+                  <div class="toggle-info">
+
+                    <strong>
+                      Show Search
+                    </strong>
+
+                    <span>
+                      Display marketplace search functionality.
+                    </span>
+
+                  </div>
+
+                  <label class="switch">
+
+                    <input
+                      id="show-search"
+                      type="checkbox"
+                      checked
+                    >
+
+                    <span class="slider"></span>
+
+                  </label>
+
+                </div>
+
+
+                <div class="toggle-row">
+
+                  <div class="toggle-info">
+
+                    <strong>
+                      Show Featured Websites
+                    </strong>
+
+                    <span>
+                      Display featured listings on the homepage.
+                    </span>
+
+                  </div>
+
+                  <label class="switch">
+
+                    <input
+                      id="show-featured"
+                      type="checkbox"
+                      checked
+                    >
+
+                    <span class="slider"></span>
+
+                  </label>
+
+                </div>
+
+
+                <div class="toggle-row">
+
+                  <div class="toggle-info">
+
+                    <strong>
+                      Show Monthly Package
+                    </strong>
+
+                    <span>
+                      Display the monthly website package section.
+                    </span>
+
+                  </div>
+
+                  <label class="switch">
+
+                    <input
+                      id="show-monthly"
+                      type="checkbox"
+                      checked
+                    >
+
+                    <span class="slider"></span>
+
+                  </label>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- =========================================
+               ORDERS
+          ========================================= -->
+
+          <section
+            class="section"
+            id="orders"
+          >
+
+            <div class="section-head">
+
+              <div class="section-heading">
+
+                <div class="section-icon">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+
+                <div>
+
+                  <h2>
+                    Order Settings
+                  </h2>
+
+                  <p>
+                    Configure customer order workflow
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="section-body">
+
+              <div class="form-grid">
+
+                <div class="field">
+
+                  <label class="label">
+                    Default Order Status
+                  </label>
+
+                  <select
+                    class="select"
+                    id="default-order-status"
+                  >
+
+                    <option value="pending" selected>
+                      Pending
+                    </option>
+
+                    <option value="processing">
+                      Processing
+                    </option>
+
+                    <option value="completed">
+                      Completed
+                    </option>
+
+                  </select>
+
+                </div>
+
+
+                <div class="field">
+
+                  <label class="label">
+                    Order Prefix
+                  </label>
+
+                  <input
+                    class="input"
+                    id="order-prefix"
+                    type="text"
+                    value="WD-"
+                  >
+
+                </div>
+
+              </div>
+
+
+              <div
+                class="toggle-list"
+                style="margin-top:20px;"
+              >
+
+                <div class="toggle-row">
+
+                  <div class="toggle-info">
+
+                    <strong>
+                      Require Customer Phone
+                    </strong>
+
+                    <span>
+                      Require a phone number during checkout.
+                    </span>
+
+                  </div>
+
+                  <label class="switch">
+
+                    <input
+                      id="require-phone"
+                      type="checkbox"
+                      checked
+                    >
+
+                    <span class="slider"></span>
+
+                  </label>
+
+                </div>
+
+
+                <div class="toggle-row">
+
+                  <div class="toggle-info">
+
+                    <strong>
+                      Require Payment Confirmation
+                    </strong>
+
+                    <span>
+                      Orders should be confirmed after payment verification.
+                    </span>
+
+                  </div>
+
+                  <label class="switch">
+
+                    <input
+                      id="payment-confirmation"
+                      type="checkbox"
+                      checked
+                    >
+
+                    <span class="slider"></span>
+
+                  </label>
+
+                </div>
+
+
+                <div class="toggle-row">
+
+                  <div class="toggle-info">
+
+                    <strong>
+                      Send Order Notifications
+                    </strong>
+
+                    <span>
+                      Notify administrators when new orders are submitted.
+                    </span>
+
+                  </div>
+
+                  <label class="switch">
+
+                    <input
+                      id="order-notifications"
+                      type="checkbox"
+                      checked
+                    >
+
+                    <span class="slider"></span>
+
+                  </label>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- =========================================
+               NOTIFICATIONS
+          ========================================= -->
+
+          <section
+            class="section"
+            id="notifications"
+          >
+
+            <div class="section-head">
+
+              <div class="section-heading">
+
+                <div class="section-icon">
+                  <i class="fa-solid fa-bell"></i>
+                </div>
+
+                <div>
+
+                  <h2>
+                    Notifications
+                  </h2>
+
+                  <p>
+                    Control system notification behavior
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="section-body">
+
+              <div class="toggle-list">
+
+                <div class="toggle-row">
+
+                  <div class="toggle-info">
+
+                    <strong>
+                      New Order Alert
+                    </strong>
+
+                    <span>
+                      Show an alert when a new website order arrives.
+                    </span>
+
+                  </div>
+
+                  <label class="switch">
+
+                    <input
+                      id="new-order-alert"
+                      type="checkbox"
+                      checked
+                    >
+
+                    <span class="slider"></span>
+
+                  </label>
+
+                </div>
+
+
+                <div class="toggle-row">
+
+                  <div class="toggle-info">
+
+                    <strong>
+                      New Subscriber Alert
+                    </strong>
+
+                    <span>
+                      Notify administrators about new newsletter subscribers.
+                    </span>
+
+                  </div>
+
+                  <label class="switch">
+
+                    <input
+                      id="subscriber-alert"
+                      type="checkbox"
+                      checked
+                    >
+
+                    <span class="slider"></span>
+
+                  </label>
+
+                </div>
+
+
+                <div class="toggle-row">
+
+                  <div class="toggle-info">
+
+                    <strong>
+                      Admin Activity Alerts
+                    </strong>
+
+                    <span>
+                      Track important administrator actions.
+                    </span>
+
+                  </div>
+
+                  <label class="switch">
+
+                    <input
+                      id="admin-alert"
+                      type="checkbox"
+                      checked
+                    >
+
+                    <span class="slider"></span>
+
+                  </label>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- =========================================
+               MAINTENANCE
+          ========================================= -->
+
+          <section
+            class="section"
+            id="maintenance"
+          >
+
+            <div class="section-head">
+
+              <div class="section-heading">
+
+                <div class="section-icon">
+                  <i class="fa-solid fa-screwdriver-wrench"></i>
+                </div>
+
+                <div>
+
+                  <h2>
+                    Maintenance Mode
+                  </h2>
+
+                  <p>
+                    Temporarily restrict public marketplace access
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="section-body">
+
+              <div class="toggle-row">
+
+                <div class="toggle-info">
+
+                  <strong>
+                    Enable Maintenance Mode
+                  </strong>
+
+                  <span>
+                    Visitors will see a maintenance screen instead of the marketplace.
+                  </span>
+
+                </div>
+
+                <label class="switch">
+
+                  <input
+                    id="maintenance-mode"
+                    type="checkbox"
+                  >
+
+                  <span class="slider"></span>
+
+                </label>
+
+              </div>
+
+
+              <div
+                class="field"
+                style="margin-top:18px;"
+              >
+
+                <label class="label">
+                  Maintenance Message
+                </label>
+
+                <textarea
+                  class="textarea"
+                  id="maintenance-message"
+                >We're currently improving the marketplace. Please check back shortly.</textarea>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- =========================================
+               SECURITY
+          ========================================= -->
+
+          <section
+            class="section"
+            id="security"
+          >
+
+            <div class="section-head">
+
+              <div class="section-heading">
+
+                <div class="section-icon">
+                  <i class="fa-solid fa-lock"></i>
+                </div>
+
+                <div>
+
+                  <h2>
+                    Security Settings
+                  </h2>
+
+                  <p>
+                    Administrative security preferences
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="section-body">
+
+              <div class="form-grid">
+
+                <div class="field">
+
+                  <label class="label">
+                    Session Timeout
+                  </label>
+
+                  <select
+                    class="select"
+                    id="session-timeout"
+                  >
+
+                    <option value="30">
+                      30 Minutes
+                    </option>
+
+                    <option value="60" selected>
+                      1 Hour
+                    </option>
+
+                    <option value="120">
+                      2 Hours
+                    </option>
+
+                    <option value="240">
+                      4 Hours
+                    </option>
+
+                  </select>
+
+                </div>
+
+
+                <div class="field">
+
+                  <label class="label">
+                    Login Attempts
+                  </label>
+
+                  <select
+                    class="select"
+                    id="login-attempts"
+                  >
+
+                    <option value="3">
+                      3 Attempts
+                    </option>
+
+                    <option value="5" selected>
+                      5 Attempts
+                    </option>
+
+                    <option value="10">
+                      10 Attempts
+                    </option>
+
+                  </select>
+
+                </div>
+
+              </div>
+
+
+              <div
+                class="toggle-list"
+                style="margin-top:20px;"
+              >
+
+                <div class="toggle-row">
+
+                  <div class="toggle-info">
+
+                    <strong>
+                      Require Secure Authentication
+                    </strong>
+
+                    <span>
+                      Require authenticated accounts for administration access.
+                    </span>
+
+                  </div>
+
+                  <label class="switch">
+
+                    <input
+                      id="secure-auth"
+                      type="checkbox"
+                      checked
+                    >
+
+                    <span class="slider"></span>
+
+                  </label>
+
+                </div>
+
+
+                <div class="toggle-row">
+
+                  <div class="toggle-info">
+
+                    <strong>
+                      Activity Logging
+                    </strong>
+
+                    <span>
+                      Record important administrative actions.
+                    </span>
+
+                  </div>
+
+                  <label class="switch">
+
+                    <input
+                      id="activity-logging"
+                      type="checkbox"
+                      checked
+                    >
+
+                    <span class="slider"></span>
+
+                  </label>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- =========================================
+               DANGER ZONE
+          ========================================= -->
+
+          <section
+            class="section danger-section"
+            id="danger"
+          >
+
+            <div class="section-head">
+
+              <div class="section-heading">
+
+                <div class="section-icon">
+                  <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+
+                <div>
+
+                  <h2>
+                    Danger Zone
+                  </h2>
+
+                  <p>
+                    Irreversible or destructive administrative actions
+                  </p>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div class="section-body">
+
+              <div class="danger-box">
+
+                <strong>
+                  Use these actions carefully
+                </strong>
+
+                <p>
+                  These demo controls can clear locally stored marketplace
+                  data. In production, destructive actions will require
+                  server-side authorization and confirmation.
+                </p>
+
+
+                <div class="danger-actions">
+
+                  <button
+                    class="btn danger"
+                    id="clear-orders"
+                  >
+                    <i class="fa-solid fa-trash"></i>
+                    Clear Demo Orders
+                  </button>
+
+
+                  <button
+                    class="btn danger"
+                    id="clear-subscribers"
+                  >
+                    <i class="fa-solid fa-trash"></i>
+                    Clear Subscribers
+                  </button>
+
+
+                  <button
+                    class="btn danger"
+                    id="clear-settings"
+                  >
+                    <i class="fa-solid fa-rotate-left"></i>
+                    Reset Settings
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- =========================================
+               SAVE BAR
+          ========================================= -->
+
+          <div class="save-bar">
+
+            <div class="save-info">
+
+              <span class="save-dot"></span>
+
+              <span>
+                Changes are saved locally in demo mode
+              </span>
+
+            </div>
+
+
+            <div class="save-actions">
+
+              <button
+                class="btn"
+                id="discard-btn"
+              >
+                Discard
+              </button>
+
+
+              <button
+                class="btn primary"
+                id="save-btn"
+              >
+                <i class="fa-solid fa-check"></i>
+                Save Settings
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+
+<!-- =========================================
+     TOAST
+========================================= -->
+
+<div
+  class="toast"
+  id="toast"
+>
+
+  <div class="toast-icon">
+    <i class="fa-solid fa-check"></i>
+  </div>
+
+
+  <div>
+
+    <strong id="toast-title">
+      Success
+    </strong>
+
+    <p id="toast-message">
+      Settings updated.
+    </p>
+
+  </div>
+
+
+  <button
+    class="toast-close"
+    id="toast-close"
+  >
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+
+</div>
+
+
+<script>
+/* =========================================================
+   WEBSITE DEALS
+   SYSTEM SETTINGS
+   DEMO MODE
+========================================================= */
+
+const SETTINGS_KEY =
+  "websiteDealsSettings";
+
+
+const DEFAULT_SETTINGS = {
+
+  marketplaceName:
+    "Website Deals",
+
+  marketplaceTagline:
+    "Premium Ready-Made Websites",
+
+  supportEmail:
+    "support@websitedeals.com",
+
+  supportPhone:
+    "+880 1XXX-XXXXXX",
+
+  marketplaceDescription:
+    "Premium ready-made websites for businesses, restaurants, agencies, portfolios and online stores.",
+
+  currency:
+    "BDT",
+
+  startingPrice:
+    999,
+
+  marketplaceEnabled:
+    true,
+
+  showSearch:
+    true,
+
+  showFeatured:
+    true,
+
+  showMonthly:
+    true,
+
+  defaultOrderStatus:
+    "pending",
+
+  orderPrefix:
+    "WD-",
+
+  requirePhone:
+    true,
+
+  paymentConfirmation:
+    true,
+
+  orderNotifications:
+    true,
+
+  newOrderAlert:
+    true,
+
+  subscriberAlert:
+    true,
+
+  adminAlert:
+    true,
+
+  maintenanceMode:
+    false,
+
+  maintenanceMessage:
+    "We're currently improving the marketplace. Please check back shortly.",
+
+  sessionTimeout:
+    "60",
+
+  loginAttempts:
+    "5",
+
+  secureAuth:
+    true,
+
+  activityLogging:
+    true
+
+};
+
+
+let settings = {};
+
+
+let toastTimer = null;
+
+
+/* =========================================================
+   ELEMENT
+========================================================= */
+
+const sidebar =
+  document.getElementById("sidebar");
+
+const overlay =
+  document.getElementById("overlay");
+
+
+/* =========================================================
+   STORAGE
+========================================================= */
+
+function loadSettings(){
+
+  try{
+
+    const stored =
+      localStorage.getItem(
+        SETTINGS_KEY
+      );
+
+    if(stored){
+
+      const parsed =
+        JSON.parse(stored);
+
+      settings = {
+        ...DEFAULT_SETTINGS,
+        ...parsed
+      };
+
+    }else{
+
+      settings = {
+        ...DEFAULT_SETTINGS
+      };
+
+    }
+
+  }catch(error){
+
+    settings = {
+      ...DEFAULT_SETTINGS
+    };
+
+  }
+
+  applySettingsToForm();
+
+}
+
+
+function saveSettings(){
+
+  try{
+
+    localStorage.setItem(
+      SETTINGS_KEY,
+      JSON.stringify(settings)
+    );
+
+    return true;
+
+  }catch(error){
+
+    console.warn(
+      "Settings could not be saved:",
+      error
+    );
+
+    return false;
+
+  }
+
+}
+
+
+/* =========================================================
+   APPLY TO FORM
+========================================================= */
+
+function setValue(
+  id,
+  value
+){
+
+  const element =
+    document.getElementById(id);
+
+  if(element){
+    element.value =
+      value ?? "";
+  }
+
+}
+
+
+function setChecked(
+  id,
+  value
+){
+
+  const element =
+    document.getElementById(id);
+
+  if(element){
+    element.checked =
+      Boolean(value);
+  }
+
+}
+
+
+function applySettingsToForm(){
+
+  setValue(
+    "marketplace-name",
+    settings.marketplaceName
+  );
+
+  setValue(
+    "marketplace-tagline",
+    settings.marketplaceTagline
+  );
+
+  setValue(
+    "support-email",
+    settings.supportEmail
+  );
+
+  setValue(
+    "support-phone",
+    settings.supportPhone
+  );
+
+  setValue(
+    "marketplace-description",
+    settings.marketplaceDescription
+  );
+
+  setValue(
+    "currency",
+    settings.currency
+  );
+
+  setValue(
+    "starting-price",
+    settings.startingPrice
+  );
+
+  setChecked(
+    "marketplace-enabled",
+    settings.marketplaceEnabled
+  );
+
+  setChecked(
+    "show-search",
+    settings.showSearch
+  );
+
+  setChecked(
+    "show-featured",
+    settings.showFeatured
+  );
+
+  setChecked(
+    "show-monthly",
+    settings.showMonthly
+  );
+
+  setValue(
+    "default-order-status",
+    settings.defaultOrderStatus
+  );
+
+  setValue(
+    "order-prefix",
+    settings.orderPrefix
+  );
+
+  setChecked(
+    "require-phone",
+    settings.requirePhone
+  );
+
+  setChecked(
+    "payment-confirmation",
+    settings.paymentConfirmation
+  );
+
+  setChecked(
+    "order-notifications",
+    settings.orderNotifications
+  );
+
+  setChecked(
+    "new-order-alert",
+    settings.newOrderAlert
+  );
+
+  setChecked(
+    "subscriber-alert",
+    settings.subscriberAlert
+  );
+
+  setChecked(
+    "admin-alert",
+    settings.adminAlert
+  );
+
+  setChecked(
+    "maintenance-mode",
+    settings.maintenanceMode
+  );
+
+  setValue(
+    "maintenance-message",
+    settings.maintenanceMessage
+  );
+
+  setValue(
+    "session-timeout",
+    settings.sessionTimeout
+  );
+
+  setValue(
+    "login-attempts",
+    settings.loginAttempts
+  );
+
+  setChecked(
+    "secure-auth",
+    settings.secureAuth
+  );
+
+  setChecked(
+    "activity-logging",
+    settings.activityLogging
+  );
+
+}
+
+
+/* =========================================================
+   READ FORM
+========================================================= */
+
+function readForm(){
+
+  settings = {
+
+    marketplaceName:
+      document.getElementById(
+        "marketplace-name"
+      ).value.trim(),
+
+    marketplaceTagline:
+      document.getElementById(
+        "marketplace-tagline"
+      ).value.trim(),
+
+    supportEmail:
+      document.getElementById(
+        "support-email"
+      ).value.trim(),
+
+    supportPhone:
+      document.getElementById(
+        "support-phone"
+      ).value.trim(),
+
+    marketplaceDescription:
+      document.getElementById(
+        "marketplace-description"
+      ).value.trim(),
+
+    currency:
+      document.getElementById(
+        "currency"
+      ).value,
+
+    startingPrice:
+      Number(
+        document.getElementById(
+          "starting-price"
+        ).value
+      ) || 0,
+
+    marketplaceEnabled:
+      document.getElementById(
+        "marketplace-enabled"
+      ).checked,
+
+    showSearch:
+      document.getElementById(
+        "show-search"
+      ).checked,
+
+    showFeatured:
+      document.getElementById(
+        "show-featured"
+      ).checked,
+
+    showMonthly:
+      document.getElementById(
+        "show-monthly"
+      ).checked,
+
+    defaultOrderStatus:
+      document.getElementById(
+        "default-order-status"
+      ).value,
+
+    orderPrefix:
+      document.getElementById(
+        "order-prefix"
+      ).value.trim(),
+
+    requirePhone:
+      document.getElementById(
+        "require-phone"
+      ).checked,
+
+    paymentConfirmation:
+      document.getElementById(
+        "payment-confirmation"
+      ).checked,
+
+    orderNotifications:
+      document.getElementById(
+        "order-notifications"
+      ).checked,
+
+    newOrderAlert:
+      document.getElementById(
+        "new-order-alert"
+      ).checked,
+
+    subscriberAlert:
+      document.getElementById(
+        "subscriber-alert"
+      ).checked,
+
+    adminAlert:
+      document.getElementById(
+        "admin-alert"
+      ).checked,
+
+    maintenanceMode:
+      document.getElementById(
+        "maintenance-mode"
+      ).checked,
+
+    maintenanceMessage:
+      document.getElementById(
+        "maintenance-message"
+      ).value.trim(),
+
+    sessionTimeout:
+      document.getElementById(
+        "session-timeout"
+      ).value,
+
+    loginAttempts:
+      document.getElementById(
+        "login-attempts"
+      ).value,
+
+    secureAuth:
+      document.getElementById(
+        "secure-auth"
+      ).checked,
+
+    activityLogging:
+      document.getElementById(
+        "activity-logging"
+      ).checked
+
+  };
+
+}
+
+
+/* =========================================================
+   SAVE
+========================================================= */
+
+document
+  .getElementById("save-btn")
+  .addEventListener(
+    "click",
+    function(){
+
+      readForm();
+
+      if(!settings.marketplaceName){
+
+        showToast(
+          "Validation",
+          "Marketplace name cannot be empty."
+        );
+
+        return;
+      }
+
+
+      if(
+        settings.supportEmail &&
+        !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
+          .test(settings.supportEmail)
+      ){
+
+        showToast(
+          "Validation",
+          "Please enter a valid support email."
+        );
+
+        return;
+      }
+
+
+      const saved =
+        saveSettings();
+
+
+      if(saved){
+
+        showToast(
+          "Settings Saved",
+          "System settings have been updated successfully."
+        );
+
+      }else{
+
+        showToast(
+          "Save Failed",
+          "The browser could not save these settings."
+        );
+
+      }
+
+    }
+  );
+
+
+/* =========================================================
+   DISCARD
+========================================================= */
+
+document
+  .getElementById("discard-btn")
+  .addEventListener(
+    "click",
+    function(){
+
+      loadSettings();
+
+      showToast(
+        "Changes Discarded",
+        "The saved settings have been restored."
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+document
+  .getElementById("reset-btn")
+  .addEventListener(
+    "click",
+    function(){
+
+      const confirmed =
+        window.confirm(
+          "Reset all system settings to their default values?"
+        );
+
+
+      if(!confirmed){
+        return;
+      }
+
+
+      settings = {
+        ...DEFAULT_SETTINGS
+      };
+
+
+      saveSettings();
+
+      applySettingsToForm();
+
+
+      showToast(
+        "Settings Reset",
+        "Default system settings have been restored."
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   DANGER ACTIONS
+========================================================= */
+
+document
+  .getElementById("clear-orders")
+  .addEventListener(
+    "click",
+    function(){
+
+      const confirmed =
+        window.confirm(
+          "Clear all demo orders from this browser?"
+        );
+
+
+      if(!confirmed){
+        return;
+      }
+
+
+      localStorage.removeItem(
+        "websiteDealsOrders"
+      );
+
+
+      showToast(
+        "Orders Cleared",
+        "Demo order data has been removed."
+      );
+
+    }
+  );
+
+
+document
+  .getElementById("clear-subscribers")
+  .addEventListener(
+    "click",
+    function(){
+
+      const confirmed =
+        window.confirm(
+          "Clear all newsletter subscribers from this browser?"
+        );
+
+
+      if(!confirmed){
+        return;
+      }
+
+
+      localStorage.removeItem(
+        "websiteDealsSubscribers"
+      );
+
+
+      showToast(
+        "Subscribers Cleared",
+        "Demo subscriber data has been removed."
+      );
+
+    }
+  );
+
+
+document
+  .getElementById("clear-settings")
+  .addEventListener(
+    "click",
+    function(){
+
+      const confirmed =
+        window.confirm(
+          "Reset Website Deals settings?"
+        );
+
+
+      if(!confirmed){
+        return;
+      }
+
+
+      localStorage.removeItem(
+        SETTINGS_KEY
+      );
+
+
+      loadSettings();
+
+
+      showToast(
+        "Settings Reset",
+        "System settings were restored to defaults."
+      );
+
+    }
+  );
+
+
+/* =========================================================
+   SETTINGS NAVIGATION
+========================================================= */
+
+const settingLinks =
+  document.querySelectorAll(
+    ".settings-link"
+  );
+
+
+settingLinks.forEach(link => {
+
+  link.addEventListener(
+    "click",
+    function(){
+
+      const targetId =
+        this.dataset.target;
+
+      const target =
+        document.getElementById(
+          targetId
+        );
+
+      if(!target){
+        return;
+      }
+
+
+      settingLinks.forEach(item => {
+
+        item.classList.remove(
+          "active"
+        );
+
+      });
+
+
+      this.classList.add(
+        "active"
+      );
+
+
+      target.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+
+    }
+  );
+
+});
+
+
+/* =========================================================
+   SCROLL ACTIVE SETTINGS
+========================================================= */
+
+const sections =
+  document.querySelectorAll(
+    ".section"
+  );
+
+
+const observer =
+  new IntersectionObserver(
+    entries => {
+
+      entries.forEach(entry => {
+
+        if(
+          entry.isIntersecting
+        ){
+
+          const id =
+            entry.target.id;
+
+
+          settingLinks.forEach(
+            link => {
+
+              link.classList.toggle(
+                "active",
+                link.dataset.target === id
+              );
+
+            }
+          );
+
+        }
+
+      });
+
+    },
+    {
+      rootMargin:"-20% 0px -65% 0px"
+    }
+  );
+
+
+sections.forEach(
+  section => observer.observe(section)
+);
+
+
+/* =========================================================
+   MOBILE MENU
+========================================================= */
+
+document
+  .getElementById("mobile-menu")
+  .addEventListener(
+    "click",
+    function(){
+
+      sidebar.classList.toggle(
+        "open"
+      );
+
+      overlay.classList.toggle(
+        "show"
+      );
+
+    }
+  );
+
+
+overlay.addEventListener(
+  "click",
+  function(){
+
+    sidebar.classList.remove(
+      "open"
+    );
+
+    overlay.classList.remove(
+      "show"
+    );
+
+  }
+);
+
+
+/* =========================================================
+   ESCAPE
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(event.key === "Escape"){
+
+      sidebar.classList.remove(
+        "open"
+      );
+
+      overlay.classList.remove(
+        "show"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(
+  title,
+  message
+){
+
+  document.getElementById(
+    "toast-title"
+  ).textContent =
+    title;
+
+
+  document.getElementById(
+    "toast-message"
+  ).textContent =
+    message;
+
+
+  const toast =
+    document.getElementById(
+      "toast"
+    );
+
+
+  toast.classList.add(
+    "show"
+  );
+
+
+  clearTimeout(
+    toastTimer
+  );
+
+
+  toastTimer =
+    setTimeout(
+      function(){
+
+        toast.classList.remove(
+          "show"
+        );
+
+      },
+      3200
+    );
+
+}
+
+
+document
+  .getElementById("toast-close")
+  .addEventListener(
+    "click",
+    function(){
+
+      document
+        .getElementById("toast")
+        .classList.remove(
+          "show"
+        );
+
+    }
+  );
+
+
+/* =========================================================
+   SIGN OUT
+========================================================= */
+
+document
+  .getElementById("signout")
+  .addEventListener(
+    "click",
+    function(){
+
+      const confirmed =
+        window.confirm(
+          "Are you sure you want to sign out?"
+        );
+
+
+      if(!confirmed){
+        return;
+      }
+
+
+      window.location.href =
+        "index.html";
+
+    }
+  );
+
+
+/* =========================================================
+   INIT
+========================================================= */
+
+loadSettings();
+
+</script>
+
+</body>
+</html>
