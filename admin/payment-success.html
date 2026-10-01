@@ -1,1 +1,1269 @@
-#
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07100b">
+
+  <title>Payment Successful | Website Deals Admin</title>
+
+  <link rel="icon" type="image/png" href="../logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root{
+      --green:#18a957;
+      --green-dark:#108344;
+      --green-soft:#eaf9f0;
+
+      --dark:#07100b;
+      --dark-2:#0d1a12;
+
+      --white:#fff;
+      --bg:#f5f8f6;
+      --text:#142019;
+      --muted:#718078;
+
+      --border:#e3ebe6;
+
+      --success:#159447;
+      --success-bg:#eaf8ef;
+
+      --shadow:0 20px 60px rgba(10,30,18,.08);
+      --shadow-lg:0 30px 90px rgba(7,20,12,.16);
+
+      --radius:22px;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      min-height:100vh;
+      font-family:Inter,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 50% -10%,rgba(24,169,87,.10),transparent 30%),
+        var(--bg);
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    button{
+      font:inherit;
+      cursor:pointer;
+    }
+
+    /* =========================
+       HEADER
+    ========================== */
+
+    .topbar{
+      height:76px;
+      background:rgba(255,255,255,.88);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--border);
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+
+      padding:0 32px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:11px;
+    }
+
+    .brand img{
+      width:40px;
+      height:40px;
+      object-fit:contain;
+      border-radius:11px;
+      padding:4px;
+      background:#fff;
+      border:1px solid var(--border);
+    }
+
+    .brand strong{
+      display:block;
+      font-family:"Space Grotesk",sans-serif;
+      font-size:17px;
+      letter-spacing:-.4px;
+    }
+
+    .brand span{
+      display:block;
+      margin-top:2px;
+      font-size:9px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:1.2px;
+      font-weight:700;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:9px;
+    }
+
+    .top-btn{
+      min-height:39px;
+      padding:0 14px;
+      display:flex;
+      align-items:center;
+      gap:7px;
+
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+
+      font-size:11px;
+      font-weight:800;
+
+      transition:.2s ease;
+    }
+
+    .top-btn:hover{
+      transform:translateY(-1px);
+      border-color:#cbd8d0;
+    }
+
+    .top-btn.dark{
+      background:var(--dark);
+      color:#fff;
+      border-color:var(--dark);
+    }
+
+    /* =========================
+       PAGE
+    ========================== */
+
+    .page{
+      width:min(1050px,calc(100% - 30px));
+      margin:0 auto;
+      padding:55px 0 70px;
+    }
+
+    /* =========================
+       SUCCESS HERO
+    ========================== */
+
+    .success-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:28px;
+      box-shadow:var(--shadow-lg);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .success-top{
+      padding:48px 30px 38px;
+      text-align:center;
+      position:relative;
+      background:
+        radial-gradient(circle at 50% 0%,rgba(24,169,87,.12),transparent 38%),
+        #fff;
+    }
+
+    .success-ring{
+      width:92px;
+      height:92px;
+      margin:0 auto 23px;
+
+      border-radius:50%;
+
+      background:var(--success-bg);
+      border:1px solid #d0efdc;
+
+      display:grid;
+      place-items:center;
+
+      position:relative;
+    }
+
+    .success-ring::before{
+      content:"";
+      position:absolute;
+      inset:7px;
+
+      border-radius:50%;
+      border:1px dashed rgba(21,148,71,.35);
+    }
+
+    .check{
+      width:47px;
+      height:47px;
+      border-radius:50%;
+
+      background:var(--green);
+      color:#fff;
+
+      display:grid;
+      place-items:center;
+
+      font-size:25px;
+      font-weight:800;
+
+      box-shadow:
+        0 10px 25px rgba(24,169,87,.25);
+    }
+
+    .success-top .eyebrow{
+      color:var(--green-dark);
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:1.6px;
+      text-transform:uppercase;
+    }
+
+    .success-top h1{
+      margin-top:9px;
+
+      font-family:"Space Grotesk",sans-serif;
+      font-size:34px;
+      letter-spacing:-1.2px;
+    }
+
+    .success-top p{
+      max-width:570px;
+      margin:11px auto 0;
+
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.7;
+    }
+
+    .success-badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+
+      margin-top:18px;
+      padding:7px 11px;
+
+      border-radius:999px;
+
+      background:var(--success-bg);
+      color:var(--success);
+
+      font-size:9px;
+      font-weight:800;
+    }
+
+    /* =========================
+       TRANSACTION
+    ========================== */
+
+    .transaction{
+      border-top:1px solid var(--border);
+      padding:27px 30px 30px;
+    }
+
+    .section-heading{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:15px;
+
+      margin-bottom:17px;
+    }
+
+    .section-heading h2{
+      font-family:"Space Grotesk",sans-serif;
+      font-size:17px;
+      letter-spacing:-.4px;
+    }
+
+    .section-heading span{
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .details{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:11px;
+    }
+
+    .detail{
+      padding:14px;
+      border:1px solid var(--border);
+      background:#fbfcfb;
+      border-radius:13px;
+      min-width:0;
+    }
+
+    .detail.full{
+      grid-column:1/-1;
+    }
+
+    .detail-label{
+      color:#87938d;
+      font-size:8px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.9px;
+      margin-bottom:6px;
+    }
+
+    .detail-value{
+      font-size:11px;
+      font-weight:700;
+      word-break:break-word;
+    }
+
+    .detail-value.amount{
+      font-family:"Space Grotesk",sans-serif;
+      font-size:18px;
+      color:var(--green-dark);
+    }
+
+    .paid-status{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+
+      padding:6px 9px;
+
+      border-radius:999px;
+
+      background:var(--success-bg);
+      color:var(--success);
+
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .paid-status::before{
+      content:"";
+      width:5px;
+      height:5px;
+      border-radius:50%;
+      background:currentColor;
+    }
+
+    /* =========================
+       CUSTOMER + WEBSITE
+    ========================== */
+
+    .info-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:15px;
+
+      margin-top:15px;
+    }
+
+    .info-card{
+      border:1px solid var(--border);
+      border-radius:17px;
+      padding:19px;
+      background:#fff;
+    }
+
+    .info-card-head{
+      display:flex;
+      align-items:center;
+      gap:10px;
+
+      margin-bottom:16px;
+    }
+
+    .info-icon{
+      width:35px;
+      height:35px;
+      border-radius:10px;
+
+      display:grid;
+      place-items:center;
+
+      background:var(--green-soft);
+      color:var(--green-dark);
+
+      font-size:14px;
+    }
+
+    .info-card-head strong{
+      font-family:"Space Grotesk",sans-serif;
+      font-size:13px;
+    }
+
+    .info-card-head span{
+      display:block;
+      margin-top:2px;
+      color:var(--muted);
+      font-size:8px;
+    }
+
+    .info-line{
+      display:flex;
+      justify-content:space-between;
+      gap:15px;
+
+      padding:9px 0;
+      border-bottom:1px solid #edf1ef;
+    }
+
+    .info-line:last-child{
+      border-bottom:0;
+      padding-bottom:0;
+    }
+
+    .info-line span{
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .info-line strong{
+      text-align:right;
+      font-size:10px;
+      word-break:break-word;
+    }
+
+    /* =========================
+       ACTIONS
+    ========================== */
+
+    .actions{
+      padding:25px 30px 30px;
+
+      border-top:1px solid var(--border);
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .action{
+      min-height:43px;
+      padding:0 17px;
+
+      border-radius:11px;
+
+      border:1px solid var(--border);
+      background:#fff;
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:7px;
+
+      font-size:10px;
+      font-weight:800;
+
+      transition:.2s ease;
+    }
+
+    .action:hover{
+      transform:translateY(-1px);
+      border-color:#cbd8d0;
+    }
+
+    .action.primary{
+      color:#fff;
+      background:var(--green);
+      border-color:var(--green);
+    }
+
+    .action.primary:hover{
+      background:var(--green-dark);
+    }
+
+    .action.dark{
+      background:var(--dark);
+      border-color:var(--dark);
+      color:#fff;
+    }
+
+    /* =========================
+       FOOT NOTE
+    ========================== */
+
+    .foot-note{
+      text-align:center;
+      margin-top:20px;
+      color:#87938d;
+      font-size:9px;
+      line-height:1.6;
+    }
+
+    .foot-note strong{
+      color:#53625a;
+    }
+
+    /* =========================
+       TOAST
+    ========================== */
+
+    .toast{
+      position:fixed;
+      right:22px;
+      bottom:22px;
+
+      min-width:270px;
+      max-width:360px;
+
+      padding:13px 15px;
+
+      border-radius:13px;
+
+      background:var(--dark);
+      color:#fff;
+
+      box-shadow:var(--shadow-lg);
+
+      display:flex;
+      align-items:center;
+      gap:10px;
+
+      transform:translateY(100px);
+      opacity:0;
+      pointer-events:none;
+
+      transition:.3s ease;
+
+      z-index:1000;
+    }
+
+    .toast.show{
+      transform:none;
+      opacity:1;
+    }
+
+    .toast-icon{
+      width:29px;
+      height:29px;
+      border-radius:9px;
+      background:rgba(24,169,87,.16);
+      color:#79e7a0;
+      display:grid;
+      place-items:center;
+      font-size:12px;
+      flex:none;
+    }
+
+    .toast strong{
+      display:block;
+      font-size:10px;
+    }
+
+    .toast span{
+      display:block;
+      color:#a1aea6;
+      font-size:8px;
+      margin-top:2px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media(max-width:800px){
+
+      .topbar{
+        padding:0 18px;
+      }
+
+      .top-actions .top-btn span{
+        display:none;
+      }
+
+      .top-btn{
+        width:39px;
+        padding:0;
+        justify-content:center;
+      }
+
+      .page{
+        padding-top:28px;
+      }
+
+      .details{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .info-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:560px){
+
+      .topbar{
+        height:68px;
+      }
+
+      .brand img{
+        width:36px;
+        height:36px;
+      }
+
+      .brand strong{
+        font-size:15px;
+      }
+
+      .brand span{
+        display:none;
+      }
+
+      .page{
+        width:min(100% - 20px,1050px);
+        padding:20px 0 40px;
+      }
+
+      .success-top{
+        padding:38px 20px 30px;
+      }
+
+      .success-ring{
+        width:78px;
+        height:78px;
+      }
+
+      .check{
+        width:40px;
+        height:40px;
+        font-size:21px;
+      }
+
+      .success-top h1{
+        font-size:27px;
+      }
+
+      .success-top p{
+        font-size:10px;
+      }
+
+      .transaction{
+        padding:22px 18px;
+      }
+
+      .details{
+        grid-template-columns:1fr;
+      }
+
+      .detail.full{
+        grid-column:auto;
+      }
+
+      .info-card{
+        padding:16px;
+      }
+
+      .actions{
+        padding:20px 18px 23px;
+        flex-direction:column;
+      }
+
+      .action{
+        width:100%;
+      }
+
+      .toast{
+        left:10px;
+        right:10px;
+        bottom:10px;
+        min-width:0;
+      }
+    }
+
+    @media print{
+
+      body{
+        background:#fff;
+      }
+
+      .topbar{
+        display:none;
+      }
+
+      .page{
+        width:100%;
+        padding:0;
+      }
+
+      .success-card{
+        box-shadow:none;
+        border:0;
+      }
+
+      .actions,
+      .foot-note{
+        display:none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
+  <header class="topbar">
+
+    <a href="dashboard.html" class="brand">
+
+      <img
+        src="../logo.png"
+        alt="Website Deals"
+      >
+
+      <div>
+        <strong>Website Deals</strong>
+        <span>Admin Portal</span>
+      </div>
+
+    </a>
+
+    <div class="top-actions">
+
+      <a
+        href="payments.html"
+        class="top-btn"
+      >
+        ← <span>Payments</span>
+      </a>
+
+      <a
+        href="dashboard.html"
+        class="top-btn dark"
+      >
+        ⌂ <span>Dashboard</span>
+      </a>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main class="page">
+
+    <section class="success-card">
+
+      <!-- SUCCESS -->
+      <div class="success-top">
+
+        <div class="success-ring">
+
+          <div class="check">
+            ✓
+          </div>
+
+        </div>
+
+        <div class="eyebrow">
+          Transaction Completed
+        </div>
+
+        <h1>
+          Payment Successful
+        </h1>
+
+        <p>
+          The payment has been successfully recorded in the
+          Website Deals payment system.
+        </p>
+
+        <div class="success-badge">
+          ● Payment Confirmed
+        </div>
+
+      </div>
+
+
+      <!-- TRANSACTION -->
+      <div class="transaction">
+
+        <div class="section-heading">
+
+          <div>
+            <h2>Transaction Details</h2>
+          </div>
+
+          <span>
+            Payment confirmation
+          </span>
+
+        </div>
+
+        <div class="details">
+
+          <div class="detail">
+            <div class="detail-label">
+              Payment ID
+            </div>
+
+            <div
+              class="detail-value"
+              id="paymentId"
+            >
+              PAY-2026-0090
+            </div>
+          </div>
+
+
+          <div class="detail">
+            <div class="detail-label">
+              Order ID
+            </div>
+
+            <div
+              class="detail-value"
+              id="orderId"
+            >
+              WD-2026-00427
+            </div>
+          </div>
+
+
+          <div class="detail">
+            <div class="detail-label">
+              Payment Date
+            </div>
+
+            <div
+              class="detail-value"
+              id="paymentDate"
+            >
+              2026-09-30
+            </div>
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Amount Paid
+            </div>
+
+            <div
+              class="detail-value amount"
+              id="amount"
+            >
+              ৳1,499
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Payment Method
+            </div>
+
+            <div
+              class="detail-value"
+              id="method"
+            >
+              Nagad
+            </div>
+
+          </div>
+
+
+          <div class="detail">
+
+            <div class="detail-label">
+              Status
+            </div>
+
+            <div>
+              <span class="paid-status">
+                Paid
+              </span>
+            </div>
+
+          </div>
+
+
+          <div class="detail full">
+
+            <div class="detail-label">
+              Transaction Reference
+            </div>
+
+            <div
+              class="detail-value"
+              id="reference"
+            >
+              NGD77192834
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- CUSTOMER + WEBSITE -->
+
+        <div class="info-grid">
+
+          <div class="info-card">
+
+            <div class="info-card-head">
+
+              <div class="info-icon">
+                ♙
+              </div>
+
+              <div>
+                <strong>Customer</strong>
+                <span>Buyer information</span>
+              </div>
+
+            </div>
+
+            <div class="info-line">
+              <span>Name</span>
+              <strong id="customerName">
+                Sara Ahmed
+              </strong>
+            </div>
+
+            <div class="info-line">
+              <span>Email</span>
+              <strong id="customerEmail">
+                sara@example.com
+              </strong>
+            </div>
+
+            <div class="info-line">
+              <span>Phone</span>
+              <strong id="customerPhone">
+                01822-334455
+              </strong>
+            </div>
+
+          </div>
+
+
+          <div class="info-card">
+
+            <div class="info-card-head">
+
+              <div class="info-icon">
+                ▣
+              </div>
+
+              <div>
+                <strong>Website</strong>
+                <span>Purchased product</span>
+              </div>
+
+            </div>
+
+            <div class="info-line">
+              <span>Website</span>
+              <strong id="websiteName">
+                Restaurant Royale
+              </strong>
+            </div>
+
+            <div class="info-line">
+              <span>Category</span>
+              <strong id="websiteCategory">
+                Restaurant
+              </strong>
+            </div>
+
+            <div class="info-line">
+              <span>Purchase</span>
+              <strong>Ready-made Website</strong>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- ACTIONS -->
+
+      <div class="actions">
+
+        <button
+          class="action primary"
+          type="button"
+          onclick="printReceipt()"
+        >
+          ⎙ Print Receipt
+        </button>
+
+        <button
+          class="action"
+          type="button"
+          onclick="copyPaymentId()"
+        >
+          ⧉ Copy Payment ID
+        </button>
+
+        <a
+          class="action dark"
+          href="payments.html"
+        >
+          ← Back to Payments
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <div class="foot-note">
+      <strong>Website Deals</strong> · Payment confirmation
+      page · Demo/localStorage version.
+      Firebase payment verification will be connected later.
+    </div>
+
+  </main>
+
+
+  <!-- =========================
+       TOAST
+  ========================== -->
+
+  <div class="toast" id="toast">
+
+    <div class="toast-icon">
+      ✓
+    </div>
+
+    <div>
+      <strong id="toastTitle">
+        Copied
+      </strong>
+
+      <span id="toastMessage">
+        Payment ID copied.
+      </span>
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /* =====================================================
+       PAYMENT SUCCESS PAGE
+       Demo/localStorage version
+       Firebase will be integrated at the final stage.
+    ===================================================== */
+
+    const PAYMENT_STORAGE_KEY =
+      "websiteDealsPayments";
+
+
+    function formatMoney(value){
+
+      return "৳" +
+        Number(value || 0).toLocaleString("en-BD");
+
+    }
+
+
+    function getPaymentFromURL(){
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+      return params.get("id");
+
+    }
+
+
+    function loadPayment(){
+
+      const paymentId =
+        getPaymentFromURL();
+
+      if(!paymentId) return;
+
+
+      try{
+
+        const saved =
+          localStorage.getItem(
+            PAYMENT_STORAGE_KEY
+          );
+
+        if(!saved) return;
+
+        const payments =
+          JSON.parse(saved);
+
+        const payment =
+          payments.find(
+            item => item.id === paymentId
+          );
+
+        if(!payment) return;
+
+
+        document.getElementById("paymentId")
+          .textContent =
+          payment.id;
+
+        document.getElementById("orderId")
+          .textContent =
+          payment.orderId;
+
+        document.getElementById("paymentDate")
+          .textContent =
+          payment.date;
+
+        document.getElementById("amount")
+          .textContent =
+          formatMoney(payment.amount);
+
+        document.getElementById("method")
+          .textContent =
+          payment.method;
+
+        document.getElementById("reference")
+          .textContent =
+          payment.reference || "Not provided";
+
+        document.getElementById("customerName")
+          .textContent =
+          payment.customer;
+
+        document.getElementById("customerEmail")
+          .textContent =
+          payment.email;
+
+        document.getElementById("customerPhone")
+          .textContent =
+          payment.phone;
+
+        document.getElementById("websiteName")
+          .textContent =
+          payment.website;
+
+      }catch(error){
+
+        console.warn(
+          "Could not load payment.",
+          error
+        );
+
+      }
+
+    }
+
+
+    function printReceipt(){
+
+      window.print();
+
+    }
+
+
+    async function copyPaymentId(){
+
+      const paymentId =
+        document.getElementById("paymentId")
+          .textContent;
+
+      try{
+
+        await navigator.clipboard.writeText(
+          paymentId
+        );
+
+        showToast(
+          "Copied",
+          "Payment ID copied successfully."
+        );
+
+      }catch(error){
+
+        const textarea =
+          document.createElement("textarea");
+
+        textarea.value = paymentId;
+
+        document.body.appendChild(textarea);
+
+        textarea.select();
+
+        document.execCommand("copy");
+
+        textarea.remove();
+
+        showToast(
+          "Copied",
+          "Payment ID copied successfully."
+        );
+
+      }
+
+    }
+
+
+    function showToast(title,message){
+
+      const toast =
+        document.getElementById("toast");
+
+      document.getElementById("toastTitle")
+        .textContent = title;
+
+      document.getElementById("toastMessage")
+        .textContent = message;
+
+      toast.classList.add("show");
+
+      clearTimeout(
+        window.toastTimer
+      );
+
+      window.toastTimer =
+        setTimeout(() => {
+
+          toast.classList.remove("show");
+
+        },3000);
+
+    }
+
+
+    loadPayment();
+
+  </script>
+
+</body>
+</html>
