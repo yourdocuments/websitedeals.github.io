@@ -1,2698 +1,4470 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Orders | Website Deals Admin</title>
-<meta name="description" content="Manage Website Deals marketplace orders.">
-
-<link rel="icon" type="image/png" href="../logo.png">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-<style>
-:root{
-  --green:#18a957;
-  --green-dark:#108344;
-  --green-soft:#eaf9f0;
-
-  --black:#101513;
-  --dark:#17201c;
-  --text:#26322d;
-  --muted:#77837d;
-
-  --white:#fff;
-  --surface:#f6f8f7;
-  --border:#e2e9e4;
-
-  --blue:#2878d7;
-  --blue-soft:#edf5ff;
-
-  --orange:#d98b00;
-  --orange-soft:#fff6df;
-
-  --red:#dc3545;
-  --red-soft:#fff0f2;
-
-  --purple:#7655d8;
-  --purple-soft:#f2efff;
-
-  --shadow-sm:0 8px 25px rgba(16,21,19,.06);
-  --shadow:0 20px 60px rgba(16,21,19,.11);
-
-  --radius:18px;
-  --sidebar:270px;
-}
-
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
-}
-
-body{
-  min-height:100vh;
-  background:var(--surface);
-  color:var(--text);
-  font-family:Inter,Arial,sans-serif;
-}
-
-button,
-input,
-select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-.hidden{
-  display:none!important;
-}
-
-/* =========================
-   SIDEBAR
-========================= */
-
-.sidebar{
-  position:fixed;
-  inset:0 auto 0 0;
-  width:var(--sidebar);
-  background:#111714;
-  color:#fff;
-  z-index:100;
-  display:flex;
-  flex-direction:column;
-  overflow-y:auto;
-}
-
-.sidebar-brand{
-  min-height:84px;
-  padding:20px 22px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  border-bottom:1px solid rgba(255,255,255,.07);
-}
-
-.sidebar-brand img{
-  width:40px;
-  height:40px;
-  object-fit:contain;
-  padding:5px;
-  border-radius:10px;
-  background:#fff;
-}
-
-.brand-text strong{
-  display:block;
-  font-family:"Space Grotesk",sans-serif;
-  font-size:17px;
-}
-
-.brand-text span{
-  display:block;
-  margin-top:3px;
-  color:#8d9a94;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:1.2px;
-}
-
-.sidebar-nav{
-  flex:1;
-  padding:18px 12px;
-}
-
-.nav-label{
-  padding:9px 12px 7px;
-  color:#64716b;
-  font-size:10px;
-  font-weight:800;
-  letter-spacing:1.2px;
-  text-transform:uppercase;
-}
-
-.nav-link{
-  min-height:45px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:0 13px;
-  margin:3px 0;
-  border-radius:11px;
-  color:#aeb9b4;
-  font-size:13px;
-  font-weight:600;
-  transition:.2s ease;
-}
-
-.nav-link i{
-  width:19px;
-  text-align:center;
-  font-size:14px;
-}
-
-.nav-link:hover{
-  color:#fff;
-  background:rgba(255,255,255,.055);
-}
-
-.nav-link.active{
-  color:#fff;
-  background:linear-gradient(135deg,#15964d,#18a957);
-  box-shadow:0 10px 25px rgba(24,169,87,.22);
-}
-
-.restricted{
-  margin-top:18px;
-  padding-top:14px;
-  border-top:1px solid rgba(255,255,255,.06);
-}
-
-.restricted .nav-link{
-  color:#84918b;
-}
-
-.restricted i{
-  color:#c8a85a;
-}
-
-.sidebar-bottom{
-  padding:14px;
-  border-top:1px solid rgba(255,255,255,.07);
-}
-
-.admin-profile{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:10px;
-  background:rgba(255,255,255,.045);
-  border:1px solid rgba(255,255,255,.06);
-  border-radius:13px;
-}
-
-.admin-avatar{
-  width:38px;
-  height:38px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:var(--green);
-  color:#fff;
-  font-weight:800;
-  font-size:12px;
-}
-
-.admin-profile strong{
-  display:block;
-  color:#fff;
-  font-size:12px;
-}
-
-.admin-profile span{
-  display:block;
-  margin-top:2px;
-  color:#7e8a85;
-  font-size:10px;
-}
-
-/* =========================
-   MAIN
-========================= */
-
-.main{
-  min-height:100vh;
-  margin-left:var(--sidebar);
-}
-
-.topbar{
-  position:sticky;
-  top:0;
-  z-index:60;
-  height:76px;
-  padding:0 32px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  background:rgba(255,255,255,.91);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid var(--border);
-}
-
-.topbar-left{
-  display:flex;
-  align-items:center;
-  gap:14px;
-}
-
-.mobile-menu{
-  display:none;
-  width:42px;
-  height:42px;
-  border:1px solid var(--border);
-  border-radius:11px;
-  background:#fff;
-}
-
-.breadcrumb{
-  display:flex;
-  align-items:center;
-  gap:9px;
-  color:var(--muted);
-  font-size:12px;
-}
-
-.breadcrumb strong{
-  color:var(--dark);
-}
-
-.topbar-actions{
-  display:flex;
-  gap:9px;
-}
-
-.top-icon{
-  width:40px;
-  height:40px;
-  display:grid;
-  place-items:center;
-  border:1px solid var(--border);
-  border-radius:11px;
-  background:#fff;
-  color:#58645f;
-}
-
-.top-icon:hover{
-  color:var(--green);
-  border-color:#c8d5ce;
-}
-
-.page{
-  max-width:1650px;
-  margin:auto;
-  padding:30px 32px 60px;
-}
-
-/* =========================
-   HEADER
-========================= */
-
-.page-header{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  gap:20px;
-  margin-bottom:25px;
-}
-
-.eyebrow{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  margin-bottom:9px;
-  color:var(--green-dark);
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:1.2px;
-  text-transform:uppercase;
-}
-
-.page-title{
-  font-family:"Space Grotesk",sans-serif;
-  color:var(--black);
-  font-size:32px;
-  letter-spacing:-1.2px;
-}
-
-.page-description{
-  max-width:700px;
-  margin-top:8px;
-  color:var(--muted);
-  font-size:13px;
-  line-height:1.6;
-}
-
-.header-actions{
-  display:flex;
-  gap:9px;
-}
-
-.btn{
-  min-height:42px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  padding:0 15px;
-  border:1px solid var(--border);
-  border-radius:11px;
-  background:#fff;
-  color:var(--text);
-  font-size:11px;
-  font-weight:800;
-  transition:.2s;
-}
-
-.btn:hover{
-  transform:translateY(-1px);
-  box-shadow:var(--shadow-sm);
-}
-
-.btn-primary{
-  color:#fff;
-  background:linear-gradient(135deg,#15964d,#18a957);
-  border-color:var(--green);
-}
-
-.btn-danger{
-  color:var(--red);
-  background:var(--red-soft);
-  border-color:#ffd3d8;
-}
-
-/* =========================
-   STATS
-========================= */
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:15px;
-  margin-bottom:20px;
-}
-
-.stat-card{
-  min-height:125px;
-  padding:19px;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:17px;
-  box-shadow:var(--shadow-sm);
-}
-
-.stat-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
-
-.stat-icon{
-  width:38px;
-  height:38px;
-  display:grid;
-  place-items:center;
-  border-radius:11px;
-  background:var(--green-soft);
-  color:var(--green-dark);
-}
-
-.stat-card:nth-child(2) .stat-icon{
-  background:var(--orange-soft);
-  color:var(--orange);
-}
-
-.stat-card:nth-child(3) .stat-icon{
-  background:var(--blue-soft);
-  color:var(--blue);
-}
-
-.stat-card:nth-child(4) .stat-icon{
-  background:var(--purple-soft);
-  color:var(--purple);
-}
-
-.stat-label{
-  margin-top:16px;
-  color:#84908a;
-  font-size:10px;
-  font-weight:700;
-}
-
-.stat-value{
-  margin-top:4px;
-  font-family:"Space Grotesk",sans-serif;
-  color:var(--black);
-  font-size:24px;
-}
-
-/* =========================
-   TOOLBAR
-========================= */
-
-.toolbar{
-  padding:15px;
-  display:flex;
-  align-items:center;
-  gap:9px;
-  flex-wrap:wrap;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:17px;
-  box-shadow:var(--shadow-sm);
-  margin-bottom:15px;
-}
-
-.search-box{
-  min-width:280px;
-  flex:1;
-  height:43px;
-  position:relative;
-}
-
-.search-box i{
-  position:absolute;
-  left:13px;
-  top:50%;
-  transform:translateY(-50%);
-  color:#9ba49f;
-  font-size:12px;
-}
-
-.search-box input{
-  width:100%;
-  height:100%;
-  padding:0 13px 0 36px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  outline:none;
-  font-size:11px;
-}
-
-.search-box input:focus{
-  border-color:#8ad0aa;
-  box-shadow:0 0 0 4px rgba(24,169,87,.07);
-}
-
-.filter{
-  height:43px;
-  min-width:145px;
-  padding:0 12px;
-  border:1px solid var(--border);
-  border-radius:10px;
-  background:#fff;
-  color:#4f5c56;
-  font-size:11px;
-  outline:none;
-}
-
-/* =========================
-   TABLE
-========================= */
-
-.table-card{
-  overflow:hidden;
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:18px;
-  box-shadow:var(--shadow-sm);
-}
-
-.table-header{
-  min-height:66px;
-  padding:17px 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid var(--border);
-}
-
-.table-header h2{
-  font-family:"Space Grotesk",sans-serif;
-  color:var(--black);
-  font-size:15px;
-}
-
-.table-header span{
-  color:#8a948f;
-  font-size:10px;
-}
-
-.table-wrap{
-  overflow-x:auto;
-}
-
-table{
-  width:100%;
-  min-width:1050px;
-  border-collapse:collapse;
-}
-
-thead th{
-  padding:13px 18px;
-  background:#fafbfa;
-  border-bottom:1px solid var(--border);
-  color:#8a948f;
-  text-align:left;
-  font-size:9px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.8px;
-}
-
-tbody td{
-  padding:14px 18px;
-  border-bottom:1px solid #edf1ee;
-  vertical-align:middle;
-  font-size:11px;
-}
-
-tbody tr:hover{
-  background:#fcfdfc;
-}
-
-tbody tr:last-child td{
-  border-bottom:0;
-}
-
-.order-id{
-  color:var(--green-dark);
-  font-weight:900;
-}
-
-.customer{
-  display:flex;
-  align-items:center;
-  gap:9px;
-}
-
-.customer-avatar{
-  width:34px;
-  height:34px;
-  display:grid;
-  place-items:center;
-  flex-shrink:0;
-  border-radius:10px;
-  background:#edf4ef;
-  color:var(--green-dark);
-  font-size:10px;
-  font-weight:900;
-}
-
-.customer strong{
-  display:block;
-  color:var(--text);
-  font-size:11px;
-}
-
-.customer span{
-  display:block;
-  margin-top:2px;
-  color:#929c97;
-  font-size:9px;
-}
-
-.website-name{
-  font-weight:800;
-  color:var(--text);
-}
-
-.website-category{
-  margin-top:3px;
-  color:#919b96;
-  font-size:9px;
-}
-
-.amount{
-  font-family:"Space Grotesk",sans-serif;
-  color:var(--black);
-  font-weight:700;
-}
-
-.status{
-  display:inline-flex;
-  align-items:center;
-  gap:5px;
-  padding:6px 8px;
-  border-radius:20px;
-  font-size:8px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.4px;
-}
-
-.status i{
-  font-size:6px;
-}
-
-.status.pending{
-  color:#966500;
-  background:var(--orange-soft);
-}
-
-.status.confirmed{
-  color:#246db9;
-  background:var(--blue-soft);
-}
-
-.status.processing{
-  color:#6644c6;
-  background:var(--purple-soft);
-}
-
-.status.completed{
-  color:var(--green-dark);
-  background:var(--green-soft);
-}
-
-.status.cancelled{
-  color:#b52d3b;
-  background:var(--red-soft);
-}
-
-.date{
-  color:#7e8984;
-  font-size:10px;
-}
-
-.actions{
-  display:flex;
-  gap:5px;
-}
-
-.action{
-  width:32px;
-  height:32px;
-  display:grid;
-  place-items:center;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:#fff;
-  color:#69756f;
-  font-size:10px;
-}
-
-.action:hover{
-  color:var(--green);
-  border-color:#b9d6c5;
-}
-
-.action.delete:hover{
-  color:var(--red);
-  border-color:#ffcbd0;
-}
-
-/* =========================
-   EMPTY
-========================= */
-
-.empty{
-  padding:60px 20px;
-  text-align:center;
-  display:none;
-}
-
-.empty.show{
-  display:block;
-}
-
-.empty i{
-  font-size:30px;
-  color:#c1cac5;
-}
-
-.empty h3{
-  margin-top:12px;
-  color:var(--black);
-  font-family:"Space Grotesk",sans-serif;
-  font-size:16px;
-}
-
-.empty p{
-  margin-top:5px;
-  color:#89938e;
-  font-size:11px;
-}
-
-/* =========================
-   MODAL
-========================= */
-
-.modal{
-  position:fixed;
-  inset:0;
-  z-index:200;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:rgba(10,15,13,.58);
-  backdrop-filter:blur(7px);
-}
-
-.modal.show{
-  display:flex;
-}
-
-.modal-card{
-  width:min(700px,100%);
-  max-height:90vh;
-  overflow-y:auto;
-  background:#fff;
-  border-radius:20px;
-  box-shadow:0 30px 90px rgba(0,0,0,.25);
-}
-
-.modal-header{
-  padding:19px 21px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid var(--border);
-}
-
-.modal-header h2{
-  font-family:"Space Grotesk",sans-serif;
-  font-size:17px;
-  color:var(--black);
-}
-
-.modal-close{
-  width:34px;
-  height:34px;
-  display:grid;
-  place-items:center;
-  border:1px solid var(--border);
-  background:#fff;
-  border-radius:9px;
-}
-
-.modal-body{
-  padding:21px;
-}
-
-.detail-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:11px;
-}
-
-.detail{
-  padding:13px;
-  background:#f8faf9;
-  border:1px solid #e7ece9;
-  border-radius:11px;
-}
-
-.detail.full{
-  grid-column:1/-1;
-}
-
-.detail span{
-  display:block;
-  color:#8b9690;
-  font-size:9px;
-  text-transform:uppercase;
-  letter-spacing:.6px;
-  font-weight:800;
-}
-
-.detail strong{
-  display:block;
-  margin-top:5px;
-  color:var(--text);
-  font-size:12px;
-  word-break:break-word;
-}
-
-.modal-footer{
-  padding:15px 21px;
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  border-top:1px solid var(--border);
-}
-
-/* =========================
-   TOAST
-========================= */
-
-.toast{
-  position:fixed;
-  right:22px;
-  bottom:22px;
-  width:min(360px,calc(100vw - 30px));
-  padding:14px 16px;
-  display:flex;
-  align-items:flex-start;
-  gap:10px;
-  background:#121916;
-  color:#fff;
-  border-radius:13px;
-  box-shadow:0 18px 55px rgba(0,0,0,.2);
-  z-index:500;
-  opacity:0;
-  transform:translateY(18px);
-  pointer-events:none;
-  transition:.25s;
-}
-
-.toast.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.toast-icon{
-  width:30px;
-  height:30px;
-  display:grid;
-  place-items:center;
-  flex-shrink:0;
-  border-radius:9px;
-  background:rgba(24,169,87,.15);
-  color:#55dc8c;
-}
-
-.toast-content{
-  flex:1;
-}
-
-.toast-content strong{
-  display:block;
-  font-size:11px;
-}
-
-.toast-content span{
-  display:block;
-  margin-top:3px;
-  color:#abb5b0;
-  font-size:10px;
-  line-height:1.5;
-}
-
-.toast-close{
-  border:0;
-  background:none;
-  color:#89958f;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:1100px){
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-}
-
-@media(max-width:850px){
-
-  .sidebar{
-    transform:translateX(-100%);
-    transition:.25s ease;
-  }
-
-  .sidebar.open{
-    transform:translateX(0);
-  }
-
-  .main{
-    margin-left:0;
-  }
-
-  .mobile-menu{
-    display:grid;
-    place-items:center;
-  }
-
-  .topbar{
-    padding:0 18px;
-  }
-
-  .page{
-    padding:25px 18px 50px;
-  }
-
-  .page-header{
-    align-items:flex-start;
-    flex-direction:column;
-  }
-
-  .header-actions{
-    width:100%;
-  }
-
-  .header-actions .btn{
-    flex:1;
-  }
-}
-
-@media(max-width:600px){
-
-  .page{
-    padding:20px 13px 40px;
-  }
-
-  .page-title{
-    font-size:27px;
-  }
-
-  .stats{
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-  }
-
-  .stat-card{
-    min-height:110px;
-    padding:14px;
-  }
-
-  .stat-value{
-    font-size:20px;
-  }
-
-  .toolbar{
-    padding:11px;
-  }
-
-  .search-box{
-    min-width:100%;
-  }
-
-  .filter{
-    flex:1;
-    min-width:120px;
-  }
-
-  .modal{
-    padding:10px;
-  }
-
-  .detail-grid{
-    grid-template-columns:1fr;
-  }
-
-  .detail.full{
-    grid-column:auto;
-  }
-}
-
-@media(max-width:430px){
-
-  .header-actions{
-    display:grid;
-    grid-template-columns:1fr;
-  }
-
-  .stats{
-    grid-template-columns:1fr;
-  }
-
-  .top-icon{
-    width:37px;
-    height:37px;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Orders Management | Website Deals Admin</title>
+  <meta name="description" content="Manage Website Deals orders, payments, customers and order status.">
+  <meta name="theme-color" content="#07110b">
+
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="icon" type="image/png" href="../logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --green:#18a957;
+      --green-dark:#0d7f3e;
+      --green-soft:#eaf8f0;
+
+      --dark:#07110b;
+      --sidebar:#101713;
+
+      --bg:#f6f8f7;
+      --surface:#ffffff;
+      --surface-2:#f9fbfa;
+
+      --text:#142019;
+      --muted:#738079;
+      --border:#e3eae6;
+
+      --blue:#2563eb;
+      --blue-soft:#eef4ff;
+
+      --orange:#d97706;
+      --orange-soft:#fff7e8;
+
+      --red:#dc2626;
+      --red-soft:#fff0f0;
+
+      --purple:#7c3aed;
+      --purple-soft:#f4efff;
+
+      --shadow:0 14px 40px rgba(12,32,21,.07);
+      --shadow-sm:0 6px 20px rgba(12,32,21,.055);
+
+      --radius:20px;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:"DM Sans",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      min-height:100vh;
+    }
+
+    button,
+    input,
+    select,
+    textarea{
+      font:inherit;
+    }
+
+    button{
+      cursor:pointer;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    /* =========================
+       APP
+    ========================= */
+
+    .app{
+      display:flex;
+      min-height:100vh;
+    }
+
+    .sidebar{
+      width:270px;
+      background:var(--sidebar);
+      color:#fff;
+      position:fixed;
+      inset:0 auto 0 0;
+      z-index:1000;
+      display:flex;
+      flex-direction:column;
+      border-right:1px solid rgba(255,255,255,.06);
+    }
+
+    .sidebar-top{
+      padding:22px 18px 18px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:4px 7px 22px;
+    }
+
+    .brand-logo{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      object-fit:cover;
+      background:#fff;
+      padding:3px;
+    }
+
+    .brand-copy strong{
+      display:block;
+      font-family:"Manrope",sans-serif;
+      font-size:17px;
+      line-height:1.1;
+    }
+
+    .brand-copy span{
+      color:#91a097;
+      font-size:11px;
+      margin-top:4px;
+      display:block;
+    }
+
+    .nav-scroll{
+      flex:1;
+      overflow:auto;
+      padding:4px 12px 18px;
+    }
+
+    .nav-label{
+      color:#68776e;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      padding:18px 11px 8px;
+    }
+
+    .nav-item{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      padding:11px 12px;
+      border-radius:12px;
+      color:#aebbb3;
+      font-size:13px;
+      font-weight:600;
+      margin:2px 0;
+      transition:.2s ease;
+    }
+
+    .nav-item:hover{
+      color:#fff;
+      background:rgba(255,255,255,.055);
+    }
+
+    .nav-item.active{
+      background:var(--green);
+      color:#fff;
+      box-shadow:0 8px 22px rgba(24,169,87,.2);
+    }
+
+    .nav-icon{
+      width:20px;
+      text-align:center;
+      font-size:16px;
+      flex:0 0 20px;
+    }
+
+    .sidebar-bottom{
+      padding:14px;
+      border-top:1px solid rgba(255,255,255,.07);
+    }
+
+    .admin-mini{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px;
+      border-radius:14px;
+      background:rgba(255,255,255,.045);
+      margin-bottom:10px;
+    }
+
+    .admin-avatar{
+      width:36px;
+      height:36px;
+      border-radius:50%;
+      background:var(--green);
+      display:grid;
+      place-items:center;
+      font-size:12px;
+      font-weight:800;
+      flex:0 0 36px;
+    }
+
+    .admin-mini-text{
+      min-width:0;
+      flex:1;
+    }
+
+    .admin-mini-text strong{
+      display:block;
+      color:#fff;
+      font-size:12px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .admin-mini-text span{
+      display:block;
+      color:#7e8c84;
+      font-size:10px;
+      margin-top:2px;
+    }
+
+    .logout-btn{
+      width:100%;
+      border:0;
+      background:rgba(220,38,38,.1);
+      color:#ff9b9b;
+      padding:10px 12px;
+      border-radius:11px;
+      font-weight:700;
+      font-size:12px;
+    }
+
+    .logout-btn:hover{
+      background:rgba(220,38,38,.17);
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .main{
+      margin-left:270px;
+      width:calc(100% - 270px);
+      min-width:0;
+    }
+
+    .topbar{
+      height:76px;
+      background:rgba(255,255,255,.94);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 30px;
+      position:sticky;
+      top:0;
+      z-index:500;
+    }
+
+    .topbar-left{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .mobile-menu{
+      display:none;
+      width:40px;
+      height:40px;
+      border:1px solid var(--border);
+      border-radius:11px;
+      background:#fff;
+      font-size:19px;
+    }
+
+    .page-title{
+      font-family:"Manrope",sans-serif;
+      font-size:20px;
+      font-weight:800;
+      letter-spacing:-.03em;
+    }
+
+    .topbar-right{
+      display:flex;
+      align-items:center;
+      gap:9px;
+    }
+
+    .top-btn{
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+      height:40px;
+      padding:0 13px;
+      border-radius:11px;
+      font-size:12px;
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      transition:.2s ease;
+    }
+
+    .top-btn:hover{
+      border-color:#cbd8d1;
+      transform:translateY(-1px);
+    }
+
+    .top-btn.primary{
+      background:var(--dark);
+      color:#fff;
+      border-color:var(--dark);
+    }
+
+    .content{
+      padding:28px 30px 45px;
+      max-width:1800px;
+      margin:0 auto;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero{
+      background:
+        radial-gradient(circle at 90% 15%, rgba(24,169,87,.18), transparent 32%),
+        linear-gradient(135deg,#07110b,#102118);
+      border-radius:26px;
+      padding:28px;
+      color:#fff;
+      position:relative;
+      overflow:hidden;
+      margin-bottom:22px;
+    }
+
+    .hero:after{
+      content:"";
+      position:absolute;
+      width:240px;
+      height:240px;
+      right:-90px;
+      bottom:-120px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:50%;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.08);
+      color:#b9f4ce;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:10px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      margin-bottom:12px;
+    }
+
+    .eyebrow-dot{
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:#53db86;
+    }
+
+    .hero h1{
+      font-family:"Manrope",sans-serif;
+      font-size:30px;
+      letter-spacing:-.045em;
+      line-height:1.1;
+      margin-bottom:8px;
+    }
+
+    .hero p{
+      max-width:650px;
+      color:#a9b8b0;
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    /* =========================
+       STATS
+    ========================= */
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
+      margin-bottom:20px;
+    }
+
+    .stat-card{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:var(--shadow-sm);
+      min-width:0;
+    }
+
+    .stat-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+    }
+
+    .stat-label{
+      color:var(--muted);
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .stat-icon{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      display:grid;
+      place-items:center;
+      background:var(--green-soft);
+      color:var(--green-dark);
+      font-size:15px;
+      flex:0 0 34px;
+    }
+
+    .stat-value{
+      font-family:"Manrope",sans-serif;
+      font-size:25px;
+      font-weight:800;
+      margin-top:12px;
+      letter-spacing:-.04em;
+    }
+
+    .stat-meta{
+      margin-top:4px;
+      color:#8a958f;
+      font-size:10px;
+    }
+
+    /* =========================
+       TOOLBAR
+    ========================= */
+
+    .panel{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:20px;
+      box-shadow:var(--shadow-sm);
+      overflow:hidden;
+    }
+
+    .toolbar{
+      padding:17px;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      flex-wrap:wrap;
+      border-bottom:1px solid var(--border);
+      background:var(--surface-2);
+    }
+
+    .search-box{
+      flex:1 1 230px;
+      min-width:190px;
+      position:relative;
+    }
+
+    .search-box span{
+      position:absolute;
+      left:12px;
+      top:50%;
+      transform:translateY(-50%);
+      color:#8b9891;
+      font-size:14px;
+      pointer-events:none;
+    }
+
+    .field{
+      height:40px;
+      width:100%;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+      border-radius:11px;
+      outline:none;
+      padding:0 12px;
+      font-size:12px;
+      transition:.2s ease;
+    }
+
+    .search-box .field{
+      padding-left:35px;
+    }
+
+    .field:focus{
+      border-color:rgba(24,169,87,.55);
+      box-shadow:0 0 0 3px rgba(24,169,87,.08);
+    }
+
+    select.field{
+      min-width:145px;
+    }
+
+    .toolbar-btn{
+      height:40px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+      border-radius:11px;
+      padding:0 13px;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .toolbar-btn:hover{
+      border-color:#c9d7cf;
+    }
+
+    .toolbar-btn.green{
+      background:var(--green);
+      color:#fff;
+      border-color:var(--green);
+    }
+
+    .toolbar-btn.danger{
+      background:var(--red-soft);
+      color:var(--red);
+      border-color:#ffd2d2;
+    }
+
+    /* =========================
+       BULK BAR
+    ========================= */
+
+    .bulk-bar{
+      display:none;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:11px 17px;
+      background:#effaf4;
+      border-bottom:1px solid #d4efdf;
+    }
+
+    .bulk-bar.show{
+      display:flex;
+    }
+
+    .bulk-info{
+      font-size:12px;
+      font-weight:700;
+      color:var(--green-dark);
+    }
+
+    .bulk-actions{
+      display:flex;
+      gap:7px;
+      flex-wrap:wrap;
+    }
+
+    .small-btn{
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+      border-radius:9px;
+      padding:7px 10px;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .small-btn.green{
+      color:var(--green-dark);
+      border-color:#bfe6cf;
+      background:#fff;
+    }
+
+    .small-btn.red{
+      color:var(--red);
+      border-color:#ffd1d1;
+      background:#fff;
+    }
+
+    /* =========================
+       TABLE
+    ========================= */
+
+    .table-wrap{
+      width:100%;
+      overflow-x:auto;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:1050px;
+    }
+
+    th{
+      background:#fbfcfc;
+      color:#849089;
+      font-size:10px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.07em;
+      text-align:left;
+      padding:13px 14px;
+      border-bottom:1px solid var(--border);
+      white-space:nowrap;
+    }
+
+    td{
+      padding:14px;
+      border-bottom:1px solid #edf1ef;
+      vertical-align:middle;
+      font-size:12px;
+    }
+
+    tbody tr{
+      transition:.15s ease;
+    }
+
+    tbody tr:hover{
+      background:#fbfdfc;
+    }
+
+    .check{
+      width:17px;
+      height:17px;
+      accent-color:var(--green);
+      cursor:pointer;
+    }
+
+    .order-id{
+      font-weight:800;
+      color:var(--green-dark);
+      font-size:12px;
+    }
+
+    .customer{
+      display:flex;
+      align-items:center;
+      gap:9px;
+      min-width:180px;
+    }
+
+    .customer-avatar{
+      width:34px;
+      height:34px;
+      border-radius:11px;
+      background:#eaf8f0;
+      color:var(--green-dark);
+      display:grid;
+      place-items:center;
+      font-size:11px;
+      font-weight:800;
+      flex:0 0 34px;
+    }
+
+    .customer-info strong{
+      display:block;
+      font-size:12px;
+      line-height:1.25;
+    }
+
+    .customer-info span{
+      display:block;
+      color:#87928c;
+      font-size:10px;
+      margin-top:3px;
+      max-width:155px;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    .website-cell strong{
+      display:block;
+      font-size:12px;
+      max-width:170px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .website-cell span{
+      display:block;
+      margin-top:3px;
+      color:#8b9690;
+      font-size:10px;
+    }
+
+    .amount{
+      font-family:"Manrope",sans-serif;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      border-radius:999px;
+      padding:6px 8px;
+      font-size:9px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .badge-dot{
+      width:5px;
+      height:5px;
+      border-radius:50%;
+      background:currentColor;
+    }
+
+    .badge.paid{
+      background:var(--green-soft);
+      color:var(--green-dark);
+    }
+
+    .badge.pending{
+      background:var(--orange-soft);
+      color:var(--orange);
+    }
+
+    .badge.failed,
+    .badge.cancelled{
+      background:var(--red-soft);
+      color:var(--red);
+    }
+
+    .badge.refunded{
+      background:var(--purple-soft);
+      color:var(--purple);
+    }
+
+    .badge.new{
+      background:var(--blue-soft);
+      color:var(--blue);
+    }
+
+    .badge.processing{
+      background:#eef8ff;
+      color:#0369a1;
+    }
+
+    .badge.completed{
+      background:var(--green-soft);
+      color:var(--green-dark);
+    }
+
+    .date-cell{
+      white-space:nowrap;
+    }
+
+    .date-cell strong{
+      display:block;
+      font-size:11px;
+    }
+
+    .date-cell span{
+      color:#8b9690;
+      font-size:10px;
+    }
+
+    .actions{
+      display:flex;
+      align-items:center;
+      gap:5px;
+    }
+
+    .icon-btn{
+      width:31px;
+      height:31px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:9px;
+      display:grid;
+      place-items:center;
+      color:#5d6963;
+      font-size:12px;
+    }
+
+    .icon-btn:hover{
+      border-color:#bfd0c6;
+      color:var(--green-dark);
+      background:#f8fbf9;
+    }
+
+    .icon-btn.red:hover{
+      color:var(--red);
+      border-color:#ffc9c9;
+      background:#fff8f8;
+    }
+
+    .empty{
+      padding:65px 20px;
+      text-align:center;
+    }
+
+    .empty-icon{
+      width:54px;
+      height:54px;
+      border-radius:16px;
+      background:#eff5f1;
+      display:grid;
+      place-items:center;
+      margin:0 auto 13px;
+      font-size:23px;
+    }
+
+    .empty h3{
+      font-family:"Manrope",sans-serif;
+      font-size:16px;
+      margin-bottom:5px;
+    }
+
+    .empty p{
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    /* =========================
+       MOBILE CARDS
+    ========================= */
+
+    .mobile-orders{
+      display:none;
+    }
+
+    .order-card{
+      padding:15px;
+      border-bottom:1px solid var(--border);
+    }
+
+    .order-card:last-child{
+      border-bottom:0;
+    }
+
+    .order-card-top{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      align-items:flex-start;
+    }
+
+    .order-card-id{
+      color:var(--green-dark);
+      font-weight:800;
+      font-size:12px;
+    }
+
+    .order-card-date{
+      color:#8b9690;
+      font-size:10px;
+      margin-top:4px;
+    }
+
+    .order-card-main{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+      margin-top:15px;
+    }
+
+    .mobile-label{
+      color:#8b9690;
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-weight:800;
+      margin-bottom:4px;
+    }
+
+    .mobile-value{
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .order-card-bottom{
+      margin-top:14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+    }
+
+    /* =========================
+       PAGINATION
+    ========================= */
+
+    .pagination{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:14px 17px;
+      border-top:1px solid var(--border);
+      background:#fbfcfc;
+    }
+
+    .page-info{
+      color:#7d8982;
+      font-size:11px;
+    }
+
+    .page-buttons{
+      display:flex;
+      align-items:center;
+      gap:5px;
+    }
+
+    .page-btn{
+      min-width:31px;
+      height:31px;
+      padding:0 8px;
+      border:1px solid var(--border);
+      border-radius:9px;
+      background:#fff;
+      color:#5d6963;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .page-btn.active{
+      background:var(--green);
+      border-color:var(--green);
+      color:#fff;
+    }
+
+    .page-btn:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+    }
+
+    /* =========================
+       MODALS
+    ========================= */
+
+    .modal-backdrop{
+      position:fixed;
+      inset:0;
+      background:rgba(4,10,7,.58);
+      backdrop-filter:blur(5px);
+      z-index:2000;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+
+    .modal-backdrop.show{
+      display:flex;
+    }
+
+    .modal{
+      width:min(760px,100%);
+      max-height:calc(100vh - 40px);
+      overflow:auto;
+      background:#fff;
+      border-radius:23px;
+      box-shadow:0 30px 90px rgba(0,0,0,.22);
+    }
+
+    .modal.small{
+      width:min(460px,100%);
+    }
+
+    .modal-head{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:15px;
+      padding:21px 22px;
+      border-bottom:1px solid var(--border);
+      position:sticky;
+      top:0;
+      background:#fff;
+      z-index:3;
+    }
+
+    .modal-head h2{
+      font-family:"Manrope",sans-serif;
+      font-size:18px;
+      letter-spacing:-.03em;
+    }
+
+    .modal-head p{
+      color:var(--muted);
+      font-size:11px;
+      margin-top:4px;
+    }
+
+    .close-btn{
+      width:34px;
+      height:34px;
+      border:1px solid var(--border);
+      border-radius:10px;
+      background:#fff;
+      color:#647069;
+      font-size:17px;
+      flex:0 0 34px;
+    }
+
+    .modal-body{
+      padding:22px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+    }
+
+    .form-group{
+      min-width:0;
+    }
+
+    .form-group.full{
+      grid-column:1/-1;
+    }
+
+    .form-label{
+      display:block;
+      font-size:11px;
+      font-weight:800;
+      margin-bottom:6px;
+      color:#4f5c55;
+    }
+
+    textarea.field{
+      height:100px;
+      resize:vertical;
+      padding:11px 12px;
+    }
+
+    .detail-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+    }
+
+    .detail-box{
+      padding:13px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:var(--surface-2);
+    }
+
+    .detail-box.full{
+      grid-column:1/-1;
+    }
+
+    .detail-label{
+      color:#8b9690;
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-weight:800;
+      margin-bottom:5px;
+    }
+
+    .detail-value{
+      font-size:12px;
+      font-weight:700;
+      line-height:1.5;
+      word-break:break-word;
+    }
+
+    .screenshot-box{
+      border:1px dashed #cad6cf;
+      border-radius:15px;
+      padding:12px;
+      background:#fbfcfc;
+    }
+
+    .screenshot-box img{
+      max-height:300px;
+      width:auto;
+      max-width:100%;
+      margin:auto;
+      border-radius:10px;
+      object-fit:contain;
+    }
+
+    .no-screenshot{
+      text-align:center;
+      color:#8a958f;
+      font-size:11px;
+      padding:30px 10px;
+    }
+
+    .modal-foot{
+      display:flex;
+      justify-content:flex-end;
+      gap:8px;
+      padding:16px 22px;
+      border-top:1px solid var(--border);
+      background:#fbfcfc;
+      position:sticky;
+      bottom:0;
+      z-index:3;
+    }
+
+    .modal-btn{
+      min-height:40px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+      border-radius:11px;
+      padding:0 15px;
+      font-size:12px;
+      font-weight:800;
+    }
+
+    .modal-btn.primary{
+      background:var(--green);
+      border-color:var(--green);
+      color:#fff;
+    }
+
+    .modal-btn.danger{
+      background:var(--red);
+      border-color:var(--red);
+      color:#fff;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    .toast-wrap{
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:5000;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      pointer-events:none;
+    }
+
+    .toast{
+      min-width:250px;
+      max-width:360px;
+      background:#102118;
+      color:#fff;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:13px;
+      padding:12px 14px;
+      box-shadow:0 18px 40px rgba(0,0,0,.2);
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:11px;
+      font-weight:700;
+      animation:toastIn .25s ease;
+    }
+
+    .toast.success .toast-icon{
+      background:#1da85a;
+    }
+
+    .toast.error .toast-icon{
+      background:#dc2626;
+    }
+
+    .toast-icon{
+      width:24px;
+      height:24px;
+      border-radius:8px;
+      display:grid;
+      place-items:center;
+      flex:0 0 24px;
+    }
+
+    @keyframes toastIn{
+      from{
+        opacity:0;
+        transform:translateY(8px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* =========================
+       SIDEBAR MOBILE
+    ========================= */
+
+    .sidebar-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.45);
+      z-index:900;
+      display:none;
+    }
+
+    .sidebar-overlay.show{
+      display:block;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media(max-width:1250px){
+      .stats{
+        grid-template-columns:repeat(3,1fr);
+      }
+    }
+
+    @media(max-width:900px){
+      .sidebar{
+        transform:translateX(-100%);
+        transition:.25s ease;
+      }
+
+      .sidebar.open{
+        transform:translateX(0);
+      }
+
+      .main{
+        margin-left:0;
+        width:100%;
+      }
+
+      .mobile-menu{
+        display:grid;
+        place-items:center;
+      }
+
+      .topbar{
+        padding:0 16px;
+      }
+
+      .content{
+        padding:20px 16px 35px;
+      }
+
+      .topbar-right .market-btn{
+        display:none;
+      }
+
+      .stats{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media(max-width:650px){
+      .topbar{
+        height:68px;
+      }
+
+      .page-title{
+        font-size:17px;
+      }
+
+      .top-btn.refresh-btn{
+        width:40px;
+        padding:0;
+        justify-content:center;
+        font-size:0;
+      }
+
+      .top-btn.refresh-btn:first-letter{
+        font-size:15px;
+      }
+
+      .hero{
+        padding:22px;
+        border-radius:20px;
+      }
+
+      .hero h1{
+        font-size:24px;
+      }
+
+      .stats{
+        grid-template-columns:1fr 1fr;
+        gap:9px;
+      }
+
+      .stat-card{
+        padding:14px;
+        border-radius:15px;
+      }
+
+      .stat-value{
+        font-size:21px;
+      }
+
+      .toolbar{
+        padding:12px;
+      }
+
+      .search-box{
+        flex-basis:100%;
+      }
+
+      .toolbar select.field{
+        flex:1;
+        min-width:0;
+      }
+
+      .toolbar-btn{
+        flex:1;
+      }
+
+      .table-wrap{
+        display:none;
+      }
+
+      .mobile-orders{
+        display:block;
+      }
+
+      .pagination{
+        padding:12px;
+      }
+
+      .page-info{
+        font-size:10px;
+      }
+
+      .form-grid,
+      .detail-grid{
+        grid-template-columns:1fr;
+      }
+
+      .form-group.full,
+      .detail-box.full{
+        grid-column:auto;
+      }
+
+      .modal-backdrop{
+        padding:10px;
+      }
+
+      .modal{
+        max-height:calc(100vh - 20px);
+        border-radius:18px;
+      }
+
+      .modal-body{
+        padding:16px;
+      }
+
+      .modal-head{
+        padding:17px;
+      }
+
+      .modal-foot{
+        padding:13px 17px;
+      }
+
+      .toast-wrap{
+        left:12px;
+        right:12px;
+        bottom:12px;
+      }
+
+      .toast{
+        min-width:0;
+        width:100%;
+      }
+    }
+
+    @media(max-width:430px){
+      .stats{
+        grid-template-columns:1fr;
+      }
+
+      .order-card-main{
+        grid-template-columns:1fr;
+      }
+
+      .topbar-right .top-btn:not(.refresh-btn){
+        display:none;
+      }
+    }
+
+    /* =========================
+       PRINT
+    ========================= */
+
+    @media print{
+      .sidebar,
+      .topbar,
+      .hero,
+      .toolbar,
+      .bulk-bar,
+      .pagination,
+      .actions,
+      .toast-wrap,
+      .sidebar-overlay{
+        display:none !important;
+      }
+
+      .main{
+        margin-left:0;
+        width:100%;
+      }
+
+      .content{
+        padding:0;
+      }
+
+      .panel{
+        box-shadow:none;
+        border:0;
+      }
+
+      table{
+        min-width:0;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- =========================
-     SIDEBAR
-========================= -->
+  <div class="app">
 
-<aside class="sidebar" id="sidebar">
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+    <aside class="sidebar" id="sidebar">
 
-  <div class="sidebar-brand">
-    <img src="../logo.png" alt="Website Deals">
+      <div class="sidebar-top">
 
-    <div class="brand-text">
-      <strong>Website Deals</strong>
-      <span>Admin Portal</span>
-    </div>
-  </div>
+        <a href="dashboard.html" class="brand">
+          <img src="../logo.png" alt="Website Deals" class="brand-logo">
+          <div class="brand-copy">
+            <strong>Website Deals</strong>
+            <span>Admin Control Center</span>
+          </div>
+        </a>
 
-  <nav class="sidebar-nav">
-
-    <div class="nav-label">Overview</div>
-
-    <a class="nav-link" href="dashboard.html">
-      <i class="fa-solid fa-chart-pie"></i>
-      <span>Dashboard</span>
-    </a>
-
-    <div class="nav-label">Marketplace</div>
-
-    <a class="nav-link" href="websites.html">
-      <i class="fa-solid fa-globe"></i>
-      <span>Websites</span>
-    </a>
-
-    <a class="nav-link" href="categories.html">
-      <i class="fa-solid fa-layer-group"></i>
-      <span>Categories</span>
-    </a>
-
-    <a class="nav-link active" href="orders.html">
-      <i class="fa-solid fa-bag-shopping"></i>
-      <span>Orders</span>
-    </a>
-
-    <a class="nav-link" href="payments.html">
-      <i class="fa-solid fa-credit-card"></i>
-      <span>Payments</span>
-    </a>
-
-    <div class="nav-label">Customers</div>
-
-    <a class="nav-link" href="customers.html">
-      <i class="fa-solid fa-users"></i>
-      <span>Customers</span>
-    </a>
-
-    <a class="nav-link" href="newsletter.html">
-      <i class="fa-solid fa-envelope"></i>
-      <span>Newsletter</span>
-    </a>
-
-    <div class="nav-label">Reports</div>
-
-    <a class="nav-link" href="monthly-report.html">
-      <i class="fa-solid fa-chart-column"></i>
-      <span>Monthly Report</span>
-    </a>
-
-    <div class="restricted">
-
-      <div class="nav-label">Restricted</div>
-
-      <a class="nav-link" href="admins.html">
-        <i class="fa-solid fa-user-shield"></i>
-        <span>Admin Management</span>
-      </a>
-
-      <a class="nav-link" href="settings.html">
-        <i class="fa-solid fa-sliders"></i>
-        <span>System Settings</span>
-      </a>
-
-    </div>
-
-  </nav>
-
-  <div class="sidebar-bottom">
-
-    <div class="admin-profile">
-
-      <div class="admin-avatar" id="adminAvatar">
-        SA
       </div>
 
-      <div>
-        <strong id="adminName">Super Admin</strong>
-        <span id="adminRole">Control Center</span>
+      <div class="nav-scroll">
+
+        <div class="nav-label">Marketplace</div>
+
+        <a href="dashboard.html" class="nav-item">
+          <span class="nav-icon">⌂</span>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="websites.html" class="nav-item">
+          <span class="nav-icon">▣</span>
+          <span>Websites</span>
+        </a>
+
+        <a href="categories.html" class="nav-item">
+          <span class="nav-icon">◫</span>
+          <span>Categories</span>
+        </a>
+
+        <a href="orders.html" class="nav-item active">
+          <span class="nav-icon">▤</span>
+          <span>Orders</span>
+        </a>
+
+        <a href="payments.html" class="nav-item">
+          <span class="nav-icon">৳</span>
+          <span>Payments</span>
+        </a>
+
+        <a href="customers.html" class="nav-item">
+          <span class="nav-icon">♙</span>
+          <span>Customers</span>
+        </a>
+
+        <a href="newsletter.html" class="nav-item">
+          <span class="nav-icon">✉</span>
+          <span>Newsletter</span>
+        </a>
+
+        <div class="nav-label">Reports</div>
+
+        <a href="reports.html" class="nav-item">
+          <span class="nav-icon">▥</span>
+          <span>Reports</span>
+        </a>
+
+        <a href="monthly-report.html" class="nav-item">
+          <span class="nav-icon">◷</span>
+          <span>Monthly Report</span>
+        </a>
+
+        <div class="nav-label">Restricted Controls</div>
+
+        <a href="admins.html" class="nav-item">
+          <span class="nav-icon">♟</span>
+          <span>Admin Management</span>
+        </a>
+
+        <a href="settings.html" class="nav-item">
+          <span class="nav-icon">⚙</span>
+          <span>System Settings</span>
+        </a>
+
       </div>
 
-    </div>
+      <div class="sidebar-bottom">
 
-  </div>
+        <div class="admin-mini">
+          <div class="admin-avatar" id="adminAvatar">SA</div>
 
-</aside>
-
-
-<!-- =========================
-     MAIN
-========================= -->
-
-<main class="main">
-
-  <header class="topbar">
-
-    <div class="topbar-left">
-
-      <button
-        class="mobile-menu"
-        id="mobileMenu"
-        aria-label="Open menu">
-        <i class="fa-solid fa-bars"></i>
-      </button>
-
-      <div class="breadcrumb">
-        <a href="dashboard.html">Dashboard</a>
-        <i class="fa-solid fa-chevron-right"></i>
-        <strong>Orders</strong>
-      </div>
-
-    </div>
-
-    <div class="topbar-actions">
-
-      <a
-        class="top-icon"
-        href="../index.html"
-        target="_blank"
-        title="Open marketplace">
-        <i class="fa-solid fa-arrow-up-right-from-square"></i>
-      </a>
-
-      <button
-        class="top-icon"
-        id="logoutButton"
-        title="Logout">
-        <i class="fa-solid fa-right-from-bracket"></i>
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <div class="page">
-
-    <!-- PAGE HEADER -->
-
-    <section class="page-header">
-
-      <div>
-
-        <div class="eyebrow">
-          <i class="fa-solid fa-bag-shopping"></i>
-          Marketplace Operations
+          <div class="admin-mini-text">
+            <strong id="adminName">Super Admin</strong>
+            <span id="adminRole">Super Administrator</span>
+          </div>
         </div>
 
-        <h1 class="page-title">
-          Orders
-        </h1>
-
-        <p class="page-description">
-          Monitor customer purchases, order status, website sales
-          and marketplace revenue from one place.
-        </p>
-
-      </div>
-
-      <div class="header-actions">
-
-        <button
-          class="btn"
-          id="refreshButton">
-          <i class="fa-solid fa-rotate"></i>
-          Refresh
-        </button>
-
-        <button
-          class="btn"
-          id="exportButton">
-          <i class="fa-solid fa-file-export"></i>
-          Export CSV
+        <button class="logout-btn" id="logoutBtn">
+          ↪ Sign Out
         </button>
 
       </div>
 
-    </section>
+    </aside>
 
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- STATS -->
+    <!-- =========================
+         MAIN
+    ========================== -->
+    <main class="main">
 
-    <section class="stats">
+      <header class="topbar">
 
-      <div class="stat-card">
+        <div class="topbar-left">
 
-        <div class="stat-top">
-          <div class="stat-icon">
-            <i class="fa-solid fa-receipt"></i>
+          <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">
+            ☰
+          </button>
+
+          <div class="page-title">
+            Orders Management
           </div>
+
         </div>
 
-        <div class="stat-label">
-          Total Orders
+        <div class="topbar-right">
+
+          <button class="top-btn refresh-btn" id="refreshBtn">
+            ↻ <span>Refresh</span>
+          </button>
+
+          <a href="../index.html" target="_blank" class="top-btn primary market-btn">
+            ↗ Marketplace
+          </a>
+
         </div>
 
-        <div class="stat-value" id="totalOrders">
-          0
-        </div>
+      </header>
 
-      </div>
+      <section class="content">
 
+        <!-- HERO -->
+        <div class="hero">
 
-      <div class="stat-card">
+          <div class="hero-content">
 
-        <div class="stat-top">
-          <div class="stat-icon">
-            <i class="fa-solid fa-clock"></i>
+            <div class="eyebrow">
+              <span class="eyebrow-dot"></span>
+              Order Control Center
+            </div>
+
+            <h1>Manage every order in one place.</h1>
+
+            <p>
+              Review customer orders, verify payments, update order progress,
+              inspect payment proof and keep your Website Deals marketplace organized.
+            </p>
+
           </div>
+
         </div>
 
-        <div class="stat-label">
-          Pending Orders
-        </div>
+        <!-- STATS -->
+        <div class="stats">
 
-        <div class="stat-value" id="pendingOrders">
-          0
-        </div>
-
-      </div>
-
-
-      <div class="stat-card">
-
-        <div class="stat-top">
-          <div class="stat-icon">
-            <i class="fa-solid fa-circle-check"></i>
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-label">Total Orders</div>
+              <div class="stat-icon">▤</div>
+            </div>
+            <div class="stat-value" id="statTotal">0</div>
+            <div class="stat-meta">All recorded orders</div>
           </div>
-        </div>
 
-        <div class="stat-label">
-          Completed Orders
-        </div>
-
-        <div class="stat-value" id="completedOrders">
-          0
-        </div>
-
-      </div>
-
-
-      <div class="stat-card">
-
-        <div class="stat-top">
-          <div class="stat-icon">
-            <i class="fa-solid fa-bangladeshi-taka-sign"></i>
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-label">Paid Orders</div>
+              <div class="stat-icon">✓</div>
+            </div>
+            <div class="stat-value" id="statPaid">0</div>
+            <div class="stat-meta">Payment verified</div>
           </div>
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-label">Pending</div>
+              <div class="stat-icon">◷</div>
+            </div>
+            <div class="stat-value" id="statPending">0</div>
+            <div class="stat-meta">Needs attention</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-label">Cancelled</div>
+              <div class="stat-icon">×</div>
+            </div>
+            <div class="stat-value" id="statCancelled">0</div>
+            <div class="stat-meta">Cancelled / failed</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-top">
+              <div class="stat-label">Order Revenue</div>
+              <div class="stat-icon">৳</div>
+            </div>
+            <div class="stat-value" id="statRevenue">৳0</div>
+            <div class="stat-meta">Paid order value</div>
+          </div>
+
         </div>
 
-        <div class="stat-label">
-          Order Revenue
+        <!-- ORDERS PANEL -->
+        <div class="panel">
+
+          <!-- FILTER TOOLBAR -->
+          <div class="toolbar">
+
+            <div class="search-box">
+              <span>⌕</span>
+              <input
+                type="search"
+                class="field"
+                id="searchInput"
+                placeholder="Search order, customer, email, website..."
+              >
+            </div>
+
+            <select class="field" id="orderStatusFilter">
+              <option value="all">All Order Status</option>
+              <option value="new">New</option>
+              <option value="processing">Processing</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+
+            <select class="field" id="paymentStatusFilter">
+              <option value="all">All Payments</option>
+              <option value="paid">Paid</option>
+              <option value="pending">Pending</option>
+              <option value="failed">Failed</option>
+              <option value="refunded">Refunded</option>
+            </select>
+
+            <select class="field" id="paymentMethodFilter">
+              <option value="all">All Methods</option>
+            </select>
+
+            <select class="field" id="sortFilter">
+              <option value="newest">Newest First</option>
+              <option value="oldest">Oldest First</option>
+              <option value="amount-high">Amount: High → Low</option>
+              <option value="amount-low">Amount: Low → High</option>
+              <option value="customer">Customer A → Z</option>
+            </select>
+
+            <button class="toolbar-btn" id="resetFiltersBtn">
+              Reset
+            </button>
+
+            <button class="toolbar-btn green" id="exportBtn">
+              ↓ Export CSV
+            </button>
+
+            <button class="toolbar-btn" id="printBtn">
+              ⎙ Print
+            </button>
+
+          </div>
+
+          <!-- BULK BAR -->
+          <div class="bulk-bar" id="bulkBar">
+
+            <div class="bulk-info">
+              <span id="selectedCount">0</span> orders selected
+            </div>
+
+            <div class="bulk-actions">
+
+              <button class="small-btn green" id="bulkProcessing">
+                Mark Processing
+              </button>
+
+              <button class="small-btn green" id="bulkCompleted">
+                Mark Completed
+              </button>
+
+              <button class="small-btn red" id="bulkCancelled">
+                Cancel Orders
+              </button>
+
+              <button class="small-btn red" id="bulkDelete">
+                Delete
+              </button>
+
+            </div>
+
+          </div>
+
+          <!-- DESKTOP TABLE -->
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+                <tr>
+                  <th>
+                    <input type="checkbox" class="check" id="selectAll">
+                  </th>
+                  <th>Order</th>
+                  <th>Customer</th>
+                  <th>Website</th>
+                  <th>Amount</th>
+                  <th>Payment</th>
+                  <th>Order Status</th>
+                  <th>Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+
+              <tbody id="ordersTableBody"></tbody>
+
+            </table>
+
+          </div>
+
+          <!-- MOBILE ORDERS -->
+          <div class="mobile-orders" id="mobileOrders"></div>
+
+          <!-- PAGINATION -->
+          <div class="pagination">
+
+            <div class="page-info" id="pageInfo">
+              Showing 0 orders
+            </div>
+
+            <div class="page-buttons" id="pageButtons"></div>
+
+          </div>
+
         </div>
 
-        <div class="stat-value" id="orderRevenue">
-          ৳0
-        </div>
+      </section>
 
-      </div>
+    </main>
 
-    </section>
+  </div>
 
+  <!-- =========================
+       VIEW / EDIT ORDER MODAL
+  ========================== -->
 
-    <!-- TOOLBAR -->
+  <div class="modal-backdrop" id="orderModal">
 
-    <section class="toolbar">
+    <div class="modal">
 
-      <div class="search-box">
-
-        <i class="fa-solid fa-magnifying-glass"></i>
-
-        <input
-          id="searchInput"
-          type="search"
-          placeholder="Search order, customer, email, phone or website...">
-
-      </div>
-
-      <select class="filter" id="statusFilter">
-
-        <option value="all">
-          All Status
-        </option>
-
-        <option value="Pending">
-          Pending
-        </option>
-
-        <option value="Confirmed">
-          Confirmed
-        </option>
-
-        <option value="Processing">
-          Processing
-        </option>
-
-        <option value="Completed">
-          Completed
-        </option>
-
-        <option value="Cancelled">
-          Cancelled
-        </option>
-
-      </select>
-
-      <select class="filter" id="sortFilter">
-
-        <option value="newest">
-          Newest
-        </option>
-
-        <option value="oldest">
-          Oldest
-        </option>
-
-        <option value="highest">
-          Highest Amount
-        </option>
-
-        <option value="lowest">
-          Lowest Amount
-        </option>
-
-        <option value="az">
-          Customer A–Z
-        </option>
-
-      </select>
-
-    </section>
-
-
-    <!-- TABLE -->
-
-    <section class="table-card">
-
-      <div class="table-header">
+      <div class="modal-head">
 
         <div>
-          <h2>
-            Order Management
-          </h2>
-
-          <span id="resultCount">
-            0 orders
-          </span>
+          <h2 id="modalTitle">Order Details</h2>
+          <p id="modalSubtitle">Review and update order information.</p>
         </div>
 
-      </div>
-
-      <div class="table-wrap">
-
-        <table>
-
-          <thead>
-
-            <tr>
-
-              <th>Order</th>
-              <th>Customer</th>
-              <th>Website</th>
-              <th>Amount</th>
-              <th>Status</th>
-              <th>Date</th>
-              <th>Action</th>
-
-            </tr>
-
-          </thead>
-
-          <tbody id="ordersBody"></tbody>
-
-        </table>
+        <button class="close-btn" data-close="orderModal">
+          ×
+        </button>
 
       </div>
 
-      <div class="empty" id="emptyState">
+      <div class="modal-body">
 
-        <i class="fa-regular fa-folder-open"></i>
+        <form id="orderForm">
 
-        <h3>
-          No orders found
-        </h3>
+          <div class="form-grid">
 
-        <p>
-          Try changing your search or filter.
+            <div class="form-group">
+              <label class="form-label">Order ID</label>
+              <input class="field" id="formOrderId" readonly>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Created Date</label>
+              <input class="field" id="formDate" readonly>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Customer Name</label>
+              <input class="field" id="formCustomer">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Customer Email</label>
+              <input class="field" id="formEmail" type="email">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Phone</label>
+              <input class="field" id="formPhone">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Website</label>
+              <input class="field" id="formWebsite">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Category</label>
+              <input class="field" id="formCategory">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Amount (BDT)</label>
+              <input class="field" id="formAmount" type="number" min="0" step="1">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Order Status</label>
+              <select class="field" id="formOrderStatus">
+                <option value="new">New</option>
+                <option value="processing">Processing</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Payment Status</label>
+              <select class="field" id="formPaymentStatus">
+                <option value="paid">Paid</option>
+                <option value="pending">Pending</option>
+                <option value="failed">Failed</option>
+                <option value="refunded">Refunded</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Payment Method</label>
+              <input class="field" id="formPaymentMethod">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Payment Transaction ID</label>
+              <input class="field" id="formPaymentId">
+            </div>
+
+            <div class="form-group full">
+              <label class="form-label">Customer Note</label>
+              <textarea class="field" id="formNote" placeholder="Customer message or internal order note..."></textarea>
+            </div>
+
+            <div class="form-group full" id="screenshotGroup">
+
+              <label class="form-label">Payment Screenshot / Proof</label>
+
+              <div class="screenshot-box" id="screenshotBox">
+                <div class="no-screenshot">
+                  No payment screenshot available.
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </form>
+
+      </div>
+
+      <div class="modal-foot">
+
+        <button class="modal-btn" data-close="orderModal">
+          Close
+        </button>
+
+        <button class="modal-btn danger" id="modalDeleteBtn">
+          Delete Order
+        </button>
+
+        <button class="modal-btn primary" id="saveOrderBtn">
+          Save Changes
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- =========================
+       DELETE MODAL
+  ========================== -->
+
+  <div class="modal-backdrop" id="deleteModal">
+
+    <div class="modal small">
+
+      <div class="modal-head">
+
+        <div>
+          <h2>Delete Order?</h2>
+          <p>This action cannot be undone.</p>
+        </div>
+
+        <button class="close-btn" data-close="deleteModal">
+          ×
+        </button>
+
+      </div>
+
+      <div class="modal-body">
+
+        <div class="detail-box">
+
+          <div class="detail-label">Selected Order</div>
+
+          <div class="detail-value" id="deleteOrderText">
+            —
+          </div>
+
+        </div>
+
+        <p style="color:#738079;font-size:11px;line-height:1.7;margin-top:12px;">
+          Deleting an order removes it from the local Website Deals order records.
+          Related transaction data will remain unchanged.
         </p>
 
       </div>
 
-    </section>
+      <div class="modal-foot">
 
-  </div>
+        <button class="modal-btn" data-close="deleteModal">
+          Keep Order
+        </button>
 
-</main>
-
-
-<!-- =========================
-     ORDER DETAILS MODAL
-========================= -->
-
-<div class="modal" id="orderModal">
-
-  <div class="modal-card">
-
-    <div class="modal-header">
-
-      <div>
-        <h2>Order Details</h2>
-      </div>
-
-      <button
-        class="modal-close"
-        id="modalClose">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-
-    </div>
-
-    <div class="modal-body">
-
-      <div class="detail-grid">
-
-        <div class="detail">
-          <span>Order ID</span>
-          <strong id="detailOrderId">—</strong>
-        </div>
-
-        <div class="detail">
-          <span>Status</span>
-          <strong id="detailStatus">—</strong>
-        </div>
-
-        <div class="detail">
-          <span>Customer</span>
-          <strong id="detailCustomer">—</strong>
-        </div>
-
-        <div class="detail">
-          <span>Email</span>
-          <strong id="detailEmail">—</strong>
-        </div>
-
-        <div class="detail">
-          <span>Phone</span>
-          <strong id="detailPhone">—</strong>
-        </div>
-
-        <div class="detail">
-          <span>Website</span>
-          <strong id="detailWebsite">—</strong>
-        </div>
-
-        <div class="detail">
-          <span>Category</span>
-          <strong id="detailCategory">—</strong>
-        </div>
-
-        <div class="detail">
-          <span>Amount</span>
-          <strong id="detailAmount">—</strong>
-        </div>
-
-        <div class="detail">
-          <span>Payment Method</span>
-          <strong id="detailPayment">—</strong>
-        </div>
-
-        <div class="detail">
-          <span>Order Date</span>
-          <strong id="detailDate">—</strong>
-        </div>
-
-        <div class="detail full">
-          <span>Customer Note</span>
-          <strong id="detailNote">—</strong>
-        </div>
-
-        <div class="detail full">
-
-          <span>Update Status</span>
-
-          <select
-            class="filter"
-            id="detailStatusSelect"
-            style="width:100%;margin-top:8px;">
-
-            <option value="Pending">
-              Pending
-            </option>
-
-            <option value="Confirmed">
-              Confirmed
-            </option>
-
-            <option value="Processing">
-              Processing
-            </option>
-
-            <option value="Completed">
-              Completed
-            </option>
-
-            <option value="Cancelled">
-              Cancelled
-            </option>
-
-          </select>
-
-        </div>
+        <button class="modal-btn danger" id="confirmDeleteBtn">
+          Delete Permanently
+        </button>
 
       </div>
 
     </div>
 
-    <div class="modal-footer">
-
-      <button
-        class="btn"
-        id="closeModalButton">
-        Close
-      </button>
-
-      <button
-        class="btn btn-danger"
-        id="cancelOrderButton">
-        <i class="fa-solid fa-ban"></i>
-        Cancel Order
-      </button>
-
-      <button
-        class="btn btn-primary"
-        id="updateStatusButton">
-        <i class="fa-solid fa-check"></i>
-        Update Status
-      </button>
-
-    </div>
-
   </div>
 
-</div>
+  <!-- TOAST -->
+  <div class="toast-wrap" id="toastWrap"></div>
 
+  <script>
+    /* =========================================================
+       WEBSITE DEALS — ORDERS MANAGEMENT
+       Prototype / LocalStorage Edition
+    ========================================================== */
 
-<!-- TOAST -->
+    const AUTH_KEY = "websiteDealsAdminAuth";
+    const ORDERS_KEY = "websiteDealsOrders";
+    const TRANSACTIONS_KEY = "websiteDealsTransactions";
+    const PAYMENT_TRANSACTIONS_KEY = "websiteDealsPaymentTransactions";
+    const WEBSITES_KEY = "websiteDealsAdminWebsites";
+    const CATEGORIES_KEY = "websiteDealsCategories";
 
-<div class="toast" id="toast">
+    const PAGE_SIZE = 8;
 
-  <div class="toast-icon">
-    <i class="fa-solid fa-check"></i>
-  </div>
+    let orders = [];
+    let transactions = [];
+    let paymentTransactions = [];
+    let websites = [];
+    let categories = [];
 
-  <div class="toast-content">
+    let filteredOrders = [];
+    let currentPage = 1;
+    let currentOrderId = null;
+    let pendingDeleteId = null;
 
-    <strong id="toastTitle">
-      Success
-    </strong>
+    /* =========================================================
+       AUTH
+    ========================================================== */
 
-    <span id="toastMessage">
-      Done.
-    </span>
+    function getAdminSession(){
+      try{
+        const raw = sessionStorage.getItem(AUTH_KEY);
 
-  </div>
+        if(!raw) return null;
 
-  <button
-    class="toast-close"
-    id="toastClose">
-    <i class="fa-solid fa-xmark"></i>
-  </button>
+        const session = JSON.parse(raw);
 
-</div>
+        if(!session || session.authenticated !== true){
+          return null;
+        }
 
+        return session;
 
-<script>
-/* =========================================================
-   WEBSITE DEALS — ORDERS MANAGEMENT
-   Frontend demo / localStorage
-========================================================= */
+      }catch(error){
+        return null;
+      }
+    }
 
-const STORAGE_KEY = "websiteDealsOrders";
+    const adminSession = getAdminSession();
 
-const DEMO_ORDERS = [
-  {
-    id:"WD-2026-00428",
-    customer:"Arif Hasan",
-    email:"arif@example.com",
-    phone:"01711000001",
-    website:"ShopEasy Store",
-    category:"E-commerce",
-    amount:2999,
-    status:"Completed",
-    paymentMethod:"bKash",
-    date:"2026-09-30T15:30:00",
-    note:"Please send the website setup instructions."
-  },
-  {
-    id:"WD-2026-00427",
-    customer:"Nusrat Jahan",
-    email:"nusrat@example.com",
-    phone:"01711000002",
-    website:"Corporate Pro",
-    category:"Business",
-    amount:999,
-    status:"Processing",
-    paymentMethod:"Nagad",
-    date:"2026-09-30T12:10:00",
-    note:"Need business contact section updated."
-  },
-  {
-    id:"WD-2026-00426",
-    customer:"Tanvir Ahmed",
-    email:"tanvir@example.com",
-    phone:"01711000003",
-    website:"Creative Studio",
-    category:"Agency",
-    amount:1999,
-    status:"Confirmed",
-    paymentMethod:"bKash",
-    date:"2026-09-29T17:45:00",
-    note:""
-  },
-  {
-    id:"WD-2026-00425",
-    customer:"Sadia Rahman",
-    email:"sadia@example.com",
-    phone:"01711000004",
-    website:"Tasty Bites",
-    category:"Restaurant",
-    amount:1499,
-    status:"Pending",
-    paymentMethod:"Bank Transfer",
-    date:"2026-09-29T10:15:00",
-    note:"Restaurant menu content will be provided."
-  },
-  {
-    id:"WD-2026-00424",
-    customer:"Mahin Islam",
-    email:"mahin@example.com",
-    phone:"01711000005",
-    website:"Personal Folio",
-    category:"Portfolio",
-    amount:999,
-    status:"Completed",
-    paymentMethod:"Rocket",
-    date:"2026-09-28T16:40:00",
-    note:""
-  },
-  {
-    id:"WD-2026-00423",
-    customer:"Rafiul Karim",
-    email:"rafiul@example.com",
-    phone:"01711000006",
-    website:"Starter Monthly",
-    category:"Monthly",
-    amount:999,
-    status:"Completed",
-    paymentMethod:"bKash",
-    date:"2026-09-28T13:25:00",
-    note:"Monthly subscription activated."
-  },
-  {
-    id:"WD-2026-00422",
-    customer:"Mim Akter",
-    email:"mim@example.com",
-    phone:"01711000007",
-    website:"Biz Launch",
-    category:"Business",
-    amount:1299,
-    status:"Cancelled",
-    paymentMethod:"Nagad",
-    date:"2026-09-27T19:10:00",
-    note:"Customer requested cancellation."
-  },
-  {
-    id:"WD-2026-00421",
-    customer:"Fahim Chowdhury",
-    email:"fahim@example.com",
-    phone:"01711000008",
-    website:"Cafe Corner",
-    category:"Restaurant",
-    amount:1199,
-    status:"Completed",
-    paymentMethod:"bKash",
-    date:"2026-09-27T11:30:00",
-    note:""
-  }
-];
+    if(!adminSession){
+      window.location.replace("login/");
+    }
 
-let orders = [];
-let filteredOrders = [];
-let selectedOrderId = null;
-let toastTimer = null;
+    /* =========================================================
+       HELPERS
+    ========================================================== */
 
-/* =========================
-   HELPERS
-========================= */
+    function readStorage(key, fallback = []){
+      try{
+        const raw = localStorage.getItem(key);
 
-function $(id){
-  return document.getElementById(id);
-}
+        if(!raw){
+          return fallback;
+        }
 
-function money(value){
-  return `৳${Number(value || 0).toLocaleString("en-BD")}`;
-}
+        const parsed = JSON.parse(raw);
 
-function getOrders(){
+        return Array.isArray(parsed) ? parsed : fallback;
 
-  try{
+      }catch(error){
+        return fallback;
+      }
+    }
 
-    const raw =
-      localStorage.getItem(STORAGE_KEY);
+    function writeStorage(key, value){
+      localStorage.setItem(key, JSON.stringify(value));
+    }
 
-    if(!raw){
+    function firstValue(...values){
+      for(const value of values){
+        if(
+          value !== undefined &&
+          value !== null &&
+          String(value).trim() !== ""
+        ){
+          return value;
+        }
+      }
 
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(DEMO_ORDERS)
+      return "";
+    }
+
+    function normalizeAmount(value){
+      if(value === undefined || value === null || value === ""){
+        return 0;
+      }
+
+      if(typeof value === "number"){
+        return Number.isFinite(value) ? value : 0;
+      }
+
+      const cleaned = String(value)
+        .replace(/[৳,\s]/g,"")
+        .replace(/[^\d.-]/g,"");
+
+      const number = Number(cleaned);
+
+      return Number.isFinite(number) ? number : 0;
+    }
+
+    function normalizeDate(value){
+      if(!value){
+        return null;
+      }
+
+      if(typeof value === "number"){
+        const timestamp = value < 10000000000
+          ? value * 1000
+          : value;
+
+        const date = new Date(timestamp);
+
+        if(!isNaN(date.getTime())){
+          return date;
+        }
+      }
+
+      const date = new Date(value);
+
+      return isNaN(date.getTime()) ? null : date;
+    }
+
+    function normalizePaymentStatus(value){
+      const status = String(value || "")
+        .trim()
+        .toLowerCase();
+
+      if([
+        "paid",
+        "complete",
+        "completed",
+        "success",
+        "successful",
+        "succeeded",
+        "verified",
+        "approved"
+      ].includes(status)){
+        return "paid";
+      }
+
+      if([
+        "pending",
+        "processing",
+        "unpaid",
+        "awaiting",
+        "awaiting payment",
+        "verification"
+      ].includes(status)){
+        return "pending";
+      }
+
+      if([
+        "refund",
+        "refunded",
+        "partially_refunded"
+      ].includes(status)){
+        return "refunded";
+      }
+
+      if([
+        "cancel",
+        "cancelled",
+        "canceled",
+        "failed",
+        "declined",
+        "rejected"
+      ].includes(status)){
+        return "failed";
+      }
+
+      return status || "pending";
+    }
+
+    function normalizeOrderStatus(value){
+      const status = String(value || "")
+        .trim()
+        .toLowerCase();
+
+      if([
+        "new",
+        "placed",
+        "received",
+        "submitted"
+      ].includes(status)){
+        return "new";
+      }
+
+      if([
+        "processing",
+        "in progress",
+        "in-progress",
+        "working",
+        "active"
+      ].includes(status)){
+        return "processing";
+      }
+
+      if([
+        "completed",
+        "complete",
+        "delivered",
+        "done",
+        "finished"
+      ].includes(status)){
+        return "completed";
+      }
+
+      if([
+        "cancel",
+        "cancelled",
+        "canceled",
+        "closed"
+      ].includes(status)){
+        return "cancelled";
+      }
+
+      return status || "new";
+    }
+
+    function escapeHTML(value){
+      return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+    }
+
+    function formatMoney(value){
+      return "৳" + normalizeAmount(value).toLocaleString("en-BD");
+    }
+
+    function formatDate(value){
+      const date = normalizeDate(value);
+
+      if(!date){
+        return "—";
+      }
+
+      return date.toLocaleDateString("en-GB",{
+        day:"2-digit",
+        month:"short",
+        year:"numeric"
+      });
+    }
+
+    function formatTime(value){
+      const date = normalizeDate(value);
+
+      if(!date){
+        return "";
+      }
+
+      return date.toLocaleTimeString("en-US",{
+        hour:"2-digit",
+        minute:"2-digit"
+      });
+    }
+
+    function getInitials(name){
+      const text = String(name || "Customer").trim();
+
+      const parts = text
+        .split(/\s+/)
+        .filter(Boolean);
+
+      if(parts.length === 1){
+        return parts[0].slice(0,2).toUpperCase();
+      }
+
+      return (
+        parts[0].charAt(0) +
+        parts[parts.length - 1].charAt(0)
+      ).toUpperCase();
+    }
+
+    function slugify(value){
+      return String(value || "")
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g,"-")
+        .replace(/^-+|-+$/g,"");
+    }
+
+    function showToast(message,type="success"){
+      const wrap = document.getElementById("toastWrap");
+
+      const toast = document.createElement("div");
+
+      toast.className = "toast " + type;
+
+      toast.innerHTML = `
+        <div class="toast-icon">
+          ${type === "error" ? "!" : "✓"}
+        </div>
+        <div>${escapeHTML(message)}</div>
+      `;
+
+      wrap.appendChild(toast);
+
+      setTimeout(()=>{
+        toast.style.opacity = "0";
+        toast.style.transform = "translateY(8px)";
+
+        setTimeout(()=>{
+          toast.remove();
+        },220);
+
+      },2800);
+    }
+
+    /* =========================================================
+       SESSION UI
+    ========================================================== */
+
+    function setupAdminIdentity(){
+
+      const name = firstValue(
+        adminSession?.name,
+        adminSession?.fullName,
+        "Super Admin"
       );
 
-      return [...DEMO_ORDERS];
+      const role = String(
+        firstValue(
+          adminSession?.role,
+          "superadmin"
+        )
+      ).toLowerCase();
+
+      document.getElementById("adminName").textContent = name;
+
+      document.getElementById("adminRole").textContent =
+        role === "superadmin"
+          ? "Super Administrator"
+          : role.charAt(0).toUpperCase() + role.slice(1);
+
+      document.getElementById("adminAvatar").textContent =
+        getInitials(name);
+
     }
 
-    const data =
-      JSON.parse(raw);
+    /* =========================================================
+       NORMALIZE ORDER
+    ========================================================== */
 
-    return Array.isArray(data)
-      ? data
-      : [...DEMO_ORDERS];
+    function normalizeOrder(raw,index){
 
-  }catch(error){
+      const orderId = firstValue(
+        raw.id,
+        raw.orderId,
+        raw.orderID,
+        raw.transactionId,
+        raw.transactionID,
+        raw.reference,
+        `WD-${1000 + index}`
+      );
 
-    console.error(error);
+      const customer = firstValue(
+        raw.customer,
+        raw.customerName,
+        raw.name,
+        raw.fullName,
+        raw.userName,
+        raw.email,
+        "Customer"
+      );
 
-    return [...DEMO_ORDERS];
-  }
-}
+      const email = firstValue(
+        raw.email,
+        raw.customerEmail,
+        raw.customer_email,
+        ""
+      );
 
-function saveOrders(){
+      const phone = firstValue(
+        raw.phone,
+        raw.customerPhone,
+        raw.mobile,
+        raw.customerMobile,
+        ""
+      );
 
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify(orders)
-  );
-}
+      const website = firstValue(
+        raw.website,
+        raw.websiteName,
+        raw.product,
+        raw.productName,
+        raw.template,
+        raw.item,
+        "Website"
+      );
 
-function initials(name){
+      const category = firstValue(
+        raw.category,
+        raw.categoryName,
+        raw.category_name,
+        "General"
+      );
 
-  return String(name || "Customer")
-    .split(" ")
-    .filter(Boolean)
-    .map(word => word[0])
-    .join("")
-    .slice(0,2)
-    .toUpperCase();
-}
+      const amount = normalizeAmount(
+        firstValue(
+          raw.amount,
+          raw.total,
+          raw.price,
+          raw.paidAmount,
+          raw.paid_amount,
+          raw.totalAmount,
+          0
+        )
+      );
 
-function formatDate(date){
+      const paymentStatus = normalizePaymentStatus(
+        firstValue(
+          raw.paymentStatus,
+          raw.payment_status,
+          raw.payment,
+          raw.payment_state,
+          raw.transactionStatus,
+          "pending"
+        )
+      );
 
-  const d = new Date(date);
+      const orderStatus = normalizeOrderStatus(
+        firstValue(
+          raw.orderStatus,
+          raw.order_status,
+          raw.fulfillmentStatus,
+          raw.fulfillment_status,
+          raw.status,
+          "new"
+        )
+      );
 
-  if(Number.isNaN(d.getTime())){
-    return "—";
-  }
+      const paymentMethod = firstValue(
+        raw.paymentMethod,
+        raw.payment_method,
+        raw.method,
+        raw.gateway,
+        raw.type,
+        "Not specified"
+      );
 
-  return d.toLocaleDateString(
-    "en-GB",
-    {
-      day:"2-digit",
-      month:"short",
-      year:"numeric"
+      const paymentId = firstValue(
+        raw.paymentTransactionId,
+        raw.payment_transaction_id,
+        raw.transactionId,
+        raw.transactionID,
+        raw.txnId,
+        raw.txid,
+        raw.reference,
+        ""
+      );
+
+      const date = firstValue(
+        raw.date,
+        raw.createdAt,
+        raw.created_at,
+        raw.timestamp,
+        raw.updatedAt,
+        raw.updated_at,
+        new Date().toISOString()
+      );
+
+      const screenshot = firstValue(
+        raw.paymentScreenshot,
+        raw.payment_screenshot,
+        raw.screenshot,
+        raw.proof,
+        raw.paymentProof,
+        raw.payment_proof,
+        ""
+      );
+
+      const note = firstValue(
+        raw.note,
+        raw.notes,
+        raw.customerNote,
+        raw.customer_note,
+        raw.message,
+        ""
+      );
+
+      const websiteUrl = firstValue(
+        raw.websiteUrl,
+        raw.websiteURL,
+        raw.url,
+        raw.demoUrl,
+        raw.demoURL,
+        raw.liveUrl,
+        raw.liveURL,
+        ""
+      );
+
+      return {
+        ...raw,
+
+        id:String(orderId),
+
+        customer:String(customer),
+
+        email:String(email),
+
+        phone:String(phone),
+
+        website:String(website),
+
+        category:String(category),
+
+        amount,
+
+        paymentStatus,
+
+        orderStatus,
+
+        paymentMethod:String(paymentMethod),
+
+        paymentId:String(paymentId),
+
+        date,
+
+        screenshot:String(screenshot),
+
+        note:String(note),
+
+        websiteUrl:String(websiteUrl)
+      };
     }
-  );
-}
 
-/* =========================
-   TOAST
-========================= */
+    /* =========================================================
+       DEMO ORDERS
+    ========================================================== */
 
-function showToast(
-  title,
-  message
-){
+    function getDemoOrders(){
 
-  $("toastTitle").textContent =
-    title;
+      return [
 
-  $("toastMessage").textContent =
-    message;
+        {
+          id:"WD-1028",
+          customer:"Nusrat Jahan",
+          email:"nusrat@example.com",
+          phone:"01711-123456",
+          website:"Corporate Pro",
+          category:"Business",
+          amount:6490,
+          paymentStatus:"paid",
+          orderStatus:"completed",
+          paymentMethod:"bKash",
+          paymentId:"BKX9A72P",
+          date:"2026-09-28T10:20:00",
+          note:"Need logo and content setup.",
+          screenshot:"",
+          websiteUrl:""
+        },
 
-  $("toast").classList.add("show");
+        {
+          id:"WD-1029",
+          customer:"Rahim Ahmed",
+          email:"rahim@example.com",
+          phone:"01822-445566",
+          website:"Creative Studio",
+          category:"Agency",
+          amount:5490,
+          paymentStatus:"paid",
+          orderStatus:"processing",
+          paymentMethod:"Nagad",
+          paymentId:"NGD-78221",
+          date:"2026-09-29T12:15:00",
+          note:"Please contact before deployment.",
+          screenshot:"",
+          websiteUrl:""
+        },
 
-  clearTimeout(toastTimer);
+        {
+          id:"WD-1030",
+          customer:"Sadia Islam",
+          email:"sadia@example.com",
+          phone:"01933-998877",
+          website:"ShopEasy Store",
+          category:"E-commerce",
+          amount:7990,
+          paymentStatus:"pending",
+          orderStatus:"new",
+          paymentMethod:"bKash",
+          paymentId:"",
+          date:"2026-09-30T09:40:00",
+          note:"Waiting for payment verification.",
+          screenshot:"",
+          websiteUrl:""
+        },
 
-  toastTimer =
-    setTimeout(
-      () => {
-        $("toast").classList.remove("show");
-      },
-      3500
-    );
-}
+        {
+          id:"WD-1031",
+          customer:"Tanvir Hasan",
+          email:"tanvir@example.com",
+          phone:"01644-112233",
+          website:"Tasty Bites",
+          category:"Restaurant",
+          amount:4990,
+          paymentStatus:"paid",
+          orderStatus:"completed",
+          paymentMethod:"Bank Transfer",
+          paymentId:"BANK-88321",
+          date:"2026-09-26T16:30:00",
+          note:"",
+          screenshot:"",
+          websiteUrl:""
+        },
 
-$("toastClose").addEventListener(
-  "click",
-  () => {
-    $("toast").classList.remove("show");
-  }
-);
+        {
+          id:"WD-1032",
+          customer:"Mahi Rahman",
+          email:"mahi@example.com",
+          phone:"01555-778899",
+          website:"Personal Folio",
+          category:"Portfolio",
+          amount:3250,
+          paymentStatus:"pending",
+          orderStatus:"processing",
+          paymentMethod:"bKash",
+          paymentId:"",
+          date:"2026-09-24T11:05:00",
+          note:"Customer requested minor text changes.",
+          screenshot:"",
+          websiteUrl:""
+        },
 
-/* =========================
-   STATS
-========================= */
+        {
+          id:"WD-1033",
+          customer:"Arif Chowdhury",
+          email:"arif@example.com",
+          phone:"01777-554433",
+          website:"Starter Monthly",
+          category:"Monthly",
+          amount:325,
+          paymentStatus:"failed",
+          orderStatus:"cancelled",
+          paymentMethod:"Card Payment",
+          paymentId:"CARD-7712",
+          date:"2026-09-21T18:15:00",
+          note:"Payment failed.",
+          screenshot:"",
+          websiteUrl:""
+        },
 
-function renderStats(){
+        {
+          id:"WD-1034",
+          customer:"Farhana Akter",
+          email:"farhana@example.com",
+          phone:"01888-334455",
+          website:"Biz Launch",
+          category:"Business",
+          amount:5990,
+          paymentStatus:"paid",
+          orderStatus:"processing",
+          paymentMethod:"bKash",
+          paymentId:"BK-99221",
+          date:"2026-09-19T14:20:00",
+          note:"Domain will be provided later.",
+          screenshot:"",
+          websiteUrl:""
+        },
 
-  const total =
-    orders.length;
+        {
+          id:"WD-1035",
+          customer:"Imran Hossain",
+          email:"imran@example.com",
+          phone:"01999-221100",
+          website:"Cafe Corner",
+          category:"Restaurant",
+          amount:4490,
+          paymentStatus:"refunded",
+          orderStatus:"cancelled",
+          paymentMethod:"Nagad",
+          paymentId:"NG-55218",
+          date:"2026-09-15T13:45:00",
+          note:"Customer requested refund.",
+          screenshot:"",
+          websiteUrl:""
+        }
 
-  const pending =
-    orders.filter(
-      order =>
-        order.status === "Pending"
-    ).length;
+      ];
+    }
 
-  const completed =
-    orders.filter(
-      order =>
-        order.status === "Completed"
-    ).length;
+    /* =========================================================
+       LOAD DATA
+    ========================================================== */
 
-  const revenue =
-    orders
-      .filter(
+    function loadData(){
+
+      const storedOrders = readStorage(ORDERS_KEY, []);
+
+      transactions = readStorage(TRANSACTIONS_KEY, []);
+      paymentTransactions = readStorage(
+        PAYMENT_TRANSACTIONS_KEY,
+        []
+      );
+
+      websites = readStorage(WEBSITES_KEY, []);
+      categories = readStorage(CATEGORIES_KEY, []);
+
+      if(storedOrders.length){
+
+        orders = storedOrders.map(normalizeOrder);
+
+      }else{
+
+        /*
+          If no orders exist but transaction data exists,
+          create order records from those transactions.
+        */
+
+        const transactionSource = [
+          ...transactions,
+          ...paymentTransactions
+        ];
+
+        if(transactionSource.length){
+
+          orders = transactionSource.map((item,index)=>{
+            return normalizeOrder(item,index);
+          });
+
+        }else{
+
+          orders = getDemoOrders();
+
+        }
+
+      }
+
+      populatePaymentMethods();
+
+      updateStats();
+
+      applyFilters();
+
+    }
+
+    /* =========================================================
+       PAYMENT METHODS
+    ========================================================== */
+
+    function populatePaymentMethods(){
+
+      const select = document.getElementById("paymentMethodFilter");
+
+      const current = select.value;
+
+      const methods = new Set();
+
+      orders.forEach(order=>{
+        if(order.paymentMethod){
+          methods.add(order.paymentMethod);
+        }
+      });
+
+      const storedMethods = readStorage(
+        "websiteDealsPaymentMethods",
+        []
+      );
+
+      storedMethods.forEach(item=>{
+        const method = firstValue(
+          item.name,
+          item.label,
+          item.method,
+          item.title
+        );
+
+        if(method){
+          methods.add(String(method));
+        }
+      });
+
+      select.innerHTML = `
+        <option value="all">All Methods</option>
+      `;
+
+      [...methods]
+        .sort((a,b)=>a.localeCompare(b))
+        .forEach(method=>{
+          const option = document.createElement("option");
+          option.value = method;
+          option.textContent = method;
+          select.appendChild(option);
+        });
+
+      if(
+        [...select.options].some(
+          option => option.value === current
+        )
+      ){
+        select.value = current;
+      }
+
+    }
+
+    /* =========================================================
+       STATS
+    ========================================================== */
+
+    function updateStats(){
+
+      const total = orders.length;
+
+      const paid = orders.filter(
+        order => order.paymentStatus === "paid"
+      ).length;
+
+      const pending = orders.filter(
+        order => order.paymentStatus === "pending"
+      ).length;
+
+      const cancelled = orders.filter(
         order =>
-          order.status !== "Cancelled"
-      )
-      .reduce(
-        (sum, order) =>
-          sum + Number(order.amount || 0),
-        0
-      );
+          order.orderStatus === "cancelled" ||
+          order.paymentStatus === "failed"
+      ).length;
 
-  $("totalOrders").textContent =
-    total.toLocaleString();
+      const revenue = orders
+        .filter(order => order.paymentStatus === "paid")
+        .reduce(
+          (sum,order)=>sum + normalizeAmount(order.amount),
+          0
+        );
 
-  $("pendingOrders").textContent =
-    pending.toLocaleString();
+      document.getElementById("statTotal").textContent = total;
 
-  $("completedOrders").textContent =
-    completed.toLocaleString();
+      document.getElementById("statPaid").textContent = paid;
 
-  $("orderRevenue").textContent =
-    money(revenue);
-}
+      document.getElementById("statPending").textContent = pending;
 
-/* =========================
-   STATUS CLASS
-========================= */
+      document.getElementById("statCancelled").textContent =
+        cancelled;
 
-function statusClass(status){
+      document.getElementById("statRevenue").textContent =
+        formatMoney(revenue);
 
-  return String(status || "")
-    .toLowerCase();
-}
+    }
 
-/* =========================
-   FILTER
-========================= */
+    /* =========================================================
+       FILTERS
+    ========================================================== */
 
-function applyFilters(){
+    function applyFilters(){
 
-  const search =
-    $("searchInput").value
-      .trim()
-      .toLowerCase();
+      const search =
+        document.getElementById("searchInput")
+          .value
+          .trim()
+          .toLowerCase();
 
-  const status =
-    $("statusFilter").value;
+      const orderStatus =
+        document.getElementById("orderStatusFilter").value;
 
-  const sort =
-    $("sortFilter").value;
+      const paymentStatus =
+        document.getElementById("paymentStatusFilter").value;
 
-  filteredOrders =
-    orders.filter(order => {
+      const paymentMethod =
+        document.getElementById("paymentMethodFilter").value;
 
-      const searchable = [
-        order.id,
-        order.customer,
-        order.email,
-        order.phone,
-        order.website,
-        order.category
-      ]
-      .join(" ")
-      .toLowerCase();
+      const sort =
+        document.getElementById("sortFilter").value;
 
-      const searchMatch =
-        !search ||
-        searchable.includes(search);
+      filteredOrders = orders.filter(order=>{
 
-      const statusMatch =
-        status === "all" ||
-        order.status === status;
+        const searchText = [
+          order.id,
+          order.customer,
+          order.email,
+          order.phone,
+          order.website,
+          order.category,
+          order.paymentMethod,
+          order.paymentId
+        ]
+          .join(" ")
+          .toLowerCase();
 
-      return searchMatch &&
-        statusMatch;
-    });
+        if(
+          search &&
+          !searchText.includes(search)
+        ){
+          return false;
+        }
 
-  filteredOrders.sort(
-    (a,b) => {
+        if(
+          orderStatus !== "all" &&
+          order.orderStatus !== orderStatus
+        ){
+          return false;
+        }
 
-      if(sort === "newest"){
-        return new Date(b.date) -
-               new Date(a.date);
+        if(
+          paymentStatus !== "all" &&
+          order.paymentStatus !== paymentStatus
+        ){
+          return false;
+        }
+
+        if(
+          paymentMethod !== "all" &&
+          order.paymentMethod !== paymentMethod
+        ){
+          return false;
+        }
+
+        return true;
+
+      });
+
+      filteredOrders.sort((a,b)=>{
+
+        if(sort === "oldest"){
+          return getTimestamp(a.date) - getTimestamp(b.date);
+        }
+
+        if(sort === "amount-high"){
+          return b.amount - a.amount;
+        }
+
+        if(sort === "amount-low"){
+          return a.amount - b.amount;
+        }
+
+        if(sort === "customer"){
+          return a.customer.localeCompare(
+            b.customer
+          );
+        }
+
+        return getTimestamp(b.date) - getTimestamp(a.date);
+
+      });
+
+      currentPage = 1;
+
+      renderOrders();
+
+    }
+
+    function getTimestamp(value){
+
+      const date = normalizeDate(value);
+
+      return date
+        ? date.getTime()
+        : 0;
+
+    }
+
+    /* =========================================================
+       RENDER
+    ========================================================== */
+
+    function renderOrders(){
+
+      const start =
+        (currentPage - 1) * PAGE_SIZE;
+
+      const end =
+        start + PAGE_SIZE;
+
+      const pageOrders =
+        filteredOrders.slice(start,end);
+
+      renderDesktopTable(pageOrders);
+
+      renderMobileOrders(pageOrders);
+
+      renderPagination();
+
+      updateSelectionUI();
+
+    }
+
+    /* =========================================================
+       DESKTOP TABLE
+    ========================================================== */
+
+    function renderDesktopTable(pageOrders){
+
+      const tbody =
+        document.getElementById("ordersTableBody");
+
+      if(!pageOrders.length){
+
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="9">
+              <div class="empty">
+                <div class="empty-icon">⌕</div>
+                <h3>No orders found</h3>
+                <p>Try changing your filters or search query.</p>
+              </div>
+            </td>
+          </tr>
+        `;
+
+        return;
       }
 
-      if(sort === "oldest"){
-        return new Date(a.date) -
-               new Date(b.date);
+      tbody.innerHTML =
+        pageOrders.map(order=>{
+
+          return `
+            <tr>
+
+              <td>
+                <input
+                  type="checkbox"
+                  class="check order-check"
+                  data-id="${escapeHTML(order.id)}"
+                >
+              </td>
+
+              <td>
+                <div class="order-id">
+                  ${escapeHTML(order.id)}
+                </div>
+              </td>
+
+              <td>
+
+                <div class="customer">
+
+                  <div class="customer-avatar">
+                    ${escapeHTML(
+                      getInitials(order.customer)
+                    )}
+                  </div>
+
+                  <div class="customer-info">
+
+                    <strong>
+                      ${escapeHTML(order.customer)}
+                    </strong>
+
+                    <span>
+                      ${escapeHTML(
+                        order.email ||
+                        order.phone ||
+                        "No contact"
+                      )}
+                    </span>
+
+                  </div>
+
+                </div>
+
+              </td>
+
+              <td>
+
+                <div class="website-cell">
+
+                  <strong>
+                    ${escapeHTML(order.website)}
+                  </strong>
+
+                  <span>
+                    ${escapeHTML(order.category)}
+                  </span>
+
+                </div>
+
+              </td>
+
+              <td>
+                <div class="amount">
+                  ${formatMoney(order.amount)}
+                </div>
+              </td>
+
+              <td>
+                ${paymentBadge(order.paymentStatus)}
+              </td>
+
+              <td>
+                ${orderBadge(order.orderStatus)}
+              </td>
+
+              <td>
+
+                <div class="date-cell">
+
+                  <strong>
+                    ${escapeHTML(
+                      formatDate(order.date)
+                    )}
+                  </strong>
+
+                  <span>
+                    ${escapeHTML(
+                      formatTime(order.date)
+                    )}
+                  </span>
+
+                </div>
+
+              </td>
+
+              <td>
+
+                <div class="actions">
+
+                  <button
+                    class="icon-btn"
+                    title="View / Edit"
+                    data-action="edit"
+                    data-id="${escapeHTML(order.id)}"
+                  >
+                    ✎
+                  </button>
+
+                  <button
+                    class="icon-btn"
+                    title="View Payment"
+                    data-action="payment"
+                    data-id="${escapeHTML(order.id)}"
+                  >
+                    ৳
+                  </button>
+
+                  <button
+                    class="icon-btn red"
+                    title="Delete"
+                    data-action="delete"
+                    data-id="${escapeHTML(order.id)}"
+                  >
+                    ×
+                  </button>
+
+                </div>
+
+              </td>
+
+            </tr>
+          `;
+
+        }).join("");
+
+    }
+
+    /* =========================================================
+       MOBILE
+    ========================================================== */
+
+    function renderMobileOrders(pageOrders){
+
+      const container =
+        document.getElementById("mobileOrders");
+
+      if(!pageOrders.length){
+
+        container.innerHTML = `
+          <div class="empty">
+            <div class="empty-icon">⌕</div>
+            <h3>No orders found</h3>
+            <p>Try changing your filters or search query.</p>
+          </div>
+        `;
+
+        return;
       }
 
-      if(sort === "highest"){
-        return Number(b.amount || 0) -
-               Number(a.amount || 0);
+      container.innerHTML =
+        pageOrders.map(order=>{
+
+          return `
+            <div class="order-card">
+
+              <div class="order-card-top">
+
+                <div>
+                  <div class="order-card-id">
+                    ${escapeHTML(order.id)}
+                  </div>
+
+                  <div class="order-card-date">
+                    ${escapeHTML(
+                      formatDate(order.date)
+                    )}
+                    ·
+                    ${escapeHTML(
+                      formatTime(order.date)
+                    )}
+                  </div>
+                </div>
+
+                ${orderBadge(order.orderStatus)}
+
+              </div>
+
+              <div class="order-card-main">
+
+                <div>
+                  <div class="mobile-label">
+                    Customer
+                  </div>
+
+                  <div class="mobile-value">
+                    ${escapeHTML(order.customer)}
+                  </div>
+                </div>
+
+                <div>
+                  <div class="mobile-label">
+                    Website
+                  </div>
+
+                  <div class="mobile-value">
+                    ${escapeHTML(order.website)}
+                  </div>
+                </div>
+
+                <div>
+                  <div class="mobile-label">
+                    Amount
+                  </div>
+
+                  <div class="mobile-value">
+                    ${formatMoney(order.amount)}
+                  </div>
+                </div>
+
+                <div>
+                  <div class="mobile-label">
+                    Payment
+                  </div>
+
+                  ${paymentBadge(order.paymentStatus)}
+
+                </div>
+
+              </div>
+
+              <div class="order-card-bottom">
+
+                <div style="font-size:10px;color:#8b9690;">
+                  ${escapeHTML(order.paymentMethod)}
+                </div>
+
+                <div class="actions">
+
+                  <button
+                    class="icon-btn"
+                    data-action="edit"
+                    data-id="${escapeHTML(order.id)}"
+                  >
+                    ✎
+                  </button>
+
+                  <button
+                    class="icon-btn"
+                    data-action="payment"
+                    data-id="${escapeHTML(order.id)}"
+                  >
+                    ৳
+                  </button>
+
+                  <button
+                    class="icon-btn red"
+                    data-action="delete"
+                    data-id="${escapeHTML(order.id)}"
+                  >
+                    ×
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+          `;
+
+        }).join("");
+
+    }
+
+    /* =========================================================
+       BADGES
+    ========================================================== */
+
+    function paymentBadge(status){
+
+      const safeStatus =
+        ["paid","pending","failed","refunded"]
+          .includes(status)
+          ? status
+          : "pending";
+
+      const labels = {
+        paid:"Paid",
+        pending:"Pending",
+        failed:"Failed",
+        refunded:"Refunded"
+      };
+
+      return `
+        <span class="badge ${safeStatus}">
+          <span class="badge-dot"></span>
+          ${labels[safeStatus]}
+        </span>
+      `;
+
+    }
+
+    function orderBadge(status){
+
+      const safeStatus =
+        ["new","processing","completed","cancelled"]
+          .includes(status)
+          ? status
+          : "new";
+
+      const labels = {
+        new:"New",
+        processing:"Processing",
+        completed:"Completed",
+        cancelled:"Cancelled"
+      };
+
+      return `
+        <span class="badge ${safeStatus}">
+          <span class="badge-dot"></span>
+          ${labels[safeStatus]}
+        </span>
+      `;
+
+    }
+
+    /* =========================================================
+       PAGINATION
+    ========================================================== */
+
+    function renderPagination(){
+
+      const total =
+        filteredOrders.length;
+
+      const totalPages =
+        Math.max(
+          1,
+          Math.ceil(total / PAGE_SIZE)
+        );
+
+      if(currentPage > totalPages){
+        currentPage = totalPages;
       }
 
-      if(sort === "lowest"){
-        return Number(a.amount || 0) -
-               Number(b.amount || 0);
-      }
+      const start =
+        total === 0
+          ? 0
+          : ((currentPage - 1) * PAGE_SIZE) + 1;
 
-      if(sort === "az"){
-        return String(a.customer || "")
-          .localeCompare(
-            String(b.customer || "")
+      const end =
+        Math.min(
+          currentPage * PAGE_SIZE,
+          total
+        );
+
+      document.getElementById("pageInfo")
+        .textContent =
+          total
+            ? `Showing ${start}–${end} of ${total} orders`
+            : "Showing 0 orders";
+
+      const buttons =
+        document.getElementById("pageButtons");
+
+      let html = "";
+
+      html += `
+        <button
+          class="page-btn"
+          data-page="${currentPage - 1}"
+          ${currentPage <= 1 ? "disabled" : ""}
+        >
+          ‹
+        </button>
+      `;
+
+      const maxVisible = 5;
+
+      let startPage =
+        Math.max(
+          1,
+          currentPage - 2
+        );
+
+      let endPage =
+        Math.min(
+          totalPages,
+          startPage + maxVisible - 1
+        );
+
+      if(endPage - startPage + 1 < maxVisible){
+        startPage =
+          Math.max(
+            1,
+            endPage - maxVisible + 1
           );
       }
 
-      return 0;
+      for(let i=startPage;i<=endPage;i++){
+
+        html += `
+          <button
+            class="page-btn ${i === currentPage ? "active" : ""}"
+            data-page="${i}"
+          >
+            ${i}
+          </button>
+        `;
+
+      }
+
+      html += `
+        <button
+          class="page-btn"
+          data-page="${currentPage + 1}"
+          ${currentPage >= totalPages ? "disabled" : ""}
+        >
+          ›
+        </button>
+      `;
+
+      buttons.innerHTML = html;
+
     }
-  );
 
-  renderTable();
-}
+    /* =========================================================
+       SELECTION
+    ========================================================== */
 
-/* =========================
-   TABLE
-========================= */
+    function getSelectedIds(){
 
-function renderTable(){
+      return [...document.querySelectorAll(".order-check:checked")]
+        .map(input => input.dataset.id);
 
-  const body =
-    $("ordersBody");
+    }
 
-  body.innerHTML = "";
+    function updateSelectionUI(){
 
-  $("resultCount").textContent =
-    `${filteredOrders.length} ${
-      filteredOrders.length === 1
-        ? "order"
-        : "orders"
-    }`;
+      const selected =
+        getSelectedIds();
 
-  $("emptyState").classList.toggle(
-    "show",
-    filteredOrders.length === 0
-  );
+      document.getElementById("selectedCount")
+        .textContent = selected.length;
 
-  filteredOrders.forEach(order => {
+      document.getElementById("bulkBar")
+        .classList.toggle(
+          "show",
+          selected.length > 0
+        );
 
-    const tr =
-      document.createElement("tr");
+      const checks =
+        [...document.querySelectorAll(".order-check")];
 
-    tr.innerHTML = `
+      const selectAll =
+        document.getElementById("selectAll");
 
-      <td>
-        <div class="order-id">
-          ${escapeHTML(order.id)}
-        </div>
-      </td>
+      selectAll.checked =
+        checks.length > 0 &&
+        checks.every(check=>check.checked);
 
-      <td>
+      selectAll.indeterminate =
+        selected.length > 0 &&
+        selected.length < checks.length;
 
-        <div class="customer">
+    }
 
-          <div class="customer-avatar">
-            ${escapeHTML(initials(order.customer))}
+    function clearSelection(){
+
+      document
+        .querySelectorAll(".order-check")
+        .forEach(check=>{
+          check.checked = false;
+        });
+
+      document.getElementById("selectAll").checked = false;
+
+      updateSelectionUI();
+
+    }
+
+    /* =========================================================
+       FIND ORDER
+    ========================================================== */
+
+    function findOrder(id){
+
+      return orders.find(
+        order => String(order.id) === String(id)
+      );
+
+    }
+
+    /* =========================================================
+       OPEN EDIT MODAL
+    ========================================================== */
+
+    function openOrderModal(id){
+
+      const order = findOrder(id);
+
+      if(!order){
+        showToast("Order not found.","error");
+        return;
+      }
+
+      currentOrderId = order.id;
+
+      document.getElementById("modalTitle").textContent =
+        `Order ${order.id}`;
+
+      document.getElementById("modalSubtitle").textContent =
+        "Review customer, payment and order information.";
+
+      document.getElementById("formOrderId").value =
+        order.id;
+
+      document.getElementById("formDate").value =
+        `${formatDate(order.date)} ${formatTime(order.date)}`;
+
+      document.getElementById("formCustomer").value =
+        order.customer;
+
+      document.getElementById("formEmail").value =
+        order.email;
+
+      document.getElementById("formPhone").value =
+        order.phone;
+
+      document.getElementById("formWebsite").value =
+        order.website;
+
+      document.getElementById("formCategory").value =
+        order.category;
+
+      document.getElementById("formAmount").value =
+        order.amount;
+
+      document.getElementById("formOrderStatus").value =
+        order.orderStatus;
+
+      document.getElementById("formPaymentStatus").value =
+        order.paymentStatus;
+
+      document.getElementById("formPaymentMethod").value =
+        order.paymentMethod;
+
+      document.getElementById("formPaymentId").value =
+        order.paymentId;
+
+      document.getElementById("formNote").value =
+        order.note;
+
+      renderScreenshot(order.screenshot);
+
+      document.getElementById("orderModal")
+        .classList.add("show");
+
+    }
+
+    /* =========================================================
+       PAYMENT VIEW
+    ========================================================== */
+
+    function openPaymentModal(id){
+
+      const order = findOrder(id);
+
+      if(!order){
+        showToast("Order not found.","error");
+        return;
+      }
+
+      currentOrderId = order.id;
+
+      document.getElementById("modalTitle").textContent =
+        `Payment · ${order.id}`;
+
+      document.getElementById("modalSubtitle").textContent =
+        "Payment verification and order information.";
+
+      document.getElementById("formOrderId").value =
+        order.id;
+
+      document.getElementById("formDate").value =
+        `${formatDate(order.date)} ${formatTime(order.date)}`;
+
+      document.getElementById("formCustomer").value =
+        order.customer;
+
+      document.getElementById("formEmail").value =
+        order.email;
+
+      document.getElementById("formPhone").value =
+        order.phone;
+
+      document.getElementById("formWebsite").value =
+        order.website;
+
+      document.getElementById("formCategory").value =
+        order.category;
+
+      document.getElementById("formAmount").value =
+        order.amount;
+
+      document.getElementById("formOrderStatus").value =
+        order.orderStatus;
+
+      document.getElementById("formPaymentStatus").value =
+        order.paymentStatus;
+
+      document.getElementById("formPaymentMethod").value =
+        order.paymentMethod;
+
+      document.getElementById("formPaymentId").value =
+        order.paymentId;
+
+      document.getElementById("formNote").value =
+        order.note;
+
+      renderScreenshot(order.screenshot);
+
+      document.getElementById("orderModal")
+        .classList.add("show");
+
+    }
+
+    function renderScreenshot(source){
+
+      const box =
+        document.getElementById("screenshotBox");
+
+      if(!source){
+
+        box.innerHTML = `
+          <div class="no-screenshot">
+            No payment screenshot available.
           </div>
+        `;
 
-          <div>
+        return;
+      }
 
-            <strong>
-              ${escapeHTML(order.customer || "—")}
-            </strong>
+      const safeSource =
+        String(source).trim();
 
-            <span>
-              ${escapeHTML(order.email || "—")}
-            </span>
+      if(
+        !safeSource.startsWith("http://") &&
+        !safeSource.startsWith("https://") &&
+        !safeSource.startsWith("data:image/")
+      ){
 
+        box.innerHTML = `
+          <div class="no-screenshot">
+            Payment proof is available, but its image source
+            is not a valid image URL.
           </div>
+        `;
 
+        return;
+      }
+
+      box.innerHTML = `
+        <img
+          src="${escapeHTML(safeSource)}"
+          alt="Payment Screenshot"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        >
+
+        <div
+          class="no-screenshot"
+          style="display:none;"
+        >
+          Unable to load payment screenshot.
         </div>
+      `;
 
-      </td>
-
-      <td>
-
-        <div class="website-name">
-          ${escapeHTML(order.website || "—")}
-        </div>
-
-        <div class="website-category">
-          ${escapeHTML(order.category || "—")}
-        </div>
-
-      </td>
-
-      <td>
-        <div class="amount">
-          ${money(order.amount)}
-        </div>
-      </td>
-
-      <td>
-
-        <span class="status ${statusClass(order.status)}">
-
-          <i class="fa-solid fa-circle"></i>
-
-          ${escapeHTML(order.status || "Pending")}
-
-        </span>
-
-      </td>
-
-      <td>
-        <div class="date">
-          ${formatDate(order.date)}
-        </div>
-      </td>
-
-      <td>
-
-        <div class="actions">
-
-          <button
-            class="action"
-            title="View order"
-            onclick="openOrder('${escapeJS(order.id)}')">
-            <i class="fa-regular fa-eye"></i>
-          </button>
-
-          <button
-            class="action"
-            title="Edit status"
-            onclick="openOrder('${escapeJS(order.id)}')">
-            <i class="fa-solid fa-pen"></i>
-          </button>
-
-          <button
-            class="action delete"
-            title="Cancel order"
-            onclick="cancelOrderDirect('${escapeJS(order.id)}')">
-            <i class="fa-solid fa-ban"></i>
-          </button>
-
-        </div>
-
-      </td>
-    `;
-
-    body.appendChild(tr);
-  });
-}
-
-/* =========================
-   HTML ESCAPE
-========================= */
-
-function escapeHTML(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
-
-function escapeJS(value){
-
-  return String(value ?? "")
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'");
-}
-
-/* =========================
-   OPEN ORDER
-========================= */
-
-function openOrder(id){
-
-  const order =
-    orders.find(
-      item =>
-        String(item.id) ===
-        String(id)
-    );
-
-  if(!order){
-    showToast(
-      "Order not found",
-      "The selected order could not be found."
-    );
-    return;
-  }
-
-  selectedOrderId =
-    order.id;
-
-  $("detailOrderId").textContent =
-    order.id || "—";
-
-  $("detailStatus").textContent =
-    order.status || "—";
-
-  $("detailCustomer").textContent =
-    order.customer || "—";
-
-  $("detailEmail").textContent =
-    order.email || "—";
-
-  $("detailPhone").textContent =
-    order.phone || "—";
-
-  $("detailWebsite").textContent =
-    order.website || "—";
-
-  $("detailCategory").textContent =
-    order.category || "—";
-
-  $("detailAmount").textContent =
-    money(order.amount);
-
-  $("detailPayment").textContent =
-    order.paymentMethod || "—";
-
-  $("detailDate").textContent =
-    formatDate(order.date);
-
-  $("detailNote").textContent =
-    order.note || "No customer note.";
-
-  $("detailStatusSelect").value =
-    order.status || "Pending";
-
-  $("cancelOrderButton").disabled =
-    order.status === "Cancelled";
-
-  $("cancelOrderButton").style.opacity =
-    order.status === "Cancelled"
-      ? ".5"
-      : "1";
-
-  $("orderModal").classList.add("show");
-}
-
-window.openOrder =
-  openOrder;
-
-/* =========================
-   CLOSE MODAL
-========================= */
-
-function closeModal(){
-
-  $("orderModal").classList.remove(
-    "show"
-  );
-
-  selectedOrderId =
-    null;
-}
-
-$("modalClose").addEventListener(
-  "click",
-  closeModal
-);
-
-$("closeModalButton").addEventListener(
-  "click",
-  closeModal
-);
-
-$("orderModal").addEventListener(
-  "click",
-  event => {
-
-    if(event.target === $("orderModal")){
-      closeModal();
     }
 
-  }
-);
+    /* =========================================================
+       SAVE ORDER
+    ========================================================== */
 
-/* =========================
-   UPDATE STATUS
-========================= */
+    function saveCurrentOrder(){
 
-$("updateStatusButton").addEventListener(
-  "click",
-  () => {
+      if(!currentOrderId){
+        return;
+      }
 
-    if(!selectedOrderId){
-      return;
-    }
+      const index =
+        orders.findIndex(
+          order =>
+            String(order.id) === String(currentOrderId)
+        );
 
-    const newStatus =
-      $("detailStatusSelect").value;
+      if(index === -1){
+        showToast("Order not found.","error");
+        return;
+      }
 
-    const index =
-      orders.findIndex(
-        order =>
-          String(order.id) ===
-          String(selectedOrderId)
+      const order = orders[index];
+
+      order.customer =
+        document.getElementById("formCustomer").value.trim();
+
+      order.email =
+        document.getElementById("formEmail").value.trim();
+
+      order.phone =
+        document.getElementById("formPhone").value.trim();
+
+      order.website =
+        document.getElementById("formWebsite").value.trim();
+
+      order.category =
+        document.getElementById("formCategory").value.trim();
+
+      order.amount =
+        normalizeAmount(
+          document.getElementById("formAmount").value
+        );
+
+      order.orderStatus =
+        normalizeOrderStatus(
+          document.getElementById("formOrderStatus").value
+        );
+
+      order.paymentStatus =
+        normalizePaymentStatus(
+          document.getElementById("formPaymentStatus").value
+        );
+
+      order.paymentMethod =
+        document.getElementById("formPaymentMethod").value.trim();
+
+      order.paymentId =
+        document.getElementById("formPaymentId").value.trim();
+
+      order.note =
+        document.getElementById("formNote").value.trim();
+
+      writeStorage(
+        ORDERS_KEY,
+        orders
       );
 
-    if(index === -1){
-      return;
-    }
+      syncRelatedTransactions(order);
 
-    orders[index].status =
-      newStatus;
+      updateStats();
 
-    orders[index].updatedAt =
-      new Date().toISOString();
+      populatePaymentMethods();
 
-    saveOrders();
+      applyFilters();
 
-    renderStats();
+      closeModal("orderModal");
 
-    applyFilters();
-
-    $("detailStatus").textContent =
-      newStatus;
-
-    showToast(
-      "Status updated",
-      `Order ${selectedOrderId} is now ${newStatus}.`
-    );
-  }
-);
-
-/* =========================
-   CANCEL DIRECT
-========================= */
-
-function cancelOrderDirect(id){
-
-  const order =
-    orders.find(
-      item =>
-        String(item.id) ===
-        String(id)
-    );
-
-  if(!order){
-    return;
-  }
-
-  if(order.status === "Cancelled"){
-
-    showToast(
-      "Already cancelled",
-      "This order is already cancelled."
-    );
-
-    return;
-  }
-
-  const confirmed =
-    confirm(
-      `Cancel order ${order.id}?`
-    );
-
-  if(!confirmed){
-    return;
-  }
-
-  order.status =
-    "Cancelled";
-
-  order.updatedAt =
-    new Date().toISOString();
-
-  saveOrders();
-
-  renderStats();
-
-  applyFilters();
-
-  showToast(
-    "Order cancelled",
-    `${order.id} has been cancelled.`
-  );
-}
-
-window.cancelOrderDirect =
-  cancelOrderDirect;
-
-/* =========================
-   CANCEL FROM MODAL
-========================= */
-
-$("cancelOrderButton").addEventListener(
-  "click",
-  () => {
-
-    if(!selectedOrderId){
-      return;
-    }
-
-    const order =
-      orders.find(
-        item =>
-          String(item.id) ===
-          String(selectedOrderId)
+      showToast(
+        `${order.id} updated successfully.`
       );
 
-    if(!order){
-      return;
     }
 
-    if(order.status === "Cancelled"){
-      return;
+    /* =========================================================
+       SYNC TRANSACTIONS
+    ========================================================== */
+
+    function syncRelatedTransactions(order){
+
+      const orderId =
+        String(order.id);
+
+      const updateTransaction = transaction => {
+
+        const transactionId =
+          String(
+            firstValue(
+              transaction.id,
+              transaction.orderId,
+              transaction.transactionId,
+              transaction.reference,
+              ""
+            )
+          );
+
+        if(transactionId !== orderId){
+          return transaction;
+        }
+
+        return {
+          ...transaction,
+
+          orderId:order.id,
+
+          amount:order.amount,
+
+          total:order.amount,
+
+          status:order.paymentStatus,
+
+          paymentStatus:order.paymentStatus,
+
+          paymentMethod:order.paymentMethod,
+
+          method:order.paymentMethod,
+
+          customer:order.customer,
+
+          customerName:order.customer,
+
+          email:order.email,
+
+          website:order.website,
+
+          websiteName:order.website,
+
+          category:order.category,
+
+          updatedAt:new Date().toISOString()
+
+        };
+
+      };
+
+      if(transactions.length){
+        transactions =
+          transactions.map(updateTransaction);
+
+        writeStorage(
+          TRANSACTIONS_KEY,
+          transactions
+        );
+      }
+
+      if(paymentTransactions.length){
+
+        paymentTransactions =
+          paymentTransactions.map(updateTransaction);
+
+        writeStorage(
+          PAYMENT_TRANSACTIONS_KEY,
+          paymentTransactions
+        );
+
+      }
+
     }
 
-    const confirmed =
-      confirm(
-        `Cancel order ${order.id}?`
+    /* =========================================================
+       DELETE
+    ========================================================== */
+
+    function requestDelete(id){
+
+      const order = findOrder(id);
+
+      if(!order){
+        showToast("Order not found.","error");
+        return;
+      }
+
+      pendingDeleteId = order.id;
+
+      document.getElementById("deleteOrderText")
+        .textContent =
+          `${order.id} · ${order.customer}`;
+
+      document.getElementById("deleteModal")
+        .classList.add("show");
+
+    }
+
+    function confirmDelete(){
+
+      if(!pendingDeleteId){
+        return;
+      }
+
+      const id = pendingDeleteId;
+
+      orders =
+        orders.filter(
+          order =>
+            String(order.id) !== String(id)
+        );
+
+      writeStorage(
+        ORDERS_KEY,
+        orders
       );
 
-    if(!confirmed){
-      return;
+      pendingDeleteId = null;
+
+      closeModal("deleteModal");
+
+      updateStats();
+
+      populatePaymentMethods();
+
+      applyFilters();
+
+      showToast(
+        `${id} deleted successfully.`
+      );
+
     }
 
-    order.status =
-      "Cancelled";
+    /* =========================================================
+       BULK UPDATE
+    ========================================================== */
 
-    order.updatedAt =
-      new Date().toISOString();
+    function bulkUpdate(status){
 
-    saveOrders();
+      const selected =
+        getSelectedIds();
 
-    renderStats();
+      if(!selected.length){
+        return;
+      }
 
-    applyFilters();
+      let changed = 0;
 
-    $("detailStatus").textContent =
-      "Cancelled";
+      orders.forEach(order=>{
 
-    $("detailStatusSelect").value =
-      "Cancelled";
+        if(
+          selected.includes(
+            String(order.id)
+          )
+        ){
 
-    $("cancelOrderButton").disabled =
-      true;
+          order.orderStatus = status;
 
-    showToast(
-      "Order cancelled",
-      `${order.id} has been cancelled.`
-    );
-  }
-);
+          changed++;
 
-/* =========================
-   SEARCH / FILTER
-========================= */
+        }
 
-$("searchInput").addEventListener(
-  "input",
-  applyFilters
-);
+      });
 
-$("statusFilter").addEventListener(
-  "change",
-  applyFilters
-);
+      writeStorage(
+        ORDERS_KEY,
+        orders
+      );
 
-$("sortFilter").addEventListener(
-  "change",
-  applyFilters
-);
+      clearSelection();
 
-/* =========================
-   REFRESH
-========================= */
+      updateStats();
 
-$("refreshButton").addEventListener(
-  "click",
-  () => {
+      applyFilters();
 
-    orders =
-      getOrders();
+      showToast(
+        `${changed} order${changed > 1 ? "s" : ""} updated.`
+      );
 
-    renderStats();
+    }
 
-    applyFilters();
+    function bulkDelete(){
 
-    showToast(
-      "Orders refreshed",
-      "Latest browser data has been loaded."
-    );
-  }
-);
+      const selected =
+        getSelectedIds();
 
-/* =========================
-   CSV EXPORT
-========================= */
+      if(!selected.length){
+        return;
+      }
 
-$("exportButton").addEventListener(
-  "click",
-  exportCSV
-);
+      if(
+        !confirm(
+          `Delete ${selected.length} selected order${selected.length > 1 ? "s" : ""}?`
+        )
+      ){
+        return;
+      }
 
-function exportCSV(){
+      orders =
+        orders.filter(
+          order =>
+            !selected.includes(
+              String(order.id)
+            )
+        );
 
-  if(!filteredOrders.length){
+      writeStorage(
+        ORDERS_KEY,
+        orders
+      );
 
-    showToast(
-      "Nothing to export",
-      "There are no orders matching the current filters."
-    );
+      clearSelection();
 
-    return;
-  }
+      updateStats();
 
-  const headers = [
-    "Order ID",
-    "Customer",
-    "Email",
-    "Phone",
-    "Website",
-    "Category",
-    "Amount",
-    "Status",
-    "Payment Method",
-    "Date",
-    "Note"
-  ];
+      applyFilters();
 
-  const rows =
-    filteredOrders.map(order => [
-      order.id,
-      order.customer,
-      order.email,
-      order.phone,
-      order.website,
-      order.category,
-      order.amount,
-      order.status,
-      order.paymentMethod,
-      formatDate(order.date),
-      order.note || ""
-    ]);
+      showToast(
+        `${selected.length} order${selected.length > 1 ? "s" : ""} deleted.`
+      );
 
-  const csv =
-    [headers,...rows]
+    }
+
+    /* =========================================================
+       CSV
+    ========================================================== */
+
+    function exportCSV(){
+
+      if(!filteredOrders.length){
+
+        showToast(
+          "There are no orders to export.",
+          "error"
+        );
+
+        return;
+      }
+
+      const headers = [
+        "Order ID",
+        "Customer",
+        "Email",
+        "Phone",
+        "Website",
+        "Category",
+        "Amount",
+        "Payment Status",
+        "Order Status",
+        "Payment Method",
+        "Payment Transaction ID",
+        "Date",
+        "Note"
+      ];
+
+      const rows =
+        filteredOrders.map(order=>[
+          order.id,
+          order.customer,
+          order.email,
+          order.phone,
+          order.website,
+          order.category,
+          order.amount,
+          order.paymentStatus,
+          order.orderStatus,
+          order.paymentMethod,
+          order.paymentId,
+          formatDate(order.date),
+          order.note
+        ]);
+
+      const csv = [
+        headers,
+        ...rows
+      ]
       .map(row =>
-        row.map(csvEscape).join(",")
+        row.map(value=>{
+          const text =
+            String(value ?? "");
+
+          return `"${text.replace(/"/g,'""')}"`;
+        }).join(",")
       )
       .join("\n");
 
-  const blob =
-    new Blob(
-      [csv],
-      {
-        type:"text/csv;charset=utf-8;"
-      }
-    );
+      const blob =
+        new Blob(
+          ["\ufeff" + csv],
+          {
+            type:"text/csv;charset=utf-8;"
+          }
+        );
 
-  const url =
-    URL.createObjectURL(blob);
+      const url =
+        URL.createObjectURL(blob);
 
-  const link =
-    document.createElement("a");
+      const link =
+        document.createElement("a");
 
-  link.href = url;
+      link.href = url;
 
-  link.download =
-    `website-deals-orders-${new Date()
-      .toISOString()
-      .slice(0,10)}.csv`;
+      link.download =
+        `website-deals-orders-${new Date().toISOString().slice(0,10)}.csv`;
 
-  document.body.appendChild(link);
+      document.body.appendChild(link);
 
-  link.click();
+      link.click();
 
-  link.remove();
+      link.remove();
 
-  URL.revokeObjectURL(url);
+      URL.revokeObjectURL(url);
 
-  showToast(
-    "CSV exported",
-    "The filtered orders have been exported."
-  );
-}
-
-function csvEscape(value){
-
-  const text =
-    String(value ?? "");
-
-  if(
-    text.includes(",") ||
-    text.includes('"') ||
-    text.includes("\n")
-  ){
-
-    return `"${text.replace(/"/g,'""')}"`;
-  }
-
-  return text;
-}
-
-/* =========================
-   MOBILE SIDEBAR
-========================= */
-
-$("mobileMenu").addEventListener(
-  "click",
-  () => {
-
-    $("sidebar").classList.toggle(
-      "open"
-    );
-  }
-);
-
-/* =========================
-   LOGOUT
-========================= */
-
-$("logoutButton").addEventListener(
-  "click",
-  () => {
-
-    const confirmed =
-      confirm(
-        "Are you sure you want to logout?"
+      showToast(
+        "Orders exported as CSV."
       );
 
-    if(!confirmed){
-      return;
     }
 
-    sessionStorage.removeItem(
-      "websiteDealsAdminAuth"
-    );
+    /* =========================================================
+       MODAL
+    ========================================================== */
 
-    window.location.href =
-      "login/";
-  }
-);
+    function closeModal(id){
 
-/* =========================
-   ADMIN SESSION
-========================= */
+      document
+        .getElementById(id)
+        .classList.remove("show");
 
-function loadAdminSession(){
-
-  try{
-
-    const raw =
-      sessionStorage.getItem(
-        "websiteDealsAdminAuth"
-      );
-
-    if(!raw){
-      return;
     }
 
-    const session =
-      JSON.parse(raw);
+    /* =========================================================
+       SIDEBAR
+    ========================================================== */
 
-    if(
-      session &&
-      session.authenticated === true
-    ){
+    function openSidebar(){
 
-      $("adminName").textContent =
-        session.name || "Admin";
+      document
+        .getElementById("sidebar")
+        .classList.add("open");
 
-      $("adminRole").textContent =
-        session.role === "superadmin"
-          ? "Control Center"
-          : "Administrator";
+      document
+        .getElementById("sidebarOverlay")
+        .classList.add("show");
 
-      const name =
-        session.name || "Admin";
-
-      $("adminAvatar").textContent =
-        name
-          .split(" ")
-          .map(part => part[0])
-          .join("")
-          .slice(0,2)
-          .toUpperCase();
     }
 
-  }catch(error){
+    function closeSidebar(){
 
-    console.error(
-      "Session error:",
-      error
-    );
-  }
-}
+      document
+        .getElementById("sidebar")
+        .classList.remove("open");
 
-/* =========================
-   ESCAPE KEY
-========================= */
+      document
+        .getElementById("sidebarOverlay")
+        .classList.remove("show");
 
-document.addEventListener(
-  "keydown",
-  event => {
-
-    if(
-      event.key === "Escape" &&
-      $("orderModal").classList.contains("show")
-    ){
-
-      closeModal();
     }
 
-  }
-);
+    /* =========================================================
+       RESET FILTERS
+    ========================================================== */
 
-/* =========================
-   INIT
-========================= */
+    function resetFilters(){
 
-loadAdminSession();
+      document.getElementById("searchInput").value = "";
 
-orders =
-  getOrders();
+      document.getElementById("orderStatusFilter").value =
+        "all";
 
-renderStats();
+      document.getElementById("paymentStatusFilter").value =
+        "all";
 
-applyFilters();
+      document.getElementById("paymentMethodFilter").value =
+        "all";
 
-</script>
+      document.getElementById("sortFilter").value =
+        "newest";
+
+      applyFilters();
+
+    }
+
+    /* =========================================================
+       EVENT LISTENERS
+    ========================================================== */
+
+    document.addEventListener("DOMContentLoaded",()=>{
+
+      setupAdminIdentity();
+
+      loadData();
+
+      /* Search */
+
+      document.getElementById("searchInput")
+        .addEventListener("input",()=>{
+          applyFilters();
+        });
+
+      /* Filters */
+
+      [
+        "orderStatusFilter",
+        "paymentStatusFilter",
+        "paymentMethodFilter",
+        "sortFilter"
+      ].forEach(id=>{
+
+        document.getElementById(id)
+          .addEventListener("change",()=>{
+            applyFilters();
+          });
+
+      });
+
+      /* Reset */
+
+      document.getElementById("resetFiltersBtn")
+        .addEventListener("click",()=>{
+          resetFilters();
+        });
+
+      /* Refresh */
+
+      document.getElementById("refreshBtn")
+        .addEventListener("click",()=>{
+
+          loadData();
+
+          showToast(
+            "Orders refreshed."
+          );
+
+        });
+
+      /* Export */
+
+      document.getElementById("exportBtn")
+        .addEventListener("click",()=>{
+          exportCSV();
+        });
+
+      /* Print */
+
+      document.getElementById("printBtn")
+        .addEventListener("click",()=>{
+          window.print();
+        });
+
+      /* Mobile sidebar */
+
+      document.getElementById("mobileMenu")
+        .addEventListener("click",()=>{
+          openSidebar();
+        });
+
+      document.getElementById("sidebarOverlay")
+        .addEventListener("click",()=>{
+          closeSidebar();
+        });
+
+      /* Logout */
+
+      document.getElementById("logoutBtn")
+        .addEventListener("click",()=>{
+
+          sessionStorage.removeItem(
+            AUTH_KEY
+          );
+
+          window.location.href =
+            "login/";
+
+        });
+
+      /* Select all */
+
+      document.getElementById("selectAll")
+        .addEventListener("change",(event)=>{
+
+          document
+            .querySelectorAll(".order-check")
+            .forEach(check=>{
+              check.checked =
+                event.target.checked;
+            });
+
+          updateSelectionUI();
+
+        });
+
+      /* Bulk buttons */
+
+      document.getElementById("bulkProcessing")
+        .addEventListener("click",()=>{
+          bulkUpdate("processing");
+        });
+
+      document.getElementById("bulkCompleted")
+        .addEventListener("click",()=>{
+          bulkUpdate("completed");
+        });
+
+      document.getElementById("bulkCancelled")
+        .addEventListener("click",()=>{
+          bulkUpdate("cancelled");
+        });
+
+      document.getElementById("bulkDelete")
+        .addEventListener("click",()=>{
+          bulkDelete();
+        });
+
+      /* Save */
+
+      document.getElementById("saveOrderBtn")
+        .addEventListener("click",()=>{
+          saveCurrentOrder();
+        });
+
+      /* Delete from modal */
+
+      document.getElementById("modalDeleteBtn")
+        .addEventListener("click",()=>{
+
+          if(currentOrderId){
+
+            closeModal("orderModal");
+
+            requestDelete(
+              currentOrderId
+            );
+
+          }
+
+        });
+
+      /* Confirm delete */
+
+      document.getElementById("confirmDeleteBtn")
+        .addEventListener("click",()=>{
+          confirmDelete();
+        });
+
+      /* Close buttons */
+
+      document.addEventListener("click",(event)=>{
+
+        const closeTarget =
+          event.target.closest("[data-close]");
+
+        if(closeTarget){
+
+          closeModal(
+            closeTarget.dataset.close
+          );
+
+          return;
+        }
+
+        const actionButton =
+          event.target.closest("[data-action]");
+
+        if(actionButton){
+
+          const action =
+            actionButton.dataset.action;
+
+          const id =
+            actionButton.dataset.id;
+
+          if(action === "edit"){
+            openOrderModal(id);
+          }
+
+          if(action === "payment"){
+            openPaymentModal(id);
+          }
+
+          if(action === "delete"){
+            requestDelete(id);
+          }
+
+        }
+
+        const pageButton =
+          event.target.closest("[data-page]");
+
+        if(
+          pageButton &&
+          pageButton.classList.contains("page-btn") &&
+          !pageButton.disabled
+        ){
+
+          const page =
+            Number(pageButton.dataset.page);
+
+          if(page > 0){
+
+            currentPage = page;
+
+            renderOrders();
+
+            window.scrollTo({
+              top:0,
+              behavior:"smooth"
+            });
+
+          }
+
+        }
+
+      });
+
+      /* Checkboxes */
+
+      document.addEventListener("change",(event)=>{
+
+        if(
+          event.target.classList.contains("order-check")
+        ){
+
+          updateSelectionUI();
+
+        }
+
+      });
+
+      /* Close modal when clicking outside */
+
+      document
+        .querySelectorAll(".modal-backdrop")
+        .forEach(backdrop=>{
+
+          backdrop.addEventListener("click",(event)=>{
+
+            if(event.target === backdrop){
+              backdrop.classList.remove("show");
+            }
+
+          });
+
+        });
+
+      /* Escape */
+
+      document.addEventListener("keydown",(event)=>{
+
+        if(event.key !== "Escape"){
+          return;
+        }
+
+        document
+          .querySelectorAll(".modal-backdrop.show")
+          .forEach(modal=>{
+            modal.classList.remove("show");
+          });
+
+        closeSidebar();
+
+      });
+
+      /* Close mobile sidebar after navigation */
+
+      document
+        .querySelectorAll(".nav-item")
+        .forEach(item=>{
+          item.addEventListener("click",()=>{
+            closeSidebar();
+          });
+        });
+
+    });
+
+  </script>
 
 </body>
 </html>
