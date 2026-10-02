@@ -1,4470 +1,4520 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Orders Management | Website Deals Admin</title>
-  <meta name="description" content="Manage Website Deals orders, payments, customers and order status.">
-  <meta name="theme-color" content="#07110b">
-
-  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-  <link rel="icon" type="image/png" href="../logo.png">
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --green:#18a957;
-      --green-dark:#0d7f3e;
-      --green-soft:#eaf8f0;
-
-      --dark:#07110b;
-      --sidebar:#101713;
-
-      --bg:#f6f8f7;
-      --surface:#ffffff;
-      --surface-2:#f9fbfa;
-
-      --text:#142019;
-      --muted:#738079;
-      --border:#e3eae6;
-
-      --blue:#2563eb;
-      --blue-soft:#eef4ff;
-
-      --orange:#d97706;
-      --orange-soft:#fff7e8;
-
-      --red:#dc2626;
-      --red-soft:#fff0f0;
-
-      --purple:#7c3aed;
-      --purple-soft:#f4efff;
-
-      --shadow:0 14px 40px rgba(12,32,21,.07);
-      --shadow-sm:0 6px 20px rgba(12,32,21,.055);
-
-      --radius:20px;
-    }
-
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
-
-    body{
-      font-family:"DM Sans",sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      min-height:100vh;
-    }
-
-    button,
-    input,
-    select,
-    textarea{
-      font:inherit;
-    }
-
-    button{
-      cursor:pointer;
-    }
-
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    img{
-      max-width:100%;
-      display:block;
-    }
-
-    /* =========================
-       APP
-    ========================= */
-
-    .app{
-      display:flex;
-      min-height:100vh;
-    }
-
-    .sidebar{
-      width:270px;
-      background:var(--sidebar);
-      color:#fff;
-      position:fixed;
-      inset:0 auto 0 0;
-      z-index:1000;
-      display:flex;
-      flex-direction:column;
-      border-right:1px solid rgba(255,255,255,.06);
-    }
-
-    .sidebar-top{
-      padding:22px 18px 18px;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:4px 7px 22px;
-    }
-
-    .brand-logo{
-      width:42px;
-      height:42px;
-      border-radius:12px;
-      object-fit:cover;
-      background:#fff;
-      padding:3px;
-    }
-
-    .brand-copy strong{
-      display:block;
-      font-family:"Manrope",sans-serif;
-      font-size:17px;
-      line-height:1.1;
-    }
-
-    .brand-copy span{
-      color:#91a097;
-      font-size:11px;
-      margin-top:4px;
-      display:block;
-    }
-
-    .nav-scroll{
-      flex:1;
-      overflow:auto;
-      padding:4px 12px 18px;
-    }
-
-    .nav-label{
-      color:#68776e;
-      font-size:10px;
-      font-weight:700;
-      letter-spacing:.14em;
-      text-transform:uppercase;
-      padding:18px 11px 8px;
-    }
-
-    .nav-item{
-      display:flex;
-      align-items:center;
-      gap:11px;
-      padding:11px 12px;
-      border-radius:12px;
-      color:#aebbb3;
-      font-size:13px;
-      font-weight:600;
-      margin:2px 0;
-      transition:.2s ease;
-    }
-
-    .nav-item:hover{
-      color:#fff;
-      background:rgba(255,255,255,.055);
-    }
-
-    .nav-item.active{
-      background:var(--green);
-      color:#fff;
-      box-shadow:0 8px 22px rgba(24,169,87,.2);
-    }
-
-    .nav-icon{
-      width:20px;
-      text-align:center;
-      font-size:16px;
-      flex:0 0 20px;
-    }
-
-    .sidebar-bottom{
-      padding:14px;
-      border-top:1px solid rgba(255,255,255,.07);
-    }
-
-    .admin-mini{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:10px;
-      border-radius:14px;
-      background:rgba(255,255,255,.045);
-      margin-bottom:10px;
-    }
-
-    .admin-avatar{
-      width:36px;
-      height:36px;
-      border-radius:50%;
-      background:var(--green);
-      display:grid;
-      place-items:center;
-      font-size:12px;
-      font-weight:800;
-      flex:0 0 36px;
-    }
-
-    .admin-mini-text{
-      min-width:0;
-      flex:1;
-    }
-
-    .admin-mini-text strong{
-      display:block;
-      color:#fff;
-      font-size:12px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .admin-mini-text span{
-      display:block;
-      color:#7e8c84;
-      font-size:10px;
-      margin-top:2px;
-    }
-
-    .logout-btn{
-      width:100%;
-      border:0;
-      background:rgba(220,38,38,.1);
-      color:#ff9b9b;
-      padding:10px 12px;
-      border-radius:11px;
-      font-weight:700;
-      font-size:12px;
-    }
-
-    .logout-btn:hover{
-      background:rgba(220,38,38,.17);
-    }
-
-    /* =========================
-       MAIN
-    ========================= */
-
-    .main{
-      margin-left:270px;
-      width:calc(100% - 270px);
-      min-width:0;
-    }
-
-    .topbar{
-      height:76px;
-      background:rgba(255,255,255,.94);
-      backdrop-filter:blur(16px);
-      border-bottom:1px solid var(--border);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:0 30px;
-      position:sticky;
-      top:0;
-      z-index:500;
-    }
-
-    .topbar-left{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-
-    .mobile-menu{
-      display:none;
-      width:40px;
-      height:40px;
-      border:1px solid var(--border);
-      border-radius:11px;
-      background:#fff;
-      font-size:19px;
-    }
-
-    .page-title{
-      font-family:"Manrope",sans-serif;
-      font-size:20px;
-      font-weight:800;
-      letter-spacing:-.03em;
-    }
-
-    .topbar-right{
-      display:flex;
-      align-items:center;
-      gap:9px;
-    }
-
-    .top-btn{
-      border:1px solid var(--border);
-      background:#fff;
-      color:var(--text);
-      height:40px;
-      padding:0 13px;
-      border-radius:11px;
-      font-size:12px;
-      font-weight:700;
-      display:inline-flex;
-      align-items:center;
-      gap:7px;
-      transition:.2s ease;
-    }
-
-    .top-btn:hover{
-      border-color:#cbd8d1;
-      transform:translateY(-1px);
-    }
-
-    .top-btn.primary{
-      background:var(--dark);
-      color:#fff;
-      border-color:var(--dark);
-    }
-
-    .content{
-      padding:28px 30px 45px;
-      max-width:1800px;
-      margin:0 auto;
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero{
-      background:
-        radial-gradient(circle at 90% 15%, rgba(24,169,87,.18), transparent 32%),
-        linear-gradient(135deg,#07110b,#102118);
-      border-radius:26px;
-      padding:28px;
-      color:#fff;
-      position:relative;
-      overflow:hidden;
-      margin-bottom:22px;
-    }
-
-    .hero:after{
-      content:"";
-      position:absolute;
-      width:240px;
-      height:240px;
-      right:-90px;
-      bottom:-120px;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:50%;
-    }
-
-    .hero-content{
-      position:relative;
-      z-index:2;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:7px;
-      background:rgba(255,255,255,.08);
-      border:1px solid rgba(255,255,255,.08);
-      color:#b9f4ce;
-      padding:7px 10px;
-      border-radius:999px;
-      font-size:10px;
-      font-weight:800;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      margin-bottom:12px;
-    }
-
-    .eyebrow-dot{
-      width:6px;
-      height:6px;
-      border-radius:50%;
-      background:#53db86;
-    }
-
-    .hero h1{
-      font-family:"Manrope",sans-serif;
-      font-size:30px;
-      letter-spacing:-.045em;
-      line-height:1.1;
-      margin-bottom:8px;
-    }
-
-    .hero p{
-      max-width:650px;
-      color:#a9b8b0;
-      font-size:13px;
-      line-height:1.7;
-    }
-
-    /* =========================
-       STATS
-    ========================= */
-
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(5,1fr);
-      gap:14px;
-      margin-bottom:20px;
-    }
-
-    .stat-card{
-      background:var(--surface);
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:18px;
-      box-shadow:var(--shadow-sm);
-      min-width:0;
-    }
-
-    .stat-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:8px;
-    }
-
-    .stat-label{
-      color:var(--muted);
-      font-size:11px;
-      font-weight:700;
-    }
-
-    .stat-icon{
-      width:34px;
-      height:34px;
-      border-radius:10px;
-      display:grid;
-      place-items:center;
-      background:var(--green-soft);
-      color:var(--green-dark);
-      font-size:15px;
-      flex:0 0 34px;
-    }
-
-    .stat-value{
-      font-family:"Manrope",sans-serif;
-      font-size:25px;
-      font-weight:800;
-      margin-top:12px;
-      letter-spacing:-.04em;
-    }
-
-    .stat-meta{
-      margin-top:4px;
-      color:#8a958f;
-      font-size:10px;
-    }
-
-    /* =========================
-       TOOLBAR
-    ========================= */
-
-    .panel{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:20px;
-      box-shadow:var(--shadow-sm);
-      overflow:hidden;
-    }
-
-    .toolbar{
-      padding:17px;
-      display:flex;
-      align-items:center;
-      gap:9px;
-      flex-wrap:wrap;
-      border-bottom:1px solid var(--border);
-      background:var(--surface-2);
-    }
-
-    .search-box{
-      flex:1 1 230px;
-      min-width:190px;
-      position:relative;
-    }
-
-    .search-box span{
-      position:absolute;
-      left:12px;
-      top:50%;
-      transform:translateY(-50%);
-      color:#8b9891;
-      font-size:14px;
-      pointer-events:none;
-    }
-
-    .field{
-      height:40px;
-      width:100%;
-      border:1px solid var(--border);
-      background:#fff;
-      color:var(--text);
-      border-radius:11px;
-      outline:none;
-      padding:0 12px;
-      font-size:12px;
-      transition:.2s ease;
-    }
-
-    .search-box .field{
-      padding-left:35px;
-    }
-
-    .field:focus{
-      border-color:rgba(24,169,87,.55);
-      box-shadow:0 0 0 3px rgba(24,169,87,.08);
-    }
-
-    select.field{
-      min-width:145px;
-    }
-
-    .toolbar-btn{
-      height:40px;
-      border:1px solid var(--border);
-      background:#fff;
-      color:var(--text);
-      border-radius:11px;
-      padding:0 13px;
-      font-size:12px;
-      font-weight:700;
-      white-space:nowrap;
-    }
-
-    .toolbar-btn:hover{
-      border-color:#c9d7cf;
-    }
-
-    .toolbar-btn.green{
-      background:var(--green);
-      color:#fff;
-      border-color:var(--green);
-    }
-
-    .toolbar-btn.danger{
-      background:var(--red-soft);
-      color:var(--red);
-      border-color:#ffd2d2;
-    }
-
-    /* =========================
-       BULK BAR
-    ========================= */
-
-    .bulk-bar{
-      display:none;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:11px 17px;
-      background:#effaf4;
-      border-bottom:1px solid #d4efdf;
-    }
-
-    .bulk-bar.show{
-      display:flex;
-    }
-
-    .bulk-info{
-      font-size:12px;
-      font-weight:700;
-      color:var(--green-dark);
-    }
-
-    .bulk-actions{
-      display:flex;
-      gap:7px;
-      flex-wrap:wrap;
-    }
-
-    .small-btn{
-      border:1px solid var(--border);
-      background:#fff;
-      color:var(--text);
-      border-radius:9px;
-      padding:7px 10px;
-      font-size:11px;
-      font-weight:700;
-    }
-
-    .small-btn.green{
-      color:var(--green-dark);
-      border-color:#bfe6cf;
-      background:#fff;
-    }
-
-    .small-btn.red{
-      color:var(--red);
-      border-color:#ffd1d1;
-      background:#fff;
-    }
-
-    /* =========================
-       TABLE
-    ========================= */
-
-    .table-wrap{
-      width:100%;
-      overflow-x:auto;
-    }
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:1050px;
-    }
-
-    th{
-      background:#fbfcfc;
-      color:#849089;
-      font-size:10px;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.07em;
-      text-align:left;
-      padding:13px 14px;
-      border-bottom:1px solid var(--border);
-      white-space:nowrap;
-    }
-
-    td{
-      padding:14px;
-      border-bottom:1px solid #edf1ef;
-      vertical-align:middle;
-      font-size:12px;
-    }
-
-    tbody tr{
-      transition:.15s ease;
-    }
-
-    tbody tr:hover{
-      background:#fbfdfc;
-    }
-
-    .check{
-      width:17px;
-      height:17px;
-      accent-color:var(--green);
-      cursor:pointer;
-    }
-
-    .order-id{
-      font-weight:800;
-      color:var(--green-dark);
-      font-size:12px;
-    }
-
-    .customer{
-      display:flex;
-      align-items:center;
-      gap:9px;
-      min-width:180px;
-    }
-
-    .customer-avatar{
-      width:34px;
-      height:34px;
-      border-radius:11px;
-      background:#eaf8f0;
-      color:var(--green-dark);
-      display:grid;
-      place-items:center;
-      font-size:11px;
-      font-weight:800;
-      flex:0 0 34px;
-    }
-
-    .customer-info strong{
-      display:block;
-      font-size:12px;
-      line-height:1.25;
-    }
-
-    .customer-info span{
-      display:block;
-      color:#87928c;
-      font-size:10px;
-      margin-top:3px;
-      max-width:155px;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-
-    .website-cell strong{
-      display:block;
-      font-size:12px;
-      max-width:170px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .website-cell span{
-      display:block;
-      margin-top:3px;
-      color:#8b9690;
-      font-size:10px;
-    }
-
-    .amount{
-      font-family:"Manrope",sans-serif;
-      font-weight:800;
-      white-space:nowrap;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:5px;
-      border-radius:999px;
-      padding:6px 8px;
-      font-size:9px;
-      font-weight:800;
-      white-space:nowrap;
-    }
-
-    .badge-dot{
-      width:5px;
-      height:5px;
-      border-radius:50%;
-      background:currentColor;
-    }
-
-    .badge.paid{
-      background:var(--green-soft);
-      color:var(--green-dark);
-    }
-
-    .badge.pending{
-      background:var(--orange-soft);
-      color:var(--orange);
-    }
-
-    .badge.failed,
-    .badge.cancelled{
-      background:var(--red-soft);
-      color:var(--red);
-    }
-
-    .badge.refunded{
-      background:var(--purple-soft);
-      color:var(--purple);
-    }
-
-    .badge.new{
-      background:var(--blue-soft);
-      color:var(--blue);
-    }
-
-    .badge.processing{
-      background:#eef8ff;
-      color:#0369a1;
-    }
-
-    .badge.completed{
-      background:var(--green-soft);
-      color:var(--green-dark);
-    }
-
-    .date-cell{
-      white-space:nowrap;
-    }
-
-    .date-cell strong{
-      display:block;
-      font-size:11px;
-    }
-
-    .date-cell span{
-      color:#8b9690;
-      font-size:10px;
-    }
-
-    .actions{
-      display:flex;
-      align-items:center;
-      gap:5px;
-    }
-
-    .icon-btn{
-      width:31px;
-      height:31px;
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:9px;
-      display:grid;
-      place-items:center;
-      color:#5d6963;
-      font-size:12px;
-    }
-
-    .icon-btn:hover{
-      border-color:#bfd0c6;
-      color:var(--green-dark);
-      background:#f8fbf9;
-    }
-
-    .icon-btn.red:hover{
-      color:var(--red);
-      border-color:#ffc9c9;
-      background:#fff8f8;
-    }
-
-    .empty{
-      padding:65px 20px;
-      text-align:center;
-    }
-
-    .empty-icon{
-      width:54px;
-      height:54px;
-      border-radius:16px;
-      background:#eff5f1;
-      display:grid;
-      place-items:center;
-      margin:0 auto 13px;
-      font-size:23px;
-    }
-
-    .empty h3{
-      font-family:"Manrope",sans-serif;
-      font-size:16px;
-      margin-bottom:5px;
-    }
-
-    .empty p{
-      color:var(--muted);
-      font-size:11px;
-    }
-
-    /* =========================
-       MOBILE CARDS
-    ========================= */
-
-    .mobile-orders{
-      display:none;
-    }
-
-    .order-card{
-      padding:15px;
-      border-bottom:1px solid var(--border);
-    }
-
-    .order-card:last-child{
-      border-bottom:0;
-    }
-
-    .order-card-top{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:flex-start;
-    }
-
-    .order-card-id{
-      color:var(--green-dark);
-      font-weight:800;
-      font-size:12px;
-    }
-
-    .order-card-date{
-      color:#8b9690;
-      font-size:10px;
-      margin-top:4px;
-    }
-
-    .order-card-main{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-      margin-top:15px;
-    }
-
-    .mobile-label{
-      color:#8b9690;
-      font-size:9px;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      font-weight:800;
-      margin-bottom:4px;
-    }
-
-    .mobile-value{
-      font-size:12px;
-      font-weight:700;
-    }
-
-    .order-card-bottom{
-      margin-top:14px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-    }
-
-    /* =========================
-       PAGINATION
-    ========================= */
-
-    .pagination{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:14px 17px;
-      border-top:1px solid var(--border);
-      background:#fbfcfc;
-    }
-
-    .page-info{
-      color:#7d8982;
-      font-size:11px;
-    }
-
-    .page-buttons{
-      display:flex;
-      align-items:center;
-      gap:5px;
-    }
-
-    .page-btn{
-      min-width:31px;
-      height:31px;
-      padding:0 8px;
-      border:1px solid var(--border);
-      border-radius:9px;
-      background:#fff;
-      color:#5d6963;
-      font-size:11px;
-      font-weight:700;
-    }
-
-    .page-btn.active{
-      background:var(--green);
-      border-color:var(--green);
-      color:#fff;
-    }
-
-    .page-btn:disabled{
-      opacity:.45;
-      cursor:not-allowed;
-    }
-
-    /* =========================
-       MODALS
-    ========================= */
-
-    .modal-backdrop{
-      position:fixed;
-      inset:0;
-      background:rgba(4,10,7,.58);
-      backdrop-filter:blur(5px);
-      z-index:2000;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-    }
-
-    .modal-backdrop.show{
-      display:flex;
-    }
-
-    .modal{
-      width:min(760px,100%);
-      max-height:calc(100vh - 40px);
-      overflow:auto;
-      background:#fff;
-      border-radius:23px;
-      box-shadow:0 30px 90px rgba(0,0,0,.22);
-    }
-
-    .modal.small{
-      width:min(460px,100%);
-    }
-
-    .modal-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:15px;
-      padding:21px 22px;
-      border-bottom:1px solid var(--border);
-      position:sticky;
-      top:0;
-      background:#fff;
-      z-index:3;
-    }
-
-    .modal-head h2{
-      font-family:"Manrope",sans-serif;
-      font-size:18px;
-      letter-spacing:-.03em;
-    }
-
-    .modal-head p{
-      color:var(--muted);
-      font-size:11px;
-      margin-top:4px;
-    }
-
-    .close-btn{
-      width:34px;
-      height:34px;
-      border:1px solid var(--border);
-      border-radius:10px;
-      background:#fff;
-      color:#647069;
-      font-size:17px;
-      flex:0 0 34px;
-    }
-
-    .modal-body{
-      padding:22px;
-    }
-
-    .form-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:14px;
-    }
-
-    .form-group{
-      min-width:0;
-    }
-
-    .form-group.full{
-      grid-column:1/-1;
-    }
-
-    .form-label{
-      display:block;
-      font-size:11px;
-      font-weight:800;
-      margin-bottom:6px;
-      color:#4f5c55;
-    }
-
-    textarea.field{
-      height:100px;
-      resize:vertical;
-      padding:11px 12px;
-    }
-
-    .detail-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-    }
-
-    .detail-box{
-      padding:13px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      background:var(--surface-2);
-    }
-
-    .detail-box.full{
-      grid-column:1/-1;
-    }
-
-    .detail-label{
-      color:#8b9690;
-      font-size:9px;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      font-weight:800;
-      margin-bottom:5px;
-    }
-
-    .detail-value{
-      font-size:12px;
-      font-weight:700;
-      line-height:1.5;
-      word-break:break-word;
-    }
-
-    .screenshot-box{
-      border:1px dashed #cad6cf;
-      border-radius:15px;
-      padding:12px;
-      background:#fbfcfc;
-    }
-
-    .screenshot-box img{
-      max-height:300px;
-      width:auto;
-      max-width:100%;
-      margin:auto;
-      border-radius:10px;
-      object-fit:contain;
-    }
-
-    .no-screenshot{
-      text-align:center;
-      color:#8a958f;
-      font-size:11px;
-      padding:30px 10px;
-    }
-
-    .modal-foot{
-      display:flex;
-      justify-content:flex-end;
-      gap:8px;
-      padding:16px 22px;
-      border-top:1px solid var(--border);
-      background:#fbfcfc;
-      position:sticky;
-      bottom:0;
-      z-index:3;
-    }
-
-    .modal-btn{
-      min-height:40px;
-      border:1px solid var(--border);
-      background:#fff;
-      color:var(--text);
-      border-radius:11px;
-      padding:0 15px;
-      font-size:12px;
-      font-weight:800;
-    }
-
-    .modal-btn.primary{
-      background:var(--green);
-      border-color:var(--green);
-      color:#fff;
-    }
-
-    .modal-btn.danger{
-      background:var(--red);
-      border-color:var(--red);
-      color:#fff;
-    }
-
-    /* =========================
-       TOAST
-    ========================= */
-
-    .toast-wrap{
-      position:fixed;
-      right:22px;
-      bottom:22px;
-      z-index:5000;
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      pointer-events:none;
-    }
-
-    .toast{
-      min-width:250px;
-      max-width:360px;
-      background:#102118;
-      color:#fff;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:13px;
-      padding:12px 14px;
-      box-shadow:0 18px 40px rgba(0,0,0,.2);
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-size:11px;
-      font-weight:700;
-      animation:toastIn .25s ease;
-    }
-
-    .toast.success .toast-icon{
-      background:#1da85a;
-    }
-
-    .toast.error .toast-icon{
-      background:#dc2626;
-    }
-
-    .toast-icon{
-      width:24px;
-      height:24px;
-      border-radius:8px;
-      display:grid;
-      place-items:center;
-      flex:0 0 24px;
-    }
-
-    @keyframes toastIn{
-      from{
-        opacity:0;
-        transform:translateY(8px);
-      }
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-    }
-
-    /* =========================
-       SIDEBAR MOBILE
-    ========================= */
-
-    .sidebar-overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.45);
-      z-index:900;
-      display:none;
-    }
-
-    .sidebar-overlay.show{
-      display:block;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media(max-width:1250px){
-      .stats{
-        grid-template-columns:repeat(3,1fr);
-      }
-    }
-
-    @media(max-width:900px){
-      .sidebar{
-        transform:translateX(-100%);
-        transition:.25s ease;
-      }
-
-      .sidebar.open{
-        transform:translateX(0);
-      }
-
-      .main{
-        margin-left:0;
-        width:100%;
-      }
-
-      .mobile-menu{
-        display:grid;
-        place-items:center;
-      }
-
-      .topbar{
-        padding:0 16px;
-      }
-
-      .content{
-        padding:20px 16px 35px;
-      }
-
-      .topbar-right .market-btn{
-        display:none;
-      }
-
-      .stats{
-        grid-template-columns:repeat(2,1fr);
-      }
-    }
-
-    @media(max-width:650px){
-      .topbar{
-        height:68px;
-      }
-
-      .page-title{
-        font-size:17px;
-      }
-
-      .top-btn.refresh-btn{
-        width:40px;
-        padding:0;
-        justify-content:center;
-        font-size:0;
-      }
-
-      .top-btn.refresh-btn:first-letter{
-        font-size:15px;
-      }
-
-      .hero{
-        padding:22px;
-        border-radius:20px;
-      }
-
-      .hero h1{
-        font-size:24px;
-      }
-
-      .stats{
-        grid-template-columns:1fr 1fr;
-        gap:9px;
-      }
-
-      .stat-card{
-        padding:14px;
-        border-radius:15px;
-      }
-
-      .stat-value{
-        font-size:21px;
-      }
-
-      .toolbar{
-        padding:12px;
-      }
-
-      .search-box{
-        flex-basis:100%;
-      }
-
-      .toolbar select.field{
-        flex:1;
-        min-width:0;
-      }
-
-      .toolbar-btn{
-        flex:1;
-      }
-
-      .table-wrap{
-        display:none;
-      }
-
-      .mobile-orders{
-        display:block;
-      }
-
-      .pagination{
-        padding:12px;
-      }
-
-      .page-info{
-        font-size:10px;
-      }
-
-      .form-grid,
-      .detail-grid{
-        grid-template-columns:1fr;
-      }
-
-      .form-group.full,
-      .detail-box.full{
-        grid-column:auto;
-      }
-
-      .modal-backdrop{
-        padding:10px;
-      }
-
-      .modal{
-        max-height:calc(100vh - 20px);
-        border-radius:18px;
-      }
-
-      .modal-body{
-        padding:16px;
-      }
-
-      .modal-head{
-        padding:17px;
-      }
-
-      .modal-foot{
-        padding:13px 17px;
-      }
-
-      .toast-wrap{
-        left:12px;
-        right:12px;
-        bottom:12px;
-      }
-
-      .toast{
-        min-width:0;
-        width:100%;
-      }
-    }
-
-    @media(max-width:430px){
-      .stats{
-        grid-template-columns:1fr;
-      }
-
-      .order-card-main{
-        grid-template-columns:1fr;
-      }
-
-      .topbar-right .top-btn:not(.refresh-btn){
-        display:none;
-      }
-    }
-
-    /* =========================
-       PRINT
-    ========================= */
-
-    @media print{
-      .sidebar,
-      .topbar,
-      .hero,
-      .toolbar,
-      .bulk-bar,
-      .pagination,
-      .actions,
-      .toast-wrap,
-      .sidebar-overlay{
-        display:none !important;
-      }
-
-      .main{
-        margin-left:0;
-        width:100%;
-      }
-
-      .content{
-        padding:0;
-      }
-
-      .panel{
-        box-shadow:none;
-        border:0;
-      }
-
-      table{
-        min-width:0;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Customers | Website Deals Admin</title>
+<meta name="description" content="Website Deals Admin Customer Management">
+<meta name="theme-color" content="#07110b">
+
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" type="image/png" href="../logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --green:#18a957;
+  --green-dark:#118044;
+  --green-soft:#eaf8f0;
+  --dark:#07110b;
+  --sidebar:#101713;
+  --sidebar-soft:#17221b;
+  --white:#fff;
+  --surface:#f6f8f7;
+  --surface-2:#f1f5f2;
+  --border:#e2e9e5;
+  --text:#142019;
+  --muted:#738079;
+  --danger:#dc3545;
+  --danger-soft:#fff0f1;
+  --warning:#c98500;
+  --warning-soft:#fff7e6;
+  --blue:#2563eb;
+  --blue-soft:#eff6ff;
+  --shadow:0 18px 50px rgba(12,30,19,.08);
+  --shadow-sm:0 8px 24px rgba(12,30,19,.06);
+  --radius:20px;
+  --radius-sm:14px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:"DM Sans",sans-serif;
+  background:var(--surface);
+  color:var(--text);
+  min-height:100vh;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+img{
+  max-width:100%;
+  display:block;
+}
+
+.app{
+  min-height:100vh;
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+  position:fixed;
+  inset:0 auto 0 0;
+  width:270px;
+  background:var(--sidebar);
+  color:#fff;
+  z-index:1000;
+  display:flex;
+  flex-direction:column;
+  padding:22px 16px;
+  overflow-y:auto;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:4px 8px 24px;
+}
+
+.brand-logo{
+  width:44px;
+  height:44px;
+  border-radius:13px;
+  background:#fff;
+  padding:5px;
+  object-fit:contain;
+}
+
+.brand-text strong{
+  display:block;
+  font-family:"Manrope",sans-serif;
+  font-size:17px;
+  font-weight:800;
+}
+
+.brand-text span{
+  display:block;
+  margin-top:2px;
+  color:#8d9a92;
+  font-size:11px;
+}
+
+.nav-title{
+  color:#68766e;
+  text-transform:uppercase;
+  letter-spacing:.11em;
+  font-size:10px;
+  font-weight:800;
+  padding:16px 12px 8px;
+}
+
+.nav{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+
+.nav a{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  min-height:44px;
+  padding:0 12px;
+  border-radius:12px;
+  color:#aeb9b2;
+  font-size:13px;
+  font-weight:600;
+  transition:.2s ease;
+}
+
+.nav a:hover{
+  background:var(--sidebar-soft);
+  color:#fff;
+}
+
+.nav a.active{
+  background:rgba(24,169,87,.16);
+  color:#fff;
+}
+
+.nav-icon{
+  width:19px;
+  height:19px;
+  display:grid;
+  place-items:center;
+  flex:none;
+}
+
+.nav-icon svg{
+  width:18px;
+  height:18px;
+  stroke:currentColor;
+}
+
+.sidebar-bottom{
+  margin-top:auto;
+  padding-top:18px;
+}
+
+.admin-mini{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px;
+  border:1px solid rgba(255,255,255,.08);
+  background:rgba(255,255,255,.03);
+  border-radius:14px;
+}
+
+.avatar{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  background:var(--green);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-weight:800;
+  font-size:13px;
+  flex:none;
+}
+
+.admin-mini-info{
+  min-width:0;
+}
+
+.admin-mini-info strong{
+  display:block;
+  font-size:12px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.admin-mini-info span{
+  display:block;
+  margin-top:2px;
+  color:#7f8c84;
+  font-size:10px;
+}
+
+.logout-btn{
+  width:100%;
+  margin-top:9px;
+  border:0;
+  background:transparent;
+  color:#9ba79f;
+  padding:10px 12px;
+  text-align:left;
+  border-radius:11px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.logout-btn:hover{
+  background:rgba(220,53,69,.1);
+  color:#ff8b96;
+}
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+  margin-left:270px;
+  min-height:100vh;
+}
+
+.topbar{
+  height:76px;
+  background:rgba(255,255,255,.92);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 34px;
+  position:sticky;
+  top:0;
+  z-index:500;
+  backdrop-filter:blur(16px);
+}
+
+.topbar-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.mobile-menu{
+  display:none;
+  width:40px;
+  height:40px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:12px;
+}
+
+.mobile-menu svg{
+  width:20px;
+  stroke:var(--text);
+}
+
+.breadcrumb{
+  color:var(--muted);
+  font-size:12px;
+}
+
+.breadcrumb strong{
+  color:var(--text);
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.icon-btn,
+.outline-btn,
+.primary-btn{
+  border-radius:11px;
+  min-height:40px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  padding:0 14px;
+  font-size:12px;
+  font-weight:700;
+  transition:.2s ease;
+}
+
+.icon-btn{
+  width:40px;
+  padding:0;
+  background:#fff;
+  border:1px solid var(--border);
+  color:var(--text);
+}
+
+.icon-btn:hover,
+.outline-btn:hover{
+  border-color:#cbd7d0;
+  background:var(--surface);
+}
+
+.outline-btn{
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--text);
+}
+
+.primary-btn{
+  border:1px solid var(--green);
+  background:var(--green);
+  color:#fff;
+  box-shadow:0 7px 18px rgba(24,169,87,.2);
+}
+
+.primary-btn:hover{
+  background:var(--green-dark);
+  border-color:var(--green-dark);
+  transform:translateY(-1px);
+}
+
+.danger-btn{
+  color:var(--danger);
+}
+
+.marketplace-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  color:var(--green-dark);
+  font-size:12px;
+  font-weight:800;
+  padding:0 6px;
+}
+
+/* =========================
+   PAGE
+========================= */
+
+.page{
+  padding:30px 34px 50px;
+  max-width:1700px;
+  margin:auto;
+}
+
+.hero{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:25px;
+  margin-bottom:24px;
+}
+
+.hero-copy{
+  max-width:760px;
+}
+
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:var(--green-soft);
+  color:var(--green-dark);
+  font-size:10px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.08em;
+  margin-bottom:11px;
+}
+
+.eyebrow-dot{
+  width:6px;
+  height:6px;
+  background:var(--green);
+  border-radius:50%;
+}
+
+.hero h1{
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(27px,3vw,40px);
+  line-height:1.08;
+  letter-spacing:-.04em;
+  margin-bottom:9px;
+}
+
+.hero p{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.7;
+}
+
+.hero-actions{
+  display:flex;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:14px;
+  margin-bottom:22px;
+}
+
+.stat-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px;
+  box-shadow:var(--shadow-sm);
+}
+
+.stat-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:700;
+}
+
+.stat-icon{
+  width:34px;
+  height:34px;
+  border-radius:11px;
+  background:var(--green-soft);
+  color:var(--green-dark);
+  display:grid;
+  place-items:center;
+}
+
+.stat-icon svg{
+  width:17px;
+  height:17px;
+  stroke:currentColor;
+}
+
+.stat-value{
+  font-family:"Manrope",sans-serif;
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:-.03em;
+  margin-top:11px;
+}
+
+.stat-note{
+  color:#8a948e;
+  font-size:10px;
+  margin-top:5px;
+}
+
+/* =========================
+   PANEL
+========================= */
+
+.panel{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:20px;
+  box-shadow:var(--shadow-sm);
+  overflow:hidden;
+}
+
+.panel-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:20px 20px 16px;
+}
+
+.panel-title strong{
+  display:block;
+  font-family:"Manrope",sans-serif;
+  font-size:15px;
+}
+
+.panel-title span{
+  display:block;
+  margin-top:4px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+/* =========================
+   FILTERS
+========================= */
+
+.filters{
+  display:grid;
+  grid-template-columns:minmax(180px,1.6fr) repeat(3,minmax(140px,.8fr)) minmax(160px,.9fr);
+  gap:9px;
+  padding:0 20px 16px;
+}
+
+.field{
+  position:relative;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--text);
+  outline:none;
+  border-radius:11px;
+  padding:0 12px;
+  min-height:42px;
+  font-size:12px;
+  transition:.2s ease;
+}
+
+.field textarea{
+  padding:11px 12px;
+  min-height:100px;
+  resize:vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:var(--green);
+  box-shadow:0 0 0 3px rgba(24,169,87,.09);
+}
+
+.search-field input{
+  padding-left:38px;
+}
+
+.search-icon{
+  position:absolute;
+  left:13px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#87928c;
+  pointer-events:none;
+}
+
+.search-icon svg{
+  width:16px;
+  height:16px;
+  stroke:currentColor;
+}
+
+/* =========================
+   BULK BAR
+========================= */
+
+.bulk-bar{
+  display:none;
+  align-items:center;
+  gap:9px;
+  padding:11px 20px;
+  background:#f8fbf9;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+}
+
+.bulk-bar.show{
+  display:flex;
+}
+
+.selected-count{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:700;
+  margin-right:auto;
+}
+
+.small-btn{
+  min-height:34px;
+  border-radius:9px;
+  border:1px solid var(--border);
+  background:#fff;
+  padding:0 10px;
+  color:var(--text);
+  font-size:11px;
+  font-weight:700;
+}
+
+.small-btn:hover{
+  background:var(--surface);
+}
+
+.small-btn.green{
+  color:var(--green-dark);
+  border-color:#bfe7cf;
+  background:var(--green-soft);
+}
+
+.small-btn.red{
+  color:var(--danger);
+  border-color:#f3c5ca;
+  background:var(--danger-soft);
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:1000px;
+}
+
+thead th{
+  background:#fbfcfb;
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  color:#77837c;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  text-align:left;
+  padding:12px 14px;
+  font-weight:800;
+  white-space:nowrap;
+}
+
+tbody td{
+  padding:14px;
+  border-bottom:1px solid #edf1ee;
+  font-size:12px;
+  vertical-align:middle;
+}
+
+tbody tr:hover{
+  background:#fcfdfc;
+}
+
+.check{
+  width:16px;
+  height:16px;
+  accent-color:var(--green);
+  cursor:pointer;
+}
+
+.customer-cell{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:190px;
+}
+
+.customer-avatar{
+  width:39px;
+  height:39px;
+  border-radius:12px;
+  background:var(--green-soft);
+  color:var(--green-dark);
+  display:grid;
+  place-items:center;
+  font-size:12px;
+  font-weight:800;
+  flex:none;
+  overflow:hidden;
+}
+
+.customer-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.customer-info strong{
+  display:block;
+  font-size:12px;
+  font-weight:800;
+}
+
+.customer-info span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
+}
+
+.contact-cell span{
+  display:block;
+}
+
+.contact-cell small{
+  display:block;
+  color:var(--muted);
+  margin-top:3px;
+  font-size:10px;
+}
+
+.money{
+  font-weight:800;
+}
+
+.muted{
+  color:var(--muted);
+}
+
+.status{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:5px 8px;
+  border-radius:999px;
+  font-size:9px;
+  font-weight:800;
+  text-transform:capitalize;
+}
+
+.status::before{
+  content:"";
+  width:5px;
+  height:5px;
+  border-radius:50%;
+  background:currentColor;
+}
+
+.status.active{
+  background:var(--green-soft);
+  color:var(--green-dark);
+}
+
+.status.inactive{
+  background:#f1f3f2;
+  color:#77817b;
+}
+
+.status.suspended{
+  background:var(--danger-soft);
+  color:#c62f3e;
+}
+
+.actions{
+  display:flex;
+  gap:5px;
+}
+
+.action-btn{
+  width:32px;
+  height:32px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:#fff;
+  color:#65726b;
+}
+
+.action-btn:hover{
+  background:var(--surface);
+  color:var(--text);
+}
+
+.action-btn.danger:hover{
+  color:var(--danger);
+  background:var(--danger-soft);
+  border-color:#f2c8cd;
+}
+
+.action-btn svg{
+  width:15px;
+  height:15px;
+  stroke:currentColor;
+}
+
+/* =========================
+   MOBILE CUSTOMER CARDS
+========================= */
+
+.mobile-list{
+  display:none;
+}
+
+.customer-card{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+  background:#fff;
+}
+
+.customer-card + .customer-card{
+  margin-top:10px;
+}
+
+.customer-card-top{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+}
+
+.customer-card-top .check{
+  margin-top:3px;
+}
+
+.customer-card-info{
+  min-width:0;
+  flex:1;
+}
+
+.customer-card-name{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.customer-card-name strong{
+  font-size:13px;
+}
+
+.customer-card-email{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:3px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.customer-card-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  margin-top:14px;
+}
+
+.mini-stat{
+  background:var(--surface);
+  border-radius:11px;
+  padding:9px;
+}
+
+.mini-stat span{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+}
+
+.mini-stat strong{
+  display:block;
+  font-size:11px;
+  margin-top:3px;
+}
+
+.customer-card-bottom{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  margin-top:12px;
+  padding-top:11px;
+  border-top:1px solid var(--border);
+}
+
+.customer-card-date{
+  color:var(--muted);
+  font-size:9px;
+}
+
+/* =========================
+   PAGINATION
+========================= */
+
+.pagination{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:15px 20px;
+}
+
+.page-info{
+  color:var(--muted);
+  font-size:11px;
+}
+
+.page-buttons{
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.page-btn{
+  min-width:32px;
+  height:32px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  background:#fff;
+  color:var(--text);
+  font-size:11px;
+  font-weight:700;
+}
+
+.page-btn:hover{
+  background:var(--surface);
+}
+
+.page-btn.active{
+  background:var(--green);
+  color:#fff;
+  border-color:var(--green);
+}
+
+.page-btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty{
+  text-align:center;
+  padding:55px 20px;
+  color:var(--muted);
+}
+
+.empty-icon{
+  width:54px;
+  height:54px;
+  margin:0 auto 12px;
+  border-radius:16px;
+  background:var(--green-soft);
+  color:var(--green-dark);
+  display:grid;
+  place-items:center;
+}
+
+.empty-icon svg{
+  width:24px;
+}
+
+.empty strong{
+  display:block;
+  color:var(--text);
+  font-size:14px;
+  margin-bottom:5px;
+}
+
+.empty span{
+  font-size:11px;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-backdrop{
+  position:fixed;
+  inset:0;
+  background:rgba(5,12,8,.58);
+  backdrop-filter:blur(5px);
+  z-index:2000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal-backdrop.show{
+  display:flex;
+}
+
+.modal{
+  width:min(850px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:22px;
+  box-shadow:0 30px 90px rgba(0,0,0,.22);
+}
+
+.modal.small{
+  width:min(460px,100%);
+}
+
+.modal-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:15px;
+  padding:22px 22px 15px;
+  border-bottom:1px solid var(--border);
+}
+
+.modal-head h2{
+  font-family:"Manrope",sans-serif;
+  font-size:18px;
+  letter-spacing:-.025em;
+}
+
+.modal-head p{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:4px;
+}
+
+.close-btn{
+  width:34px;
+  height:34px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:10px;
+  display:grid;
+  place-items:center;
+  color:#69756f;
+}
+
+.close-btn:hover{
+  background:var(--surface);
+}
+
+.modal-body{
+  padding:20px 22px;
+}
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.form-group{
+  min-width:0;
+}
+
+.form-group.full{
+  grid-column:1/-1;
+}
+
+.form-label{
+  display:block;
+  color:#59665f;
+  font-size:10px;
+  font-weight:800;
+  margin-bottom:6px;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+
+.form-control{
+  width:100%;
+  min-height:43px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  outline:none;
+  padding:0 12px;
+  font-size:12px;
+  color:var(--text);
+  background:#fff;
+}
+
+textarea.form-control{
+  padding:11px 12px;
+  min-height:90px;
+  resize:vertical;
+}
+
+.form-control:focus{
+  border-color:var(--green);
+  box-shadow:0 0 0 3px rgba(24,169,87,.09);
+}
+
+.customer-summary{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.summary-box{
+  padding:13px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  background:var(--surface);
+}
+
+.summary-box span{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+}
+
+.summary-box strong{
+  display:block;
+  font-family:"Manrope",sans-serif;
+  font-size:17px;
+  margin-top:5px;
+}
+
+.history{
+  margin-top:22px;
+}
+
+.history-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+
+.history-head strong{
+  font-family:"Manrope",sans-serif;
+  font-size:13px;
+}
+
+.history-list{
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+}
+
+.history-row{
+  display:grid;
+  grid-template-columns:1fr 1fr 110px 100px;
+  gap:10px;
+  padding:11px 12px;
+  border-bottom:1px solid var(--border);
+  font-size:10px;
+  align-items:center;
+}
+
+.history-row:last-child{
+  border-bottom:0;
+}
+
+.history-row.head{
+  background:var(--surface);
+  color:var(--muted);
+  font-weight:800;
+  text-transform:uppercase;
+  font-size:8px;
+}
+
+.modal-foot{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:8px;
+  padding:15px 22px 20px;
+  border-top:1px solid var(--border);
+}
+
+/* =========================
+   DELETE MODAL
+========================= */
+
+.confirm-icon{
+  width:54px;
+  height:54px;
+  border-radius:16px;
+  background:var(--danger-soft);
+  color:var(--danger);
+  display:grid;
+  place-items:center;
+  margin-bottom:14px;
+}
+
+.confirm-icon svg{
+  width:25px;
+}
+
+.confirm-text h3{
+  font-family:"Manrope",sans-serif;
+  font-size:18px;
+}
+
+.confirm-text p{
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.6;
+  margin-top:7px;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast-wrap{
+  position:fixed;
+  right:22px;
+  bottom:22px;
+  z-index:5000;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  pointer-events:none;
+}
+
+.toast{
+  min-width:270px;
+  max-width:390px;
+  background:#102018;
+  color:#fff;
+  border-radius:13px;
+  padding:12px 14px;
+  box-shadow:0 16px 40px rgba(0,0,0,.2);
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  animation:toastIn .25s ease;
+}
+
+.toast.success{
+  border-left:4px solid var(--green);
+}
+
+.toast.error{
+  border-left:4px solid var(--danger);
+}
+
+.toast strong{
+  display:block;
+  font-size:11px;
+}
+
+.toast span{
+  display:block;
+  color:#b7c3bc;
+  font-size:10px;
+  margin-top:2px;
+}
+
+@keyframes toastIn{
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* =========================
+   OVERLAY
+========================= */
+
+.overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.4);
+  z-index:900;
+}
+
+.overlay.show{
+  display:block;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1250px){
+  .stats{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+
+  .filters{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+
+  .search-field{
+    grid-column:1/-1;
+  }
+}
+
+@media(max-width:900px){
+  .sidebar{
+    transform:translateX(-100%);
+    transition:.25s ease;
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .main{
+    margin-left:0;
+  }
+
+  .topbar{
+    padding:0 18px;
+  }
+
+  .mobile-menu{
+    display:grid;
+    place-items:center;
+  }
+
+  .marketplace-btn{
+    display:none;
+  }
+
+  .page{
+    padding:22px 18px 40px;
+  }
+
+  .hero{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .hero-actions{
+    width:100%;
+  }
+}
+
+@media(max-width:700px){
+  .topbar{
+    height:68px;
+  }
+
+  .top-actions .outline-btn{
+    display:none;
+  }
+
+  .page{
+    padding:18px 13px 35px;
+  }
+
+  .stats{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:9px;
+  }
+
+  .stat-card{
+    padding:14px;
+  }
+
+  .stat-value{
+    font-size:21px;
+  }
+
+  .stat-card:last-child{
+    grid-column:1/-1;
+  }
+
+  .panel-head{
+    padding:17px 14px 13px;
+  }
+
+  .filters{
+    grid-template-columns:1fr 1fr;
+    padding:0 14px 14px;
+  }
+
+  .search-field{
+    grid-column:1/-1;
+  }
+
+  .bulk-bar{
+    padding:10px 14px;
+    overflow-x:auto;
+  }
+
+  .bulk-bar .small-btn{
+    white-space:nowrap;
+  }
+
+  .table-wrap{
+    display:none;
+  }
+
+  .mobile-list{
+    display:block;
+    padding:0 14px 14px;
+  }
+
+  .pagination{
+    padding:12px 14px;
+  }
+
+  .page-info{
+    font-size:9px;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .form-group.full{
+    grid-column:auto;
+  }
+
+  .modal-backdrop{
+    padding:10px;
+  }
+
+  .modal{
+    max-height:94vh;
+    border-radius:18px;
+  }
+
+  .modal-head,
+  .modal-body,
+  .modal-foot{
+    padding-left:16px;
+    padding-right:16px;
+  }
+
+  .customer-summary{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .history-row{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .history-row.head{
+    display:none;
+  }
+
+  .history-row > div:nth-child(3),
+  .history-row > div:nth-child(4){
+    font-size:9px;
+  }
+
+  .modal-foot{
+    flex-wrap:wrap;
+  }
+
+  .modal-foot button{
+    flex:1;
+  }
+}
+
+@media(max-width:460px){
+  .stats{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .filters{
+    grid-template-columns:1fr;
+  }
+
+  .search-field{
+    grid-column:auto;
+  }
+
+  .hero h1{
+    font-size:28px;
+  }
+
+  .hero-actions .primary-btn,
+  .hero-actions .outline-btn{
+    flex:1;
+  }
+
+  .customer-summary{
+    gap:6px;
+  }
+
+  .summary-box{
+    padding:10px 8px;
+  }
+
+  .summary-box strong{
+    font-size:14px;
+  }
+}
+
+/* =========================
+   PRINT
+========================= */
+
+@media print{
+  body{
+    background:#fff;
+  }
+
+  .sidebar,
+  .topbar,
+  .hero-actions,
+  .filters,
+  .bulk-bar,
+  .pagination,
+  .actions,
+  .mobile-list,
+  .modal-backdrop,
+  .toast-wrap{
+    display:none!important;
+  }
+
+  .main{
+    margin:0;
+  }
+
+  .page{
+    padding:0;
+  }
+
+  .panel,
+  .stat-card{
+    box-shadow:none;
+  }
+
+  .stats{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .table-wrap{
+    display:block!important;
+  }
+
+  table{
+    min-width:0;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <div class="app">
+<div class="app">
 
-    <!-- =========================
-         SIDEBAR
-    ========================== -->
-    <aside class="sidebar" id="sidebar">
+  <!-- =========================
+       SIDEBAR
+  ========================== -->
+  <aside class="sidebar" id="sidebar">
 
-      <div class="sidebar-top">
-
-        <a href="dashboard.html" class="brand">
-          <img src="../logo.png" alt="Website Deals" class="brand-logo">
-          <div class="brand-copy">
-            <strong>Website Deals</strong>
-            <span>Admin Control Center</span>
-          </div>
-        </a>
-
+    <div class="brand">
+      <img src="../logo.png" class="brand-logo" alt="Website Deals">
+      <div class="brand-text">
+        <strong>Website Deals</strong>
+        <span>Admin Control Center</span>
       </div>
+    </div>
 
-      <div class="nav-scroll">
+    <div class="nav-title">Marketplace</div>
 
-        <div class="nav-label">Marketplace</div>
+    <nav class="nav">
 
-        <a href="dashboard.html" class="nav-item">
-          <span class="nav-icon">⌂</span>
-          <span>Dashboard</span>
-        </a>
+      <a href="dashboard.html">
+        <span class="nav-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+            <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+          </svg>
+        </span>
+        Dashboard
+      </a>
 
-        <a href="websites.html" class="nav-item">
-          <span class="nav-icon">▣</span>
-          <span>Websites</span>
-        </a>
+      <a href="websites.html">
+        <span class="nav-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+            <rect x="3" y="4" width="18" height="14" rx="2"></rect>
+            <path d="M8 21h8M12 18v3"></path>
+          </svg>
+        </span>
+        Websites
+      </a>
 
-        <a href="categories.html" class="nav-item">
-          <span class="nav-icon">◫</span>
-          <span>Categories</span>
-        </a>
+      <a href="categories.html">
+        <span class="nav-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+            <path d="M4 5h16M4 12h16M4 19h16"></path>
+            <circle cx="8" cy="5" r="2"></circle>
+            <circle cx="16" cy="12" r="2"></circle>
+            <circle cx="10" cy="19" r="2"></circle>
+          </svg>
+        </span>
+        Categories
+      </a>
 
-        <a href="orders.html" class="nav-item active">
-          <span class="nav-icon">▤</span>
-          <span>Orders</span>
-        </a>
+      <a href="orders.html">
+        <span class="nav-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+            <path d="M6 3h12l2 4v14H4V7l2-4Z"></path>
+            <path d="M4 7h16M9 11h6M9 15h6"></path>
+          </svg>
+        </span>
+        Orders
+      </a>
 
-        <a href="payments.html" class="nav-item">
-          <span class="nav-icon">৳</span>
-          <span>Payments</span>
-        </a>
+      <a href="payments.html">
+        <span class="nav-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <path d="M3 10h18"></path>
+          </svg>
+        </span>
+        Payments
+      </a>
 
-        <a href="customers.html" class="nav-item">
-          <span class="nav-icon">♙</span>
-          <span>Customers</span>
-        </a>
+      <a href="customers.html" class="active">
+        <span class="nav-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+            <circle cx="9" cy="8" r="3"></circle>
+            <path d="M3 20c.7-3.3 2.7-5 6-5s5.3 1.7 6 5"></path>
+            <circle cx="17" cy="9" r="2.2"></circle>
+            <path d="M15.2 15.5c2.6.2 4.2 1.7 4.8 4.5"></path>
+          </svg>
+        </span>
+        Customers
+      </a>
 
-        <a href="newsletter.html" class="nav-item">
-          <span class="nav-icon">✉</span>
-          <span>Newsletter</span>
-        </a>
+      <a href="newsletter.html">
+        <span class="nav-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+            <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+            <path d="m4 7 8 6 8-6"></path>
+          </svg>
+        </span>
+        Newsletter
+      </a>
 
-        <div class="nav-label">Reports</div>
+    </nav>
 
-        <a href="reports.html" class="nav-item">
-          <span class="nav-icon">▥</span>
-          <span>Reports</span>
-        </a>
+    <div class="nav-title">Reports</div>
 
-        <a href="monthly-report.html" class="nav-item">
-          <span class="nav-icon">◷</span>
-          <span>Monthly Report</span>
-        </a>
+    <nav class="nav">
 
-        <div class="nav-label">Restricted Controls</div>
+      <a href="reports.html">
+        <span class="nav-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+            <path d="M4 19V5M4 19h17"></path>
+            <path d="m7 15 4-4 3 2 6-7"></path>
+          </svg>
+        </span>
+        Reports
+      </a>
 
-        <a href="admins.html" class="nav-item">
-          <span class="nav-icon">♟</span>
-          <span>Admin Management</span>
-        </a>
+      <a href="monthly-report.html">
+        <span class="nav-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+            <rect x="3" y="4" width="18" height="17" rx="2"></rect>
+            <path d="M7 2v4M17 2v4M3 9h18M8 13h3M13 13h3M8 17h3"></path>
+          </svg>
+        </span>
+        Monthly Report
+      </a>
 
-        <a href="settings.html" class="nav-item">
-          <span class="nav-icon">⚙</span>
-          <span>System Settings</span>
-        </a>
+    </nav>
 
-      </div>
+    <div class="nav-title">Restricted Controls</div>
 
-      <div class="sidebar-bottom">
+    <nav class="nav">
 
-        <div class="admin-mini">
-          <div class="admin-avatar" id="adminAvatar">SA</div>
+      <a href="admins.html">
+        <span class="nav-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+            <circle cx="12" cy="8" r="3"></circle>
+            <path d="M5 21c.8-4.2 3.1-6.3 7-6.3s6.2 2.1 7 6.3"></path>
+          </svg>
+        </span>
+        Admin Management
+      </a>
 
-          <div class="admin-mini-text">
-            <strong id="adminName">Super Admin</strong>
-            <span id="adminRole">Super Administrator</span>
-          </div>
+      <a href="settings.html">
+        <span class="nav-icon">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+            <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"></path>
+            <circle cx="12" cy="12" r="4"></circle>
+          </svg>
+        </span>
+        System Settings
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <div class="admin-mini">
+        <div class="avatar" id="sidebarAvatar">SA</div>
+        <div class="admin-mini-info">
+          <strong id="sidebarAdminName">Super Admin</strong>
+          <span id="sidebarAdminRole">Super Administrator</span>
         </div>
+      </div>
 
-        <button class="logout-btn" id="logoutBtn">
-          ↪ Sign Out
+      <button class="logout-btn" id="logoutBtn">
+        ↪ &nbsp; Sign out
+      </button>
+
+    </div>
+
+  </aside>
+
+  <div class="overlay" id="overlay"></div>
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+  <main class="main">
+
+    <header class="topbar">
+
+      <div class="topbar-left">
+
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+            <path d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
         </button>
 
+        <div class="breadcrumb">
+          Admin / <strong>Customers</strong>
+        </div>
+
       </div>
 
-    </aside>
+      <div class="top-actions">
 
-    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        <button class="icon-btn" id="refreshBtn" title="Refresh">
+          <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+            <path d="M20 11a8 8 0 0 0-14.8-4M4 5v5h5"></path>
+            <path d="M4 13a8 8 0 0 0 14.8 4M20 19v-5h-5"></path>
+          </svg>
+        </button>
 
-    <!-- =========================
-         MAIN
-    ========================== -->
-    <main class="main">
+        <a class="marketplace-btn" href="../index.html" target="_blank">
+          View Marketplace
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+            <path d="M14 5h5v5M19 5l-8 8"></path>
+            <path d="M19 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1h5"></path>
+          </svg>
+        </a>
 
-      <header class="topbar">
+      </div>
 
-        <div class="topbar-left">
+    </header>
 
-          <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">
-            ☰
+    <section class="page">
+
+      <!-- HERO -->
+      <div class="hero">
+
+        <div class="hero-copy">
+
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Customer Management
+          </div>
+
+          <h1>Know your customers better.</h1>
+
+          <p>
+            Manage customer profiles, order history, spending activity,
+            account status and marketplace relationships from one premium workspace.
+          </p>
+
+        </div>
+
+        <div class="hero-actions">
+
+          <button class="outline-btn" id="exportBtn">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path d="M12 3v12M7 10l5 5 5-5"></path>
+              <path d="M4 21h16"></path>
+            </svg>
+            Export CSV
           </button>
 
-          <div class="page-title">
-            Orders Management
-          </div>
-
-        </div>
-
-        <div class="topbar-right">
-
-          <button class="top-btn refresh-btn" id="refreshBtn">
-            ↻ <span>Refresh</span>
+          <button class="outline-btn" id="printBtn">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+              <path d="M6 9V3h12v6"></path>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+              <path d="M6 14h12v7H6z"></path>
+            </svg>
+            Print
           </button>
 
-          <a href="../index.html" target="_blank" class="top-btn primary market-btn">
-            ↗ Marketplace
-          </a>
+          <button class="primary-btn" id="addCustomerBtn">
+            <svg width="15" height="15" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M12 5v14M5 12h14"></path>
+            </svg>
+            Add Customer
+          </button>
 
         </div>
 
-      </header>
+      </div>
 
-      <section class="content">
+      <!-- STATS -->
+      <div class="stats">
 
-        <!-- HERO -->
-        <div class="hero">
-
-          <div class="hero-content">
-
-            <div class="eyebrow">
-              <span class="eyebrow-dot"></span>
-              Order Control Center
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Total Customers</span>
+            <div class="stat-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+                <circle cx="9" cy="8" r="3"></circle>
+                <path d="M3 20c.7-3.3 2.7-5 6-5s5.3 1.7 6 5"></path>
+                <circle cx="17" cy="9" r="2"></circle>
+              </svg>
             </div>
+          </div>
+          <div class="stat-value" id="statTotal">0</div>
+          <div class="stat-note">All registered customers</div>
+        </div>
 
-            <h1>Manage every order in one place.</h1>
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Active Customers</span>
+            <div class="stat-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+                <path d="m5 12 4 4L19 6"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value" id="statActive">0</div>
+          <div class="stat-note">Currently active accounts</div>
+        </div>
 
-            <p>
-              Review customer orders, verify payments, update order progress,
-              inspect payment proof and keep your Website Deals marketplace organized.
-            </p>
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">New Customers</span>
+            <div class="stat-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+                <path d="M12 3v18M3 12h18"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value" id="statNew">0</div>
+          <div class="stat-note">Joined within 30 days</div>
+        </div>
 
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Customer Revenue</span>
+            <div class="stat-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+                <path d="M12 2v20M17 6.5c0-1.7-2.2-3-5-3S7 4.3 7 6s2.2 3 5 3 5 1.3 5 3-2.2 3-5 3-5-1.3-5-3"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value" id="statRevenue">৳0</div>
+          <div class="stat-note">Paid order value</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-top">
+            <span class="stat-label">Returning Customers</span>
+            <div class="stat-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+                <path d="M20 11a8 8 0 0 0-14.8-4M4 5v5h5"></path>
+                <path d="M4 13a8 8 0 0 0 14.8 4M20 19v-5h-5"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value" id="statReturning">0</div>
+          <div class="stat-note">Customers with 2+ orders</div>
+        </div>
+
+      </div>
+
+      <!-- CUSTOMER PANEL -->
+      <section class="panel">
+
+        <div class="panel-head">
+
+          <div class="panel-title">
+            <strong>Customer Directory</strong>
+            <span id="resultLabel">Loading customers...</span>
           </div>
 
         </div>
 
-        <!-- STATS -->
-        <div class="stats">
+        <!-- FILTERS -->
+        <div class="filters">
 
-          <div class="stat-card">
-            <div class="stat-top">
-              <div class="stat-label">Total Orders</div>
-              <div class="stat-icon">▤</div>
-            </div>
-            <div class="stat-value" id="statTotal">0</div>
-            <div class="stat-meta">All recorded orders</div>
+          <div class="field search-field">
+
+            <span class="search-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+                <circle cx="11" cy="11" r="7"></circle>
+                <path d="m20 20-4-4"></path>
+              </svg>
+            </span>
+
+            <input
+              type="search"
+              id="searchInput"
+              placeholder="Search name, email, phone or customer ID..."
+            >
+
           </div>
 
-          <div class="stat-card">
-            <div class="stat-top">
-              <div class="stat-label">Paid Orders</div>
-              <div class="stat-icon">✓</div>
-            </div>
-            <div class="stat-value" id="statPaid">0</div>
-            <div class="stat-meta">Payment verified</div>
+          <div class="field">
+            <select id="statusFilter">
+              <option value="all">All Status</option>
+              <option value="active">Active</option>
+              <option value="inactive">Inactive</option>
+              <option value="suspended">Suspended</option>
+            </select>
           </div>
 
-          <div class="stat-card">
-            <div class="stat-top">
-              <div class="stat-label">Pending</div>
-              <div class="stat-icon">◷</div>
-            </div>
-            <div class="stat-value" id="statPending">0</div>
-            <div class="stat-meta">Needs attention</div>
+          <div class="field">
+            <select id="typeFilter">
+              <option value="all">All Customers</option>
+              <option value="new">New Customers</option>
+              <option value="returning">Returning</option>
+            </select>
           </div>
 
-          <div class="stat-card">
-            <div class="stat-top">
-              <div class="stat-label">Cancelled</div>
-              <div class="stat-icon">×</div>
-            </div>
-            <div class="stat-value" id="statCancelled">0</div>
-            <div class="stat-meta">Cancelled / failed</div>
+          <div class="field">
+            <select id="sortFilter">
+              <option value="newest">Newest Joined</option>
+              <option value="oldest">Oldest Joined</option>
+              <option value="spendingHigh">Highest Spending</option>
+              <option value="spendingLow">Lowest Spending</option>
+              <option value="ordersHigh">Most Orders</option>
+              <option value="ordersLow">Fewest Orders</option>
+              <option value="nameAZ">Name A–Z</option>
+              <option value="nameZA">Name Z–A</option>
+            </select>
           </div>
 
-          <div class="stat-card">
-            <div class="stat-top">
-              <div class="stat-label">Order Revenue</div>
-              <div class="stat-icon">৳</div>
-            </div>
-            <div class="stat-value" id="statRevenue">৳0</div>
-            <div class="stat-meta">Paid order value</div>
+          <div class="field">
+            <button class="outline-btn" id="resetFilters" style="width:100%;">
+              Reset Filters
+            </button>
           </div>
 
         </div>
 
-        <!-- ORDERS PANEL -->
-        <div class="panel">
+        <!-- BULK BAR -->
+        <div class="bulk-bar" id="bulkBar">
 
-          <!-- FILTER TOOLBAR -->
-          <div class="toolbar">
-
-            <div class="search-box">
-              <span>⌕</span>
-              <input
-                type="search"
-                class="field"
-                id="searchInput"
-                placeholder="Search order, customer, email, website..."
-              >
-            </div>
-
-            <select class="field" id="orderStatusFilter">
-              <option value="all">All Order Status</option>
-              <option value="new">New</option>
-              <option value="processing">Processing</option>
-              <option value="completed">Completed</option>
-              <option value="cancelled">Cancelled</option>
-            </select>
-
-            <select class="field" id="paymentStatusFilter">
-              <option value="all">All Payments</option>
-              <option value="paid">Paid</option>
-              <option value="pending">Pending</option>
-              <option value="failed">Failed</option>
-              <option value="refunded">Refunded</option>
-            </select>
-
-            <select class="field" id="paymentMethodFilter">
-              <option value="all">All Methods</option>
-            </select>
-
-            <select class="field" id="sortFilter">
-              <option value="newest">Newest First</option>
-              <option value="oldest">Oldest First</option>
-              <option value="amount-high">Amount: High → Low</option>
-              <option value="amount-low">Amount: Low → High</option>
-              <option value="customer">Customer A → Z</option>
-            </select>
-
-            <button class="toolbar-btn" id="resetFiltersBtn">
-              Reset
-            </button>
-
-            <button class="toolbar-btn green" id="exportBtn">
-              ↓ Export CSV
-            </button>
-
-            <button class="toolbar-btn" id="printBtn">
-              ⎙ Print
-            </button>
-
+          <div class="selected-count" id="selectedCount">
+            0 selected
           </div>
 
-          <!-- BULK BAR -->
-          <div class="bulk-bar" id="bulkBar">
+          <button class="small-btn green" id="bulkActivate">
+            Activate
+          </button>
 
-            <div class="bulk-info">
-              <span id="selectedCount">0</span> orders selected
-            </div>
+          <button class="small-btn" id="bulkSuspend">
+            Suspend
+          </button>
 
-            <div class="bulk-actions">
+          <button class="small-btn red" id="bulkDelete">
+            Delete
+          </button>
 
-              <button class="small-btn green" id="bulkProcessing">
-                Mark Processing
-              </button>
+        </div>
 
-              <button class="small-btn green" id="bulkCompleted">
-                Mark Completed
-              </button>
+        <!-- DESKTOP TABLE -->
+        <div class="table-wrap">
 
-              <button class="small-btn red" id="bulkCancelled">
-                Cancel Orders
-              </button>
+          <table>
 
-              <button class="small-btn red" id="bulkDelete">
-                Delete
-              </button>
+            <thead>
+              <tr>
+                <th style="width:42px;">
+                  <input type="checkbox" class="check" id="selectAll">
+                </th>
+                <th>Customer</th>
+                <th>Contact</th>
+                <th>Orders</th>
+                <th>Total Spent</th>
+                <th>Last Order</th>
+                <th>Status</th>
+                <th>Joined</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
 
-            </div>
+            <tbody id="customerTableBody"></tbody>
 
+          </table>
+
+        </div>
+
+        <!-- MOBILE -->
+        <div class="mobile-list" id="mobileList"></div>
+
+        <!-- EMPTY -->
+        <div class="empty" id="emptyState" style="display:none;">
+
+          <div class="empty-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.7">
+              <circle cx="9" cy="8" r="3"></circle>
+              <path d="M3 20c.7-3.3 2.7-5 6-5"></path>
+              <circle cx="17" cy="17" r="3"></circle>
+              <path d="m15 19 4 4"></path>
+            </svg>
           </div>
 
-          <!-- DESKTOP TABLE -->
-          <div class="table-wrap">
+          <strong>No customers found</strong>
+          <span>Try changing your search or filter settings.</span>
 
-            <table>
+        </div>
 
-              <thead>
-                <tr>
-                  <th>
-                    <input type="checkbox" class="check" id="selectAll">
-                  </th>
-                  <th>Order</th>
-                  <th>Customer</th>
-                  <th>Website</th>
-                  <th>Amount</th>
-                  <th>Payment</th>
-                  <th>Order Status</th>
-                  <th>Date</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
+        <!-- PAGINATION -->
+        <div class="pagination">
 
-              <tbody id="ordersTableBody"></tbody>
-
-            </table>
-
+          <div class="page-info" id="pageInfo">
+            Showing 0 customers
           </div>
 
-          <!-- MOBILE ORDERS -->
-          <div class="mobile-orders" id="mobileOrders"></div>
-
-          <!-- PAGINATION -->
-          <div class="pagination">
-
-            <div class="page-info" id="pageInfo">
-              Showing 0 orders
-            </div>
-
-            <div class="page-buttons" id="pageButtons"></div>
-
-          </div>
+          <div class="page-buttons" id="pageButtons"></div>
 
         </div>
 
       </section>
 
-    </main>
+    </section>
 
-  </div>
+  </main>
 
-  <!-- =========================
-       VIEW / EDIT ORDER MODAL
-  ========================== -->
+</div>
 
-  <div class="modal-backdrop" id="orderModal">
+<!-- =========================
+     CUSTOMER MODAL
+========================= -->
 
-    <div class="modal">
+<div class="modal-backdrop" id="customerModal">
 
-      <div class="modal-head">
+  <div class="modal">
 
-        <div>
-          <h2 id="modalTitle">Order Details</h2>
-          <p id="modalSubtitle">Review and update order information.</p>
+    <div class="modal-head">
+
+      <div>
+        <h2 id="modalTitle">Add Customer</h2>
+        <p id="modalSubtitle">Create a new customer profile.</p>
+      </div>
+
+      <button class="close-btn" id="closeCustomerModal">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path d="m6 6 12 12M18 6 6 18"></path>
+        </svg>
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <div class="customer-summary" id="customerSummary">
+
+        <div class="summary-box">
+          <span>Total Orders</span>
+          <strong id="summaryOrders">0</strong>
         </div>
 
-        <button class="close-btn" data-close="orderModal">
-          ×
-        </button>
+        <div class="summary-box">
+          <span>Total Spent</span>
+          <strong id="summarySpent">৳0</strong>
+        </div>
+
+        <div class="summary-box">
+          <span>Last Order</span>
+          <strong id="summaryLastOrder">—</strong>
+        </div>
 
       </div>
 
-      <div class="modal-body">
+      <div class="form-grid">
 
-        <form id="orderForm">
+        <div class="form-group">
+          <label class="form-label">Customer ID</label>
+          <input class="form-control" id="customerId" placeholder="CUS-1009">
+        </div>
 
-          <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label">Status</label>
+          <select class="form-control" id="customerStatus">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="suspended">Suspended</option>
+          </select>
+        </div>
 
-            <div class="form-group">
-              <label class="form-label">Order ID</label>
-              <input class="field" id="formOrderId" readonly>
-            </div>
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input class="form-control" id="customerName" placeholder="Customer full name">
+        </div>
 
-            <div class="form-group">
-              <label class="form-label">Created Date</label>
-              <input class="field" id="formDate" readonly>
-            </div>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input class="form-control" id="customerEmail" type="email" placeholder="customer@example.com">
+        </div>
 
-            <div class="form-group">
-              <label class="form-label">Customer Name</label>
-              <input class="field" id="formCustomer">
-            </div>
+        <div class="form-group">
+          <label class="form-label">Phone Number</label>
+          <input class="form-control" id="customerPhone" placeholder="+880 1XXXXXXXXX">
+        </div>
 
-            <div class="form-group">
-              <label class="form-label">Customer Email</label>
-              <input class="field" id="formEmail" type="email">
-            </div>
+        <div class="form-group">
+          <label class="form-label">Joined Date</label>
+          <input class="form-control" id="customerJoined" type="date">
+        </div>
 
-            <div class="form-group">
-              <label class="form-label">Phone</label>
-              <input class="field" id="formPhone">
-            </div>
+        <div class="form-group full">
+          <label class="form-label">Address</label>
+          <textarea class="form-control" id="customerAddress" placeholder="Customer address"></textarea>
+        </div>
 
-            <div class="form-group">
-              <label class="form-label">Website</label>
-              <input class="field" id="formWebsite">
-            </div>
+        <div class="form-group full">
+          <label class="form-label">Internal Note</label>
+          <textarea class="form-control" id="customerNote" placeholder="Add an internal note about this customer..."></textarea>
+        </div>
 
-            <div class="form-group">
-              <label class="form-label">Category</label>
-              <input class="field" id="formCategory">
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Amount (BDT)</label>
-              <input class="field" id="formAmount" type="number" min="0" step="1">
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Order Status</label>
-              <select class="field" id="formOrderStatus">
-                <option value="new">New</option>
-                <option value="processing">Processing</option>
-                <option value="completed">Completed</option>
-                <option value="cancelled">Cancelled</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Payment Status</label>
-              <select class="field" id="formPaymentStatus">
-                <option value="paid">Paid</option>
-                <option value="pending">Pending</option>
-                <option value="failed">Failed</option>
-                <option value="refunded">Refunded</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Payment Method</label>
-              <input class="field" id="formPaymentMethod">
-            </div>
-
-            <div class="form-group">
-              <label class="form-label">Payment Transaction ID</label>
-              <input class="field" id="formPaymentId">
-            </div>
-
-            <div class="form-group full">
-              <label class="form-label">Customer Note</label>
-              <textarea class="field" id="formNote" placeholder="Customer message or internal order note..."></textarea>
-            </div>
-
-            <div class="form-group full" id="screenshotGroup">
-
-              <label class="form-label">Payment Screenshot / Proof</label>
-
-              <div class="screenshot-box" id="screenshotBox">
-                <div class="no-screenshot">
-                  No payment screenshot available.
-                </div>
-              </div>
-
-            </div>
-
-          </div>
-
-        </form>
+        <div class="form-group">
+          <label class="form-label">Avatar Image URL</label>
+          <input class="form-control" id="customerAvatar" placeholder="https://...">
+        </div>
 
       </div>
 
-      <div class="modal-foot">
+      <div class="history" id="historySection">
 
-        <button class="modal-btn" data-close="orderModal">
-          Close
-        </button>
+        <div class="history-head">
+          <strong>Order History</strong>
+          <span class="muted" style="font-size:10px;" id="historyCount">0 orders</span>
+        </div>
 
-        <button class="modal-btn danger" id="modalDeleteBtn">
-          Delete Order
-        </button>
-
-        <button class="modal-btn primary" id="saveOrderBtn">
-          Save Changes
-        </button>
+        <div class="history-list" id="historyList"></div>
 
       </div>
 
     </div>
 
+    <div class="modal-foot">
+
+      <button class="outline-btn danger-btn" id="modalDeleteBtn" style="margin-right:auto;">
+        Delete
+      </button>
+
+      <button class="outline-btn" id="modalCancelBtn">
+        Cancel
+      </button>
+
+      <button class="primary-btn" id="saveCustomerBtn">
+        Save Customer
+      </button>
+
+    </div>
+
   </div>
 
-  <!-- =========================
-       DELETE MODAL
-  ========================== -->
+</div>
 
-  <div class="modal-backdrop" id="deleteModal">
+<!-- =========================
+     DELETE CONFIRM
+========================= -->
 
-    <div class="modal small">
+<div class="modal-backdrop" id="deleteModal">
 
-      <div class="modal-head">
+  <div class="modal small">
 
-        <div>
-          <h2>Delete Order?</h2>
-          <p>This action cannot be undone.</p>
-        </div>
+    <div class="modal-body">
 
-        <button class="close-btn" data-close="deleteModal">
-          ×
-        </button>
-
+      <div class="confirm-icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+          <path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"></path>
+        </svg>
       </div>
 
-      <div class="modal-body">
-
-        <div class="detail-box">
-
-          <div class="detail-label">Selected Order</div>
-
-          <div class="detail-value" id="deleteOrderText">
-            —
-          </div>
-
-        </div>
-
-        <p style="color:#738079;font-size:11px;line-height:1.7;margin-top:12px;">
-          Deleting an order removes it from the local Website Deals order records.
-          Related transaction data will remain unchanged.
+      <div class="confirm-text">
+        <h3>Delete customer?</h3>
+        <p>
+          This will remove the customer profile from the Website Deals customer directory.
+          Existing order records will remain untouched.
         </p>
-
       </div>
 
-      <div class="modal-foot">
+    </div>
 
-        <button class="modal-btn" data-close="deleteModal">
-          Keep Order
-        </button>
+    <div class="modal-foot">
 
-        <button class="modal-btn danger" id="confirmDeleteBtn">
-          Delete Permanently
-        </button>
+      <button class="outline-btn" id="cancelDeleteBtn">
+        Keep Customer
+      </button>
 
-      </div>
+      <button class="primary-btn" style="background:var(--danger);border-color:var(--danger);" id="confirmDeleteBtn">
+        Delete Customer
+      </button>
 
     </div>
 
   </div>
 
-  <!-- TOAST -->
-  <div class="toast-wrap" id="toastWrap"></div>
+</div>
 
-  <script>
-    /* =========================================================
-       WEBSITE DEALS — ORDERS MANAGEMENT
-       Prototype / LocalStorage Edition
-    ========================================================== */
+<div class="toast-wrap" id="toastWrap"></div>
 
-    const AUTH_KEY = "websiteDealsAdminAuth";
-    const ORDERS_KEY = "websiteDealsOrders";
-    const TRANSACTIONS_KEY = "websiteDealsTransactions";
-    const PAYMENT_TRANSACTIONS_KEY = "websiteDealsPaymentTransactions";
-    const WEBSITES_KEY = "websiteDealsAdminWebsites";
-    const CATEGORIES_KEY = "websiteDealsCategories";
+<script>
+/* =========================================================
+   WEBSITE DEALS — CUSTOMER MANAGEMENT
+   File: admin/customers.html
+========================================================= */
 
-    const PAGE_SIZE = 8;
+const AUTH_KEY = "websiteDealsAdminAuth";
+const CUSTOMER_KEY = "websiteDealsCustomers";
+const ORDER_KEY = "websiteDealsOrders";
+const TRANSACTION_KEY = "websiteDealsTransactions";
+const PAYMENT_TRANSACTION_KEY = "websiteDealsPaymentTransactions";
 
-    let orders = [];
-    let transactions = [];
-    let paymentTransactions = [];
-    let websites = [];
-    let categories = [];
+const PAGE_SIZE = 8;
 
-    let filteredOrders = [];
-    let currentPage = 1;
-    let currentOrderId = null;
-    let pendingDeleteId = null;
+let customers = [];
+let orders = [];
+let transactions = [];
+let paymentTransactions = [];
 
-    /* =========================================================
-       AUTH
-    ========================================================== */
+let filteredCustomers = [];
+let currentPage = 1;
+let editingCustomerId = null;
+let deleteTargetId = null;
 
-    function getAdminSession(){
-      try{
-        const raw = sessionStorage.getItem(AUTH_KEY);
+/* =========================================================
+   AUTH
+========================================================= */
 
-        if(!raw) return null;
+function getAdminSession(){
+  try{
+    const raw = sessionStorage.getItem(AUTH_KEY);
 
-        const session = JSON.parse(raw);
+    if(!raw) return null;
 
-        if(!session || session.authenticated !== true){
-          return null;
-        }
+    const session = JSON.parse(raw);
 
-        return session;
-
-      }catch(error){
-        return null;
-      }
+    if(!session || session.authenticated !== true){
+      return null;
     }
 
-    const adminSession = getAdminSession();
+    return session;
 
-    if(!adminSession){
-      window.location.replace("login/");
+  }catch(error){
+    return null;
+  }
+}
+
+const adminSession = getAdminSession();
+
+if(!adminSession){
+  window.location.replace("login/");
+}
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function escapeHTML(value){
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
+
+function safeJSONParse(key, fallback=[]){
+  try{
+    const raw = localStorage.getItem(key);
+
+    if(!raw) return fallback;
+
+    const parsed = JSON.parse(raw);
+
+    return Array.isArray(parsed) ? parsed : fallback;
+
+  }catch(error){
+    return fallback;
+  }
+}
+
+function saveJSON(key, value){
+  localStorage.setItem(key, JSON.stringify(value));
+}
+
+function normalizeText(value){
+  return String(value ?? "").trim();
+}
+
+function money(value){
+  const amount = Number(value) || 0;
+
+  return "৳" + amount.toLocaleString("en-BD",{
+    maximumFractionDigits:0
+  });
+}
+
+function formatDate(value){
+  if(!value) return "—";
+
+  const date = new Date(value);
+
+  if(Number.isNaN(date.getTime())) return "—";
+
+  return date.toLocaleDateString("en-GB",{
+    day:"2-digit",
+    month:"short",
+    year:"numeric"
+  });
+}
+
+function inputDate(value){
+  if(!value) return "";
+
+  const date = new Date(value);
+
+  if(Number.isNaN(date.getTime())) return "";
+
+  const y = date.getFullYear();
+  const m = String(date.getMonth()+1).padStart(2,"0");
+  const d = String(date.getDate()).padStart(2,"0");
+
+  return `${y}-${m}-${d}`;
+}
+
+function initials(name){
+  const parts = normalizeText(name)
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0,2);
+
+  if(!parts.length) return "CU";
+
+  return parts.map(part => part[0].toUpperCase()).join("");
+}
+
+function statusClass(status){
+  const value = normalizeText(status).toLowerCase();
+
+  if(value === "suspended") return "suspended";
+  if(value === "inactive") return "inactive";
+
+  return "active";
+}
+
+function normalizeStatus(value){
+  const status = normalizeText(value).toLowerCase();
+
+  if(
+    status.includes("suspend") ||
+    status.includes("blocked") ||
+    status.includes("banned")
+  ){
+    return "suspended";
+  }
+
+  if(
+    status.includes("inactive") ||
+    status.includes("disabled")
+  ){
+    return "inactive";
+  }
+
+  return "active";
+}
+
+function normalizeOrderStatus(value){
+  const status = normalizeText(value).toLowerCase();
+
+  if(
+    status.includes("cancel") ||
+    status.includes("failed")
+  ){
+    return "cancelled";
+  }
+
+  if(
+    status.includes("complete") ||
+    status.includes("deliver") ||
+    status.includes("success")
+  ){
+    return "completed";
+  }
+
+  if(
+    status.includes("process") ||
+    status.includes("confirm")
+  ){
+    return "processing";
+  }
+
+  return "pending";
+}
+
+function normalizePaymentStatus(value){
+  const status = normalizeText(value).toLowerCase();
+
+  if(
+    status.includes("paid") ||
+    status.includes("complete") ||
+    status.includes("success") ||
+    status.includes("succeed")
+  ){
+    return "paid";
+  }
+
+  if(
+    status.includes("cancel") ||
+    status.includes("failed") ||
+    status.includes("refund")
+  ){
+    return "cancelled";
+  }
+
+  return "pending";
+}
+
+function getRecordDate(record){
+  return (
+    record?.date ||
+    record?.createdAt ||
+    record?.created_at ||
+    record?.timestamp ||
+    record?.updatedAt ||
+    ""
+  );
+}
+
+/* =========================================================
+   CUSTOMER NORMALIZATION
+========================================================= */
+
+function normalizeCustomer(raw){
+
+  const name = normalizeText(
+    raw?.name ||
+    raw?.customerName ||
+    raw?.fullName ||
+    raw?.customer ||
+    raw?.buyerName ||
+    "Unnamed Customer"
+  );
+
+  const email = normalizeText(
+    raw?.email ||
+    raw?.customerEmail ||
+    raw?.buyerEmail ||
+    ""
+  );
+
+  const phone = normalizeText(
+    raw?.phone ||
+    raw?.customerPhone ||
+    raw?.mobile ||
+    raw?.phoneNumber ||
+    ""
+  );
+
+  const id = normalizeText(
+    raw?.id ||
+    raw?.customerId ||
+    raw?.customerID ||
+    ""
+  );
+
+  return {
+    id,
+    name,
+    email,
+    phone,
+    status:normalizeStatus(raw?.status),
+    joined:getRecordDate(raw) || new Date().toISOString(),
+    address:normalizeText(raw?.address),
+    note:normalizeText(raw?.note || raw?.notes),
+    avatar:normalizeText(raw?.avatar || raw?.avatarUrl || raw?.image),
+    totalOrders:Number(raw?.totalOrders) || 0,
+    totalSpent:Number(raw?.totalSpent) || 0,
+    lastOrder:getRecordDate(raw?.lastOrderDate ? {
+      date:raw.lastOrderDate
+    } : raw),
+    explicit:true
+  };
+}
+
+/* =========================================================
+   ORDER NORMALIZATION
+========================================================= */
+
+function normalizeOrder(raw){
+
+  const customerName = normalizeText(
+    raw?.customerName ||
+    raw?.customer ||
+    raw?.buyerName ||
+    raw?.name ||
+    ""
+  );
+
+  const customerEmail = normalizeText(
+    raw?.customerEmail ||
+    raw?.email ||
+    raw?.buyerEmail ||
+    ""
+  );
+
+  const customerPhone = normalizeText(
+    raw?.customerPhone ||
+    raw?.phone ||
+    raw?.mobile ||
+    ""
+  );
+
+  const amount = Number(
+    raw?.amount ??
+    raw?.total ??
+    raw?.price ??
+    raw?.paidAmount ??
+    0
+  ) || 0;
+
+  const orderStatus = normalizeOrderStatus(
+    raw?.orderStatus ||
+    raw?.status ||
+    "pending"
+  );
+
+  const paymentStatus = normalizePaymentStatus(
+    raw?.paymentStatus ||
+    raw?.payment_state ||
+    raw?.status ||
+    ""
+  );
+
+  return {
+    id:normalizeText(
+      raw?.id ||
+      raw?.orderId ||
+      raw?.orderID ||
+      `ORDER-${Math.random().toString(36).slice(2,8)}`
+    ),
+    customerName,
+    customerEmail,
+    customerPhone,
+    amount,
+    orderStatus,
+    paymentStatus,
+    date:getRecordDate(raw),
+    website:normalizeText(
+      raw?.website ||
+      raw?.websiteName ||
+      raw?.product ||
+      raw?.productName ||
+      ""
+    ),
+    category:normalizeText(
+      raw?.category ||
+      raw?.categoryName ||
+      ""
+    )
+  };
+}
+
+/* =========================================================
+   CUSTOMER MATCHING
+========================================================= */
+
+function customerKey(name,email,phone){
+
+  if(email){
+    return "email:" + email.toLowerCase();
+  }
+
+  if(phone){
+    return "phone:" + phone.replace(/\D/g,"");
+  }
+
+  if(name){
+    return "name:" + name.toLowerCase();
+  }
+
+  return "";
+}
+
+function sameCustomer(customer, order){
+
+  const cEmail = normalizeText(customer.email).toLowerCase();
+  const oEmail = normalizeText(order.customerEmail).toLowerCase();
+
+  if(cEmail && oEmail && cEmail === oEmail){
+    return true;
+  }
+
+  const cPhone = normalizeText(customer.phone).replace(/\D/g,"");
+  const oPhone = normalizeText(order.customerPhone).replace(/\D/g,"");
+
+  if(cPhone && oPhone && cPhone === oPhone){
+    return true;
+  }
+
+  const cName = normalizeText(customer.name).toLowerCase();
+  const oName = normalizeText(order.customerName).toLowerCase();
+
+  if(
+    !cEmail &&
+    !oEmail &&
+    !cPhone &&
+    !oPhone &&
+    cName &&
+    oName &&
+    cName === oName
+  ){
+    return true;
+  }
+
+  return false;
+}
+
+/* =========================================================
+   BUILD CUSTOMERS
+========================================================= */
+
+function demoCustomers(){
+
+  const now = new Date();
+
+  function daysAgo(days){
+    const d = new Date(now);
+    d.setDate(d.getDate() - days);
+    return d.toISOString();
+  }
+
+  return [
+    {
+      id:"CUS-1001",
+      name:"Nusrat Jahan",
+      email:"nusrat@example.com",
+      phone:"+880 1712-345678",
+      status:"active",
+      joined:daysAgo(12),
+      address:"Moulvibazar, Bangladesh",
+      note:"Regular marketplace customer."
+    },
+    {
+      id:"CUS-1002",
+      name:"Rahim Ahmed",
+      email:"rahim@example.com",
+      phone:"+880 1812-456789",
+      status:"active",
+      joined:daysAgo(35),
+      address:"Dhaka, Bangladesh",
+      note:"Purchased business website packages."
+    },
+    {
+      id:"CUS-1003",
+      name:"Sadia Islam",
+      email:"sadia@example.com",
+      phone:"+880 1912-567890",
+      status:"active",
+      joined:daysAgo(7),
+      address:"Sylhet, Bangladesh",
+      note:"Interested in portfolio websites."
+    },
+    {
+      id:"CUS-1004",
+      name:"Tanvir Hasan",
+      email:"tanvir@example.com",
+      phone:"+880 1612-678901",
+      status:"inactive",
+      joined:daysAgo(90),
+      address:"Chattogram, Bangladesh",
+      note:"No recent activity."
+    },
+    {
+      id:"CUS-1005",
+      name:"Mahi Rahman",
+      email:"mahi@example.com",
+      phone:"+880 1512-789012",
+      status:"active",
+      joined:daysAgo(22),
+      address:"Dhaka, Bangladesh",
+      note:"Returning customer."
+    },
+    {
+      id:"CUS-1006",
+      name:"Arif Chowdhury",
+      email:"arif@example.com",
+      phone:"+880 1312-890123",
+      status:"active",
+      joined:daysAgo(58),
+      address:"Rajshahi, Bangladesh",
+      note:"Business customer."
+    },
+    {
+      id:"CUS-1007",
+      name:"Farhana Akter",
+      email:"farhana@example.com",
+      phone:"+880 1412-901234",
+      status:"suspended",
+      joined:daysAgo(120),
+      address:"Barishal, Bangladesh",
+      note:"Account temporarily suspended."
+    },
+    {
+      id:"CUS-1008",
+      name:"Imran Hossain",
+      email:"imran@example.com",
+      phone:"+880 1912-112233",
+      status:"active",
+      joined:daysAgo(3),
+      address:"Mymensingh, Bangladesh",
+      note:"New customer."
     }
+  ];
+}
 
-    /* =========================================================
-       HELPERS
-    ========================================================== */
+function loadData(){
 
-    function readStorage(key, fallback = []){
-      try{
-        const raw = localStorage.getItem(key);
+  orders = safeJSONParse(ORDER_KEY, []);
+  transactions = safeJSONParse(TRANSACTION_KEY, []);
+  paymentTransactions = safeJSONParse(PAYMENT_TRANSACTION_KEY, []);
 
-        if(!raw){
-          return fallback;
-        }
+  const storedCustomers = safeJSONParse(CUSTOMER_KEY, []);
 
-        const parsed = JSON.parse(raw);
+  if(storedCustomers.length){
 
-        return Array.isArray(parsed) ? parsed : fallback;
+    customers = storedCustomers.map(normalizeCustomer);
 
-      }catch(error){
-        return fallback;
-      }
-    }
+  }else{
 
-    function writeStorage(key, value){
-      localStorage.setItem(key, JSON.stringify(value));
-    }
+    const derived = new Map();
 
-    function firstValue(...values){
-      for(const value of values){
-        if(
-          value !== undefined &&
-          value !== null &&
-          String(value).trim() !== ""
-        ){
-          return value;
-        }
+    [...orders.map(normalizeOrder),
+     ...transactions.map(normalizeOrder),
+     ...paymentTransactions.map(normalizeOrder)]
+    .forEach(order => {
+
+      if(!order.customerName && !order.customerEmail && !order.customerPhone){
+        return;
       }
 
-      return "";
-    }
-
-    function normalizeAmount(value){
-      if(value === undefined || value === null || value === ""){
-        return 0;
-      }
-
-      if(typeof value === "number"){
-        return Number.isFinite(value) ? value : 0;
-      }
-
-      const cleaned = String(value)
-        .replace(/[৳,\s]/g,"")
-        .replace(/[^\d.-]/g,"");
-
-      const number = Number(cleaned);
-
-      return Number.isFinite(number) ? number : 0;
-    }
-
-    function normalizeDate(value){
-      if(!value){
-        return null;
-      }
-
-      if(typeof value === "number"){
-        const timestamp = value < 10000000000
-          ? value * 1000
-          : value;
-
-        const date = new Date(timestamp);
-
-        if(!isNaN(date.getTime())){
-          return date;
-        }
-      }
-
-      const date = new Date(value);
-
-      return isNaN(date.getTime()) ? null : date;
-    }
-
-    function normalizePaymentStatus(value){
-      const status = String(value || "")
-        .trim()
-        .toLowerCase();
-
-      if([
-        "paid",
-        "complete",
-        "completed",
-        "success",
-        "successful",
-        "succeeded",
-        "verified",
-        "approved"
-      ].includes(status)){
-        return "paid";
-      }
-
-      if([
-        "pending",
-        "processing",
-        "unpaid",
-        "awaiting",
-        "awaiting payment",
-        "verification"
-      ].includes(status)){
-        return "pending";
-      }
-
-      if([
-        "refund",
-        "refunded",
-        "partially_refunded"
-      ].includes(status)){
-        return "refunded";
-      }
-
-      if([
-        "cancel",
-        "cancelled",
-        "canceled",
-        "failed",
-        "declined",
-        "rejected"
-      ].includes(status)){
-        return "failed";
-      }
-
-      return status || "pending";
-    }
-
-    function normalizeOrderStatus(value){
-      const status = String(value || "")
-        .trim()
-        .toLowerCase();
-
-      if([
-        "new",
-        "placed",
-        "received",
-        "submitted"
-      ].includes(status)){
-        return "new";
-      }
-
-      if([
-        "processing",
-        "in progress",
-        "in-progress",
-        "working",
-        "active"
-      ].includes(status)){
-        return "processing";
-      }
-
-      if([
-        "completed",
-        "complete",
-        "delivered",
-        "done",
-        "finished"
-      ].includes(status)){
-        return "completed";
-      }
-
-      if([
-        "cancel",
-        "cancelled",
-        "canceled",
-        "closed"
-      ].includes(status)){
-        return "cancelled";
-      }
-
-      return status || "new";
-    }
-
-    function escapeHTML(value){
-      return String(value ?? "")
-        .replace(/&/g,"&amp;")
-        .replace(/</g,"&lt;")
-        .replace(/>/g,"&gt;")
-        .replace(/"/g,"&quot;")
-        .replace(/'/g,"&#039;");
-    }
-
-    function formatMoney(value){
-      return "৳" + normalizeAmount(value).toLocaleString("en-BD");
-    }
-
-    function formatDate(value){
-      const date = normalizeDate(value);
-
-      if(!date){
-        return "—";
-      }
-
-      return date.toLocaleDateString("en-GB",{
-        day:"2-digit",
-        month:"short",
-        year:"numeric"
-      });
-    }
-
-    function formatTime(value){
-      const date = normalizeDate(value);
-
-      if(!date){
-        return "";
-      }
-
-      return date.toLocaleTimeString("en-US",{
-        hour:"2-digit",
-        minute:"2-digit"
-      });
-    }
-
-    function getInitials(name){
-      const text = String(name || "Customer").trim();
-
-      const parts = text
-        .split(/\s+/)
-        .filter(Boolean);
-
-      if(parts.length === 1){
-        return parts[0].slice(0,2).toUpperCase();
-      }
-
-      return (
-        parts[0].charAt(0) +
-        parts[parts.length - 1].charAt(0)
-      ).toUpperCase();
-    }
-
-    function slugify(value){
-      return String(value || "")
-        .toLowerCase()
-        .trim()
-        .replace(/[^a-z0-9]+/g,"-")
-        .replace(/^-+|-+$/g,"");
-    }
-
-    function showToast(message,type="success"){
-      const wrap = document.getElementById("toastWrap");
-
-      const toast = document.createElement("div");
-
-      toast.className = "toast " + type;
-
-      toast.innerHTML = `
-        <div class="toast-icon">
-          ${type === "error" ? "!" : "✓"}
-        </div>
-        <div>${escapeHTML(message)}</div>
-      `;
-
-      wrap.appendChild(toast);
-
-      setTimeout(()=>{
-        toast.style.opacity = "0";
-        toast.style.transform = "translateY(8px)";
-
-        setTimeout(()=>{
-          toast.remove();
-        },220);
-
-      },2800);
-    }
-
-    /* =========================================================
-       SESSION UI
-    ========================================================== */
-
-    function setupAdminIdentity(){
-
-      const name = firstValue(
-        adminSession?.name,
-        adminSession?.fullName,
-        "Super Admin"
+      const key = customerKey(
+        order.customerName,
+        order.customerEmail,
+        order.customerPhone
       );
 
-      const role = String(
-        firstValue(
-          adminSession?.role,
-          "superadmin"
-        )
-      ).toLowerCase();
+      if(!key) return;
 
-      document.getElementById("adminName").textContent = name;
+      if(!derived.has(key)){
 
-      document.getElementById("adminRole").textContent =
-        role === "superadmin"
-          ? "Super Administrator"
-          : role.charAt(0).toUpperCase() + role.slice(1);
-
-      document.getElementById("adminAvatar").textContent =
-        getInitials(name);
-
-    }
-
-    /* =========================================================
-       NORMALIZE ORDER
-    ========================================================== */
-
-    function normalizeOrder(raw,index){
-
-      const orderId = firstValue(
-        raw.id,
-        raw.orderId,
-        raw.orderID,
-        raw.transactionId,
-        raw.transactionID,
-        raw.reference,
-        `WD-${1000 + index}`
-      );
-
-      const customer = firstValue(
-        raw.customer,
-        raw.customerName,
-        raw.name,
-        raw.fullName,
-        raw.userName,
-        raw.email,
-        "Customer"
-      );
-
-      const email = firstValue(
-        raw.email,
-        raw.customerEmail,
-        raw.customer_email,
-        ""
-      );
-
-      const phone = firstValue(
-        raw.phone,
-        raw.customerPhone,
-        raw.mobile,
-        raw.customerMobile,
-        ""
-      );
-
-      const website = firstValue(
-        raw.website,
-        raw.websiteName,
-        raw.product,
-        raw.productName,
-        raw.template,
-        raw.item,
-        "Website"
-      );
-
-      const category = firstValue(
-        raw.category,
-        raw.categoryName,
-        raw.category_name,
-        "General"
-      );
-
-      const amount = normalizeAmount(
-        firstValue(
-          raw.amount,
-          raw.total,
-          raw.price,
-          raw.paidAmount,
-          raw.paid_amount,
-          raw.totalAmount,
-          0
-        )
-      );
-
-      const paymentStatus = normalizePaymentStatus(
-        firstValue(
-          raw.paymentStatus,
-          raw.payment_status,
-          raw.payment,
-          raw.payment_state,
-          raw.transactionStatus,
-          "pending"
-        )
-      );
-
-      const orderStatus = normalizeOrderStatus(
-        firstValue(
-          raw.orderStatus,
-          raw.order_status,
-          raw.fulfillmentStatus,
-          raw.fulfillment_status,
-          raw.status,
-          "new"
-        )
-      );
-
-      const paymentMethod = firstValue(
-        raw.paymentMethod,
-        raw.payment_method,
-        raw.method,
-        raw.gateway,
-        raw.type,
-        "Not specified"
-      );
-
-      const paymentId = firstValue(
-        raw.paymentTransactionId,
-        raw.payment_transaction_id,
-        raw.transactionId,
-        raw.transactionID,
-        raw.txnId,
-        raw.txid,
-        raw.reference,
-        ""
-      );
-
-      const date = firstValue(
-        raw.date,
-        raw.createdAt,
-        raw.created_at,
-        raw.timestamp,
-        raw.updatedAt,
-        raw.updated_at,
-        new Date().toISOString()
-      );
-
-      const screenshot = firstValue(
-        raw.paymentScreenshot,
-        raw.payment_screenshot,
-        raw.screenshot,
-        raw.proof,
-        raw.paymentProof,
-        raw.payment_proof,
-        ""
-      );
-
-      const note = firstValue(
-        raw.note,
-        raw.notes,
-        raw.customerNote,
-        raw.customer_note,
-        raw.message,
-        ""
-      );
-
-      const websiteUrl = firstValue(
-        raw.websiteUrl,
-        raw.websiteURL,
-        raw.url,
-        raw.demoUrl,
-        raw.demoURL,
-        raw.liveUrl,
-        raw.liveURL,
-        ""
-      );
-
-      return {
-        ...raw,
-
-        id:String(orderId),
-
-        customer:String(customer),
-
-        email:String(email),
-
-        phone:String(phone),
-
-        website:String(website),
-
-        category:String(category),
-
-        amount,
-
-        paymentStatus,
-
-        orderStatus,
-
-        paymentMethod:String(paymentMethod),
-
-        paymentId:String(paymentId),
-
-        date,
-
-        screenshot:String(screenshot),
-
-        note:String(note),
-
-        websiteUrl:String(websiteUrl)
-      };
-    }
-
-    /* =========================================================
-       DEMO ORDERS
-    ========================================================== */
-
-    function getDemoOrders(){
-
-      return [
-
-        {
-          id:"WD-1028",
-          customer:"Nusrat Jahan",
-          email:"nusrat@example.com",
-          phone:"01711-123456",
-          website:"Corporate Pro",
-          category:"Business",
-          amount:6490,
-          paymentStatus:"paid",
-          orderStatus:"completed",
-          paymentMethod:"bKash",
-          paymentId:"BKX9A72P",
-          date:"2026-09-28T10:20:00",
-          note:"Need logo and content setup.",
-          screenshot:"",
-          websiteUrl:""
-        },
-
-        {
-          id:"WD-1029",
-          customer:"Rahim Ahmed",
-          email:"rahim@example.com",
-          phone:"01822-445566",
-          website:"Creative Studio",
-          category:"Agency",
-          amount:5490,
-          paymentStatus:"paid",
-          orderStatus:"processing",
-          paymentMethod:"Nagad",
-          paymentId:"NGD-78221",
-          date:"2026-09-29T12:15:00",
-          note:"Please contact before deployment.",
-          screenshot:"",
-          websiteUrl:""
-        },
-
-        {
-          id:"WD-1030",
-          customer:"Sadia Islam",
-          email:"sadia@example.com",
-          phone:"01933-998877",
-          website:"ShopEasy Store",
-          category:"E-commerce",
-          amount:7990,
-          paymentStatus:"pending",
-          orderStatus:"new",
-          paymentMethod:"bKash",
-          paymentId:"",
-          date:"2026-09-30T09:40:00",
-          note:"Waiting for payment verification.",
-          screenshot:"",
-          websiteUrl:""
-        },
-
-        {
-          id:"WD-1031",
-          customer:"Tanvir Hasan",
-          email:"tanvir@example.com",
-          phone:"01644-112233",
-          website:"Tasty Bites",
-          category:"Restaurant",
-          amount:4990,
-          paymentStatus:"paid",
-          orderStatus:"completed",
-          paymentMethod:"Bank Transfer",
-          paymentId:"BANK-88321",
-          date:"2026-09-26T16:30:00",
+        derived.set(key,{
+          id:"",
+          name:order.customerName || "Unnamed Customer",
+          email:order.customerEmail,
+          phone:order.customerPhone,
+          status:"active",
+          joined:order.date || new Date().toISOString(),
+          address:"",
           note:"",
-          screenshot:"",
-          websiteUrl:""
-        },
-
-        {
-          id:"WD-1032",
-          customer:"Mahi Rahman",
-          email:"mahi@example.com",
-          phone:"01555-778899",
-          website:"Personal Folio",
-          category:"Portfolio",
-          amount:3250,
-          paymentStatus:"pending",
-          orderStatus:"processing",
-          paymentMethod:"bKash",
-          paymentId:"",
-          date:"2026-09-24T11:05:00",
-          note:"Customer requested minor text changes.",
-          screenshot:"",
-          websiteUrl:""
-        },
-
-        {
-          id:"WD-1033",
-          customer:"Arif Chowdhury",
-          email:"arif@example.com",
-          phone:"01777-554433",
-          website:"Starter Monthly",
-          category:"Monthly",
-          amount:325,
-          paymentStatus:"failed",
-          orderStatus:"cancelled",
-          paymentMethod:"Card Payment",
-          paymentId:"CARD-7712",
-          date:"2026-09-21T18:15:00",
-          note:"Payment failed.",
-          screenshot:"",
-          websiteUrl:""
-        },
-
-        {
-          id:"WD-1034",
-          customer:"Farhana Akter",
-          email:"farhana@example.com",
-          phone:"01888-334455",
-          website:"Biz Launch",
-          category:"Business",
-          amount:5990,
-          paymentStatus:"paid",
-          orderStatus:"processing",
-          paymentMethod:"bKash",
-          paymentId:"BK-99221",
-          date:"2026-09-19T14:20:00",
-          note:"Domain will be provided later.",
-          screenshot:"",
-          websiteUrl:""
-        },
-
-        {
-          id:"WD-1035",
-          customer:"Imran Hossain",
-          email:"imran@example.com",
-          phone:"01999-221100",
-          website:"Cafe Corner",
-          category:"Restaurant",
-          amount:4490,
-          paymentStatus:"refunded",
-          orderStatus:"cancelled",
-          paymentMethod:"Nagad",
-          paymentId:"NG-55218",
-          date:"2026-09-15T13:45:00",
-          note:"Customer requested refund.",
-          screenshot:"",
-          websiteUrl:""
-        }
-
-      ];
-    }
-
-    /* =========================================================
-       LOAD DATA
-    ========================================================== */
-
-    function loadData(){
-
-      const storedOrders = readStorage(ORDERS_KEY, []);
-
-      transactions = readStorage(TRANSACTIONS_KEY, []);
-      paymentTransactions = readStorage(
-        PAYMENT_TRANSACTIONS_KEY,
-        []
-      );
-
-      websites = readStorage(WEBSITES_KEY, []);
-      categories = readStorage(CATEGORIES_KEY, []);
-
-      if(storedOrders.length){
-
-        orders = storedOrders.map(normalizeOrder);
-
-      }else{
-
-        /*
-          If no orders exist but transaction data exists,
-          create order records from those transactions.
-        */
-
-        const transactionSource = [
-          ...transactions,
-          ...paymentTransactions
-        ];
-
-        if(transactionSource.length){
-
-          orders = transactionSource.map((item,index)=>{
-            return normalizeOrder(item,index);
-          });
-
-        }else{
-
-          orders = getDemoOrders();
-
-        }
+          avatar:"",
+          totalOrders:0,
+          totalSpent:0,
+          lastOrder:"",
+          explicit:false
+        });
 
       }
 
-      populatePaymentMethods();
+      const customer = derived.get(key);
 
-      updateStats();
+      if(order.customerName && !customer.name){
+        customer.name = order.customerName;
+      }
 
-      applyFilters();
+      if(order.customerEmail && !customer.email){
+        customer.email = order.customerEmail;
+      }
 
-    }
+      if(order.customerPhone && !customer.phone){
+        customer.phone = order.customerPhone;
+      }
 
-    /* =========================================================
-       PAYMENT METHODS
-    ========================================================== */
+      customer.totalOrders += 1;
 
-    function populatePaymentMethods(){
-
-      const select = document.getElementById("paymentMethodFilter");
-
-      const current = select.value;
-
-      const methods = new Set();
-
-      orders.forEach(order=>{
-        if(order.paymentMethod){
-          methods.add(order.paymentMethod);
-        }
-      });
-
-      const storedMethods = readStorage(
-        "websiteDealsPaymentMethods",
-        []
-      );
-
-      storedMethods.forEach(item=>{
-        const method = firstValue(
-          item.name,
-          item.label,
-          item.method,
-          item.title
-        );
-
-        if(method){
-          methods.add(String(method));
-        }
-      });
-
-      select.innerHTML = `
-        <option value="all">All Methods</option>
-      `;
-
-      [...methods]
-        .sort((a,b)=>a.localeCompare(b))
-        .forEach(method=>{
-          const option = document.createElement("option");
-          option.value = method;
-          option.textContent = method;
-          select.appendChild(option);
-        });
+      if(order.paymentStatus === "paid"){
+        customer.totalSpent += order.amount;
+      }
 
       if(
-        [...select.options].some(
-          option => option.value === current
+        order.date &&
+        (
+          !customer.lastOrder ||
+          new Date(order.date) > new Date(customer.lastOrder)
         )
       ){
-        select.value = current;
-      }
-
-    }
-
-    /* =========================================================
-       STATS
-    ========================================================== */
-
-    function updateStats(){
-
-      const total = orders.length;
-
-      const paid = orders.filter(
-        order => order.paymentStatus === "paid"
-      ).length;
-
-      const pending = orders.filter(
-        order => order.paymentStatus === "pending"
-      ).length;
-
-      const cancelled = orders.filter(
-        order =>
-          order.orderStatus === "cancelled" ||
-          order.paymentStatus === "failed"
-      ).length;
-
-      const revenue = orders
-        .filter(order => order.paymentStatus === "paid")
-        .reduce(
-          (sum,order)=>sum + normalizeAmount(order.amount),
-          0
-        );
-
-      document.getElementById("statTotal").textContent = total;
-
-      document.getElementById("statPaid").textContent = paid;
-
-      document.getElementById("statPending").textContent = pending;
-
-      document.getElementById("statCancelled").textContent =
-        cancelled;
-
-      document.getElementById("statRevenue").textContent =
-        formatMoney(revenue);
-
-    }
-
-    /* =========================================================
-       FILTERS
-    ========================================================== */
-
-    function applyFilters(){
-
-      const search =
-        document.getElementById("searchInput")
-          .value
-          .trim()
-          .toLowerCase();
-
-      const orderStatus =
-        document.getElementById("orderStatusFilter").value;
-
-      const paymentStatus =
-        document.getElementById("paymentStatusFilter").value;
-
-      const paymentMethod =
-        document.getElementById("paymentMethodFilter").value;
-
-      const sort =
-        document.getElementById("sortFilter").value;
-
-      filteredOrders = orders.filter(order=>{
-
-        const searchText = [
-          order.id,
-          order.customer,
-          order.email,
-          order.phone,
-          order.website,
-          order.category,
-          order.paymentMethod,
-          order.paymentId
-        ]
-          .join(" ")
-          .toLowerCase();
-
-        if(
-          search &&
-          !searchText.includes(search)
-        ){
-          return false;
-        }
-
-        if(
-          orderStatus !== "all" &&
-          order.orderStatus !== orderStatus
-        ){
-          return false;
-        }
-
-        if(
-          paymentStatus !== "all" &&
-          order.paymentStatus !== paymentStatus
-        ){
-          return false;
-        }
-
-        if(
-          paymentMethod !== "all" &&
-          order.paymentMethod !== paymentMethod
-        ){
-          return false;
-        }
-
-        return true;
-
-      });
-
-      filteredOrders.sort((a,b)=>{
-
-        if(sort === "oldest"){
-          return getTimestamp(a.date) - getTimestamp(b.date);
-        }
-
-        if(sort === "amount-high"){
-          return b.amount - a.amount;
-        }
-
-        if(sort === "amount-low"){
-          return a.amount - b.amount;
-        }
-
-        if(sort === "customer"){
-          return a.customer.localeCompare(
-            b.customer
-          );
-        }
-
-        return getTimestamp(b.date) - getTimestamp(a.date);
-
-      });
-
-      currentPage = 1;
-
-      renderOrders();
-
-    }
-
-    function getTimestamp(value){
-
-      const date = normalizeDate(value);
-
-      return date
-        ? date.getTime()
-        : 0;
-
-    }
-
-    /* =========================================================
-       RENDER
-    ========================================================== */
-
-    function renderOrders(){
-
-      const start =
-        (currentPage - 1) * PAGE_SIZE;
-
-      const end =
-        start + PAGE_SIZE;
-
-      const pageOrders =
-        filteredOrders.slice(start,end);
-
-      renderDesktopTable(pageOrders);
-
-      renderMobileOrders(pageOrders);
-
-      renderPagination();
-
-      updateSelectionUI();
-
-    }
-
-    /* =========================================================
-       DESKTOP TABLE
-    ========================================================== */
-
-    function renderDesktopTable(pageOrders){
-
-      const tbody =
-        document.getElementById("ordersTableBody");
-
-      if(!pageOrders.length){
-
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="9">
-              <div class="empty">
-                <div class="empty-icon">⌕</div>
-                <h3>No orders found</h3>
-                <p>Try changing your filters or search query.</p>
-              </div>
-            </td>
-          </tr>
-        `;
-
-        return;
-      }
-
-      tbody.innerHTML =
-        pageOrders.map(order=>{
-
-          return `
-            <tr>
-
-              <td>
-                <input
-                  type="checkbox"
-                  class="check order-check"
-                  data-id="${escapeHTML(order.id)}"
-                >
-              </td>
-
-              <td>
-                <div class="order-id">
-                  ${escapeHTML(order.id)}
-                </div>
-              </td>
-
-              <td>
-
-                <div class="customer">
-
-                  <div class="customer-avatar">
-                    ${escapeHTML(
-                      getInitials(order.customer)
-                    )}
-                  </div>
-
-                  <div class="customer-info">
-
-                    <strong>
-                      ${escapeHTML(order.customer)}
-                    </strong>
-
-                    <span>
-                      ${escapeHTML(
-                        order.email ||
-                        order.phone ||
-                        "No contact"
-                      )}
-                    </span>
-
-                  </div>
-
-                </div>
-
-              </td>
-
-              <td>
-
-                <div class="website-cell">
-
-                  <strong>
-                    ${escapeHTML(order.website)}
-                  </strong>
-
-                  <span>
-                    ${escapeHTML(order.category)}
-                  </span>
-
-                </div>
-
-              </td>
-
-              <td>
-                <div class="amount">
-                  ${formatMoney(order.amount)}
-                </div>
-              </td>
-
-              <td>
-                ${paymentBadge(order.paymentStatus)}
-              </td>
-
-              <td>
-                ${orderBadge(order.orderStatus)}
-              </td>
-
-              <td>
-
-                <div class="date-cell">
-
-                  <strong>
-                    ${escapeHTML(
-                      formatDate(order.date)
-                    )}
-                  </strong>
-
-                  <span>
-                    ${escapeHTML(
-                      formatTime(order.date)
-                    )}
-                  </span>
-
-                </div>
-
-              </td>
-
-              <td>
-
-                <div class="actions">
-
-                  <button
-                    class="icon-btn"
-                    title="View / Edit"
-                    data-action="edit"
-                    data-id="${escapeHTML(order.id)}"
-                  >
-                    ✎
-                  </button>
-
-                  <button
-                    class="icon-btn"
-                    title="View Payment"
-                    data-action="payment"
-                    data-id="${escapeHTML(order.id)}"
-                  >
-                    ৳
-                  </button>
-
-                  <button
-                    class="icon-btn red"
-                    title="Delete"
-                    data-action="delete"
-                    data-id="${escapeHTML(order.id)}"
-                  >
-                    ×
-                  </button>
-
-                </div>
-
-              </td>
-
-            </tr>
-          `;
-
-        }).join("");
-
-    }
-
-    /* =========================================================
-       MOBILE
-    ========================================================== */
-
-    function renderMobileOrders(pageOrders){
-
-      const container =
-        document.getElementById("mobileOrders");
-
-      if(!pageOrders.length){
-
-        container.innerHTML = `
-          <div class="empty">
-            <div class="empty-icon">⌕</div>
-            <h3>No orders found</h3>
-            <p>Try changing your filters or search query.</p>
-          </div>
-        `;
-
-        return;
-      }
-
-      container.innerHTML =
-        pageOrders.map(order=>{
-
-          return `
-            <div class="order-card">
-
-              <div class="order-card-top">
-
-                <div>
-                  <div class="order-card-id">
-                    ${escapeHTML(order.id)}
-                  </div>
-
-                  <div class="order-card-date">
-                    ${escapeHTML(
-                      formatDate(order.date)
-                    )}
-                    ·
-                    ${escapeHTML(
-                      formatTime(order.date)
-                    )}
-                  </div>
-                </div>
-
-                ${orderBadge(order.orderStatus)}
-
-              </div>
-
-              <div class="order-card-main">
-
-                <div>
-                  <div class="mobile-label">
-                    Customer
-                  </div>
-
-                  <div class="mobile-value">
-                    ${escapeHTML(order.customer)}
-                  </div>
-                </div>
-
-                <div>
-                  <div class="mobile-label">
-                    Website
-                  </div>
-
-                  <div class="mobile-value">
-                    ${escapeHTML(order.website)}
-                  </div>
-                </div>
-
-                <div>
-                  <div class="mobile-label">
-                    Amount
-                  </div>
-
-                  <div class="mobile-value">
-                    ${formatMoney(order.amount)}
-                  </div>
-                </div>
-
-                <div>
-                  <div class="mobile-label">
-                    Payment
-                  </div>
-
-                  ${paymentBadge(order.paymentStatus)}
-
-                </div>
-
-              </div>
-
-              <div class="order-card-bottom">
-
-                <div style="font-size:10px;color:#8b9690;">
-                  ${escapeHTML(order.paymentMethod)}
-                </div>
-
-                <div class="actions">
-
-                  <button
-                    class="icon-btn"
-                    data-action="edit"
-                    data-id="${escapeHTML(order.id)}"
-                  >
-                    ✎
-                  </button>
-
-                  <button
-                    class="icon-btn"
-                    data-action="payment"
-                    data-id="${escapeHTML(order.id)}"
-                  >
-                    ৳
-                  </button>
-
-                  <button
-                    class="icon-btn red"
-                    data-action="delete"
-                    data-id="${escapeHTML(order.id)}"
-                  >
-                    ×
-                  </button>
-
-                </div>
-
-              </div>
-
-            </div>
-          `;
-
-        }).join("");
-
-    }
-
-    /* =========================================================
-       BADGES
-    ========================================================== */
-
-    function paymentBadge(status){
-
-      const safeStatus =
-        ["paid","pending","failed","refunded"]
-          .includes(status)
-          ? status
-          : "pending";
-
-      const labels = {
-        paid:"Paid",
-        pending:"Pending",
-        failed:"Failed",
-        refunded:"Refunded"
-      };
-
-      return `
-        <span class="badge ${safeStatus}">
-          <span class="badge-dot"></span>
-          ${labels[safeStatus]}
-        </span>
-      `;
-
-    }
-
-    function orderBadge(status){
-
-      const safeStatus =
-        ["new","processing","completed","cancelled"]
-          .includes(status)
-          ? status
-          : "new";
-
-      const labels = {
-        new:"New",
-        processing:"Processing",
-        completed:"Completed",
-        cancelled:"Cancelled"
-      };
-
-      return `
-        <span class="badge ${safeStatus}">
-          <span class="badge-dot"></span>
-          ${labels[safeStatus]}
-        </span>
-      `;
-
-    }
-
-    /* =========================================================
-       PAGINATION
-    ========================================================== */
-
-    function renderPagination(){
-
-      const total =
-        filteredOrders.length;
-
-      const totalPages =
-        Math.max(
-          1,
-          Math.ceil(total / PAGE_SIZE)
-        );
-
-      if(currentPage > totalPages){
-        currentPage = totalPages;
-      }
-
-      const start =
-        total === 0
-          ? 0
-          : ((currentPage - 1) * PAGE_SIZE) + 1;
-
-      const end =
-        Math.min(
-          currentPage * PAGE_SIZE,
-          total
-        );
-
-      document.getElementById("pageInfo")
-        .textContent =
-          total
-            ? `Showing ${start}–${end} of ${total} orders`
-            : "Showing 0 orders";
-
-      const buttons =
-        document.getElementById("pageButtons");
-
-      let html = "";
-
-      html += `
-        <button
-          class="page-btn"
-          data-page="${currentPage - 1}"
-          ${currentPage <= 1 ? "disabled" : ""}
-        >
-          ‹
-        </button>
-      `;
-
-      const maxVisible = 5;
-
-      let startPage =
-        Math.max(
-          1,
-          currentPage - 2
-        );
-
-      let endPage =
-        Math.min(
-          totalPages,
-          startPage + maxVisible - 1
-        );
-
-      if(endPage - startPage + 1 < maxVisible){
-        startPage =
-          Math.max(
-            1,
-            endPage - maxVisible + 1
-          );
-      }
-
-      for(let i=startPage;i<=endPage;i++){
-
-        html += `
-          <button
-            class="page-btn ${i === currentPage ? "active" : ""}"
-            data-page="${i}"
-          >
-            ${i}
-          </button>
-        `;
-
-      }
-
-      html += `
-        <button
-          class="page-btn"
-          data-page="${currentPage + 1}"
-          ${currentPage >= totalPages ? "disabled" : ""}
-        >
-          ›
-        </button>
-      `;
-
-      buttons.innerHTML = html;
-
-    }
-
-    /* =========================================================
-       SELECTION
-    ========================================================== */
-
-    function getSelectedIds(){
-
-      return [...document.querySelectorAll(".order-check:checked")]
-        .map(input => input.dataset.id);
-
-    }
-
-    function updateSelectionUI(){
-
-      const selected =
-        getSelectedIds();
-
-      document.getElementById("selectedCount")
-        .textContent = selected.length;
-
-      document.getElementById("bulkBar")
-        .classList.toggle(
-          "show",
-          selected.length > 0
-        );
-
-      const checks =
-        [...document.querySelectorAll(".order-check")];
-
-      const selectAll =
-        document.getElementById("selectAll");
-
-      selectAll.checked =
-        checks.length > 0 &&
-        checks.every(check=>check.checked);
-
-      selectAll.indeterminate =
-        selected.length > 0 &&
-        selected.length < checks.length;
-
-    }
-
-    function clearSelection(){
-
-      document
-        .querySelectorAll(".order-check")
-        .forEach(check=>{
-          check.checked = false;
-        });
-
-      document.getElementById("selectAll").checked = false;
-
-      updateSelectionUI();
-
-    }
-
-    /* =========================================================
-       FIND ORDER
-    ========================================================== */
-
-    function findOrder(id){
-
-      return orders.find(
-        order => String(order.id) === String(id)
-      );
-
-    }
-
-    /* =========================================================
-       OPEN EDIT MODAL
-    ========================================================== */
-
-    function openOrderModal(id){
-
-      const order = findOrder(id);
-
-      if(!order){
-        showToast("Order not found.","error");
-        return;
-      }
-
-      currentOrderId = order.id;
-
-      document.getElementById("modalTitle").textContent =
-        `Order ${order.id}`;
-
-      document.getElementById("modalSubtitle").textContent =
-        "Review customer, payment and order information.";
-
-      document.getElementById("formOrderId").value =
-        order.id;
-
-      document.getElementById("formDate").value =
-        `${formatDate(order.date)} ${formatTime(order.date)}`;
-
-      document.getElementById("formCustomer").value =
-        order.customer;
-
-      document.getElementById("formEmail").value =
-        order.email;
-
-      document.getElementById("formPhone").value =
-        order.phone;
-
-      document.getElementById("formWebsite").value =
-        order.website;
-
-      document.getElementById("formCategory").value =
-        order.category;
-
-      document.getElementById("formAmount").value =
-        order.amount;
-
-      document.getElementById("formOrderStatus").value =
-        order.orderStatus;
-
-      document.getElementById("formPaymentStatus").value =
-        order.paymentStatus;
-
-      document.getElementById("formPaymentMethod").value =
-        order.paymentMethod;
-
-      document.getElementById("formPaymentId").value =
-        order.paymentId;
-
-      document.getElementById("formNote").value =
-        order.note;
-
-      renderScreenshot(order.screenshot);
-
-      document.getElementById("orderModal")
-        .classList.add("show");
-
-    }
-
-    /* =========================================================
-       PAYMENT VIEW
-    ========================================================== */
-
-    function openPaymentModal(id){
-
-      const order = findOrder(id);
-
-      if(!order){
-        showToast("Order not found.","error");
-        return;
-      }
-
-      currentOrderId = order.id;
-
-      document.getElementById("modalTitle").textContent =
-        `Payment · ${order.id}`;
-
-      document.getElementById("modalSubtitle").textContent =
-        "Payment verification and order information.";
-
-      document.getElementById("formOrderId").value =
-        order.id;
-
-      document.getElementById("formDate").value =
-        `${formatDate(order.date)} ${formatTime(order.date)}`;
-
-      document.getElementById("formCustomer").value =
-        order.customer;
-
-      document.getElementById("formEmail").value =
-        order.email;
-
-      document.getElementById("formPhone").value =
-        order.phone;
-
-      document.getElementById("formWebsite").value =
-        order.website;
-
-      document.getElementById("formCategory").value =
-        order.category;
-
-      document.getElementById("formAmount").value =
-        order.amount;
-
-      document.getElementById("formOrderStatus").value =
-        order.orderStatus;
-
-      document.getElementById("formPaymentStatus").value =
-        order.paymentStatus;
-
-      document.getElementById("formPaymentMethod").value =
-        order.paymentMethod;
-
-      document.getElementById("formPaymentId").value =
-        order.paymentId;
-
-      document.getElementById("formNote").value =
-        order.note;
-
-      renderScreenshot(order.screenshot);
-
-      document.getElementById("orderModal")
-        .classList.add("show");
-
-    }
-
-    function renderScreenshot(source){
-
-      const box =
-        document.getElementById("screenshotBox");
-
-      if(!source){
-
-        box.innerHTML = `
-          <div class="no-screenshot">
-            No payment screenshot available.
-          </div>
-        `;
-
-        return;
-      }
-
-      const safeSource =
-        String(source).trim();
-
-      if(
-        !safeSource.startsWith("http://") &&
-        !safeSource.startsWith("https://") &&
-        !safeSource.startsWith("data:image/")
-      ){
-
-        box.innerHTML = `
-          <div class="no-screenshot">
-            Payment proof is available, but its image source
-            is not a valid image URL.
-          </div>
-        `;
-
-        return;
-      }
-
-      box.innerHTML = `
-        <img
-          src="${escapeHTML(safeSource)}"
-          alt="Payment Screenshot"
-          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
-        >
-
-        <div
-          class="no-screenshot"
-          style="display:none;"
-        >
-          Unable to load payment screenshot.
-        </div>
-      `;
-
-    }
-
-    /* =========================================================
-       SAVE ORDER
-    ========================================================== */
-
-    function saveCurrentOrder(){
-
-      if(!currentOrderId){
-        return;
-      }
-
-      const index =
-        orders.findIndex(
-          order =>
-            String(order.id) === String(currentOrderId)
-        );
-
-      if(index === -1){
-        showToast("Order not found.","error");
-        return;
-      }
-
-      const order = orders[index];
-
-      order.customer =
-        document.getElementById("formCustomer").value.trim();
-
-      order.email =
-        document.getElementById("formEmail").value.trim();
-
-      order.phone =
-        document.getElementById("formPhone").value.trim();
-
-      order.website =
-        document.getElementById("formWebsite").value.trim();
-
-      order.category =
-        document.getElementById("formCategory").value.trim();
-
-      order.amount =
-        normalizeAmount(
-          document.getElementById("formAmount").value
-        );
-
-      order.orderStatus =
-        normalizeOrderStatus(
-          document.getElementById("formOrderStatus").value
-        );
-
-      order.paymentStatus =
-        normalizePaymentStatus(
-          document.getElementById("formPaymentStatus").value
-        );
-
-      order.paymentMethod =
-        document.getElementById("formPaymentMethod").value.trim();
-
-      order.paymentId =
-        document.getElementById("formPaymentId").value.trim();
-
-      order.note =
-        document.getElementById("formNote").value.trim();
-
-      writeStorage(
-        ORDERS_KEY,
-        orders
-      );
-
-      syncRelatedTransactions(order);
-
-      updateStats();
-
-      populatePaymentMethods();
-
-      applyFilters();
-
-      closeModal("orderModal");
-
-      showToast(
-        `${order.id} updated successfully.`
-      );
-
-    }
-
-    /* =========================================================
-       SYNC TRANSACTIONS
-    ========================================================== */
-
-    function syncRelatedTransactions(order){
-
-      const orderId =
-        String(order.id);
-
-      const updateTransaction = transaction => {
-
-        const transactionId =
-          String(
-            firstValue(
-              transaction.id,
-              transaction.orderId,
-              transaction.transactionId,
-              transaction.reference,
-              ""
-            )
-          );
-
-        if(transactionId !== orderId){
-          return transaction;
-        }
-
-        return {
-          ...transaction,
-
-          orderId:order.id,
-
-          amount:order.amount,
-
-          total:order.amount,
-
-          status:order.paymentStatus,
-
-          paymentStatus:order.paymentStatus,
-
-          paymentMethod:order.paymentMethod,
-
-          method:order.paymentMethod,
-
-          customer:order.customer,
-
-          customerName:order.customer,
-
-          email:order.email,
-
-          website:order.website,
-
-          websiteName:order.website,
-
-          category:order.category,
-
-          updatedAt:new Date().toISOString()
-
-        };
-
-      };
-
-      if(transactions.length){
-        transactions =
-          transactions.map(updateTransaction);
-
-        writeStorage(
-          TRANSACTIONS_KEY,
-          transactions
-        );
-      }
-
-      if(paymentTransactions.length){
-
-        paymentTransactions =
-          paymentTransactions.map(updateTransaction);
-
-        writeStorage(
-          PAYMENT_TRANSACTIONS_KEY,
-          paymentTransactions
-        );
-
-      }
-
-    }
-
-    /* =========================================================
-       DELETE
-    ========================================================== */
-
-    function requestDelete(id){
-
-      const order = findOrder(id);
-
-      if(!order){
-        showToast("Order not found.","error");
-        return;
-      }
-
-      pendingDeleteId = order.id;
-
-      document.getElementById("deleteOrderText")
-        .textContent =
-          `${order.id} · ${order.customer}`;
-
-      document.getElementById("deleteModal")
-        .classList.add("show");
-
-    }
-
-    function confirmDelete(){
-
-      if(!pendingDeleteId){
-        return;
-      }
-
-      const id = pendingDeleteId;
-
-      orders =
-        orders.filter(
-          order =>
-            String(order.id) !== String(id)
-        );
-
-      writeStorage(
-        ORDERS_KEY,
-        orders
-      );
-
-      pendingDeleteId = null;
-
-      closeModal("deleteModal");
-
-      updateStats();
-
-      populatePaymentMethods();
-
-      applyFilters();
-
-      showToast(
-        `${id} deleted successfully.`
-      );
-
-    }
-
-    /* =========================================================
-       BULK UPDATE
-    ========================================================== */
-
-    function bulkUpdate(status){
-
-      const selected =
-        getSelectedIds();
-
-      if(!selected.length){
-        return;
-      }
-
-      let changed = 0;
-
-      orders.forEach(order=>{
-
-        if(
-          selected.includes(
-            String(order.id)
-          )
-        ){
-
-          order.orderStatus = status;
-
-          changed++;
-
-        }
-
-      });
-
-      writeStorage(
-        ORDERS_KEY,
-        orders
-      );
-
-      clearSelection();
-
-      updateStats();
-
-      applyFilters();
-
-      showToast(
-        `${changed} order${changed > 1 ? "s" : ""} updated.`
-      );
-
-    }
-
-    function bulkDelete(){
-
-      const selected =
-        getSelectedIds();
-
-      if(!selected.length){
-        return;
+        customer.lastOrder = order.date;
       }
 
       if(
-        !confirm(
-          `Delete ${selected.length} selected order${selected.length > 1 ? "s" : ""}?`
+        order.date &&
+        (
+          !customer.joined ||
+          new Date(order.date) < new Date(customer.joined)
         )
       ){
-        return;
+        customer.joined = order.date;
       }
-
-      orders =
-        orders.filter(
-          order =>
-            !selected.includes(
-              String(order.id)
-            )
-        );
-
-      writeStorage(
-        ORDERS_KEY,
-        orders
-      );
-
-      clearSelection();
-
-      updateStats();
-
-      applyFilters();
-
-      showToast(
-        `${selected.length} order${selected.length > 1 ? "s" : ""} deleted.`
-      );
-
-    }
-
-    /* =========================================================
-       CSV
-    ========================================================== */
-
-    function exportCSV(){
-
-      if(!filteredOrders.length){
-
-        showToast(
-          "There are no orders to export.",
-          "error"
-        );
-
-        return;
-      }
-
-      const headers = [
-        "Order ID",
-        "Customer",
-        "Email",
-        "Phone",
-        "Website",
-        "Category",
-        "Amount",
-        "Payment Status",
-        "Order Status",
-        "Payment Method",
-        "Payment Transaction ID",
-        "Date",
-        "Note"
-      ];
-
-      const rows =
-        filteredOrders.map(order=>[
-          order.id,
-          order.customer,
-          order.email,
-          order.phone,
-          order.website,
-          order.category,
-          order.amount,
-          order.paymentStatus,
-          order.orderStatus,
-          order.paymentMethod,
-          order.paymentId,
-          formatDate(order.date),
-          order.note
-        ]);
-
-      const csv = [
-        headers,
-        ...rows
-      ]
-      .map(row =>
-        row.map(value=>{
-          const text =
-            String(value ?? "");
-
-          return `"${text.replace(/"/g,'""')}"`;
-        }).join(",")
-      )
-      .join("\n");
-
-      const blob =
-        new Blob(
-          ["\ufeff" + csv],
-          {
-            type:"text/csv;charset=utf-8;"
-          }
-        );
-
-      const url =
-        URL.createObjectURL(blob);
-
-      const link =
-        document.createElement("a");
-
-      link.href = url;
-
-      link.download =
-        `website-deals-orders-${new Date().toISOString().slice(0,10)}.csv`;
-
-      document.body.appendChild(link);
-
-      link.click();
-
-      link.remove();
-
-      URL.revokeObjectURL(url);
-
-      showToast(
-        "Orders exported as CSV."
-      );
-
-    }
-
-    /* =========================================================
-       MODAL
-    ========================================================== */
-
-    function closeModal(id){
-
-      document
-        .getElementById(id)
-        .classList.remove("show");
-
-    }
-
-    /* =========================================================
-       SIDEBAR
-    ========================================================== */
-
-    function openSidebar(){
-
-      document
-        .getElementById("sidebar")
-        .classList.add("open");
-
-      document
-        .getElementById("sidebarOverlay")
-        .classList.add("show");
-
-    }
-
-    function closeSidebar(){
-
-      document
-        .getElementById("sidebar")
-        .classList.remove("open");
-
-      document
-        .getElementById("sidebarOverlay")
-        .classList.remove("show");
-
-    }
-
-    /* =========================================================
-       RESET FILTERS
-    ========================================================== */
-
-    function resetFilters(){
-
-      document.getElementById("searchInput").value = "";
-
-      document.getElementById("orderStatusFilter").value =
-        "all";
-
-      document.getElementById("paymentStatusFilter").value =
-        "all";
-
-      document.getElementById("paymentMethodFilter").value =
-        "all";
-
-      document.getElementById("sortFilter").value =
-        "newest";
-
-      applyFilters();
-
-    }
-
-    /* =========================================================
-       EVENT LISTENERS
-    ========================================================== */
-
-    document.addEventListener("DOMContentLoaded",()=>{
-
-      setupAdminIdentity();
-
-      loadData();
-
-      /* Search */
-
-      document.getElementById("searchInput")
-        .addEventListener("input",()=>{
-          applyFilters();
-        });
-
-      /* Filters */
-
-      [
-        "orderStatusFilter",
-        "paymentStatusFilter",
-        "paymentMethodFilter",
-        "sortFilter"
-      ].forEach(id=>{
-
-        document.getElementById(id)
-          .addEventListener("change",()=>{
-            applyFilters();
-          });
-
-      });
-
-      /* Reset */
-
-      document.getElementById("resetFiltersBtn")
-        .addEventListener("click",()=>{
-          resetFilters();
-        });
-
-      /* Refresh */
-
-      document.getElementById("refreshBtn")
-        .addEventListener("click",()=>{
-
-          loadData();
-
-          showToast(
-            "Orders refreshed."
-          );
-
-        });
-
-      /* Export */
-
-      document.getElementById("exportBtn")
-        .addEventListener("click",()=>{
-          exportCSV();
-        });
-
-      /* Print */
-
-      document.getElementById("printBtn")
-        .addEventListener("click",()=>{
-          window.print();
-        });
-
-      /* Mobile sidebar */
-
-      document.getElementById("mobileMenu")
-        .addEventListener("click",()=>{
-          openSidebar();
-        });
-
-      document.getElementById("sidebarOverlay")
-        .addEventListener("click",()=>{
-          closeSidebar();
-        });
-
-      /* Logout */
-
-      document.getElementById("logoutBtn")
-        .addEventListener("click",()=>{
-
-          sessionStorage.removeItem(
-            AUTH_KEY
-          );
-
-          window.location.href =
-            "login/";
-
-        });
-
-      /* Select all */
-
-      document.getElementById("selectAll")
-        .addEventListener("change",(event)=>{
-
-          document
-            .querySelectorAll(".order-check")
-            .forEach(check=>{
-              check.checked =
-                event.target.checked;
-            });
-
-          updateSelectionUI();
-
-        });
-
-      /* Bulk buttons */
-
-      document.getElementById("bulkProcessing")
-        .addEventListener("click",()=>{
-          bulkUpdate("processing");
-        });
-
-      document.getElementById("bulkCompleted")
-        .addEventListener("click",()=>{
-          bulkUpdate("completed");
-        });
-
-      document.getElementById("bulkCancelled")
-        .addEventListener("click",()=>{
-          bulkUpdate("cancelled");
-        });
-
-      document.getElementById("bulkDelete")
-        .addEventListener("click",()=>{
-          bulkDelete();
-        });
-
-      /* Save */
-
-      document.getElementById("saveOrderBtn")
-        .addEventListener("click",()=>{
-          saveCurrentOrder();
-        });
-
-      /* Delete from modal */
-
-      document.getElementById("modalDeleteBtn")
-        .addEventListener("click",()=>{
-
-          if(currentOrderId){
-
-            closeModal("orderModal");
-
-            requestDelete(
-              currentOrderId
-            );
-
-          }
-
-        });
-
-      /* Confirm delete */
-
-      document.getElementById("confirmDeleteBtn")
-        .addEventListener("click",()=>{
-          confirmDelete();
-        });
-
-      /* Close buttons */
-
-      document.addEventListener("click",(event)=>{
-
-        const closeTarget =
-          event.target.closest("[data-close]");
-
-        if(closeTarget){
-
-          closeModal(
-            closeTarget.dataset.close
-          );
-
-          return;
-        }
-
-        const actionButton =
-          event.target.closest("[data-action]");
-
-        if(actionButton){
-
-          const action =
-            actionButton.dataset.action;
-
-          const id =
-            actionButton.dataset.id;
-
-          if(action === "edit"){
-            openOrderModal(id);
-          }
-
-          if(action === "payment"){
-            openPaymentModal(id);
-          }
-
-          if(action === "delete"){
-            requestDelete(id);
-          }
-
-        }
-
-        const pageButton =
-          event.target.closest("[data-page]");
-
-        if(
-          pageButton &&
-          pageButton.classList.contains("page-btn") &&
-          !pageButton.disabled
-        ){
-
-          const page =
-            Number(pageButton.dataset.page);
-
-          if(page > 0){
-
-            currentPage = page;
-
-            renderOrders();
-
-            window.scrollTo({
-              top:0,
-              behavior:"smooth"
-            });
-
-          }
-
-        }
-
-      });
-
-      /* Checkboxes */
-
-      document.addEventListener("change",(event)=>{
-
-        if(
-          event.target.classList.contains("order-check")
-        ){
-
-          updateSelectionUI();
-
-        }
-
-      });
-
-      /* Close modal when clicking outside */
-
-      document
-        .querySelectorAll(".modal-backdrop")
-        .forEach(backdrop=>{
-
-          backdrop.addEventListener("click",(event)=>{
-
-            if(event.target === backdrop){
-              backdrop.classList.remove("show");
-            }
-
-          });
-
-        });
-
-      /* Escape */
-
-      document.addEventListener("keydown",(event)=>{
-
-        if(event.key !== "Escape"){
-          return;
-        }
-
-        document
-          .querySelectorAll(".modal-backdrop.show")
-          .forEach(modal=>{
-            modal.classList.remove("show");
-          });
-
-        closeSidebar();
-
-      });
-
-      /* Close mobile sidebar after navigation */
-
-      document
-        .querySelectorAll(".nav-item")
-        .forEach(item=>{
-          item.addEventListener("click",()=>{
-            closeSidebar();
-          });
-        });
 
     });
 
-  </script>
+    if(derived.size){
+
+      customers = Array.from(derived.values()).map((customer,index) => ({
+        ...customer,
+        id:`CUS-${1001 + index}`
+      }));
+
+    }else{
+
+      customers = demoCustomers().map(item => ({
+        ...item,
+        totalOrders:0,
+        totalSpent:0,
+        lastOrder:""
+      }));
+
+    }
+
+  }
+
+  recalculateCustomers();
+}
+
+/* =========================================================
+   RECALCULATE CUSTOMER AGGREGATES
+========================================================= */
+
+function recalculateCustomers(){
+
+  const normalizedOrders = orders.map(normalizeOrder);
+
+  customers = customers.map(customer => {
+
+    const related = normalizedOrders.filter(order =>
+      sameCustomer(customer,order)
+    );
+
+    let totalSpent = 0;
+
+    related.forEach(order => {
+
+      if(order.paymentStatus === "paid"){
+        totalSpent += order.amount;
+      }
+
+    });
+
+    const lastOrder = related
+      .filter(order => order.date)
+      .sort((a,b) =>
+        new Date(b.date) - new Date(a.date)
+      )[0];
+
+    return {
+      ...customer,
+      totalOrders:related.length || Number(customer.totalOrders) || 0,
+      totalSpent:related.length ? totalSpent : Number(customer.totalSpent) || 0,
+      lastOrder:lastOrder?.date || customer.lastOrder || ""
+    };
+
+  });
+}
+
+/* =========================================================
+   NEW / RETURNING
+========================================================= */
+
+function isNewCustomer(customer){
+
+  if(!customer.joined) return false;
+
+  const date = new Date(customer.joined);
+
+  if(Number.isNaN(date.getTime())) return false;
+
+  const now = new Date();
+  const diff = now.getTime() - date.getTime();
+
+  return diff >= 0 && diff <= 30 * 24 * 60 * 60 * 1000;
+}
+
+function isReturning(customer){
+  return Number(customer.totalOrders) >= 2;
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+  const total = customers.length;
+
+  const active = customers.filter(c =>
+    normalizeStatus(c.status) === "active"
+  ).length;
+
+  const fresh = customers.filter(isNewCustomer).length;
+
+  const revenue = customers.reduce(
+    (sum,c) => sum + (Number(c.totalSpent) || 0),
+    0
+  );
+
+  const returning = customers.filter(isReturning).length;
+
+  document.getElementById("statTotal").textContent =
+    total.toLocaleString();
+
+  document.getElementById("statActive").textContent =
+    active.toLocaleString();
+
+  document.getElementById("statNew").textContent =
+    fresh.toLocaleString();
+
+  document.getElementById("statRevenue").textContent =
+    money(revenue);
+
+  document.getElementById("statReturning").textContent =
+    returning.toLocaleString();
+}
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function applyFilters(){
+
+  const search = normalizeText(
+    document.getElementById("searchInput").value
+  ).toLowerCase();
+
+  const status = document.getElementById("statusFilter").value;
+  const type = document.getElementById("typeFilter").value;
+  const sort = document.getElementById("sortFilter").value;
+
+  filteredCustomers = customers.filter(customer => {
+
+    const searchable = [
+      customer.id,
+      customer.name,
+      customer.email,
+      customer.phone
+    ]
+    .join(" ")
+    .toLowerCase();
+
+    if(search && !searchable.includes(search)){
+      return false;
+    }
+
+    if(
+      status !== "all" &&
+      normalizeStatus(customer.status) !== status
+    ){
+      return false;
+    }
+
+    if(type === "new" && !isNewCustomer(customer)){
+      return false;
+    }
+
+    if(type === "returning" && !isReturning(customer)){
+      return false;
+    }
+
+    return true;
+
+  });
+
+  filteredCustomers.sort((a,b) => {
+
+    switch(sort){
+
+      case "oldest":
+        return new Date(a.joined || 0) - new Date(b.joined || 0);
+
+      case "spendingHigh":
+        return Number(b.totalSpent) - Number(a.totalSpent);
+
+      case "spendingLow":
+        return Number(a.totalSpent) - Number(b.totalSpent);
+
+      case "ordersHigh":
+        return Number(b.totalOrders) - Number(a.totalOrders);
+
+      case "ordersLow":
+        return Number(a.totalOrders) - Number(b.totalOrders);
+
+      case "nameAZ":
+        return a.name.localeCompare(b.name);
+
+      case "nameZA":
+        return b.name.localeCompare(a.name);
+
+      case "newest":
+      default:
+        return new Date(b.joined || 0) - new Date(a.joined || 0);
+
+    }
+
+  });
+
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredCustomers.length / PAGE_SIZE)
+  );
+
+  if(currentPage > totalPages){
+    currentPage = totalPages;
+  }
+
+  renderCustomers();
+}
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderCustomers(){
+
+  const tbody = document.getElementById("customerTableBody");
+  const mobileList = document.getElementById("mobileList");
+  const emptyState = document.getElementById("emptyState");
+
+  tbody.innerHTML = "";
+  mobileList.innerHTML = "";
+
+  const start = (currentPage - 1) * PAGE_SIZE;
+  const visible = filteredCustomers.slice(
+    start,
+    start + PAGE_SIZE
+  );
+
+  document.getElementById("resultLabel").textContent =
+    `${filteredCustomers.length.toLocaleString()} customer${filteredCustomers.length === 1 ? "" : "s"} found`;
+
+  if(!visible.length){
+
+    emptyState.style.display = "block";
+
+  }else{
+
+    emptyState.style.display = "none";
+
+    visible.forEach(customer => {
+
+      tbody.insertAdjacentHTML(
+        "beforeend",
+        customerRow(customer)
+      );
+
+      mobileList.insertAdjacentHTML(
+        "beforeend",
+        customerMobileCard(customer)
+      );
+
+    });
+
+  }
+
+  const from = filteredCustomers.length
+    ? start + 1
+    : 0;
+
+  const to = Math.min(
+    start + PAGE_SIZE,
+    filteredCustomers.length
+  );
+
+  document.getElementById("pageInfo").textContent =
+    `Showing ${from}-${to} of ${filteredCustomers.length} customers`;
+
+  renderPagination();
+  updateBulkState();
+  syncSelectAll();
+}
+
+function customerRow(customer){
+
+  const status = normalizeStatus(customer.status);
+
+  const avatar = customer.avatar
+    ? `<img src="${escapeHTML(customer.avatar)}" alt="${escapeHTML(customer.name)}">`
+    : escapeHTML(initials(customer.name));
+
+  return `
+    <tr>
+      <td>
+        <input
+          type="checkbox"
+          class="check customer-check"
+          data-id="${escapeHTML(customer.id)}"
+        >
+      </td>
+
+      <td>
+        <div class="customer-cell">
+
+          <div class="customer-avatar">
+            ${avatar}
+          </div>
+
+          <div class="customer-info">
+            <strong>${escapeHTML(customer.name)}</strong>
+            <span>${escapeHTML(customer.id)}</span>
+          </div>
+
+        </div>
+      </td>
+
+      <td>
+        <div class="contact-cell">
+          <span>${escapeHTML(customer.email || "No email")}</span>
+          <small>${escapeHTML(customer.phone || "No phone")}</small>
+        </div>
+      </td>
+
+      <td>
+        <strong>${Number(customer.totalOrders || 0)}</strong>
+      </td>
+
+      <td>
+        <span class="money">${money(customer.totalSpent)}</span>
+      </td>
+
+      <td>
+        <span class="muted">${formatDate(customer.lastOrder)}</span>
+      </td>
+
+      <td>
+        <span class="status ${statusClass(status)}">
+          ${escapeHTML(status)}
+        </span>
+      </td>
+
+      <td>
+        <span class="muted">${formatDate(customer.joined)}</span>
+      </td>
+
+      <td>
+        <div class="actions">
+
+          <button
+            class="action-btn"
+            title="View customer"
+            onclick="openCustomer('${escapeHTML(customer.id)}', false)"
+          >
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+              <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
+              <circle cx="12" cy="12" r="2.5"></circle>
+            </svg>
+          </button>
+
+          <button
+            class="action-btn"
+            title="Edit customer"
+            onclick="openCustomer('${escapeHTML(customer.id)}', true)"
+          >
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+              <path d="m4 20 4.5-1 10.7-10.7a2 2 0 0 0-2.8-2.8L5.7 16.2 4 20Z"></path>
+              <path d="m14.5 6.5 3 3"></path>
+            </svg>
+          </button>
+
+          <button
+            class="action-btn danger"
+            title="Delete customer"
+            onclick="requestDelete('${escapeHTML(customer.id)}')"
+          >
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+              <path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"></path>
+            </svg>
+          </button>
+
+        </div>
+      </td>
+    </tr>
+  `;
+}
+
+function customerMobileCard(customer){
+
+  const status = normalizeStatus(customer.status);
+
+  const avatar = customer.avatar
+    ? `<img src="${escapeHTML(customer.avatar)}" alt="${escapeHTML(customer.name)}">`
+    : escapeHTML(initials(customer.name));
+
+  return `
+    <div class="customer-card">
+
+      <div class="customer-card-top">
+
+        <input
+          type="checkbox"
+          class="check customer-check"
+          data-id="${escapeHTML(customer.id)}"
+        >
+
+        <div class="customer-avatar">
+          ${avatar}
+        </div>
+
+        <div class="customer-card-info">
+
+          <div class="customer-card-name">
+            <strong>${escapeHTML(customer.name)}</strong>
+
+            <span class="status ${statusClass(status)}">
+              ${escapeHTML(status)}
+            </span>
+          </div>
+
+          <div class="customer-card-email">
+            ${escapeHTML(customer.email || customer.phone || "No contact information")}
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="customer-card-stats">
+
+        <div class="mini-stat">
+          <span>Orders</span>
+          <strong>${Number(customer.totalOrders || 0)}</strong>
+        </div>
+
+        <div class="mini-stat">
+          <span>Spent</span>
+          <strong>${money(customer.totalSpent)}</strong>
+        </div>
+
+        <div class="mini-stat">
+          <span>Last Order</span>
+          <strong>${escapeHTML(formatDate(customer.lastOrder))}</strong>
+        </div>
+
+      </div>
+
+      <div class="customer-card-bottom">
+
+        <div class="customer-card-date">
+          Joined ${escapeHTML(formatDate(customer.joined))}
+        </div>
+
+        <div class="actions">
+
+          <button
+            class="action-btn"
+            onclick="openCustomer('${escapeHTML(customer.id)}', false)"
+          >
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+              <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
+              <circle cx="12" cy="12" r="2.5"></circle>
+            </svg>
+          </button>
+
+          <button
+            class="action-btn"
+            onclick="openCustomer('${escapeHTML(customer.id)}', true)"
+          >
+            <svg fill="none" viewBox="0 0 24 24" stroke-width="1.8">
+              <path d="m4 20 4.5-1 10.7-10.7a2 2 0 0 0-2.8-2.8L5.7 16.2 4 20Z"></path>
+              <path d="m14.5 6.5 3 3"></path>
+            </svg>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+function renderPagination(){
+
+  const container = document.getElementById("pageButtons");
+
+  const totalPages = Math.max(
+    1,
+    Math.ceil(filteredCustomers.length / PAGE_SIZE)
+  );
+
+  container.innerHTML = "";
+
+  const previous = document.createElement("button");
+
+  previous.className = "page-btn";
+  previous.textContent = "‹";
+  previous.disabled = currentPage <= 1;
+
+  previous.addEventListener("click",() => {
+    if(currentPage > 1){
+      currentPage--;
+      renderCustomers();
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+  });
+
+  container.appendChild(previous);
+
+  let startPage = Math.max(1,currentPage - 2);
+  let endPage = Math.min(totalPages,startPage + 4);
+
+  if(endPage - startPage < 4){
+    startPage = Math.max(1,endPage - 4);
+  }
+
+  for(let i=startPage;i<=endPage;i++){
+
+    const button = document.createElement("button");
+
+    button.className =
+      "page-btn" +
+      (i === currentPage ? " active" : "");
+
+    button.textContent = i;
+
+    button.addEventListener("click",() => {
+      currentPage = i;
+      renderCustomers();
+    });
+
+    container.appendChild(button);
+  }
+
+  const next = document.createElement("button");
+
+  next.className = "page-btn";
+  next.textContent = "›";
+  next.disabled = currentPage >= totalPages;
+
+  next.addEventListener("click",() => {
+
+    if(currentPage < totalPages){
+      currentPage++;
+      renderCustomers();
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+
+  });
+
+  container.appendChild(next);
+}
+
+/* =========================================================
+   SELECTION
+========================================================= */
+
+function getSelectedIds(){
+
+  return Array.from(
+    document.querySelectorAll(".customer-check:checked")
+  ).map(input => input.dataset.id);
+
+}
+
+function updateBulkState(){
+
+  const ids = getSelectedIds();
+
+  const bulkBar = document.getElementById("bulkBar");
+  const selectedCount = document.getElementById("selectedCount");
+
+  if(ids.length){
+
+    bulkBar.classList.add("show");
+    selectedCount.textContent =
+      `${ids.length} customer${ids.length === 1 ? "" : "s"} selected`;
+
+  }else{
+
+    bulkBar.classList.remove("show");
+    selectedCount.textContent = "0 selected";
+
+  }
+
+}
+
+function syncSelectAll(){
+
+  const visibleChecks =
+    Array.from(document.querySelectorAll(".customer-check"));
+
+  const checked =
+    visibleChecks.filter(input => input.checked);
+
+  const selectAll =
+    document.getElementById("selectAll");
+
+  selectAll.checked =
+    visibleChecks.length > 0 &&
+    checked.length === visibleChecks.length;
+
+  selectAll.indeterminate =
+    checked.length > 0 &&
+    checked.length < visibleChecks.length;
+}
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openCustomer(id = null, edit = true){
+
+  editingCustomerId = id;
+
+  const modal = document.getElementById("customerModal");
+  const summary = document.getElementById("customerSummary");
+  const historySection = document.getElementById("historySection");
+  const deleteBtn = document.getElementById("modalDeleteBtn");
+
+  if(id){
+
+    const customer = customers.find(
+      item => String(item.id) === String(id)
+    );
+
+    if(!customer) return;
+
+    document.getElementById("modalTitle").textContent =
+      edit ? "Edit Customer" : "Customer Profile";
+
+    document.getElementById("modalSubtitle").textContent =
+      edit
+        ? "Update customer information and account status."
+        : "Review customer profile and order history.";
+
+    fillCustomerForm(customer);
+
+    summary.style.display = "grid";
+    historySection.style.display = "block";
+    deleteBtn.style.display = edit ? "inline-flex" : "none";
+
+    renderCustomerHistory(customer);
+
+    setFormReadonly(!edit);
+
+  }else{
+
+    document.getElementById("modalTitle").textContent =
+      "Add Customer";
+
+    document.getElementById("modalSubtitle").textContent =
+      "Create a new customer profile.";
+
+    clearCustomerForm();
+
+    summary.style.display = "none";
+    historySection.style.display = "none";
+    deleteBtn.style.display = "none";
+
+    setFormReadonly(false);
+
+  }
+
+  modal.classList.add("show");
+  document.body.style.overflow = "hidden";
+}
+
+function fillCustomerForm(customer){
+
+  document.getElementById("customerId").value =
+    customer.id || "";
+
+  document.getElementById("customerStatus").value =
+    normalizeStatus(customer.status);
+
+  document.getElementById("customerName").value =
+    customer.name || "";
+
+  document.getElementById("customerEmail").value =
+    customer.email || "";
+
+  document.getElementById("customerPhone").value =
+    customer.phone || "";
+
+  document.getElementById("customerJoined").value =
+    inputDate(customer.joined);
+
+  document.getElementById("customerAddress").value =
+    customer.address || "";
+
+  document.getElementById("customerNote").value =
+    customer.note || "";
+
+  document.getElementById("customerAvatar").value =
+    customer.avatar || "";
+
+  document.getElementById("summaryOrders").textContent =
+    Number(customer.totalOrders || 0);
+
+  document.getElementById("summarySpent").textContent =
+    money(customer.totalSpent);
+
+  document.getElementById("summaryLastOrder").textContent =
+    formatDate(customer.lastOrder);
+
+}
+
+function clearCustomerForm(){
+
+  document.getElementById("customerId").value =
+    nextCustomerId();
+
+  document.getElementById("customerStatus").value =
+    "active";
+
+  document.getElementById("customerName").value = "";
+  document.getElementById("customerEmail").value = "";
+  document.getElementById("customerPhone").value = "";
+
+  const today = new Date();
+
+  document.getElementById("customerJoined").value =
+    inputDate(today);
+
+  document.getElementById("customerAddress").value = "";
+  document.getElementById("customerNote").value = "";
+  document.getElementById("customerAvatar").value = "";
+
+  document.getElementById("summaryOrders").textContent = "0";
+  document.getElementById("summarySpent").textContent = "৳0";
+  document.getElementById("summaryLastOrder").textContent = "—";
+
+}
+
+function setFormReadonly(readonly){
+
+  [
+    "customerId",
+    "customerStatus",
+    "customerName",
+    "customerEmail",
+    "customerPhone",
+    "customerJoined",
+    "customerAddress",
+    "customerNote",
+    "customerAvatar"
+  ].forEach(id => {
+
+    const element = document.getElementById(id);
+
+    element.disabled = readonly;
+
+  });
+
+  document.getElementById("saveCustomerBtn").style.display =
+    readonly ? "none" : "inline-flex";
+
+}
+
+function closeCustomerModal(){
+
+  document.getElementById("customerModal")
+    .classList.remove("show");
+
+  document.body.style.overflow = "";
+
+  editingCustomerId = null;
+
+}
+
+function nextCustomerId(){
+
+  let highest = 1000;
+
+  customers.forEach(customer => {
+
+    const match =
+      String(customer.id || "").match(/CUS-(\d+)/i);
+
+    if(match){
+      highest = Math.max(
+        highest,
+        Number(match[1])
+      );
+    }
+
+  });
+
+  return `CUS-${highest + 1}`;
+
+}
+
+/* =========================================================
+   ORDER HISTORY
+========================================================= */
+
+function renderCustomerHistory(customer){
+
+  const historyList =
+    document.getElementById("historyList");
+
+  const historyCount =
+    document.getElementById("historyCount");
+
+  const relatedOrders =
+    orders
+      .map(normalizeOrder)
+      .filter(order =>
+        sameCustomer(customer,order)
+      )
+      .sort((a,b) =>
+        new Date(b.date || 0) -
+        new Date(a.date || 0)
+      );
+
+  historyCount.textContent =
+    `${relatedOrders.length} order${relatedOrders.length === 1 ? "" : "s"}`;
+
+  if(!relatedOrders.length){
+
+    historyList.innerHTML = `
+      <div style="
+        padding:25px;
+        text-align:center;
+        color:var(--muted);
+        font-size:10px;
+      ">
+        No order history available.
+      </div>
+    `;
+
+    return;
+  }
+
+  historyList.innerHTML = `
+    <div class="history-row head">
+      <div>Order</div>
+      <div>Website</div>
+      <div>Amount</div>
+      <div>Status</div>
+    </div>
+
+    ${relatedOrders.map(order => {
+
+      const status =
+        normalizeOrderStatus(order.orderStatus);
+
+      return `
+        <div class="history-row">
+
+          <div>
+            <strong>${escapeHTML(order.id)}</strong>
+            <div class="muted" style="margin-top:3px;">
+              ${escapeHTML(formatDate(order.date))}
+            </div>
+          </div>
+
+          <div>
+            ${escapeHTML(order.website || "Website")}
+            <div class="muted" style="margin-top:3px;">
+              ${escapeHTML(order.category || "")}
+            </div>
+          </div>
+
+          <div>
+            <strong>${money(order.amount)}</strong>
+          </div>
+
+          <div>
+            <span class="status ${
+              status === "cancelled"
+                ? "suspended"
+                : status === "completed"
+                  ? "active"
+                  : "inactive"
+            }">
+              ${escapeHTML(status)}
+            </span>
+          </div>
+
+        </div>
+      `;
+
+    }).join("")}
+  `;
+
+}
+
+/* =========================================================
+   SAVE CUSTOMER
+========================================================= */
+
+function saveCustomer(){
+
+  const id =
+    normalizeText(
+      document.getElementById("customerId").value
+    );
+
+  const name =
+    normalizeText(
+      document.getElementById("customerName").value
+    );
+
+  const email =
+    normalizeText(
+      document.getElementById("customerEmail").value
+    );
+
+  const phone =
+    normalizeText(
+      document.getElementById("customerPhone").value
+    );
+
+  const status =
+    normalizeStatus(
+      document.getElementById("customerStatus").value
+    );
+
+  const joined =
+    document.getElementById("customerJoined").value;
+
+  if(!id){
+    showToast(
+      "Customer ID required",
+      "Please enter a customer ID.",
+      "error"
+    );
+    return;
+  }
+
+  if(!name){
+    showToast(
+      "Name required",
+      "Please enter the customer's full name.",
+      "error"
+    );
+    return;
+  }
+
+  if(!email && !phone){
+    showToast(
+      "Contact required",
+      "Add at least an email address or phone number.",
+      "error"
+    );
+    return;
+  }
+
+  const duplicate = customers.find(customer =>
+    String(customer.id).toLowerCase() === id.toLowerCase() &&
+    String(customer.id).toLowerCase() !== String(editingCustomerId || "").toLowerCase()
+  );
+
+  if(duplicate){
+
+    showToast(
+      "Duplicate Customer ID",
+      "This customer ID already exists.",
+      "error"
+    );
+
+    return;
+  }
+
+  const duplicateEmail = email &&
+    customers.find(customer =>
+      normalizeText(customer.email).toLowerCase() === email.toLowerCase() &&
+      String(customer.id).toLowerCase() !== String(editingCustomerId || "").toLowerCase()
+    );
+
+  if(duplicateEmail){
+
+    showToast(
+      "Duplicate email",
+      "Another customer already uses this email address.",
+      "error"
+    );
+
+    return;
+  }
+
+  const existing =
+    editingCustomerId
+      ? customers.find(
+          customer =>
+            String(customer.id) === String(editingCustomerId)
+        )
+      : null;
+
+  const relatedOrders =
+    orders
+      .map(normalizeOrder)
+      .filter(order =>
+        sameCustomer(
+          {
+            name,
+            email,
+            phone
+          },
+          order
+        )
+      );
+
+  let totalSpent = 0;
+
+  relatedOrders.forEach(order => {
+
+    if(order.paymentStatus === "paid"){
+      totalSpent += order.amount;
+    }
+
+  });
+
+  const lastOrder =
+    relatedOrders
+      .filter(order => order.date)
+      .sort(
+        (a,b) =>
+          new Date(b.date) -
+          new Date(a.date)
+      )[0];
+
+  const customer = {
+
+    id,
+
+    name,
+
+    email,
+
+    phone,
+
+    status,
+
+    joined:
+      joined
+        ? new Date(joined + "T00:00:00").toISOString()
+        : existing?.joined || new Date().toISOString(),
+
+    address:
+      normalizeText(
+        document.getElementById("customerAddress").value
+      ),
+
+    note:
+      normalizeText(
+        document.getElementById("customerNote").value
+      ),
+
+    avatar:
+      normalizeText(
+        document.getElementById("customerAvatar").value
+      ),
+
+    totalOrders:
+      relatedOrders.length ||
+      Number(existing?.totalOrders) ||
+      0,
+
+    totalSpent:
+      relatedOrders.length
+        ? totalSpent
+        : Number(existing?.totalSpent) || 0,
+
+    lastOrder:
+      lastOrder?.date ||
+      existing?.lastOrder ||
+      "",
+
+    explicit:true
+
+  };
+
+  if(existing){
+
+    customers =
+      customers.map(item =>
+        String(item.id) === String(editingCustomerId)
+          ? customer
+          : item
+      );
+
+  }else{
+
+    customers.unshift(customer);
+
+  }
+
+  saveJSON(CUSTOMER_KEY,customers);
+
+  recalculateCustomers();
+  updateStats();
+
+  closeCustomerModal();
+  applyFilters();
+
+  showToast(
+    "Customer saved",
+    `${name} has been saved successfully.`,
+    "success"
+  );
+
+}
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+function requestDelete(id){
+
+  deleteTargetId = id;
+
+  const customer =
+    customers.find(
+      item => String(item.id) === String(id)
+    );
+
+  if(!customer) return;
+
+  document.querySelector("#deleteModal .confirm-text h3")
+    .textContent =
+      `Delete ${customer.name}?`;
+
+  document.querySelector("#deleteModal .confirm-text p")
+    .textContent =
+      "This will remove the customer profile from the customer directory. Existing order records will remain untouched.";
+
+  document.getElementById("deleteModal")
+    .classList.add("show");
+
+  document.body.style.overflow = "hidden";
+}
+
+function closeDeleteModal(){
+
+  document.getElementById("deleteModal")
+    .classList.remove("show");
+
+  document.body.style.overflow = "";
+
+  deleteTargetId = null;
+
+}
+
+function deleteCustomer(id){
+
+  const customer =
+    customers.find(
+      item => String(item.id) === String(id)
+    );
+
+  if(!customer) return;
+
+  customers =
+    customers.filter(
+      item => String(item.id) !== String(id)
+    );
+
+  saveJSON(CUSTOMER_KEY,customers);
+
+  recalculateCustomers();
+  updateStats();
+
+  closeDeleteModal();
+  closeCustomerModal();
+  applyFilters();
+
+  showToast(
+    "Customer deleted",
+    `${customer.name} was removed successfully.`,
+    "success"
+  );
+
+}
+
+/* =========================================================
+   BULK ACTIONS
+========================================================= */
+
+function bulkUpdateStatus(status){
+
+  const ids = getSelectedIds();
+
+  if(!ids.length) return;
+
+  customers =
+    customers.map(customer =>
+      ids.includes(String(customer.id))
+        ? {
+            ...customer,
+            status
+          }
+        : customer
+    );
+
+  saveJSON(CUSTOMER_KEY,customers);
+
+  updateStats();
+  applyFilters();
+
+  showToast(
+    "Customers updated",
+    `${ids.length} customer${ids.length === 1 ? "" : "s"} updated.`,
+    "success"
+  );
+
+}
+
+function bulkDelete(){
+
+  const ids = getSelectedIds();
+
+  if(!ids.length) return;
+
+  if(!confirm(
+    `Delete ${ids.length} selected customer${ids.length === 1 ? "" : "s"}?`
+  )){
+    return;
+  }
+
+  customers =
+    customers.filter(
+      customer =>
+        !ids.includes(String(customer.id))
+    );
+
+  saveJSON(CUSTOMER_KEY,customers);
+
+  updateStats();
+  applyFilters();
+
+  showToast(
+    "Customers deleted",
+    `${ids.length} customer${ids.length === 1 ? "" : "s"} removed.`,
+    "success"
+  );
+
+}
+
+/* =========================================================
+   CSV
+========================================================= */
+
+function csvEscape(value){
+
+  const text =
+    String(value ?? "")
+      .replace(/"/g,'""');
+
+  return `"${text}"`;
+
+}
+
+function exportCSV(){
+
+  const data =
+    filteredCustomers.length
+      ? filteredCustomers
+      : customers;
+
+  if(!data.length){
+
+    showToast(
+      "Nothing to export",
+      "There are no customers available.",
+      "error"
+    );
+
+    return;
+  }
+
+  const rows = [
+
+    [
+      "Customer ID",
+      "Name",
+      "Email",
+      "Phone",
+      "Status",
+      "Joined",
+      "Total Orders",
+      "Total Spent",
+      "Last Order",
+      "Address",
+      "Note"
+    ],
+
+    ...data.map(customer => [
+
+      customer.id,
+      customer.name,
+      customer.email,
+      customer.phone,
+      customer.status,
+      formatDate(customer.joined),
+      customer.totalOrders,
+      customer.totalSpent,
+      formatDate(customer.lastOrder),
+      customer.address,
+      customer.note
+
+    ])
+
+  ];
+
+  const csv =
+    rows
+      .map(row =>
+        row.map(csvEscape).join(",")
+      )
+      .join("\n");
+
+  const blob =
+    new Blob(
+      ["\ufeff" + csv],
+      {type:"text/csv;charset=utf-8;"}
+    );
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const link =
+    document.createElement("a");
+
+  link.href = url;
+
+  link.download =
+    `website-deals-customers-${new Date().toISOString().slice(0,10)}.csv`;
+
+  document.body.appendChild(link);
+  link.click();
+  link.remove();
+
+  URL.revokeObjectURL(url);
+
+  showToast(
+    "CSV exported",
+    `${data.length} customer records exported.`,
+    "success"
+  );
+
+}
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function showToast(title,message,type="success"){
+
+  const wrap =
+    document.getElementById("toastWrap");
+
+  const toast =
+    document.createElement("div");
+
+  toast.className =
+    `toast ${type}`;
+
+  toast.innerHTML = `
+    <div>
+      <strong>${escapeHTML(title)}</strong>
+      <span>${escapeHTML(message)}</span>
+    </div>
+  `;
+
+  wrap.appendChild(toast);
+
+  setTimeout(() => {
+
+    toast.style.opacity = "0";
+    toast.style.transform = "translateY(8px)";
+
+    setTimeout(() => toast.remove(),250);
+
+  },3200);
+
+}
+
+/* =========================================================
+   ADMIN IDENTITY
+========================================================= */
+
+function setupAdminIdentity(){
+
+  const name =
+    adminSession?.name ||
+    adminSession?.email ||
+    "Super Admin";
+
+  const role =
+    String(adminSession?.role || "")
+      .toLowerCase();
+
+  let roleLabel = "Administrator";
+
+  if(role === "superadmin"){
+    roleLabel = "Super Administrator";
+  }else if(role === "manager"){
+    roleLabel = "Manager";
+  }
+
+  document.getElementById("sidebarAdminName")
+    .textContent = name;
+
+  document.getElementById("sidebarAdminRole")
+    .textContent = roleLabel;
+
+  document.getElementById("sidebarAvatar")
+    .textContent = initials(name);
+
+}
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+function setupSidebar(){
+
+  const sidebar =
+    document.getElementById("sidebar");
+
+  const overlay =
+    document.getElementById("overlay");
+
+  const mobileMenu =
+    document.getElementById("mobileMenu");
+
+  function closeSidebar(){
+
+    sidebar.classList.remove("open");
+    overlay.classList.remove("show");
+
+  }
+
+  mobileMenu.addEventListener("click",() => {
+
+    sidebar.classList.add("open");
+    overlay.classList.add("show");
+
+  });
+
+  overlay.addEventListener("click",closeSidebar);
+
+  sidebar.querySelectorAll("a").forEach(link => {
+
+    link.addEventListener("click",() => {
+
+      if(window.innerWidth <= 900){
+        closeSidebar();
+      }
+
+    });
+
+  });
+
+}
+
+/* =========================================================
+   EVENTS
+========================================================= */
+
+document.getElementById("searchInput")
+  .addEventListener("input",() => {
+
+    currentPage = 1;
+    applyFilters();
+
+  });
+
+document.getElementById("statusFilter")
+  .addEventListener("change",() => {
+
+    currentPage = 1;
+    applyFilters();
+
+  });
+
+document.getElementById("typeFilter")
+  .addEventListener("change",() => {
+
+    currentPage = 1;
+    applyFilters();
+
+  });
+
+document.getElementById("sortFilter")
+  .addEventListener("change",() => {
+
+    currentPage = 1;
+    applyFilters();
+
+  });
+
+document.getElementById("resetFilters")
+  .addEventListener("click",() => {
+
+    document.getElementById("searchInput").value = "";
+    document.getElementById("statusFilter").value = "all";
+    document.getElementById("typeFilter").value = "all";
+    document.getElementById("sortFilter").value = "newest";
+
+    currentPage = 1;
+
+    clearSelection();
+    applyFilters();
+
+  });
+
+document.getElementById("selectAll")
+  .addEventListener("change",(event) => {
+
+    document
+      .querySelectorAll(".customer-check")
+      .forEach(input => {
+        input.checked = event.target.checked;
+      });
+
+    updateBulkState();
+
+  });
+
+document.addEventListener("change",(event) => {
+
+  if(event.target.classList.contains("customer-check")){
+    updateBulkState();
+    syncSelectAll();
+  }
+
+});
+
+document.getElementById("bulkActivate")
+  .addEventListener("click",() =>
+    bulkUpdateStatus("active")
+  );
+
+document.getElementById("bulkSuspend")
+  .addEventListener("click",() =>
+    bulkUpdateStatus("suspended")
+  );
+
+document.getElementById("bulkDelete")
+  .addEventListener("click",bulkDelete);
+
+document.getElementById("addCustomerBtn")
+  .addEventListener("click",() =>
+    openCustomer(null,true)
+  );
+
+document.getElementById("closeCustomerModal")
+  .addEventListener("click",closeCustomerModal);
+
+document.getElementById("modalCancelBtn")
+  .addEventListener("click",closeCustomerModal);
+
+document.getElementById("saveCustomerBtn")
+  .addEventListener("click",saveCustomer);
+
+document.getElementById("modalDeleteBtn")
+  .addEventListener("click",() => {
+
+    if(editingCustomerId){
+      requestDelete(editingCustomerId);
+    }
+
+  });
+
+document.getElementById("cancelDeleteBtn")
+  .addEventListener("click",closeDeleteModal);
+
+document.getElementById("confirmDeleteBtn")
+  .addEventListener("click",() => {
+
+    if(deleteTargetId){
+      deleteCustomer(deleteTargetId);
+    }
+
+  });
+
+document.getElementById("exportBtn")
+  .addEventListener("click",exportCSV);
+
+document.getElementById("printBtn")
+  .addEventListener("click",() => {
+    window.print();
+  });
+
+document.getElementById("refreshBtn")
+  .addEventListener("click",() => {
+
+    loadData();
+    updateStats();
+    currentPage = 1;
+    applyFilters();
+
+    showToast(
+      "Customers refreshed",
+      "Customer data has been refreshed.",
+      "success"
+    );
+
+  });
+
+document.getElementById("logoutBtn")
+  .addEventListener("click",() => {
+
+    sessionStorage.removeItem(AUTH_KEY);
+
+    window.location.href = "login/";
+
+  });
+
+/* =========================================================
+   MODAL BACKDROP
+========================================================= */
+
+document.getElementById("customerModal")
+  .addEventListener("click",(event) => {
+
+    if(event.target.id === "customerModal"){
+      closeCustomerModal();
+    }
+
+  });
+
+document.getElementById("deleteModal")
+  .addEventListener("click",(event) => {
+
+    if(event.target.id === "deleteModal"){
+      closeDeleteModal();
+    }
+
+  });
+
+document.addEventListener("keydown",(event) => {
+
+  if(event.key === "Escape"){
+
+    closeCustomerModal();
+    closeDeleteModal();
+
+  }
+
+});
+
+/* =========================================================
+   CLEAR SELECTION
+========================================================= */
+
+function clearSelection(){
+
+  document
+    .querySelectorAll(".customer-check")
+    .forEach(input => {
+      input.checked = false;
+    });
+
+  document.getElementById("selectAll").checked = false;
+  document.getElementById("selectAll").indeterminate = false;
+
+  updateBulkState();
+
+}
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+setupAdminIdentity();
+setupSidebar();
+loadData();
+updateStats();
+applyFilters();
+
+</script>
 
 </body>
 </html>
