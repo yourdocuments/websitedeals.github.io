@@ -2,14 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Reports | Website Deals Admin</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#07110b"
+  >
+
   <meta
     name="description"
-    content="Website Deals Admin Reports Dashboard"
+    content="Website Deals Admin Reports — Sales, revenue, orders, payments and marketplace analytics."
   >
-  <meta name="theme-color" content="#07110b">
+
+  <title>Reports | Website Deals Admin</title>
 
   <link rel="icon" type="image/png" href="../logo.png">
 
@@ -22,1406 +31,2023 @@
   >
 
   <style>
-    :root{
-      --green:#18a957;
-      --green-dark:#108445;
-      --green-soft:#eaf8f0;
+    :root {
+      --green: #18a957;
+      --green-dark: #108844;
+      --green-soft: #eaf8f0;
 
-      --dark:#07110b;
-      --dark-2:#101713;
-      --dark-3:#17221b;
+      --dark: #07110b;
+      --dark-2: #0d1811;
+      --dark-3: #142119;
 
-      --bg:#f5f8f6;
-      --surface:#ffffff;
-      --surface-2:#f8faf9;
+      --white: #ffffff;
+      --text: #18221c;
+      --muted: #748078;
+      --muted-2: #9aa59e;
 
-      --text:#172019;
-      --muted:#738078;
+      --surface: #f6f8f7;
+      --border: #e3eae5;
 
-      --border:#e4ebe6;
+      --warning: #d88b00;
+      --warning-soft: #fff6df;
 
-      --danger:#dc4c4c;
-      --danger-soft:#fff0f0;
+      --danger: #dc3545;
+      --danger-soft: #fff0f1;
 
-      --warning:#d89417;
-      --warning-soft:#fff7e7;
+      --blue: #3677d8;
+      --blue-soft: #edf4ff;
 
-      --blue:#3977d6;
-      --blue-soft:#edf4ff;
+      --purple: #7655d9;
+      --purple-soft: #f2efff;
 
-      --shadow:0 18px 50px rgba(20,38,27,.07);
-      --shadow-soft:0 8px 28px rgba(20,38,27,.05);
+      --sidebar-width: 270px;
 
-      --radius:20px;
-      --sidebar:270px;
+      --shadow-sm:
+        0 4px 16px rgba(7, 17, 11, .05);
+
+      --shadow-md:
+        0 12px 30px rgba(7, 17, 11, .07);
+
+      --shadow-lg:
+        0 25px 65px rgba(7, 17, 11, .12);
+
+      --radius-xl: 24px;
+      --radius-lg: 19px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
     }
 
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    html{
-      scroll-behavior:smooth;
+    html {
+      scroll-behavior: smooth;
     }
 
-    body{
-      min-height:100vh;
-      background:var(--bg);
-      color:var(--text);
-      font-family:"DM Sans",sans-serif;
-      overflow-x:hidden;
+    body {
+      min-height: 100vh;
+
+      font-family: "DM Sans", sans-serif;
+
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 85% 0%,
+          rgba(24, 169, 87, .055),
+          transparent 25%
+        ),
+        var(--surface);
+
+      overflow-x: hidden;
     }
 
     button,
     input,
-    select{
-      font:inherit;
+    select {
+      font: inherit;
     }
 
-    button{
-      cursor:pointer;
+    button {
+      border: 0;
     }
 
-    a{
-      color:inherit;
-      text-decoration:none;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .app{
-      min-height:100vh;
+    svg {
+      display: block;
     }
 
-    /* =========================
+    /* =========================================
        SIDEBAR
-    ========================== */
+    ========================================= */
 
-    .sidebar{
-      position:fixed;
-      inset:0 auto 0 0;
-      width:var(--sidebar);
-      background:var(--dark-2);
-      color:#fff;
-      z-index:1000;
-      display:flex;
-      flex-direction:column;
-      padding:22px 16px 16px;
-      transition:transform .3s ease;
-    }
+    .sidebar {
+      position: fixed;
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:4px 10px 25px;
-    }
+      inset: 0 auto 0 0;
 
-    .brand-logo{
-      width:42px;
-      height:42px;
-      border-radius:12px;
-      object-fit:contain;
-      background:#fff;
-      padding:5px;
-      border:1px solid rgba(255,255,255,.08);
-    }
+      width: var(--sidebar-width);
 
-    .brand-copy{
-      min-width:0;
-    }
-
-    .brand-name{
-      font-family:"Manrope",sans-serif;
-      font-weight:800;
-      font-size:16px;
-      letter-spacing:-.3px;
-    }
-
-    .brand-sub{
-      color:#8d9a92;
-      font-size:11px;
-      margin-top:2px;
-    }
-
-    .nav{
-      flex:1;
-      overflow:auto;
-      padding-right:3px;
-    }
-
-    .nav::-webkit-scrollbar{
-      width:4px;
-    }
-
-    .nav::-webkit-scrollbar-thumb{
-      background:#2b372f;
-      border-radius:20px;
-    }
-
-    .nav-section{
-      margin:18px 9px 8px;
-      color:#657269;
-      text-transform:uppercase;
-      font-size:10px;
-      font-weight:800;
-      letter-spacing:1.1px;
-    }
-
-    .nav-link{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-height:46px;
-      padding:0 12px;
-      margin:4px 0;
-      border-radius:13px;
-      color:#aeb9b1;
-      font-size:13px;
-      font-weight:600;
-      transition:.2s ease;
-    }
-
-    .nav-link:hover{
-      background:rgba(255,255,255,.055);
-      color:#fff;
-    }
-
-    .nav-link.active{
-      background:var(--green);
-      color:#fff;
-      box-shadow:0 8px 20px rgba(24,169,87,.22);
-    }
-
-    .nav-icon{
-      width:20px;
-      text-align:center;
-      font-size:16px;
-      flex:none;
-    }
-
-    .sidebar-bottom{
-      border-top:1px solid rgba(255,255,255,.07);
-      padding-top:14px;
-      margin-top:12px;
-    }
-
-    .admin-mini{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:10px;
-      border-radius:14px;
-      background:rgba(255,255,255,.04);
-    }
-
-    .admin-avatar{
-      width:36px;
-      height:36px;
-      flex:none;
-      display:grid;
-      place-items:center;
-      border-radius:11px;
-      background:var(--green);
-      color:#fff;
-      font-size:13px;
-      font-weight:800;
-    }
-
-    .admin-info{
-      min-width:0;
-      flex:1;
-    }
-
-    .admin-name{
-      font-size:12px;
-      font-weight:700;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .admin-role{
-      color:#849188;
-      font-size:10px;
-      margin-top:2px;
-    }
-
-    .logout-btn{
-      border:0;
-      background:transparent;
-      color:#87938b;
-      font-size:16px;
-      width:32px;
-      height:32px;
-      border-radius:9px;
-    }
-
-    .logout-btn:hover{
-      color:#fff;
-      background:rgba(255,255,255,.07);
-    }
-
-    /* =========================
-       MAIN
-    ========================== */
-
-    .main{
-      margin-left:var(--sidebar);
-      min-height:100vh;
-    }
-
-    .topbar{
-      height:76px;
-      padding:0 32px;
-      background:rgba(255,255,255,.88);
-      border-bottom:1px solid var(--border);
-      backdrop-filter:blur(14px);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      position:sticky;
-      top:0;
-      z-index:500;
-    }
-
-    .topbar-left{
-      display:flex;
-      align-items:center;
-      gap:13px;
-    }
-
-    .mobile-menu{
-      display:none;
-      width:40px;
-      height:40px;
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:12px;
-      font-size:19px;
-    }
-
-    .breadcrumb{
-      display:flex;
-      align-items:center;
-      gap:8px;
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    .breadcrumb strong{
-      color:var(--text);
-    }
-
-    .topbar-actions{
-      display:flex;
-      align-items:center;
-      gap:9px;
-    }
-
-    .btn{
-      height:40px;
-      padding:0 14px;
-      border-radius:11px;
-      border:1px solid var(--border);
-      background:#fff;
-      color:var(--text);
-      font-size:12px;
-      font-weight:700;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      transition:.2s ease;
-    }
-
-    .btn:hover{
-      transform:translateY(-1px);
-      box-shadow:var(--shadow-soft);
-    }
-
-    .btn.primary{
-      background:var(--green);
-      color:#fff;
-      border-color:var(--green);
-    }
-
-    .btn.primary:hover{
-      background:var(--green-dark);
-    }
-
-    .btn.dark{
-      background:var(--dark);
-      color:#fff;
-      border-color:var(--dark);
-    }
-
-    .content{
-      padding:30px 32px 40px;
-      max-width:1700px;
-    }
-
-    /* =========================
-       HERO
-    ========================== */
-
-    .hero{
-      position:relative;
-      overflow:hidden;
-      border-radius:26px;
       background:
-        radial-gradient(circle at 90% 10%, rgba(24,169,87,.28), transparent 28%),
-        radial-gradient(circle at 70% 90%, rgba(24,169,87,.11), transparent 32%),
-        var(--dark);
-      color:#fff;
-      padding:31px;
-      box-shadow:0 22px 60px rgba(7,17,11,.14);
-      margin-bottom:22px;
+        linear-gradient(
+          180deg,
+          #07110b 0%,
+          #0b1510 100%
+        );
+
+      color: #fff;
+
+      padding: 20px 15px;
+
+      z-index: 100;
+
+      overflow-y: auto;
+
+      transition:
+        transform .25s ease;
     }
 
-    .hero::after{
-      content:"";
-      position:absolute;
-      width:240px;
-      height:240px;
-      right:-100px;
-      bottom:-130px;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:50%;
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      padding: 7px 10px 22px;
     }
 
-    .hero-content{
-      position:relative;
-      z-index:2;
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-      gap:25px;
+    .brand-logo {
+      width: 43px;
+      height: 43px;
+
+      flex: 0 0 43px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 13px;
+
+      background: #fff;
+
+      overflow: hidden;
     }
 
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:7px;
-      color:#91e9b5;
-      text-transform:uppercase;
-      letter-spacing:1.2px;
-      font-size:10px;
-      font-weight:800;
-      margin-bottom:10px;
+    .brand-logo img {
+      width: 82%;
+      height: 82%;
+      object-fit: contain;
     }
 
-    .eyebrow-dot{
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      background:#55dc8a;
-      box-shadow:0 0 0 5px rgba(85,220,138,.1);
+    .brand-name {
+      font-family: "Manrope", sans-serif;
+
+      font-size: 16px;
+      font-weight: 800;
+
+      letter-spacing: -.4px;
     }
 
-    .hero h1{
-      font-family:"Manrope",sans-serif;
-      font-size:clamp(25px,3vw,38px);
-      line-height:1.08;
-      letter-spacing:-1.4px;
-      margin-bottom:9px;
+    .brand-subtitle {
+      margin-top: 2px;
+
+      font-size: 9px;
+      font-weight: 700;
+
+      color: rgba(255,255,255,.40);
+
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
-    .hero p{
-      max-width:650px;
-      color:#aab8af;
-      font-size:13px;
-      line-height:1.7;
+    .sidebar-section {
+      margin-top: 17px;
     }
 
-    .hero-meta{
-      display:flex;
-      align-items:center;
-      gap:9px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
+    .sidebar-section-title {
+      padding: 0 11px 8px;
+
+      color: rgba(255,255,255,.30);
+
+      font-size: 9px;
+      font-weight: 800;
+
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
     }
 
-    .hero-pill{
-      min-height:38px;
-      padding:0 13px;
-      border:1px solid rgba(255,255,255,.1);
-      background:rgba(255,255,255,.055);
-      border-radius:11px;
-      color:#d6dfda;
-      display:flex;
-      align-items:center;
-      gap:7px;
-      font-size:11px;
-      font-weight:700;
+    .nav-list {
+      display: grid;
+      gap: 4px;
     }
 
-    /* =========================
-       FILTERS
-    ========================== */
+    .nav-item {
+      position: relative;
 
-    .filter-card{
-      background:var(--surface);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:17px;
-      margin-bottom:22px;
-      box-shadow:var(--shadow-soft);
+      display: flex;
+      align-items: center;
+      gap: 11px;
+
+      min-height: 43px;
+
+      padding: 0 12px;
+
+      border-radius: 11px;
+
+      color: rgba(255,255,255,.58);
+
+      font-size: 12px;
+      font-weight: 600;
+
+      transition:
+        color .2s ease,
+        background .2s ease;
     }
 
-    .filter-row{
-      display:grid;
-      grid-template-columns:1.1fr 1fr 1fr 1fr auto;
-      gap:11px;
-      align-items:end;
+    .nav-item svg {
+      width: 17px;
+      height: 17px;
+
+      flex: 0 0 17px;
     }
 
-    .field label{
-      display:block;
-      color:#6d7971;
-      font-size:10px;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.75px;
-      margin:0 0 7px 2px;
+    .nav-item:hover {
+      color: #fff;
+      background: rgba(255,255,255,.055);
     }
 
-    .control{
-      width:100%;
-      height:42px;
-      border:1px solid var(--border);
-      border-radius:11px;
-      background:#fbfcfb;
-      color:var(--text);
-      padding:0 12px;
-      outline:none;
-      font-size:12px;
-      font-weight:600;
-      transition:.2s;
+    .nav-item.active {
+      color: #fff;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(24,169,87,.20),
+          rgba(24,169,87,.07)
+        );
     }
 
-    .control:focus{
-      border-color:rgba(24,169,87,.55);
-      box-shadow:0 0 0 4px rgba(24,169,87,.08);
-      background:#fff;
+    .nav-item.active::before {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      top: 9px;
+      bottom: 9px;
+
+      width: 3px;
+
+      border-radius: 99px;
+
+      background: var(--green);
     }
 
-    /* =========================
-       KPI
-    ========================== */
+    .nav-badge {
+      margin-left: auto;
 
-    .section-heading{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:15px;
-      margin:0 0 12px;
+      min-width: 19px;
+      height: 19px;
+
+      display: grid;
+      place-items: center;
+
+      padding: 0 5px;
+
+      border-radius: 999px;
+
+      background: rgba(255,255,255,.08);
+
+      color: rgba(255,255,255,.52);
+
+      font-size: 9px;
+      font-weight: 800;
     }
 
-    .section-title{
-      font-family:"Manrope",sans-serif;
-      font-size:16px;
-      font-weight:800;
-      letter-spacing:-.4px;
+    .sidebar-footer {
+      margin-top: 22px;
+
+      padding: 13px 10px;
+
+      border-top: 1px solid rgba(255,255,255,.07);
     }
 
-    .section-note{
-      color:var(--muted);
-      font-size:11px;
+    .admin-mini {
+      display: flex;
+      align-items: center;
+      gap: 9px;
     }
 
-    .kpi-grid{
-      display:grid;
-      grid-template-columns:repeat(6,1fr);
-      gap:13px;
-      margin-bottom:22px;
+    .admin-avatar {
+      width: 34px;
+      height: 34px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 10px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #20bb64,
+          #108844
+        );
+
+      color: #fff;
+
+      font-size: 11px;
+      font-weight: 800;
     }
 
-    .kpi{
-      position:relative;
-      overflow:hidden;
-      background:var(--surface);
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:17px;
-      box-shadow:var(--shadow-soft);
-      min-height:132px;
+    .admin-mini-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: rgba(255,255,255,.76);
     }
 
-    .kpi-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:17px;
+    .admin-mini-role {
+      margin-top: 2px;
+
+      font-size: 9px;
+      color: rgba(255,255,255,.35);
     }
 
-    .kpi-icon{
-      width:36px;
-      height:36px;
-      border-radius:11px;
-      display:grid;
-      place-items:center;
-      background:var(--green-soft);
-      color:var(--green-dark);
-      font-size:15px;
-      font-weight:800;
+    /* =========================================
+       OVERLAY / MOBILE
+    ========================================= */
+
+    .sidebar-overlay {
+      position: fixed;
+      inset: 0;
+
+      z-index: 90;
+
+      background: rgba(0,0,0,.48);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition:
+        opacity .25s ease,
+        visibility .25s ease;
     }
 
-    .kpi-icon.blue{
-      background:var(--blue-soft);
-      color:var(--blue);
+    .sidebar-overlay.show {
+      opacity: 1;
+      visibility: visible;
     }
 
-    .kpi-icon.orange{
-      background:var(--warning-soft);
-      color:var(--warning);
+    /* =========================================
+       MAIN
+    ========================================= */
+
+    .main {
+      min-height: 100vh;
+
+      margin-left: var(--sidebar-width);
     }
 
-    .kpi-icon.red{
-      background:var(--danger-soft);
-      color:var(--danger);
+    .topbar {
+      position: sticky;
+      top: 0;
+
+      height: 72px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+
+      padding: 0 30px;
+
+      background: rgba(246,248,247,.88);
+
+      border-bottom: 1px solid rgba(227,234,229,.85);
+
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+
+      z-index: 50;
     }
 
-    .kpi-label{
-      color:var(--muted);
-      font-size:10px;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.6px;
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 13px;
     }
 
-    .kpi-value{
-      font-family:"Manrope",sans-serif;
-      font-size:22px;
-      line-height:1;
-      letter-spacing:-.8px;
-      font-weight:800;
+    .mobile-menu {
+      display: none;
+
+      width: 39px;
+      height: 39px;
+
+      place-items: center;
+
+      border-radius: 11px;
+
+      background: #fff;
+
+      border: 1px solid var(--border);
+
+      color: var(--text);
+
+      cursor: pointer;
     }
 
-    .kpi-sub{
-      margin-top:7px;
-      color:#87928b;
-      font-size:10px;
+    .mobile-menu svg {
+      width: 18px;
+      height: 18px;
     }
 
-    /* =========================
-       GRID
-    ========================== */
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 7px;
 
-    .report-grid{
-      display:grid;
-      grid-template-columns:minmax(0,1.7fr) minmax(310px,.9fr);
-      gap:20px;
-      margin-bottom:20px;
+      color: var(--muted);
+
+      font-size: 11px;
+      font-weight: 600;
     }
 
-    .card{
-      background:var(--surface);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow-soft);
-      overflow:hidden;
+    .breadcrumb strong {
+      color: var(--text);
+      font-weight: 800;
     }
 
-    .card-head{
-      padding:19px 20px 15px;
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:15px;
-      border-bottom:1px solid #eef2ef;
+    .topbar-actions {
+      display: flex;
+      align-items: center;
+      gap: 9px;
     }
 
-    .card-title{
-      font-family:"Manrope",sans-serif;
-      font-size:14px;
-      font-weight:800;
+    .top-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      height: 39px;
+
+      padding: 0 12px;
+
+      border-radius: 10px;
+
+      background: #fff;
+
+      border: 1px solid var(--border);
+
+      color: #536058;
+
+      font-size: 11px;
+      font-weight: 700;
+
+      cursor: pointer;
+
+      transition:
+        border-color .2s ease,
+        color .2s ease,
+        transform .2s ease;
     }
 
-    .card-subtitle{
-      color:var(--muted);
-      font-size:10px;
-      margin-top:4px;
+    .top-action:hover {
+      border-color: #bfd4c6;
+      color: var(--green);
+      transform: translateY(-1px);
     }
 
-    .legend{
-      display:flex;
-      align-items:center;
-      gap:13px;
-      color:var(--muted);
-      font-size:10px;
-      font-weight:600;
+    .top-action svg {
+      width: 15px;
+      height: 15px;
     }
 
-    .legend-item{
-      display:flex;
-      align-items:center;
-      gap:5px;
+    .page {
+      padding: 30px;
     }
 
-    .legend-dot{
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      background:var(--green);
+    /* =========================================
+       HERO
+    ========================================= */
+
+    .hero {
+      position: relative;
+
+      overflow: hidden;
+
+      padding: 29px 31px;
+
+      border-radius: var(--radius-xl);
+
+      color: #fff;
+
+      background:
+        radial-gradient(
+          circle at 88% 10%,
+          rgba(24,169,87,.20),
+          transparent 27%
+        ),
+        linear-gradient(
+          135deg,
+          #07110b,
+          #101d15
+        );
+
+      box-shadow: var(--shadow-md);
     }
 
-    .chart-wrap{
-      padding:18px 20px 20px;
+    .hero::after {
+      content: "";
+
+      position: absolute;
+
+      width: 250px;
+      height: 250px;
+
+      right: -100px;
+      bottom: -160px;
+
+      border-radius: 50%;
+
+      border: 1px solid rgba(255,255,255,.06);
+      box-shadow:
+        0 0 0 35px rgba(255,255,255,.018),
+        0 0 0 70px rgba(255,255,255,.012);
     }
 
-    .chart{
-      width:100%;
-      height:275px;
-      position:relative;
+    .hero-content {
+      position: relative;
+      z-index: 2;
+
+      max-width: 760px;
     }
 
-    .chart-grid{
-      position:absolute;
-      inset:14px 0 35px;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      pointer-events:none;
+    .hero-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 7px 10px;
+
+      border-radius: 999px;
+
+      background: rgba(24,169,87,.13);
+      border: 1px solid rgba(24,169,87,.22);
+
+      color: #78e6a5;
+
+      font-size: 9px;
+      font-weight: 800;
+
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
-    .grid-line{
-      width:100%;
-      border-top:1px dashed #e9eeeb;
-      position:relative;
+    .hero-kicker-dot {
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: #50db87;
     }
 
-    .grid-label{
-      position:absolute;
-      left:0;
-      top:-7px;
-      transform:translateX(-100%);
-      padding-right:8px;
-      color:#9aa49e;
-      font-size:9px;
-      white-space:nowrap;
+    .hero h1 {
+      margin-top: 15px;
+
+      font-family: "Manrope", sans-serif;
+
+      font-size: clamp(28px, 3vw, 41px);
+
+      line-height: 1.08;
+
+      letter-spacing: -1.5px;
+
+      font-weight: 800;
     }
 
-    .chart-bars{
-      position:absolute;
-      left:34px;
-      right:3px;
-      top:10px;
-      bottom:35px;
-      display:flex;
-      align-items:flex-end;
-      justify-content:space-around;
-      gap:10px;
+    .hero p {
+      max-width: 650px;
+
+      margin-top: 10px;
+
+      color: rgba(255,255,255,.56);
+
+      font-size: 12px;
+      line-height: 1.7;
     }
 
-    .bar-group{
-      height:100%;
-      flex:1;
-      max-width:70px;
-      display:flex;
-      align-items:flex-end;
-      justify-content:center;
-      position:relative;
+    .hero-meta {
+      position: relative;
+      z-index: 2;
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+
+      margin-top: 20px;
     }
 
-    .bar{
-      width:58%;
-      min-height:3px;
-      border-radius:8px 8px 4px 4px;
-      background:linear-gradient(180deg,#32bf73,#18a957);
-      transition:height .5s ease;
-      position:relative;
+    .hero-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      padding: 8px 10px;
+
+      border-radius: 9px;
+
+      background: rgba(255,255,255,.055);
+      border: 1px solid rgba(255,255,255,.07);
+
+      color: rgba(255,255,255,.55);
+
+      font-size: 9px;
+      font-weight: 700;
     }
 
-    .bar:hover{
-      filter:brightness(.95);
+    .hero-meta-item svg {
+      width: 13px;
+      height: 13px;
+
+      color: #60dc91;
     }
 
-    .bar-value{
-      position:absolute;
-      left:50%;
-      transform:translateX(-50%);
-      top:-19px;
-      color:#5f6b63;
-      font-size:8px;
-      font-weight:800;
-      white-space:nowrap;
+    /* =========================================
+       FILTER BAR
+    ========================================= */
+
+    .filter-bar {
+      margin-top: 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 14px;
+
+      padding: 14px;
+
+      background: #fff;
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-lg);
+
+      box-shadow: var(--shadow-sm);
     }
 
-    .bar-label{
-      position:absolute;
-      bottom:-28px;
-      left:50%;
-      transform:translateX(-50%);
-      color:#8a958e;
-      font-size:9px;
-      white-space:nowrap;
+    .filters {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+
+      gap: 8px;
     }
 
-    /* =========================
-       SIDE SUMMARY
-    ========================== */
+    .filter-label {
+      margin-right: 2px;
 
-    .summary-list{
-      padding:4px 20px 18px;
+      color: #657169;
+
+      font-size: 10px;
+      font-weight: 800;
     }
 
-    .summary-item{
-      padding:14px 0;
-      border-bottom:1px solid #eef2ef;
+    .select-wrap {
+      position: relative;
     }
 
-    .summary-item:last-child{
-      border-bottom:0;
+    .select {
+      min-width: 145px;
+      height: 39px;
+
+      padding: 0 31px 0 12px;
+
+      border-radius: 10px;
+
+      border: 1px solid var(--border);
+
+      background: #fafcfb;
+
+      color: #344139;
+
+      font-size: 11px;
+      font-weight: 700;
+
+      outline: none;
+
+      cursor: pointer;
     }
 
-    .summary-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      margin-bottom:8px;
+    .select:focus {
+      border-color: rgba(24,169,87,.55);
+
+      box-shadow:
+        0 0 0 3px rgba(24,169,87,.08);
     }
 
-    .summary-name{
-      font-size:11px;
-      font-weight:700;
-      max-width:65%;
-      overflow:hidden;
-      white-space:nowrap;
-      text-overflow:ellipsis;
+    .filter-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .summary-value{
-      font-size:11px;
-      font-weight:800;
+    .btn {
+      height: 39px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      padding: 0 13px;
+
+      border-radius: 10px;
+
+      font-size: 10px;
+      font-weight: 800;
+
+      cursor: pointer;
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        border-color .2s ease;
     }
 
-    .progress{
-      height:6px;
-      border-radius:20px;
-      background:#edf1ee;
-      overflow:hidden;
+    .btn svg {
+      width: 14px;
+      height: 14px;
     }
 
-    .progress span{
-      display:block;
-      height:100%;
-      border-radius:inherit;
-      background:var(--green);
+    .btn:hover {
+      transform: translateY(-1px);
     }
 
-    .summary-empty{
-      padding:30px 0;
-      text-align:center;
-      color:var(--muted);
-      font-size:11px;
+    .btn-primary {
+      color: #fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          #18a957,
+          #118c46
+        );
+
+      box-shadow:
+        0 7px 16px rgba(24,169,87,.17);
     }
 
-    /* =========================
+    .btn-secondary {
+      background: #fff;
+
+      color: #536058;
+
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: #bfd4c6;
+      color: var(--green);
+    }
+
+    /* =========================================
+       KPI GRID
+    ========================================= */
+
+    .section {
+      margin-top: 22px;
+    }
+
+    .kpi-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(6, minmax(0, 1fr));
+
+      gap: 12px;
+    }
+
+    .kpi-card {
+      padding: 17px;
+
+      background: #fff;
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-lg);
+
+      box-shadow: var(--shadow-sm);
+
+      min-width: 0;
+    }
+
+    .kpi-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 8px;
+    }
+
+    .kpi-icon {
+      width: 34px;
+      height: 34px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 10px;
+
+      background: var(--green-soft);
+
+      color: var(--green);
+    }
+
+    .kpi-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .kpi-change {
+      padding: 5px 7px;
+
+      border-radius: 999px;
+
+      background: #f2f7f4;
+
+      color: #5d7065;
+
+      font-size: 8px;
+      font-weight: 800;
+    }
+
+    .kpi-label {
+      margin-top: 14px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .kpi-value {
+      margin-top: 4px;
+
+      font-family: "Manrope", sans-serif;
+
+      color: var(--text);
+
+      font-size: 22px;
+      font-weight: 800;
+
+      letter-spacing: -.8px;
+    }
+
+    .kpi-note {
+      margin-top: 4px;
+
+      color: var(--muted-2);
+
+      font-size: 8px;
+      font-weight: 600;
+    }
+
+    .kpi-card:nth-child(2) .kpi-icon {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .kpi-card:nth-child(3) .kpi-icon {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .kpi-card:nth-child(4) .kpi-icon {
+      background: var(--warning-soft);
+      color: var(--warning);
+    }
+
+    .kpi-card:nth-child(5) .kpi-icon {
+      background: var(--danger-soft);
+      color: var(--danger);
+    }
+
+    .kpi-card:nth-child(6) .kpi-icon {
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    /* =========================================
+       REPORT GRID
+    ========================================= */
+
+    .report-grid {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1.45fr)
+        minmax(300px, .75fr);
+
+      gap: 16px;
+    }
+
+    .card {
+      background: #fff;
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-xl);
+
+      box-shadow: var(--shadow-sm);
+
+      overflow: hidden;
+    }
+
+    .card-header {
+      min-height: 65px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 12px;
+
+      padding: 16px 19px;
+
+      border-bottom: 1px solid #edf1ee;
+    }
+
+    .card-title {
+      font-family: "Manrope", sans-serif;
+
+      font-size: 13px;
+      font-weight: 800;
+
+      letter-spacing: -.2px;
+    }
+
+    .card-subtitle {
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 9px;
+      font-weight: 600;
+    }
+
+    .card-body {
+      padding: 19px;
+    }
+
+    .period-pill {
+      display: inline-flex;
+      align-items: center;
+
+      height: 28px;
+
+      padding: 0 9px;
+
+      border-radius: 8px;
+
+      background: #f3f7f4;
+
+      color: #5f6e65;
+
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    /* =========================================
+       CHART
+    ========================================= */
+
+    .chart-wrap {
+      position: relative;
+
+      width: 100%;
+
+      height: 285px;
+    }
+
+    .chart-svg {
+      width: 100%;
+      height: 100%;
+
+      overflow: visible;
+    }
+
+    .chart-grid-line {
+      stroke: #edf1ee;
+      stroke-width: 1;
+    }
+
+    .chart-area {
+      fill: rgba(24,169,87,.08);
+    }
+
+    .chart-line {
+      fill: none;
+
+      stroke: var(--green);
+
+      stroke-width: 3;
+
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .chart-point {
+      fill: #fff;
+
+      stroke: var(--green);
+
+      stroke-width: 2;
+    }
+
+    .chart-label {
+      fill: #89948e;
+
+      font-size: 9px;
+
+      font-family: "DM Sans", sans-serif;
+    }
+
+    .chart-value {
+      fill: #5e6b63;
+
+      font-size: 8px;
+
+      font-family: "DM Sans", sans-serif;
+
+      font-weight: 700;
+    }
+
+    .chart-empty {
+      height: 100%;
+
+      display: grid;
+      place-items: center;
+
+      color: var(--muted);
+
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    /* =========================================
+       PAYMENT BREAKDOWN
+    ========================================= */
+
+    .payment-list {
+      display: grid;
+      gap: 16px;
+    }
+
+    .payment-row {
+      display: grid;
+
+      grid-template-columns:
+        38px minmax(0, 1fr) auto;
+
+      align-items: center;
+
+      gap: 10px;
+    }
+
+    .payment-icon {
+      width: 38px;
+      height: 38px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 11px;
+
+      background: #f3f7f4;
+
+      color: var(--green);
+    }
+
+    .payment-icon svg {
+      width: 17px;
+      height: 17px;
+    }
+
+    .payment-name {
+      font-size: 10px;
+      font-weight: 800;
+
+      color: #344139;
+    }
+
+    .payment-bar {
+      height: 5px;
+
+      margin-top: 6px;
+
+      overflow: hidden;
+
+      border-radius: 99px;
+
+      background: #edf2ee;
+    }
+
+    .payment-progress {
+      height: 100%;
+
+      border-radius: inherit;
+
+      background: var(--green);
+
+      transition: width .4s ease;
+    }
+
+    .payment-amount {
+      text-align: right;
+
+      font-size: 10px;
+      font-weight: 800;
+
+      color: #3c4a41;
+    }
+
+    .payment-percent {
+      margin-top: 3px;
+
+      text-align: right;
+
+      color: var(--muted);
+
+      font-size: 8px;
+      font-weight: 600;
+    }
+
+    /* =========================================
+       ORDERS CHART
+    ========================================= */
+
+    .orders-chart {
+      display: flex;
+
+      align-items: flex-end;
+
+      gap: 10px;
+
+      height: 190px;
+
+      padding-top: 10px;
+    }
+
+    .bar-group {
+      flex: 1;
+
+      height: 100%;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+
+      gap: 7px;
+    }
+
+    .bar-value {
+      min-height: 12px;
+
+      color: #718078;
+
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    .bar-track {
+      width: 100%;
+      max-width: 35px;
+
+      height: 135px;
+
+      display: flex;
+      align-items: flex-end;
+
+      border-radius: 8px 8px 4px 4px;
+
+      background: #f1f5f2;
+
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      width: 100%;
+
+      border-radius: 8px 8px 4px 4px;
+
+      background:
+        linear-gradient(
+          180deg,
+          #38c875,
+          #18a957
+        );
+
+      transition: height .45s ease;
+    }
+
+    .bar-label {
+      color: #8a948e;
+
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    /* =========================================
        TABLES
-    ========================== */
+    ========================================= */
 
-    .table-wrap{
-      overflow:auto;
+    .table-card {
+      margin-top: 16px;
     }
 
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:700px;
+    .table-scroll {
+      width: 100%;
+      overflow-x: auto;
     }
 
-    th{
-      text-align:left;
-      padding:12px 20px;
-      background:#fafcfb;
-      color:#7d8981;
-      font-size:9px;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.7px;
-      border-bottom:1px solid var(--border);
-      white-space:nowrap;
+    table {
+      width: 100%;
+
+      border-collapse: collapse;
+
+      min-width: 680px;
     }
 
-    td{
-      padding:14px 20px;
-      border-bottom:1px solid #eef2ef;
-      font-size:11px;
-      vertical-align:middle;
+    th {
+      padding: 11px 19px;
+
+      text-align: left;
+
+      color: #8a958e;
+
+      background: #fafcfb;
+
+      border-bottom: 1px solid #edf1ee;
+
+      font-size: 8px;
+      font-weight: 800;
+
+      letter-spacing: .7px;
+      text-transform: uppercase;
+
+      white-space: nowrap;
     }
 
-    tbody tr:hover{
-      background:#fbfdfc;
+    td {
+      padding: 13px 19px;
+
+      border-bottom: 1px solid #f0f3f1;
+
+      color: #4a574f;
+
+      font-size: 10px;
+      font-weight: 600;
+
+      white-space: nowrap;
     }
 
-    tbody tr:last-child td{
-      border-bottom:0;
+    tbody tr:last-child td {
+      border-bottom: 0;
     }
 
-    .website-cell{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width:190px;
+    tbody tr:hover {
+      background: #fbfdfc;
     }
 
-    .website-thumb{
-      width:36px;
-      height:36px;
-      border-radius:10px;
-      background:var(--green-soft);
-      display:grid;
-      place-items:center;
-      color:var(--green-dark);
-      font-size:12px;
-      font-weight:800;
-      overflow:hidden;
-      flex:none;
+    .website-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .website-thumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
+    .website-avatar {
+      width: 32px;
+      height: 32px;
+
+      display: grid;
+      place-items: center;
+
+      flex: 0 0 32px;
+
+      border-radius: 9px;
+
+      background: #eff7f2;
+
+      color: var(--green);
+
+      font-size: 10px;
+      font-weight: 800;
     }
 
-    .website-name{
-      font-weight:800;
-      color:var(--text);
+    .website-name {
+      color: #27332c;
+
+      font-size: 10px;
+      font-weight: 800;
     }
 
-    .website-meta{
-      color:var(--muted);
-      font-size:9px;
-      margin-top:2px;
+    .website-type {
+      margin-top: 2px;
+
+      color: #9aa49e;
+
+      font-size: 8px;
+      font-weight: 600;
     }
 
-    .amount{
-      font-weight:800;
-      white-space:nowrap;
+    .amount {
+      color: #243028;
+
+      font-family: "Manrope", sans-serif;
+
+      font-size: 10px;
+      font-weight: 800;
     }
 
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      min-height:24px;
-      padding:0 8px;
-      border-radius:8px;
-      font-size:9px;
-      font-weight:800;
-      text-transform:capitalize;
+    .rank {
+      width: 23px;
+      height: 23px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 7px;
+
+      background: #f1f5f2;
+
+      color: #6e7c73;
+
+      font-size: 8px;
+      font-weight: 800;
     }
 
-    .badge.paid,
-    .badge.active,
-    .badge.completed{
-      color:#108445;
-      background:var(--green-soft);
+    .status {
+      display: inline-flex;
+      align-items: center;
+
+      padding: 5px 8px;
+
+      border-radius: 999px;
+
+      font-size: 8px;
+      font-weight: 800;
+
+      text-transform: capitalize;
     }
 
-    .badge.pending{
-      color:#ad7111;
-      background:var(--warning-soft);
+    .status-paid,
+    .status-completed,
+    .status-success {
+      color: #08713a;
+      background: var(--green-soft);
     }
 
-    .badge.cancelled,
-    .badge.failed,
-    .badge.inactive{
-      color:#c33f3f;
-      background:var(--danger-soft);
+    .status-pending,
+    .status-processing {
+      color: #9b6500;
+      background: var(--warning-soft);
     }
 
-    .badge.processing{
-      color:#2d68c5;
-      background:var(--blue-soft);
+    .status-cancelled,
+    .status-failed,
+    .status-refunded {
+      color: #ae2938;
+      background: var(--danger-soft);
     }
 
-    .empty{
-      text-align:center;
-      padding:38px 20px;
-      color:var(--muted);
-      font-size:11px;
+    .status-default {
+      color: #647169;
+      background: #f0f3f1;
     }
 
-    /* =========================
-       BOTTOM GRID
-    ========================== */
+    /* =========================================
+       CATEGORY BARS
+    ========================================= */
 
-    .bottom-grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:20px;
-      margin-bottom:20px;
+    .category-list {
+      display: grid;
+      gap: 14px;
     }
 
-    .mini-stat-list{
-      padding:4px 20px 16px;
+    .category-row {
+      display: grid;
+
+      grid-template-columns:
+        32px minmax(0, 1fr) auto;
+
+      align-items: center;
+
+      gap: 9px;
     }
 
-    .mini-stat{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:13px 0;
-      border-bottom:1px solid #eef2ef;
+    .category-number {
+      width: 30px;
+      height: 30px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 9px;
+
+      background: #f1f6f3;
+
+      color: var(--green);
+
+      font-size: 9px;
+      font-weight: 800;
     }
 
-    .mini-stat:last-child{
-      border-bottom:0;
+    .category-name {
+      font-size: 10px;
+      font-weight: 800;
+
+      color: #344139;
     }
 
-    .mini-number{
-      width:34px;
-      height:34px;
-      display:grid;
-      place-items:center;
-      border-radius:10px;
-      background:#f0f4f1;
-      color:#4f5d54;
-      font-size:10px;
-      font-weight:800;
-      flex:none;
+    .category-count {
+      color: #8a958e;
+
+      font-size: 8px;
+      font-weight: 700;
     }
 
-    .mini-info{
-      flex:1;
-      min-width:0;
+    .category-progress {
+      height: 5px;
+
+      margin-top: 6px;
+
+      border-radius: 99px;
+
+      background: #edf2ee;
+
+      overflow: hidden;
     }
 
-    .mini-title{
-      font-size:11px;
-      font-weight:800;
+    .category-progress span {
+      display: block;
+
+      height: 100%;
+
+      border-radius: inherit;
+
+      background: var(--green);
     }
 
-    .mini-sub{
-      color:var(--muted);
-      font-size:9px;
-      margin-top:2px;
+    /* =========================================
+       REPORT SUMMARY
+    ========================================= */
+
+    .summary-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 12px;
+
+      margin-top: 16px;
     }
 
-    .mini-right{
-      text-align:right;
+    .summary-box {
+      padding: 16px;
+
+      border-radius: 15px;
+
+      background: #f8faf9;
+
+      border: 1px solid #e8eee9;
     }
 
-    .mini-right strong{
-      display:block;
-      font-size:11px;
+    .summary-label {
+      color: #89948e;
+
+      font-size: 8px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+      letter-spacing: .6px;
     }
 
-    .mini-right span{
-      color:var(--muted);
-      font-size:9px;
+    .summary-value {
+      margin-top: 6px;
+
+      color: #26322b;
+
+      font-family: "Manrope", sans-serif;
+
+      font-size: 16px;
+      font-weight: 800;
     }
 
-    /* =========================
+    .summary-note {
+      margin-top: 3px;
+
+      color: #8f9993;
+
+      font-size: 8px;
+      font-weight: 600;
+    }
+
+    /* =========================================
        FOOTER
-    ========================== */
+    ========================================= */
 
-    .footer{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:15px;
-      padding:10px 2px 0;
-      color:#89948d;
-      font-size:10px;
+    .footer {
+      margin-top: 28px;
+
+      padding: 20px 2px 5px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+
+      color: #98a19c;
+
+      font-size: 9px;
+      font-weight: 600;
     }
 
-    .footer strong{
-      color:#5f6b63;
+    .footer strong {
+      color: #657169;
     }
 
-    /* =========================
+    /* =========================================
        TOAST
-    ========================== */
+    ========================================= */
 
-    .toast{
-      position:fixed;
-      right:24px;
-      bottom:24px;
-      z-index:3000;
-      background:var(--dark);
-      color:#fff;
-      min-width:250px;
-      max-width:380px;
-      padding:13px 15px;
-      border-radius:13px;
-      box-shadow:0 18px 50px rgba(0,0,0,.2);
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-size:11px;
-      font-weight:700;
-      transform:translateY(20px);
-      opacity:0;
-      pointer-events:none;
-      transition:.25s ease;
+    .toast {
+      position: fixed;
+
+      right: 24px;
+      bottom: 24px;
+
+      z-index: 500;
+
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      min-width: 250px;
+
+      padding: 13px 15px;
+
+      border-radius: 13px;
+
+      background: #101713;
+
+      color: #fff;
+
+      box-shadow:
+        0 18px 45px rgba(0,0,0,.18);
+
+      font-size: 11px;
+      font-weight: 700;
+
+      opacity: 0;
+      visibility: hidden;
+
+      transform: translateY(12px);
+
+      transition:
+        opacity .25s ease,
+        visibility .25s ease,
+        transform .25s ease;
     }
 
-    .toast.show{
-      transform:translateY(0);
-      opacity:1;
+    .toast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
     }
 
-    .toast-icon{
-      width:25px;
-      height:25px;
-      display:grid;
-      place-items:center;
-      background:var(--green);
-      border-radius:8px;
-      flex:none;
+    .toast-icon {
+      width: 28px;
+      height: 28px;
+
+      flex: 0 0 28px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 8px;
+
+      background: rgba(24,169,87,.16);
+
+      color: #59dd8b;
     }
 
-    /* =========================
-       MOBILE
-    ========================== */
-
-    .overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.45);
-      z-index:900;
-      display:none;
+    .toast-icon svg {
+      width: 15px;
+      height: 15px;
     }
 
-    .overlay.show{
-      display:block;
-    }
+    /* =========================================
+       PRINT
+    ========================================= */
 
-    @media(max-width:1250px){
-      .kpi-grid{
-        grid-template-columns:repeat(3,1fr);
-      }
+    @media print {
 
-      .filter-row{
-        grid-template-columns:repeat(3,1fr);
-      }
-
-      .filter-row .filter-action{
-        grid-column:span 1;
-      }
-    }
-
-    @media(max-width:1050px){
-      .sidebar{
-        transform:translateX(-100%);
-      }
-
-      .sidebar.open{
-        transform:translateX(0);
-      }
-
-      .main{
-        margin-left:0;
-      }
-
-      .mobile-menu{
-        display:grid;
-        place-items:center;
-      }
-
-      .report-grid,
-      .bottom-grid{
-        grid-template-columns:1fr;
-      }
-    }
-
-    @media(max-width:760px){
-      .topbar{
-        height:68px;
-        padding:0 15px;
-      }
-
-      .breadcrumb{
-        display:none;
-      }
-
-      .topbar-actions .marketplace-btn{
-        display:none;
-      }
-
-      .content{
-        padding:18px 14px 30px;
-      }
-
-      .hero{
-        padding:23px 20px;
-        border-radius:20px;
-      }
-
-      .hero-content{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      .hero-meta{
-        justify-content:flex-start;
-      }
-
-      .filter-row{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .filter-row .filter-action{
-        grid-column:1/-1;
-      }
-
-      .kpi-grid{
-        grid-template-columns:1fr 1fr;
-        gap:10px;
-      }
-
-      .kpi{
-        min-height:120px;
-        padding:14px;
-      }
-
-      .kpi-value{
-        font-size:19px;
-      }
-
-      .card-head{
-        padding:16px;
-      }
-
-      .chart-wrap{
-        padding:14px 10px 18px;
-      }
-
-      .chart{
-        height:250px;
-      }
-
-      .legend{
-        display:none;
-      }
-
-      .footer{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-    }
-
-    @media(max-width:480px){
-      .filter-row{
-        grid-template-columns:1fr;
-      }
-
-      .filter-row .filter-action{
-        grid-column:auto;
-      }
-
-      .kpi-grid{
-        grid-template-columns:1fr;
-      }
-
-      .hero h1{
-        font-size:25px;
-      }
-
-      .hero-meta{
-        width:100%;
-      }
-
-      .hero-pill{
-        flex:1;
-      }
-
-      .topbar-actions .btn{
-        padding:0 10px;
-      }
-
-      .topbar-actions .btn span{
-        display:none;
-      }
-
-      .toast{
-        left:14px;
-        right:14px;
-        bottom:14px;
-        min-width:0;
-      }
-    }
-
-    @media print{
-      body{
-        background:#fff;
+      body {
+        background: #fff;
       }
 
       .sidebar,
       .topbar,
-      .filter-card,
-      .hero-meta,
+      .filter-bar,
       .toast,
-      .footer .print-hide{
-        display:none !important;
+      .footer {
+        display: none !important;
       }
 
-      .main{
-        margin-left:0;
+      .main {
+        margin-left: 0;
       }
 
-      .content{
-        padding:0;
-        max-width:none;
+      .page {
+        padding: 0;
       }
 
-      .hero{
-        color:#000;
-        background:#fff;
-        border:1px solid #ddd;
-        box-shadow:none;
-      }
-
-      .hero p{
-        color:#555;
+      .hero {
+        box-shadow: none;
       }
 
       .card,
-      .kpi{
-        box-shadow:none;
+      .kpi-card {
+        break-inside: avoid;
+        box-shadow: none;
+      }
+    }
+
+    /* =========================================
+       RESPONSIVE
+    ========================================= */
+
+    @media (max-width: 1250px) {
+
+      .kpi-grid {
+        grid-template-columns:
+          repeat(3, minmax(0, 1fr));
       }
 
-      .report-grid,
-      .bottom-grid{
-        break-inside:avoid;
+      .report-grid {
+        grid-template-columns: 1fr;
       }
+
+    }
+
+    @media (max-width: 1000px) {
+
+      .sidebar {
+        transform: translateX(-100%);
+      }
+
+      .sidebar.open {
+        transform: translateX(0);
+      }
+
+      .main {
+        margin-left: 0;
+      }
+
+      .mobile-menu {
+        display: grid;
+      }
+
+      .page {
+        padding: 22px;
+      }
+
+      .topbar {
+        padding: 0 22px;
+      }
+
+    }
+
+    @media (max-width: 720px) {
+
+      .topbar {
+        height: 65px;
+      }
+
+      .topbar-actions .marketplace-action {
+        display: none;
+      }
+
+      .breadcrumb {
+        font-size: 10px;
+      }
+
+      .page {
+        padding: 15px;
+      }
+
+      .hero {
+        padding: 24px 21px;
+        border-radius: 19px;
+      }
+
+      .hero h1 {
+        font-size: 29px;
+      }
+
+      .filter-bar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .filters {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .select {
+        width: 100%;
+      }
+
+      .filter-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .filter-actions .btn {
+        width: 100%;
+      }
+
+      .kpi-grid {
+        grid-template-columns:
+          repeat(2, minmax(0, 1fr));
+      }
+
+      .kpi-card {
+        padding: 15px;
+      }
+
+      .kpi-value {
+        font-size: 19px;
+      }
+
+      .card-header {
+        padding: 15px;
+      }
+
+      .card-body {
+        padding: 15px;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+    }
+
+    @media (max-width: 420px) {
+
+      .kpi-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-meta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-meta-item {
+        min-width: 0;
+      }
+
+      .hero-meta-item span:last-child {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .top-action span {
+        display: none;
+      }
+
+      .top-action {
+        width: 39px;
+        padding: 0;
+        justify-content: center;
+      }
+
     }
   </style>
 </head>
 
 <body>
 
-<div class="app">
-
-  <!-- =========================
-       MOBILE OVERLAY
-  ========================== -->
-  <div class="overlay" id="overlay"></div>
-
-  <!-- =========================
+  <!-- =========================================
        SIDEBAR
-  ========================== -->
+  ========================================== -->
+
   <aside class="sidebar" id="sidebar">
 
-    <div class="brand">
-      <img
-        src="../logo.png"
-        alt="Website Deals"
-        class="brand-logo"
-        onerror="this.style.display='none'"
-      >
+    <div class="sidebar-brand">
 
-      <div class="brand-copy">
-        <div class="brand-name">Website Deals</div>
-        <div class="brand-sub">Admin Control Center</div>
+      <div class="brand-logo">
+        <img
+          src="../logo.png"
+          alt="Website Deals"
+          onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=&quot;color:#18a957;font-weight:900;&quot;>WD</span>';"
+        >
       </div>
+
+      <div>
+        <div class="brand-name">
+          Website Deals
+        </div>
+
+        <div class="brand-subtitle">
+          Admin Console
+        </div>
+      </div>
+
     </div>
 
-    <nav class="nav">
 
-      <div class="nav-section">Marketplace</div>
+    <div class="sidebar-section">
 
-      <a class="nav-link" href="dashboard.html">
-        <span class="nav-icon">⌂</span>
-        <span>Dashboard</span>
-      </a>
+      <div class="sidebar-section-title">
+        Marketplace
+      </div>
 
-      <a class="nav-link" href="websites.html">
-        <span class="nav-icon">▦</span>
-        <span>Websites</span>
-      </a>
+      <nav class="nav-list">
 
-      <a class="nav-link" href="categories.html">
-        <span class="nav-icon">◫</span>
-        <span>Categories</span>
-      </a>
+        <a class="nav-item" href="dashboard.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1"/>
+            <rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/>
+            <rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+          Dashboard
+        </a>
 
-      <a class="nav-link" href="orders.html">
-        <span class="nav-icon">▤</span>
-        <span>Orders</span>
-      </a>
+        <a class="nav-item" href="websites.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="16" rx="2"/>
+            <path d="M3 9h18"/>
+            <path d="M8 4v5"/>
+          </svg>
+          Websites
+        </a>
 
-      <a class="nav-link" href="payments.html">
-        <span class="nav-icon">৳</span>
-        <span>Payments</span>
-      </a>
+        <a class="nav-item" href="categories.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h6v6H4z"/>
+            <path d="M14 4h6v6h-6z"/>
+            <path d="M4 14h6v6H4z"/>
+            <path d="M14 14h6v6h-6z"/>
+          </svg>
+          Categories
+        </a>
 
-      <a class="nav-link" href="customers.html">
-        <span class="nav-icon">♙</span>
-        <span>Customers</span>
-      </a>
+        <a class="nav-item" href="orders.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2h12l2 5v15H4V7l2-5Z"/>
+            <path d="M4 7h16"/>
+            <path d="M9 11h6"/>
+          </svg>
+          Orders
+        </a>
 
-      <a class="nav-link" href="newsletter.html">
-        <span class="nav-icon">✉</span>
-        <span>Newsletter</span>
-      </a>
+        <a class="nav-item" href="payments.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2.5" y="5" width="19" height="14" rx="2"/>
+            <path d="M2.5 10h19"/>
+            <path d="M7 15h3"/>
+          </svg>
+          Payments
+        </a>
 
-      <div class="nav-section">Reports</div>
+        <a class="nav-item" href="customers.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="8" r="3"/>
+            <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/>
+            <path d="M16 5.5a3 3 0 0 1 0 5.8"/>
+            <path d="M18 14c1.8.7 3 2.4 3 4.5"/>
+          </svg>
+          Customers
+        </a>
 
-      <a class="nav-link active" href="reports.html">
-        <span class="nav-icon">▥</span>
-        <span>Reports</span>
-      </a>
+        <a class="nav-item" href="newsletter.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="5" width="18" height="14" rx="2"/>
+            <path d="m3 7 9 6 9-6"/>
+          </svg>
+          Newsletter
+        </a>
 
-      <a class="nav-link" href="monthly-report.html">
-        <span class="nav-icon">◷</span>
-        <span>Monthly Report</span>
-      </a>
+      </nav>
 
-      <div class="nav-section restricted-nav">Restricted Controls</div>
+    </div>
 
-      <a
-        class="nav-link restricted-nav"
-        href="admins.html"
-        id="adminsNav"
-      >
-        <span class="nav-icon">♟</span>
-        <span>Admin Management</span>
-      </a>
 
-      <a
-        class="nav-link restricted-nav"
-        href="settings.html"
-        id="settingsNav"
-      >
-        <span class="nav-icon">⚙</span>
-        <span>System Settings</span>
-      </a>
+    <div class="sidebar-section">
 
-    </nav>
+      <div class="sidebar-section-title">
+        Reports
+      </div>
 
-    <div class="sidebar-bottom">
+      <nav class="nav-list">
+
+        <a class="nav-item active" href="reports.html">
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 19V5"/>
+            <path d="M4 19h17"/>
+            <path d="m7 15 4-5 3 3 6-7"/>
+          </svg>
+
+          Reports
+
+          <span class="nav-badge">
+            LIVE
+          </span>
+
+        </a>
+
+        <a class="nav-item" href="monthly-report.html">
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="17" rx="2"/>
+            <path d="M16 2v4"/>
+            <path d="M8 2v4"/>
+            <path d="M3 9h18"/>
+            <path d="M8 13h3"/>
+            <path d="M8 17h3"/>
+          </svg>
+
+          Monthly Report
+
+        </a>
+
+      </nav>
+
+    </div>
+
+
+    <div class="sidebar-section">
+
+      <div class="sidebar-section-title">
+        Restricted Controls
+      </div>
+
+      <nav class="nav-list">
+
+        <a class="nav-item" href="admins.html">
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="8" r="3"/>
+            <path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/>
+            <path d="M16 11h5"/>
+            <path d="M18.5 8.5v5"/>
+          </svg>
+
+          Admin Management
+
+        </a>
+
+        <a class="nav-item" href="settings.html">
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/>
+            <path d="M19.4 15a1.8 1.8 0 0 0 .36 2l.05.05-1.8 1.8-.05-.05a1.8 1.8 0 0 0-2-.36 1.8 1.8 0 0 0-1.1 1.66V20h-2.55v-.07a1.8 1.8 0 0 0-1.1-1.66 1.8 1.8 0 0 0-2 .36l-.05.05-1.8-1.8.05-.05a1.8 1.8 0 0 0 .36-2 1.8 1.8 0 0 0-1.66-1.1H4v-2.55h.07a1.8 1.8 0 0 0 1.66-1.1 1.8 1.8 0 0 0-.36-2l-.05-.05 1.8-1.8.05.05a1.8 1.8 0 0 0 2 .36 1.8 1.8 0 0 0 1.1-1.66V4h2.55v.07a1.8 1.8 0 0 0 1.1 1.66 1.8 1.8 0 0 0 2-.36l.05-.05 1.8 1.8-.05.05a1.8 1.8 0 0 0-.36 2 1.8 1.8 0 0 0 1.66 1.1H20v2.55h-.07a1.8 1.8 0 0 0-1.66 1.1Z"/>
+          </svg>
+
+          System Settings
+
+        </a>
+
+      </nav>
+
+    </div>
+
+
+    <div class="sidebar-footer">
 
       <div class="admin-mini">
 
-        <div class="admin-avatar" id="adminAvatar">
+        <div class="admin-avatar" id="sidebarAvatar">
           SA
         </div>
 
-        <div class="admin-info">
-          <div class="admin-name" id="adminName">
+        <div>
+
+          <div
+            class="admin-mini-name"
+            id="sidebarAdminName"
+          >
             Super Admin
           </div>
 
-          <div class="admin-role" id="adminRole">
-            Super Admin
+          <div class="admin-mini-role">
+            Super Administrator
           </div>
+
         </div>
-
-        <button
-          class="logout-btn"
-          id="logoutBtn"
-          title="Sign out"
-          aria-label="Sign out"
-        >
-          ↪
-        </button>
 
       </div>
 
@@ -1429,12 +2055,21 @@
 
   </aside>
 
-  <!-- =========================
+
+  <div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+  ></div>
+
+
+  <!-- =========================================
        MAIN
-  ========================== -->
+  ========================================== -->
+
   <main class="main">
 
     <!-- TOPBAR -->
+
     <header class="topbar">
 
       <div class="topbar-left">
@@ -1442,80 +2077,142 @@
         <button
           class="mobile-menu"
           id="mobileMenu"
+          type="button"
           aria-label="Open menu"
         >
-          ☰
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 6h16"/>
+            <path d="M4 12h16"/>
+            <path d="M4 18h16"/>
+          </svg>
+
         </button>
 
         <div class="breadcrumb">
+
           <span>Admin</span>
+
           <span>/</span>
+
           <strong>Reports</strong>
+
         </div>
 
       </div>
 
+
       <div class="topbar-actions">
 
         <button
-          class="btn marketplace-btn"
-          id="marketplaceBtn"
+          class="top-action marketplace-action"
+          type="button"
+          id="marketplaceButton"
         >
-          ↗ <span>Marketplace</span>
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9h18"/>
+            <path d="m5 9 1.5-5h11L20 9"/>
+            <path d="M4 9v11h16V9"/>
+            <path d="M9 20v-6h6v6"/>
+          </svg>
+
+          <span>
+            Marketplace
+          </span>
+
         </button>
 
-        <button
-          class="btn"
-          id="refreshBtn"
-        >
-          ↻ <span>Refresh</span>
-        </button>
 
         <button
-          class="btn primary"
-          id="exportBtn"
+          class="top-action"
+          type="button"
+          id="logoutButton"
+          title="Sign out"
         >
-          ↓ <span>Export CSV</span>
+
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10 17l5-5-5-5"/>
+            <path d="M15 12H3"/>
+            <path d="M14 3h5a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-5"/>
+          </svg>
+
+          <span>
+            Sign Out
+          </span>
+
         </button>
 
       </div>
 
     </header>
 
-    <!-- CONTENT -->
-    <section class="content">
+
+    <div class="page">
 
       <!-- HERO -->
+
       <section class="hero">
 
         <div class="hero-content">
 
-          <div>
+          <div class="hero-kicker">
 
-            <div class="eyebrow">
-              <span class="eyebrow-dot"></span>
-              Business Intelligence
-            </div>
+            <span class="hero-kicker-dot"></span>
 
-            <h1>Reports &amp; Analytics</h1>
-
-            <p>
-              Understand your marketplace performance with sales,
-              revenue, orders, payment and category insights in one place.
-            </p>
+            Marketplace Intelligence
 
           </div>
+
+          <h1>
+            Reports & Analytics
+          </h1>
+
+          <p>
+            Understand revenue, orders, payment performance,
+            website sales and category activity from one
+            centralized reporting dashboard.
+          </p>
 
           <div class="hero-meta">
 
-            <div class="hero-pill">
-              <span>●</span>
-              <span id="reportStatus">Live Report</span>
+            <div class="hero-meta-item">
+
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 19V5"/>
+                <path d="M4 19h17"/>
+                <path d="m7 15 4-5 3 3 6-7"/>
+              </svg>
+
+              <span id="heroPeriod">
+                Last 30 Days
+              </span>
+
             </div>
 
-            <div class="hero-pill">
-              <span>◷</span>
-              <span id="lastUpdated">Updated just now</span>
+            <div class="hero-meta-item">
+
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="9"/>
+                <path d="M12 7v5l3 2"/>
+              </svg>
+
+              <span id="lastUpdated">
+                Updated just now
+              </span>
+
+            </div>
+
+            <div class="hero-meta-item">
+
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
+              </svg>
+
+              <span>
+                Admin Analytics
+              </span>
+
             </div>
 
           </div>
@@ -1523,3016 +2220,987 @@
         </div>
 
       </section>
+
 
       <!-- FILTERS -->
-      <section class="filter-card">
 
-        <div class="filter-row">
+      <section class="filter-bar">
 
-          <div class="field">
+        <div class="filters">
 
-            <label for="dateRange">Date Range</label>
+          <span class="filter-label">
+            Report Period
+          </span>
 
-            <select class="control" id="dateRange">
+          <select
+            class="select"
+            id="dateRange"
+          >
+            <option value="7">Last 7 Days</option>
+            <option value="30" selected>Last 30 Days</option>
+            <option value="90">Last 90 Days</option>
+            <option value="365">Last 12 Months</option>
+            <option value="all">All Time</option>
+          </select>
 
-              <option value="7">Last 7 Days</option>
-              <option value="30" selected>Last 30 Days</option>
-              <option value="90">Last 90 Days</option>
-              <option value="365">Last 12 Months</option>
-              <option value="all">All Time</option>
 
-            </select>
+          <select
+            class="select"
+            id="reportType"
+          >
+            <option value="overview" selected>
+              Overview Report
+            </option>
 
-          </div>
+            <option value="sales">
+              Sales Report
+            </option>
 
-          <div class="field">
+            <option value="categories">
+              Category Report
+            </option>
 
-            <label for="reportType">Report Type</label>
+            <option value="payments">
+              Payment Report
+            </option>
+          </select>
 
-            <select class="control" id="reportType">
+        </div>
 
-              <option value="overview" selected>Overview</option>
-              <option value="sales">Sales Performance</option>
-              <option value="categories">Category Performance</option>
-              <option value="payments">Payment Performance</option>
 
-            </select>
+        <div class="filter-actions">
 
-          </div>
+          <button
+            class="btn btn-secondary"
+            type="button"
+            id="refreshButton"
+          >
 
-          <div class="field">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 11a8.1 8.1 0 0 0-15.4-3"/>
+              <path d="M4 4v4h4"/>
+              <path d="M4 13a8.1 8.1 0 0 0 15.4 3"/>
+              <path d="M20 20v-4h-4"/>
+            </svg>
 
-            <label for="statusFilter">Order Status</label>
+            Refresh
 
-            <select class="control" id="statusFilter">
+          </button>
 
-              <option value="all" selected>All Statuses</option>
-              <option value="paid">Paid</option>
-              <option value="pending">Pending</option>
-              <option value="processing">Processing</option>
-              <option value="completed">Completed</option>
-              <option value="cancelled">Cancelled</option>
 
-            </select>
+          <button
+            class="btn btn-primary"
+            type="button"
+            id="exportButton"
+          >
 
-          </div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 3v12"/>
+              <path d="m8 11 4 4 4-4"/>
+              <path d="M4 20h16"/>
+            </svg>
 
-          <div class="field">
+            Export CSV
 
-            <label for="paymentFilter">Payment Method</label>
+          </button>
 
-            <select class="control" id="paymentFilter">
 
-              <option value="all" selected>All Methods</option>
-              <option value="bkash">bKash</option>
-              <option value="nagad">Nagad</option>
-              <option value="bank">Bank Transfer</option>
-              <option value="card">Card Payment</option>
+          <button
+            class="btn btn-secondary"
+            type="button"
+            id="printButton"
+          >
 
-            </select>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 9V3h12v6"/>
+              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+              <path d="M6 14h12v7H6z"/>
+            </svg>
 
-          </div>
+            Print
 
-          <div class="filter-action">
-
-            <button class="btn dark" id="applyFilter">
-              Apply Filters
-            </button>
-
-          </div>
+          </button>
 
         </div>
 
       </section>
+
 
       <!-- KPI -->
-      <div class="section-heading">
 
-        <div>
-          <div class="section-title">Performance Snapshot</div>
-          <div class="section-note" id="periodText">
-            Last 30 days
-          </div>
-        </div>
+      <section class="section">
 
-      </div>
+        <div class="kpi-grid">
 
-      <section class="kpi-grid">
+          <div class="kpi-card">
 
-        <article class="kpi">
+            <div class="kpi-top">
 
-          <div class="kpi-top">
-            <div class="kpi-label">Total Revenue</div>
+              <div class="kpi-icon">
 
-            <div class="kpi-icon">
-              ৳
-            </div>
-          </div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 7h18"/>
+                  <path d="M5 7v13h14V7"/>
+                  <path d="M8 4h8"/>
+                  <path d="M8 12h8"/>
+                  <path d="M8 16h5"/>
+                </svg>
 
-          <div class="kpi-value" id="totalRevenue">
-            ৳0
-          </div>
-
-          <div class="kpi-sub">
-            Confirmed / paid revenue
-          </div>
-
-        </article>
-
-        <article class="kpi">
-
-          <div class="kpi-top">
-            <div class="kpi-label">Total Orders</div>
-
-            <div class="kpi-icon blue">
-              #
-            </div>
-          </div>
-
-          <div class="kpi-value" id="totalOrders">
-            0
-          </div>
-
-          <div class="kpi-sub">
-            Orders in selected period
-          </div>
-
-        </article>
-
-        <article class="kpi">
-
-          <div class="kpi-top">
-            <div class="kpi-label">Paid</div>
-
-            <div class="kpi-icon">
-              ✓
-            </div>
-          </div>
-
-          <div class="kpi-value" id="paidOrders">
-            0
-          </div>
-
-          <div class="kpi-sub">
-            Successfully paid orders
-          </div>
-
-        </article>
-
-        <article class="kpi">
-
-          <div class="kpi-top">
-            <div class="kpi-label">Pending</div>
-
-            <div class="kpi-icon orange">
-              !
-            </div>
-          </div>
-
-          <div class="kpi-value" id="pendingOrders">
-            0
-          </div>
-
-          <div class="kpi-sub">
-            Awaiting payment / review
-          </div>
-
-        </article>
-
-        <article class="kpi">
-
-          <div class="kpi-top">
-            <div class="kpi-label">Cancelled</div>
-
-            <div class="kpi-icon red">
-              ×
-            </div>
-          </div>
-
-          <div class="kpi-value" id="cancelledOrders">
-            0
-          </div>
-
-          <div class="kpi-sub">
-            Cancelled orders
-          </div>
-
-        </article>
-
-        <article class="kpi">
-
-          <div class="kpi-top">
-            <div class="kpi-label">Avg. Order Value</div>
-
-            <div class="kpi-icon blue">
-              ↗
-            </div>
-          </div>
-
-          <div class="kpi-value" id="averageOrder">
-            ৳0
-          </div>
-
-          <div class="kpi-sub">
-            Revenue ÷ paid orders
-          </div>
-
-        </article>
-
-      </section>
-
-      <!-- CHARTS -->
-      <section class="report-grid">
-
-        <!-- REVENUE CHART -->
-        <article class="card">
-
-          <div class="card-head">
-
-            <div>
-              <div class="card-title">
-                Revenue Overview
               </div>
 
-              <div class="card-subtitle">
-                Revenue generated across the selected period
-              </div>
-            </div>
-
-            <div class="legend">
-
-              <div class="legend-item">
-                <span class="legend-dot"></span>
-                Revenue
-              </div>
+              <span
+                class="kpi-change"
+                id="revenueChange"
+              >
+                Live
+              </span>
 
             </div>
 
-          </div>
-
-          <div class="chart-wrap">
-
-            <div class="chart" id="revenueChart">
-
-              <div class="chart-grid" id="revenueGrid"></div>
-
-              <div class="chart-bars" id="revenueBars"></div>
-
+            <div class="kpi-label">
+              Total Revenue
             </div>
 
-          </div>
+            <div
+              class="kpi-value"
+              id="kpiRevenue"
+            >
+              ৳0
+            </div>
 
-        </article>
-
-        <!-- SALES SUMMARY -->
-        <article class="card">
-
-          <div class="card-head">
-
-            <div>
-              <div class="card-title">
-                Top Websites
-              </div>
-
-              <div class="card-subtitle">
-                Highest revenue contributors
-              </div>
+            <div class="kpi-note">
+              Paid transaction value
             </div>
 
           </div>
 
-          <div class="summary-list" id="topWebsites">
-          </div>
 
-        </article>
+          <div class="kpi-card">
 
-      </section>
+            <div class="kpi-top">
 
-      <!-- ORDER CHART -->
-      <section class="report-grid">
+              <div class="kpi-icon">
 
-        <article class="card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M6 2h12l2 5v15H4V7l2-5Z"/>
+                  <path d="M4 7h16"/>
+                  <path d="M9 11h6"/>
+                </svg>
 
-          <div class="card-head">
-
-            <div>
-              <div class="card-title">
-                Order Activity
               </div>
 
-              <div class="card-subtitle">
-                Orders received during the selected period
-              </div>
-            </div>
-
-            <div class="legend">
-
-              <div class="legend-item">
-                <span class="legend-dot"></span>
+              <span class="kpi-change">
                 Orders
+              </span>
+
+            </div>
+
+            <div class="kpi-label">
+              Total Orders
+            </div>
+
+            <div
+              class="kpi-value"
+              id="kpiOrders"
+            >
+              0
+            </div>
+
+            <div class="kpi-note">
+              In selected period
+            </div>
+
+          </div>
+
+
+          <div class="kpi-card">
+
+            <div class="kpi-top">
+
+              <div class="kpi-icon">
+
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="m8 12 2.5 2.5L16 9"/>
+                </svg>
+
               </div>
 
+              <span class="kpi-change">
+                Paid
+              </span>
+
+            </div>
+
+            <div class="kpi-label">
+              Paid Orders
+            </div>
+
+            <div
+              class="kpi-value"
+              id="kpiPaid"
+            >
+              0
+            </div>
+
+            <div class="kpi-note">
+              Successfully completed
             </div>
 
           </div>
 
-          <div class="chart-wrap">
 
-            <div class="chart" id="ordersChart">
+          <div class="kpi-card">
 
-              <div class="chart-grid" id="ordersGrid"></div>
+            <div class="kpi-top">
 
-              <div class="chart-bars" id="ordersBars"></div>
+              <div class="kpi-icon">
 
-            </div>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="M12 7v5l3 2"/>
+                </svg>
 
-          </div>
-
-        </article>
-
-        <!-- CATEGORY SUMMARY -->
-        <article class="card">
-
-          <div class="card-head">
-
-            <div>
-              <div class="card-title">
-                Top Categories
               </div>
 
-              <div class="card-subtitle">
-                Category revenue contribution
+              <span class="kpi-change">
+                Review
+              </span>
+
+            </div>
+
+            <div class="kpi-label">
+              Pending
+            </div>
+
+            <div
+              class="kpi-value"
+              id="kpiPending"
+            >
+              0
+            </div>
+
+            <div class="kpi-note">
+              Awaiting processing
+            </div>
+
+          </div>
+
+
+          <div class="kpi-card">
+
+            <div class="kpi-top">
+
+              <div class="kpi-icon">
+
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="9"/>
+                  <path d="m9 9 6 6"/>
+                  <path d="m15 9-6 6"/>
+                </svg>
+
               </div>
+
+              <span class="kpi-change">
+                Lost
+              </span>
+
+            </div>
+
+            <div class="kpi-label">
+              Cancelled
+            </div>
+
+            <div
+              class="kpi-value"
+              id="kpiCancelled"
+            >
+              0
+            </div>
+
+            <div class="kpi-note">
+              Cancelled or failed
             </div>
 
           </div>
 
-          <div class="summary-list" id="topCategories">
-          </div>
 
-        </article>
+          <div class="kpi-card">
 
-      </section>
+            <div class="kpi-top">
 
-      <!-- TOP SELLING WEBSITES -->
-      <section class="card" style="margin-bottom:20px;">
+              <div class="kpi-icon">
 
-        <div class="card-head">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 19V5"/>
+                  <path d="M4 19h17"/>
+                  <path d="M8 15h2"/>
+                  <path d="M12 12h2"/>
+                  <path d="M16 9h2"/>
+                </svg>
 
-          <div>
-            <div class="card-title">
-              Website Sales Performance
+              </div>
+
+              <span class="kpi-change">
+                AOV
+              </span>
+
             </div>
 
-            <div class="card-subtitle">
-              Revenue and order contribution by website
+            <div class="kpi-label">
+              Average Order
             </div>
-          </div>
 
-          <button class="btn" id="printBtn">
-            ⎙ Print Report
-          </button>
+            <div
+              class="kpi-value"
+              id="kpiAverage"
+            >
+              ৳0
+            </div>
+
+            <div class="kpi-note">
+              Average paid order
+            </div>
+
+          </div>
 
         </div>
 
-        <div class="table-wrap">
+      </section>
 
-          <table>
 
-            <thead>
-              <tr>
-                <th>Website</th>
-                <th>Category</th>
-                <th>Orders</th>
-                <th>Paid</th>
-                <th>Revenue</th>
-                <th>Avg. Value</th>
-              </tr>
-            </thead>
+      <!-- MAIN REPORT -->
 
-            <tbody id="websiteTableBody">
-            </tbody>
+      <section class="section">
 
-          </table>
+        <div class="report-grid">
+
+          <!-- Revenue Chart -->
+
+          <div class="card">
+
+            <div class="card-header">
+
+              <div>
+                <div class="card-title">
+                  Revenue Performance
+                </div>
+
+                <div class="card-subtitle">
+                  Revenue generated across the selected reporting period
+                </div>
+              </div>
+
+              <span
+                class="period-pill"
+                id="chartPeriod"
+              >
+                30 Days
+              </span>
+
+            </div>
+
+            <div class="card-body">
+
+              <div class="chart-wrap" id="revenueChart">
+
+                <svg
+                  class="chart-svg"
+                  id="revenueChartSvg"
+                  viewBox="0 0 760 285"
+                  preserveAspectRatio="none"
+                ></svg>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- Payment Breakdown -->
+
+          <div class="card">
+
+            <div class="card-header">
+
+              <div>
+                <div class="card-title">
+                  Payment Breakdown
+                </div>
+
+                <div class="card-subtitle">
+                  Revenue by payment method
+                </div>
+              </div>
+
+            </div>
+
+            <div class="card-body">
+
+              <div
+                class="payment-list"
+                id="paymentList"
+              ></div>
+
+            </div>
+
+          </div>
 
         </div>
 
       </section>
 
-      <!-- CATEGORY + PAYMENTS -->
-      <section class="bottom-grid">
 
-        <article class="card">
+      <!-- ORDERS + CATEGORIES -->
 
-          <div class="card-head">
+      <section class="section">
 
-            <div>
-              <div class="card-title">
-                Category Performance
+        <div class="report-grid">
+
+          <div class="card">
+
+            <div class="card-header">
+
+              <div>
+                <div class="card-title">
+                  Order Activity
+                </div>
+
+                <div class="card-subtitle">
+                  Order volume across the reporting period
+                </div>
               </div>
 
-              <div class="card-subtitle">
-                Sales distribution across categories
+            </div>
+
+            <div class="card-body">
+
+              <div
+                class="orders-chart"
+                id="ordersChart"
+              ></div>
+
+              <div class="summary-grid">
+
+                <div class="summary-box">
+
+                  <div class="summary-label">
+                    Conversion
+                  </div>
+
+                  <div
+                    class="summary-value"
+                    id="summaryConversion"
+                  >
+                    0%
+                  </div>
+
+                  <div class="summary-note">
+                    Paid / total orders
+                  </div>
+
+                </div>
+
+                <div class="summary-box">
+
+                  <div class="summary-label">
+                    Completion
+                  </div>
+
+                  <div
+                    class="summary-value"
+                    id="summaryCompletion"
+                  >
+                    0%
+                  </div>
+
+                  <div class="summary-note">
+                    Successful orders
+                  </div>
+
+                </div>
+
+                <div class="summary-box">
+
+                  <div class="summary-label">
+                    Revenue / Order
+                  </div>
+
+                  <div
+                    class="summary-value"
+                    id="summaryRevenueOrder"
+                  >
+                    ৳0
+                  </div>
+
+                  <div class="summary-note">
+                    Average paid value
+                  </div>
+
+                </div>
+
               </div>
+
             </div>
 
           </div>
 
-          <div class="mini-stat-list" id="categoryPerformance">
-          </div>
 
-        </article>
+          <div class="card">
 
-        <article class="card">
+            <div class="card-header">
 
-          <div class="card-head">
+              <div>
+                <div class="card-title">
+                  Top Categories
+                </div>
 
-            <div>
-              <div class="card-title">
-                Payment Performance
+                <div class="card-subtitle">
+                  Category performance by sales
+                </div>
               </div>
 
-              <div class="card-subtitle">
-                Transaction volume by payment method
-              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div
+                class="category-list"
+                id="categoryList"
+              ></div>
+
             </div>
 
           </div>
 
-          <div class="mini-stat-list" id="paymentPerformance">
-          </div>
-
-        </article>
+        </div>
 
       </section>
+
+
+      <!-- TOP WEBSITES -->
+
+      <section class="section">
+
+        <div class="card table-card">
+
+          <div class="card-header">
+
+            <div>
+
+              <div class="card-title">
+                Top Selling Websites
+              </div>
+
+              <div class="card-subtitle">
+                Website performance based on recorded orders and revenue
+              </div>
+
+            </div>
+
+            <span class="period-pill">
+              Sales Ranking
+            </span>
+
+          </div>
+
+          <div class="table-scroll">
+
+            <table>
+
+              <thead>
+
+                <tr>
+                  <th>#</th>
+                  <th>Website</th>
+                  <th>Orders</th>
+                  <th>Paid Orders</th>
+                  <th>Revenue</th>
+                  <th>Avg. Value</th>
+                </tr>
+
+              </thead>
+
+              <tbody id="websiteTableBody"></tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+      </section>
+
 
       <!-- RECENT TRANSACTIONS -->
-      <section class="card" style="margin-bottom:20px;">
 
-        <div class="card-head">
+      <section class="section">
 
-          <div>
-            <div class="card-title">
-              Recent Transactions
+        <div class="card table-card">
+
+          <div class="card-header">
+
+            <div>
+
+              <div class="card-title">
+                Recent Transactions
+              </div>
+
+              <div class="card-subtitle">
+                Latest payment activity available in the admin data store
+              </div>
+
             </div>
 
-            <div class="card-subtitle">
-              Latest payment activity in the selected report
-            </div>
+            <span class="period-pill">
+              Latest Activity
+            </span>
+
           </div>
 
-          <button class="btn" id="clearFilterBtn">
-            Reset Filters
-          </button>
+          <div class="table-scroll">
 
-        </div>
+            <table>
 
-        <div class="table-wrap">
+              <thead>
 
-          <table>
+                <tr>
+                  <th>Transaction</th>
+                  <th>Customer</th>
+                  <th>Payment Method</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
 
-            <thead>
-              <tr>
-                <th>Transaction</th>
-                <th>Customer</th>
-                <th>Website</th>
-                <th>Method</th>
-                <th>Amount</th>
-                <th>Status</th>
-                <th>Date</th>
-              </tr>
-            </thead>
+              </thead>
 
-            <tbody id="transactionTableBody">
-            </tbody>
+              <tbody id="transactionTableBody"></tbody>
 
-          </table>
+            </table>
+
+          </div>
 
         </div>
 
       </section>
 
+
       <!-- FOOTER -->
+
       <footer class="footer">
 
-        <div>
-          Website Deals Admin · Reports Center
-        </div>
+        <span>
+          Website Deals Admin Reports
+          <strong>• Analytics Console</strong>
+        </span>
 
-        <div>
-          Data mode:
-          <strong id="dataMode">
-            Local Storage / Demo
-          </strong>
-        </div>
+        <span>
+          Data source: LocalStorage prototype
+        </span>
 
       </footer>
 
-    </section>
+    </div>
 
   </main>
 
-</div>
 
-<!-- TOAST -->
-<div class="toast" id="toast">
+  <!-- TOAST -->
 
-  <div class="toast-icon">
-    ✓
+  <div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+  >
+
+    <div class="toast-icon">
+
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="m5 12 4 4L19 6"/>
+      </svg>
+
+    </div>
+
+    <span id="toastText">
+      Done.
+    </span>
+
   </div>
 
-  <div id="toastMessage">
-    Done
-  </div>
 
-</div>
+  <script>
+    /* =====================================================
+       WEBSITE DEALS — REPORTS
+       Admin Analytics / LocalStorage Prototype
+    ===================================================== */
 
-<script>
-/* =========================================================
-   WEBSITE DEALS
-   REPORTS CENTER
-   admin/reports.html
-========================================================= */
+    const AUTH_KEY = "websiteDealsAdminAuth";
 
-(function(){
-
-  "use strict";
-
-  /* =======================================================
-     AUTH
-  ======================================================= */
-
-  const AUTH_KEY = "websiteDealsAdminAuth";
-
-  function getAdminSession(){
-
-    try{
-
-      const raw = sessionStorage.getItem(AUTH_KEY);
-
-      if(!raw){
-        return null;
-      }
-
-      const session = JSON.parse(raw);
-
-      if(
-        !session ||
-        session.authenticated !== true
-      ){
-        return null;
-      }
-
-      return session;
-
-    }catch(error){
-
-      return null;
-
-    }
-
-  }
-
-  const adminSession = getAdminSession();
-
-  if(!adminSession){
-
-    window.location.replace("login/");
-
-    return;
-
-  }
-
-
-  /* =======================================================
-     CONSTANTS
-  ======================================================= */
-
-  const STORAGE = {
-
-    transactions:"websiteDealsTransactions",
-
-    orders:"websiteDealsOrders",
-
-    websites:"websiteDealsAdminWebsites",
-
-    categories:"websiteDealsCategories"
-
-  };
-
-
-  /* =======================================================
-     DOM HELPERS
-  ======================================================= */
-
-  const $ = (selector) =>
-    document.querySelector(selector);
-
-  const $$ = (selector) =>
-    Array.from(document.querySelectorAll(selector));
-
-
-  /* =======================================================
-     SAFE HELPERS
-  ======================================================= */
-
-  function escapeHTML(value){
-
-    return String(value ?? "")
-      .replace(/&/g,"&amp;")
-      .replace(/</g,"&lt;")
-      .replace(/>/g,"&gt;")
-      .replace(/"/g,"&quot;")
-      .replace(/'/g,"&#039;");
-
-  }
-
-
-  function readStorage(key, fallback){
-
-    try{
-
-      const raw = localStorage.getItem(key);
-
-      if(!raw){
-        return fallback;
-      }
-
-      const data = JSON.parse(raw);
-
-      return data ?? fallback;
-
-    }catch(error){
-
-      return fallback;
-
-    }
-
-  }
-
-
-  function writeStorage(key,data){
-
-    try{
-
-      localStorage.setItem(
-        key,
-        JSON.stringify(data)
-      );
-
-      return true;
-
-    }catch(error){
-
-      return false;
-
-    }
-
-  }
-
-
-  function number(value){
-
-    const n = Number(value);
-
-    return Number.isFinite(n)
-      ? n
-      : 0;
-
-  }
-
-
-  function money(value){
-
-    return "৳" + new Intl.NumberFormat("en-BD",{
-      maximumFractionDigits:0
-    }).format(number(value));
-
-  }
-
-
-  function compactMoney(value){
-
-    const n = number(value);
-
-    if(n >= 100000){
-
-      return "৳" +
-        (n / 100000)
-          .toFixed(n >= 1000000 ? 1 : 2)
-          .replace(/\.0$/,"") +
-        "L";
-
-    }
-
-    if(n >= 1000){
-
-      return "৳" +
-        (n / 1000)
-          .toFixed(n >= 100000 ? 0 : 1)
-          .replace(/\.0$/,"") +
-        "K";
-
-    }
-
-    return money(n);
-
-  }
-
-
-  function formatDate(value){
-
-    const date = new Date(value);
-
-    if(Number.isNaN(date.getTime())){
-      return "—";
-    }
-
-    return date.toLocaleDateString("en-BD",{
-      day:"2-digit",
-      month:"short",
-      year:"numeric"
-    });
-
-  }
-
-
-  function formatDateTime(value){
-
-    const date = new Date(value);
-
-    if(Number.isNaN(date.getTime())){
-      return "—";
-    }
-
-    return date.toLocaleString("en-BD",{
-      day:"2-digit",
-      month:"short",
-      year:"numeric",
-      hour:"2-digit",
-      minute:"2-digit"
-    });
-
-  }
-
-
-  function normalizeStatus(value){
-
-    const status = String(
-      value || "pending"
-    )
-      .toLowerCase()
-      .trim()
-      .replace(/\s+/g,"_");
-
-    if(
-      ["success","successful","paid","payment_received"]
-        .includes(status)
-    ){
-      return "paid";
-    }
-
-    if(
-      ["complete","completed","delivered"]
-        .includes(status)
-    ){
-      return "completed";
-    }
-
-    if(
-      ["processing","in_progress"]
-        .includes(status)
-    ){
-      return "processing";
-    }
-
-    if(
-      ["cancel","cancelled","canceled","rejected"]
-        .includes(status)
-    ){
-      return "cancelled";
-    }
-
-    if(
-      ["failed","failure"]
-        .includes(status)
-    ){
-      return "failed";
-    }
-
-    return "pending";
-
-  }
-
-
-  function normalizeMethod(value){
-
-    const raw = String(
-      value || "Other"
-    ).toLowerCase();
-
-    if(raw.includes("bkash")){
-      return "bKash";
-    }
-
-    if(raw.includes("nagad")){
-      return "Nagad";
-    }
-
-    if(
-      raw.includes("bank") ||
-      raw.includes("transfer")
-    ){
-      return "Bank Transfer";
-    }
-
-    if(
-      raw.includes("card") ||
-      raw.includes("stripe")
-    ){
-      return "Card Payment";
-    }
-
-    return value
-      ? String(value)
-      : "Other";
-
-  }
-
-
-  function slugify(value){
-
-    return String(value || "")
-      .toLowerCase()
-      .trim()
-      .replace(/[^a-z0-9]+/g,"-")
-      .replace(/^-+|-+$/g,"");
-
-  }
-
-
-  function initials(value){
-
-    const parts = String(value || "Admin")
-      .trim()
-      .split(/\s+/)
-      .filter(Boolean);
-
-    if(!parts.length){
-      return "A";
-    }
-
-    if(parts.length === 1){
-      return parts[0].slice(0,2).toUpperCase();
-    }
-
-    return (
-      parts[0][0] +
-      parts[parts.length - 1][0]
-    ).toUpperCase();
-
-  }
-
-
-  /* =======================================================
-     ADMIN PROFILE
-  ======================================================= */
-
-  const sessionName =
-    adminSession.name ||
-    adminSession.email ||
-    "Admin";
-
-  const sessionRole =
-    adminSession.role ||
-    "admin";
-
-  $("#adminName").textContent = sessionName;
-
-  $("#adminRole").textContent =
-    String(sessionRole)
-      .replace(/([a-z])([A-Z])/g,"$1 $2")
-      .replace(/^./,char => char.toUpperCase());
-
-  $("#adminAvatar").textContent =
-    initials(sessionName);
-
-
-  const isSuperAdmin =
-    String(sessionRole).toLowerCase() === "superadmin";
-
-
-  if(!isSuperAdmin){
-
-    $$(".restricted-nav").forEach(el => {
-
-      el.style.display = "none";
-
-    });
-
-  }
-
-
-  /* =======================================================
-     DEMO DATA
-  ======================================================= */
-
-  function createDemoTransactions(){
-
-    const now = new Date();
-
-    function dateAgo(days,hour){
-
-      const d = new Date(now);
-
-      d.setDate(d.getDate() - days);
-
-      d.setHours(hour || 12,15,0,0);
-
-      return d.toISOString();
-
-    }
-
-    return [
-
-      {
-        id:"WD-1028",
-        customer:"Rahim Ahmed",
-        website:"Corporate Pro",
-        method:"bKash",
-        amount:12500,
-        status:"paid",
-        date:dateAgo(1,14)
-      },
-
-      {
-        id:"WD-1027",
-        customer:"Nusrat Jahan",
-        website:"Tasty Bites",
-        method:"Nagad",
-        amount:8500,
-        status:"paid",
-        date:dateAgo(2,11)
-      },
-
-      {
-        id:"WD-1026",
-        customer:"Tanvir Hasan",
-        website:"Creative Studio",
-        method:"Bank Transfer",
-        amount:15500,
-        status:"pending",
-        date:dateAgo(4,16)
-      },
-
-      {
-        id:"WD-1025",
-        customer:"Sadia Islam",
-        website:"ShopEasy Store",
-        method:"bKash",
-        amount:9900,
-        status:"paid",
-        date:dateAgo(6,10)
-      },
-
-      {
-        id:"WD-1024",
-        customer:"Mahin Khan",
-        website:"Personal Folio",
-        method:"bKash",
-        amount:6500,
-        status:"completed",
-        date:dateAgo(8,13)
-      },
-
-      {
-        id:"WD-1023",
-        customer:"Arif Hossain",
-        website:"Starter Monthly",
-        method:"Nagad",
-        amount:325,
-        status:"paid",
-        date:dateAgo(11,17)
-      },
-
-      {
-        id:"WD-1022",
-        customer:"Mim Akter",
-        website:"Biz Launch",
-        method:"bKash",
-        amount:7500,
-        status:"cancelled",
-        date:dateAgo(14,9)
-      },
-
-      {
-        id:"WD-1021",
-        customer:"Sabbir Rahman",
-        website:"Cafe Corner",
-        method:"Bank Transfer",
-        amount:11200,
-        status:"paid",
-        date:dateAgo(17,15)
-      },
-
-      {
-        id:"WD-1020",
-        customer:"Fahim Chowdhury",
-        website:"Corporate Pro",
-        method:"bKash",
-        amount:12500,
-        status:"paid",
-        date:dateAgo(21,12)
-      },
-
-      {
-        id:"WD-1019",
-        customer:"Jannat Tasnim",
-        website:"Tasty Bites",
-        method:"Nagad",
-        amount:8500,
-        status:"completed",
-        date:dateAgo(25,18)
-      },
-
-      {
-        id:"WD-1018",
-        customer:"Imran Kabir",
-        website:"Creative Studio",
-        method:"Card Payment",
-        amount:15500,
-        status:"paid",
-        date:dateAgo(29,10)
-      },
-
-      {
-        id:"WD-1017",
-        customer:"Rafiul Islam",
-        website:"ShopEasy Store",
-        method:"bKash",
-        amount:9900,
-        status:"pending",
-        date:dateAgo(35,14)
-      },
-
-      {
-        id:"WD-1016",
-        customer:"Ayesha Rahman",
-        website:"Corporate Pro",
-        method:"bKash",
-        amount:12500,
-        status:"paid",
-        date:dateAgo(45,11)
-      },
-
-      {
-        id:"WD-1015",
-        customer:"Nayeem Ahmed",
-        website:"Cafe Corner",
-        method:"Nagad",
-        amount:11200,
-        status:"completed",
-        date:dateAgo(58,16)
-      },
-
-      {
-        id:"WD-1014",
-        customer:"Sumaiya Islam",
-        website:"Personal Folio",
-        method:"bKash",
-        amount:6500,
-        status:"paid",
-        date:dateAgo(72,12)
-      },
-
-      {
-        id:"WD-1013",
-        customer:"Sakib Hasan",
-        website:"Biz Launch",
-        method:"Bank Transfer",
-        amount:7500,
-        status:"paid",
-        date:dateAgo(88,13)
-      },
-
-      {
-        id:"WD-1012",
-        customer:"Mahi Rahman",
-        website:"Starter Monthly",
-        method:"bKash",
-        amount:325,
-        status:"paid",
-        date:dateAgo(105,15)
-      },
-
-      {
-        id:"WD-1011",
-        customer:"Hasan Mahmud",
-        website:"Corporate Pro",
-        method:"Nagad",
-        amount:12500,
-        status:"completed",
-        date:dateAgo(130,10)
-      },
-
-      {
-        id:"WD-1010",
-        customer:"Tania Akter",
-        website:"Tasty Bites",
-        method:"bKash",
-        amount:8500,
-        status:"paid",
-        date:dateAgo(165,17)
-      },
-
-      {
-        id:"WD-1009",
-        customer:"Shakil Ahmed",
-        website:"Creative Studio",
-        method:"Bank Transfer",
-        amount:15500,
-        status:"paid",
-        date:dateAgo(205,12)
-      }
-
+    const TRANSACTION_KEYS = [
+      "websiteDealsTransactions",
+      "websiteDealsPaymentTransactions"
     ];
 
-  }
+    const ORDER_KEYS = [
+      "websiteDealsOrders",
+      "websiteDealsAdminOrders"
+    ];
 
+    const WEBSITE_KEY =
+      "websiteDealsAdminWebsites";
 
-  /* =======================================================
-     LOAD DATA
-  ======================================================= */
+    const CATEGORY_KEY =
+      "websiteDealsCategories";
 
-  let storedTransactions =
-    readStorage(
-      STORAGE.transactions,
-      null
-    );
 
-  let transactions;
+    /* =====================================================
+       AUTH
+    ===================================================== */
 
-  let usingDemo = false;
+    function getAdminSession() {
 
-  if(
-    Array.isArray(storedTransactions) &&
-    storedTransactions.length
-  ){
+      try {
 
-    transactions =
-      storedTransactions.map(normalizeTransaction);
+        const raw =
+          sessionStorage.getItem(AUTH_KEY);
 
-  }else{
-
-    transactions =
-      createDemoTransactions()
-        .map(normalizeTransaction);
-
-    usingDemo = true;
-
-  }
-
-
-  function normalizeTransaction(item,index){
-
-    const amount =
-      number(
-        item.amount ??
-        item.total ??
-        item.price ??
-        item.value
-      );
-
-    const status =
-      normalizeStatus(
-        item.status ??
-        item.paymentStatus ??
-        item.orderStatus
-      );
-
-    const website =
-      item.website ||
-      item.websiteName ||
-      item.product ||
-      item.productName ||
-      item.title ||
-      "Website";
-
-    const customer =
-      item.customer ||
-      item.customerName ||
-      item.name ||
-      item.email ||
-      "Customer";
-
-    const method =
-      normalizeMethod(
-        item.method ||
-        item.paymentMethod ||
-        item.gateway ||
-        item.type
-      );
-
-    const date =
-      item.date ||
-      item.createdAt ||
-      item.created_at ||
-      item.timestamp ||
-      new Date().toISOString();
-
-    return {
-
-      id:
-        item.id ||
-        item.orderId ||
-        item.transactionId ||
-        `WD-${1000 + index}`,
-
-      customer:String(customer),
-
-      website:String(website),
-
-      method,
-
-      amount,
-
-      status,
-
-      date
-
-    };
-
-  }
-
-
-  /* =======================================================
-     WEBSITE DATA
-  ======================================================= */
-
-  const websiteStorage =
-    readStorage(
-      STORAGE.websites,
-      []
-    );
-
-  const categoryStorage =
-    readStorage(
-      STORAGE.categories,
-      []
-    );
-
-
-  const websiteMap = {};
-
-  if(Array.isArray(websiteStorage)){
-
-    websiteStorage.forEach(item => {
-
-      const name =
-        item.name ||
-        item.title ||
-        item.websiteName ||
-        item.slug ||
-        "Website";
-
-      websiteMap[name.toLowerCase()] = {
-
-        name,
-
-        category:
-          item.category ||
-          item.categoryName ||
-          "General",
-
-        image:
-          item.image ||
-          item.imageUrl ||
-          item.thumbnail ||
-          "",
-
-        price:
-          number(
-            item.price ||
-            item.salePrice ||
-            item.offerPrice
-          )
-
-      };
-
-    });
-
-  }
-
-
-  const categoryMap = {};
-
-  if(Array.isArray(categoryStorage)){
-
-    categoryStorage.forEach(item => {
-
-      const name =
-        item.name ||
-        item.title ||
-        "General";
-
-      categoryMap[name.toLowerCase()] = {
-
-        name,
-
-        image:
-          item.image ||
-          item.imageUrl ||
-          ""
-
-      };
-
-    });
-
-  }
-
-
-  /* =======================================================
-     FILTER STATE
-  ======================================================= */
-
-  let state = {
-
-    dateRange:"30",
-
-    reportType:"overview",
-
-    status:"all",
-
-    payment:"all"
-
-  };
-
-
-  function getDateLimit(){
-
-    if(state.dateRange === "all"){
-      return null;
-    }
-
-    const days =
-      Number(state.dateRange);
-
-    const d = new Date();
-
-    d.setHours(0,0,0,0);
-
-    d.setDate(
-      d.getDate() - days
-    );
-
-    return d;
-
-  }
-
-
-  function transactionMatches(item){
-
-    const itemDate =
-      new Date(item.date);
-
-    if(Number.isNaN(itemDate.getTime())){
-      return false;
-    }
-
-    const limit =
-      getDateLimit();
-
-    if(
-      limit &&
-      itemDate < limit
-    ){
-      return false;
-    }
-
-    if(
-      state.status !== "all" &&
-      item.status !== state.status
-    ){
-      return false;
-    }
-
-    if(
-      state.payment !== "all" &&
-      slugify(item.method) !==
-      slugify(
-        state.payment === "bank"
-          ? "Bank Transfer"
-          : state.payment === "card"
-            ? "Card Payment"
-            : state.payment
-      )
-    ){
-      return false;
-    }
-
-    return true;
-
-  }
-
-
-  function getFilteredTransactions(){
-
-    return transactions
-      .filter(transactionMatches)
-      .sort(
-        (a,b) =>
-          new Date(b.date) -
-          new Date(a.date)
-      );
-
-  }
-
-
-  /* =======================================================
-     WEBSITE CATEGORY RESOLUTION
-  ======================================================= */
-
-  function getWebsiteInfo(websiteName){
-
-    const key =
-      String(websiteName || "")
-        .toLowerCase();
-
-    if(websiteMap[key]){
-      return websiteMap[key];
-    }
-
-    const fallbackCategories = {
-
-      "corporate pro":"Business",
-
-      "tasty bites":"Restaurant",
-
-      "creative studio":"Agency",
-
-      "shopeasy store":"E-commerce",
-
-      "personal folio":"Portfolio",
-
-      "starter monthly":"Monthly",
-
-      "biz launch":"Business",
-
-      "cafe corner":"Restaurant"
-
-    };
-
-    return {
-
-      name:websiteName,
-
-      category:
-        fallbackCategories[key] ||
-        "General",
-
-      image:"",
-
-      price:0
-
-    };
-
-  }
-
-
-  /* =======================================================
-     PERIOD LABEL
-  ======================================================= */
-
-  function periodLabel(){
-
-    switch(state.dateRange){
-
-      case "7":
-        return "Last 7 days";
-
-      case "30":
-        return "Last 30 days";
-
-      case "90":
-        return "Last 90 days";
-
-      case "365":
-        return "Last 12 months";
-
-      case "all":
-        return "All time";
-
-      default:
-        return "Selected period";
-
-    }
-
-  }
-
-
-  /* =======================================================
-     RENDER KPIs
-  ======================================================= */
-
-  function renderKPIs(data){
-
-    const totalOrders =
-      data.length;
-
-    const paidOrders =
-      data.filter(
-        item =>
-          item.status === "paid" ||
-          item.status === "completed"
-      );
-
-    const paidRevenue =
-      paidOrders.reduce(
-        (sum,item) =>
-          sum + item.amount,
-        0
-      );
-
-    const pending =
-      data.filter(
-        item =>
-          item.status === "pending" ||
-          item.status === "processing"
-      ).length;
-
-    const cancelled =
-      data.filter(
-        item =>
-          item.status === "cancelled" ||
-          item.status === "failed"
-      ).length;
-
-    const average =
-      paidOrders.length
-        ? paidRevenue / paidOrders.length
-        : 0;
-
-    $("#totalRevenue").textContent =
-      money(paidRevenue);
-
-    $("#totalOrders").textContent =
-      totalOrders.toLocaleString("en-BD");
-
-    $("#paidOrders").textContent =
-      paidOrders.length.toLocaleString("en-BD");
-
-    $("#pendingOrders").textContent =
-      pending.toLocaleString("en-BD");
-
-    $("#cancelledOrders").textContent =
-      cancelled.toLocaleString("en-BD");
-
-    $("#averageOrder").textContent =
-      money(average);
-
-    $("#periodText").textContent =
-      periodLabel();
-
-  }
-
-
-  /* =======================================================
-     GROUP BY DAY / MONTH
-  ======================================================= */
-
-  function getChartGroups(data){
-
-    const range =
-      state.dateRange;
-
-    let count;
-    let unit;
-
-    if(range === "7"){
-
-      count = 7;
-      unit = "day";
-
-    }else if(range === "30"){
-
-      count = 10;
-      unit = "day";
-
-    }else{
-
-      count = 12;
-      unit = "month";
-
-    }
-
-    const groups = [];
-
-    const now = new Date();
-
-    if(unit === "day"){
-
-      const step =
-        range === "7"
-          ? 1
-          : 3;
-
-      for(
-        let i = count - 1;
-        i >= 0;
-        i--
-      ){
-
-        const end =
-          new Date(now);
-
-        end.setHours(
-          23,59,59,999
-        );
-
-        end.setDate(
-          end.getDate() -
-          i * step
-        );
-
-        const start =
-          new Date(end);
-
-        start.setHours(
-          0,0,0,0
-        );
-
-        groups.push({
-
-          label:
-            end.toLocaleDateString(
-              "en-BD",
-              {
-                day:"2-digit",
-                month:"short"
-              }
-            ),
-
-          start,
-
-          end,
-
-          value:0,
-
-          orders:0
-
-        });
-
-      }
-
-    }else{
-
-      for(
-        let i = count - 1;
-        i >= 0;
-        i--
-      ){
-
-        const date =
-          new Date(
-            now.getFullYear(),
-            now.getMonth() - i,
-            1
-          );
-
-        const start =
-          new Date(
-            date.getFullYear(),
-            date.getMonth(),
-            1
-          );
-
-        const end =
-          new Date(
-            date.getFullYear(),
-            date.getMonth() + 1,
-            0,
-            23,
-            59,
-            59,
-            999
-          );
-
-        groups.push({
-
-          label:
-            date.toLocaleDateString(
-              "en-BD",
-              {
-                month:"short"
-              }
-            ),
-
-          start,
-
-          end,
-
-          value:0,
-
-          orders:0
-
-        });
-
-      }
-
-    }
-
-    data.forEach(item => {
-
-      const date =
-        new Date(item.date);
-
-      const group =
-        groups.find(
-          g =>
-            date >= g.start &&
-            date <= g.end
-        );
-
-      if(group){
-
-        group.orders++;
-
-        if(
-          item.status === "paid" ||
-          item.status === "completed"
-        ){
-
-          group.value +=
-            item.amount;
-
+        if (!raw) {
+          return null;
         }
 
-      }
-
-    });
-
-    return groups;
-
-  }
-
-
-  /* =======================================================
-     RENDER BAR CHART
-  ======================================================= */
-
-  function renderBarChart(
-    barsId,
-    gridId,
-    groups,
-    valueKey,
-    moneyMode
-  ){
-
-    const bars =
-      document.getElementById(
-        barsId
-      );
-
-    const grid =
-      document.getElementById(
-        gridId
-      );
-
-    if(!bars || !grid){
-      return;
-    }
-
-    bars.innerHTML = "";
-    grid.innerHTML = "";
-
-    const values =
-      groups.map(
-        g =>
-          number(g[valueKey])
-      );
-
-    const max =
-      Math.max(
-        ...values,
-        1
-      );
-
-    const gridSteps = 4;
-
-    for(
-      let i = gridSteps;
-      i >= 0;
-      i--
-    ){
-
-      const line =
-        document.createElement("div");
-
-      line.className =
-        "grid-line";
-
-      const label =
-        document.createElement("span");
-
-      label.className =
-        "grid-label";
-
-      const value =
-        max *
-        (i / gridSteps);
-
-      label.textContent =
-        moneyMode
-          ? compactMoney(value)
-          : Math.round(value);
-
-      line.appendChild(label);
-
-      grid.appendChild(line);
-
-    }
-
-
-    groups.forEach(group => {
-
-      const wrapper =
-        document.createElement("div");
-
-      wrapper.className =
-        "bar-group";
-
-      const bar =
-        document.createElement("div");
-
-      bar.className =
-        "bar";
-
-      const height =
-        max > 0
-          ? (number(group[valueKey]) / max) * 100
-          : 0;
-
-      bar.style.height =
-        Math.max(
-          height,
-          number(group[valueKey]) > 0
-            ? 5
-            : 1
-        ) + "%";
-
-      const value =
-        document.createElement("span");
-
-      value.className =
-        "bar-value";
-
-      value.textContent =
-        moneyMode
-          ? compactMoney(group[valueKey])
-          : group[valueKey];
-
-      bar.appendChild(value);
-
-      const label =
-        document.createElement("span");
-
-      label.className =
-        "bar-label";
-
-      label.textContent =
-        group.label;
-
-      wrapper.appendChild(bar);
-      wrapper.appendChild(label);
-
-      bars.appendChild(wrapper);
-
-    });
-
-  }
-
-
-  /* =======================================================
-     AGGREGATE WEBSITES
-  ======================================================= */
-
-  function aggregateWebsites(data){
-
-    const map = {};
-
-    data.forEach(item => {
-
-      const name =
-        item.website ||
-        "Website";
-
-      const key =
-        name.toLowerCase();
-
-      if(!map[key]){
-
-        const info =
-          getWebsiteInfo(name);
-
-        map[key] = {
-
-          name,
-
-          category:
-            info.category,
-
-          image:
-            info.image,
-
-          orders:0,
-
-          paid:0,
-
-          revenue:0
-
-        };
-
-      }
-
-      map[key].orders++;
-
-      if(
-        item.status === "paid" ||
-        item.status === "completed"
-      ){
-
-        map[key].paid++;
-
-        map[key].revenue +=
-          item.amount;
-
-      }
-
-    });
-
-    return Object.values(map)
-      .sort(
-        (a,b) =>
-          b.revenue -
-          a.revenue
-      );
-
-  }
-
-
-  /* =======================================================
-     AGGREGATE CATEGORIES
-  ======================================================= */
-
-  function aggregateCategories(data){
-
-    const map = {};
-
-    data.forEach(item => {
-
-      const info =
-        getWebsiteInfo(
-          item.website
-        );
-
-      const category =
-        info.category ||
-        "General";
-
-      const key =
-        category.toLowerCase();
-
-      if(!map[key]){
-
-        map[key] = {
-
-          name:category,
-
-          orders:0,
-
-          revenue:0
-
-        };
-
-      }
-
-      map[key].orders++;
-
-      if(
-        item.status === "paid" ||
-        item.status === "completed"
-      ){
-
-        map[key].revenue +=
-          item.amount;
-
-      }
-
-    });
-
-    return Object.values(map)
-      .sort(
-        (a,b) =>
-          b.revenue -
-          a.revenue
-      );
-
-  }
-
-
-  /* =======================================================
-     RENDER TOP WEBSITES
-  ======================================================= */
-
-  function renderTopWebsites(data){
-
-    const container =
-      $("#topWebsites");
-
-    const websites =
-      aggregateWebsites(data)
-        .slice(0,6);
-
-    if(!websites.length){
-
-      container.innerHTML =
-        '<div class="summary-empty">No website data available.</div>';
-
-      return;
-
-    }
-
-    const max =
-      Math.max(
-        ...websites.map(
-          item => item.revenue
-        ),
-        1
-      );
-
-    container.innerHTML =
-      websites.map(item => {
-
-        const percent =
-          Math.max(
-            3,
-            (item.revenue / max) * 100
-          );
-
-        return `
-
-          <div class="summary-item">
-
-            <div class="summary-row">
-
-              <div class="summary-name"
-                   title="${escapeHTML(item.name)}">
-
-                ${escapeHTML(item.name)}
-
-              </div>
-
-              <div class="summary-value">
-                ${money(item.revenue)}
-              </div>
-
-            </div>
-
-            <div class="progress">
-
-              <span style="width:${percent}%"></span>
-
-            </div>
-
-          </div>
-
-        `;
-
-      }).join("");
-
-  }
-
-
-  /* =======================================================
-     RENDER TOP CATEGORIES
-  ======================================================= */
-
-  function renderTopCategories(data){
-
-    const container =
-      $("#topCategories");
-
-    const categories =
-      aggregateCategories(data)
-        .slice(0,6);
-
-    if(!categories.length){
-
-      container.innerHTML =
-        '<div class="summary-empty">No category data available.</div>';
-
-      return;
-
-    }
-
-    const max =
-      Math.max(
-        ...categories.map(
-          item => item.revenue
-        ),
-        1
-      );
-
-    container.innerHTML =
-      categories.map(item => {
-
-        const percent =
-          Math.max(
-            3,
-            (item.revenue / max) * 100
-          );
-
-        return `
-
-          <div class="summary-item">
-
-            <div class="summary-row">
-
-              <div class="summary-name">
-                ${escapeHTML(item.name)}
-              </div>
-
-              <div class="summary-value">
-                ${money(item.revenue)}
-              </div>
-
-            </div>
-
-            <div class="progress">
-
-              <span style="width:${percent}%"></span>
-
-            </div>
-
-          </div>
-
-        `;
-
-      }).join("");
-
-  }
-
-
-  /* =======================================================
-     RENDER WEBSITE TABLE
-  ======================================================= */
-
-  function renderWebsiteTable(data){
-
-    const tbody =
-      $("#websiteTableBody");
-
-    const websites =
-      aggregateWebsites(data);
-
-    if(!websites.length){
-
-      tbody.innerHTML = `
-
-        <tr>
-          <td colspan="6">
-            <div class="empty">
-              No website sales data found.
-            </div>
-          </td>
-        </tr>
-
-      `;
-
-      return;
-
-    }
-
-    tbody.innerHTML =
-      websites
-        .slice(0,12)
-        .map(item => {
-
-          const info =
-            getWebsiteInfo(
-              item.name
-            );
-
-          const avg =
-            item.paid
-              ? item.revenue / item.paid
-              : 0;
-
-          const thumb =
-            info.image
-              ? `
-                <img
-                  src="${escapeHTML(info.image)}"
-                  alt=""
-                  onerror="this.style.display='none'"
-                >
-              `
-              : escapeHTML(
-                  initials(item.name)
-                );
-
-          return `
-
-            <tr>
-
-              <td>
-
-                <div class="website-cell">
-
-                  <div class="website-thumb">
-                    ${thumb}
-                  </div>
-
-                  <div>
-
-                    <div class="website-name">
-                      ${escapeHTML(item.name)}
-                    </div>
-
-                    <div class="website-meta">
-                      ${item.paid} paid
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </td>
-
-              <td>
-                ${escapeHTML(item.category)}
-              </td>
-
-              <td>
-                ${item.orders}
-              </td>
-
-              <td>
-                ${item.paid}
-              </td>
-
-              <td class="amount">
-                ${money(item.revenue)}
-              </td>
-
-              <td>
-                ${money(avg)}
-              </td>
-
-            </tr>
-
-          `;
-
-        })
-        .join("");
-
-  }
-
-
-  /* =======================================================
-     RENDER CATEGORY PERFORMANCE
-  ======================================================= */
-
-  function renderCategoryPerformance(data){
-
-    const container =
-      $("#categoryPerformance");
-
-    const categories =
-      aggregateCategories(data);
-
-    if(!categories.length){
-
-      container.innerHTML =
-        '<div class="empty">No category data available.</div>';
-
-      return;
-
-    }
-
-    const totalRevenue =
-      categories.reduce(
-        (sum,item) =>
-          sum + item.revenue,
-        0
-      );
-
-    container.innerHTML =
-      categories
-        .slice(0,7)
-        .map((item,index) => {
-
-          const percentage =
-            totalRevenue
-              ? (item.revenue / totalRevenue) * 100
-              : 0;
-
-          return `
-
-            <div class="mini-stat">
-
-              <div class="mini-number">
-                ${String(index + 1).padStart(2,"0")}
-              </div>
-
-              <div class="mini-info">
-
-                <div class="mini-title">
-                  ${escapeHTML(item.name)}
-                </div>
-
-                <div class="mini-sub">
-                  ${item.orders} order${item.orders === 1 ? "" : "s"}
-                  · ${percentage.toFixed(1)}%
-                </div>
-
-              </div>
-
-              <div class="mini-right">
-
-                <strong>
-                  ${money(item.revenue)}
-                </strong>
-
-                <span>
-                  revenue
-                </span>
-
-              </div>
-
-            </div>
-
-          `;
-
-        })
-        .join("");
-
-  }
-
-
-  /* =======================================================
-     RENDER PAYMENT PERFORMANCE
-  ======================================================= */
-
-  function renderPaymentPerformance(data){
-
-    const container =
-      $("#paymentPerformance");
-
-    const map = {};
-
-    data.forEach(item => {
-
-      const method =
-        normalizeMethod(
-          item.method
-        );
-
-      if(!map[method]){
-
-        map[method] = {
-
-          method,
-
-          count:0,
-
-          revenue:0
-
-        };
-
-      }
-
-      map[method].count++;
-
-      if(
-        item.status === "paid" ||
-        item.status === "completed"
-      ){
-
-        map[method].revenue +=
-          item.amount;
-
-      }
-
-    });
-
-    const methods =
-      Object.values(map)
-        .sort(
-          (a,b) =>
-            b.revenue -
-            a.revenue
-        );
-
-    if(!methods.length){
-
-      container.innerHTML =
-        '<div class="empty">No payment data available.</div>';
-
-      return;
-
-    }
-
-    container.innerHTML =
-      methods
-        .slice(0,7)
-        .map((item,index) => {
-
-          return `
-
-            <div class="mini-stat">
-
-              <div class="mini-number">
-                ${String(index + 1).padStart(2,"0")}
-              </div>
-
-              <div class="mini-info">
-
-                <div class="mini-title">
-                  ${escapeHTML(item.method)}
-                </div>
-
-                <div class="mini-sub">
-                  ${item.count} transaction${item.count === 1 ? "" : "s"}
-                </div>
-
-              </div>
-
-              <div class="mini-right">
-
-                <strong>
-                  ${money(item.revenue)}
-                </strong>
-
-                <span>
-                  paid value
-                </span>
-
-              </div>
-
-            </div>
-
-          `;
-
-        })
-        .join("");
-
-  }
-
-
-  /* =======================================================
-     STATUS BADGE
-  ======================================================= */
-
-  function statusBadge(status){
-
-    const safe =
-      normalizeStatus(status);
-
-    const label =
-      safe.replace(
-        "_",
-        " "
-      );
-
-    return `
-
-      <span class="badge ${escapeHTML(safe)}">
-        ${escapeHTML(label)}
-      </span>
-
-    `;
-
-  }
-
-
-  /* =======================================================
-     RENDER TRANSACTIONS
-  ======================================================= */
-
-  function renderTransactions(data){
-
-    const tbody =
-      $("#transactionTableBody");
-
-    if(!data.length){
-
-      tbody.innerHTML = `
-
-        <tr>
-          <td colspan="7">
-
-            <div class="empty">
-              No transactions match the current filters.
-            </div>
-
-          </td>
-        </tr>
-
-      `;
-
-      return;
-
-    }
-
-    tbody.innerHTML =
-      data
-        .slice(0,15)
-        .map(item => {
-
-          return `
-
-            <tr>
-
-              <td>
-                <strong>
-                  ${escapeHTML(item.id)}
-                </strong>
-              </td>
-
-              <td>
-                ${escapeHTML(item.customer)}
-              </td>
-
-              <td>
-                ${escapeHTML(item.website)}
-              </td>
-
-              <td>
-                ${escapeHTML(item.method)}
-              </td>
-
-              <td class="amount">
-                ${money(item.amount)}
-              </td>
-
-              <td>
-                ${statusBadge(item.status)}
-              </td>
-
-              <td>
-                ${formatDateTime(item.date)}
-              </td>
-
-            </tr>
-
-          `;
-
-        })
-        .join("");
-
-  }
-
-
-  /* =======================================================
-     REPORT TYPE VISUAL STATE
-  ======================================================= */
-
-  function applyReportType(){
-
-    const type =
-      state.reportType;
-
-    const title =
-      $(".hero h1");
-
-    const eyebrow =
-      $(".eyebrow");
-
-    if(type === "sales"){
-
-      title.textContent =
-        "Sales Performance";
-
-      eyebrow.innerHTML =
-        '<span class="eyebrow-dot"></span> Sales Intelligence';
-
-    }else if(type === "categories"){
-
-      title.textContent =
-        "Category Performance";
-
-      eyebrow.innerHTML =
-        '<span class="eyebrow-dot"></span> Category Intelligence';
-
-    }else if(type === "payments"){
-
-      title.textContent =
-        "Payment Performance";
-
-      eyebrow.innerHTML =
-        '<span class="eyebrow-dot"></span> Payment Intelligence';
-
-    }else{
-
-      title.textContent =
-        "Reports & Analytics";
-
-      eyebrow.innerHTML =
-        '<span class="eyebrow-dot"></span> Business Intelligence';
-
-    }
-
-  }
-
-
-  /* =======================================================
-     FULL RENDER
-  ======================================================= */
-
-  function render(){
-
-    const data =
-      getFilteredTransactions();
-
-    renderKPIs(data);
-
-    const groups =
-      getChartGroups(data);
-
-    renderBarChart(
-      "revenueBars",
-      "revenueGrid",
-      groups,
-      "value",
-      true
-    );
-
-    renderBarChart(
-      "ordersBars",
-      "ordersGrid",
-      groups,
-      "orders",
-      false
-    );
-
-    renderTopWebsites(data);
-
-    renderTopCategories(data);
-
-    renderWebsiteTable(data);
-
-    renderCategoryPerformance(data);
-
-    renderPaymentPerformance(data);
-
-    renderTransactions(data);
-
-    applyReportType();
-
-    $("#dataMode").textContent =
-      usingDemo
-        ? "Local Storage / Demo"
-        : "Local Storage";
-
-    $("#lastUpdated").textContent =
-      "Updated " +
-      new Date().toLocaleTimeString(
-        "en-BD",
-        {
-          hour:"2-digit",
-          minute:"2-digit"
+        const session =
+          JSON.parse(raw);
+
+        if (
+          !session ||
+          session.authenticated !== true
+        ) {
+          return null;
         }
+
+        return session;
+
+      } catch (error) {
+
+        return null;
+
+      }
+
+    }
+
+
+    const adminSession =
+      getAdminSession();
+
+
+    if (!adminSession) {
+
+      window.location.replace(
+        "login/"
       );
 
-    $("#reportStatus").textContent =
-      usingDemo
-        ? "Demo Report"
-        : "Live Local Data";
-
-  }
+    }
 
 
-  /* =======================================================
-     TOAST
-  ======================================================= */
+    /* =====================================================
+       SUPER ADMIN CHECK
+    ===================================================== */
 
-  let toastTimer;
+    const normalizedRole =
+      String(
+        adminSession?.role || ""
+      ).toLowerCase();
 
-  function showToast(message){
+    /*
+      Reports are useful for all authorized admins.
+      Restricted controls remain protected separately.
+    */
+
+
+    /* =====================================================
+       DOM
+    ===================================================== */
+
+    const sidebar =
+      document.getElementById("sidebar");
+
+    const sidebarOverlay =
+      document.getElementById("sidebarOverlay");
+
+    const mobileMenu =
+      document.getElementById("mobileMenu");
+
+    const logoutButton =
+      document.getElementById("logoutButton");
+
+    const marketplaceButton =
+      document.getElementById("marketplaceButton");
+
+    const dateRange =
+      document.getElementById("dateRange");
+
+    const reportType =
+      document.getElementById("reportType");
+
+    const refreshButton =
+      document.getElementById("refreshButton");
+
+    const exportButton =
+      document.getElementById("exportButton");
+
+    const printButton =
+      document.getElementById("printButton");
 
     const toast =
-      $("#toast");
+      document.getElementById("toast");
 
-    $("#toastMessage").textContent =
-      message;
-
-    toast.classList.add("show");
-
-    clearTimeout(toastTimer);
-
-    toastTimer =
-      setTimeout(() => {
-
-        toast.classList.remove("show");
-
-      },2800);
-
-  }
+    const toastText =
+      document.getElementById("toastText");
 
 
-  /* =======================================================
-     FILTER EVENTS
-  ======================================================= */
+    /* =====================================================
+       ADMIN IDENTITY
+    ===================================================== */
 
-  $("#applyFilter")
-    .addEventListener(
-      "click",
-      () => {
+    function getInitials(name) {
 
-        state.dateRange =
-          $("#dateRange").value;
+      const clean =
+        String(name || "Super Admin")
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean);
 
-        state.reportType =
-          $("#reportType").value;
-
-        state.status =
-          $("#statusFilter").value;
-
-        state.payment =
-          $("#paymentFilter").value;
-
-        render();
-
-        showToast(
-          "Report filters applied."
-        );
-
+      if (!clean.length) {
+        return "SA";
       }
-    );
 
-
-  $("#clearFilterBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        $("#dateRange").value =
-          "30";
-
-        $("#reportType").value =
-          "overview";
-
-        $("#statusFilter").value =
-          "all";
-
-        $("#paymentFilter").value =
-          "all";
-
-        state = {
-
-          dateRange:"30",
-
-          reportType:"overview",
-
-          status:"all",
-
-          payment:"all"
-
-        };
-
-        render();
-
-        showToast(
-          "Report filters reset."
-        );
-
+      if (clean.length === 1) {
+        return clean[0]
+          .slice(0, 2)
+          .toUpperCase();
       }
-    );
 
-
-  /* =======================================================
-     REFRESH
-  ======================================================= */
-
-  $("#refreshBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        storedTransactions =
-          readStorage(
-            STORAGE.transactions,
-            null
-          );
-
-        if(
-          Array.isArray(storedTransactions) &&
-          storedTransactions.length
-        ){
-
-          transactions =
-            storedTransactions.map(
-              normalizeTransaction
-            );
-
-          usingDemo = false;
-
-        }else{
-
-          transactions =
-            createDemoTransactions()
-              .map(
-                normalizeTransaction
-              );
-
-          usingDemo = true;
-
-        }
-
-        render();
-
-        showToast(
-          "Reports refreshed successfully."
-        );
-
-      }
-    );
-
-
-  /* =======================================================
-     MARKETPLACE
-  ======================================================= */
-
-  $("#marketplaceBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        window.open(
-          "../index.html",
-          "_blank"
-        );
-
-      }
-    );
-
-
-  /* =======================================================
-     PRINT
-  ======================================================= */
-
-  $("#printBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        window.print();
-
-      }
-    );
-
-
-  /* =======================================================
-     CSV EXPORT
-  ======================================================= */
-
-  function csvEscape(value){
-
-    const string =
-      String(value ?? "");
-
-    return '"' +
-      string.replace(
-        /"/g,
-        '""'
-      ) +
-      '"';
-
-  }
-
-
-  function exportCSV(){
-
-    const data =
-      getFilteredTransactions();
-
-    if(!data.length){
-
-      showToast(
-        "No report data available to export."
-      );
-
-      return;
+      return (
+        clean[0][0] +
+        clean[clean.length - 1][0]
+      ).toUpperCase();
 
     }
 
-    const rows = [
 
-      [
-        "Transaction ID",
-        "Customer",
-        "Website",
-        "Payment Method",
-        "Amount",
-        "Status",
-        "Date"
-      ],
+    document.getElementById(
+      "sidebarAdminName"
+    ).textContent =
+      adminSession.name ||
+      "Super Admin";
 
-      ...data.map(item => [
 
-        item.id,
+    document.getElementById(
+      "sidebarAvatar"
+    ).textContent =
+      getInitials(
+        adminSession.name ||
+        "Super Admin"
+      );
 
-        item.customer,
 
-        item.website,
+    /* =====================================================
+       MOBILE SIDEBAR
+    ===================================================== */
 
-        item.method,
+    function openSidebar() {
 
-        item.amount,
+      sidebar.classList.add("open");
 
-        item.status,
+      sidebarOverlay.classList.add(
+        "show"
+      );
 
-        formatDateTime(item.date)
+      document.body.style.overflow =
+        "hidden";
 
-      ])
+    }
 
-    ];
 
-    const csv =
-      rows
-        .map(row =>
-          row
-            .map(csvEscape)
-            .join(",")
-        )
-        .join("\n");
+    function closeSidebar() {
 
-    const blob =
-      new Blob(
-        [
-          "\uFEFF" + csv
-        ],
-        {
-          type:"text/csv;charset=utf-8;"
+      sidebar.classList.remove("open");
+
+      sidebarOverlay.classList.remove(
+        "show"
+      );
+
+      document.body.style.overflow =
+        "";
+
+    }
+
+
+    mobileMenu.addEventListener(
+      "click",
+      openSidebar
+    );
+
+
+    sidebarOverlay.addEventListener(
+      "click",
+      closeSidebar
+    );
+
+
+    document
+      .querySelectorAll(".nav-item")
+      .forEach(
+        function (item) {
+
+          item.addEventListener(
+            "click",
+            function () {
+
+              if (
+                window.innerWidth <= 1000
+              ) {
+
+                closeSidebar();
+
+              }
+
+            }
+          );
+
         }
       );
 
-    const url =
-      URL.createObjectURL(blob);
 
-    const link =
-      document.createElement("a");
+    window.addEventListener(
+      "resize",
+      function () {
 
-    const today =
-      new Date()
-        .toISOString()
-        .slice(0,10);
-
-    link.href = url;
-
-    link.download =
-      `website-deals-report-${today}.csv`;
-
-    document.body.appendChild(link);
-
-    link.click();
-
-    link.remove();
-
-    URL.revokeObjectURL(url);
-
-    showToast(
-      "CSV report exported successfully."
-    );
-
-  }
-
-
-  $("#exportBtn")
-    .addEventListener(
-      "click",
-      exportCSV
-    );
-
-
-  /* =======================================================
-     LOGOUT
-  ======================================================= */
-
-  $("#logoutBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        const confirmed =
-          window.confirm(
-            "Are you sure you want to sign out?"
-          );
-
-        if(!confirmed){
-          return;
+        if (window.innerWidth > 1000) {
+          closeSidebar();
         }
+
+      }
+    );
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    logoutButton.addEventListener(
+      "click",
+      function () {
 
         sessionStorage.removeItem(
           AUTH_KEY
@@ -4545,99 +3213,2821 @@
     );
 
 
-  /* =======================================================
-     MOBILE SIDEBAR
-  ======================================================= */
+    /* =====================================================
+       MARKETPLACE
+    ===================================================== */
 
-  const sidebar =
-    $("#sidebar");
-
-  const overlay =
-    $("#overlay");
-
-  const mobileMenu =
-    $("#mobileMenu");
-
-
-  function openSidebar(){
-
-    sidebar.classList.add("open");
-
-    overlay.classList.add("show");
-
-  }
-
-
-  function closeSidebar(){
-
-    sidebar.classList.remove("open");
-
-    overlay.classList.remove("show");
-
-  }
-
-
-  mobileMenu
-    .addEventListener(
+    marketplaceButton.addEventListener(
       "click",
-      openSidebar
+      function () {
+
+        window.location.href =
+          "../index.html";
+
+      }
     );
 
 
-  overlay
-    .addEventListener(
-      "click",
-      closeSidebar
-    );
+    /* =====================================================
+       STORAGE HELPERS
+    ===================================================== */
+
+    function readArray(
+      keys
+    ) {
+
+      for (
+        const key of keys
+      ) {
+
+        try {
+
+          const raw =
+            localStorage.getItem(key);
+
+          if (!raw) {
+            continue;
+          }
+
+          const parsed =
+            JSON.parse(raw);
+
+          if (
+            Array.isArray(parsed)
+          ) {
+
+            return parsed;
+
+          }
+
+        } catch (error) {
+
+          console.warn(
+            "Could not parse",
+            key
+          );
+
+        }
+
+      }
+
+      return [];
+
+    }
 
 
-  $$(".nav-link")
-    .forEach(link => {
+    function readObject(
+      key
+    ) {
 
-      link.addEventListener(
-        "click",
-        () => {
+      try {
 
-          if(
-            window.innerWidth <= 1050
-          ){
+        const raw =
+          localStorage.getItem(key);
 
-            closeSidebar();
+        if (!raw) {
+          return {};
+        }
+
+        const parsed =
+          JSON.parse(raw);
+
+        return (
+          parsed &&
+          typeof parsed === "object"
+            ? parsed
+            : {}
+        );
+
+      } catch (error) {
+
+        return {};
+
+      }
+
+    }
+
+
+    /* =====================================================
+       DEMO DATA
+    ===================================================== */
+
+    const DEMO_TRANSACTIONS = [
+
+      {
+        id: "WD-1028",
+        customer: "Rahim Ahmed",
+        method: "bKash",
+        amount: 6490,
+        status: "paid",
+        date: "2026-10-03T10:30:00"
+      },
+
+      {
+        id: "WD-1027",
+        customer: "Nusrat Jahan",
+        method: "Nagad",
+        amount: 7990,
+        status: "paid",
+        date: "2026-10-02T16:20:00"
+      },
+
+      {
+        id: "WD-1026",
+        customer: "Tanvir Hasan",
+        method: "Bank Transfer",
+        amount: 4990,
+        status: "pending",
+        date: "2026-10-01T12:10:00"
+      },
+
+      {
+        id: "WD-1025",
+        customer: "Sadia Islam",
+        method: "bKash",
+        amount: 8990,
+        status: "paid",
+        date: "2026-09-30T19:15:00"
+      },
+
+      {
+        id: "WD-1024",
+        customer: "Mahin Rahman",
+        method: "Card Payment",
+        amount: 12990,
+        status: "cancelled",
+        date: "2026-09-29T14:45:00"
+      },
+
+      {
+        id: "WD-1023",
+        customer: "Arif Chowdhury",
+        method: "bKash",
+        amount: 5490,
+        status: "paid",
+        date: "2026-09-28T11:30:00"
+      },
+
+      {
+        id: "WD-1022",
+        customer: "Jannat Akter",
+        method: "Nagad",
+        amount: 6990,
+        status: "paid",
+        date: "2026-09-27T17:00:00"
+      },
+
+      {
+        id: "WD-1021",
+        customer: "Fahim Khan",
+        method: "Bank Transfer",
+        amount: 3990,
+        status: "pending",
+        date: "2026-09-25T10:15:00"
+      },
+
+      {
+        id: "WD-1020",
+        customer: "Mim Sultana",
+        method: "bKash",
+        amount: 10990,
+        status: "paid",
+        date: "2026-09-23T15:45:00"
+      },
+
+      {
+        id: "WD-1019",
+        customer: "Siam Hossain",
+        method: "bKash",
+        amount: 7490,
+        status: "paid",
+        date: "2026-09-21T09:40:00"
+      }
+
+    ];
+
+
+    const DEMO_WEBSITES = [
+
+      {
+        id: "site-1",
+        name: "Corporate Pro",
+        category: "Business",
+        price: 6490,
+        orders: 42
+      },
+
+      {
+        id: "site-2",
+        name: "Tasty Bites",
+        category: "Restaurant",
+        price: 7990,
+        orders: 36
+      },
+
+      {
+        id: "site-3",
+        name: "Creative Studio",
+        category: "Agency",
+        price: 8990,
+        orders: 31
+      },
+
+      {
+        id: "site-4",
+        name: "ShopEasy Store",
+        category: "E-commerce",
+        price: 12990,
+        orders: 28
+      },
+
+      {
+        id: "site-5",
+        name: "Personal Folio",
+        category: "Portfolio",
+        price: 4990,
+        orders: 24
+      },
+
+      {
+        id: "site-6",
+        name: "Starter Monthly",
+        category: "Monthly",
+        price: 325,
+        orders: 21
+      },
+
+      {
+        id: "site-7",
+        name: "Biz Launch",
+        category: "Business",
+        price: 5490,
+        orders: 18
+      },
+
+      {
+        id: "site-8",
+        name: "Cafe Corner",
+        category: "Restaurant",
+        price: 5990,
+        orders: 16
+      }
+
+    ];
+
+
+    const DEMO_CATEGORIES = [
+
+      {
+        id: "cat-1",
+        name: "Business"
+      },
+
+      {
+        id: "cat-2",
+        name: "Restaurant"
+      },
+
+      {
+        id: "cat-3",
+        name: "Agency"
+      },
+
+      {
+        id: "cat-4",
+        name: "E-commerce"
+      },
+
+      {
+        id: "cat-5",
+        name: "Portfolio"
+      },
+
+      {
+        id: "cat-6",
+        name: "Monthly"
+      }
+
+    ];
+
+
+    /* =====================================================
+       DATA NORMALIZATION
+    ===================================================== */
+
+    function normalizeTransaction(
+      item,
+      index
+    ) {
+
+      const amount =
+        Number(
+          item.amount ??
+          item.price ??
+          item.total ??
+          item.totalAmount ??
+          item.paidAmount ??
+          0
+        ) || 0;
+
+
+      const status =
+        String(
+          item.status ??
+          item.paymentStatus ??
+          item.orderStatus ??
+          "paid"
+        )
+        .toLowerCase()
+        .trim();
+
+
+      const date =
+        item.date ??
+        item.createdAt ??
+        item.created_at ??
+        item.timestamp ??
+        new Date().toISOString();
+
+
+      const method =
+        item.method ??
+        item.paymentMethod ??
+        item.payment_method ??
+        item.gateway ??
+        "bKash";
+
+
+      const customer =
+        item.customer ??
+        item.customerName ??
+        item.name ??
+        item.email ??
+        "Customer";
+
+
+      const id =
+        item.id ??
+        item.orderId ??
+        item.order_id ??
+        `WD-${1000 + index}`;
+
+
+      return {
+
+        id: String(id),
+
+        customer:
+          String(customer),
+
+        method:
+          String(method),
+
+        amount,
+
+        status,
+
+        date:
+          parseDate(date),
+
+        raw:
+          item
+
+      };
+
+    }
+
+
+    function parseDate(
+      value
+    ) {
+
+      if (
+        value instanceof Date
+      ) {
+        return value;
+      }
+
+      if (
+        typeof value === "number"
+      ) {
+
+        const date =
+          new Date(value);
+
+        if (
+          !Number.isNaN(
+            date.getTime()
+          )
+        ) {
+
+          return date;
+
+        }
+
+      }
+
+      const date =
+        new Date(value);
+
+      if (
+        !Number.isNaN(
+          date.getTime()
+        )
+      ) {
+
+        return date;
+
+      }
+
+      return new Date();
+
+    }
+
+
+    function normalizeWebsite(
+      item,
+      index
+    ) {
+
+      const name =
+        item.name ??
+        item.title ??
+        item.websiteName ??
+        `Website ${index + 1}`;
+
+
+      const category =
+        item.category ??
+        item.categoryName ??
+        item.type ??
+        "Uncategorized";
+
+
+      const price =
+        Number(
+          item.price ??
+          item.salePrice ??
+          item.amount ??
+          0
+        ) || 0;
+
+
+      const orders =
+        Number(
+          item.orders ??
+          item.orderCount ??
+          item.sales ??
+          item.totalOrders ??
+          0
+        ) || 0;
+
+
+      return {
+
+        id:
+          item.id ??
+          `website-${index + 1}`,
+
+        name:
+          String(name),
+
+        category:
+          String(category),
+
+        price,
+
+        orders,
+
+        raw:
+          item
+
+      };
+
+    }
+
+
+    /* =====================================================
+       LOAD DATA
+    ===================================================== */
+
+    function loadTransactions() {
+
+      let stored =
+        readArray(
+          TRANSACTION_KEYS
+        );
+
+
+      if (!stored.length) {
+
+        const orders =
+          readArray(
+            ORDER_KEYS
+          );
+
+        if (orders.length) {
+          stored = orders;
+        }
+
+      }
+
+
+      if (!stored.length) {
+
+        stored =
+          DEMO_TRANSACTIONS;
+
+      }
+
+
+      return stored.map(
+        normalizeTransaction
+      );
+
+    }
+
+
+    function loadWebsites() {
+
+      const stored =
+        readArray([
+          WEBSITE_KEY
+        ]);
+
+
+      if (!stored.length) {
+
+        return DEMO_WEBSITES;
+
+      }
+
+
+      return stored.map(
+        normalizeWebsite
+      );
+
+    }
+
+
+    function loadCategories() {
+
+      const stored =
+        readArray([
+          CATEGORY_KEY
+        ]);
+
+
+      if (!stored.length) {
+
+        return DEMO_CATEGORIES;
+
+      }
+
+
+      return stored;
+
+    }
+
+
+    let allTransactions =
+      loadTransactions();
+
+    let allWebsites =
+      loadWebsites();
+
+    let allCategories =
+      loadCategories();
+
+
+    /* =====================================================
+       DATE FILTER
+    ===================================================== */
+
+    function getFilteredTransactions() {
+
+      const range =
+        dateRange.value;
+
+
+      if (range === "all") {
+
+        return [
+          ...allTransactions
+        ].sort(
+          (a,b) =>
+            b.date - a.date
+        );
+
+      }
+
+
+      const days =
+        Number(range);
+
+
+      const now =
+        new Date();
+
+
+      const start =
+        new Date(now);
+
+
+      start.setDate(
+        start.getDate() -
+        (days - 1)
+      );
+
+      start.setHours(
+        0,0,0,0
+      );
+
+
+      return allTransactions
+        .filter(
+          item =>
+            item.date >= start &&
+            item.date <= now
+        )
+        .sort(
+          (a,b) =>
+            b.date - a.date
+        );
+
+    }
+
+
+    /* =====================================================
+       STATUS HELPERS
+    ===================================================== */
+
+    function isPaid(
+      status
+    ) {
+
+      return [
+        "paid",
+        "completed",
+        "success",
+        "successful",
+        "confirmed"
+      ].includes(
+        String(status)
+          .toLowerCase()
+      );
+
+    }
+
+
+    function isPending(
+      status
+    ) {
+
+      return [
+        "pending",
+        "processing",
+        "awaiting",
+        "review"
+      ].includes(
+        String(status)
+          .toLowerCase()
+      );
+
+    }
+
+
+    function isCancelled(
+      status
+    ) {
+
+      return [
+        "cancelled",
+        "canceled",
+        "failed",
+        "refunded",
+        "rejected"
+      ].includes(
+        String(status)
+          .toLowerCase()
+      );
+
+    }
+
+
+    /* =====================================================
+       FORMATTERS
+    ===================================================== */
+
+    const currencyFormatter =
+      new Intl.NumberFormat(
+        "en-BD",
+        {
+          maximumFractionDigits: 0
+        }
+      );
+
+
+    const numberFormatter =
+      new Intl.NumberFormat(
+        "en-BD",
+        {
+          maximumFractionDigits: 0
+        }
+      );
+
+
+    function money(
+      amount
+    ) {
+
+      return (
+        "৳" +
+        currencyFormatter.format(
+          Math.round(
+            Number(amount) || 0
+          )
+        )
+      );
+
+    }
+
+
+    function number(
+      value
+    ) {
+
+      return numberFormatter.format(
+        Math.round(
+          Number(value) || 0
+        )
+      );
+
+    }
+
+
+    function percent(
+      value
+    ) {
+
+      return (
+        Number(value) || 0
+      ).toFixed(1) + "%";
+
+    }
+
+
+    function formatDate(
+      date
+    ) {
+
+      return new Intl.DateTimeFormat(
+        "en-BD",
+        {
+          day: "2-digit",
+          month: "short",
+          year: "numeric"
+        }
+      ).format(
+        date
+      );
+
+    }
+
+
+    function shortDate(
+      date
+    ) {
+
+      return new Intl.DateTimeFormat(
+        "en-BD",
+        {
+          day: "2-digit",
+          month: "short"
+        }
+      ).format(
+        date
+      );
+
+    }
+
+
+    function escapeHTML(
+      value
+    ) {
+
+      return String(value)
+        .replaceAll(
+          "&",
+          "&amp;"
+        )
+        .replaceAll(
+          "<",
+          "&lt;"
+        )
+        .replaceAll(
+          ">",
+          "&gt;"
+        )
+        .replaceAll(
+          '"',
+          "&quot;"
+        )
+        .replaceAll(
+          "'",
+          "&#039;"
+        );
+
+    }
+
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    let toastTimer;
+
+    function showToast(
+      message
+    ) {
+
+      toastText.textContent =
+        message;
+
+      toast.classList.add(
+        "show"
+      );
+
+      clearTimeout(
+        toastTimer
+      );
+
+      toastTimer =
+        setTimeout(
+          function () {
+
+            toast.classList.remove(
+              "show"
+            );
+
+          },
+          2500
+        );
+
+    }
+
+
+    /* =====================================================
+       PERIOD LABEL
+    ===================================================== */
+
+    function getPeriodLabel() {
+
+      const range =
+        dateRange.value;
+
+      if (range === "7") {
+        return "Last 7 Days";
+      }
+
+      if (range === "30") {
+        return "Last 30 Days";
+      }
+
+      if (range === "90") {
+        return "Last 90 Days";
+      }
+
+      if (range === "365") {
+        return "Last 12 Months";
+      }
+
+      return "All Time";
+
+    }
+
+
+    function updatePeriodLabels() {
+
+      const label =
+        getPeriodLabel();
+
+
+      document.getElementById(
+        "heroPeriod"
+      ).textContent =
+        label;
+
+
+      document.getElementById(
+        "chartPeriod"
+      ).textContent =
+        label
+          .replace(
+            "Last ",
+            ""
+          );
+
+    }
+
+
+    /* =====================================================
+       KPI
+    ===================================================== */
+
+    function renderKPIs(
+      transactions
+    ) {
+
+      const totalOrders =
+        transactions.length;
+
+
+      const paid =
+        transactions.filter(
+          item =>
+            isPaid(item.status)
+        );
+
+
+      const pending =
+        transactions.filter(
+          item =>
+            isPending(item.status)
+        );
+
+
+      const cancelled =
+        transactions.filter(
+          item =>
+            isCancelled(item.status)
+        );
+
+
+      const revenue =
+        paid.reduce(
+          (
+            sum,
+            item
+          ) =>
+            sum + item.amount,
+          0
+        );
+
+
+      const average =
+        paid.length
+          ? revenue / paid.length
+          : 0;
+
+
+      document.getElementById(
+        "kpiRevenue"
+      ).textContent =
+        money(revenue);
+
+
+      document.getElementById(
+        "kpiOrders"
+      ).textContent =
+        number(totalOrders);
+
+
+      document.getElementById(
+        "kpiPaid"
+      ).textContent =
+        number(paid.length);
+
+
+      document.getElementById(
+        "kpiPending"
+      ).textContent =
+        number(pending.length);
+
+
+      document.getElementById(
+        "kpiCancelled"
+      ).textContent =
+        number(cancelled.length);
+
+
+      document.getElementById(
+        "kpiAverage"
+      ).textContent =
+        money(average);
+
+
+      document.getElementById(
+        "revenueChange"
+      ).textContent =
+        paid.length
+          ? `${paid.length} Paid`
+          : "No Data";
+
+
+      const conversion =
+        totalOrders
+          ? (
+              paid.length /
+              totalOrders
+            ) * 100
+          : 0;
+
+
+      document.getElementById(
+        "summaryConversion"
+      ).textContent =
+        percent(conversion);
+
+
+      document.getElementById(
+        "summaryCompletion"
+      ).textContent =
+        percent(conversion);
+
+
+      document.getElementById(
+        "summaryRevenueOrder"
+      ).textContent =
+        money(average);
+
+    }
+
+
+    /* =====================================================
+       REVENUE CHART
+    ===================================================== */
+
+    function getRevenueBuckets(
+      transactions
+    ) {
+
+      const range =
+        dateRange.value;
+
+
+      let bucketCount = 7;
+
+
+      if (range === "30") {
+        bucketCount = 7;
+      }
+
+      if (range === "90") {
+        bucketCount = 9;
+      }
+
+      if (range === "365") {
+        bucketCount = 12;
+      }
+
+      if (range === "all") {
+        bucketCount = 8;
+      }
+
+
+      const now =
+        new Date();
+
+
+      const buckets = [];
+
+
+      if (range === "365") {
+
+        for (
+          let i = 11;
+          i >= 0;
+          i--
+        ) {
+
+          const date =
+            new Date(
+              now.getFullYear(),
+              now.getMonth() - i,
+              1
+            );
+
+
+          buckets.push({
+
+            label:
+              new Intl.DateTimeFormat(
+                "en",
+                {
+                  month: "short"
+                }
+              ).format(date),
+
+            start:
+              new Date(
+                date.getFullYear(),
+                date.getMonth(),
+                1
+              ),
+
+            end:
+              new Date(
+                date.getFullYear(),
+                date.getMonth() + 1,
+                0,
+                23,59,59,999
+              ),
+
+            value: 0
+
+          });
+
+        }
+
+        return buckets;
+
+      }
+
+
+      const days =
+        range === "7"
+          ? 7
+          : range === "90"
+            ? 90
+            : range === "all"
+              ? 240
+              : 30;
+
+
+      const interval =
+        Math.ceil(
+          days /
+          bucketCount
+        );
+
+
+      for (
+        let i = bucketCount - 1;
+        i >= 0;
+        i--
+      ) {
+
+        const end =
+          new Date(now);
+
+        end.setHours(
+          23,59,59,999
+        );
+
+        end.setDate(
+          now.getDate() -
+          (i * interval)
+        );
+
+
+        const start =
+          new Date(end);
+
+        start.setDate(
+          end.getDate() -
+          interval +
+          1
+        );
+
+        start.setHours(
+          0,0,0,0
+        );
+
+
+        buckets.push({
+
+          label:
+            shortDate(start),
+
+          start,
+          end,
+          value: 0
+
+        });
+
+      }
+
+
+      return buckets;
+
+    }
+
+
+    function renderRevenueChart(
+      transactions
+    ) {
+
+      const svg =
+        document.getElementById(
+          "revenueChartSvg"
+        );
+
+
+      const buckets =
+        getRevenueBuckets(
+          transactions
+        );
+
+
+      buckets.forEach(
+        bucket => {
+
+          bucket.value =
+            transactions
+              .filter(
+                item =>
+                  isPaid(item.status) &&
+                  item.date >= bucket.start &&
+                  item.date <= bucket.end
+              )
+              .reduce(
+                (
+                  sum,
+                  item
+                ) =>
+                  sum + item.amount,
+                  0
+              );
+
+        }
+      );
+
+
+      const width = 760;
+      const height = 285;
+
+      const left = 48;
+      const right = 18;
+      const top = 22;
+      const bottom = 36;
+
+      const chartWidth =
+        width -
+        left -
+        right;
+
+      const chartHeight =
+        height -
+        top -
+        bottom;
+
+
+      const maxValue =
+        Math.max(
+          ...buckets.map(
+            b => b.value
+          ),
+          1000
+        );
+
+
+      const roundedMax =
+        Math.ceil(
+          maxValue /
+          1000
+        ) * 1000;
+
+
+      const points =
+        buckets.map(
+          (
+            bucket,
+            index
+          ) => {
+
+            const x =
+              left +
+              (
+                index /
+                Math.max(
+                  buckets.length - 1,
+                  1
+                )
+              ) *
+              chartWidth;
+
+
+            const y =
+              top +
+              chartHeight -
+              (
+                bucket.value /
+                roundedMax
+              ) *
+              chartHeight;
+
+
+            return {
+              x,
+              y,
+              bucket
+            };
+
+          }
+        );
+
+
+      let markup = "";
+
+
+      /* Grid */
+
+      for (
+        let i = 0;
+        i <= 4;
+        i++
+      ) {
+
+        const y =
+          top +
+          (
+            i / 4
+          ) *
+          chartHeight;
+
+
+        const value =
+          roundedMax -
+          (
+            i / 4
+          ) *
+          roundedMax;
+
+
+        markup += `
+          <line
+            class="chart-grid-line"
+            x1="${left}"
+            y1="${y}"
+            x2="${width - right}"
+            y2="${y}"
+          ></line>
+
+          <text
+            class="chart-label"
+            x="2"
+            y="${y + 3}"
+          >
+            ${escapeHTML(
+              money(value)
+            )}
+          </text>
+        `;
+
+      }
+
+
+      if (points.length) {
+
+        let areaPath =
+          `M ${points[0].x} ${top + chartHeight}`;
+
+        points.forEach(
+          point => {
+
+            areaPath +=
+              ` L ${point.x} ${point.y}`;
+
+          }
+        );
+
+        areaPath +=
+          ` L ${points[points.length - 1].x} ${top + chartHeight} Z`;
+
+
+        markup += `
+          <path
+            class="chart-area"
+            d="${areaPath}"
+          ></path>
+        `;
+
+
+        const linePath =
+          points
+            .map(
+              (
+                point,
+                index
+              ) =>
+                `${
+                  index === 0
+                    ? "M"
+                    : "L"
+                } ${point.x} ${point.y}`
+            )
+            .join(" ");
+
+
+        markup += `
+          <path
+            class="chart-line"
+            d="${linePath}"
+          ></path>
+        `;
+
+
+        points.forEach(
+          (
+            point,
+            index
+          ) => {
+
+            markup += `
+              <circle
+                class="chart-point"
+                cx="${point.x}"
+                cy="${point.y}"
+                r="4"
+              ></circle>
+
+              <text
+                class="chart-label"
+                x="${point.x}"
+                y="${height - 10}"
+                text-anchor="middle"
+              >
+                ${escapeHTML(
+                  point.bucket.label
+                )}
+              </text>
+            `;
+
+          }
+        );
+
+
+        const highest =
+          [...points]
+            .sort(
+              (
+                a,
+                b
+              ) =>
+                b.bucket.value -
+                a.bucket.value
+            )
+            .slice(
+              0,
+              2
+            );
+
+
+        highest.forEach(
+          point => {
+
+            markup += `
+              <text
+                class="chart-value"
+                x="${point.x}"
+                y="${point.y - 10}"
+                text-anchor="middle"
+              >
+                ${escapeHTML(
+                  money(
+                    point.bucket.value
+                  )
+                )}
+              </text>
+            `;
+
+          }
+        );
+
+      }
+
+
+      svg.innerHTML =
+        markup;
+
+    }
+
+
+    /* =====================================================
+       PAYMENT BREAKDOWN
+    ===================================================== */
+
+    function renderPayments(
+      transactions
+    ) {
+
+      const container =
+        document.getElementById(
+          "paymentList"
+        );
+
+
+      const map = {};
+
+
+      transactions
+        .filter(
+          item =>
+            isPaid(item.status)
+        )
+        .forEach(
+          item => {
+
+            const key =
+              item.method ||
+              "Other";
+
+
+            if (!map[key]) {
+
+              map[key] = {
+                amount: 0,
+                count: 0
+              };
+
+            }
+
+
+            map[key].amount +=
+              item.amount;
+
+            map[key].count +=
+              1;
+
+          }
+        );
+
+
+      const entries =
+        Object.entries(map)
+          .sort(
+            (
+              a,
+              b
+            ) =>
+              b[1].amount -
+              a[1].amount
+          );
+
+
+      const total =
+        entries.reduce(
+          (
+            sum,
+            [
+              ,
+              data
+            ]
+          ) =>
+            sum + data.amount,
+          0
+        );
+
+
+      if (!entries.length) {
+
+        container.innerHTML = `
+          <div class="chart-empty">
+            No payment data available.
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        entries
+          .slice(
+            0,
+            5
+          )
+          .map(
+            (
+              [
+                name,
+                data
+              ]
+            ) => {
+
+              const share =
+                total
+                  ? (
+                      data.amount /
+                      total
+                    ) * 100
+                  : 0;
+
+
+              return `
+                <div class="payment-row">
+
+                  <div class="payment-icon">
+
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <rect
+                        x="2.5"
+                        y="5"
+                        width="19"
+                        height="14"
+                        rx="2"
+                      />
+                      <path d="M2.5 10h19"/>
+                    </svg>
+
+                  </div>
+
+                  <div>
+
+                    <div class="payment-name">
+                      ${escapeHTML(name)}
+                    </div>
+
+                    <div class="payment-bar">
+
+                      <div
+                        class="payment-progress"
+                        style="width:${Math.min(100, share)}%"
+                      ></div>
+
+                    </div>
+
+                  </div>
+
+                  <div>
+
+                    <div class="payment-amount">
+                      ${escapeHTML(
+                        money(data.amount)
+                      )}
+                    </div>
+
+                    <div class="payment-percent">
+                      ${share.toFixed(1)}%
+                    </div>
+
+                  </div>
+
+                </div>
+              `;
+
+            }
+          )
+          .join("");
+
+    }
+
+
+    /* =====================================================
+       ORDERS BAR CHART
+    ===================================================== */
+
+    function renderOrdersChart(
+      transactions
+    ) {
+
+      const container =
+        document.getElementById(
+          "ordersChart"
+        );
+
+
+      const buckets =
+        getRevenueBuckets(
+          transactions
+        );
+
+
+      buckets.forEach(
+        bucket => {
+
+          bucket.count =
+            transactions.filter(
+              item =>
+                item.date >= bucket.start &&
+                item.date <= bucket.end
+            ).length;
+
+        }
+      );
+
+
+      const maxCount =
+        Math.max(
+          ...buckets.map(
+            b => b.count
+          ),
+          1
+        );
+
+
+      container.innerHTML =
+        buckets
+          .map(
+            bucket => {
+
+              const height =
+                (
+                  bucket.count /
+                  maxCount
+                ) * 100;
+
+
+              return `
+                <div class="bar-group">
+
+                  <div class="bar-value">
+                    ${number(bucket.count)}
+                  </div>
+
+                  <div class="bar-track">
+
+                    <div
+                      class="bar-fill"
+                      style="height:${height}%"
+                    ></div>
+
+                  </div>
+
+                  <div class="bar-label">
+                    ${escapeHTML(
+                      bucket.label
+                    )}
+                  </div>
+
+                </div>
+              `;
+
+            }
+          )
+          .join("");
+
+    }
+
+
+    /* =====================================================
+       CATEGORY REPORT
+    ===================================================== */
+
+    function renderCategories(
+      transactions
+    ) {
+
+      const container =
+        document.getElementById(
+          "categoryList"
+        );
+
+
+      const categoryMap = {};
+
+
+      allWebsites.forEach(
+        website => {
+
+          const key =
+            website.category ||
+            "Uncategorized";
+
+
+          if (!categoryMap[key]) {
+
+            categoryMap[key] = {
+              orders: 0,
+              revenue: 0
+            };
+
+          }
+
+
+          categoryMap[key].orders +=
+            website.orders || 0;
+
+
+          categoryMap[key].revenue +=
+            (
+              website.orders || 0
+            ) *
+            (
+              website.price || 0
+            );
+
+        }
+      );
+
+
+      /* If transaction data contains category,
+         use it as an additional signal. */
+
+      transactions.forEach(
+        item => {
+
+          const category =
+            item.raw?.category ??
+            item.raw?.categoryName;
+
+          if (!category) {
+            return;
+          }
+
+
+          const key =
+            String(category);
+
+
+          if (!categoryMap[key]) {
+
+            categoryMap[key] = {
+              orders: 0,
+              revenue: 0
+            };
+
+          }
+
+
+          if (isPaid(item.status)) {
+
+            categoryMap[key].orders += 1;
+
+            categoryMap[key].revenue +=
+              item.amount;
 
           }
 
         }
       );
 
-    });
+
+      let entries =
+        Object.entries(
+          categoryMap
+        )
+        .sort(
+          (
+            a,
+            b
+          ) =>
+            b[1].revenue -
+            a[1].revenue
+        );
 
 
-  /* =======================================================
-     ESCAPE
-  ======================================================= */
+      if (!entries.length) {
 
-  document.addEventListener(
-    "keydown",
-    event => {
+        entries =
+          allCategories.map(
+            category => [
+              category.name ||
+              "Uncategorized",
+              {
+                orders: 0,
+                revenue: 0
+              }
+            ]
+          );
 
-      if(event.key === "Escape"){
+      }
 
-        closeSidebar();
+
+      const maxRevenue =
+        Math.max(
+          ...entries.map(
+            (
+              [
+                ,
+                data
+              ]
+            ) =>
+              data.revenue
+          ),
+          1
+        );
+
+
+      container.innerHTML =
+        entries
+          .slice(
+            0,
+            6
+          )
+          .map(
+            (
+              [
+                name,
+                data
+              ],
+              index
+            ) => {
+
+              const width =
+                (
+                  data.revenue /
+                  maxRevenue
+                ) * 100;
+
+
+              return `
+                <div class="category-row">
+
+                  <div class="category-number">
+                    ${index + 1}
+                  </div>
+
+                  <div>
+
+                    <div class="category-name">
+                      ${escapeHTML(name)}
+                    </div>
+
+                    <div class="category-progress">
+                      <span
+                        style="width:${Math.max(
+                          4,
+                          Math.min(
+                            100,
+                            width
+                          )
+                        )}%"
+                      ></span>
+                    </div>
+
+                  </div>
+
+                  <div class="category-count">
+                    ${number(data.orders)}
+                    orders
+                  </div>
+
+                </div>
+              `;
+
+            }
+          )
+          .join("");
+
+    }
+
+
+    /* =====================================================
+       WEBSITE REPORT
+    ===================================================== */
+
+    function renderWebsites(
+      transactions
+    ) {
+
+      const tbody =
+        document.getElementById(
+          "websiteTableBody"
+        );
+
+
+      const websiteMap = {};
+
+
+      allWebsites.forEach(
+        website => {
+
+          const key =
+            String(
+              website.name
+            ).toLowerCase();
+
+
+          websiteMap[key] = {
+
+            name:
+              website.name,
+
+            category:
+              website.category,
+
+            orders:
+              Number(
+                website.orders
+              ) || 0,
+
+            paid:
+              0,
+
+            revenue:
+              0
+
+          };
+
+        }
+      );
+
+
+      transactions.forEach(
+        transaction => {
+
+          const raw =
+            transaction.raw ||
+            {};
+
+
+          const websiteName =
+            raw.websiteName ??
+            raw.website ??
+            raw.productName ??
+            raw.product ??
+            raw.itemName;
+
+
+          if (!websiteName) {
+            return;
+          }
+
+
+          const key =
+            String(
+              websiteName
+            ).toLowerCase();
+
+
+          if (!websiteMap[key]) {
+
+            websiteMap[key] = {
+
+              name:
+                String(
+                  websiteName
+                ),
+
+              category:
+                String(
+                  raw.category ??
+                  raw.categoryName ??
+                  "Marketplace"
+                ),
+
+              orders:
+                0,
+
+              paid:
+                0,
+
+              revenue:
+                0
+
+            };
+
+          }
+
+
+          websiteMap[key].orders += 1;
+
+
+          if (
+            isPaid(
+              transaction.status
+            )
+          ) {
+
+            websiteMap[key].paid += 1;
+
+            websiteMap[key].revenue +=
+              transaction.amount;
+
+          }
+
+        }
+      );
+
+
+      let rows =
+        Object.values(
+          websiteMap
+        )
+        .sort(
+          (
+            a,
+            b
+          ) =>
+            b.revenue -
+            a.revenue ||
+            b.orders -
+            a.orders
+        );
+
+
+      if (!rows.length) {
+
+        rows =
+          DEMO_WEBSITES.map(
+            website => ({
+
+              name:
+                website.name,
+
+              category:
+                website.category,
+
+              orders:
+                website.orders,
+
+              paid:
+                website.orders,
+
+              revenue:
+                website.orders *
+                website.price
+
+            })
+          );
+
+      }
+
+
+      tbody.innerHTML =
+        rows
+          .slice(
+            0,
+            8
+          )
+          .map(
+            (
+              website,
+              index
+            ) => {
+
+              const average =
+                website.paid
+                  ? website.revenue /
+                    website.paid
+                  : 0;
+
+
+              const initials =
+                getInitials(
+                  website.name
+                );
+
+
+              return `
+                <tr>
+
+                  <td>
+                    <span class="rank">
+                      ${index + 1}
+                    </span>
+                  </td>
+
+                  <td>
+
+                    <div class="website-cell">
+
+                      <div class="website-avatar">
+                        ${escapeHTML(
+                          initials
+                        )}
+                      </div>
+
+                      <div>
+
+                        <div class="website-name">
+                          ${escapeHTML(
+                            website.name
+                          )}
+                        </div>
+
+                        <div class="website-type">
+                          ${escapeHTML(
+                            website.category
+                          )}
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </td>
+
+                  <td>
+                    ${number(
+                      website.orders
+                    )}
+                  </td>
+
+                  <td>
+                    ${number(
+                      website.paid
+                    )}
+                  </td>
+
+                  <td>
+                    <span class="amount">
+                      ${escapeHTML(
+                        money(
+                          website.revenue
+                        )
+                      )}
+                    </span>
+                  </td>
+
+                  <td>
+                    ${escapeHTML(
+                      money(
+                        average
+                      )
+                    )}
+                  </td>
+
+                </tr>
+              `;
+
+            }
+          )
+          .join("");
+
+    }
+
+
+    /* =====================================================
+       TRANSACTION TABLE
+    ===================================================== */
+
+    function statusClass(
+      status
+    ) {
+
+      const clean =
+        String(status)
+          .toLowerCase();
+
+
+      if (isPaid(clean)) {
+        return "status-paid";
+      }
+
+      if (isPending(clean)) {
+        return "status-pending";
+      }
+
+      if (isCancelled(clean)) {
+        return "status-cancelled";
+      }
+
+      return "status-default";
+
+    }
+
+
+    function renderTransactions(
+      transactions
+    ) {
+
+      const tbody =
+        document.getElementById(
+          "transactionTableBody"
+        );
+
+
+      const rows =
+        transactions
+          .slice(
+            0,
+            8
+          );
+
+
+      if (!rows.length) {
+
+        tbody.innerHTML = `
+          <tr>
+            <td
+              colspan="6"
+              style="text-align:center;padding:30px;color:#8b968f;"
+            >
+              No transactions found.
+            </td>
+          </tr>
+        `;
+
+        return;
+
+      }
+
+
+      tbody.innerHTML =
+        rows
+          .map(
+            item => {
+
+              return `
+                <tr>
+
+                  <td>
+
+                    <strong
+                      style="
+                        color:#27332c;
+                        font-size:10px;
+                        font-weight:800;
+                      "
+                    >
+                      ${escapeHTML(
+                        item.id
+                      )}
+                    </strong>
+
+                  </td>
+
+                  <td>
+                    ${escapeHTML(
+                      item.customer
+                    )}
+                  </td>
+
+                  <td>
+                    ${escapeHTML(
+                      item.method
+                    )}
+                  </td>
+
+                  <td>
+                    <span class="amount">
+                      ${escapeHTML(
+                        money(
+                          item.amount
+                        )
+                      )}
+                    </span>
+                  </td>
+
+                  <td>
+
+                    <span
+                      class="status ${
+                        statusClass(
+                          item.status
+                        )
+                      }"
+                    >
+                      ${escapeHTML(
+                        item.status
+                      )}
+                    </span>
+
+                  </td>
+
+                  <td>
+                    ${escapeHTML(
+                      formatDate(
+                        item.date
+                      )
+                    )}
+                  </td>
+
+                </tr>
+              `;
+
+            }
+          )
+          .join("");
+
+    }
+
+
+    /* =====================================================
+       REPORT TYPE VISUAL STATE
+    ===================================================== */
+
+    function applyReportType() {
+
+      const type =
+        reportType.value;
+
+
+      const chartTitle =
+        document.querySelector(
+          ".card-title"
+        );
+
+
+      /*
+        The report selector currently changes
+        the reporting context while preserving
+        one unified dashboard.
+      */
+
+      if (
+        type === "sales"
+      ) {
+
+        document
+          .querySelector(
+            ".hero p"
+          )
+          .textContent =
+          "Review sales activity, website performance, order volume and revenue generated across the marketplace.";
+
+      } else if (
+        type === "categories"
+      ) {
+
+        document
+          .querySelector(
+            ".hero p"
+          )
+          .textContent =
+          "Review category performance, website demand and revenue contribution across marketplace categories.";
+
+      } else if (
+        type === "payments"
+      ) {
+
+        document
+          .querySelector(
+            ".hero p"
+          )
+          .textContent =
+          "Review payment methods, successful transactions, pending payments and revenue collected.";
+
+      } else {
+
+        document
+          .querySelector(
+            ".hero p"
+          )
+          .textContent =
+          "Understand revenue, orders, payment performance, website sales and category activity from one centralized reporting dashboard.";
 
       }
 
     }
-  );
 
 
-  /* =======================================================
-     INITIAL RENDER
-  ======================================================= */
+    /* =====================================================
+       RENDER ALL
+    ===================================================== */
 
-  render();
+    function renderReports() {
 
-})();
-</script>
+      allTransactions =
+        loadTransactions();
+
+      allWebsites =
+        loadWebsites();
+
+      allCategories =
+        loadCategories();
+
+
+      const transactions =
+        getFilteredTransactions();
+
+
+      updatePeriodLabels();
+
+      applyReportType();
+
+      renderKPIs(
+        transactions
+      );
+
+      renderRevenueChart(
+        transactions
+      );
+
+      renderPayments(
+        transactions
+      );
+
+      renderOrdersChart(
+        transactions
+      );
+
+      renderCategories(
+        transactions
+      );
+
+      renderWebsites(
+        transactions
+      );
+
+      renderTransactions(
+        transactions
+      );
+
+
+      document.getElementById(
+        "lastUpdated"
+      ).textContent =
+        "Updated just now";
+
+    }
+
+
+    /* =====================================================
+       FILTER EVENTS
+    ===================================================== */
+
+    dateRange.addEventListener(
+      "change",
+      function () {
+
+        renderReports();
+
+      }
+    );
+
+
+    reportType.addEventListener(
+      "change",
+      function () {
+
+        renderReports();
+
+      }
+    );
+
+
+    /* =====================================================
+       REFRESH
+    ===================================================== */
+
+    refreshButton.addEventListener(
+      "click",
+      function () {
+
+        refreshButton.disabled =
+          true;
+
+        renderReports();
+
+        showToast(
+          "Report data refreshed."
+        );
+
+
+        setTimeout(
+          function () {
+
+            refreshButton.disabled =
+              false;
+
+          },
+          500
+        );
+
+      }
+    );
+
+
+    /* =====================================================
+       PRINT
+    ===================================================== */
+
+    printButton.addEventListener(
+      "click",
+      function () {
+
+        window.print();
+
+      }
+    );
+
+
+    /* =====================================================
+       CSV
+    ===================================================== */
+
+    function csvEscape(
+      value
+    ) {
+
+      const string =
+        String(
+          value ??
+          ""
+        );
+
+
+      return (
+        '"' +
+        string
+          .replaceAll(
+            '"',
+            '""'
+          ) +
+        '"'
+      );
+
+    }
+
+
+    function exportCSV() {
+
+      const transactions =
+        getFilteredTransactions();
+
+
+      const paid =
+        transactions.filter(
+          item =>
+            isPaid(item.status)
+        );
+
+
+      const revenue =
+        paid.reduce(
+          (
+            sum,
+            item
+          ) =>
+            sum + item.amount,
+          0
+        );
+
+
+      const rows = [
+
+        [
+          "Website Deals Report"
+        ],
+
+        [
+          "Period",
+          getPeriodLabel()
+        ],
+
+        [
+          "Generated",
+          new Date().toISOString()
+        ],
+
+        [],
+
+        [
+          "Transaction ID",
+          "Customer",
+          "Payment Method",
+          "Amount",
+          "Status",
+          "Date"
+        ]
+
+      ];
+
+
+      transactions.forEach(
+        item => {
+
+          rows.push([
+            item.id,
+            item.customer,
+            item.method,
+            item.amount,
+            item.status,
+            formatDate(
+              item.date
+            )
+          ]);
+
+        }
+      );
+
+
+      rows.push([]);
+
+      rows.push([
+        "Summary"
+      ]);
+
+      rows.push([
+        "Total Orders",
+        transactions.length
+      ]);
+
+      rows.push([
+        "Paid Orders",
+        paid.length
+      ]);
+
+      rows.push([
+        "Revenue",
+        revenue
+      ]);
+
+      rows.push([
+        "Average Order",
+        paid.length
+          ? revenue / paid.length
+          : 0
+      ]);
+
+
+      const csv =
+        rows
+          .map(
+            row =>
+              row
+                .map(
+                  csvEscape
+                )
+                .join(",")
+          )
+          .join("\n");
+
+
+      const blob =
+        new Blob(
+          [
+            "\uFEFF" +
+            csv
+          ],
+          {
+            type:
+              "text/csv;charset=utf-8;"
+          }
+        );
+
+
+      const url =
+        URL.createObjectURL(
+          blob
+        );
+
+
+      const link =
+        document.createElement(
+          "a"
+        );
+
+
+      const date =
+        new Date()
+          .toISOString()
+          .slice(
+            0,
+            10
+          );
+
+
+      link.href =
+        url;
+
+      link.download =
+        `website-deals-report-${date}.csv`;
+
+
+      document.body.appendChild(
+        link
+      );
+
+      link.click();
+
+      link.remove();
+
+      URL.revokeObjectURL(
+        url
+      );
+
+
+      showToast(
+        "Report CSV exported successfully."
+      );
+
+    }
+
+
+    exportButton.addEventListener(
+      "click",
+      exportCSV
+    );
+
+
+    /* =====================================================
+       KEYBOARD SHORTCUT
+    ===================================================== */
+
+    document.addEventListener(
+      "keydown",
+      function (event) {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closeSidebar();
+
+        }
+
+      }
+    );
+
+
+    /* =====================================================
+       INITIAL RENDER
+    ===================================================== */
+
+    renderReports();
+
+  </script>
 
 </body>
 </html>
