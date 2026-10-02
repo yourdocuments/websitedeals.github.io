@@ -2,66 +2,48 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="theme-color"
-    content="#101713"
-  >
-
-  <meta
-    name="description"
-    content="Website Deals Admin Monthly Reports"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Monthly Reports | Website Deals Admin</title>
+  <meta
+    name="description"
+    content="Website Deals Admin monthly performance reports and analytics."
+  >
 
   <link rel="icon" type="image/png" href="../logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
     :root{
       --green:#18a957;
-      --green-dark:#118044;
+      --green-dark:#108344;
       --green-soft:#eaf8f0;
-
-      --dark:#101713;
-      --dark-2:#17201b;
-      --dark-3:#202b24;
-
-      --text:#18211c;
-      --muted:#758078;
-
-      --bg:#f4f7f5;
-      --card:#ffffff;
-      --border:#e6ebe7;
-
-      --red:#e5484d;
-      --red-soft:#fff0f0;
-
-      --orange:#e98b2a;
-      --orange-soft:#fff5e8;
-
-      --blue:#3d78e8;
-      --blue-soft:#eef4ff;
-
-      --purple:#7957d5;
-      --purple-soft:#f3efff;
-
-      --shadow:0 12px 35px rgba(16,23,19,.06);
-      --shadow-sm:0 5px 18px rgba(16,23,19,.05);
-
-      --radius:18px;
-      --sidebar:264px;
+      --dark:#07110b;
+      --dark-2:#101713;
+      --dark-3:#18221c;
+      --text:#132019;
+      --muted:#718078;
+      --line:#e4ebe6;
+      --surface:#f6f8f7;
+      --white:#ffffff;
+      --red:#e24a4a;
+      --orange:#e99a35;
+      --blue:#3678df;
+      --shadow:0 18px 50px rgba(7,17,11,.07);
+      --radius:20px;
+      --sidebar:270px;
     }
 
     *{
+      box-sizing:border-box;
       margin:0;
       padding:0;
-      box-sizing:border-box;
     }
 
     html{
@@ -69,15 +51,8 @@
     }
 
     body{
-      font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-      background:var(--bg);
+      font-family:"DM Sans",sans-serif;
+      background:var(--surface);
       color:var(--text);
       min-height:100vh;
     }
@@ -97,249 +72,244 @@
       text-decoration:none;
     }
 
+    .app{
+      min-height:100vh;
+    }
+
     /* =========================
        SIDEBAR
-    ========================= */
+    ========================== */
 
     .sidebar{
       position:fixed;
       inset:0 auto 0 0;
       width:var(--sidebar);
-      background:var(--dark);
+      background:var(--dark-2);
       color:#fff;
       z-index:1000;
       display:flex;
       flex-direction:column;
-      border-right:1px solid rgba(255,255,255,.04);
-      transition:.25s ease;
+      border-right:1px solid rgba(255,255,255,.06);
     }
 
     .brand{
-      height:78px;
+      height:82px;
       display:flex;
       align-items:center;
       gap:12px;
       padding:0 22px;
       border-bottom:1px solid rgba(255,255,255,.07);
-      flex-shrink:0;
     }
 
     .brand-logo{
-      width:39px;
-      height:39px;
-      border-radius:11px;
-      object-fit:contain;
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      object-fit:cover;
       background:#fff;
-      padding:5px;
+      padding:4px;
     }
 
-    .brand-text{
+    .brand-copy{
       min-width:0;
     }
 
-    .brand-title{
-      font-size:17px;
+    .brand-name{
+      font-family:"Manrope",sans-serif;
       font-weight:800;
-      letter-spacing:-.4px;
+      font-size:15px;
+      letter-spacing:-.3px;
       white-space:nowrap;
     }
 
     .brand-sub{
-      font-size:10px;
-      color:#91a099;
+      font-size:11px;
+      color:#829188;
       margin-top:2px;
-      letter-spacing:1px;
-      text-transform:uppercase;
     }
 
-    .sidebar-scroll{
+    .nav{
       flex:1;
-      overflow-y:auto;
-      padding:18px 12px;
+      overflow:auto;
+      padding:20px 14px;
     }
 
-    .nav-section{
-      margin-bottom:22px;
+    .nav::-webkit-scrollbar{
+      width:4px;
     }
 
-    .nav-label{
-      padding:0 12px 9px;
+    .nav::-webkit-scrollbar-thumb{
+      background:#2c3831;
+      border-radius:20px;
+    }
+
+    .nav-title{
       font-size:10px;
-      font-weight:800;
-      color:#6f7d75;
       text-transform:uppercase;
-      letter-spacing:1.2px;
+      letter-spacing:1.4px;
+      color:#657269;
+      font-weight:700;
+      padding:0 11px 9px;
+      margin-top:8px;
     }
 
-    .nav-item{
+    .nav-title:not(:first-child){
+      margin-top:22px;
+    }
+
+    .nav-link{
       display:flex;
       align-items:center;
-      gap:11px;
+      gap:12px;
       width:100%;
       min-height:44px;
-      padding:0 12px;
-      border-radius:11px;
+      padding:10px 12px;
+      margin:3px 0;
       color:#aeb9b2;
+      border-radius:12px;
+      transition:.2s ease;
       font-size:13px;
       font-weight:600;
-      margin-bottom:3px;
-      transition:.18s ease;
-      position:relative;
     }
 
-    .nav-item:hover{
-      background:rgba(255,255,255,.06);
+    .nav-link:hover{
+      background:#19231d;
       color:#fff;
     }
 
-    .nav-item.active{
-      background:rgba(24,169,87,.16);
-      color:#69e29c;
-    }
-
-    .nav-item.active::before{
-      content:"";
-      position:absolute;
-      left:-12px;
-      top:9px;
-      bottom:9px;
-      width:3px;
-      background:var(--green);
-      border-radius:0 4px 4px 0;
+    .nav-link.active{
+      background:rgba(24,169,87,.15);
+      color:#8df0b5;
     }
 
     .nav-icon{
       width:20px;
-      text-align:center;
+      height:20px;
+      display:grid;
+      place-items:center;
+      flex:0 0 20px;
       font-size:16px;
-      flex-shrink:0;
     }
 
-    .nav-badge{
-      margin-left:auto;
-      background:#27342d;
-      color:#8e9d95;
-      border-radius:20px;
-      padding:2px 7px;
-      font-size:10px;
-    }
-
-    .sidebar-footer{
-      padding:14px;
+    .sidebar-bottom{
+      padding:15px;
       border-top:1px solid rgba(255,255,255,.07);
-      flex-shrink:0;
     }
 
     .admin-mini{
       display:flex;
       align-items:center;
       gap:10px;
-      padding:9px;
-      border-radius:12px;
-      background:rgba(255,255,255,.04);
+      padding:11px;
+      background:#151e18;
+      border:1px solid rgba(255,255,255,.06);
+      border-radius:14px;
+      margin-bottom:10px;
     }
 
-    .admin-avatar{
+    .avatar{
       width:36px;
       height:36px;
       border-radius:50%;
-      display:grid;
-      place-items:center;
       background:var(--green);
       color:#fff;
+      display:grid;
+      place-items:center;
       font-size:13px;
       font-weight:800;
-      flex-shrink:0;
+      flex:0 0 36px;
     }
 
-    .admin-info{
+    .admin-mini-copy{
       min-width:0;
       flex:1;
     }
 
-    .admin-name{
+    .admin-mini-name{
       font-size:12px;
-      font-weight:700;
       color:#fff;
+      font-weight:700;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
     }
 
-    .admin-role{
-      color:#718078;
+    .admin-mini-role{
       font-size:10px;
+      color:#7e8b82;
       margin-top:2px;
+      text-transform:capitalize;
     }
 
-    .logout-mini{
-      width:34px;
-      height:34px;
-      border:0;
+    .logout-btn{
+      width:100%;
+      border:1px solid rgba(255,255,255,.08);
       background:transparent;
-      color:#7d8982;
-      border-radius:8px;
-      font-size:15px;
+      color:#aab5ae;
+      border-radius:11px;
+      padding:10px 12px;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      font-size:12px;
+      font-weight:700;
+      transition:.2s;
     }
 
-    .logout-mini:hover{
+    .logout-btn:hover{
+      background:#1d2821;
       color:#fff;
-      background:rgba(255,255,255,.06);
     }
 
     /* =========================
        MAIN
-    ========================= */
+    ========================== */
 
     .main{
       margin-left:var(--sidebar);
       min-height:100vh;
-      transition:.25s ease;
     }
 
     .topbar{
-      height:78px;
-      background:rgba(255,255,255,.94);
-      border-bottom:1px solid var(--border);
+      height:72px;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid var(--line);
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:18px;
       padding:0 30px;
       position:sticky;
       top:0;
-      z-index:900;
-      backdrop-filter:blur(15px);
+      z-index:500;
     }
 
-    .top-left{
+    .topbar-left{
       display:flex;
       align-items:center;
-      gap:14px;
-      min-width:0;
+      gap:12px;
     }
 
     .mobile-menu{
       display:none;
       width:40px;
       height:40px;
-      border:1px solid var(--border);
+      border:1px solid var(--line);
       background:#fff;
-      border-radius:10px;
-      font-size:19px;
+      border-radius:11px;
+      font-size:18px;
     }
 
-    .page-heading h1{
-      font-size:21px;
-      line-height:1.1;
-      letter-spacing:-.6px;
-      font-weight:800;
-    }
-
-    .page-heading p{
-      color:var(--muted);
+    .breadcrumb{
+      display:flex;
+      align-items:center;
+      gap:8px;
       font-size:12px;
-      margin-top:5px;
+      color:var(--muted);
+    }
+
+    .breadcrumb strong{
+      color:var(--text);
     }
 
     .top-actions{
@@ -348,249 +318,334 @@
       gap:9px;
     }
 
-    .icon-btn{
-      width:40px;
-      height:40px;
-      border:1px solid var(--border);
+    .top-btn{
+      height:38px;
+      padding:0 13px;
+      border:1px solid var(--line);
       background:#fff;
-      border-radius:11px;
-      color:#58635d;
-      display:grid;
-      place-items:center;
-      font-size:16px;
+      color:#334138;
+      border-radius:10px;
+      font-size:12px;
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      transition:.2s;
     }
 
-    .icon-btn:hover{
-      border-color:#cfd8d2;
-      background:#fafcfb;
+    .top-btn:hover{
+      border-color:#cdd8d1;
+      transform:translateY(-1px);
     }
 
-    /* =========================
-       CONTENT
-    ========================= */
+    .top-btn.primary{
+      color:#fff;
+      background:var(--green);
+      border-color:var(--green);
+    }
 
-    .content{
-      padding:28px 30px 38px;
-      max-width:1600px;
+    .top-btn.primary:hover{
+      background:var(--green-dark);
+    }
+
+    .page{
+      padding:30px;
+      max-width:1700px;
       margin:auto;
     }
 
-    .toolbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:22px;
-      flex-wrap:wrap;
-    }
+    /* =========================
+       HERO
+    ========================== */
 
-    .toolbar-left{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      flex-wrap:wrap;
-    }
-
-    .toolbar-right{
-      display:flex;
-      gap:9px;
-      flex-wrap:wrap;
-    }
-
-    .select-wrap{
+    .hero{
+      background:
+        radial-gradient(circle at 85% 15%, rgba(24,169,87,.18), transparent 30%),
+        linear-gradient(135deg,#07110b,#132119);
+      color:#fff;
+      border-radius:26px;
+      padding:30px;
       position:relative;
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      margin-bottom:22px;
     }
 
-    .month-select{
-      min-width:180px;
-      height:43px;
-      padding:0 38px 0 14px;
-      border:1px solid var(--border);
-      border-radius:11px;
-      background:#fff;
-      color:var(--text);
-      outline:none;
-      font-size:13px;
-      font-weight:650;
-      appearance:none;
-      cursor:pointer;
-    }
-
-    .select-wrap::after{
-      content:"⌄";
+    .hero::after{
+      content:"";
       position:absolute;
-      right:13px;
-      top:9px;
-      color:#78837d;
-      pointer-events:none;
-      font-size:16px;
+      width:260px;
+      height:260px;
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:50%;
+      right:-80px;
+      bottom:-130px;
     }
 
-    .btn{
-      height:43px;
-      border:1px solid var(--border);
-      background:#fff;
-      color:#354039;
-      padding:0 14px;
-      border-radius:11px;
-      font-size:12px;
-      font-weight:750;
+    .hero-content{
+      position:relative;
+      z-index:2;
+    }
+
+    .hero-eyebrow{
       display:inline-flex;
       align-items:center;
-      justify-content:center;
-      gap:8px;
-      transition:.18s ease;
+      gap:7px;
+      font-size:11px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:1.3px;
+      color:#84e7aa;
+      margin-bottom:11px;
     }
 
-    .btn:hover{
-      transform:translateY(-1px);
-      box-shadow:var(--shadow-sm);
+    .hero-eyebrow span{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:#51df86;
+      box-shadow:0 0 0 5px rgba(81,223,134,.12);
     }
 
-    .btn-primary{
-      border-color:var(--green);
-      background:var(--green);
-      color:#fff;
+    .hero h1{
+      font-family:"Manrope",sans-serif;
+      font-size:clamp(26px,3vw,40px);
+      line-height:1.1;
+      letter-spacing:-1.3px;
+      margin-bottom:9px;
     }
 
-    .btn-primary:hover{
-      background:var(--green-dark);
-      border-color:var(--green-dark);
+    .hero p{
+      max-width:650px;
+      color:#9aa89f;
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .hero-meta{
+      display:flex;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:9px;
+      margin-top:20px;
+    }
+
+    .hero-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      border:1px solid rgba(255,255,255,.09);
+      background:rgba(255,255,255,.05);
+      border-radius:999px;
+      padding:8px 11px;
+      color:#b9c5bd;
+      font-size:11px;
+      font-weight:700;
     }
 
     /* =========================
-       KPI CARDS
-    ========================= */
+       FILTER PANEL
+    ========================== */
+
+    .filter-panel{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:20px;
+      padding:18px;
+      box-shadow:var(--shadow);
+      margin-bottom:22px;
+    }
+
+    .filter-grid{
+      display:grid;
+      grid-template-columns:1.1fr 1fr 1fr auto auto auto;
+      gap:12px;
+      align-items:end;
+    }
+
+    .field label{
+      display:block;
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      color:#78847d;
+      font-weight:800;
+      margin-bottom:7px;
+    }
+
+    .input,
+    .select{
+      width:100%;
+      height:42px;
+      border:1px solid var(--line);
+      border-radius:11px;
+      background:#fff;
+      padding:0 12px;
+      color:var(--text);
+      outline:none;
+      font-size:12px;
+      font-weight:600;
+    }
+
+    .input:focus,
+    .select:focus{
+      border-color:var(--green);
+      box-shadow:0 0 0 3px rgba(24,169,87,.08);
+    }
+
+    .filter-actions{
+      display:flex;
+      gap:8px;
+    }
+
+    /* =========================
+       SECTION
+    ========================== */
+
+    .section{
+      margin-bottom:22px;
+    }
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:15px;
+      margin-bottom:12px;
+    }
+
+    .section-title{
+      font-family:"Manrope",sans-serif;
+      font-size:17px;
+      font-weight:800;
+      letter-spacing:-.4px;
+    }
+
+    .section-sub{
+      color:var(--muted);
+      font-size:11px;
+      margin-top:3px;
+    }
+
+    /* =========================
+       KPI
+    ========================== */
 
     .kpi-grid{
       display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:16px;
-      margin-bottom:18px;
+      grid-template-columns:repeat(6,1fr);
+      gap:14px;
     }
 
-    .kpi-card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding:20px;
-      box-shadow:var(--shadow-sm);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .kpi-card::after{
-      content:"";
-      position:absolute;
-      width:100px;
-      height:100px;
-      border-radius:50%;
-      right:-45px;
-      top:-45px;
-      background:var(--green-soft);
-      opacity:.7;
+    .kpi{
+      background:#fff;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 10px 30px rgba(7,17,11,.045);
+      min-width:0;
     }
 
     .kpi-top{
       display:flex;
       justify-content:space-between;
-      align-items:flex-start;
-      gap:10px;
-      position:relative;
-      z-index:1;
-    }
-
-    .kpi-icon{
-      width:42px;
-      height:42px;
-      display:grid;
-      place-items:center;
-      border-radius:12px;
-      background:var(--green-soft);
-      color:var(--green);
-      font-size:18px;
-    }
-
-    .kpi-card:nth-child(2) .kpi-icon{
-      background:var(--blue-soft);
-      color:var(--blue);
-    }
-
-    .kpi-card:nth-child(3) .kpi-icon{
-      background:var(--purple-soft);
-      color:var(--purple);
-    }
-
-    .kpi-card:nth-child(4) .kpi-icon{
-      background:var(--orange-soft);
-      color:var(--orange);
+      align-items:center;
+      gap:8px;
     }
 
     .kpi-label{
-      font-size:11px;
       color:var(--muted);
-      font-weight:700;
-      margin-top:17px;
+      font-size:10px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.7px;
+    }
+
+    .kpi-icon{
+      width:32px;
+      height:32px;
+      border-radius:10px;
+      background:var(--green-soft);
+      color:var(--green);
+      display:grid;
+      place-items:center;
+      font-size:14px;
+      flex:0 0 32px;
     }
 
     .kpi-value{
-      font-size:25px;
-      font-weight:850;
-      letter-spacing:-.9px;
-      margin-top:4px;
-      position:relative;
-      z-index:1;
+      font-family:"Manrope",sans-serif;
+      font-size:24px;
+      font-weight:800;
+      letter-spacing:-.8px;
+      margin-top:13px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
-    .kpi-meta{
+    .kpi-foot{
       display:flex;
       align-items:center;
-      gap:7px;
-      margin-top:9px;
+      gap:5px;
+      color:#829087;
       font-size:10px;
-      color:var(--muted);
+      margin-top:6px;
     }
 
-    .trend-up{
+    .delta{
+      font-weight:800;
+    }
+
+    .delta.up{
       color:var(--green);
-      font-weight:800;
     }
 
-    .trend-down{
+    .delta.down{
       color:var(--red);
-      font-weight:800;
+    }
+
+    .delta.neutral{
+      color:#7d8882;
     }
 
     /* =========================
-       CARDS
-    ========================= */
+       TWO COLUMN
+    ========================== */
+
+    .two-col{
+      display:grid;
+      grid-template-columns:1.45fr 1fr;
+      gap:18px;
+    }
 
     .card{
       background:#fff;
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow-sm);
+      border:1px solid var(--line);
+      border-radius:20px;
+      box-shadow:0 10px 30px rgba(7,17,11,.045);
+      overflow:hidden;
     }
 
-    .card-header{
+    .card-head{
       padding:18px 20px;
-      border-bottom:1px solid var(--border);
+      border-bottom:1px solid var(--line);
       display:flex;
-      align-items:center;
       justify-content:space-between;
-      gap:15px;
+      align-items:center;
+      gap:10px;
     }
 
     .card-title{
+      font-family:"Manrope",sans-serif;
       font-size:14px;
       font-weight:800;
-      letter-spacing:-.2px;
     }
 
     .card-sub{
       color:var(--muted);
       font-size:10px;
-      margin-top:4px;
+      margin-top:3px;
     }
 
     .card-body{
@@ -598,38 +653,84 @@
     }
 
     /* =========================
-       CHART
-    ========================= */
+       COMPARISON
+    ========================== */
 
-    .chart-card{
-      margin-bottom:18px;
+    .comparison{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
     }
 
-    .chart-legend{
-      display:flex;
-      align-items:center;
-      gap:16px;
-      flex-wrap:wrap;
+    .compare-box{
+      background:#f7f9f8;
+      border:1px solid var(--line);
+      border-radius:15px;
+      padding:16px;
+    }
+
+    .compare-label{
       font-size:10px;
-      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.7px;
+      color:#7c8881;
+      font-weight:800;
     }
 
-    .legend-item{
-      display:flex;
-      align-items:center;
-      gap:6px;
+    .compare-value{
+      font-family:"Manrope",sans-serif;
+      font-size:22px;
+      font-weight:800;
+      margin-top:7px;
     }
 
-    .legend-dot{
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:var(--green);
+    .compare-change{
+      margin-top:8px;
+      font-size:10px;
+      font-weight:800;
     }
 
-    .legend-dot.orders{
-      background:var(--blue);
+    .compare-main{
+      background:var(--green-soft);
+      border-color:#ccebd8;
     }
+
+    /* =========================
+       ANNUAL SNAPSHOT
+    ========================== */
+
+    .snapshot{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:9px;
+    }
+
+    .snapshot-item{
+      padding:13px;
+      border:1px solid var(--line);
+      border-radius:13px;
+      background:#fafcfb;
+    }
+
+    .snapshot-item span{
+      display:block;
+      color:#849087;
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:.6px;
+      font-weight:800;
+    }
+
+    .snapshot-item strong{
+      display:block;
+      font-family:"Manrope",sans-serif;
+      font-size:17px;
+      margin-top:5px;
+    }
+
+    /* =========================
+       CHARTS
+    ========================== */
 
     .chart-wrap{
       width:100%;
@@ -638,25 +739,32 @@
 
     .chart{
       width:100%;
-      height:300px;
+      height:280px;
       display:block;
     }
 
-    .chart-grid-line{
-      stroke:#edf1ee;
+    .chart-label{
+      font-size:9px;
+      fill:#89958e;
+    }
+
+    .chart-value{
+      font-size:9px;
+      fill:#4e5d54;
+      font-weight:700;
+    }
+
+    .chart-grid{
+      stroke:#e9eeeb;
       stroke-width:1;
     }
 
-    .chart-label{
-      fill:#87918b;
-      font-size:10px;
+    .chart-axis{
+      stroke:#dbe4de;
+      stroke-width:1;
     }
 
-    .revenue-area{
-      fill:rgba(24,169,87,.09);
-    }
-
-    .revenue-line{
+    .chart-line{
       fill:none;
       stroke:var(--green);
       stroke-width:3;
@@ -664,196 +772,119 @@
       stroke-linejoin:round;
     }
 
-    .orders-line{
-      fill:none;
-      stroke:var(--blue);
-      stroke-width:2.5;
-      stroke-linecap:round;
-      stroke-linejoin:round;
-      stroke-dasharray:5 4;
-    }
-
-    .chart-point{
+    .chart-dot{
       fill:#fff;
       stroke:var(--green);
-      stroke-width:2;
+      stroke-width:3;
     }
 
-    .orders-point{
-      fill:#fff;
-      stroke:var(--blue);
-      stroke-width:2;
+    .chart-area{
+      fill:rgba(24,169,87,.09);
     }
 
-    /* =========================
-       TWO COLUMN
-    ========================= */
-
-    .two-col{
-      display:grid;
-      grid-template-columns:1.15fr .85fr;
-      gap:18px;
-      margin-bottom:18px;
+    .bar{
+      fill:var(--green);
+      opacity:.88;
     }
 
-    .three-col{
-      display:grid;
-      grid-template-columns:1fr 1fr 1fr;
-      gap:18px;
-      margin-bottom:18px;
+    .bar:hover{
+      opacity:1;
     }
 
     /* =========================
-       PROGRESS LIST
-    ========================= */
+       BREAKDOWN
+    ========================== */
 
-    .metric-list{
+    .breakdown-list{
       display:flex;
       flex-direction:column;
-      gap:17px;
+      gap:13px;
     }
 
-    .metric-row{
+    .break-row{
       display:grid;
-      grid-template-columns:minmax(130px,1fr) 90px;
-      gap:15px;
+      grid-template-columns:minmax(110px,1fr) 80px;
+      gap:10px;
       align-items:center;
     }
 
-    .metric-info{
+    .break-main{
       min-width:0;
     }
 
-    .metric-title{
+    .break-top{
       display:flex;
       justify-content:space-between;
-      gap:10px;
-      font-size:11px;
-      font-weight:700;
-      margin-bottom:8px;
+      gap:8px;
+      margin-bottom:6px;
     }
 
-    .metric-title span:last-child{
-      color:var(--muted);
+    .break-name{
+      font-size:11px;
+      font-weight:700;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .break-amount{
+      font-size:10px;
+      color:#6e7a73;
       font-weight:700;
     }
 
     .progress{
       height:7px;
-      border-radius:10px;
-      background:#eef2ef;
+      background:#edf1ee;
+      border-radius:999px;
       overflow:hidden;
     }
 
-    .progress-bar{
-      height:100%;
-      border-radius:10px;
-      background:var(--green);
-    }
-
-    .metric-value{
-      text-align:right;
-      font-size:12px;
-      font-weight:800;
-    }
-
-    /* =========================
-       PAYMENT
-    ========================= */
-
-    .payment-list{
-      display:flex;
-      flex-direction:column;
-      gap:14px;
-    }
-
-    .payment-row{
-      display:flex;
-      align-items:center;
-      gap:11px;
-    }
-
-    .payment-icon{
-      width:38px;
-      height:38px;
-      display:grid;
-      place-items:center;
-      border-radius:10px;
-      background:#f1f4f2;
-      font-size:15px;
-      flex-shrink:0;
-    }
-
-    .payment-info{
-      min-width:0;
-      flex:1;
-    }
-
-    .payment-name{
-      font-size:11px;
-      font-weight:750;
-    }
-
-    .payment-bar{
-      height:5px;
-      background:#eef2ef;
-      border-radius:8px;
-      margin-top:6px;
-      overflow:hidden;
-    }
-
-    .payment-fill{
-      height:100%;
-      background:var(--green);
-      border-radius:8px;
-    }
-
-    .payment-amount{
-      text-align:right;
-      font-size:11px;
-      font-weight:800;
-      white-space:nowrap;
-    }
-
-    .payment-percent{
+    .progress span{
       display:block;
-      color:var(--muted);
-      font-size:9px;
-      margin-top:2px;
-      font-weight:600;
+      height:100%;
+      border-radius:999px;
+      background:var(--green);
+    }
+
+    .break-percent{
+      text-align:right;
+      font-size:11px;
+      font-weight:800;
     }
 
     /* =========================
        TABLE
-    ========================= */
+    ========================== */
 
     .table-wrap{
-      overflow-x:auto;
+      overflow:auto;
     }
 
     table{
       width:100%;
       border-collapse:collapse;
-      min-width:700px;
+      min-width:720px;
     }
 
     th{
-      padding:12px 14px;
-      background:#fafcfb;
-      color:#77827b;
-      font-size:9px;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.7px;
       text-align:left;
-      border-bottom:1px solid var(--border);
+      padding:12px 20px;
+      background:#fafcfb;
+      color:#7c8881;
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      font-weight:800;
+      border-bottom:1px solid var(--line);
       white-space:nowrap;
     }
 
     td{
-      padding:14px;
-      border-bottom:1px solid #eef1ef;
+      padding:14px 20px;
+      border-bottom:1px solid #edf1ee;
       font-size:11px;
+      color:#3d4a42;
       vertical-align:middle;
     }
 
@@ -865,206 +896,130 @@
       border-bottom:0;
     }
 
-    .month-cell{
-      font-weight:800;
-    }
-
-    .positive{
-      color:var(--green);
-      font-weight:800;
-    }
-
-    .neutral{
-      color:#647069;
-      font-weight:700;
-    }
-
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:23px;
-      padding:0 8px;
-      border-radius:20px;
-      font-size:9px;
-      font-weight:800;
-    }
-
-    .pill-green{
-      background:var(--green-soft);
-      color:var(--green-dark);
-    }
-
-    .pill-blue{
-      background:var(--blue-soft);
-      color:#3567bf;
-    }
-
-    /* =========================
-       WEBSITE LIST
-    ========================= */
-
-    .website-list{
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
-
-    .website-item{
+    .website-cell{
       display:flex;
       align-items:center;
-      gap:11px;
-      padding:9px;
-      border-radius:11px;
-      transition:.15s ease;
-    }
-
-    .website-item:hover{
-      background:#f7f9f8;
+      gap:10px;
+      min-width:200px;
     }
 
     .website-thumb{
-      width:38px;
-      height:38px;
-      border-radius:9px;
-      background:#eef2ef;
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      background:#edf5ef;
+      color:var(--green);
       display:grid;
       place-items:center;
-      color:var(--green);
-      font-size:14px;
+      font-size:12px;
       font-weight:800;
-      flex-shrink:0;
-      overflow:hidden;
-    }
-
-    .website-thumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-
-    .website-info{
-      min-width:0;
-      flex:1;
+      flex:0 0 34px;
     }
 
     .website-name{
-      font-size:11px;
       font-weight:800;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      color:#18241d;
     }
 
     .website-category{
+      color:#89958e;
       font-size:9px;
-      color:var(--muted);
-      margin-top:3px;
-    }
-
-    .website-sales{
-      text-align:right;
-      font-size:11px;
-      font-weight:800;
-    }
-
-    .website-sales small{
-      display:block;
-      color:var(--muted);
-      font-size:9px;
-      font-weight:600;
       margin-top:2px;
     }
 
-    /* =========================
-       SUMMARY
-    ========================= */
-
-    .summary-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
+    .money{
+      font-weight:800;
+      color:#17221b;
+      white-space:nowrap;
     }
 
-    .summary-box{
-      border:1px solid var(--border);
-      border-radius:13px;
-      padding:14px;
-      background:#fbfcfb;
-    }
-
-    .summary-label{
+    .status{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      padding:5px 8px;
+      border-radius:999px;
       font-size:9px;
-      color:var(--muted);
-      font-weight:700;
+      font-weight:800;
+      text-transform:capitalize;
     }
 
-    .summary-value{
-      font-size:18px;
-      font-weight:850;
-      margin-top:6px;
-      letter-spacing:-.4px;
+    .status::before{
+      content:"";
+      width:5px;
+      height:5px;
+      border-radius:50%;
+      background:currentColor;
     }
 
-    .summary-note{
-      font-size:9px;
-      color:var(--muted);
-      margin-top:4px;
+    .status.paid{
+      background:#eaf8f0;
+      color:#13914a;
+    }
+
+    .status.pending{
+      background:#fff6e9;
+      color:#c47a17;
+    }
+
+    .status.cancelled{
+      background:#fff0f0;
+      color:#d34646;
+    }
+
+    .status.refunded{
+      background:#eef3ff;
+      color:#426fc5;
+    }
+
+    .status.unknown{
+      background:#f1f3f2;
+      color:#7c8781;
+    }
+
+    .empty{
+      text-align:center;
+      padding:38px 20px;
+      color:#87938c;
+      font-size:12px;
     }
 
     /* =========================
        FOOTER
-    ========================= */
+    ========================== */
 
     .footer{
-      text-align:center;
-      color:#89938d;
+      display:flex;
+      justify-content:space-between;
+      gap:15px;
+      padding:24px 2px 10px;
+      color:#8a958f;
       font-size:10px;
-      padding:8px 0 2px;
-    }
-
-    /* =========================
-       OVERLAY
-    ========================= */
-
-    .overlay{
-      display:none;
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.42);
-      z-index:950;
-    }
-
-    .overlay.show{
-      display:block;
     }
 
     /* =========================
        TOAST
-    ========================= */
+    ========================== */
 
     .toast{
       position:fixed;
-      right:25px;
-      bottom:25px;
+      right:22px;
+      bottom:22px;
       z-index:2000;
       min-width:250px;
-      max-width:calc(100vw - 40px);
-      background:#15201a;
+      max-width:380px;
+      background:#111a15;
       color:#fff;
       border:1px solid rgba(255,255,255,.08);
       border-radius:13px;
-      padding:13px 16px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      box-shadow:0 18px 45px rgba(0,0,0,.22);
-      transform:translateY(20px);
+      padding:13px 15px;
+      box-shadow:0 20px 50px rgba(0,0,0,.2);
+      transform:translateY(25px);
       opacity:0;
       pointer-events:none;
       transition:.25s ease;
       font-size:11px;
-      font-weight:650;
+      font-weight:700;
     }
 
     .toast.show{
@@ -1072,183 +1027,63 @@
       opacity:1;
     }
 
-    .toast-icon{
-      width:25px;
-      height:25px;
-      display:grid;
-      place-items:center;
-      background:rgba(24,169,87,.18);
-      color:#6ce29c;
-      border-radius:7px;
-      flex-shrink:0;
-    }
-
     /* =========================
-       PRINT
-    ========================= */
+       OVERLAY
+    ========================== */
 
-    @media print{
-      .sidebar,
-      .topbar,
-      .toolbar,
-      .toast,
-      .overlay,
-      .footer{
-        display:none !important;
-      }
-
-      .main{
-        margin-left:0;
-      }
-
-      .content{
-        padding:0;
-        max-width:none;
-      }
-
-      body{
-        background:#fff;
-      }
-
-      .card,
-      .kpi-card{
-        box-shadow:none;
-        break-inside:avoid;
-      }
-
-      .chart-card,
-      .two-col,
-      .three-col{
-        break-inside:avoid;
-      }
+    .overlay{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.45);
+      z-index:900;
     }
 
     /* =========================
        RESPONSIVE
-    ========================= */
+    ========================== */
 
-    @media(max-width:1150px){
+    @media(max-width:1250px){
       .kpi-grid{
-        grid-template-columns:repeat(2,1fr);
+        grid-template-columns:repeat(3,1fr);
       }
 
+      .filter-grid{
+        grid-template-columns:repeat(3,1fr);
+      }
+
+      .filter-actions{
+        grid-column:span 3;
+      }
+    }
+
+    @media(max-width:1050px){
       .two-col{
         grid-template-columns:1fr;
       }
-
-      .three-col{
-        grid-template-columns:1fr 1fr;
-      }
     }
 
-    @media(max-width:850px){
+    @media(max-width:900px){
       :root{
-        --sidebar:70px;
+        --sidebar:270px;
       }
 
       .sidebar{
-        width:70px;
-      }
-
-      .brand{
-        justify-content:center;
-        padding:0;
-      }
-
-      .brand-text,
-      .nav-label,
-      .nav-item span:not(.nav-icon),
-      .nav-badge,
-      .admin-info,
-      .logout-mini{
-        display:none;
-      }
-
-      .nav-item{
-        justify-content:center;
-        padding:0;
-      }
-
-      .nav-item.active::before{
-        left:0;
-      }
-
-      .admin-mini{
-        justify-content:center;
-        padding:6px;
-      }
-
-      .sidebar-footer{
-        padding:10px;
-      }
-
-      .main{
-        margin-left:70px;
-      }
-
-      .topbar{
-        padding:0 20px;
-      }
-
-      .mobile-menu{
-        display:none;
-      }
-    }
-
-    @media(max-width:680px){
-      :root{
-        --sidebar:0px;
-      }
-
-      .sidebar{
-        width:270px;
         transform:translateX(-100%);
+        transition:.25s ease;
         box-shadow:20px 0 50px rgba(0,0,0,.18);
       }
 
-      .sidebar.mobile-open{
+      .sidebar.open{
         transform:translateX(0);
       }
 
-      .brand{
-        justify-content:flex-start;
-        padding:0 22px;
-      }
-
-      .brand-text,
-      .nav-label,
-      .nav-item span:not(.nav-icon),
-      .nav-badge,
-      .admin-info,
-      .logout-mini{
+      .overlay.show{
         display:block;
-      }
-
-      .nav-item{
-        justify-content:flex-start;
-        padding:0 12px;
-      }
-
-      .nav-item.active::before{
-        left:-12px;
-      }
-
-      .admin-mini{
-        justify-content:flex-start;
-        padding:9px;
-      }
-
-      .logout-mini{
-        margin-left:auto;
       }
 
       .main{
         margin-left:0;
-      }
-
-      .topbar{
-        height:70px;
-        padding:0 15px;
       }
 
       .mobile-menu{
@@ -1256,45 +1091,48 @@
         place-items:center;
       }
 
-      .page-heading h1{
-        font-size:18px;
+      .topbar{
+        padding:0 18px;
       }
 
-      .page-heading p{
-        font-size:10px;
-      }
-
-      .top-actions .icon-btn:nth-child(1){
+      .top-actions .hide-mobile{
         display:none;
       }
 
-      .content{
-        padding:20px 15px 30px;
+      .page{
+        padding:20px 16px;
+      }
+    }
+
+    @media(max-width:680px){
+      .hero{
+        padding:24px 20px;
+        border-radius:20px;
       }
 
-      .toolbar{
-        align-items:stretch;
+      .hero h1{
+        font-size:28px;
       }
 
-      .toolbar-left,
-      .toolbar-right{
-        width:100%;
+      .filter-grid{
+        grid-template-columns:1fr;
       }
 
-      .month-select{
-        width:100%;
+      .filter-actions{
+        grid-column:auto;
+        display:grid;
+        grid-template-columns:1fr 1fr;
       }
 
-      .toolbar-right .btn{
-        flex:1;
+      .filter-actions .top-btn:last-child{
+        grid-column:span 2;
       }
 
       .kpi-grid{
-        grid-template-columns:1fr 1fr;
-        gap:10px;
+        grid-template-columns:repeat(2,1fr);
       }
 
-      .kpi-card{
+      .kpi{
         padding:15px;
       }
 
@@ -1302,54 +1140,92 @@
         font-size:20px;
       }
 
-      .kpi-icon{
-        width:36px;
-        height:36px;
-        font-size:15px;
-      }
-
-      .three-col{
+      .comparison{
         grid-template-columns:1fr;
       }
 
-      .card-header{
-        padding:15px;
+      .snapshot{
+        grid-template-columns:1fr 1fr;
       }
 
-      .card-body{
-        padding:15px;
-      }
-
-      .chart{
-        height:240px;
-      }
-
-      .summary-grid{
-        grid-template-columns:1fr;
+      .footer{
+        flex-direction:column;
       }
     }
 
-    @media(max-width:420px){
+    @media(max-width:430px){
       .kpi-grid{
         grid-template-columns:1fr;
       }
 
-      .top-actions{
-        gap:5px;
+      .topbar{
+        height:64px;
       }
 
-      .top-actions .icon-btn{
-        width:36px;
-        height:36px;
+      .breadcrumb{
+        display:none;
       }
 
-      .metric-row{
-        grid-template-columns:1fr;
-        gap:6px;
+      .hero-meta{
+        align-items:flex-start;
+        flex-direction:column;
       }
 
-      .metric-value{
-        text-align:left;
+      .top-btn{
+        padding:0 10px;
+      }
+    }
+
+    /* =========================
+       PRINT
+    ========================== */
+
+    @media print{
+      body{
+        background:#fff;
+      }
+
+      .sidebar,
+      .topbar,
+      .filter-panel,
+      .top-actions,
+      .mobile-menu,
+      .footer,
+      .toast,
+      .overlay{
+        display:none !important;
+      }
+
+      .main{
+        margin:0;
+      }
+
+      .page{
+        max-width:none;
+        padding:0;
+      }
+
+      .hero{
+        color:#000;
+        background:#fff;
+        border:1px solid #ddd;
+        box-shadow:none;
+      }
+
+      .hero p,
+      .hero-eyebrow,
+      .hero-pill{
+        color:#555;
+      }
+
+      .card,
+      .kpi{
+        box-shadow:none;
+        break-inside:avoid;
+      }
+
+      .section{
+        break-inside:avoid;
       }
     }
   </style>
@@ -1357,150 +1233,118 @@
 
 <body>
 
+<div class="app">
+
   <!-- =========================
        SIDEBAR
   ========================== -->
-
   <aside class="sidebar" id="sidebar">
 
     <div class="brand">
       <img
+        class="brand-logo"
         src="../logo.png"
         alt="Website Deals"
-        class="brand-logo"
         onerror="this.style.display='none'"
       >
 
-      <div class="brand-text">
-        <div class="brand-title">Website Deals</div>
-        <div class="brand-sub">Admin Panel</div>
+      <div class="brand-copy">
+        <div class="brand-name">Website Deals</div>
+        <div class="brand-sub">Admin Control Center</div>
       </div>
     </div>
 
-    <div class="sidebar-scroll">
+    <nav class="nav">
 
-      <div class="nav-section">
-        <div class="nav-label">Core</div>
+      <div class="nav-title">Marketplace</div>
 
-        <a class="nav-item" href="dashboard.html">
-          <span class="nav-icon">⌂</span>
-          <span>Dashboard</span>
-        </a>
+      <a class="nav-link" href="dashboard.html">
+        <span class="nav-icon">⌂</span>
+        <span>Dashboard</span>
+      </a>
 
-        <a class="nav-item" href="websites.html">
-          <span class="nav-icon">▣</span>
-          <span>Websites</span>
-        </a>
+      <a class="nav-link" href="websites.html">
+        <span class="nav-icon">▦</span>
+        <span>Websites</span>
+      </a>
 
-        <a class="nav-item" href="categories.html">
-          <span class="nav-icon">◫</span>
-          <span>Categories</span>
-        </a>
+      <a class="nav-link" href="categories.html">
+        <span class="nav-icon">◈</span>
+        <span>Categories</span>
+      </a>
 
-        <a class="nav-item" href="orders.html">
-          <span class="nav-icon">☷</span>
-          <span>Orders</span>
-          <span class="nav-badge">12</span>
-        </a>
+      <a class="nav-link" href="orders.html">
+        <span class="nav-icon">☷</span>
+        <span>Orders</span>
+      </a>
 
-        <a class="nav-item" href="customers.html">
-          <span class="nav-icon">♙</span>
-          <span>Customers</span>
-        </a>
-      </div>
+      <a class="nav-link" href="payments.html">
+        <span class="nav-icon">৳</span>
+        <span>Payments</span>
+      </a>
 
-      <div class="nav-section">
-        <div class="nav-label">UI Management</div>
+      <a class="nav-link" href="customers.html">
+        <span class="nav-icon">♙</span>
+        <span>Customers</span>
+      </a>
 
-        <a class="nav-item" href="browse-ui.html">
-          <span class="nav-icon">◈</span>
-          <span>Browse UI</span>
-        </a>
+      <a class="nav-link" href="newsletter.html">
+        <span class="nav-icon">✉</span>
+        <span>Newsletter</span>
+      </a>
 
-        <a class="nav-item" href="homepage.html">
-          <span class="nav-icon">⌂</span>
-          <span>Homepage</span>
-        </a>
+      <div class="nav-title">Reports</div>
 
-        <a class="nav-item" href="banners.html">
-          <span class="nav-icon">▤</span>
-          <span>Banners</span>
-        </a>
-      </div>
+      <a class="nav-link" href="reports.html">
+        <span class="nav-icon">◫</span>
+        <span>Reports</span>
+      </a>
 
-      <div class="nav-section">
-        <div class="nav-label">Business</div>
+      <a class="nav-link active" href="monthly-report.html">
+        <span class="nav-icon">▥</span>
+        <span>Monthly Report</span>
+      </a>
 
-        <a class="nav-item" href="newsletter.html">
-          <span class="nav-icon">✉</span>
-          <span>Newsletter</span>
-        </a>
+      <div class="nav-title">Restricted Controls</div>
 
-        <a class="nav-item" href="payments.html">
-          <span class="nav-icon">৳</span>
-          <span>Payments</span>
-        </a>
+      <a class="nav-link" href="admins.html">
+        <span class="nav-icon">♟</span>
+        <span>Admin Management</span>
+      </a>
 
-        <a class="nav-item active" href="monthly-report.html">
-          <span class="nav-icon">▥</span>
-          <span>Reports</span>
-        </a>
-      </div>
+      <a class="nav-link" href="settings.html">
+        <span class="nav-icon">⚙</span>
+        <span>System Settings</span>
+      </a>
 
-      <div
-        class="nav-section super-admin-section"
-        id="superAdminNav"
-      >
-        <div class="nav-label">Super Admin</div>
+    </nav>
 
-        <a class="nav-item" href="admins.html">
-          <span class="nav-icon">♙</span>
-          <span>Admin Management</span>
-        </a>
+    <div class="sidebar-bottom">
 
-        <a class="nav-item" href="settings.html">
-          <span class="nav-icon">⚙</span>
-          <span>System Settings</span>
-        </a>
-      </div>
-
-    </div>
-
-    <div class="sidebar-footer">
       <div class="admin-mini">
+        <div class="avatar" id="sidebarAvatar">SA</div>
 
-        <div class="admin-avatar" id="adminAvatar">
-          SA
-        </div>
-
-        <div class="admin-info">
-          <div class="admin-name" id="adminName">
+        <div class="admin-mini-copy">
+          <div class="admin-mini-name" id="sidebarAdminName">
             Super Admin
           </div>
 
-          <div class="admin-role" id="adminRole">
-            Administrator
+          <div class="admin-mini-role" id="sidebarAdminRole">
+            Super Admin
           </div>
         </div>
-
-        <button
-          class="logout-mini"
-          id="logoutBtn"
-          title="Logout"
-        >
-          ↪
-        </button>
-
       </div>
+
+      <button class="logout-btn" id="logoutBtn">
+        <span>↪</span>
+        <span>Sign Out</span>
+      </button>
+
     </div>
 
   </aside>
 
-  <div
-    class="overlay"
-    id="overlay"
-  ></div>
-
+  <div class="overlay" id="overlay"></div>
 
   <!-- =========================
        MAIN
@@ -1510,7 +1354,7 @@
 
     <header class="topbar">
 
-      <div class="top-left">
+      <div class="topbar-left">
 
         <button
           class="mobile-menu"
@@ -1520,2172 +1364,2949 @@
           ☰
         </button>
 
-        <div class="page-heading">
-          <h1>Monthly Reports</h1>
-          <p>Track marketplace performance and business growth.</p>
+        <div class="breadcrumb">
+          <span>Admin</span>
+          <span>/</span>
+          <strong>Monthly Report</strong>
         </div>
 
       </div>
 
       <div class="top-actions">
 
-        <button
-          class="icon-btn"
-          onclick="window.location.href='dashboard.html'"
-          title="Dashboard"
-        >
-          ⌂
+        <button class="top-btn hide-mobile" id="refreshBtn">
+          ↻ Refresh
         </button>
 
-        <button
-          class="icon-btn"
-          onclick="window.print()"
-          title="Print Report"
-        >
-          ⎙
+        <button class="top-btn hide-mobile" id="printBtn">
+          ⎙ Print
+        </button>
+
+        <button class="top-btn" id="marketplaceBtn">
+          ↗ Marketplace
         </button>
 
       </div>
 
     </header>
 
+    <div class="page">
 
-    <section class="content">
+      <!-- =========================
+           HERO
+      ========================== -->
 
-      <!-- TOOLBAR -->
+      <section class="hero">
 
-      <div class="toolbar">
+        <div class="hero-content">
 
-        <div class="toolbar-left">
+          <div class="hero-eyebrow">
+            <span></span>
+            Monthly Analytics
+          </div>
 
-          <div class="select-wrap">
-            <select
-              class="month-select"
-              id="monthSelect"
-            >
-              <option value="2026-10">October 2026</option>
-              <option value="2026-09">September 2026</option>
-              <option value="2026-08">August 2026</option>
-              <option value="2026-07">July 2026</option>
-              <option value="2026-06">June 2026</option>
-              <option value="2026-05">May 2026</option>
-              <option value="2026-04">April 2026</option>
-              <option value="2026-03">March 2026</option>
-              <option value="2026-02">February 2026</option>
-              <option value="2026-01">January 2026</option>
+          <h1>Monthly Reports</h1>
+
+          <p>
+            Review monthly revenue, orders, payment activity, website sales,
+            category performance and year-to-date marketplace movement.
+          </p>
+
+          <div class="hero-meta">
+
+            <div class="hero-pill">
+              📅
+              <span id="heroMonth">October 2026</span>
+            </div>
+
+            <div class="hero-pill">
+              ◉
+              <span id="heroStatus">Live Local Data</span>
+            </div>
+
+            <div class="hero-pill">
+              ♟
+              <span id="heroAdmin">Super Admin</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- =========================
+           FILTERS
+      ========================== -->
+
+      <section class="filter-panel">
+
+        <div class="filter-grid">
+
+          <div class="field">
+            <label for="monthSelect">Month</label>
+            <select class="select" id="monthSelect"></select>
+          </div>
+
+          <div class="field">
+            <label for="yearSelect">Year</label>
+            <select class="select" id="yearSelect"></select>
+          </div>
+
+          <div class="field">
+            <label for="compareSelect">Compare With</label>
+            <select class="select" id="compareSelect">
+              <option value="previous">Previous Month</option>
+              <option value="yearAgo">Same Month Last Year</option>
             </select>
           </div>
 
-        </div>
+          <div></div>
 
-        <div class="toolbar-right">
+          <div class="filter-actions">
 
-          <button
-            class="btn"
-            id="exportBtn"
-          >
-            ⇩ Export CSV
-          </button>
+            <button class="top-btn primary" id="applyBtn">
+              ✓ Apply
+            </button>
 
-          <button
-            class="btn"
-            onclick="window.print()"
-          >
-            ⎙ Print Report
-          </button>
+            <button class="top-btn" id="exportBtn">
+              ↓ Export CSV
+            </button>
 
-          <button
-            class="btn btn-primary"
-            id="refreshBtn"
-          >
-            ↻ Refresh
-          </button>
+            <button class="top-btn" id="resetBtn">
+              ↺ Current Month
+            </button>
 
-        </div>
-
-      </div>
-
-
-      <!-- KPI -->
-
-      <div class="kpi-grid">
-
-        <div class="kpi-card">
-
-          <div class="kpi-top">
-            <div class="kpi-icon">৳</div>
-          </div>
-
-          <div class="kpi-label">
-            Monthly Revenue
-          </div>
-
-          <div
-            class="kpi-value"
-            id="monthlyRevenue"
-          >
-            ৳0
-          </div>
-
-          <div class="kpi-meta">
-            <span class="trend-up" id="revenueGrowth">
-              +0%
-            </span>
-            <span>vs previous month</span>
           </div>
 
         </div>
 
+      </section>
 
-        <div class="kpi-card">
+      <!-- =========================
+           KPI
+      ========================== -->
 
-          <div class="kpi-top">
-            <div class="kpi-icon">☷</div>
-          </div>
+      <section class="section">
 
-          <div class="kpi-label">
-            Total Orders
-          </div>
-
-          <div
-            class="kpi-value"
-            id="monthlyOrders"
-          >
-            0
-          </div>
-
-          <div class="kpi-meta">
-            <span class="trend-up" id="ordersGrowth">
-              +0%
-            </span>
-            <span>vs previous month</span>
-          </div>
-
-        </div>
-
-
-        <div class="kpi-card">
-
-          <div class="kpi-top">
-            <div class="kpi-icon">♙</div>
-          </div>
-
-          <div class="kpi-label">
-            New Customers
-          </div>
-
-          <div
-            class="kpi-value"
-            id="newCustomers"
-          >
-            0
-          </div>
-
-          <div class="kpi-meta">
-            <span class="trend-up" id="customerGrowth">
-              +0%
-            </span>
-            <span>vs previous month</span>
-          </div>
-
-        </div>
-
-
-        <div class="kpi-card">
-
-          <div class="kpi-top">
-            <div class="kpi-icon">◈</div>
-          </div>
-
-          <div class="kpi-label">
-            Average Order Value
-          </div>
-
-          <div
-            class="kpi-value"
-            id="averageOrder"
-          >
-            ৳0
-          </div>
-
-          <div class="kpi-meta">
-            <span class="trend-up" id="aovGrowth">
-              +0%
-            </span>
-            <span>vs previous month</span>
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- REVENUE TREND -->
-
-      <div class="card chart-card">
-
-        <div class="card-header">
+        <div class="section-head">
 
           <div>
-            <div class="card-title">
-              Revenue & Order Trend
+            <div class="section-title">Monthly Overview</div>
+            <div class="section-sub" id="overviewSub">
+              Performance for October 2026
             </div>
-
-            <div class="card-sub">
-              Daily marketplace performance for the selected month
-            </div>
-          </div>
-
-          <div class="chart-legend">
-
-            <div class="legend-item">
-              <span class="legend-dot"></span>
-              Revenue
-            </div>
-
-            <div class="legend-item">
-              <span class="legend-dot orders"></span>
-              Orders
-            </div>
-
           </div>
 
         </div>
 
-        <div class="card-body">
+        <div class="kpi-grid">
 
-          <div class="chart-wrap">
-            <svg
-              class="chart"
-              id="trendChart"
-              viewBox="0 0 1000 300"
-              preserveAspectRatio="none"
-            >
-              <!-- generated by JS -->
-            </svg>
-          </div>
+          <article class="kpi">
+            <div class="kpi-top">
+              <div class="kpi-label">Monthly Revenue</div>
+              <div class="kpi-icon">৳</div>
+            </div>
+
+            <div class="kpi-value" id="kpiRevenue">৳0</div>
+
+            <div class="kpi-foot">
+              <span id="revenueDelta" class="delta neutral">—</span>
+              <span>vs comparison</span>
+            </div>
+          </article>
+
+          <article class="kpi">
+            <div class="kpi-top">
+              <div class="kpi-label">Monthly Orders</div>
+              <div class="kpi-icon">☷</div>
+            </div>
+
+            <div class="kpi-value" id="kpiOrders">0</div>
+
+            <div class="kpi-foot">
+              <span id="ordersDelta" class="delta neutral">—</span>
+              <span>vs comparison</span>
+            </div>
+          </article>
+
+          <article class="kpi">
+            <div class="kpi-top">
+              <div class="kpi-label">Paid Orders</div>
+              <div class="kpi-icon">✓</div>
+            </div>
+
+            <div class="kpi-value" id="kpiPaid">0</div>
+
+            <div class="kpi-foot">
+              <span id="paidRate">0%</span>
+              <span>of monthly orders</span>
+            </div>
+          </article>
+
+          <article class="kpi">
+            <div class="kpi-top">
+              <div class="kpi-label">Pending</div>
+              <div class="kpi-icon">◷</div>
+            </div>
+
+            <div class="kpi-value" id="kpiPending">0</div>
+
+            <div class="kpi-foot">
+              <span>Awaiting completion</span>
+            </div>
+          </article>
+
+          <article class="kpi">
+            <div class="kpi-top">
+              <div class="kpi-label">Cancelled</div>
+              <div class="kpi-icon">×</div>
+            </div>
+
+            <div class="kpi-value" id="kpiCancelled">0</div>
+
+            <div class="kpi-foot">
+              <span>Cancelled transactions</span>
+            </div>
+          </article>
+
+          <article class="kpi">
+            <div class="kpi-top">
+              <div class="kpi-label">Avg Paid Order</div>
+              <div class="kpi-icon">↗</div>
+            </div>
+
+            <div class="kpi-value" id="kpiAverage">৳0</div>
+
+            <div class="kpi-foot">
+              <span>Paid revenue ÷ paid orders</span>
+            </div>
+          </article>
 
         </div>
 
-      </div>
+      </section>
 
+      <!-- =========================
+           COMPARISON + SNAPSHOT
+      ========================== -->
 
-      <!-- REVENUE + PAYMENT -->
+      <section class="section">
 
-      <div class="two-col">
+        <div class="two-col">
 
-        <div class="card">
+          <article class="card">
 
-          <div class="card-header">
-            <div>
-              <div class="card-title">
-                Revenue Breakdown
+            <div class="card-head">
+
+              <div>
+                <div class="card-title">Month Comparison</div>
+                <div class="card-sub" id="comparisonSub">
+                  Current month compared with previous month
+                </div>
               </div>
 
-              <div class="card-sub">
-                Revenue contribution by business category
+              <div class="hero-pill" style="color:#4f5d55;background:#f5f8f6;border-color:#e4ebe6;">
+                ↔ Comparison
               </div>
-            </div>
-          </div>
 
-          <div class="card-body">
-
-            <div
-              class="metric-list"
-              id="categoryMetrics"
-            >
-              <!-- JS -->
             </div>
 
-          </div>
+            <div class="card-body">
+
+              <div class="comparison">
+
+                <div class="compare-box compare-main">
+                  <div class="compare-label" id="compareCurrentLabel">
+                    Current Month
+                  </div>
+
+                  <div class="compare-value" id="compareCurrentRevenue">
+                    ৳0
+                  </div>
+
+                  <div class="compare-change" id="compareRevenueChange">
+                    —
+                  </div>
+                </div>
+
+                <div class="compare-box">
+                  <div class="compare-label" id="comparePreviousLabel">
+                    Previous Month
+                  </div>
+
+                  <div class="compare-value" id="comparePreviousRevenue">
+                    ৳0
+                  </div>
+
+                  <div class="compare-change" id="comparePreviousText">
+                    Reference period
+                  </div>
+                </div>
+
+              </div>
+
+              <div style="height:12px"></div>
+
+              <div class="comparison">
+
+                <div class="compare-box">
+                  <div class="compare-label">Current Orders</div>
+
+                  <div class="compare-value" id="compareCurrentOrders">
+                    0
+                  </div>
+
+                  <div class="compare-change" id="compareOrdersChange">
+                    —
+                  </div>
+                </div>
+
+                <div class="compare-box">
+                  <div class="compare-label">Reference Orders</div>
+
+                  <div class="compare-value" id="comparePreviousOrders">
+                    0
+                  </div>
+
+                  <div class="compare-change">
+                    Reference period
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </article>
+
+          <article class="card">
+
+            <div class="card-head">
+
+              <div>
+                <div class="card-title">Annual Snapshot</div>
+                <div class="card-sub" id="snapshotYear">
+                  2026 marketplace summary
+                </div>
+              </div>
+
+            </div>
+
+            <div class="card-body">
+
+              <div class="snapshot">
+
+                <div class="snapshot-item">
+                  <span>YTD Revenue</span>
+                  <strong id="ytdRevenue">৳0</strong>
+                </div>
+
+                <div class="snapshot-item">
+                  <span>YTD Orders</span>
+                  <strong id="ytdOrders">0</strong>
+                </div>
+
+                <div class="snapshot-item">
+                  <span>YTD Paid</span>
+                  <strong id="ytdPaid">0</strong>
+                </div>
+
+                <div class="snapshot-item">
+                  <span>Avg Order</span>
+                  <strong id="ytdAverage">৳0</strong>
+                </div>
+
+                <div class="snapshot-item">
+                  <span>Active Months</span>
+                  <strong id="activeMonths">0</strong>
+                </div>
+
+                <div class="snapshot-item">
+                  <span>Transactions</span>
+                  <strong id="ytdTransactions">0</strong>
+                </div>
+
+              </div>
+
+            </div>
+
+          </article>
 
         </div>
 
+      </section>
 
-        <div class="card">
+      <!-- =========================
+           REVENUE TREND
+      ========================== -->
 
-          <div class="card-header">
-            <div>
-              <div class="card-title">
-                Payment Methods
-              </div>
+      <section class="section">
 
-              <div class="card-sub">
-                Transaction distribution
-              </div>
-            </div>
-          </div>
-
-          <div class="card-body">
-
-            <div
-              class="payment-list"
-              id="paymentList"
-            >
-              <!-- JS -->
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- TOP WEBSITES + SUMMARY -->
-
-      <div class="three-col">
-
-        <div class="card">
-
-          <div class="card-header">
-            <div>
-              <div class="card-title">
-                Top Websites
-              </div>
-
-              <div class="card-sub">
-                Highest selling products
-              </div>
-            </div>
-          </div>
-
-          <div class="card-body">
-
-            <div
-              class="website-list"
-              id="websiteList"
-            >
-              <!-- JS -->
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div class="card-header">
-            <div>
-              <div class="card-title">
-                Monthly Summary
-              </div>
-
-              <div class="card-sub">
-                Key business indicators
-              </div>
-            </div>
-          </div>
-
-          <div class="card-body">
-
-            <div
-              class="summary-grid"
-              id="summaryGrid"
-            >
-              <!-- JS -->
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div class="card-header">
-            <div>
-              <div class="card-title">
-                Customer Activity
-              </div>
-
-              <div class="card-sub">
-                Marketplace audience
-              </div>
-            </div>
-          </div>
-
-          <div class="card-body">
-
-            <div class="metric-list">
-
-              <div class="metric-row">
-
-                <div class="metric-info">
-
-                  <div class="metric-title">
-                    <span>Returning Customers</span>
-                    <span>68%</span>
-                  </div>
-
-                  <div class="progress">
-                    <div
-                      class="progress-bar"
-                      style="width:68%"
-                    ></div>
-                  </div>
-
-                </div>
-
-                <div class="metric-value">
-                  215
-                </div>
-
-              </div>
-
-
-              <div class="metric-row">
-
-                <div class="metric-info">
-
-                  <div class="metric-title">
-                    <span>New Customers</span>
-                    <span>32%</span>
-                  </div>
-
-                  <div class="progress">
-                    <div
-                      class="progress-bar"
-                      style="width:32%"
-                    ></div>
-                  </div>
-
-                </div>
-
-                <div class="metric-value">
-                  101
-                </div>
-
-              </div>
-
-
-              <div class="metric-row">
-
-                <div class="metric-info">
-
-                  <div class="metric-title">
-                    <span>Repeat Orders</span>
-                    <span>47%</span>
-                  </div>
-
-                  <div class="progress">
-                    <div
-                      class="progress-bar"
-                      style="width:47%"
-                    ></div>
-                  </div>
-
-                </div>
-
-                <div class="metric-value">
-                  201
-                </div>
-
-              </div>
-
-
-              <div class="metric-row">
-
-                <div class="metric-info">
-
-                  <div class="metric-title">
-                    <span>Conversion Rate</span>
-                    <span>6.8%</span>
-                  </div>
-
-                  <div class="progress">
-                    <div
-                      class="progress-bar"
-                      style="width:68%"
-                    ></div>
-                  </div>
-
-                </div>
-
-                <div class="metric-value">
-                  6.8%
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- PERFORMANCE TABLE -->
-
-      <div class="card">
-
-        <div class="card-header">
+        <div class="section-head">
 
           <div>
-            <div class="card-title">
-              Monthly Performance
-            </div>
-
-            <div class="card-sub">
-              Historical marketplace performance
+            <div class="section-title">Revenue Trend</div>
+            <div class="section-sub">
+              Monthly revenue movement across the selected year
             </div>
           </div>
 
-          <span class="pill pill-green">
-            2026
-          </span>
+        </div>
+
+        <article class="card">
+
+          <div class="card-body">
+
+            <div class="chart-wrap">
+              <svg
+                class="chart"
+                id="revenueChart"
+                viewBox="0 0 1000 280"
+                preserveAspectRatio="none"
+                aria-label="Revenue trend chart"
+              ></svg>
+            </div>
+
+          </div>
+
+        </article>
+
+      </section>
+
+      <!-- =========================
+           ORDERS TREND
+      ========================== -->
+
+      <section class="section">
+
+        <div class="section-head">
+
+          <div>
+            <div class="section-title">Orders Trend</div>
+            <div class="section-sub">
+              Monthly order volume across the selected year
+            </div>
+          </div>
 
         </div>
 
-        <div class="table-wrap">
+        <article class="card">
 
-          <table>
+          <div class="card-body">
 
-            <thead>
+            <div class="chart-wrap">
+              <svg
+                class="chart"
+                id="ordersChart"
+                viewBox="0 0 1000 280"
+                preserveAspectRatio="none"
+                aria-label="Orders trend chart"
+              ></svg>
+            </div>
 
-              <tr>
-                <th>Month</th>
-                <th>Revenue</th>
-                <th>Orders</th>
-                <th>Customers</th>
-                <th>AOV</th>
-                <th>Growth</th>
-                <th>Status</th>
-              </tr>
+          </div>
 
-            </thead>
+        </article>
 
-            <tbody id="performanceTable">
-              <!-- JS -->
-            </tbody>
+      </section>
 
-          </table>
+      <!-- =========================
+           BREAKDOWNS
+      ========================== -->
+
+      <section class="section">
+
+        <div class="two-col">
+
+          <article class="card">
+
+            <div class="card-head">
+              <div>
+                <div class="card-title">Revenue by Category</div>
+                <div class="card-sub">
+                  Paid revenue grouped by category
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div
+                class="breakdown-list"
+                id="categoryBreakdown"
+              ></div>
+
+            </div>
+
+          </article>
+
+          <article class="card">
+
+            <div class="card-head">
+              <div>
+                <div class="card-title">Payment Methods</div>
+                <div class="card-sub">
+                  Monthly paid revenue by payment method
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div
+                class="breakdown-list"
+                id="paymentBreakdown"
+              ></div>
+
+            </div>
+
+          </article>
 
         </div>
 
-      </div>
+      </section>
 
+      <!-- =========================
+           WEBSITE PERFORMANCE
+      ========================== -->
 
-      <div class="footer">
-        Website Deals Admin • Monthly Reports • Prototype analytics data
-      </div>
+      <section class="section">
 
-    </section>
+        <div class="section-head">
+
+          <div>
+            <div class="section-title">Website Sales</div>
+            <div class="section-sub">
+              Website-level performance for the selected month
+            </div>
+          </div>
+
+        </div>
+
+        <article class="card">
+
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Website</th>
+                  <th>Category</th>
+                  <th>Orders</th>
+                  <th>Paid</th>
+                  <th>Revenue</th>
+                  <th>Average</th>
+                </tr>
+              </thead>
+
+              <tbody id="websiteTable"></tbody>
+
+            </table>
+
+          </div>
+
+        </article>
+
+      </section>
+
+      <!-- =========================
+           TRANSACTIONS
+      ========================== -->
+
+      <section class="section">
+
+        <div class="section-head">
+
+          <div>
+            <div class="section-title">Monthly Transactions</div>
+            <div class="section-sub">
+              Transaction-level records for the selected month
+            </div>
+          </div>
+
+        </div>
+
+        <article class="card">
+
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+                <tr>
+                  <th>Transaction</th>
+                  <th>Date</th>
+                  <th>Customer</th>
+                  <th>Website</th>
+                  <th>Method</th>
+                  <th>Status</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+
+              <tbody id="transactionTable"></tbody>
+
+            </table>
+
+          </div>
+
+        </article>
+
+      </section>
+
+      <!-- =========================
+           FOOTER
+      ========================== -->
+
+      <footer class="footer">
+        <div>
+          Website Deals Admin • Monthly Reports
+        </div>
+
+        <div>
+          Data source: LocalStorage • Generated
+          <span id="generatedAt"></span>
+        </div>
+      </footer>
+
+    </div>
 
   </main>
 
+</div>
 
-  <!-- TOAST -->
+<div class="toast" id="toast"></div>
 
-  <div
-    class="toast"
-    id="toast"
-  >
-    <div class="toast-icon">✓</div>
-    <div id="toastMessage">Done</div>
-  </div>
+<script>
+/* =========================================================
+   WEBSITE DEALS — MONTHLY REPORT
+========================================================= */
 
+(function(){
 
-  <script>
-    /* =====================================================
-       WEBSITE DEALS
-       MONTHLY REPORT
-    ===================================================== */
+  "use strict";
 
-    const AUTH_KEY = "websiteDealsAdminAuth";
+  /* =======================================================
+     AUTH
+  ======================================================= */
 
-    function getAdminSession(){
-      try{
-        const raw = sessionStorage.getItem(AUTH_KEY);
+  const AUTH_KEY = "websiteDealsAdminAuth";
 
-        if(!raw){
-          return null;
-        }
+  function getAdminSession(){
+    try{
+      const raw = sessionStorage.getItem(AUTH_KEY);
 
-        const session = JSON.parse(raw);
+      if(!raw) return null;
 
-        if(
-          !session ||
-          session.authenticated !== true
-        ){
-          return null;
-        }
+      const session = JSON.parse(raw);
 
-        return session;
-
-      }catch(error){
+      if(!session || session.authenticated !== true){
         return null;
       }
+
+      return session;
+
+    }catch(error){
+      return null;
+    }
+  }
+
+  const adminSession = getAdminSession();
+
+  if(!adminSession){
+    window.location.replace("login/");
+    return;
+  }
+
+  /* =======================================================
+     DOM
+  ======================================================= */
+
+  const $ = (selector) => document.querySelector(selector);
+
+  /* =======================================================
+     ADMIN IDENTITY
+  ======================================================= */
+
+  const adminName =
+    adminSession.name ||
+    adminSession.email ||
+    "Super Admin";
+
+  const adminRole =
+    adminSession.role ||
+    "Admin";
+
+  const initials = adminName
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0,2)
+    .map(word => word.charAt(0).toUpperCase())
+    .join("") || "SA";
+
+  $("#sidebarAdminName").textContent = adminName;
+  $("#sidebarAdminRole").textContent = adminRole;
+  $("#sidebarAvatar").textContent = initials;
+  $("#heroAdmin").textContent = adminName;
+
+  /* =======================================================
+     HELPERS
+  ======================================================= */
+
+  const MONTHS = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+
+  const SHORT_MONTHS = [
+    "Jan","Feb","Mar","Apr","May","Jun",
+    "Jul","Aug","Sep","Oct","Nov","Dec"
+  ];
+
+  function formatMoney(value){
+    const number = Number(value) || 0;
+
+    return "৳" + new Intl.NumberFormat("en-BD", {
+      maximumFractionDigits:0
+    }).format(number);
+  }
+
+  function formatNumber(value){
+    return new Intl.NumberFormat("en-BD", {
+      maximumFractionDigits:0
+    }).format(Number(value) || 0);
+  }
+
+  function escapeHTML(value){
+    return String(value ?? "")
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
+  }
+
+  function readStorage(key, fallback){
+    try{
+      const raw = localStorage.getItem(key);
+
+      if(raw === null){
+        return fallback;
+      }
+
+      const parsed = JSON.parse(raw);
+
+      return parsed ?? fallback;
+
+    }catch(error){
+      return fallback;
+    }
+  }
+
+  function safeArray(value){
+    if(Array.isArray(value)) return value;
+
+    if(value && Array.isArray(value.items)){
+      return value.items;
     }
 
-    const adminSession = getAdminSession();
-
-    if(!adminSession){
-      window.location.replace("login/");
+    if(value && Array.isArray(value.data)){
+      return value.data;
     }
 
+    return [];
+  }
 
-    /* =========================
-       ADMIN UI
-    ========================= */
+  function parseDate(value){
 
-    const adminName =
-      document.getElementById("adminName");
+    if(value instanceof Date && !isNaN(value)){
+      return value;
+    }
 
-    const adminRole =
-      document.getElementById("adminRole");
+    if(typeof value === "number"){
+      const date = new Date(
+        value < 10000000000 ? value * 1000 : value
+      );
 
-    const adminAvatar =
-      document.getElementById("adminAvatar");
+      if(!isNaN(date)) return date;
+    }
 
-    if(adminSession){
+    if(typeof value === "string"){
 
-      const name =
-        adminSession.name ||
-        adminSession.email ||
-        "Admin";
+      const trimmed = value.trim();
 
-      const role =
-        adminSession.role ||
-        "Administrator";
+      if(!trimmed){
+        return null;
+      }
 
-      adminName.textContent = name;
-      adminRole.textContent =
-        role === "superadmin"
-          ? "Super Administrator"
-          : "Administrator";
+      const direct = new Date(trimmed);
 
-      const initials =
-        name
-          .split(" ")
-          .map(word => word.charAt(0))
-          .join("")
-          .slice(0,2)
-          .toUpperCase();
+      if(!isNaN(direct)){
+        return direct;
+      }
 
-      adminAvatar.textContent =
-        initials || "AD";
+      const numeric = Number(trimmed);
 
-      if(role !== "superadmin"){
-        const superNav =
-          document.getElementById("superAdminNav");
+      if(Number.isFinite(numeric)){
+        const date = new Date(
+          numeric < 10000000000
+            ? numeric * 1000
+            : numeric
+        );
 
-        if(superNav){
-          superNav.style.display = "none";
-        }
+        if(!isNaN(date)) return date;
       }
     }
 
+    return null;
+  }
 
-    /* =========================
-       LOGOUT
-    ========================= */
+  function normalizeStatus(value){
 
-    document
-      .getElementById("logoutBtn")
-      .addEventListener("click", () => {
+    const status = String(value || "")
+      .toLowerCase()
+      .trim();
 
-        sessionStorage.removeItem(AUTH_KEY);
-
-        window.location.replace("login/");
-      });
-
-
-    /* =========================
-       MOBILE SIDEBAR
-    ========================= */
-
-    const sidebar =
-      document.getElementById("sidebar");
-
-    const overlay =
-      document.getElementById("overlay");
-
-    const mobileMenu =
-      document.getElementById("mobileMenu");
-
-    function openMobileMenu(){
-      sidebar.classList.add("mobile-open");
-      overlay.classList.add("show");
-      document.body.style.overflow = "hidden";
+    if([
+      "paid",
+      "completed",
+      "complete",
+      "success",
+      "successful",
+      "succeeded",
+      "approved"
+    ].includes(status)){
+      return "paid";
     }
 
-    function closeMobileMenu(){
-      sidebar.classList.remove("mobile-open");
-      overlay.classList.remove("show");
-      document.body.style.overflow = "";
+    if([
+      "pending",
+      "processing",
+      "unpaid",
+      "awaiting",
+      "waiting"
+    ].includes(status)){
+      return "pending";
     }
 
-    mobileMenu.addEventListener(
-      "click",
-      openMobileMenu
-    );
+    if([
+      "cancelled",
+      "canceled",
+      "cancel",
+      "failed",
+      "failure"
+    ].includes(status)){
+      return "cancelled";
+    }
 
-    overlay.addEventListener(
-      "click",
-      closeMobileMenu
-    );
+    if([
+      "refunded",
+      "refund"
+    ].includes(status)){
+      return "refunded";
+    }
 
+    return status || "unknown";
+  }
 
-    /* =========================
-       DEMO REPORT DATA
-    ========================= */
+  function normalizeTransaction(item, index){
 
-    const reportData = {
+    const raw = item || {};
 
-      "2026-10":{
-        revenue:842000,
-        orders:428,
-        customers:316,
-        previousRevenue:769000,
-        previousOrders:394,
-        previousCustomers:286,
+    const amount =
+      raw.amount ??
+      raw.total ??
+      raw.price ??
+      raw.paidAmount ??
+      raw.paid_amount ??
+      raw.orderTotal ??
+      raw.value ??
+      0;
 
-        categories:[
-          {
-            name:"Business",
-            value:198000,
-            percent:74
-          },
-          {
-            name:"E-commerce",
-            value:176000,
-            percent:66
-          },
-          {
-            name:"Portfolio",
-            value:145000,
-            percent:54
-          },
-          {
-            name:"Restaurant",
-            value:112000,
-            percent:42
-          },
-          {
-            name:"Landing Page",
-            value:97000,
-            percent:36
-          },
-          {
-            name:"Other",
-            value:114000,
-            percent:43
-          }
-        ],
+    const dateValue =
+      raw.date ??
+      raw.createdAt ??
+      raw.created_at ??
+      raw.timestamp ??
+      raw.updatedAt ??
+      raw.updated_at ??
+      raw.time ??
+      raw.orderDate;
 
-        payments:[
-          {
-            name:"bKash",
-            amount:362000,
-            percent:43
-          },
-          {
-            name:"Nagad",
-            amount:202000,
-            percent:24
-          },
-          {
-            name:"Bank Transfer",
-            amount:177000,
-            percent:21
-          },
-          {
-            name:"Card Payment",
-            amount:101000,
-            percent:12
-          }
-        ],
+    const date = parseDate(dateValue);
 
-        websites:[
-          {
-            name:"Restaurant Pro",
-            category:"Restaurant",
-            sales:72,
-            revenue:128000
-          },
-          {
-            name:"Business Elite",
-            category:"Business",
-            sales:61,
-            revenue:114000
-          },
-          {
-            name:"ShopWave",
-            category:"E-commerce",
-            sales:55,
-            revenue:98000
-          },
-          {
-            name:"Portfolio X",
-            category:"Portfolio",
-            sales:49,
-            revenue:87000
-          },
-          {
-            name:"Agency Pro",
-            category:"Agency",
-            sales:43,
-            revenue:76000
-          }
-        ],
+    return {
+      id:
+        raw.id ??
+        raw.orderId ??
+        raw.orderID ??
+        raw.transactionId ??
+        raw.transactionID ??
+        raw.reference ??
+        ("TX-" + String(index + 1).padStart(4,"0")),
 
-        dailyRevenue:[
-          18000,21000,25000,19000,28000,
-          30000,22000,27000,31000,24000,
-          33000,29000,35000,26000,32000,
-          37000,30000,28000,39000,35000,
-          42000,38000,41000,34000,44000,
-          39000,45000,41000,47000,49000,52000
-        ],
+      amount:Number(
+        String(amount).replace(/[^\d.-]/g,"")
+      ) || 0,
 
-        dailyOrders:[
-          9,11,12,10,13,
-          14,11,12,15,12,
-          16,14,17,13,15,
-          18,14,13,19,17,
-          20,18,19,16,21,
-          18,22,20,23,24,26
-        ]
-      },
+      status:normalizeStatus(
+        raw.status ??
+        raw.paymentStatus ??
+        raw.orderStatus ??
+        raw.state
+      ),
 
+      date,
 
-      "2026-09":{
-        revenue:769000,
-        orders:394,
-        customers:286,
-        previousRevenue:712000,
-        previousOrders:367,
-        previousCustomers:268,
+      customer:
+        raw.customer ??
+        raw.customerName ??
+        raw.name ??
+        raw.fullName ??
+        raw.email ??
+        "Customer",
 
-        categories:[
-          {
-            name:"Business",
-            value:184000,
-            percent:71
-          },
-          {
-            name:"E-commerce",
-            value:163000,
-            percent:63
-          },
-          {
-            name:"Portfolio",
-            value:131000,
-            percent:51
-          },
-          {
-            name:"Restaurant",
-            value:99000,
-            percent:38
-          },
-          {
-            name:"Landing Page",
-            value:91000,
-            percent:35
-          },
-          {
-            name:"Other",
-            value:101000,
-            percent:39
-          }
-        ],
+      email:
+        raw.email ??
+        raw.customerEmail ??
+        "",
 
-        payments:[
-          {
-            name:"bKash",
-            amount:328000,
-            percent:43
-          },
-          {
-            name:"Nagad",
-            amount:184000,
-            percent:24
-          },
-          {
-            name:"Bank Transfer",
-            amount:157000,
-            percent:20
-          },
-          {
-            name:"Card Payment",
-            amount:100000,
-            percent:13
-          }
-        ],
+      method:
+        raw.method ??
+        raw.paymentMethod ??
+        raw.gateway ??
+        raw.payment_gateway ??
+        raw.type ??
+        "Unknown",
 
-        websites:[
-          {
-            name:"Business Elite",
-            category:"Business",
-            sales:66,
-            revenue:119000
-          },
-          {
-            name:"Restaurant Pro",
-            category:"Restaurant",
-            sales:58,
-            revenue:107000
-          },
-          {
-            name:"ShopWave",
-            category:"E-commerce",
-            sales:51,
-            revenue:93000
-          },
-          {
-            name:"Portfolio X",
-            category:"Portfolio",
-            sales:45,
-            revenue:81000
-          },
-          {
-            name:"Agency Pro",
-            category:"Agency",
-            sales:41,
-            revenue:72000
-          }
-        ],
+      website:
+        raw.website ??
+        raw.websiteName ??
+        raw.product ??
+        raw.productName ??
+        raw.template ??
+        raw.item ??
+        "Website",
 
-        dailyRevenue:[
-          16000,19000,23000,18000,25000,
-          27000,21000,24000,28000,22000,
-          30000,26000,32000,24000,29000,
-          33000,28000,27000,35000,32000,
-          38000,34000,37000,31000,40000,
-          36000,41000,38000,43000,45000
-        ],
-
-        dailyOrders:[
-          8,9,11,9,12,
-          13,10,12,13,11,
-          15,13,16,12,14,
-          16,13,12,17,15,
-          18,16,17,15,19,
-          17,20,18,21,22
-        ]
-      }
-
+      category:
+        raw.category ??
+        raw.categoryName ??
+        raw.websiteCategory ??
+        raw.typeCategory ??
+        "Uncategorized"
     };
+  }
 
+  /* =======================================================
+     DEMO DATA
+     Used only when NO local transaction data exists.
+  ======================================================= */
 
-    /* =========================
-       HISTORICAL DATA
-    ========================= */
+  function makeDemoDate(month, day){
+    return new Date(2026, month, day, 12, 0, 0);
+  }
 
-    const historicalData = [
+  const DEMO_TRANSACTIONS = [
+    {
+      id:"WD-1001",
+      amount:6500,
+      status:"paid",
+      date:makeDemoDate(0,12),
+      customer:"Arif Rahman",
+      email:"arif@example.com",
+      method:"bKash",
+      website:"Business Pro",
+      category:"Business"
+    },
+    {
+      id:"WD-1002",
+      amount:4500,
+      status:"paid",
+      date:makeDemoDate(1,8),
+      customer:"Nusrat Jahan",
+      email:"nusrat@example.com",
+      method:"Nagad",
+      website:"Cafe Corner",
+      category:"Restaurant"
+    },
+    {
+      id:"WD-1003",
+      amount:7500,
+      status:"paid",
+      date:makeDemoDate(2,16),
+      customer:"Siam Ahmed",
+      email:"siam@example.com",
+      method:"bKash",
+      website:"Creative Studio",
+      category:"Agency"
+    },
+    {
+      id:"WD-1004",
+      amount:5500,
+      status:"paid",
+      date:makeDemoDate(3,5),
+      customer:"Mahi Islam",
+      email:"mahi@example.com",
+      method:"Bank Transfer",
+      website:"ShopEasy Store",
+      category:"E-commerce"
+    },
+    {
+      id:"WD-1005",
+      amount:6500,
+      status:"paid",
+      date:makeDemoDate(4,18),
+      customer:"Tanvir Hasan",
+      email:"tanvir@example.com",
+      method:"bKash",
+      website:"Personal Folio",
+      category:"Portfolio"
+    },
+    {
+      id:"WD-1006",
+      amount:3500,
+      status:"pending",
+      date:makeDemoDate(5,11),
+      customer:"Sadia Karim",
+      email:"sadia@example.com",
+      method:"Nagad",
+      website:"Starter Monthly",
+      category:"Monthly"
+    },
+    {
+      id:"WD-1007",
+      amount:8500,
+      status:"paid",
+      date:makeDemoDate(6,9),
+      customer:"Rafiul Islam",
+      email:"rafiul@example.com",
+      method:"bKash",
+      website:"Biz Launch",
+      category:"Business"
+    },
+    {
+      id:"WD-1008",
+      amount:6500,
+      status:"paid",
+      date:makeDemoDate(7,14),
+      customer:"Farhan Kabir",
+      email:"farhan@example.com",
+      method:"Card",
+      website:"Creative Studio",
+      category:"Agency"
+    },
+    {
+      id:"WD-1009",
+      amount:5000,
+      status:"cancelled",
+      date:makeDemoDate(8,4),
+      customer:"Rumana Akter",
+      email:"rumana@example.com",
+      method:"bKash",
+      website:"Cafe Corner",
+      category:"Restaurant"
+    },
+    {
+      id:"WD-1010",
+      amount:7500,
+      status:"paid",
+      date:makeDemoDate(8,20),
+      customer:"Imran Hossain",
+      email:"imran@example.com",
+      method:"Bank Transfer",
+      website:"ShopEasy Store",
+      category:"E-commerce"
+    },
+    {
+      id:"WD-1011",
+      amount:6500,
+      status:"paid",
+      date:makeDemoDate(9,2),
+      customer:"Afsana Rahman",
+      email:"afsana@example.com",
+      method:"bKash",
+      website:"Business Pro",
+      category:"Business"
+    },
+    {
+      id:"WD-1012",
+      amount:4500,
+      status:"pending",
+      date:makeDemoDate(9,7),
+      customer:"Nayeem Ahmed",
+      email:"nayeem@example.com",
+      method:"Nagad",
+      website:"Starter Monthly",
+      category:"Monthly"
+    },
+    {
+      id:"WD-1013",
+      amount:8500,
+      status:"paid",
+      date:makeDemoDate(9,13),
+      customer:"Sabrina Noor",
+      email:"sabrina@example.com",
+      method:"bKash",
+      website:"Creative Studio",
+      category:"Agency"
+    },
+    {
+      id:"WD-1014",
+      amount:5500,
+      status:"paid",
+      date:makeDemoDate(9,19),
+      customer:"Mehedi Hasan",
+      email:"mehedi@example.com",
+      method:"Bank Transfer",
+      website:"ShopEasy Store",
+      category:"E-commerce"
+    },
+    {
+      id:"WD-1015",
+      amount:3500,
+      status:"cancelled",
+      date:makeDemoDate(9,24),
+      customer:"Jannatul Ferdous",
+      email:"jannatul@example.com",
+      method:"Nagad",
+      website:"Starter Monthly",
+      category:"Monthly"
+    },
+    {
+      id:"WD-1016",
+      amount:6500,
+      status:"paid",
+      date:makeDemoDate(9,27),
+      customer:"Sakib Khan",
+      email:"sakib@example.com",
+      method:"bKash",
+      website:"Personal Folio",
+      category:"Portfolio"
+    }
+  ];
 
-      {
-        month:"October 2026",
-        revenue:842000,
-        orders:428,
-        customers:316,
-        growth:"+9.5%",
-        status:"Growing"
-      },
+  /* =======================================================
+     LOAD TRANSACTIONS
+  ======================================================= */
 
-      {
-        month:"September 2026",
-        revenue:769000,
-        orders:394,
-        customers:286,
-        growth:"+8.0%",
-        status:"Growing"
-      },
+  function loadTransactions(){
 
-      {
-        month:"August 2026",
-        revenue:712000,
-        orders:367,
-        customers:268,
-        growth:"+7.2%",
-        status:"Growing"
-      },
-
-      {
-        month:"July 2026",
-        revenue:664000,
-        orders:341,
-        customers:249,
-        growth:"+5.8%",
-        status:"Growing"
-      },
-
-      {
-        month:"June 2026",
-        revenue:628000,
-        orders:324,
-        customers:231,
-        growth:"+4.9%",
-        status:"Stable"
-      },
-
-      {
-        month:"May 2026",
-        revenue:599000,
-        orders:311,
-        customers:218,
-        growth:"+3.8%",
-        status:"Stable"
-      },
-
-      {
-        month:"April 2026",
-        revenue:577000,
-        orders:297,
-        customers:207,
-        growth:"+3.2%",
-        status:"Stable"
-      },
-
-      {
-        month:"March 2026",
-        revenue:559000,
-        orders:286,
-        customers:196,
-        growth:"+2.7%",
-        status:"Stable"
-      }
+    const keys = [
+      "websiteDealsTransactions",
+      "websiteDealsPaymentTransactions",
+      "websiteDealsOrders"
     ];
 
+    let foundAnyStorage = false;
+    let combined = [];
 
-    /* =========================
-       FORMATTERS
-    ========================= */
+    keys.forEach(key => {
 
-    function money(value){
-      return "৳" +
-        Number(value || 0).toLocaleString(
-          "en-BD"
+      const stored = localStorage.getItem(key);
+
+      if(stored !== null){
+        foundAnyStorage = true;
+      }
+
+      const parsed = readStorage(key, []);
+
+      safeArray(parsed).forEach(item => {
+        combined.push(item);
+      });
+
+    });
+
+    /*
+      Remove duplicate records using ID where possible.
+    */
+
+    const unique = [];
+    const seen = new Set();
+
+    combined.forEach((item, index) => {
+
+      const normalized = normalizeTransaction(item,index);
+
+      const key =
+        String(normalized.id || "").trim() ||
+        (
+          String(normalized.customer) +
+          "|" +
+          String(normalized.amount) +
+          "|" +
+          String(normalized.date)
         );
+
+      if(!seen.has(key)){
+        seen.add(key);
+        unique.push(normalized);
+      }
+
+    });
+
+    if(!foundAnyStorage || unique.length === 0){
+
+      return {
+        transactions:DEMO_TRANSACTIONS,
+        demo:true
+      };
+
     }
 
-    function number(value){
-      return Number(value || 0).toLocaleString(
-        "en-BD"
-      );
-    }
+    return {
+      transactions:unique,
+      demo:false
+    };
+  }
 
-    function percentChange(current, previous){
+  let DATA = loadTransactions();
 
-      if(!previous){
-        return 0;
+  /* =======================================================
+     OTHER LOCAL DATA
+  ======================================================= */
+
+  const websites = safeArray(
+    readStorage("websiteDealsAdminWebsites", [])
+  );
+
+  const categories = safeArray(
+    readStorage("websiteDealsCategories", [])
+  );
+
+  /* =======================================================
+     DATE STATE
+  ======================================================= */
+
+  const now = new Date();
+
+  let selectedMonth = now.getMonth();
+  let selectedYear = now.getFullYear();
+
+  /* =======================================================
+     POPULATE SELECTS
+  ======================================================= */
+
+  function populateYears(){
+
+    const yearSelect = $("#yearSelect");
+
+    const transactionYears = DATA.transactions
+      .filter(t => t.date)
+      .map(t => t.date.getFullYear());
+
+    const years = new Set([
+      now.getFullYear(),
+      now.getFullYear() - 1,
+      now.getFullYear() - 2,
+      ...transactionYears
+    ]);
+
+    yearSelect.innerHTML = [...years]
+      .sort((a,b) => b-a)
+      .map(year =>
+        `<option value="${year}">${year}</option>`
+      )
+      .join("");
+
+    yearSelect.value = String(selectedYear);
+  }
+
+  function populateMonths(){
+
+    const monthSelect = $("#monthSelect");
+
+    monthSelect.innerHTML = MONTHS
+      .map((month,index) =>
+        `<option value="${index}">${month}</option>`
+      )
+      .join("");
+
+    monthSelect.value = String(selectedMonth);
+  }
+
+  populateYears();
+  populateMonths();
+
+  /* =======================================================
+     PERIOD HELPERS
+  ======================================================= */
+
+  function getMonthTransactions(year, month){
+
+    return DATA.transactions.filter(transaction => {
+
+      if(!transaction.date){
+        return false;
       }
 
       return (
-        ((current - previous) / previous) * 100
+        transaction.date.getFullYear() === Number(year) &&
+        transaction.date.getMonth() === Number(month)
       );
+
+    });
+
+  }
+
+  function getYearTransactions(year){
+
+    return DATA.transactions.filter(transaction => {
+
+      if(!transaction.date){
+        return false;
+      }
+
+      return transaction.date.getFullYear() === Number(year);
+
+    });
+
+  }
+
+  function getPreviousPeriod(year, month){
+
+    if(month === 0){
+      return {
+        year:year - 1,
+        month:11
+      };
     }
 
+    return {
+      year,
+      month:month - 1
+    };
 
-    /* =========================
-       TOAST
-    ========================= */
+  }
 
-    let toastTimer;
+  function getYearAgoPeriod(year, month){
 
-    function showToast(message){
+    return {
+      year:year - 1,
+      month
+    };
 
-      const toast =
-        document.getElementById("toast");
+  }
 
-      const toastMessage =
-        document.getElementById("toastMessage");
+  /* =======================================================
+     STATS
+  ======================================================= */
 
-      toastMessage.textContent = message;
+  function getStats(transactions){
 
-      toast.classList.add("show");
+    const totalRevenue = transactions
+      .filter(t => t.status === "paid")
+      .reduce((sum,t) => sum + t.amount,0);
 
-      clearTimeout(toastTimer);
+    const paid = transactions
+      .filter(t => t.status === "paid");
 
-      toastTimer =
-        setTimeout(() => {
-          toast.classList.remove("show");
-        }, 2500);
+    const pending = transactions
+      .filter(t => t.status === "pending")
+      .length;
+
+    const cancelled = transactions
+      .filter(t => t.status === "cancelled")
+      .length;
+
+    const refunded = transactions
+      .filter(t => t.status === "refunded");
+
+    const average =
+      paid.length
+        ? totalRevenue / paid.length
+        : 0;
+
+    return {
+      transactions:transactions.length,
+      revenue:totalRevenue,
+      orders:transactions.length,
+      paid:paid.length,
+      pending,
+      cancelled,
+      refunded:refunded.length,
+      average
+    };
+
+  }
+
+  /* =======================================================
+     DELTA
+  ======================================================= */
+
+  function percentageChange(current, previous){
+
+    if(previous === 0){
+
+      if(current === 0){
+        return 0;
+      }
+
+      return null;
     }
 
+    return ((current - previous) / previous) * 100;
+  }
 
-    /* =========================
-       KPI RENDER
-    ========================= */
+  function setDelta(elementId, current, previous){
 
-    function renderKpis(data){
+    const element = $("#" + elementId);
 
-      const revenueGrowth =
-        percentChange(
-          data.revenue,
-          data.previousRevenue
-        );
+    const delta = percentageChange(current,previous);
 
-      const ordersGrowth =
-        percentChange(
-          data.orders,
-          data.previousOrders
-        );
+    element.classList.remove(
+      "up",
+      "down",
+      "neutral"
+    );
 
-      const customerGrowth =
-        percentChange(
-          data.customers,
-          data.previousCustomers
-        );
+    if(delta === null){
 
-      const currentAov =
-        data.orders
-          ? data.revenue / data.orders
-          : 0;
+      element.textContent = "New";
 
-      const previousAov =
-        data.previousOrders
-          ? data.previousRevenue / data.previousOrders
-          : 0;
+      element.classList.add("up");
 
-      const aovGrowth =
-        percentChange(
-          currentAov,
-          previousAov
-        );
+      return;
 
-
-      document.getElementById(
-        "monthlyRevenue"
-      ).textContent = money(data.revenue);
-
-      document.getElementById(
-        "monthlyOrders"
-      ).textContent = number(data.orders);
-
-      document.getElementById(
-        "newCustomers"
-      ).textContent = number(data.customers);
-
-      document.getElementById(
-        "averageOrder"
-      ).textContent = money(
-        Math.round(currentAov)
-      );
-
-
-      setGrowth(
-        "revenueGrowth",
-        revenueGrowth
-      );
-
-      setGrowth(
-        "ordersGrowth",
-        ordersGrowth
-      );
-
-      setGrowth(
-        "customerGrowth",
-        customerGrowth
-      );
-
-      setGrowth(
-        "aovGrowth",
-        aovGrowth
-      );
     }
 
+    if(delta > 0){
 
-    function setGrowth(id,value){
+      element.textContent =
+        "+" + Math.abs(delta).toFixed(1) + "%";
 
-      const el =
-        document.getElementById(id);
+      element.classList.add("up");
 
-      const formatted =
-        (value >= 0 ? "+" : "") +
-        value.toFixed(1) +
-        "%";
+      return;
+    }
 
-      el.textContent = formatted;
+    if(delta < 0){
 
-      el.classList.remove(
-        "trend-up",
-        "trend-down"
+      element.textContent =
+        "-" + Math.abs(delta).toFixed(1) + "%";
+
+      element.classList.add("down");
+
+      return;
+    }
+
+    element.textContent = "0.0%";
+    element.classList.add("neutral");
+  }
+
+  /* =======================================================
+     RENDER HERO
+  ======================================================= */
+
+  function renderHero(){
+
+    const label =
+      MONTHS[selectedMonth] +
+      " " +
+      selectedYear;
+
+    $("#heroMonth").textContent = label;
+
+    $("#overviewSub").textContent =
+      "Performance for " + label;
+
+    $("#snapshotYear").textContent =
+      selectedYear + " marketplace summary";
+
+    $("#heroStatus").textContent =
+      DATA.demo
+        ? "Demo Data Preview"
+        : "Live Local Data";
+
+  }
+
+  /* =======================================================
+     RENDER KPI
+  ======================================================= */
+
+  function renderKPI(){
+
+    const currentTransactions =
+      getMonthTransactions(
+        selectedYear,
+        selectedMonth
       );
 
-      el.classList.add(
-        value >= 0
-          ? "trend-up"
-          : "trend-down"
+    const currentStats =
+      getStats(currentTransactions);
+
+    const compareMode =
+      $("#compareSelect").value;
+
+    const reference =
+      compareMode === "yearAgo"
+        ? getYearAgoPeriod(selectedYear,selectedMonth)
+        : getPreviousPeriod(selectedYear,selectedMonth);
+
+    const referenceTransactions =
+      getMonthTransactions(
+        reference.year,
+        reference.month
       );
-    }
 
+    const referenceStats =
+      getStats(referenceTransactions);
 
-    /* =========================
-       CATEGORY RENDER
-    ========================= */
+    $("#kpiRevenue").textContent =
+      formatMoney(currentStats.revenue);
 
-    function renderCategories(data){
+    $("#kpiOrders").textContent =
+      formatNumber(currentStats.orders);
 
-      const container =
-        document.getElementById(
-          "categoryMetrics"
+    $("#kpiPaid").textContent =
+      formatNumber(currentStats.paid);
+
+    $("#kpiPending").textContent =
+      formatNumber(currentStats.pending);
+
+    $("#kpiCancelled").textContent =
+      formatNumber(currentStats.cancelled);
+
+    $("#kpiAverage").textContent =
+      formatMoney(currentStats.average);
+
+    const paidRate =
+      currentStats.orders
+        ? (currentStats.paid / currentStats.orders) * 100
+        : 0;
+
+    $("#paidRate").textContent =
+      paidRate.toFixed(1) + "%";
+
+    setDelta(
+      "revenueDelta",
+      currentStats.revenue,
+      referenceStats.revenue
+    );
+
+    setDelta(
+      "ordersDelta",
+      currentStats.orders,
+      referenceStats.orders
+    );
+
+    const compareLabel =
+      compareMode === "yearAgo"
+        ? MONTHS[selectedMonth] +
+          " " +
+          (selectedYear - 1)
+        : (
+          getPreviousPeriod(
+            selectedYear,
+            selectedMonth
+          )
         );
 
-      container.innerHTML = "";
+    if(compareMode === "yearAgo"){
 
-      data.categories.forEach(item => {
+      $("#comparisonSub").textContent =
+        "Current month compared with " +
+        MONTHS[selectedMonth] +
+        " " +
+        (selectedYear - 1);
 
-        const row =
-          document.createElement("div");
+    }else{
 
-        row.className = "metric-row";
+      const p = getPreviousPeriod(
+        selectedYear,
+        selectedMonth
+      );
 
-        row.innerHTML = `
-          <div class="metric-info">
+      $("#comparisonSub").textContent =
+        "Current month compared with " +
+        MONTHS[p.month] +
+        " " +
+        p.year;
 
-            <div class="metric-title">
-              <span>${item.name}</span>
-              <span>${item.percent}%</span>
-            </div>
-
-            <div class="progress">
-              <div
-                class="progress-bar"
-                style="width:${item.percent}%"
-              ></div>
-            </div>
-
-          </div>
-
-          <div class="metric-value">
-            ${money(item.value)}
-          </div>
-        `;
-
-        container.appendChild(row);
-      });
     }
 
+    $("#compareCurrentLabel").textContent =
+      MONTHS[selectedMonth] +
+      " " +
+      selectedYear;
 
-    /* =========================
-       PAYMENT RENDER
-    ========================= */
+    $("#comparePreviousLabel").textContent =
+      compareMode === "yearAgo"
+        ? MONTHS[selectedMonth] +
+          " " +
+          (selectedYear - 1)
+        : (() => {
 
-    function renderPayments(data){
+          const p = getPreviousPeriod(
+            selectedYear,
+            selectedMonth
+          );
 
-      const container =
-        document.getElementById(
-          "paymentList"
-        );
+          return MONTHS[p.month] +
+            " " +
+            p.year;
 
-      container.innerHTML = "";
+        })();
 
-      data.payments.forEach(item => {
+    $("#compareCurrentRevenue").textContent =
+      formatMoney(currentStats.revenue);
 
-        const row =
-          document.createElement("div");
+    $("#comparePreviousRevenue").textContent =
+      formatMoney(referenceStats.revenue);
 
-        row.className = "payment-row";
+    const revenueDelta =
+      percentageChange(
+        currentStats.revenue,
+        referenceStats.revenue
+      );
 
-        const icon =
-          item.name === "bKash"
-            ? "৳"
-            : item.name === "Nagad"
-              ? "N"
-              : item.name === "Bank Transfer"
-                ? "⌁"
-                : "▣";
+    const revenueChange =
+      $("#compareRevenueChange");
 
-        row.innerHTML = `
+    revenueChange.classList.remove(
+      "up",
+      "down",
+      "neutral"
+    );
 
-          <div class="payment-icon">
-            ${icon}
-          </div>
+    if(revenueDelta === null){
 
-          <div class="payment-info">
+      revenueChange.textContent =
+        "No reference revenue";
 
-            <div class="payment-name">
-              ${item.name}
-            </div>
+      revenueChange.classList.add("neutral");
 
-            <div class="payment-bar">
-              <div
-                class="payment-fill"
-                style="width:${item.percent}%"
-              ></div>
-            </div>
+    }else if(revenueDelta > 0){
 
-          </div>
+      revenueChange.textContent =
+        "+" +
+        revenueDelta.toFixed(1) +
+        "% change";
 
-          <div class="payment-amount">
+      revenueChange.classList.add("up");
 
-            ${money(item.amount)}
+    }else if(revenueDelta < 0){
 
-            <span class="payment-percent">
-              ${item.percent}%
-            </span>
+      revenueChange.textContent =
+        revenueDelta.toFixed(1) +
+        "% change";
 
-          </div>
+      revenueChange.classList.add("down");
 
-        `;
+    }else{
 
-        container.appendChild(row);
-      });
+      revenueChange.textContent =
+        "No change";
+
+      revenueChange.classList.add("neutral");
     }
 
+    $("#comparePreviousText").textContent =
+      referenceStats.orders +
+      " orders";
 
-    /* =========================
-       WEBSITE RENDER
-    ========================= */
+    $("#compareCurrentOrders").textContent =
+      formatNumber(currentStats.orders);
 
-    function renderWebsites(data){
+    $("#comparePreviousOrders").textContent =
+      formatNumber(referenceStats.orders);
 
-      const container =
-        document.getElementById(
-          "websiteList"
-        );
+    const ordersDelta =
+      percentageChange(
+        currentStats.orders,
+        referenceStats.orders
+      );
 
-      container.innerHTML = "";
+    const ordersChange =
+      $("#compareOrdersChange");
 
-      data.websites.forEach((item,index) => {
+    ordersChange.classList.remove(
+      "up",
+      "down",
+      "neutral"
+    );
 
-        const row =
-          document.createElement("div");
+    if(ordersDelta === null){
 
-        row.className = "website-item";
+      ordersChange.textContent =
+        "New activity";
 
-        const initial =
-          item.name
-            .charAt(0)
-            .toUpperCase();
+      ordersChange.classList.add("up");
 
-        row.innerHTML = `
+    }else if(ordersDelta > 0){
 
-          <div class="website-thumb">
-            ${initial}
-          </div>
+      ordersChange.textContent =
+        "+" +
+        ordersDelta.toFixed(1) +
+        "% change";
 
-          <div class="website-info">
+      ordersChange.classList.add("up");
 
-            <div class="website-name">
-              ${index + 1}. ${item.name}
-            </div>
+    }else if(ordersDelta < 0){
 
-            <div class="website-category">
-              ${item.category}
-            </div>
+      ordersChange.textContent =
+        ordersDelta.toFixed(1) +
+        "% change";
 
-          </div>
+      ordersChange.classList.add("down");
 
-          <div class="website-sales">
+    }else{
 
-            ${money(item.revenue)}
+      ordersChange.textContent =
+        "No change";
 
-            <small>
-              ${item.sales} sales
-            </small>
-
-          </div>
-
-        `;
-
-        container.appendChild(row);
-      });
+      ordersChange.classList.add("neutral");
     }
 
+  }
 
-    /* =========================
-       SUMMARY RENDER
-    ========================= */
+  /* =======================================================
+     ANNUAL SNAPSHOT
+  ======================================================= */
 
-    function renderSummary(data){
+  function renderSnapshot(){
 
-      const aov =
-        data.orders
-          ? data.revenue / data.orders
-          : 0;
+    const yearTransactions =
+      getYearTransactions(selectedYear);
 
-      const revenuePerCustomer =
-        data.customers
-          ? data.revenue / data.customers
-          : 0;
+    const stats =
+      getStats(yearTransactions);
 
-      const ordersPerCustomer =
-        data.customers
-          ? data.orders / data.customers
-          : 0;
+    $("#ytdRevenue").textContent =
+      formatMoney(stats.revenue);
 
+    $("#ytdOrders").textContent =
+      formatNumber(stats.orders);
 
-      const items = [
+    $("#ytdPaid").textContent =
+      formatNumber(stats.paid);
 
-        {
-          label:"Revenue / Customer",
-          value:money(
-            Math.round(
-              revenuePerCustomer
+    $("#ytdAverage").textContent =
+      formatMoney(stats.average);
+
+    const activeMonths =
+      new Set(
+        yearTransactions
+          .filter(t => t.date)
+          .map(t => t.date.getMonth())
+      ).size;
+
+    $("#activeMonths").textContent =
+      formatNumber(activeMonths);
+
+    $("#ytdTransactions").textContent =
+      formatNumber(stats.transactions);
+  }
+
+  /* =======================================================
+     SVG HELPERS
+  ======================================================= */
+
+  function clearSVG(svg){
+    svg.innerHTML = "";
+  }
+
+  function svgText(x,y,text,className,anchor){
+
+    const safe =
+      String(text)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;");
+
+    return `
+      <text
+        x="${x}"
+        y="${y}"
+        class="${className || ""}"
+        text-anchor="${anchor || "start"}"
+      >${safe}</text>
+    `;
+  }
+
+  /* =======================================================
+     REVENUE CHART
+  ======================================================= */
+
+  function renderRevenueChart(){
+
+    const svg = $("#revenueChart");
+
+    clearSVG(svg);
+
+    const width = 1000;
+    const height = 280;
+
+    const left = 55;
+    const right = 20;
+    const top = 22;
+    const bottom = 42;
+
+    const chartWidth =
+      width - left - right;
+
+    const chartHeight =
+      height - top - bottom;
+
+    const monthlyValues =
+      Array.from({length:12},(_,month) => {
+
+        const stats =
+          getStats(
+            getMonthTransactions(
+              selectedYear,
+              month
             )
-          ),
-          note:"Average customer value"
-        },
+          );
 
-        {
-          label:"Orders / Customer",
-          value:ordersPerCustomer.toFixed(1),
-          note:"Average order frequency"
-        },
-
-        {
-          label:"Average Order",
-          value:money(
-            Math.round(aov)
-          ),
-          note:"Average transaction value"
-        },
-
-        {
-          label:"Best Category",
-          value:data.categories[0]
-            ? data.categories[0].name
-            : "—",
-          note:"By reported revenue"
-        },
-
-        {
-          label:"Top Payment",
-          value:data.payments[0]
-            ? data.payments[0].name
-            : "—",
-          note:"By transaction volume"
-        },
-
-        {
-          label:"Top Website",
-          value:data.websites[0]
-            ? data.websites[0].name
-            : "—",
-          note:"By monthly sales"
-        }
-
-      ];
-
-
-      const container =
-        document.getElementById(
-          "summaryGrid"
-        );
-
-      container.innerHTML = "";
-
-      items.forEach(item => {
-
-        const box =
-          document.createElement("div");
-
-        box.className = "summary-box";
-
-        box.innerHTML = `
-
-          <div class="summary-label">
-            ${item.label}
-          </div>
-
-          <div class="summary-value">
-            ${item.value}
-          </div>
-
-          <div class="summary-note">
-            ${item.note}
-          </div>
-
-        `;
-
-        container.appendChild(box);
+        return stats.revenue;
       });
+
+    const max =
+      Math.max(...monthlyValues,1);
+
+    let markup = "";
+
+    const gridCount = 4;
+
+    for(let i=0;i<=gridCount;i++){
+
+      const ratio = i / gridCount;
+
+      const y =
+        top +
+        chartHeight -
+        ratio * chartHeight;
+
+      const value =
+        max * ratio;
+
+      markup += `
+        <line
+          x1="${left}"
+          y1="${y}"
+          x2="${width-right}"
+          y2="${y}"
+          class="chart-grid"
+        />
+      `;
+
+      markup += svgText(
+        left - 9,
+        y + 3,
+        formatMoney(value),
+        "chart-label",
+        "end"
+      );
     }
 
+    const points = [];
 
-    /* =========================
-       SVG CHART
-    ========================= */
+    monthlyValues.forEach((value,month) => {
 
-    function renderChart(data){
+      const x =
+        left +
+        (month / 11) *
+        chartWidth;
 
-      const svg =
-        document.getElementById(
-          "trendChart"
-        );
+      const y =
+        top +
+        chartHeight -
+        (value / max) *
+        chartHeight;
 
-      const revenue =
-        data.dailyRevenue || [];
+      points.push({x,y,value,month});
 
-      const orders =
-        data.dailyOrders || [];
+    });
 
-      if(!revenue.length){
-        svg.innerHTML = "";
-        return;
-      }
+    if(points.length){
 
+      const areaPoints = [
+        `${points[0].x},${top+chartHeight}`,
+        ...points.map(p => `${p.x},${p.y}`),
+        `${points[points.length-1].x},${top+chartHeight}`
+      ].join(" ");
 
-      const width = 1000;
-      const height = 300;
+      markup += `
+        <polygon
+          points="${areaPoints}"
+          class="chart-area"
+        />
+      `;
 
-      const left = 55;
-      const right = 20;
-      const top = 20;
-      const bottom = 35;
+      const linePoints =
+        points
+          .map(p => `${p.x},${p.y}`)
+          .join(" ");
 
-      const chartWidth =
-        width - left - right;
+      markup += `
+        <polyline
+          points="${linePoints}"
+          class="chart-line"
+        />
+      `;
 
-      const chartHeight =
-        height - top - bottom;
+      points.forEach((point,index) => {
 
-
-      const maxRevenue =
-        Math.max(...revenue) * 1.15;
-
-      const maxOrders =
-        Math.max(...orders) * 1.15;
-
-
-      function x(index){
-        if(revenue.length === 1){
-          return left;
-        }
-
-        return (
-          left +
-          (
-            index /
-            (revenue.length - 1)
-          ) *
-          chartWidth
-        );
-      }
-
-
-      function yRevenue(value){
-        return (
-          top +
-          chartHeight -
-          (
-            value /
-            maxRevenue
-          ) *
-          chartHeight
-        );
-      }
-
-
-      function yOrders(value){
-        return (
-          top +
-          chartHeight -
-          (
-            value /
-            maxOrders
-          ) *
-          chartHeight
-        );
-      }
-
-
-      let html = "";
-
-
-      /* Grid */
-
-      for(let i=0;i<=4;i++){
-
-        const y =
-          top +
-          (chartHeight / 4) * i;
-
-        html += `
-          <line
-            x1="${left}"
-            y1="${y}"
-            x2="${width-right}"
-            y2="${y}"
-            class="chart-grid-line"
+        markup += `
+          <circle
+            cx="${point.x}"
+            cy="${point.y}"
+            r="${index === selectedMonth ? 5 : 3.5}"
+            class="chart-dot"
           />
         `;
 
-        const value =
-          Math.round(
-            maxRevenue -
-            (maxRevenue / 4) * i
-          );
+      });
+    }
 
-        html += `
-          <text
-            x="4"
-            y="${y + 4}"
-            class="chart-label"
-          >
-            ${formatShortMoney(value)}
-          </text>
-        `;
+    monthlyValues.forEach((value,month) => {
+
+      const x =
+        left +
+        (month / 11) *
+        chartWidth;
+
+      markup += svgText(
+        x,
+        height - 13,
+        SHORT_MONTHS[month],
+        "chart-label",
+        "middle"
+      );
+
+      if(value > 0){
+
+        const point =
+          points[month];
+
+        markup += svgText(
+          point.x,
+          Math.max(
+            top + 11,
+            point.y - 10
+          ),
+          formatMoney(value),
+          "chart-value",
+          "middle"
+        );
+
       }
 
+    });
 
-      /* X labels */
+    markup += `
+      <line
+        x1="${left}"
+        y1="${top+chartHeight}"
+        x2="${width-right}"
+        y2="${top+chartHeight}"
+        class="chart-axis"
+      />
+    `;
 
-      const labelIndexes = [
-        0,
-        Math.floor(
-          (revenue.length - 1) * .2
-        ),
-        Math.floor(
-          (revenue.length - 1) * .4
-        ),
-        Math.floor(
-          (revenue.length - 1) * .6
-        ),
-        Math.floor(
-          (revenue.length - 1) * .8
-        ),
-        revenue.length - 1
-      ];
+    svg.innerHTML = markup;
 
-      labelIndexes.forEach(index => {
+  }
 
-        const day = index + 1;
+  /* =======================================================
+     ORDERS CHART
+  ======================================================= */
 
-        html += `
-          <text
-            x="${x(index)}"
-            y="${height - 8}"
-            text-anchor="middle"
-            class="chart-label"
-          >
-            ${day}
-          </text>
-        `;
-      });
+  function renderOrdersChart(){
 
+    const svg = $("#ordersChart");
 
-      /* Revenue path */
+    clearSVG(svg);
 
-      let revenuePath = "";
+    const width = 1000;
+    const height = 280;
 
-      revenue.forEach((value,index) => {
+    const left = 50;
+    const right = 20;
+    const top = 22;
+    const bottom = 42;
 
-        revenuePath +=
-          `${index === 0 ? "M" : "L"}`
-          + x(index)
-          + " "
-          + yRevenue(value)
-          + " ";
+    const chartWidth =
+      width - left - right;
+
+    const chartHeight =
+      height - top - bottom;
+
+    const monthlyValues =
+      Array.from({length:12},(_,month) => {
+
+        return getMonthTransactions(
+          selectedYear,
+          month
+        ).length;
 
       });
 
+    const max =
+      Math.max(...monthlyValues,1);
 
-      /* Revenue area */
+    let markup = "";
 
-      const areaPath =
-        revenuePath +
-        `L ${x(revenue.length - 1)} ${top + chartHeight}`
-        + ` L ${x(0)} ${top + chartHeight} Z`;
+    const gridCount = 4;
 
+    for(let i=0;i<=gridCount;i++){
 
-      html += `
-        <path
-          d="${areaPath}"
-          class="revenue-area"
+      const ratio = i / gridCount;
+
+      const y =
+        top +
+        chartHeight -
+        ratio * chartHeight;
+
+      const value =
+        max * ratio;
+
+      markup += `
+        <line
+          x1="${left}"
+          y1="${y}"
+          x2="${width-right}"
+          y2="${y}"
+          class="chart-grid"
         />
       `;
 
-      html += `
-        <path
-          d="${revenuePath}"
-          class="revenue-line"
+      markup += svgText(
+        left - 9,
+        y + 3,
+        Math.round(value),
+        "chart-label",
+        "end"
+      );
+    }
+
+    const slot =
+      chartWidth / 12;
+
+    monthlyValues.forEach((value,month) => {
+
+      const barWidth =
+        Math.min(46,slot * .58);
+
+      const x =
+        left +
+        month * slot +
+        (slot-barWidth)/2;
+
+      const barHeight =
+        (value / max) *
+        chartHeight;
+
+      const y =
+        top +
+        chartHeight -
+        barHeight;
+
+      markup += `
+        <rect
+          x="${x}"
+          y="${y}"
+          width="${barWidth}"
+          height="${Math.max(barHeight,0)}"
+          rx="7"
+          class="bar"
         />
       `;
 
+      markup += svgText(
+        x + barWidth/2,
+        height - 13,
+        SHORT_MONTHS[month],
+        "chart-label",
+        "middle"
+      );
 
-      /* Orders path */
+      if(value > 0){
 
-      let ordersPath = "";
+        markup += svgText(
+          x + barWidth/2,
+          Math.max(top + 11,y - 8),
+          value,
+          "chart-value",
+          "middle"
+        );
+      }
 
-      orders.forEach((value,index) => {
+    });
 
-        ordersPath +=
-          `${index === 0 ? "M" : "L"}`
-          + x(index)
-          + " "
-          + yOrders(value)
-          + " ";
+    markup += `
+      <line
+        x1="${left}"
+        y1="${top+chartHeight}"
+        x2="${width-right}"
+        y2="${top+chartHeight}"
+        class="chart-axis"
+      />
+    `;
 
-      });
+    svg.innerHTML = markup;
 
+  }
 
-      html += `
-        <path
-          d="${ordersPath}"
-          class="orders-line"
-        />
-      `;
+  /* =======================================================
+     CATEGORY BREAKDOWN
+  ======================================================= */
 
+  function renderCategoryBreakdown(){
 
-      /* Points */
+    const container =
+      $("#categoryBreakdown");
 
-      revenue.forEach((value,index) => {
+    const transactions =
+      getMonthTransactions(
+        selectedYear,
+        selectedMonth
+      ).filter(t => t.status === "paid");
 
-        if(
-          index === revenue.length - 1 ||
-          index === 0 ||
-          index % 5 === 0
-        ){
+    const map = {};
 
-          html += `
-            <circle
-              cx="${x(index)}"
-              cy="${yRevenue(value)}"
-              r="4"
-              class="chart-point"
-            />
+    transactions.forEach(t => {
+
+      const category =
+        String(
+          t.category ||
+          "Uncategorized"
+        ).trim();
+
+      map[category] =
+        (map[category] || 0) +
+        t.amount;
+
+    });
+
+    const entries =
+      Object.entries(map)
+        .sort((a,b) => b[1] - a[1]);
+
+    if(!entries.length){
+
+      container.innerHTML =
+        `<div class="empty">No paid category data for this month.</div>`;
+
+      return;
+    }
+
+    const total =
+      entries.reduce(
+        (sum,item) => sum + item[1],
+        0
+      );
+
+    container.innerHTML =
+      entries
+        .slice(0,8)
+        .map(([name,amount]) => {
+
+          const percentage =
+            total
+              ? (amount / total) * 100
+              : 0;
+
+          return `
+            <div class="break-row">
+
+              <div class="break-main">
+
+                <div class="break-top">
+
+                  <span class="break-name">
+                    ${escapeHTML(name)}
+                  </span>
+
+                  <span class="break-amount">
+                    ${formatMoney(amount)}
+                  </span>
+
+                </div>
+
+                <div class="progress">
+                  <span
+                    style="width:${Math.min(100,percentage)}%"
+                  ></span>
+                </div>
+
+              </div>
+
+              <div class="break-percent">
+                ${percentage.toFixed(1)}%
+              </div>
+
+            </div>
           `;
-        }
 
-      });
+        })
+        .join("");
 
+  }
 
-      orders.forEach((value,index) => {
+  /* =======================================================
+     PAYMENT BREAKDOWN
+  ======================================================= */
 
-        if(
-          index === orders.length - 1 ||
-          index === 0 ||
-          index % 5 === 0
-        ){
+  function renderPaymentBreakdown(){
 
-          html += `
-            <circle
-              cx="${x(index)}"
-              cy="${yOrders(value)}"
-              r="3.5"
-              class="orders-point"
-            />
+    const container =
+      $("#paymentBreakdown");
+
+    const transactions =
+      getMonthTransactions(
+        selectedYear,
+        selectedMonth
+      ).filter(t => t.status === "paid");
+
+    const map = {};
+
+    transactions.forEach(t => {
+
+      const method =
+        String(
+          t.method ||
+          "Unknown"
+        ).trim();
+
+      map[method] =
+        (map[method] || 0) +
+        t.amount;
+
+    });
+
+    const entries =
+      Object.entries(map)
+        .sort((a,b) => b[1] - a[1]);
+
+    if(!entries.length){
+
+      container.innerHTML =
+        `<div class="empty">No paid payment data for this month.</div>`;
+
+      return;
+    }
+
+    const total =
+      entries.reduce(
+        (sum,item) => sum + item[1],
+        0
+      );
+
+    container.innerHTML =
+      entries
+        .slice(0,8)
+        .map(([name,amount]) => {
+
+          const percentage =
+            total
+              ? (amount / total) * 100
+              : 0;
+
+          return `
+            <div class="break-row">
+
+              <div class="break-main">
+
+                <div class="break-top">
+
+                  <span class="break-name">
+                    ${escapeHTML(name)}
+                  </span>
+
+                  <span class="break-amount">
+                    ${formatMoney(amount)}
+                  </span>
+
+                </div>
+
+                <div class="progress">
+                  <span
+                    style="width:${Math.min(100,percentage)}%"
+                  ></span>
+                </div>
+
+              </div>
+
+              <div class="break-percent">
+                ${percentage.toFixed(1)}%
+              </div>
+
+            </div>
           `;
-        }
+
+        })
+        .join("");
+
+  }
+
+  /* =======================================================
+     WEBSITE TABLE
+  ======================================================= */
+
+  function findWebsiteCategory(name){
+
+    const target =
+      String(name || "")
+        .trim()
+        .toLowerCase();
+
+    const match =
+      websites.find(site => {
+
+        const siteName =
+          String(
+            site.name ??
+            site.title ??
+            site.websiteName ??
+            ""
+          )
+          .trim()
+          .toLowerCase();
+
+        return siteName === target;
 
       });
 
+    if(match){
 
-      svg.innerHTML = html;
+      return (
+        match.category ??
+        match.categoryName ??
+        "Uncategorized"
+      );
+
     }
 
+    return null;
+  }
 
-    function formatShortMoney(value){
+  function renderWebsiteTable(){
 
-      if(value >= 100000){
+    const tbody =
+      $("#websiteTable");
 
-        return "৳" +
-          (
-            value / 100000
-          ).toFixed(1) +
-          "L";
+    const transactions =
+      getMonthTransactions(
+        selectedYear,
+        selectedMonth
+      );
+
+    const map = {};
+
+    transactions.forEach(t => {
+
+      const key =
+        String(t.website || "Website")
+          .trim();
+
+      if(!map[key]){
+
+        map[key] = {
+          website:key,
+          category:
+            t.category ||
+            findWebsiteCategory(key) ||
+            "Uncategorized",
+          orders:0,
+          paid:0,
+          revenue:0
+        };
+
       }
 
-      if(value >= 1000){
+      map[key].orders++;
 
-        return "৳" +
-          (
-            value / 1000
-          ).toFixed(0) +
-          "K";
+      if(t.status === "paid"){
+
+        map[key].paid++;
+        map[key].revenue += t.amount;
+
       }
 
-      return "৳" + value;
+    });
+
+    const rows =
+      Object.values(map)
+        .sort((a,b) => b.revenue - a.revenue);
+
+    if(!rows.length){
+
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="6">
+            <div class="empty">
+              No website sales recorded for this month.
+            </div>
+          </td>
+        </tr>
+      `;
+
+      return;
     }
 
+    tbody.innerHTML =
+      rows
+        .map(row => {
 
-    /* =========================
-       PERFORMANCE TABLE
-    ========================= */
+          const average =
+            row.paid
+              ? row.revenue / row.paid
+              : 0;
 
-    function renderPerformanceTable(){
+          const initial =
+            String(row.website)
+              .trim()
+              .charAt(0)
+              .toUpperCase() || "W";
 
-      const tbody =
-        document.getElementById(
-          "performanceTable"
-        );
+          return `
+            <tr>
 
-      tbody.innerHTML = "";
+              <td>
 
-      historicalData.forEach(item => {
+                <div class="website-cell">
 
-        const tr =
-          document.createElement("tr");
+                  <div class="website-thumb">
+                    ${escapeHTML(initial)}
+                  </div>
 
-        const aov =
-          item.orders
-            ? Math.round(
-                item.revenue /
-                item.orders
-              )
-            : 0;
+                  <div>
+                    <div class="website-name">
+                      ${escapeHTML(row.website)}
+                    </div>
 
-        tr.innerHTML = `
+                    <div class="website-category">
+                      ${escapeHTML(row.category)}
+                    </div>
+                  </div>
 
-          <td class="month-cell">
-            ${item.month}
-          </td>
+                </div>
 
-          <td>
-            ${money(item.revenue)}
-          </td>
+              </td>
 
-          <td>
-            ${number(item.orders)}
-          </td>
+              <td>
+                ${escapeHTML(row.category)}
+              </td>
 
-          <td>
-            ${number(item.customers)}
-          </td>
+              <td>
+                ${formatNumber(row.orders)}
+              </td>
 
-          <td>
-            ${money(aov)}
-          </td>
+              <td>
+                ${formatNumber(row.paid)}
+              </td>
 
-          <td class="positive">
-            ${item.growth}
-          </td>
+              <td class="money">
+                ${formatMoney(row.revenue)}
+              </td>
 
-          <td>
-            <span class="pill pill-green">
-              ${item.status}
-            </span>
-          </td>
+              <td class="money">
+                ${formatMoney(average)}
+              </td>
 
-        `;
+            </tr>
+          `;
 
-        tbody.appendChild(tr);
-      });
+        })
+        .join("");
+
+  }
+
+  /* =======================================================
+     TRANSACTION TABLE
+  ======================================================= */
+
+  function formatDate(date){
+
+    if(!date){
+      return "—";
     }
 
-
-    /* =========================
-       RENDER ALL
-    ========================= */
-
-    function renderReport(){
-
-      const select =
-        document.getElementById(
-          "monthSelect"
-        );
-
-      const selected =
-        select.value;
-
-      const data =
-        reportData[selected] ||
-        reportData["2026-10"];
-
-
-      renderKpis(data);
-      renderCategories(data);
-      renderPayments(data);
-      renderWebsites(data);
-      renderSummary(data);
-      renderChart(data);
-
-      renderPerformanceTable();
-    }
-
-
-    /* =========================
-       MONTH CHANGE
-    ========================= */
-
-    document
-      .getElementById("monthSelect")
-      .addEventListener(
-        "change",
-        () => {
-
-          renderReport();
-
-          const label =
-            document
-              .getElementById("monthSelect")
-              .selectedOptions[0]
-              .textContent;
-
-          showToast(
-            "Report loaded: " + label
-          );
-        }
-      );
-
-
-    /* =========================
-       REFRESH
-    ========================= */
-
-    document
-      .getElementById("refreshBtn")
-      .addEventListener(
-        "click",
-        () => {
-
-          renderReport();
-
-          showToast(
-            "Monthly report refreshed."
-          );
-        }
-      );
-
-
-    /* =========================
-       CSV EXPORT
-    ========================= */
-
-    document
-      .getElementById("exportBtn")
-      .addEventListener(
-        "click",
-        exportCSV
-      );
-
-
-    function exportCSV(){
-
-      const selected =
-        document.getElementById(
-          "monthSelect"
-        ).value;
-
-      const data =
-        reportData[selected] ||
-        reportData["2026-10"];
-
-
-      const monthLabel =
-        document
-          .getElementById(
-            "monthSelect"
-          )
-          .selectedOptions[0]
-          .textContent;
-
-
-      const rows = [
-
-        [
-          "Website Deals Monthly Report"
-        ],
-
-        [
-          "Period",
-          monthLabel
-        ],
-
-        [],
-
-        [
-          "Metric",
-          "Value"
-        ],
-
-        [
-          "Revenue",
-          data.revenue
-        ],
-
-        [
-          "Orders",
-          data.orders
-        ],
-
-        [
-          "New Customers",
-          data.customers
-        ],
-
-        [
-          "Average Order Value",
-          Math.round(
-            data.revenue /
-            data.orders
-          )
-        ],
-
-        [],
-
-        [
-          "Top Websites"
-        ],
-
-        [
-          "Website",
-          "Category",
-          "Sales",
-          "Revenue"
-        ]
-
-      ];
-
-
-      data.websites.forEach(item => {
-
-        rows.push([
-          item.name,
-          item.category,
-          item.sales,
-          item.revenue
-        ]);
-
-      });
-
-
-      rows.push([]);
-
-      rows.push([
-        "Payment Methods"
-      ]);
-
-      rows.push([
-        "Method",
-        "Amount",
-        "Percentage"
-      ]);
-
-
-      data.payments.forEach(item => {
-
-        rows.push([
-          item.name,
-          item.amount,
-          item.percent + "%"
-        ]);
-
-      });
-
-
-      rows.push([]);
-
-      rows.push([
-        "Categories"
-      ]);
-
-      rows.push([
-        "Category",
-        "Revenue",
-        "Share"
-      ]);
-
-
-      data.categories.forEach(item => {
-
-        rows.push([
-          item.name,
-          item.value,
-          item.percent + "%"
-        ]);
-
-      });
-
-
-      const csv =
-        rows
-          .map(row =>
-            row
-              .map(value =>
-                csvEscape(value)
-              )
-              .join(",")
-          )
-          .join("\n");
-
-
-      const blob =
-        new Blob(
-          ["\ufeff" + csv],
-          {
-            type:
-              "text/csv;charset=utf-8;"
-          }
-        );
-
-
-      const url =
-        URL.createObjectURL(blob);
-
-      const link =
-        document.createElement("a");
-
-      link.href = url;
-
-      link.download =
-        "website-deals-" +
-        selected +
-        "-monthly-report.csv";
-
-      document.body.appendChild(link);
-
-      link.click();
-
-      link.remove();
-
-      URL.revokeObjectURL(url);
-
-      showToast(
-        "CSV report exported successfully."
-      );
-    }
-
-
-    function csvEscape(value){
-
-      const stringValue =
-        String(value ?? "");
-
-      if(
-        stringValue.includes(",") ||
-        stringValue.includes('"') ||
-        stringValue.includes("\n")
-      ){
-
-        return '"' +
-          stringValue.replace(
-            /"/g,
-            '""'
-          ) +
-          '"';
-      }
-
-      return stringValue;
-    }
-
-
-    /* =========================
-       INITIAL LOAD
-    ========================= */
-
-    renderReport();
-
-
-    /* =========================
-       WINDOW RESIZE
-    ========================= */
-
-    window.addEventListener(
-      "resize",
-      () => {
-
-        const selected =
-          document.getElementById(
-            "monthSelect"
-          ).value;
-
-        const data =
-          reportData[selected] ||
-          reportData["2026-10"];
-
-        renderChart(data);
+    return date.toLocaleDateString(
+      "en-BD",
+      {
+        day:"2-digit",
+        month:"short",
+        year:"numeric"
       }
     );
 
-  </script>
+  }
+
+  function renderTransactionTable(){
+
+    const tbody =
+      $("#transactionTable");
+
+    const transactions =
+      getMonthTransactions(
+        selectedYear,
+        selectedMonth
+      )
+      .sort((a,b) => {
+
+        const aTime =
+          a.date
+            ? a.date.getTime()
+            : 0;
+
+        const bTime =
+          b.date
+            ? b.date.getTime()
+            : 0;
+
+        return bTime - aTime;
+
+      });
+
+    if(!transactions.length){
+
+      tbody.innerHTML = `
+        <tr>
+          <td colspan="7">
+            <div class="empty">
+              No transactions recorded for this month.
+            </div>
+          </td>
+        </tr>
+      `;
+
+      return;
+    }
+
+    tbody.innerHTML =
+      transactions
+        .map(transaction => {
+
+          const status =
+            ["paid","pending","cancelled","refunded"]
+              .includes(transaction.status)
+              ? transaction.status
+              : "unknown";
+
+          return `
+            <tr>
+
+              <td>
+                <strong>
+                  ${escapeHTML(transaction.id)}
+                </strong>
+              </td>
+
+              <td>
+                ${escapeHTML(
+                  formatDate(transaction.date)
+                )}
+              </td>
+
+              <td>
+                <strong>
+                  ${escapeHTML(transaction.customer)}
+                </strong>
+
+                ${
+                  transaction.email
+                    ? `
+                      <div style="
+                        color:#8a958f;
+                        font-size:9px;
+                        margin-top:2px;
+                      ">
+                        ${escapeHTML(transaction.email)}
+                      </div>
+                    `
+                    : ""
+                }
+              </td>
+
+              <td>
+                ${escapeHTML(transaction.website)}
+              </td>
+
+              <td>
+                ${escapeHTML(transaction.method)}
+              </td>
+
+              <td>
+                <span class="status ${status}">
+                  ${escapeHTML(transaction.status)}
+                </span>
+              </td>
+
+              <td class="money">
+                ${formatMoney(transaction.amount)}
+              </td>
+
+            </tr>
+          `;
+
+        })
+        .join("");
+
+  }
+
+  /* =======================================================
+     MAIN RENDER
+  ======================================================= */
+
+  function render(){
+
+    DATA = loadTransactions();
+
+    renderHero();
+    renderKPI();
+    renderSnapshot();
+    renderRevenueChart();
+    renderOrdersChart();
+    renderCategoryBreakdown();
+    renderPaymentBreakdown();
+    renderWebsiteTable();
+    renderTransactionTable();
+
+    $("#generatedAt").textContent =
+      new Date().toLocaleString(
+        "en-BD",
+        {
+          day:"2-digit",
+          month:"short",
+          year:"numeric",
+          hour:"2-digit",
+          minute:"2-digit"
+        }
+      );
+
+  }
+
+  /* =======================================================
+     TOAST
+  ======================================================= */
+
+  let toastTimer;
+
+  function showToast(message){
+
+    const toast =
+      $("#toast");
+
+    toast.textContent =
+      message;
+
+    toast.classList.add("show");
+
+    clearTimeout(toastTimer);
+
+    toastTimer =
+      setTimeout(() => {
+        toast.classList.remove("show");
+      },2600);
+
+  }
+
+  /* =======================================================
+     CSV EXPORT
+  ======================================================= */
+
+  function csvEscape(value){
+
+    const text =
+      String(value ?? "");
+
+    if(
+      text.includes(",") ||
+      text.includes('"') ||
+      text.includes("\n")
+    ){
+
+      return '"' +
+        text.replace(/"/g,'""') +
+        '"';
+
+    }
+
+    return text;
+  }
+
+  function exportCSV(){
+
+    const transactions =
+      getMonthTransactions(
+        selectedYear,
+        selectedMonth
+      );
+
+    if(!transactions.length){
+
+      showToast(
+        "No transactions available for this month."
+      );
+
+      return;
+    }
+
+    const headers = [
+      "Transaction ID",
+      "Date",
+      "Customer",
+      "Email",
+      "Website",
+      "Category",
+      "Payment Method",
+      "Status",
+      "Amount"
+    ];
+
+    const rows =
+      transactions.map(t => [
+
+        t.id,
+
+        t.date
+          ? t.date.toISOString()
+          : "",
+
+        t.customer,
+        t.email,
+        t.website,
+        t.category,
+        t.method,
+        t.status,
+        t.amount
+
+      ]);
+
+    const csv = [
+      headers,
+      ...rows
+    ]
+      .map(row =>
+        row.map(csvEscape).join(",")
+      )
+      .join("\n");
+
+    const blob =
+      new Blob(
+        [csv],
+        {
+          type:"text/csv;charset=utf-8;"
+        }
+      );
+
+    const url =
+      URL.createObjectURL(blob);
+
+    const link =
+      document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+      "website-deals-" +
+      MONTHS[selectedMonth]
+        .toLowerCase() +
+      "-" +
+      selectedYear +
+      "-report.csv";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+    URL.revokeObjectURL(url);
+
+    showToast(
+      "Monthly CSV report exported."
+    );
+
+  }
+
+  /* =======================================================
+     EVENTS
+  ======================================================= */
+
+  $("#monthSelect").addEventListener(
+    "change",
+    function(){
+      selectedMonth =
+        Number(this.value);
+    }
+  );
+
+  $("#yearSelect").addEventListener(
+    "change",
+    function(){
+      selectedYear =
+        Number(this.value);
+    }
+  );
+
+  $("#applyBtn").addEventListener(
+    "click",
+    function(){
+
+      selectedMonth =
+        Number($("#monthSelect").value);
+
+      selectedYear =
+        Number($("#yearSelect").value);
+
+      render();
+
+      showToast(
+        "Monthly report updated."
+      );
+    }
+  );
+
+  $("#resetBtn").addEventListener(
+    "click",
+    function(){
+
+      const current =
+        new Date();
+
+      selectedMonth =
+        current.getMonth();
+
+      selectedYear =
+        current.getFullYear();
+
+      $("#monthSelect").value =
+        String(selectedMonth);
+
+      $("#yearSelect").value =
+        String(selectedYear);
+
+      render();
+
+      showToast(
+        "Report reset to current month."
+      );
+
+    }
+  );
+
+  $("#refreshBtn").addEventListener(
+    "click",
+    function(){
+
+      DATA = loadTransactions();
+
+      render();
+
+      showToast(
+        "Report data refreshed."
+      );
+
+    }
+  );
+
+  $("#exportBtn").addEventListener(
+    "click",
+    exportCSV
+  );
+
+  $("#printBtn").addEventListener(
+    "click",
+    function(){
+      window.print();
+    }
+  );
+
+  $("#marketplaceBtn").addEventListener(
+    "click",
+    function(){
+      window.open(
+        "../index.html",
+        "_blank"
+      );
+    }
+  );
+
+  $("#logoutBtn").addEventListener(
+    "click",
+    function(){
+
+      sessionStorage.removeItem(
+        AUTH_KEY
+      );
+
+      window.location.href =
+        "login/";
+
+    }
+  );
+
+  /* =======================================================
+     MOBILE SIDEBAR
+  ======================================================= */
+
+  const sidebar =
+    $("#sidebar");
+
+  const overlay =
+    $("#overlay");
+
+  const mobileMenu =
+    $("#mobileMenu");
+
+  function openSidebar(){
+
+    sidebar.classList.add("open");
+    overlay.classList.add("show");
+
+  }
+
+  function closeSidebar(){
+
+    sidebar.classList.remove("open");
+    overlay.classList.remove("show");
+
+  }
+
+  mobileMenu.addEventListener(
+    "click",
+    openSidebar
+  );
+
+  overlay.addEventListener(
+    "click",
+    closeSidebar
+  );
+
+  document
+    .querySelectorAll(".nav-link")
+    .forEach(link => {
+
+      link.addEventListener(
+        "click",
+        closeSidebar
+      );
+
+    });
+
+  /* =======================================================
+     INITIAL RENDER
+  ======================================================= */
+
+  render();
+
+})();
+</script>
 
 </body>
 </html>
