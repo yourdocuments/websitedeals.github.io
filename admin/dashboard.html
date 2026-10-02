@@ -10,10 +10,15 @@
 
   <meta
     name="theme-color"
-    content="#07110c"
+    content="#08110d"
   >
 
-  <title>Dashboard | Website Deals</title>
+  <meta
+    name="description"
+    content="Website Deals Admin Dashboard"
+  >
+
+  <title>Dashboard | Website Deals Admin</title>
 
   <link
     rel="icon"
@@ -33,1196 +38,1133 @@
   >
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
     rel="stylesheet"
   >
 
   <style>
-    :root {
-      --green: #18a957;
-      --green-dark: #108344;
-      --green-soft: #eaf8f0;
+    :root{
+      --green:#18a957;
+      --green-dark:#108344;
+      --green-soft:#eaf9f0;
 
-      --dark: #07110c;
-      --dark-2: #0b1811;
-      --dark-3: #102219;
+      --black:#07100c;
+      --black-2:#0c1712;
+      --sidebar:#0a120e;
 
-      --white: #ffffff;
-      --surface: #f6f8f7;
-      --surface-2: #fbfcfb;
+      --text:#101713;
+      --muted:#718078;
 
-      --text: #111814;
-      --muted: #718078;
+      --white:#ffffff;
+      --surface:#f6f8f7;
+      --border:#e4eae7;
 
-      --border: #e4e9e6;
+      --danger:#dc3d4b;
+      --danger-soft:#fff0f1;
 
-      --orange: #f59e0b;
-      --blue: #3b82f6;
-      --red: #dc3545;
+      --warning:#d99000;
+      --warning-soft:#fff7df;
 
-      --shadow:
-        0 15px 45px rgba(7, 17, 12, 0.07);
+      --shadow:0 18px 50px rgba(8,30,18,.08);
 
-      --radius-xl: 24px;
-      --radius-lg: 18px;
-      --radius-md: 13px;
+      --radius:18px;
+      --radius-sm:12px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    body {
-      min-height: 100vh;
+    html{
+      scroll-behavior:smooth;
+    }
 
-      font-family: "Inter", sans-serif;
-
-      color: var(--text);
-
-      background: var(--surface);
+    body{
+      font-family:"DM Sans",sans-serif;
+      background:var(--surface);
+      color:var(--text);
+      min-height:100vh;
+      overflow-x:hidden;
     }
 
     button,
-    input {
-      font: inherit;
+    input,
+    select{
+      font:inherit;
     }
 
-    button {
-      cursor: pointer;
+    button{
+      cursor:pointer;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    a{
+      color:inherit;
+      text-decoration:none;
     }
 
-    /* =====================================
+    /* =========================
        APP
-    ====================================== */
+    ========================= */
 
-    .app {
-      min-height: 100vh;
-
-      display: flex;
+    .app{
+      min-height:100vh;
+      display:flex;
     }
 
-    /* =====================================
+    /* =========================
        SIDEBAR
-    ====================================== */
+    ========================= */
 
-    .sidebar {
-      position: fixed;
+    .sidebar{
+      width:270px;
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 20% 10%,rgba(24,169,87,.16),transparent 28%),
+        linear-gradient(180deg,#0b1510 0%,#07100c 100%);
+      color:#fff;
+      position:fixed;
+      left:0;
+      top:0;
+      bottom:0;
+      z-index:1000;
+      display:flex;
+      flex-direction:column;
+      border-right:1px solid rgba(255,255,255,.07);
+    }
 
-      left: 0;
-      top: 0;
-      bottom: 0;
+    .brand{
+      height:86px;
+      padding:20px 22px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
 
-      width: 260px;
+    .brand-logo{
+      width:42px;
+      height:42px;
+      border-radius:12px;
+      object-fit:contain;
+      background:#fff;
+      padding:5px;
+    }
 
-      display: flex;
-      flex-direction: column;
+    .brand-text{
+      min-width:0;
+    }
 
-      padding: 22px 15px;
+    .brand-name{
+      font-family:"Manrope",sans-serif;
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:-.5px;
+    }
 
-      color: #fff;
+    .brand-sub{
+      color:#8ea198;
+      font-size:11px;
+      margin-top:2px;
+    }
 
+    .sidebar-scroll{
+      flex:1;
+      overflow-y:auto;
+      padding:18px 13px;
+    }
+
+    .nav-label{
+      color:#607068;
+      text-transform:uppercase;
+      letter-spacing:1.4px;
+      font-size:10px;
+      font-weight:700;
+      padding:10px 12px 8px;
+    }
+
+    .nav{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+
+    .nav-item{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:12px 13px;
+      border-radius:11px;
+      color:#aebbb4;
+      transition:.2s ease;
+      font-size:14px;
+      font-weight:600;
+    }
+
+    .nav-item:hover{
+      color:#fff;
+      background:rgba(255,255,255,.055);
+    }
+
+    .nav-item.active{
+      color:#fff;
+      background:linear-gradient(
+        135deg,
+        rgba(24,169,87,.22),
+        rgba(24,169,87,.08)
+      );
+      box-shadow:
+        inset 3px 0 0 var(--green),
+        0 8px 20px rgba(0,0,0,.12);
+    }
+
+    .nav-icon{
+      width:20px;
+      text-align:center;
+      font-size:15px;
+      flex:none;
+    }
+
+    .nav-badge{
+      margin-left:auto;
+      min-width:22px;
+      height:22px;
+      padding:0 7px;
+      display:grid;
+      place-items:center;
+      border-radius:20px;
+      background:rgba(24,169,87,.15);
+      color:#8df0b4;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .sidebar-footer{
+      padding:14px;
+      border-top:1px solid rgba(255,255,255,.07);
+    }
+
+    .profile-mini{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:10px;
+      border-radius:14px;
+      background:rgba(255,255,255,.045);
+    }
+
+    .profile-avatar{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      background:linear-gradient(135deg,var(--green),#0f7540);
+      display:grid;
+      place-items:center;
+      font-weight:800;
+      color:#fff;
+      flex:none;
+    }
+
+    .profile-info{
+      min-width:0;
+      flex:1;
+    }
+
+    .profile-name{
+      color:#fff;
+      font-size:13px;
+      font-weight:700;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .profile-role{
+      color:#7f9087;
+      font-size:10px;
+      margin-top:2px;
+    }
+
+    .logout-small{
+      width:32px;
+      height:32px;
+      border:0;
+      border-radius:9px;
+      background:rgba(255,255,255,.05);
+      color:#94a39c;
+      transition:.2s;
+    }
+
+    .logout-small:hover{
+      color:#fff;
+      background:rgba(220,61,75,.18);
+    }
+
+    /* =========================
+       MOBILE OVERLAY
+    ========================= */
+
+    .sidebar-overlay{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.48);
+      z-index:900;
+      backdrop-filter:blur(3px);
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .main{
+      width:calc(100% - 270px);
+      margin-left:270px;
+      min-height:100vh;
+    }
+
+    /* =========================
+       TOP HEADER
+    ========================= */
+
+    .top-header{
+      height:86px;
+      background:rgba(255,255,255,.9);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--border);
+      position:sticky;
+      top:0;
+      z-index:700;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 32px;
+    }
+
+    .header-left{
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .mobile-menu{
+      display:none;
+      width:42px;
+      height:42px;
+      border:1px solid var(--border);
+      border-radius:12px;
+      background:#fff;
+      color:var(--text);
+      font-size:18px;
+    }
+
+    .page-heading h1{
+      font-family:"Manrope",sans-serif;
+      font-size:25px;
+      line-height:1.1;
+      letter-spacing:-1px;
+    }
+
+    .page-heading p{
+      color:var(--muted);
+      font-size:12px;
+      margin-top:5px;
+    }
+
+    .header-actions{
+      display:flex;
+      align-items:center;
+      gap:9px;
+    }
+
+    .header-btn{
+      height:40px;
+      padding:0 14px;
+      border-radius:11px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:#33413a;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      font-size:12px;
+      font-weight:700;
+      transition:.2s;
+    }
+
+    .header-btn:hover{
+      border-color:#c8d4ce;
+      transform:translateY(-1px);
+    }
+
+    .header-btn.primary{
+      color:#fff;
+      background:var(--black);
+      border-color:var(--black);
+    }
+
+    .header-btn.primary:hover{
+      background:#13231b;
+    }
+
+    /* =========================
+       CONTENT
+    ========================= */
+
+    .content{
+      padding:30px 32px 50px;
+      max-width:1600px;
+      margin:auto;
+    }
+
+    /* =========================
+       WELCOME
+    ========================= */
+
+    .welcome{
+      position:relative;
+      overflow:hidden;
+      border-radius:24px;
+      padding:28px 30px;
       background:
         radial-gradient(
-          circle at 100% 0%,
-          rgba(24,169,87,.18),
-          transparent 25%
+          circle at 80% 0%,
+          rgba(24,169,87,.20),
+          transparent 32%
         ),
         linear-gradient(
-          160deg,
-          #06100a,
-          #0a1710 60%,
-          #102219
-        );
-
-      z-index: 100;
-    }
-
-    .brand {
-      display: flex;
-
-      align-items: center;
-
-      gap: 11px;
-
-      padding: 4px 8px 25px;
-
-      border-bottom:
-        1px solid rgba(255,255,255,.07);
-    }
-
-    .brand img {
-      width: 42px;
-      height: 42px;
-
-      padding: 5px;
-
-      object-fit: contain;
-
-      background: #fff;
-
-      border-radius: 11px;
-    }
-
-    .brand strong {
-      display: block;
-
-      font-family: "Space Grotesk", sans-serif;
-
-      font-size: 17px;
-    }
-
-    .brand span {
-      display: block;
-
-      margin-top: 2px;
-
-      color: #7f9186;
-
-      font-size: 9px;
-      font-weight: 800;
-
-      letter-spacing: 1.2px;
-
-      text-transform: uppercase;
-    }
-
-    .nav {
-      padding-top: 22px;
-
-      display: flex;
-      flex-direction: column;
-
-      gap: 5px;
-    }
-
-    .nav-label {
-      padding: 0 12px 9px;
-
-      color: #65776c;
-
-      font-size: 9px;
-      font-weight: 800;
-
-      letter-spacing: 1.4px;
-
-      text-transform: uppercase;
-    }
-
-    .nav a {
-      min-height: 43px;
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 12px;
-
-      padding: 0 12px;
-
-      color: #9caaa1;
-
-      border-radius: 11px;
-
-      font-size: 12px;
-      font-weight: 600;
-
-      transition: .2s ease;
-    }
-
-    .nav a:hover {
-      color: #fff;
-
-      background: rgba(255,255,255,.05);
-    }
-
-    .nav a.active {
-      color: #fff;
-
-      background:
-        linear-gradient(
-          90deg,
-          rgba(24,169,87,.20),
-          rgba(24,169,87,.07)
-        );
-
-      box-shadow:
-        inset 3px 0 0 var(--green);
-    }
-
-    .nav-icon {
-      width: 24px;
-
-      text-align: center;
-
-      font-size: 15px;
-    }
-
-    .nav-badge {
-      margin-left: auto;
-
-      min-width: 21px;
-      height: 21px;
-
-      display: grid;
-      place-items: center;
-
-      padding: 0 6px;
-
-      color: #a8efc1;
-
-      background: rgba(24,169,87,.14);
-
-      border-radius: 20px;
-
-      font-size: 9px;
-      font-weight: 800;
-    }
-
-    .sidebar-bottom {
-      margin-top: auto;
-    }
-
-    .profile-mini {
-      padding: 13px;
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 10px;
-
-      background: rgba(255,255,255,.045);
-
-      border:
-        1px solid rgba(255,255,255,.06);
-
-      border-radius: 14px;
-    }
-
-    .avatar {
-      width: 35px;
-      height: 35px;
-
-      display: grid;
-      place-items: center;
-
-      flex-shrink: 0;
-
-      color: #fff;
-
-      background:
-        linear-gradient(
           135deg,
-          var(--green),
-          var(--green-dark)
+          #10231a 0%,
+          #09130e 100%
         );
-
-      border-radius: 10px;
-
-      font-size: 12px;
-      font-weight: 800;
+      color:#fff;
+      box-shadow:var(--shadow);
+      margin-bottom:22px;
     }
 
-    .profile-mini strong {
-      display: block;
-
-      color: #fff;
-
-      font-size: 11px;
+    .welcome::after{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      right:-90px;
+      bottom:-120px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:50%;
+      box-shadow:
+        0 0 0 35px rgba(255,255,255,.025),
+        0 0 0 70px rgba(255,255,255,.018);
     }
 
-    .profile-mini span {
-      display: block;
-
-      margin-top: 2px;
-
-      color: #718178;
-
-      font-size: 9px;
+    .welcome-content{
+      position:relative;
+      z-index:2;
+      max-width:720px;
     }
 
-    .logout-btn {
-      width: 100%;
-
-      margin-top: 9px;
-
-      height: 40px;
-
-      display: flex;
-      align-items: center;
-
-      gap: 10px;
-
-      padding: 0 12px;
-
-      color: #9aa79f;
-
-      background: transparent;
-
-      border: 0;
-
-      border-radius: 10px;
-
-      font-size: 11px;
-      font-weight: 700;
-
-      text-align: left;
+    .welcome-kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:1.5px;
+      color:#86e7ad;
+      font-weight:800;
+      margin-bottom:10px;
     }
 
-    .logout-btn:hover {
-      color: #ff9da6;
-
-      background: rgba(220,53,69,.08);
+    .live-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:#4be58b;
+      box-shadow:0 0 0 5px rgba(75,229,139,.1);
     }
 
-    /* =====================================
-       MAIN
-    ====================================== */
-
-    .main {
-      width: calc(100% - 260px);
-
-      margin-left: 260px;
-
-      min-height: 100vh;
+    .welcome h2{
+      font-family:"Manrope",sans-serif;
+      font-size:30px;
+      letter-spacing:-1.4px;
+      margin-bottom:7px;
     }
 
-    /* =====================================
-       HEADER
-    ====================================== */
-
-    .header {
-      height: 76px;
-
-      padding: 0 34px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      background: rgba(255,255,255,.88);
-
-      border-bottom: 1px solid var(--border);
-
-      position: sticky;
-
-      top: 0;
-
-      z-index: 50;
-
-      backdrop-filter: blur(15px);
+    .welcome p{
+      color:#aabbb2;
+      font-size:13px;
+      line-height:1.7;
+      max-width:620px;
     }
 
-    .header-left {
-      display: flex;
-
-      align-items: center;
-
-      gap: 15px;
-    }
-
-    .mobile-menu {
-      display: none;
-
-      width: 40px;
-      height: 40px;
-
-      border: 1px solid var(--border);
-
-      background: #fff;
-
-      border-radius: 11px;
-    }
-
-    .page-title h1 {
-      font-family: "Space Grotesk", sans-serif;
-
-      font-size: 21px;
-
-      letter-spacing: -.7px;
-    }
-
-    .page-title p {
-      margin-top: 3px;
-
-      color: var(--muted);
-
-      font-size: 10px;
-    }
-
-    .header-actions {
-      display: flex;
-
-      align-items: center;
-
-      gap: 9px;
-    }
-
-    .header-btn {
-      height: 38px;
-
-      padding: 0 13px;
-
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 7px;
-
-      color: #526057;
-
-      background: #fff;
-
-      border: 1px solid var(--border);
-
-      border-radius: 10px;
-
-      font-size: 10px;
-      font-weight: 700;
-    }
-
-    .header-btn:hover {
-      border-color: #cbd6cf;
-    }
-
-    .header-btn.primary {
-      color: #fff;
-
-      background: var(--green);
-
-      border-color: var(--green);
-    }
-
-    /* =====================================
-       CONTENT
-    ====================================== */
-
-    .content {
-      padding: 30px 34px 45px;
-    }
-
-    .welcome {
-      margin-bottom: 25px;
-    }
-
-    .welcome small {
-      color: var(--green-dark);
-
-      font-size: 10px;
-      font-weight: 800;
-
-      letter-spacing: 1.2px;
-
-      text-transform: uppercase;
-    }
-
-    .welcome h2 {
-      margin-top: 7px;
-
-      font-family: "Space Grotesk", sans-serif;
-
-      font-size: 30px;
-
-      letter-spacing: -1.3px;
-    }
-
-    .welcome p {
-      margin-top: 7px;
-
-      color: var(--muted);
-
-      font-size: 12px;
-    }
-
-    /* =====================================
+    /* =========================
        STATS
-    ====================================== */
+    ========================= */
 
-    .stats {
-      display: grid;
-
-      grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-
-      gap: 15px;
-
-      margin-bottom: 25px;
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:15px;
+      margin-bottom:22px;
     }
 
-    .stat-card {
-      position: relative;
-
-      padding: 20px;
-
-      background: #fff;
-
-      border: 1px solid var(--border);
-
-      border-radius: var(--radius-lg);
-
-      box-shadow: var(--shadow);
-
-      overflow: hidden;
+    .stat-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:17px;
+      padding:19px;
+      box-shadow:0 7px 24px rgba(10,30,20,.035);
+      transition:.2s;
     }
 
-    .stat-card::after {
-      content: "";
-
-      position: absolute;
-
-      width: 90px;
-      height: 90px;
-
-      right: -35px;
-      bottom: -40px;
-
-      background: var(--green-soft);
-
-      border-radius: 50%;
+    .stat-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 12px 30px rgba(10,30,20,.07);
     }
 
-    .stat-top {
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
+    .stat-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:17px;
     }
 
-    .stat-label {
-      color: var(--muted);
-
-      font-size: 10px;
-      font-weight: 700;
+    .stat-icon{
+      width:39px;
+      height:39px;
+      border-radius:11px;
+      display:grid;
+      place-items:center;
+      background:var(--green-soft);
+      color:var(--green-dark);
+      font-size:16px;
     }
 
-    .stat-icon {
-      width: 32px;
-      height: 32px;
-
-      display: grid;
-      place-items: center;
-
-      color: var(--green-dark);
-
-      background: var(--green-soft);
-
-      border-radius: 10px;
+    .stat-change{
+      font-size:10px;
+      font-weight:800;
+      color:var(--green-dark);
+      background:var(--green-soft);
+      padding:5px 7px;
+      border-radius:7px;
     }
 
-    .stat-number {
-      margin-top: 14px;
-
-      font-family: "Space Grotesk", sans-serif;
-
-      font-size: 27px;
-      font-weight: 700;
-
-      letter-spacing: -1px;
+    .stat-label{
+      color:var(--muted);
+      font-size:11px;
+      margin-bottom:5px;
     }
 
-    .stat-change {
-      margin-top: 7px;
-
-      color: var(--green-dark);
-
-      font-size: 9px;
-      font-weight: 700;
+    .stat-value{
+      font-family:"Manrope",sans-serif;
+      font-size:25px;
+      font-weight:800;
+      letter-spacing:-1px;
     }
 
-    /* =====================================
+    /* =========================
        GRID
-    ====================================== */
+    ========================= */
 
-    .dashboard-grid {
-      display: grid;
-
-      grid-template-columns:
-        minmax(0, 1.55fr)
-        minmax(300px, .85fr);
-
-      gap: 18px;
+    .dashboard-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.55fr) minmax(310px,.85fr);
+      gap:18px;
+      margin-bottom:18px;
     }
 
-    .card {
-      background: #fff;
-
-      border: 1px solid var(--border);
-
-      border-radius: var(--radius-lg);
-
-      box-shadow: var(--shadow);
-
-      overflow: hidden;
+    .panel{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 7px 24px rgba(10,30,20,.035);
     }
 
-    .card-head {
-      min-height: 67px;
-
-      padding: 0 20px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      border-bottom: 1px solid var(--border);
+    .panel-head{
+      min-height:70px;
+      padding:17px 20px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
     }
 
-    .card-head h3 {
-      font-family: "Space Grotesk", sans-serif;
-
-      font-size: 14px;
+    .panel-title{
+      font-family:"Manrope",sans-serif;
+      font-size:14px;
+      font-weight:800;
     }
 
-    .card-head span {
-      color: var(--muted);
-
-      font-size: 9px;
+    .panel-sub{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:3px;
     }
 
-    .view-all {
-      color: var(--green-dark);
-
-      font-size: 10px;
-      font-weight: 800;
+    .panel-link{
+      color:var(--green-dark);
+      font-size:11px;
+      font-weight:800;
     }
 
-    /* =====================================
-       ORDERS
-    ====================================== */
+    /* =========================
+       TABLE
+    ========================= */
 
-    .order-list {
-      padding: 7px 20px;
+    .table-wrap{
+      overflow-x:auto;
     }
 
-    .order-row {
-      min-height: 65px;
-
-      display: grid;
-
-      grid-template-columns:
-        1.15fr 1.3fr .8fr .7fr;
-
-      align-items: center;
-
-      gap: 12px;
-
-      border-bottom: 1px solid #edf0ee;
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:600px;
     }
 
-    .order-row:last-child {
-      border-bottom: 0;
+    th{
+      text-align:left;
+      color:#839088;
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-weight:800;
+      padding:13px 20px;
+      background:#fbfcfb;
+      border-bottom:1px solid var(--border);
     }
 
-    .customer {
-      display: flex;
-
-      align-items: center;
-
-      gap: 9px;
+    td{
+      padding:14px 20px;
+      border-bottom:1px solid #eef2f0;
+      font-size:11px;
+      vertical-align:middle;
     }
 
-    .customer-avatar {
-      width: 32px;
-      height: 32px;
-
-      display: grid;
-      place-items: center;
-
-      flex-shrink: 0;
-
-      color: var(--green-dark);
-
-      background: var(--green-soft);
-
-      border-radius: 9px;
-
-      font-size: 10px;
-      font-weight: 800;
+    tr:last-child td{
+      border-bottom:0;
     }
 
-    .customer strong,
-    .website-name strong {
-      display: block;
-
-      font-size: 10px;
+    .order-id{
+      font-weight:800;
+      color:var(--text);
     }
 
-    .customer span,
-    .website-name span {
-      display: block;
-
-      margin-top: 3px;
-
-      color: var(--muted);
-
-      font-size: 8px;
+    .customer{
+      display:flex;
+      align-items:center;
+      gap:9px;
     }
 
-    .amount {
-      font-size: 10px;
-      font-weight: 800;
+    .customer-avatar{
+      width:31px;
+      height:31px;
+      border-radius:10px;
+      display:grid;
+      place-items:center;
+      background:#eef6f1;
+      color:var(--green-dark);
+      font-size:10px;
+      font-weight:800;
     }
 
-    .status {
-      width: max-content;
-
-      padding: 5px 8px;
-
-      border-radius: 20px;
-
-      font-size: 8px;
-      font-weight: 800;
+    .customer-name{
+      font-weight:700;
     }
 
-    .status.pending {
-      color: #9a6500;
-
-      background: #fff7df;
+    .customer-email{
+      color:#8a9690;
+      font-size:9px;
+      margin-top:2px;
     }
 
-    .status.completed {
-      color: #168246;
-
-      background: #eaf8f0;
+    .status{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      padding:5px 8px;
+      border-radius:7px;
+      font-size:9px;
+      font-weight:800;
     }
 
-    /* =====================================
+    .status.pending{
+      background:var(--warning-soft);
+      color:#a86e00;
+    }
+
+    .status.completed{
+      background:var(--green-soft);
+      color:var(--green-dark);
+    }
+
+    .status.processing{
+      background:#edf4ff;
+      color:#376cae;
+    }
+
+    .status.cancelled{
+      background:var(--danger-soft);
+      color:#bd2d3a;
+    }
+
+    .status-dot{
+      width:5px;
+      height:5px;
+      border-radius:50%;
+      background:currentColor;
+    }
+
+    /* =========================
        QUICK ACTIONS
-    ====================================== */
+    ========================= */
 
-    .quick-actions {
-      padding: 18px;
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, 1fr);
-
-      gap: 10px;
+    .quick-actions{
+      padding:16px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
     }
 
-    .quick-action {
-      min-height: 90px;
-
-      padding: 14px;
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: space-between;
-
-      background: var(--surface-2);
-
-      border: 1px solid var(--border);
-
-      border-radius: 13px;
-
-      transition: .2s ease;
+    .quick-action{
+      padding:15px;
+      border:1px solid var(--border);
+      border-radius:13px;
+      background:#fff;
+      transition:.2s;
     }
 
-    .quick-action:hover {
-      transform: translateY(-2px);
-
-      border-color: #cbd8d0;
-
-      box-shadow: 0 8px 20px rgba(7,17,12,.05);
+    .quick-action:hover{
+      border-color:#b9cec2;
+      transform:translateY(-2px);
+      box-shadow:0 8px 22px rgba(10,30,20,.06);
     }
 
-    .quick-icon {
-      width: 30px;
-      height: 30px;
-
-      display: grid;
-      place-items: center;
-
-      color: var(--green-dark);
-
-      background: var(--green-soft);
-
-      border-radius: 9px;
+    .quick-icon{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      background:var(--green-soft);
+      color:var(--green-dark);
+      display:grid;
+      place-items:center;
+      margin-bottom:11px;
     }
 
-    .quick-action strong {
-      font-size: 10px;
+    .quick-title{
+      font-size:11px;
+      font-weight:800;
     }
 
-    .quick-action span {
-      margin-top: 3px;
-
-      color: var(--muted);
-
-      font-size: 8px;
+    .quick-text{
+      color:var(--muted);
+      font-size:9px;
+      line-height:1.5;
+      margin-top:4px;
     }
 
-    /* =====================================
+    /* =========================
        TOP WEBSITES
-    ====================================== */
+    ========================= */
 
-    .website-list {
-      padding: 8px 20px 18px;
+    .website-list{
+      padding:7px 20px 14px;
     }
 
-    .website-item {
-      padding: 13px 0;
-
-      display: flex;
-
-      align-items: center;
-
-      gap: 11px;
-
-      border-bottom: 1px solid #edf0ee;
+    .website-row{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:12px 0;
+      border-bottom:1px solid #eef2f0;
     }
 
-    .website-item:last-child {
-      border-bottom: 0;
+    .website-row:last-child{
+      border-bottom:0;
     }
 
-    .website-thumb {
-      width: 45px;
-      height: 35px;
-
-      display: grid;
-      place-items: center;
-
-      flex-shrink: 0;
-
-      color: #fff;
-
+    .website-thumb{
+      width:45px;
+      height:36px;
+      border-radius:9px;
       background:
         linear-gradient(
           135deg,
-          #13271c,
-          #18a957
+          #e8f8ef,
+          #f6faf7
         );
-
-      border-radius: 8px;
-
-      font-size: 9px;
-      font-weight: 800;
+      display:grid;
+      place-items:center;
+      color:var(--green-dark);
+      font-size:13px;
+      flex:none;
+      overflow:hidden;
     }
 
-    .website-info {
-      min-width: 0;
-
-      flex: 1;
+    .website-thumb img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
     }
 
-    .website-info strong {
-      display: block;
-
-      overflow: hidden;
-
-      white-space: nowrap;
-
-      text-overflow: ellipsis;
-
-      font-size: 10px;
+    .website-info{
+      flex:1;
+      min-width:0;
     }
 
-    .website-info span {
-      display: block;
-
-      margin-top: 3px;
-
-      color: var(--muted);
-
-      font-size: 8px;
+    .website-name{
+      font-size:11px;
+      font-weight:800;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
-    .website-sales {
-      text-align: right;
+    .website-category{
+      color:var(--muted);
+      font-size:9px;
+      margin-top:2px;
     }
 
-    .website-sales strong {
-      display: block;
-
-      font-size: 10px;
+    .website-sales{
+      text-align:right;
     }
 
-    .website-sales span {
-      display: block;
-
-      margin-top: 3px;
-
-      color: var(--muted);
-
-      font-size: 8px;
+    .website-sales strong{
+      display:block;
+      font-size:11px;
     }
 
-    /* =====================================
+    .website-sales span{
+      color:var(--muted);
+      font-size:8px;
+    }
+
+    /* =========================
        PERFORMANCE
-    ====================================== */
+    ========================= */
 
-    .performance {
-      margin-top: 18px;
-
-      padding: 20px;
+    .performance{
+      padding:20px;
     }
 
-    .performance-title {
-      margin-bottom: 18px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
+    .metric{
+      margin-bottom:18px;
     }
 
-    .performance-title h3 {
-      font-family: "Space Grotesk", sans-serif;
-
-      font-size: 14px;
+    .metric:last-child{
+      margin-bottom:0;
     }
 
-    .performance-title span {
-      color: var(--muted);
-
-      font-size: 9px;
+    .metric-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:7px;
     }
 
-    .bar-row {
-      margin-bottom: 16px;
+    .metric-name{
+      font-size:10px;
+      font-weight:700;
     }
 
-    .bar-info {
-      margin-bottom: 7px;
-
-      display: flex;
-
-      justify-content: space-between;
-
-      font-size: 9px;
-      font-weight: 700;
+    .metric-value{
+      font-size:10px;
+      font-weight:800;
+      color:var(--green-dark);
     }
 
-    .bar-info span:last-child {
-      color: var(--muted);
+    .bar{
+      height:7px;
+      border-radius:20px;
+      background:#edf1ef;
+      overflow:hidden;
     }
 
-    .bar {
-      height: 7px;
-
-      overflow: hidden;
-
-      background: #edf1ee;
-
-      border-radius: 10px;
+    .bar-fill{
+      height:100%;
+      width:0;
+      border-radius:inherit;
+      background:linear-gradient(
+        90deg,
+        var(--green-dark),
+        var(--green)
+      );
     }
 
-    .bar span {
-      display: block;
+    /* =========================
+       SECURITY
+    ========================= */
 
-      height: 100%;
-
-      background:
-        linear-gradient(
-          90deg,
-          var(--green),
-          #72d69b
-        );
-
-      border-radius: inherit;
+    .security-strip{
+      margin-top:18px;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:14px 17px;
+      display:flex;
+      align-items:center;
+      gap:12px;
     }
 
-    /* =====================================
-       OVERLAY
-    ====================================== */
-
-    .sidebar-overlay {
-      display: none;
-
-      position: fixed;
-
-      inset: 0;
-
-      z-index: 90;
-
-      background: rgba(0,0,0,.42);
+    .security-icon{
+      width:34px;
+      height:34px;
+      border-radius:10px;
+      background:var(--green-soft);
+      color:var(--green-dark);
+      display:grid;
+      place-items:center;
+      flex:none;
     }
 
-    /* =====================================
+    .security-text{
+      flex:1;
+    }
+
+    .security-title{
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .security-desc{
+      color:var(--muted);
+      font-size:9px;
+      margin-top:3px;
+    }
+
+    .session-badge{
+      font-size:9px;
+      font-weight:800;
+      color:var(--green-dark);
+      background:var(--green-soft);
+      border-radius:7px;
+      padding:6px 9px;
+      white-space:nowrap;
+    }
+
+    /* =========================
        TOAST
-    ====================================== */
+    ========================= */
 
-    .toast {
-      position: fixed;
-
-      right: 24px;
-      bottom: 24px;
-
-      z-index: 500;
-
-      min-width: 280px;
-
-      padding: 15px 17px;
-
-      color: #fff;
-
-      background: #101814;
-
-      border-radius: 13px;
-
-      box-shadow:
-        0 20px 45px rgba(0,0,0,.2);
-
-      transform: translateY(20px);
-
-      opacity: 0;
-
-      pointer-events: none;
-
-      transition: .25s ease;
+    .toast{
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      width:min(350px,calc(100vw - 30px));
+      background:#0c1712;
+      color:#fff;
+      border-radius:14px;
+      padding:14px 16px;
+      display:flex;
+      align-items:flex-start;
+      gap:11px;
+      box-shadow:0 20px 45px rgba(0,0,0,.22);
+      transform:translateY(120px);
+      opacity:0;
+      pointer-events:none;
+      transition:.3s ease;
+      z-index:3000;
     }
 
-    .toast.show {
-      opacity: 1;
-
-      transform: translateY(0);
+    .toast.show{
+      transform:translateY(0);
+      opacity:1;
     }
 
-    .toast strong {
-      display: block;
-
-      font-size: 12px;
+    .toast-icon{
+      width:30px;
+      height:30px;
+      border-radius:9px;
+      display:grid;
+      place-items:center;
+      background:rgba(24,169,87,.16);
+      color:#70e6a1;
+      flex:none;
     }
 
-    .toast span {
-      display: block;
-
-      margin-top: 4px;
-
-      color: #aab5ae;
-
-      font-size: 10px;
+    .toast-title{
+      font-size:11px;
+      font-weight:800;
     }
 
-    /* =====================================
+    .toast-message{
+      color:#aab8b0;
+      font-size:10px;
+      line-height:1.5;
+      margin-top:2px;
+    }
+
+    /* =========================
        RESPONSIVE
-    ====================================== */
+    ========================= */
 
-    @media (max-width: 1100px) {
-      .sidebar {
-        width: 230px;
+    @media(max-width:1200px){
+      .sidebar{
+        width:245px;
       }
 
-      .main {
-        width: calc(100% - 230px);
-
-        margin-left: 230px;
+      .main{
+        width:calc(100% - 245px);
+        margin-left:245px;
       }
 
-      .stats {
-        grid-template-columns:
-          repeat(2, 1fr);
+      .content{
+        padding-left:22px;
+        padding-right:22px;
       }
 
-      .dashboard-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 800px) {
-      .sidebar {
-        transform: translateX(-100%);
-
-        transition: transform .25s ease;
+      .top-header{
+        padding-left:22px;
+        padding-right:22px;
       }
 
-      .sidebar.open {
-        transform: translateX(0);
-      }
-
-      .sidebar-overlay.show {
-        display: block;
-      }
-
-      .main {
-        width: 100%;
-
-        margin-left: 0;
-      }
-
-      .mobile-menu {
-        display: grid;
-
-        place-items: center;
-      }
-
-      .header {
-        padding: 0 18px;
-      }
-
-      .content {
-        padding:
-          24px 18px 35px;
-      }
-
-      .header-actions .header-btn:first-child {
-        display: none;
+      .stats-grid{
+        grid-template-columns:repeat(2,1fr);
       }
     }
 
-    @media (max-width: 560px) {
-      .stats {
-        grid-template-columns: 1fr;
+    @media(max-width:980px){
+      .sidebar{
+        transform:translateX(-100%);
+        transition:transform .28s ease;
       }
 
-      .welcome h2 {
-        font-size: 26px;
+      .sidebar.open{
+        transform:translateX(0);
       }
 
-      .header {
-        height: 68px;
+      .sidebar-overlay.show{
+        display:block;
       }
 
-      .header-actions .header-btn {
-        padding: 0 10px;
+      .main{
+        width:100%;
+        margin-left:0;
       }
 
-      .header-actions .header-btn span {
-        display: none;
+      .mobile-menu{
+        display:block;
       }
 
-      .order-row {
-        grid-template-columns:
-          1fr auto;
-        gap: 7px;
+      .dashboard-grid{
+        grid-template-columns:1fr;
+      }
+    }
 
-        padding: 12px 0;
+    @media(max-width:700px){
+      .top-header{
+        height:76px;
+        padding:0 15px;
       }
 
-      .order-row > :nth-child(2) {
-        display: none;
+      .header-actions .view-btn{
+        display:none;
       }
 
-      .order-row > :nth-child(3) {
-        text-align: right;
+      .page-heading h1{
+        font-size:21px;
       }
 
-      .quick-actions {
-        grid-template-columns: 1fr 1fr;
+      .page-heading p{
+        font-size:10px;
       }
 
-      .toast {
-        left: 15px;
-        right: 15px;
+      .content{
+        padding:18px 14px 35px;
+      }
 
-        min-width: 0;
+      .welcome{
+        padding:22px 20px;
+        border-radius:19px;
+      }
+
+      .welcome h2{
+        font-size:24px;
+      }
+
+      .welcome p{
+        font-size:11px;
+      }
+
+      .stats-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+      }
+
+      .stat-card{
+        padding:14px;
+      }
+
+      .stat-value{
+        font-size:21px;
+      }
+
+      .stat-icon{
+        width:34px;
+        height:34px;
+      }
+
+      .stat-change{
+        display:none;
+      }
+
+      .panel-head{
+        padding:15px;
+      }
+
+      .table-wrap{
+        margin:0;
+      }
+
+      .quick-actions{
+        padding:13px;
+      }
+
+      .security-strip{
+        align-items:flex-start;
+      }
+
+      .session-badge{
+        display:none;
+      }
+    }
+
+    @media(max-width:480px){
+      .stats-grid{
+        grid-template-columns:1fr;
+      }
+
+      .header-btn.refresh-btn{
+        width:40px;
+        padding:0;
+        justify-content:center;
+      }
+
+      .header-btn.refresh-btn span{
+        display:none;
+      }
+
+      .welcome h2{
+        font-size:21px;
+      }
+
+      .quick-actions{
+        grid-template-columns:1fr;
+      }
+    }
+
+    /* =========================
+       REDUCED MOTION
+    ========================= */
+
+    @media(prefers-reduced-motion:reduce){
+      *,
+      *::before,
+      *::after{
+        scroll-behavior:auto!important;
+        transition:none!important;
       }
     }
   </style>
@@ -1230,160 +1172,181 @@
 
 <body>
 
-  <!-- =====================================
-       APP
-  ====================================== -->
-
   <div class="app">
 
-    <!-- ===================================
+    <!-- =========================
          SIDEBAR
-    ==================================== -->
+    ========================= -->
 
     <aside
       class="sidebar"
       id="sidebar"
     >
 
-      <a
-        href="../index.html"
-        class="brand"
-      >
+      <div class="brand">
 
         <img
           src="../logo.png"
           alt="Website Deals"
+          class="brand-logo"
+          onerror="this.style.display='none'"
         >
 
-        <div>
-          <strong>Website Deals</strong>
-          <span>Admin Workspace</span>
+        <div class="brand-text">
+          <div class="brand-name">
+            Website Deals
+          </div>
+
+          <div class="brand-sub">
+            Admin Portal
+          </div>
         </div>
 
-      </a>
+      </div>
 
-
-      <nav class="nav">
+      <div class="sidebar-scroll">
 
         <div class="nav-label">
           Marketplace
         </div>
 
-        <a
-          href="dashboard.html"
-          class="active"
-        >
-          <span class="nav-icon">⌂</span>
-          Dashboard
-        </a>
+        <nav class="nav">
 
-        <a href="websites.html">
-          <span class="nav-icon">▣</span>
-          Websites
-          <span
-            class="nav-badge"
-            id="website-count"
+          <a
+            href="dashboard.html"
+            class="nav-item active"
           >
-            11
-          </span>
-        </a>
+            <span class="nav-icon">⌂</span>
+            <span>Dashboard</span>
+          </a>
 
-        <a href="categories.html">
-          <span class="nav-icon">◈</span>
-          Categories
-        </a>
-
-        <a href="orders.html">
-          <span class="nav-icon">◷</span>
-          Orders
-          <span
-            class="nav-badge"
-            id="order-count"
+          <a
+            href="websites.html"
+            class="nav-item"
           >
-            8
-          </span>
-        </a>
+            <span class="nav-icon">▣</span>
+            <span>Websites</span>
+          </a>
 
-        <a href="payments.html">
-          <span class="nav-icon">৳</span>
-          Payments
-        </a>
+          <a
+            href="categories.html"
+            class="nav-item"
+          >
+            <span class="nav-icon">◈</span>
+            <span>Categories</span>
+          </a>
 
-        <a href="customers.html">
-          <span class="nav-icon">♙</span>
-          Customers
-        </a>
+          <a
+            href="orders.html"
+            class="nav-item"
+          >
+            <span class="nav-icon">◫</span>
+            <span>Orders</span>
+            <span class="nav-badge">12</span>
+          </a>
 
-        <a href="newsletter.html">
-          <span class="nav-icon">✉</span>
-          Newsletter
-        </a>
+          <a
+            href="payments.html"
+            class="nav-item"
+          >
+            <span class="nav-icon">৳</span>
+            <span>Payments</span>
+          </a>
 
+          <a
+            href="customers.html"
+            class="nav-item"
+          >
+            <span class="nav-icon">♙</span>
+            <span>Customers</span>
+          </a>
 
-        <div
-          class="nav-label"
-          style="margin-top:18px;"
-        >
+          <a
+            href="newsletter.html"
+            class="nav-item"
+          >
+            <span class="nav-icon">✉</span>
+            <span>Newsletter</span>
+          </a>
+
+        </nav>
+
+        <div class="nav-label" style="margin-top:12px;">
           Reports
         </div>
 
-        <a href="monthly-report.html">
-          <span class="nav-icon">▤</span>
-          Monthly Report
-        </a>
+        <nav class="nav">
 
-      </nav>
+          <a
+            href="monthly-report.html"
+            class="nav-item"
+          >
+            <span class="nav-icon">▥</span>
+            <span>Monthly Report</span>
+          </a>
 
+        </nav>
 
-      <div class="sidebar-bottom">
+      </div>
+
+      <div class="sidebar-footer">
 
         <div class="profile-mini">
 
-          <div class="avatar">
-            SN
+          <div
+            class="profile-avatar"
+            id="profile-avatar"
+          >
+            SA
           </div>
 
-          <div>
-            <strong id="admin-name">
+          <div class="profile-info">
+
+            <div
+              class="profile-name"
+              id="profile-name"
+            >
+              Admin
+            </div>
+
+            <div
+              class="profile-role"
+              id="profile-role"
+            >
               Administrator
-            </strong>
+            </div>
 
-            <span id="admin-role">
-              Marketplace Admin
-            </span>
           </div>
+
+          <button
+            class="logout-small"
+            id="sidebar-logout"
+            type="button"
+            title="Sign out"
+          >
+            ↪
+          </button>
 
         </div>
-
-        <button
-          class="logout-btn"
-          id="logout-btn"
-          type="button"
-        >
-          <span>↪</span>
-          Sign Out
-        </button>
 
       </div>
 
     </aside>
-
 
     <div
       class="sidebar-overlay"
       id="sidebar-overlay"
     ></div>
 
-
-    <!-- ===================================
+    <!-- =========================
          MAIN
-    ==================================== -->
+    ========================= -->
 
-    <section class="main">
+    <main class="main">
 
-      <!-- Header -->
+      <!-- TOP HEADER -->
 
-      <header class="header">
+      <header class="top-header">
 
         <div class="header-left">
 
@@ -1396,25 +1359,24 @@
             ☰
           </button>
 
-          <div class="page-title">
+          <div class="page-heading">
 
             <h1>
               Dashboard
             </h1>
 
             <p>
-              Marketplace overview & activity
+              Overview of your Website Deals marketplace
             </p>
 
           </div>
 
         </div>
 
-
         <div class="header-actions">
 
           <button
-            class="header-btn"
+            class="header-btn refresh-btn"
             id="refresh-btn"
             type="button"
           >
@@ -1425,390 +1387,407 @@
           <a
             href="../index.html"
             target="_blank"
-            class="header-btn primary"
+            class="header-btn primary view-btn"
           >
             ↗
-            <span>View Marketplace</span>
+            View Marketplace
           </a>
 
         </div>
 
       </header>
 
+      <!-- CONTENT -->
 
-      <!-- Content -->
+      <div class="content">
 
-      <main class="content">
+        <!-- WELCOME -->
 
         <section class="welcome">
 
-          <small>
-            Admin Overview
-          </small>
+          <div class="welcome-content">
 
-          <h2>
-            Good morning,
-            <span id="welcome-name">
-              Administrator
-            </span>.
-          </h2>
+            <div class="welcome-kicker">
+              <span class="live-dot"></span>
+              Admin Session Active
+            </div>
 
-          <p>
-            Here's what's happening across Website Deals today.
-          </p>
+            <h2 id="welcome-title">
+              Welcome back.
+            </h2>
+
+            <p>
+              Manage your ready-made websites, orders,
+              customers and marketplace activity from one
+              professional control center.
+            </p>
+
+          </div>
 
         </section>
 
+        <!-- STATS -->
 
-        <!-- =================================
-             STATS
-        ================================== -->
-
-        <section class="stats">
+        <section class="stats-grid">
 
           <div class="stat-card">
 
             <div class="stat-top">
 
-              <span class="stat-label">
-                Total Websites
-              </span>
-
-              <span class="stat-icon">
+              <div class="stat-icon">
                 ▣
-              </span>
+              </div>
+
+              <div class="stat-change">
+                +8.4%
+              </div>
 
             </div>
 
+            <div class="stat-label">
+              Total Websites
+            </div>
+
             <div
-              class="stat-number"
-              id="total-websites"
+              class="stat-value"
+              id="stat-websites"
             >
               11
             </div>
 
-            <div class="stat-change">
-              ↑ 3 added this month
-            </div>
-
           </div>
-
 
           <div class="stat-card">
 
             <div class="stat-top">
 
-              <span class="stat-label">
-                Total Orders
-              </span>
+              <div class="stat-icon">
+                ◫
+              </div>
 
-              <span class="stat-icon">
-                ◷
-              </span>
+              <div class="stat-change">
+                +12.1%
+              </div>
 
             </div>
 
+            <div class="stat-label">
+              Total Orders
+            </div>
+
             <div
-              class="stat-number"
-              id="total-orders"
+              class="stat-value"
+              id="stat-orders"
             >
               428
             </div>
 
-            <div class="stat-change">
-              ↑ 12.4% from last month
-            </div>
-
           </div>
-
 
           <div class="stat-card">
 
             <div class="stat-top">
 
-              <span class="stat-label">
-                Customers
-              </span>
-
-              <span class="stat-icon">
+              <div class="stat-icon">
                 ♙
-              </span>
+              </div>
+
+              <div class="stat-change">
+                +6.7%
+              </div>
 
             </div>
 
+            <div class="stat-label">
+              Customers
+            </div>
+
             <div
-              class="stat-number"
-              id="total-customers"
+              class="stat-value"
+              id="stat-customers"
             >
               316
             </div>
 
-            <div class="stat-change">
-              ↑ 8.7% new customers
-            </div>
-
           </div>
-
 
           <div class="stat-card">
 
             <div class="stat-top">
 
-              <span class="stat-label">
-                Total Revenue
-              </span>
-
-              <span class="stat-icon">
+              <div class="stat-icon">
                 ৳
-              </span>
+              </div>
 
+              <div class="stat-change">
+                +15.2%
+              </div>
+
+            </div>
+
+            <div class="stat-label">
+              Total Revenue
             </div>
 
             <div
-              class="stat-number"
-              id="total-revenue"
+              class="stat-value"
+              id="stat-revenue"
             >
               ৳8.42L
-            </div>
-
-            <div class="stat-change">
-              ↑ 15.2% this month
             </div>
 
           </div>
 
         </section>
 
-
-        <!-- =================================
-             MAIN GRID
-        ================================== -->
+        <!-- MAIN GRID -->
 
         <section class="dashboard-grid">
 
+          <!-- RECENT ORDERS -->
 
-          <!-- Recent Orders -->
+          <div class="panel">
 
-          <div class="card">
-
-            <div class="card-head">
+            <div class="panel-head">
 
               <div>
-                <h3>
-                  Recent Orders
-                </h3>
 
-                <span>
+                <div class="panel-title">
+                  Recent Orders
+                </div>
+
+                <div class="panel-sub">
                   Latest marketplace activity
-                </span>
+                </div>
+
               </div>
 
               <a
                 href="orders.html"
-                class="view-all"
+                class="panel-link"
               >
                 View all →
               </a>
 
             </div>
 
+            <div class="table-wrap">
 
-            <div class="order-list">
+              <table>
 
-              <div class="order-row">
+                <thead>
 
-                <div class="customer">
+                  <tr>
+                    <th>Order</th>
+                    <th>Customer</th>
+                    <th>Website</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                  </tr>
 
-                  <div class="customer-avatar">
-                    RK
-                  </div>
+                </thead>
 
-                  <div>
-                    <strong>
-                      Rahim Khan
-                    </strong>
+                <tbody id="recent-orders-body">
 
-                    <span>
-                      WD-2026-00428
-                    </span>
-                  </div>
+                  <tr>
+                    <td>
+                      <strong class="order-id">
+                        WD-2026-00428
+                      </strong>
+                    </td>
 
-                </div>
+                    <td>
+                      <div class="customer">
 
-                <div class="website-name">
+                        <div class="customer-avatar">
+                          RA
+                        </div>
 
-                  <strong>
-                    Nova Business Pro
-                  </strong>
+                        <div>
+                          <div class="customer-name">
+                            Rahim Ahmed
+                          </div>
 
-                  <span>
-                    Business
-                  </span>
+                          <div class="customer-email">
+                            rahim@example.com
+                          </div>
+                        </div>
 
-                </div>
+                      </div>
+                    </td>
 
-                <div class="amount">
-                  ৳1,999
-                </div>
+                    <td>
+                      Corporate Pro
+                    </td>
 
-                <span class="status pending">
-                  Pending
-                </span>
+                    <td>
+                      <strong>৳999</strong>
+                    </td>
 
-              </div>
+                    <td>
+                      <span class="status completed">
+                        <span class="status-dot"></span>
+                        Completed
+                      </span>
+                    </td>
+                  </tr>
 
+                  <tr>
+                    <td>
+                      <strong class="order-id">
+                        WD-2026-00427
+                      </strong>
+                    </td>
 
-              <div class="order-row">
+                    <td>
+                      <div class="customer">
 
-                <div class="customer">
+                        <div class="customer-avatar">
+                          NS
+                        </div>
 
-                  <div class="customer-avatar">
-                    SA
-                  </div>
+                        <div>
+                          <div class="customer-name">
+                            Nusrat S.
+                          </div>
 
-                  <div>
-                    <strong>
-                      Sara Ahmed
-                    </strong>
+                          <div class="customer-email">
+                            nusrat@example.com
+                          </div>
+                        </div>
 
-                    <span>
-                      WD-2026-00427
-                    </span>
-                  </div>
+                      </div>
+                    </td>
 
-                </div>
+                    <td>
+                      Tasty Bites
+                    </td>
 
-                <div class="website-name">
+                    <td>
+                      <strong>৳1,499</strong>
+                    </td>
 
-                  <strong>
-                    Restaurant Royale
-                  </strong>
+                    <td>
+                      <span class="status pending">
+                        <span class="status-dot"></span>
+                        Pending
+                      </span>
+                    </td>
+                  </tr>
 
-                  <span>
-                    Restaurant
-                  </span>
+                  <tr>
+                    <td>
+                      <strong class="order-id">
+                        WD-2026-00426
+                      </strong>
+                    </td>
 
-                </div>
+                    <td>
+                      <div class="customer">
 
-                <div class="amount">
-                  ৳2,499
-                </div>
+                        <div class="customer-avatar">
+                          AK
+                        </div>
 
-                <span class="status completed">
-                  Completed
-                </span>
+                        <div>
+                          <div class="customer-name">
+                            Arif Khan
+                          </div>
 
-              </div>
+                          <div class="customer-email">
+                            arif@example.com
+                          </div>
+                        </div>
 
+                      </div>
+                    </td>
 
-              <div class="order-row">
+                    <td>
+                      ShopEasy Store
+                    </td>
 
-                <div class="customer">
+                    <td>
+                      <strong>৳2,999</strong>
+                    </td>
 
-                  <div class="customer-avatar">
-                    MI
-                  </div>
+                    <td>
+                      <span class="status processing">
+                        <span class="status-dot"></span>
+                        Processing
+                      </span>
+                    </td>
+                  </tr>
 
-                  <div>
-                    <strong>
-                      Mahin Islam
-                    </strong>
+                  <tr>
+                    <td>
+                      <strong class="order-id">
+                        WD-2026-00425
+                      </strong>
+                    </td>
 
-                    <span>
-                      WD-2026-00426
-                    </span>
-                  </div>
+                    <td>
+                      <div class="customer">
 
-                </div>
+                        <div class="customer-avatar">
+                          TM
+                        </div>
 
-                <div class="website-name">
+                        <div>
+                          <div class="customer-name">
+                            Tania M.
+                          </div>
 
-                  <strong>
-                    Creative Agency X
-                  </strong>
+                          <div class="customer-email">
+                            tania@example.com
+                          </div>
+                        </div>
 
-                  <span>
-                    Agency
-                  </span>
+                      </div>
+                    </td>
 
-                </div>
+                    <td>
+                      Personal Folio
+                    </td>
 
-                <div class="amount">
-                  ৳2,999
-                </div>
+                    <td>
+                      <strong>৳999</strong>
+                    </td>
 
-                <span class="status completed">
-                  Completed
-                </span>
+                    <td>
+                      <span class="status completed">
+                        <span class="status-dot"></span>
+                        Completed
+                      </span>
+                    </td>
+                  </tr>
 
-              </div>
+                </tbody>
 
-
-              <div class="order-row">
-
-                <div class="customer">
-
-                  <div class="customer-avatar">
-                    TA
-                  </div>
-
-                  <div>
-                    <strong>
-                      Tanvir Ahmed
-                    </strong>
-
-                    <span>
-                      WD-2026-00425
-                    </span>
-                  </div>
-
-                </div>
-
-                <div class="website-name">
-
-                  <strong>
-                    ShopEase Store
-                  </strong>
-
-                  <span>
-                    E-commerce
-                  </span>
-
-                </div>
-
-                <div class="amount">
-                  ৳3,499
-                </div>
-
-                <span class="status pending">
-                  Pending
-                </span>
-
-              </div>
+              </table>
 
             </div>
 
           </div>
 
+          <!-- QUICK ACTIONS -->
 
-          <!-- Quick Actions -->
+          <div class="panel">
 
-          <div class="card">
-
-            <div class="card-head">
+            <div class="panel-head">
 
               <div>
-                <h3>
-                  Quick Actions
-                </h3>
 
-                <span>
-                  Manage marketplace
-                </span>
+                <div class="panel-title">
+                  Quick Actions
+                </div>
+
+                <div class="panel-sub">
+                  Frequently used tools
+                </div>
+
               </div>
 
             </div>
-
 
             <div class="quick-actions">
 
@@ -1821,18 +1800,15 @@
                   ＋
                 </div>
 
-                <div>
-                  <strong>
-                    Add Website
-                  </strong>
+                <div class="quick-title">
+                  Add Website
+                </div>
 
-                  <span>
-                    Create listing
-                  </span>
+                <div class="quick-text">
+                  Publish a new ready-made website.
                 </div>
 
               </a>
-
 
               <a
                 href="categories.html"
@@ -1843,18 +1819,15 @@
                   ◈
                 </div>
 
-                <div>
-                  <strong>
-                    Categories
-                  </strong>
+                <div class="quick-title">
+                  Categories
+                </div>
 
-                  <span>
-                    Manage categories
-                  </span>
+                <div class="quick-text">
+                  Manage marketplace categories.
                 </div>
 
               </a>
-
 
               <a
                 href="orders.html"
@@ -1862,39 +1835,34 @@
               >
 
                 <div class="quick-icon">
-                  ◷
+                  ◫
                 </div>
 
-                <div>
-                  <strong>
-                    Orders
-                  </strong>
+                <div class="quick-title">
+                  Orders
+                </div>
 
-                  <span>
-                    Review orders
-                  </span>
+                <div class="quick-text">
+                  Review and update customer orders.
                 </div>
 
               </a>
 
-
               <a
-                href="newsletter.html"
+                href="monthly-report.html"
                 class="quick-action"
               >
 
                 <div class="quick-icon">
-                  ✉
+                  ▥
                 </div>
 
-                <div>
-                  <strong>
-                    Newsletter
-                  </strong>
+                <div class="quick-title">
+                  Monthly Report
+                </div>
 
-                  <span>
-                    Subscribers
-                  </span>
+                <div class="quick-text">
+                  View revenue and sales performance.
                 </div>
 
               </a>
@@ -1905,59 +1873,57 @@
 
         </section>
 
+        <!-- SECOND GRID -->
 
-        <!-- =================================
-             SECONDARY GRID
-        ================================== -->
+        <section class="dashboard-grid">
 
-        <section
-          class="dashboard-grid"
-          style="margin-top:18px;"
-        >
+          <!-- TOP WEBSITES -->
 
-          <!-- Top Websites -->
+          <div class="panel">
 
-          <div class="card">
-
-            <div class="card-head">
+            <div class="panel-head">
 
               <div>
-                <h3>
-                  Top Websites
-                </h3>
 
-                <span>
-                  By marketplace sales
-                </span>
+                <div class="panel-title">
+                  Top Websites
+                </div>
+
+                <div class="panel-sub">
+                  Best-performing marketplace products
+                </div>
+
               </div>
 
               <a
                 href="websites.html"
-                class="view-all"
+                class="panel-link"
               >
                 Manage →
               </a>
 
             </div>
 
+            <div
+              class="website-list"
+              id="top-websites"
+            >
 
-            <div class="website-list">
-
-              <div class="website-item">
+              <div class="website-row">
 
                 <div class="website-thumb">
-                  NP
+                  ◫
                 </div>
 
                 <div class="website-info">
 
-                  <strong>
-                    Nova Business Pro
-                  </strong>
+                  <div class="website-name">
+                    ShopEasy Store
+                  </div>
 
-                  <span>
-                    Business • ৳1,999
-                  </span>
+                  <div class="website-category">
+                    E-commerce
+                  </div>
 
                 </div>
 
@@ -1968,29 +1934,28 @@
                   </strong>
 
                   <span>
-                    4.9 ★
+                    ৳2,999
                   </span>
 
                 </div>
 
               </div>
 
-
-              <div class="website-item">
+              <div class="website-row">
 
                 <div class="website-thumb">
-                  SS
+                  ◧
                 </div>
 
                 <div class="website-info">
 
-                  <strong>
-                    ShopEase Store
-                  </strong>
+                  <div class="website-name">
+                    Corporate Pro
+                  </div>
 
-                  <span>
-                    E-commerce • ৳3,499
-                  </span>
+                  <div class="website-category">
+                    Business
+                  </div>
 
                 </div>
 
@@ -2001,29 +1966,28 @@
                   </strong>
 
                   <span>
-                    4.9 ★
+                    ৳999
                   </span>
 
                 </div>
 
               </div>
 
-
-              <div class="website-item">
+              <div class="website-row">
 
                 <div class="website-thumb">
-                  CA
+                  ◉
                 </div>
 
                 <div class="website-info">
 
-                  <strong>
-                    Creative Agency X
-                  </strong>
+                  <div class="website-name">
+                    Starter Monthly
+                  </div>
 
-                  <span>
-                    Agency • ৳2,999
-                  </span>
+                  <div class="website-category">
+                    Monthly
+                  </div>
 
                 </div>
 
@@ -2034,29 +1998,28 @@
                   </strong>
 
                   <span>
-                    4.8 ★
+                    ৳999/mo
                   </span>
 
                 </div>
 
               </div>
 
-
-              <div class="website-item">
+              <div class="website-row">
 
                 <div class="website-thumb">
-                  RR
+                  ◇
                 </div>
 
                 <div class="website-info">
 
-                  <strong>
-                    Restaurant Royale
-                  </strong>
+                  <div class="website-name">
+                    Tasty Bites
+                  </div>
 
-                  <span>
-                    Restaurant • ৳2,499
-                  </span>
+                  <div class="website-category">
+                    Restaurant
+                  </div>
 
                 </div>
 
@@ -2067,7 +2030,7 @@
                   </strong>
 
                   <span>
-                    4.8 ★
+                    ৳1,499
                   </span>
 
                 </div>
@@ -2078,103 +2041,118 @@
 
           </div>
 
+          <!-- PERFORMANCE -->
 
-          <!-- Performance -->
+          <div class="panel">
 
-          <div class="card performance">
+            <div class="panel-head">
 
-            <div class="performance-title">
+              <div>
 
-              <h3>
-                Marketplace Performance
-              </h3>
+                <div class="panel-title">
+                  Marketplace Performance
+                </div>
 
-              <span>
-                This month
-              </span>
+                <div class="panel-sub">
+                  Current demo indicators
+                </div>
 
-            </div>
-
-
-            <div class="bar-row">
-
-              <div class="bar-info">
-
-                <span>
-                  Website Sales
-                </span>
-
-                <span>
-                  82%
-                </span>
-
-              </div>
-
-              <div class="bar">
-                <span style="width:82%;"></span>
               </div>
 
             </div>
 
+            <div class="performance">
 
-            <div class="bar-row">
+              <div class="metric">
 
-              <div class="bar-info">
+                <div class="metric-top">
 
-                <span>
-                  Customer Growth
-                </span>
+                  <span class="metric-name">
+                    Website Listings
+                  </span>
 
-                <span>
-                  68%
-                </span>
+                  <span class="metric-value">
+                    88%
+                  </span>
 
-              </div>
+                </div>
 
-              <div class="bar">
-                <span style="width:68%;"></span>
-              </div>
-
-            </div>
-
-
-            <div class="bar-row">
-
-              <div class="bar-info">
-
-                <span>
-                  Order Completion
-                </span>
-
-                <span>
-                  91%
-                </span>
+                <div class="bar">
+                  <div
+                    class="bar-fill"
+                    style="width:88%"
+                  ></div>
+                </div>
 
               </div>
 
-              <div class="bar">
-                <span style="width:91%;"></span>
+              <div class="metric">
+
+                <div class="metric-top">
+
+                  <span class="metric-name">
+                    Order Completion
+                  </span>
+
+                  <span class="metric-value">
+                    82%
+                  </span>
+
+                </div>
+
+                <div class="bar">
+                  <div
+                    class="bar-fill"
+                    style="width:82%"
+                  ></div>
+                </div>
+
               </div>
 
-            </div>
+              <div class="metric">
 
+                <div class="metric-top">
 
-            <div class="bar-row">
+                  <span class="metric-name">
+                    Customer Activity
+                  </span>
 
-              <div class="bar-info">
+                  <span class="metric-value">
+                    74%
+                  </span>
 
-                <span>
-                  Newsletter Growth
-                </span>
+                </div>
 
-                <span>
-                  57%
-                </span>
+                <div class="bar">
+                  <div
+                    class="bar-fill"
+                    style="width:74%"
+                  ></div>
+                </div>
 
               </div>
 
-              <div class="bar">
-                <span style="width:57%;"></span>
+              <div class="metric">
+
+                <div class="metric-top">
+
+                  <span class="metric-name">
+                    Subscriber Growth
+                  </span>
+
+                  <span class="metric-value">
+                    68%
+                  </span>
+
+                </div>
+
+                <div class="bar">
+                  <div
+                    class="bar-fill"
+                    style="width:68%"
+                  ></div>
+                </div>
+
               </div>
 
             </div>
@@ -2183,73 +2161,104 @@
 
         </section>
 
-      </main>
+        <!-- SECURITY -->
 
-    </section>
+        <div class="security-strip">
+
+          <div class="security-icon">
+            ✓
+          </div>
+
+          <div class="security-text">
+
+            <div class="security-title">
+              Secure Admin Session
+            </div>
+
+            <div class="security-desc">
+              Your current admin session is protected by
+              the Website Deals authentication layer.
+            </div>
+
+          </div>
+
+          <div class="session-badge">
+            SESSION ACTIVE
+          </div>
+
+        </div>
+
+      </div>
+
+    </main>
 
   </div>
 
-
-  <!-- =====================================
-       TOAST
-  ====================================== -->
+  <!-- TOAST -->
 
   <div
     class="toast"
     id="toast"
+    role="status"
+    aria-live="polite"
   >
 
-    <strong id="toast-title">
-      Notice
-    </strong>
+    <div class="toast-icon">
+      ✓
+    </div>
 
-    <span id="toast-message">
-      Something happened.
-    </span>
+    <div>
+
+      <div class="toast-title">
+        Done
+      </div>
+
+      <div
+        class="toast-message"
+        id="toast-message"
+      >
+        Action completed.
+      </div>
+
+    </div>
 
   </div>
 
-
   <script>
-    /* =================================================
-       WEBSITE DEALS
-       DASHBOARD AUTH — STEP 1
-       ================================================= */
+    /* =========================================================
+       STEP 2 — DASHBOARD AUTHENTICATION
+       Same session key used by admin/login/index.html
+    ========================================================= */
 
+    const AUTH_KEY = "websiteDealsAdminAuth";
 
-    /* ==========================================
-       AUTH CHECK
-    =========================================== */
+    function getAdminSession(){
 
-    function getAdminSession() {
-
-      try {
+      try{
 
         const raw =
-          sessionStorage.getItem(
-            "websiteDealsAdminAuth"
-          );
+          sessionStorage.getItem(AUTH_KEY);
 
-        if (!raw) {
+        if(!raw){
           return null;
         }
 
         const session =
           JSON.parse(raw);
 
-        if (
+        if(
           !session ||
           session.authenticated !== true
-        ) {
+        ){
           return null;
         }
 
         return session;
 
-      } catch (error) {
+      }catch(error){
 
         console.error(
-          "Session error:",
+          "Admin session error:",
           error
         );
 
@@ -2258,35 +2267,14 @@
     }
 
 
-    /*
-      IMPORTANT:
-
-      Login page saves:
-
-      websiteDealsAdminAuth
-
-      Dashboard reads exactly the same key.
-
-      No redirect loop.
-    */
+    /* =========================================================
+       PROTECT DASHBOARD
+    ========================================================= */
 
     const adminSession =
       getAdminSession();
 
-
-    if (!adminSession) {
-
-      /*
-        Only redirect when there is
-        genuinely no valid login session.
-
-        dashboard.html
-              ↓
-        ../admin/login/
-
-        Because dashboard is inside /admin/
-        and login is inside /admin/login/.
-      */
+    if(!adminSession){
 
       window.location.replace(
         "login/"
@@ -2295,28 +2283,125 @@
     }
 
 
-    /* ==========================================
-       ELEMENTS
-    =========================================== */
+    /* =========================================================
+       PROFILE
+    ========================================================= */
 
-    const adminName =
-      document.getElementById(
-        "admin-name"
+    function getInitials(name){
+
+      if(!name){
+        return "AD";
+      }
+
+      const parts =
+        String(name)
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean);
+
+      if(parts.length === 1){
+
+        return parts[0]
+          .slice(0,2)
+          .toUpperCase();
+
+      }
+
+      return (
+        parts[0][0] +
+        parts[parts.length - 1][0]
+      ).toUpperCase();
+
+    }
+
+
+    function updateProfile(){
+
+      if(!adminSession){
+        return;
+      }
+
+      const name =
+        adminSession.name ||
+        "Admin";
+
+      const role =
+        adminSession.role === "superadmin"
+          ? "Administrator"
+          : (
+              adminSession.role ||
+              "Administrator"
+            );
+
+      const profileName =
+        document.getElementById(
+          "profile-name"
+        );
+
+      const profileRole =
+        document.getElementById(
+          "profile-role"
+        );
+
+      const profileAvatar =
+        document.getElementById(
+          "profile-avatar"
+        );
+
+      const welcomeTitle =
+        document.getElementById(
+          "welcome-title"
+        );
+
+      if(profileName){
+        profileName.textContent =
+          name;
+      }
+
+      if(profileRole){
+        profileRole.textContent =
+          role;
+      }
+
+      if(profileAvatar){
+        profileAvatar.textContent =
+          getInitials(name);
+      }
+
+      if(welcomeTitle){
+        welcomeTitle.textContent =
+          "Welcome back, " +
+          name.split(" ")[0] +
+          ".";
+      }
+
+    }
+
+
+    /* =========================================================
+       LOGOUT
+    ========================================================= */
+
+    function logoutAdmin(){
+
+      sessionStorage.removeItem(
+        AUTH_KEY
       );
 
-    const adminRole =
-      document.getElementById(
-        "admin-role"
+      window.location.replace(
+        "login/"
       );
 
-    const welcomeName =
-      document.getElementById(
-        "welcome-name"
-      );
+    }
 
-    const logoutBtn =
+
+    /* =========================================================
+       MOBILE SIDEBAR
+    ========================================================= */
+
+    const sidebar =
       document.getElementById(
-        "logout-btn"
+        "sidebar"
       );
 
     const mobileMenu =
@@ -2324,15 +2409,73 @@
         "mobile-menu"
       );
 
-    const sidebar =
-      document.getElementById(
-        "sidebar"
-      );
-
     const sidebarOverlay =
       document.getElementById(
         "sidebar-overlay"
       );
+
+
+    function openSidebar(){
+
+      if(!sidebar){
+        return;
+      }
+
+      sidebar.classList.add(
+        "open"
+      );
+
+      sidebarOverlay?.classList.add(
+        "show"
+      );
+
+    }
+
+
+    function closeSidebar(){
+
+      if(!sidebar){
+        return;
+      }
+
+      sidebar.classList.remove(
+        "open"
+      );
+
+      sidebarOverlay?.classList.remove(
+        "show"
+      );
+
+    }
+
+
+    mobileMenu?.addEventListener(
+      "click",
+      openSidebar
+    );
+
+
+    sidebarOverlay?.addEventListener(
+      "click",
+      closeSidebar
+    );
+
+
+    document
+      .querySelectorAll(".nav-item")
+      .forEach(item => {
+
+        item.addEventListener(
+          "click",
+          closeSidebar
+        );
+
+      });
+
+
+    /* =========================================================
+       REFRESH
+    ========================================================= */
 
     const refreshBtn =
       document.getElementById(
@@ -2340,94 +2483,66 @@
       );
 
 
-    /* ==========================================
-       SESSION DATA
-    =========================================== */
-
-    if (adminSession) {
-
-      const displayName =
-        adminSession.name ||
-        "Administrator";
-
-      adminName.textContent =
-        displayName;
-
-      welcomeName.textContent =
-        displayName;
-
-      adminRole.textContent =
-        adminSession.role === "superadmin"
-          ? "Super Admin"
-          : "Marketplace Admin";
-    }
-
-
-    /* ==========================================
-       MOBILE SIDEBAR
-    =========================================== */
-
-    function openSidebar() {
-
-      sidebar.classList.add(
-        "open"
-      );
-
-      sidebarOverlay.classList.add(
-        "show"
-      );
-    }
-
-
-    function closeSidebar() {
-
-      sidebar.classList.remove(
-        "open"
-      );
-
-      sidebarOverlay.classList.remove(
-        "show"
-      );
-    }
-
-
-    mobileMenu.addEventListener(
+    refreshBtn?.addEventListener(
       "click",
-      openSidebar
+      () => {
+
+        showToast(
+          "Dashboard refreshed",
+          "Latest available demo data has been loaded."
+        );
+
+        setTimeout(
+          () => {
+            window.location.reload();
+          },
+          500
+        );
+
+      }
     );
 
 
-    sidebarOverlay.addEventListener(
-      "click",
-      closeSidebar
-    );
-
-
-    /* ==========================================
+    /* =========================================================
        TOAST
-    =========================================== */
+    ========================================================= */
 
-    let toastTimer;
+    let toastTimer = null;
+
 
     function showToast(
       title,
       message
-    ) {
+    ){
 
       const toast =
         document.getElementById(
           "toast"
         );
 
-      document.getElementById(
-        "toast-title"
-      ).textContent =
-        title;
+      const toastTitle =
+        toast?.querySelector(
+          ".toast-title"
+        );
 
-      document.getElementById(
-        "toast-message"
-      ).textContent =
-        message;
+      const toastMessage =
+        document.getElementById(
+          "toast-message"
+        );
+
+      if(!toast){
+        return;
+      }
+
+      if(toastTitle){
+        toastTitle.textContent =
+          title || "Done";
+      }
+
+      if(toastMessage){
+        toastMessage.textContent =
+          message || "";
+      }
 
       toast.classList.add(
         "show"
@@ -2446,179 +2561,184 @@
             );
 
           },
-          2800
+          3000
         );
+
     }
 
 
-    /* ==========================================
-       LOGOUT
-    =========================================== */
+    /* =========================================================
+       LOAD DEMO DATA
+    ========================================================= */
 
-    logoutBtn.addEventListener(
-      "click",
-      function () {
-
-        /*
-          Remove ONLY the admin session.
-        */
-
-        sessionStorage.removeItem(
-          "websiteDealsAdminAuth"
-        );
-
-
-        /*
-          Send user to the new separated
-          login page.
-        */
-
-        window.location.replace(
-          "login/"
-        );
-
-      }
-    );
-
-
-    /* ==========================================
-       REFRESH
-    =========================================== */
-
-    refreshBtn.addEventListener(
-      "click",
-      function () {
-
-        refreshBtn.disabled = true;
-
-        showToast(
-          "Dashboard refreshed",
-          "Marketplace overview has been refreshed."
-        );
-
-        setTimeout(
-          () => {
-
-            refreshBtn.disabled =
-              false;
-
-          },
-          700
-        );
-
-      }
-    );
-
-
-    /* ==========================================
-       DEMO DATA
-    =========================================== */
-
-    function loadDemoStats() {
-
-      let orders = [];
-
-      let websites = [];
-
-      let subscribers = [];
-
-      try {
-
-        orders =
-          JSON.parse(
-            localStorage.getItem(
-              "websiteDealsOrders"
-            )
-          ) || [];
-
-      } catch (error) {
-        orders = [];
-      }
-
-
-      try {
-
-        websites =
-          JSON.parse(
-            localStorage.getItem(
-              "websiteDealsAdminWebsites"
-            )
-          ) || [];
-
-      } catch (error) {
-        websites = [];
-      }
-
-
-      try {
-
-        subscribers =
-          JSON.parse(
-            localStorage.getItem(
-              "websiteDealsSubscribers"
-            )
-          ) || [];
-
-      } catch (error) {
-        subscribers = [];
-      }
-
+    function loadDashboardData(){
 
       /*
-        Only update if demo/local data
-        actually exists.
+        These values are intentionally demo values
+        until Firebase integration is completed.
       */
 
-      if (websites.length) {
+      let websites =
+        11;
 
-        document.getElementById(
-          "total-websites"
-        ).textContent =
-          websites.length;
+      let orders =
+        428;
 
-        document.getElementById(
-          "website-count"
-        ).textContent =
-          websites.length;
+      let customers =
+        316;
+
+      let revenue =
+        "৳8.42L";
+
+
+      try{
+
+        const savedWebsites =
+          localStorage.getItem(
+            "websiteDealsAdminWebsites"
+          );
+
+        if(savedWebsites){
+
+          const parsed =
+            JSON.parse(
+              savedWebsites
+            );
+
+          if(Array.isArray(parsed)){
+
+            const published =
+              parsed.filter(
+                item =>
+                  item.status !== "draft"
+              );
+
+            if(published.length){
+              websites =
+                published.length;
+            }
+
+          }
+
+        }
+
+      }catch(error){
+
+        console.warn(
+          "Website demo data error:",
+          error
+        );
+
       }
 
 
-      if (orders.length) {
+      try{
 
-        document.getElementById(
-          "total-orders"
-        ).textContent =
-          orders.length;
+        const savedOrders =
+          localStorage.getItem(
+            "websiteDealsOrders"
+          );
+
+        if(savedOrders){
+
+          const parsed =
+            JSON.parse(
+              savedOrders
+            );
+
+          if(Array.isArray(parsed) &&
+             parsed.length){
+
+            orders =
+              parsed.length;
+
+          }
+
+        }
+
+      }catch(error){
+
+        console.warn(
+          "Order demo data error:",
+          error
+        );
+
       }
 
 
-      if (subscribers.length) {
+      const websiteEl =
+        document.getElementById(
+          "stat-websites"
+        );
 
-        /*
-          Subscriber count is intentionally
-          not replacing customer count because
-          they are different entities.
-        */
+      const orderEl =
+        document.getElementById(
+          "stat-orders"
+        );
+
+      const customerEl =
+        document.getElementById(
+          "stat-customers"
+        );
+
+      const revenueEl =
+        document.getElementById(
+          "stat-revenue"
+        );
+
+
+      if(websiteEl){
+        websiteEl.textContent =
+          websites;
+      }
+
+      if(orderEl){
+        orderEl.textContent =
+          orders;
+      }
+
+      if(customerEl){
+        customerEl.textContent =
+          customers;
+      }
+
+      if(revenueEl){
+        revenueEl.textContent =
+          revenue;
       }
 
     }
 
 
-    loadDemoStats();
+    /* =========================================================
+       SIDEBAR LOGOUT
+    ========================================================= */
+
+    document
+      .getElementById("sidebar-logout")
+      ?.addEventListener(
+        "click",
+        logoutAdmin
+      );
 
 
-    /* ==========================================
-       PREVENT FLASH AFTER LOGOUT
-    =========================================== */
+    /* =========================================================
+       EXTRA SECURITY
+       Prevent dashboard remaining in browser history
+       after logout.
+    ========================================================= */
 
     window.addEventListener(
       "pageshow",
-      function () {
+      event => {
 
-        const session =
+        const currentSession =
           getAdminSession();
 
-        if (!session) {
+        if(
+          !currentSession ||
+          currentSession.authenticated !== true
+        ){
 
           window.location.replace(
             "login/"
@@ -2628,6 +2748,14 @@
 
       }
     );
+
+
+    /* =========================================================
+       INITIALIZE
+    ========================================================= */
+
+    updateProfile();
+    loadDashboardData();
 
   </script>
 
