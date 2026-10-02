@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Banner Manager | Website Deals</title>
+<link rel="icon" href="../logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{--g:#18a957;--dark:#111713;--text:#17211b;--muted:#748078;--bg:#f5f7f6;--border:#e4e9e6;--red:#e5484d;--shadow:0 14px 40px #1017130b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter;background:var(--bg);color:var(--text)}
+.layout{display:flex;min-height:100vh}.side{position:fixed;inset:0 auto 0 0;width:260px;background:var(--dark);padding:24px 16px;color:#fff}.brand{display:flex;gap:12px;align-items:center;padding:4px 10px 27px}.brand img{width:42px;height:42px;background:#fff;border-radius:10px}.brand b{font:700 18px "Space Grotesk"}.brand small{display:block;color:#7d897f;font-size:10px}.nav-title{font-size:10px;color:#69746d;text-transform:uppercase;letter-spacing:1.3px;padding:17px 12px 7px}.nav a{display:flex;gap:12px;text-decoration:none;color:#aeb8b1;font-size:13px;padding:12px;border-radius:10px;margin:2px 0}.nav a:hover,.nav a.active{background:#1d2821;color:#fff}.nav a.active{box-shadow:inset 3px 0 var(--g)}
+main{margin-left:260px;width:calc(100% - 260px);padding:30px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.eyebrow{font-size:11px;color:var(--g);font-weight:800;letter-spacing:1.5px;text-transform:uppercase}h1{font:700 30px "Space Grotesk";margin-top:4px}.sub{font-size:13px;color:var(--muted);margin-top:5px}.admin{background:#fff;border:1px solid var(--border);border-radius:11px;padding:10px 14px;font-size:12px}
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;gap:10px}.btn{border:0;border-radius:11px;padding:11px 16px;font-size:12px;font-weight:800}.primary{background:var(--g);color:#fff}.secondary{background:#fff;border:1px solid var(--border);color:#27332b}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.card{background:#fff;border:1px solid var(--border);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}.visual{height:170px;background:linear-gradient(135deg,#dff7e9,#f5faf7);display:grid;place-items:center;color:var(--g);font:700 26px "Space Grotesk"}.body{padding:18px}.tag{display:inline-block;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:1px;background:#eaf8f0;color:var(--g);padding:5px 8px;border-radius:6px}.card h2{font:700 18px "Space Grotesk";margin:11px 0 5px}.card p{font-size:11px;color:var(--muted);line-height:1.6}.meta{display:flex;justify-content:space-between;align-items:center;margin-top:15px;padding-top:14px;border-top:1px solid var(--border)}.status{font-size:10px;font-weight:800;color:var(--g)}.actions{display:flex;gap:7px}.smallbtn{border:1px solid var(--border);background:#fff;border-radius:8px;padding:7px 9px;font-size:10px;font-weight:700}.smallbtn.delete{color:var(--red)}
+.modal{display:none;position:fixed;inset:0;background:#11171388;align-items:center;justify-content:center;padding:20px;z-index:50}.modal-box{width:min(650px,100%);background:#fff;border-radius:20px;padding:24px;max-height:90vh;overflow:auto}.modal-head{display:flex;justify-content:space-between;margin-bottom:20px}.modal h2{font:700 20px "Space Grotesk"}.close{border:0;background:#edf1ee;width:34px;height:34px;border-radius:50%}.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}.full{grid-column:1/-1}.field label{display:block;font-size:11px;font-weight:800;margin-bottom:7px}.field input,.field textarea,.field select{width:100%;padding:11px;border:1px solid var(--border);border-radius:10px;outline:none}.field textarea{height:90px;resize:vertical}.modal-actions{text-align:right;margin-top:18px}.toast{display:none;position:fixed;right:25px;bottom:25px;background:#111713;color:#fff;padding:14px 18px;border-radius:12px;font-size:12px;z-index:99}
+@media(max-width:1050px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:800px){.side{width:70px}.brand b,.brand small,.nav span,.nav-title{display:none}main{margin-left:70px;width:calc(100% - 70px);padding:18px}}
+@media(max-width:600px){.grid,.fields{grid-template-columns:1fr}.full{grid-column:auto}.top{display:block}.admin{display:inline-block;margin-top:14px}.toolbar{flex-direction:column;align-items:stretch}}
+</style>
+</head>
+
+<body>
+<div class="layout">
+
+<aside class="side">
+<div class="brand"><img src="../logo.png"><div><b>Website Deals</b><small>ADMIN PANEL</small></div></div>
+<div class="nav">
+<div class="nav-title">Core</div>
+<a href="dashboard.html">▦ <span>Dashboard</span></a>
+<a href="websites.html">◫ <span>Websites</span></a>
+<a href="categories.html">◈ <span>Categories</span></a>
+<a href="orders.html">⌁ <span>Orders</span></a>
+<a href="customers.html">♙ <span>Customers</span></a>
+<div class="nav-title">UI Management</div>
+<a href="browse-ui.html">◉ <span>Browse UI</span></a>
+<a href="homepage.html">⌂ <span>Homepage</span></a>
+<a class="active" href="banners.html">▣ <span>Banners</span></a>
+<div class="nav-title">Business</div>
+<a href="newsletter.html">✉ <span>Newsletter</span></a>
+<a href="payments.html">৳ <span>Payments</span></a>
+<a href="monthly-report.html">⌁ <span>Reports</span></a>
+</div>
+</aside>
+
+<main>
+<header class="top">
+<div><div class="eyebrow">Promotional Content</div><h1>Banner Manager</h1><div class="sub">Create and control promotional banners across Website Deals.</div></div>
+<div class="admin">● Admin Panel</div>
+</header>
+
+<div class="toolbar">
+<div style="font-size:12px;color:#748078">Manage homepage promotions, offers and campaign banners.</div>
+<button class="btn primary" onclick="openModal()">+ Add Banner</button>
+</div>
+
+<section class="grid" id="bannerGrid"></section>
+</main>
+</div>
+
+<div class="modal" id="modal">
+<div class="modal-box">
+<div class="modal-head"><div><h2 id="modalTitle">Add Banner</h2><div style="font-size:11px;color:#748078;margin-top:4px">Banner information</div></div><button class="close" onclick="closeModal()">×</button></div>
+
+<div class="fields">
+<div class="field"><label>Banner Title</label><input id="title" placeholder="Summer Website Sale"></div>
+<div class="field"><label>Badge</label><input id="badge" placeholder="LIMITED OFFER"></div>
+<div class="field full"><label>Description</label><textarea id="description" placeholder="Save more on premium ready-made websites."></textarea></div>
+<div class="field"><label>CTA Text</label><input id="cta" value="Explore Deals"></div>
+<div class="field"><label>CTA Link</label><input id="link" value="../index.html"></div>
+<div class="field"><label>Image URL</label><input id="image" placeholder="https://..."></div>
+<div class="field"><label>Status</label><select id="status"><option value="active">Active</option><option value="draft">Draft</option></select></div>
+</div>
+
+<div class="modal-actions">
+<button class="btn secondary" onclick="closeModal()">Cancel</button>
+<button class="btn primary" onclick="saveBanner()">Save Banner</button>
+</div>
+</div>
+</div>
+
+<div class="toast" id="toast">Saved successfully.</div>
+
+<script>
+const KEY="websiteDealsBanners";
+let banners=[];
+let editId=null;
+
+const defaults=[
+{id:"BNR001",title:"Premium Websites from ৳999",badge:"STARTING AT ৳999",description:"Launch faster with professionally designed ready-made websites.",cta:"Explore Websites",link:"../index.html",image:"",status:"active"},
+{id:"BNR002",title:"New Websites Are Here",badge:"NEW ARRIVALS",description:"Discover the latest additions to the Website Deals marketplace.",cta:"View New Websites",link:"../index.html#new",image:"",status:"active"},
+{id:"BNR003",title:"Build Your Next Website",badge:"WEBSITE DEALS",description:"Choose a ready-made website and get your project moving today.",cta:"Browse Marketplace",link:"../index.html",image:"",status:"draft"}
+];
+
+function load(){
+try{
+const saved=JSON.parse(localStorage.getItem(KEY));
+banners=Array.isArray(saved)?saved:defaults;
+}catch(e){banners=defaults}
+render();
+}
+
+function render(){
+const grid=document.getElementById("bannerGrid");
+grid.innerHTML="";
+banners.forEach(b=>{
+const visual=b.image
+?`<img src="${escapeHtml(b.image)}" style="width:100%;height:170px;object-fit:cover" onerror="this.style.display='none'">`
+:`${escapeHtml(b.badge||"WEBSITE DEALS")}`;
+
+grid.innerHTML+=`
+<article class="card">
+<div class="visual">${visual}</div>
+<div class="body">
+<span class="tag">${escapeHtml(b.status)}</span>
+<h2>${escapeHtml(b.title)}</h2>
+<p>${escapeHtml(b.description)}</p>
+<div class="meta">
+<span class="status">${escapeHtml(b.id)}</span>
+<div class="actions">
+<button class="smallbtn" onclick="editBanner('${b.id}')">Edit</button>
+<button class="smallbtn delete" onclick="deleteBanner('${b.id}')">Delete</button>
+</div>
+</div>
+</div>
+</article>`;
+});
+}
+
+function openModal(id=null){
+editId=id;
+document.getElementById("modal").style.display="flex";
+if(id){
+const b=banners.find(x=>x.id===id);
+document.getElementById("modalTitle").textContent="Edit Banner";
+["title","badge","description","cta","link","image","status"].forEach(k=>document.getElementById(k).value=b[k]||"");
+}else{
+document.getElementById("modalTitle").textContent="Add Banner";
+["title","badge","description","image"].forEach(k=>document.getElementById(k).value="");
+document.getElementById("cta").value="Explore Deals";
+document.getElementById("link").value="../index.html";
+document.getElementById("status").value="active";
+}
+}
+
+function closeModal(){document.getElementById("modal").style.display="none"}
+
+function saveBanner(){
+const data={
+id:editId||"BNR"+Date.now().toString().slice(-5),
+title:document.getElementById("title").value.trim(),
+badge:document.getElementById("badge").value.trim(),
+description:document.getElementById("description").value.trim(),
+cta:document.getElementById("cta").value.trim(),
+link:document.getElementById("link").value.trim(),
+image:document.getElementById("image").value.trim(),
+status:document.getElementById("status").value
+};
+
+if(!data.title){alert("Banner title is required.");return}
+
+if(editId){
+const i=banners.findIndex(x=>x.id===editId);
+banners[i]=data;
+}else banners.unshift(data);
+
+localStorage.setItem(KEY,JSON.stringify(banners));
+closeModal();
+render();
+showToast();
+}
+
+function editBanner(id){openModal(id)}
+
+function deleteBanner(id){
+if(!confirm("Delete this banner?"))return;
+banners=banners.filter(x=>x.id!==id);
+localStorage.setItem(KEY,JSON.stringify(banners));
+render();
+showToast("Banner deleted.");
+}
+
+function showToast(msg="Banner saved successfully."){
+const t=document.getElementById("toast");
+t.textContent=msg;
+t.style.display="block";
+setTimeout(()=>t.style.display="none",2200);
+}
+
+function escapeHtml(v){
+return String(v??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+}
+
+load();
+</script>
+</body>
+</html>
