@@ -1,2219 +1,2220 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-
-<link rel="icon" type="image/svg+xml" href="../favicon.svg">
-<link rel="icon" type="image/png" href="../logo.png">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#07110b">
-
-<title>Newsletter | Website Deals Admin</title>
-<meta name="description" content="Website Deals Admin — Newsletter Management">
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
-:root{
-  --green:#18a957;
-  --green-dark:#118344;
-  --green-soft:#e9f8ef;
-  --dark:#07110b;
-  --sidebar:#101713;
-  --sidebar-soft:#18231d;
-  --white:#fff;
-  --surface:#f6f8f7;
-  --surface-2:#fbfcfb;
-  --border:#e3eae6;
-  --text:#142019;
-  --muted:#738079;
-  --danger:#dc3d4b;
-  --danger-soft:#fff0f1;
-  --warning:#c88700;
-  --warning-soft:#fff8e8;
-  --blue:#2563eb;
-  --blue-soft:#edf3ff;
-  --shadow:0 14px 40px rgba(8,25,15,.07);
-  --shadow-lg:0 25px 70px rgba(8,25,15,.14);
-  --radius:20px;
-}
-
-*{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
-}
-
-body{
-  font-family:"DM Sans",sans-serif;
-  background:var(--surface);
-  color:var(--text);
-  min-height:100vh;
-}
-
-button,input,textarea,select{
-  font:inherit;
-}
-
-button{
-  cursor:pointer;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-}
-
-/* =========================
-   LAYOUT
-========================= */
-
-.app{
-  min-height:100vh;
-  display:flex;
-}
-
-.sidebar{
-  width:270px;
-  background:var(--sidebar);
-  color:#fff;
-  position:fixed;
-  inset:0 auto 0 0;
-  z-index:1000;
-  display:flex;
-  flex-direction:column;
-  padding:22px 16px;
-  transition:transform .25s ease;
-}
-
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:4px 10px 24px;
-}
-
-.brand-logo{
-  width:42px;
-  height:42px;
-  border-radius:13px;
-  object-fit:cover;
-  background:#fff;
-}
-
-.brand-title{
-  font-family:"Manrope",sans-serif;
-  font-weight:800;
-  font-size:15px;
-}
-
-.brand-sub{
-  color:#8c9a91;
-  font-size:11px;
-  margin-top:2px;
-}
-
-.nav{
-  flex:1;
-  overflow:auto;
-}
-
-.nav-section{
-  margin:18px 8px 8px;
-  color:#718077;
-  text-transform:uppercase;
-  font-size:10px;
-  letter-spacing:.12em;
-  font-weight:700;
-}
-
-.nav-link{
-  display:flex;
-  align-items:center;
-  gap:11px;
-  padding:11px 12px;
-  border-radius:12px;
-  color:#aeb9b2;
-  font-size:13px;
-  font-weight:600;
-  margin-bottom:3px;
-}
-
-.nav-link:hover{
-  background:var(--sidebar-soft);
-  color:#fff;
-}
-
-.nav-link.active{
-  background:var(--green);
-  color:#fff;
-  box-shadow:0 9px 22px rgba(24,169,87,.18);
-}
-
-.nav-icon{
-  width:18px;
-  text-align:center;
-}
-
-.sidebar-bottom{
-  border-top:1px solid rgba(255,255,255,.07);
-  padding-top:15px;
-  margin-top:12px;
-}
-
-.admin-mini{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  padding:9px 10px;
-}
-
-.admin-avatar{
-  width:35px;
-  height:35px;
-  border-radius:50%;
-  background:var(--green);
-  display:grid;
-  place-items:center;
-  font-size:12px;
-  font-weight:800;
-}
-
-.admin-mini-text{
-  min-width:0;
-  flex:1;
-}
-
-.admin-name{
-  color:#fff;
-  font-size:12px;
-  font-weight:700;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.admin-role{
-  color:#819087;
-  font-size:10px;
-  margin-top:2px;
-}
-
-.logout-btn{
-  width:100%;
-  border:1px solid rgba(255,255,255,.08);
-  background:transparent;
-  color:#b4c0b8;
-  padding:10px 12px;
-  border-radius:11px;
-  margin-top:8px;
-  font-size:12px;
-  font-weight:700;
-  text-align:left;
-}
-
-.logout-btn:hover{
-  background:rgba(255,255,255,.05);
-  color:#fff;
-}
-
-.main{
-  margin-left:270px;
-  width:calc(100% - 270px);
-  min-width:0;
-}
-
-.topbar{
-  height:74px;
-  background:rgba(255,255,255,.94);
-  border-bottom:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:0 30px;
-  position:sticky;
-  top:0;
-  z-index:800;
-  backdrop-filter:blur(16px);
-}
-
-.topbar-left{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.page-kicker{
-  color:var(--muted);
-  font-size:12px;
-  font-weight:600;
-}
-
-.top-actions{
-  display:flex;
-  gap:8px;
-}
-
-.icon-btn,
-.top-btn{
-  min-height:39px;
-  border:1px solid var(--border);
-  background:#fff;
-  color:var(--text);
-  border-radius:11px;
-  padding:0 13px;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:7px;
-  font-size:12px;
-  font-weight:700;
-}
-
-.top-btn:hover,
-.icon-btn:hover{
-  background:var(--surface-2);
-}
-
-.mobile-menu{
-  display:none;
-}
-
-/* =========================
-   CONTENT
-========================= */
-
-.content{
-  padding:30px;
-  max-width:1700px;
-  margin:auto;
-}
-
-.hero{
-  display:flex;
-  justify-content:space-between;
-  align-items:flex-end;
-  gap:25px;
-  margin-bottom:24px;
-}
-
-.eyebrow{
-  color:var(--green);
-  text-transform:uppercase;
-  letter-spacing:.13em;
-  font-size:10px;
-  font-weight:800;
-  margin-bottom:9px;
-}
-
-.hero h1{
-  font-family:"Manrope",sans-serif;
-  font-size:clamp(28px,3vw,42px);
-  letter-spacing:-.045em;
-  line-height:1.08;
-}
-
-.hero p{
-  color:var(--muted);
-  margin-top:10px;
-  max-width:700px;
-  font-size:14px;
-  line-height:1.7;
-}
-
-.hero-badge{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:15px;
-  padding:12px 15px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-  box-shadow:var(--shadow);
-  white-space:nowrap;
-}
-
-.status-dot{
-  width:9px;
-  height:9px;
-  border-radius:50%;
-  background:var(--green);
-  box-shadow:0 0 0 5px var(--green-soft);
-}
-
-.hero-badge strong{
-  display:block;
-  font-size:12px;
-}
-
-.hero-badge span{
-  display:block;
-  color:var(--muted);
-  font-size:10px;
-  margin-top:2px;
-}
-
-/* =========================
-   STATS
-========================= */
-
-.stats{
-  display:grid;
-  grid-template-columns:repeat(5,minmax(0,1fr));
-  gap:14px;
-  margin-bottom:20px;
-}
-
-.stat-card{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  padding:19px;
-  box-shadow:var(--shadow);
-}
-
-.stat-top{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-}
-
-.stat-label{
-  color:var(--muted);
-  font-size:11px;
-  font-weight:700;
-}
-
-.stat-icon{
-  width:33px;
-  height:33px;
-  display:grid;
-  place-items:center;
-  border-radius:10px;
-  background:var(--green-soft);
-  color:var(--green-dark);
-}
-
-.stat-value{
-  margin-top:13px;
-  font-family:"Manrope",sans-serif;
-  font-size:25px;
-  font-weight:800;
-  letter-spacing:-.04em;
-}
-
-.stat-meta{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:6px;
-}
-
-/* =========================
-   GRID
-========================= */
-
-.dashboard-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.55fr) minmax(310px,.75fr);
-  gap:18px;
-}
-
-.panel{
-  background:#fff;
-  border:1px solid var(--border);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
-}
-
-.panel-header{
-  padding:18px 19px;
-  border-bottom:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-
-.panel-title{
-  font-family:"Manrope",sans-serif;
-  font-size:15px;
-  font-weight:800;
-}
-
-.panel-subtitle{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:4px;
-}
-
-.panel-body{
-  padding:18px;
-}
-
-/* =========================
-   CAMPAIGN COMPOSER
-========================= */
-
-.field-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
-}
-
-.field{
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-}
-
-.field.full{
-  grid-column:1/-1;
-}
-
-.field label{
-  color:#526058;
-  font-size:10px;
-  font-weight:800;
-}
-
-.field input,
-.field select,
-.field textarea{
-  width:100%;
-  border:1px solid var(--border);
-  background:var(--surface-2);
-  border-radius:11px;
-  min-height:42px;
-  padding:10px 12px;
-  outline:none;
-  color:var(--text);
-  font-size:11px;
-}
-
-.field textarea{
-  min-height:120px;
-  resize:vertical;
-}
-
-.field input:focus,
-.field select:focus,
-.field textarea:focus{
-  border-color:rgba(24,169,87,.55);
-  box-shadow:0 0 0 4px rgba(24,169,87,.08);
-  background:#fff;
-}
-
-.help{
-  color:#8a958f;
-  font-size:9px;
-  line-height:1.5;
-}
-
-.toggle-row{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  padding:12px;
-  border:1px solid var(--border);
-  border-radius:12px;
-  background:var(--surface-2);
-}
-
-.toggle-copy strong{
-  display:block;
-  font-size:11px;
-}
-
-.toggle-copy span{
-  display:block;
-  color:var(--muted);
-  font-size:9px;
-  margin-top:3px;
-}
-
-.switch{
-  position:relative;
-  width:43px;
-  height:24px;
-  flex:0 0 43px;
-}
-
-.switch input{
-  opacity:0;
-  width:0;
-  height:0;
-}
-
-.slider{
-  position:absolute;
-  inset:0;
-  background:#cfd7d2;
-  border-radius:999px;
-  transition:.2s;
-}
-
-.slider:before{
-  content:"";
-  position:absolute;
-  width:18px;
-  height:18px;
-  left:3px;
-  top:3px;
-  background:#fff;
-  border-radius:50%;
-  transition:.2s;
-  box-shadow:0 2px 5px rgba(0,0,0,.15);
-}
-
-.switch input:checked + .slider{
-  background:var(--green);
-}
-
-.switch input:checked + .slider:before{
-  transform:translateX(19px);
-}
-
-.composer-actions{
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  margin-top:16px;
-  padding-top:16px;
-  border-top:1px solid var(--border);
-}
-
-/* =========================
-   AUDIENCE
-========================= */
-
-.audience-list{
-  display:grid;
-  gap:9px;
-}
-
-.audience-item{
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:12px;
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.audience-check{
-  width:16px;
-  height:16px;
-  accent-color:var(--green);
-}
-
-.audience-icon{
-  width:35px;
-  height:35px;
-  border-radius:10px;
-  background:var(--green-soft);
-  color:var(--green-dark);
-  display:grid;
-  place-items:center;
-  font-size:14px;
-}
-
-.audience-copy{
-  flex:1;
-}
-
-.audience-copy strong{
-  display:block;
-  font-size:11px;
-}
-
-.audience-copy span{
-  display:block;
-  color:var(--muted);
-  font-size:9px;
-  margin-top:3px;
-}
-
-.audience-count{
-  font-size:11px;
-  font-weight:800;
-}
-
-/* =========================
-   RECENT CAMPAIGNS
-========================= */
-
-.campaign-list{
-  display:grid;
-}
-
-.campaign{
-  padding:14px 18px;
-  border-bottom:1px solid #edf1ee;
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.campaign:last-child{
-  border-bottom:0;
-}
-
-.campaign-icon{
-  width:39px;
-  height:39px;
-  border-radius:12px;
-  background:var(--green-soft);
-  color:var(--green-dark);
-  display:grid;
-  place-items:center;
-  flex:0 0 39px;
-}
-
-.campaign-main{
-  min-width:0;
-  flex:1;
-}
-
-.campaign-name{
-  font-weight:800;
-  font-size:11px;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
-}
-
-.campaign-meta{
-  color:var(--muted);
-  font-size:9px;
-  margin-top:3px;
-}
-
-.campaign-status{
-  padding:5px 8px;
-  border-radius:999px;
-  font-size:8px;
-  font-weight:800;
-}
-
-.campaign-status.sent{
-  background:var(--green-soft);
-  color:var(--green-dark);
-}
-
-.campaign-status.draft{
-  background:#eef1ef;
-  color:#69756e;
-}
-
-.campaign-status.scheduled{
-  background:var(--blue-soft);
-  color:var(--blue);
-}
-
-.campaign-actions{
-  display:flex;
-  gap:5px;
-}
-
-.small-action{
-  width:30px;
-  height:30px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  background:#fff;
-  font-size:11px;
-}
-
-/* =========================
-   SETTINGS
-========================= */
-
-.settings-list{
-  display:grid;
-  gap:10px;
-}
-
-.setting-item{
-  border:1px solid var(--border);
-  border-radius:13px;
-  padding:13px;
-}
-
-.setting-item strong{
-  display:block;
-  font-size:11px;
-}
-
-.setting-item span{
-  display:block;
-  color:var(--muted);
-  font-size:9px;
-  line-height:1.5;
-  margin-top:4px;
-}
-
-/* =========================
-   TABLE
-========================= */
-
-.table-wrap{
-  overflow:auto;
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:850px;
-}
-
-thead th{
-  background:#fbfcfb;
-  color:#7d8982;
-  font-size:10px;
-  text-transform:uppercase;
-  letter-spacing:.07em;
-  text-align:left;
-  padding:13px 15px;
-  border-bottom:1px solid var(--border);
-  white-space:nowrap;
-}
-
-tbody td{
-  padding:13px 15px;
-  border-bottom:1px solid #edf1ee;
-  font-size:11px;
-}
-
-.sub{
-  color:var(--muted);
-  font-size:9px;
-  margin-top:3px;
-}
-
-.badge{
-  display:inline-flex;
-  padding:5px 8px;
-  border-radius:999px;
-  font-size:9px;
-  font-weight:800;
-}
-
-.badge.sent{
-  color:var(--green-dark);
-  background:var(--green-soft);
-}
-
-.badge.draft{
-  color:#68746d;
-  background:#eef1ef;
-}
-
-.badge.scheduled{
-  color:var(--blue);
-  background:var(--blue-soft);
-}
-
-.badge.cancelled{
-  color:var(--danger);
-  background:var(--danger-soft);
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-.btn{
-  height:39px;
-  border:1px solid var(--border);
-  background:#fff;
-  border-radius:10px;
-  padding:0 13px;
-  font-size:11px;
-  font-weight:700;
-  color:var(--text);
-}
-
-.btn:hover{
-  background:var(--surface);
-}
-
-.btn.primary{
-  background:var(--green);
-  border-color:var(--green);
-  color:#fff;
-}
-
-.btn.dark{
-  background:var(--dark);
-  border-color:var(--dark);
-  color:#fff;
-}
-
-.btn.danger{
-  color:var(--danger);
-  border-color:#f1d2d5;
-}
-
-.btn.small{
-  height:31px;
-  padding:0 9px;
-  font-size:9px;
-}
-
-/* =========================
-   EMPTY
-========================= */
-
-.empty{
-  padding:38px 20px;
-  text-align:center;
-  color:var(--muted);
-  font-size:11px;
-}
-
-/* =========================
-   MODAL
-========================= */
-
-.modal-overlay{
-  position:fixed;
-  inset:0;
-  z-index:3000;
-  display:none;
-  align-items:center;
-  justify-content:center;
-  padding:20px;
-  background:rgba(4,12,7,.57);
-  backdrop-filter:blur(7px);
-}
-
-.modal-overlay.show{
-  display:flex;
-}
-
-.modal{
-  width:min(780px,100%);
-  max-height:92vh;
-  overflow:auto;
-  background:#fff;
-  border-radius:23px;
-  box-shadow:var(--shadow-lg);
-}
-
-.modal.small{
-  width:min(450px,100%);
-}
-
-.modal-header{
-  position:sticky;
-  top:0;
-  z-index:2;
-  background:rgba(255,255,255,.96);
-  border-bottom:1px solid var(--border);
-  padding:18px 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-
-.modal-title{
-  font-family:"Manrope",sans-serif;
-  font-size:17px;
-  font-weight:800;
-}
-
-.modal-subtitle{
-  color:var(--muted);
-  font-size:10px;
-  margin-top:4px;
-}
-
-.close-btn{
-  width:34px;
-  height:34px;
-  border:1px solid var(--border);
-  background:#fff;
-  border-radius:9px;
-  font-size:17px;
-}
-
-.modal-body{
-  padding:20px;
-}
-
-.modal-footer{
-  padding:15px 20px;
-  border-top:1px solid var(--border);
-  background:#fbfcfb;
-  display:flex;
-  justify-content:flex-end;
-  gap:8px;
-}
-
-/* =========================
-   TOAST
-========================= */
-
-.toast{
-  position:fixed;
-  right:24px;
-  bottom:24px;
-  z-index:5000;
-  background:var(--dark);
-  color:#fff;
-  border-radius:13px;
-  padding:12px 15px;
-  display:flex;
-  align-items:center;
-  gap:9px;
-  box-shadow:var(--shadow-lg);
-  opacity:0;
-  transform:translateY(20px);
-  pointer-events:none;
-  transition:.25s;
-  font-size:11px;
-  font-weight:700;
-}
-
-.toast.show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-.toast-icon{
-  width:22px;
-  height:22px;
-  border-radius:7px;
-  background:var(--green);
-  display:grid;
-  place-items:center;
-}
-
-/* =========================
-   OVERLAY
-========================= */
-
-.sidebar-overlay{
-  display:none;
-  position:fixed;
-  inset:0;
-  z-index:900;
-  background:rgba(0,0,0,.45);
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-.footer-note{
-  text-align:center;
-  color:#8b958f;
-  font-size:9px;
-  padding:18px 0 5px;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:1250px){
-  .stats{
-    grid-template-columns:repeat(3,1fr);
-  }
-
-  .dashboard-grid{
-    grid-template-columns:1fr;
-  }
-}
-
-@media(max-width:1050px){
-
-  .sidebar{
-    transform:translateX(-100%);
-  }
-
-  .sidebar.open{
-    transform:translateX(0);
-  }
-
-  .sidebar-overlay.show{
-    display:block;
-  }
-
-  .main{
-    margin-left:0;
-    width:100%;
-  }
-
-  .mobile-menu{
-    display:inline-flex;
-  }
-
-  .topbar{
-    padding:0 18px;
-  }
-
-  .content{
-    padding:22px 18px;
-  }
-}
-
-@media(max-width:760px){
-
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-  .hero{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .hero-badge{
-    width:100%;
-  }
-
-  .field-grid{
-    grid-template-columns:1fr;
-  }
-
-  .field.full{
-    grid-column:auto;
-  }
-
-  .composer-actions{
-    flex-wrap:wrap;
-  }
-
-  .composer-actions .btn{
-    flex:1;
-  }
-}
-
-@media(max-width:480px){
-
-  .content{
-    padding:17px 12px;
-  }
-
-  .topbar{
-    height:66px;
-    padding:0 12px;
-  }
-
-  .page-kicker{
-    display:none;
-  }
-
-  .top-actions .marketplace{
-    display:none;
-  }
-
-  .stat-card{
-    padding:14px;
-    border-radius:16px;
-  }
-
-  .stat-value{
-    font-size:21px;
-  }
-
-  .hero h1{
-    font-size:27px;
-  }
-
-  .modal-overlay{
-    padding:10px;
-  }
-
-  .modal{
-    max-height:96vh;
-    border-radius:19px;
-  }
-
-  .modal-header,
-  .modal-body,
-  .modal-footer{
-    padding-left:15px;
-    padding-right:15px;
-  }
-
-  .modal-footer{
-    flex-wrap:wrap;
-  }
-
-  .modal-footer .btn{
-    flex:1;
-  }
-
-  .toast{
-    left:12px;
-    right:12px;
-    bottom:12px;
-  }
-}
-
-/* =========================
-   PRINT
-========================= */
-
-@media print{
-
-  @page{
-    size:A4 landscape;
-    margin:12mm;
-  }
-
-  body{
-    background:#fff;
-  }
-
-  .sidebar,
-  .topbar,
-  .hero-badge,
-  .btn,
-  .composer-actions,
-  .campaign-actions,
-  .modal-overlay,
-  .toast,
-  .footer-note{
-    display:none !important;
-  }
-
-  .main{
-    margin:0;
-    width:100%;
-  }
-
-  .content{
-    padding:0;
-  }
-
-  .panel,
-  .stat-card{
-    box-shadow:none;
-  }
-}
-</style>
+  <meta charset="UTF-8">
+
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="icon" type="image/png" href="../logo.png">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07110b">
+
+  <meta
+    name="description"
+    content="Website Deals Admin — Customer Management"
+  >
+
+  <title>Customers | Website Deals Admin</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root{
+      --green:#18a957;
+      --green-dark:#108243;
+      --green-soft:#eaf8f0;
+
+      --dark:#07110b;
+      --sidebar:#101713;
+
+      --bg:#f6f8f7;
+      --surface:#ffffff;
+      --surface-2:#f1f5f3;
+
+      --border:#e3eae6;
+
+      --text:#142019;
+      --muted:#738079;
+
+      --danger:#dc3545;
+      --danger-soft:#fff0f1;
+
+      --warning:#d88b00;
+      --warning-soft:#fff7df;
+
+      --blue:#3478f6;
+      --blue-soft:#edf4ff;
+
+      --purple:#7657e8;
+      --purple-soft:#f1edff;
+
+      --shadow:0 18px 50px rgba(8,24,14,.07);
+      --shadow-soft:0 8px 24px rgba(8,24,14,.06);
+
+      --radius:20px;
+      --radius-sm:13px;
+    }
+
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:"DM Sans",sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      min-height:100vh;
+    }
+
+    button,
+    input,
+    select,
+    textarea{
+      font:inherit;
+    }
+
+    button{
+      cursor:pointer;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    .app{
+      min-height:100vh;
+      display:flex;
+    }
+
+    /* =========================
+       SIDEBAR
+    ========================= */
+
+    .sidebar{
+      width:270px;
+      flex:0 0 270px;
+      background:var(--sidebar);
+      color:#fff;
+      min-height:100vh;
+      position:fixed;
+      left:0;
+      top:0;
+      bottom:0;
+      z-index:1000;
+      display:flex;
+      flex-direction:column;
+      padding:22px 16px 18px;
+      overflow-y:auto;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:4px 8px 24px;
+    }
+
+    .brand-logo{
+      width:44px;
+      height:44px;
+      border-radius:13px;
+      background:#fff;
+      padding:6px;
+      object-fit:contain;
+      flex:none;
+    }
+
+    .brand-name{
+      font-family:"Manrope",sans-serif;
+      font-size:17px;
+      font-weight:800;
+      letter-spacing:-.4px;
+    }
+
+    .brand-sub{
+      color:#9ca9a1;
+      font-size:11px;
+      margin-top:2px;
+    }
+
+    .nav-section{
+      margin-top:10px;
+    }
+
+    .nav-label{
+      color:#6e7d74;
+      text-transform:uppercase;
+      font-size:10px;
+      letter-spacing:1.5px;
+      font-weight:700;
+      padding:0 12px 9px;
+    }
+
+    .nav-item{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      min-height:45px;
+      padding:0 12px;
+      border-radius:12px;
+      color:#b9c3bd;
+      margin-bottom:4px;
+      font-size:13px;
+      font-weight:600;
+      transition:.2s ease;
+    }
+
+    .nav-item:hover{
+      background:rgba(255,255,255,.06);
+      color:#fff;
+    }
+
+    .nav-item.active{
+      background:rgba(24,169,87,.16);
+      color:#72e3a1;
+    }
+
+    .nav-icon{
+      width:19px;
+      height:19px;
+      display:grid;
+      place-items:center;
+      flex:none;
+      font-size:16px;
+    }
+
+    .sidebar-bottom{
+      margin-top:auto;
+      padding-top:18px;
+    }
+
+    .admin-mini{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:16px;
+      padding:12px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .avatar-small{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      display:grid;
+      place-items:center;
+      background:var(--green);
+      color:#fff;
+      font-weight:800;
+      flex:none;
+    }
+
+    .admin-mini-name{
+      color:#fff;
+      font-size:12px;
+      font-weight:700;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .admin-mini-role{
+      color:#819087;
+      font-size:10px;
+      margin-top:2px;
+    }
+
+    .logout-btn{
+      width:100%;
+      margin-top:10px;
+      border:1px solid rgba(255,255,255,.08);
+      background:transparent;
+      color:#b7c1bb;
+      min-height:42px;
+      border-radius:12px;
+      font-weight:600;
+      font-size:12px;
+      transition:.2s;
+    }
+
+    .logout-btn:hover{
+      background:rgba(220,53,69,.1);
+      color:#ff8f99;
+      border-color:rgba(220,53,69,.2);
+    }
+
+    /* =========================
+       MAIN
+    ========================= */
+
+    .main{
+      width:calc(100% - 270px);
+      margin-left:270px;
+      min-width:0;
+    }
+
+    .topbar{
+      height:76px;
+      background:rgba(255,255,255,.92);
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 30px;
+      position:sticky;
+      top:0;
+      z-index:500;
+      backdrop-filter:blur(16px);
+    }
+
+    .topbar-left{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .page-kicker{
+      color:var(--muted);
+      font-size:12px;
+      font-weight:600;
+    }
+
+    .page-title-mini{
+      font-family:"Manrope",sans-serif;
+      font-size:15px;
+      font-weight:800;
+      margin-top:2px;
+    }
+
+    .top-actions{
+      display:flex;
+      align-items:center;
+      gap:8px;
+    }
+
+    .icon-btn,
+    .outline-btn,
+    .primary-btn{
+      border-radius:11px;
+      min-height:40px;
+      padding:0 13px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+      font-size:12px;
+      font-weight:700;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:7px;
+      transition:.2s;
+    }
+
+    .icon-btn{
+      width:40px;
+      padding:0;
+    }
+
+    .icon-btn:hover,
+    .outline-btn:hover{
+      border-color:#cbd7d0;
+      background:var(--surface-2);
+    }
+
+    .primary-btn{
+      border-color:var(--green);
+      background:var(--green);
+      color:#fff;
+      box-shadow:0 8px 20px rgba(24,169,87,.18);
+    }
+
+    .primary-btn:hover{
+      background:var(--green-dark);
+      border-color:var(--green-dark);
+      transform:translateY(-1px);
+    }
+
+    .danger-btn{
+      border-color:#f0c7cb;
+      background:#fff;
+      color:var(--danger);
+    }
+
+    .danger-btn:hover{
+      background:var(--danger-soft);
+    }
+
+    .mobile-menu{
+      display:none;
+    }
+
+    .content{
+      padding:30px;
+      max-width:1700px;
+      margin:0 auto;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero{
+      background:
+        radial-gradient(circle at 90% 20%, rgba(24,169,87,.15), transparent 32%),
+        linear-gradient(135deg,#0b1710,#12251a);
+      border-radius:26px;
+      color:#fff;
+      padding:30px;
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:25px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+
+    .hero:after{
+      content:"";
+      position:absolute;
+      width:280px;
+      height:280px;
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:50%;
+      right:-100px;
+      top:-130px;
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      background:rgba(24,169,87,.14);
+      color:#7ce6a7;
+      border:1px solid rgba(24,169,87,.25);
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:10px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:1px;
+    }
+
+    .eyebrow-dot{
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:#62df95;
+    }
+
+    .hero h1{
+      font-family:"Manrope",sans-serif;
+      font-size:clamp(26px,3vw,40px);
+      line-height:1.08;
+      letter-spacing:-1.4px;
+      margin-top:15px;
+    }
+
+    .hero p{
+      color:#aebdb4;
+      font-size:13px;
+      line-height:1.7;
+      max-width:650px;
+      margin-top:11px;
+    }
+
+    .hero-side{
+      position:relative;
+      z-index:2;
+      min-width:250px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:18px;
+      padding:17px;
+    }
+
+    .hero-side-label{
+      color:#8f9e95;
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-weight:800;
+    }
+
+    .hero-side-value{
+      font-family:"Manrope",sans-serif;
+      font-size:25px;
+      font-weight:800;
+      margin-top:5px;
+    }
+
+    .hero-side-sub{
+      color:#8f9e95;
+      font-size:11px;
+      margin-top:3px;
+    }
+
+    /* =========================
+       STATS
+    ========================= */
+
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(5,1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .stat-card{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:19px;
+      box-shadow:var(--shadow-soft);
+      min-width:0;
+    }
+
+    .stat-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+    }
+
+    .stat-label{
+      color:var(--muted);
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .stat-icon{
+      width:34px;
+      height:34px;
+      border-radius:11px;
+      display:grid;
+      place-items:center;
+      background:var(--green-soft);
+      color:var(--green);
+      font-size:15px;
+    }
+
+    .stat-value{
+      font-family:"Manrope",sans-serif;
+      font-size:25px;
+      font-weight:800;
+      letter-spacing:-.8px;
+      margin-top:13px;
+    }
+
+    .stat-note{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:4px;
+    }
+
+    /* =========================
+       TOOLBAR
+    ========================= */
+
+    .section-card{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:20px;
+      box-shadow:var(--shadow-soft);
+      margin-top:18px;
+    }
+
+    .toolbar{
+      padding:16px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .search-wrap{
+      position:relative;
+      flex:1 1 280px;
+      min-width:220px;
+    }
+
+    .search-icon{
+      position:absolute;
+      left:13px;
+      top:50%;
+      transform:translateY(-50%);
+      color:#95a099;
+      font-size:13px;
+      pointer-events:none;
+    }
+
+    .search-input{
+      width:100%;
+      height:42px;
+      border:1px solid var(--border);
+      background:var(--surface-2);
+      border-radius:12px;
+      padding:0 13px 0 36px;
+      outline:none;
+      color:var(--text);
+      font-size:12px;
+      transition:.2s;
+    }
+
+    .search-input:focus,
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus{
+      border-color:rgba(24,169,87,.55);
+      box-shadow:0 0 0 3px rgba(24,169,87,.09);
+      background:#fff;
+    }
+
+    .filter-select{
+      height:42px;
+      min-width:145px;
+      border:1px solid var(--border);
+      background:var(--surface-2);
+      border-radius:12px;
+      padding:0 11px;
+      outline:none;
+      color:var(--text);
+      font-size:12px;
+      font-weight:600;
+    }
+
+    .bulk-wrap{
+      display:none;
+      align-items:center;
+      gap:7px;
+      padding-left:4px;
+    }
+
+    .bulk-wrap.show{
+      display:flex;
+    }
+
+    .bulk-count{
+      color:var(--muted);
+      font-size:11px;
+      font-weight:700;
+      margin-right:3px;
+    }
+
+    /* =========================
+       TABLE
+    ========================= */
+
+    .table-wrap{
+      width:100%;
+      overflow-x:auto;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:1050px;
+    }
+
+    th{
+      text-align:left;
+      color:#849088;
+      background:#fbfcfb;
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:.7px;
+      font-weight:800;
+      padding:13px 16px;
+      border-bottom:1px solid var(--border);
+      white-space:nowrap;
+    }
+
+    td{
+      padding:14px 16px;
+      border-bottom:1px solid #edf1ee;
+      font-size:12px;
+      vertical-align:middle;
+    }
+
+    tbody tr{
+      transition:.15s;
+    }
+
+    tbody tr:hover{
+      background:#fbfdfc;
+    }
+
+    tbody tr:last-child td{
+      border-bottom:none;
+    }
+
+    .check{
+      width:16px;
+      height:16px;
+      accent-color:var(--green);
+      cursor:pointer;
+    }
+
+    .customer-cell{
+      display:flex;
+      align-items:center;
+      gap:11px;
+      min-width:200px;
+    }
+
+    .customer-avatar{
+      width:40px;
+      height:40px;
+      border-radius:13px;
+      display:grid;
+      place-items:center;
+      color:#fff;
+      font-size:12px;
+      font-weight:800;
+      flex:none;
+      background:linear-gradient(135deg,#18a957,#106c38);
+    }
+
+    .customer-name{
+      font-weight:800;
+      color:var(--text);
+      font-size:12px;
+    }
+
+    .customer-id{
+      color:#909a94;
+      font-size:10px;
+      margin-top:2px;
+    }
+
+    .contact-main{
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .contact-sub{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:3px;
+    }
+
+    .money{
+      font-weight:800;
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      padding:6px 9px;
+      border-radius:999px;
+      font-size:10px;
+      font-weight:800;
+      white-space:nowrap;
+    }
+
+    .badge:before{
+      content:"";
+      width:5px;
+      height:5px;
+      border-radius:50%;
+      background:currentColor;
+    }
+
+    .badge.active{
+      background:var(--green-soft);
+      color:var(--green-dark);
+    }
+
+    .badge.inactive{
+      background:#eef1f0;
+      color:#68746d;
+    }
+
+    .badge.suspended{
+      background:var(--danger-soft);
+      color:var(--danger);
+    }
+
+    .badge.new{
+      background:var(--blue-soft);
+      color:var(--blue);
+    }
+
+    .badge.returning{
+      background:var(--purple-soft);
+      color:var(--purple);
+    }
+
+    .row-actions{
+      display:flex;
+      align-items:center;
+      gap:5px;
+    }
+
+    .row-btn{
+      width:31px;
+      height:31px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:9px;
+      display:grid;
+      place-items:center;
+      font-size:12px;
+      color:#647169;
+      transition:.2s;
+    }
+
+    .row-btn:hover{
+      background:var(--surface-2);
+      color:var(--text);
+      border-color:#cbd6cf;
+    }
+
+    .row-btn.delete:hover{
+      color:var(--danger);
+      border-color:#efc9cd;
+      background:var(--danger-soft);
+    }
+
+    .empty{
+      padding:60px 20px;
+      text-align:center;
+      color:var(--muted);
+    }
+
+    .empty-icon{
+      width:55px;
+      height:55px;
+      border-radius:17px;
+      background:var(--surface-2);
+      display:grid;
+      place-items:center;
+      margin:0 auto 12px;
+      font-size:22px;
+    }
+
+    .empty strong{
+      display:block;
+      color:var(--text);
+      font-size:14px;
+      margin-bottom:4px;
+    }
+
+    .empty span{
+      font-size:11px;
+    }
+
+    /* =========================
+       MOBILE CARDS
+    ========================= */
+
+    .mobile-list{
+      display:none;
+      padding:12px;
+    }
+
+    .customer-mobile-card{
+      border:1px solid var(--border);
+      border-radius:16px;
+      padding:14px;
+      margin-bottom:10px;
+      background:#fff;
+    }
+
+    .mobile-card-top{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .mobile-card-customer{
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .mobile-card-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:9px;
+      margin-top:13px;
+      padding-top:13px;
+      border-top:1px solid #edf1ee;
+    }
+
+    .mobile-meta-label{
+      color:#89938d;
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:.6px;
+      font-weight:800;
+    }
+
+    .mobile-meta-value{
+      color:var(--text);
+      font-size:11px;
+      font-weight:700;
+      margin-top:3px;
+    }
+
+    .mobile-actions{
+      display:flex;
+      gap:7px;
+      margin-top:13px;
+    }
+
+    .mobile-actions button{
+      flex:1;
+    }
+
+    /* =========================
+       PAGINATION
+    ========================= */
+
+    .pagination{
+      padding:14px 16px;
+      border-top:1px solid var(--border);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+
+    .pagination-info{
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    .page-buttons{
+      display:flex;
+      gap:5px;
+    }
+
+    .page-btn{
+      min-width:32px;
+      height:32px;
+      padding:0 8px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:9px;
+      color:#657169;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .page-btn:hover{
+      background:var(--surface-2);
+    }
+
+    .page-btn.active{
+      background:var(--green);
+      color:#fff;
+      border-color:var(--green);
+    }
+
+    .page-btn:disabled{
+      opacity:.45;
+      cursor:not-allowed;
+    }
+
+    /* =========================
+       FOOTER NOTE
+    ========================= */
+
+    .footer-note{
+      margin-top:18px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      color:#89948e;
+      font-size:10px;
+      padding:0 4px 25px;
+    }
+
+    .prototype-pill{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      background:#eef2ef;
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:6px 9px;
+      font-weight:700;
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(4,10,7,.58);
+      backdrop-filter:blur(8px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:2000;
+    }
+
+    .modal-overlay.show{
+      display:flex;
+    }
+
+    .modal{
+      width:min(760px,100%);
+      max-height:90vh;
+      overflow:auto;
+      background:#fff;
+      border-radius:23px;
+      box-shadow:0 30px 100px rgba(0,0,0,.2);
+    }
+
+    .modal.large{
+      width:min(900px,100%);
+    }
+
+    .modal.small{
+      width:min(440px,100%);
+    }
+
+    .modal-header{
+      padding:20px 22px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:15px;
+      position:sticky;
+      top:0;
+      background:#fff;
+      z-index:3;
+    }
+
+    .modal-title{
+      font-family:"Manrope",sans-serif;
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:-.4px;
+    }
+
+    .modal-subtitle{
+      color:var(--muted);
+      font-size:11px;
+      margin-top:4px;
+    }
+
+    .modal-close{
+      width:35px;
+      height:35px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:#fff;
+      color:#68746d;
+      font-size:16px;
+    }
+
+    .modal-body{
+      padding:22px;
+    }
+
+    .customer-profile{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:15px;
+      border:1px solid var(--border);
+      background:var(--surface-2);
+      border-radius:17px;
+      margin-bottom:18px;
+    }
+
+    .profile-avatar{
+      width:58px;
+      height:58px;
+      border-radius:17px;
+      background:linear-gradient(135deg,#18a957,#0d713b);
+      display:grid;
+      place-items:center;
+      color:#fff;
+      font-size:16px;
+      font-weight:800;
+      flex:none;
+    }
+
+    .profile-name{
+      font-family:"Manrope",sans-serif;
+      font-weight:800;
+      font-size:16px;
+    }
+
+    .profile-email{
+      color:var(--muted);
+      font-size:11px;
+      margin-top:3px;
+    }
+
+    .profile-id{
+      color:var(--green-dark);
+      font-size:10px;
+      font-weight:800;
+      margin-top:4px;
+    }
+
+    .modal-summary{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-bottom:20px;
+    }
+
+    .summary-card{
+      border:1px solid var(--border);
+      border-radius:15px;
+      padding:14px;
+      background:#fff;
+    }
+
+    .summary-label{
+      color:var(--muted);
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:.7px;
+      font-weight:800;
+    }
+
+    .summary-value{
+      font-family:"Manrope",sans-serif;
+      font-weight:800;
+      font-size:17px;
+      margin-top:6px;
+    }
+
+    .summary-sub{
+      color:#89938d;
+      font-size:9px;
+      margin-top:2px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:7px;
+    }
+
+    .field.full{
+      grid-column:1/-1;
+    }
+
+    .field label{
+      color:#4f5b54;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .field input,
+    .field select,
+    .field textarea{
+      width:100%;
+      border:1px solid var(--border);
+      border-radius:11px;
+      height:42px;
+      padding:0 12px;
+      outline:none;
+      background:var(--surface-2);
+      color:var(--text);
+      font-size:12px;
+    }
+
+    .field textarea{
+      min-height:90px;
+      height:auto;
+      padding:11px 12px;
+      resize:vertical;
+      line-height:1.55;
+    }
+
+    .field input[readonly]{
+      color:#7d8881;
+      background:#eef2ef;
+    }
+
+    .modal-footer{
+      padding:16px 22px;
+      border-top:1px solid var(--border);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      position:sticky;
+      bottom:0;
+      background:#fff;
+      z-index:3;
+    }
+
+    .modal-footer-left,
+    .modal-footer-right{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+
+    /* =========================
+       ORDER HISTORY
+    ========================= */
+
+    .history-title{
+      font-family:"Manrope",sans-serif;
+      font-size:14px;
+      font-weight:800;
+      margin:22px 0 10px;
+    }
+
+    .history-list{
+      border:1px solid var(--border);
+      border-radius:15px;
+      overflow:hidden;
+    }
+
+    .history-item{
+      display:grid;
+      grid-template-columns:1fr 1.5fr 100px 100px;
+      gap:10px;
+      align-items:center;
+      padding:12px 14px;
+      border-bottom:1px solid #edf1ee;
+      font-size:11px;
+    }
+
+    .history-item:last-child{
+      border-bottom:none;
+    }
+
+    .history-id{
+      font-weight:800;
+    }
+
+    .history-website{
+      color:#4e5a53;
+      font-weight:600;
+    }
+
+    .history-date{
+      color:var(--muted);
+    }
+
+    .history-empty{
+      padding:25px;
+      text-align:center;
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    /* =========================
+       CONFIRM
+    ========================= */
+
+    .confirm-icon{
+      width:55px;
+      height:55px;
+      border-radius:17px;
+      display:grid;
+      place-items:center;
+      background:var(--danger-soft);
+      color:var(--danger);
+      font-size:23px;
+      margin-bottom:14px;
+    }
+
+    .confirm-title{
+      font-family:"Manrope",sans-serif;
+      font-size:18px;
+      font-weight:800;
+    }
+
+    .confirm-text{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.65;
+      margin-top:7px;
+    }
+
+    /* =========================
+       TOAST
+    ========================= */
+
+    .toast-wrap{
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:5000;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      pointer-events:none;
+    }
+
+    .toast{
+      min-width:270px;
+      max-width:380px;
+      background:#102017;
+      color:#fff;
+      border:1px solid rgba(255,255,255,.08);
+      box-shadow:0 20px 50px rgba(0,0,0,.2);
+      border-radius:13px;
+      padding:12px 14px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:11px;
+      font-weight:600;
+      animation:toastIn .25s ease;
+    }
+
+    .toast.success .toast-mark{
+      color:#6fe29b;
+    }
+
+    .toast.error .toast-mark{
+      color:#ff8790;
+    }
+
+    .toast-mark{
+      font-size:16px;
+      font-weight:800;
+    }
+
+    @keyframes toastIn{
+      from{
+        transform:translateY(10px);
+        opacity:0;
+      }
+      to{
+        transform:translateY(0);
+        opacity:1;
+      }
+    }
+
+    /* =========================
+       OVERLAY
+    ========================= */
+
+    .mobile-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.42);
+      z-index:900;
+      display:none;
+    }
+
+    .mobile-overlay.show{
+      display:block;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media(max-width:1250px){
+      .stats-grid{
+        grid-template-columns:repeat(3,1fr);
+      }
+
+      .hero-side{
+        min-width:210px;
+      }
+    }
+
+    @media(max-width:900px){
+      .sidebar{
+        transform:translateX(-100%);
+        transition:.25s ease;
+        box-shadow:20px 0 60px rgba(0,0,0,.18);
+      }
+
+      .sidebar.open{
+        transform:translateX(0);
+      }
+
+      .main{
+        width:100%;
+        margin-left:0;
+      }
+
+      .mobile-menu{
+        display:grid;
+      }
+
+      .topbar{
+        padding:0 17px;
+      }
+
+      .content{
+        padding:18px;
+      }
+
+      .hero{
+        padding:23px;
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .hero-side{
+        min-width:0;
+      }
+    }
+
+    @media(max-width:700px){
+      .top-actions .outline-btn.marketplace{
+        display:none;
+      }
+
+      .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+        gap:10px;
+      }
+
+      .stat-card{
+        padding:15px;
+      }
+
+      .stat-value{
+        font-size:21px;
+      }
+
+      .section-card{
+        border-radius:17px;
+      }
+
+      .toolbar{
+        padding:12px;
+      }
+
+      .search-wrap{
+        flex-basis:100%;
+      }
+
+      .filter-select{
+        flex:1;
+        min-width:0;
+      }
+
+      .bulk-wrap{
+        flex-wrap:wrap;
+        width:100%;
+        padding-top:5px;
+      }
+
+      .bulk-wrap button{
+        flex:1;
+      }
+
+      .table-wrap{
+        display:none;
+      }
+
+      .mobile-list{
+        display:block;
+      }
+
+      .pagination{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .page-buttons{
+        justify-content:center;
+      }
+
+      .modal-overlay{
+        padding:10px;
+      }
+
+      .modal{
+        max-height:94vh;
+        border-radius:19px;
+      }
+
+      .modal-body{
+        padding:17px;
+      }
+
+      .modal-header{
+        padding:17px;
+      }
+
+      .modal-footer{
+        padding:13px 17px;
+      }
+
+      .modal-footer-left .danger-btn{
+        display:none;
+      }
+
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+
+      .field.full{
+        grid-column:auto;
+      }
+
+      .modal-summary{
+        grid-template-columns:repeat(3,1fr);
+      }
+
+      .summary-card{
+        padding:11px;
+      }
+
+      .summary-value{
+        font-size:14px;
+      }
+
+      .history-item{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .history-item > div:nth-child(3),
+      .history-item > div:nth-child(4){
+        text-align:left;
+      }
+
+      .footer-note{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+    }
+
+    @media(max-width:460px){
+      .hero h1{
+        font-size:27px;
+      }
+
+      .stats-grid{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .stat-card:nth-child(5){
+        grid-column:1/-1;
+      }
+
+      .topbar{
+        height:68px;
+      }
+
+      .page-kicker{
+        display:none;
+      }
+
+      .page-title-mini{
+        font-size:14px;
+      }
+
+      .filter-select{
+        flex-basis:100%;
+      }
+
+      .customer-mobile-card{
+        padding:12px;
+      }
+
+      .modal-summary{
+        gap:6px;
+      }
+
+      .summary-card{
+        padding:9px;
+      }
+
+      .summary-label{
+        font-size:8px;
+      }
+
+      .summary-value{
+        font-size:13px;
+      }
+
+      .modal-footer{
+        flex-direction:column;
+        align-items:stretch;
+      }
+
+      .modal-footer-left,
+      .modal-footer-right{
+        width:100%;
+      }
+
+      .modal-footer-right button{
+        flex:1;
+      }
+
+      .toast-wrap{
+        left:12px;
+        right:12px;
+        bottom:12px;
+      }
+
+      .toast{
+        min-width:0;
+        width:100%;
+      }
+    }
+
+    /* =========================
+       PRINT
+    ========================= */
+
+    @media print{
+      @page{
+        size:A4 landscape;
+        margin:10mm;
+      }
+
+      body{
+        background:#fff;
+      }
+
+      .sidebar,
+      .topbar,
+      .toolbar,
+      .pagination,
+      .mobile-list,
+      .footer-note,
+      .row-actions,
+      .modal-overlay,
+      .toast-wrap{
+        display:none!important;
+      }
+
+      .main{
+        width:100%;
+        margin:0;
+      }
+
+      .content{
+        padding:0;
+        max-width:none;
+      }
+
+      .hero{
+        background:#fff;
+        color:#111;
+        box-shadow:none;
+        border:1px solid #ddd;
+        padding:18px;
+      }
+
+      .hero p,
+      .hero-side-sub,
+      .hero-side-label{
+        color:#555;
+      }
+
+      .hero-side{
+        background:#f6f6f6;
+        border:1px solid #ddd;
+      }
+
+      .hero:after{
+        display:none;
+      }
+
+      .stats-grid{
+        grid-template-columns:repeat(5,1fr);
+      }
+
+      .stat-card,
+      .section-card{
+        box-shadow:none;
+      }
+
+      .table-wrap{
+        display:block!important;
+        overflow:visible;
+      }
+
+      table{
+        min-width:0;
+      }
+
+      .section-card{
+        margin-top:14px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <div class="app">
 
-<!-- =========================
-     SIDEBAR
-========================= -->
-
-<aside class="sidebar" id="sidebar">
-
-  <div class="brand">
-    <img src="../logo.png" class="brand-logo" alt="Website Deals">
-
-    <div>
-      <div class="brand-title">Website Deals</div>
-      <div class="brand-sub">Admin Control Center</div>
-    </div>
-  </div>
-
-  <nav class="nav">
-
-    <div class="nav-section">Marketplace</div>
-
-    <a class="nav-link" href="dashboard.html">
-      <span class="nav-icon">⌂</span>
-      Dashboard
-    </a>
-
-    <a class="nav-link" href="websites.html">
-      <span class="nav-icon">◫</span>
-      Websites
-    </a>
-
-    <a class="nav-link" href="categories.html">
-      <span class="nav-icon">▦</span>
-      Categories
-    </a>
-
-    <a class="nav-link" href="orders.html">
-      <span class="nav-icon">◌</span>
-      Orders
-    </a>
-
-    <a class="nav-link" href="payments.html">
-      <span class="nav-icon">৳</span>
-      Payments
-    </a>
-
-    <a class="nav-link" href="customers.html">
-      <span class="nav-icon">♙</span>
-      Customers
-    </a>
-
-    <a class="nav-link active" href="newsletter.html">
-      <span class="nav-icon">✉</span>
-      Newsletter
-    </a>
-
-    <div class="nav-section">Reports</div>
-
-    <a class="nav-link" href="reports.html">
-      <span class="nav-icon">◒</span>
-      Reports
-    </a>
-
-    <a class="nav-link" href="monthly-report.html">
-      <span class="nav-icon">▤</span>
-      Monthly Report
-    </a>
-
-    <div class="nav-section">Restricted Controls</div>
-
-    <a class="nav-link" href="admins.html">
-      <span class="nav-icon">♙</span>
-      Admin Management
-    </a>
-
-    <a class="nav-link" href="settings.html">
-      <span class="nav-icon">⚙</span>
-      System Settings
-    </a>
-
-  </nav>
-
-  <div class="sidebar-bottom">
-
-    <div class="admin-mini">
-
-      <div class="admin-avatar" id="adminAvatar">
-        SA
-      </div>
-
-      <div class="admin-mini-text">
-        <div class="admin-name" id="adminName">
-          Super Admin
-        </div>
-
-        <div class="admin-role" id="adminRole">
-          Super Admin
-        </div>
-      </div>
-
-    </div>
-
-    <button class="logout-btn" onclick="logout()">
-      ↪ &nbsp; Sign Out
-    </button>
-
-  </div>
-
-</aside>
-
-<div
-  class="sidebar-overlay"
-  id="sidebarOverlay"
-  onclick="closeSidebar()"
-></div>
-
-
-<!-- =========================
-     MAIN
-========================= -->
-
-<main class="main">
-
-<header class="topbar">
-
-  <div class="topbar-left">
-
-    <button
-      class="icon-btn mobile-menu"
-      onclick="openSidebar()"
-    >
-      ☰
-    </button>
-
-    <div class="page-kicker">
-      Admin / Newsletter
-    </div>
-
-  </div>
-
-  <div class="top-actions">
-
-    <button
-      class="top-btn"
-      onclick="refreshNewsletter()"
-    >
-      ↻ <span>Refresh</span>
-    </button>
-
-    <a
-      class="top-btn marketplace"
-      href="../index.html"
-    >
-      ↗ <span>Marketplace</span>
-    </a>
-
-  </div>
-
-</header>
-
-
-<section class="content">
-
-<!-- =========================
-     HERO
-========================= -->
-
-<div class="hero">
-
-  <div>
-
-    <div class="eyebrow">
-      Audience & Campaigns
-    </div>
-
-    <h1>
-      Stay connected with your audience.
-    </h1>
-
-    <p>
-      Manage newsletter subscribers, create campaigns,
-      schedule broadcasts and keep your Website Deals
-      community informed.
-    </p>
-
-  </div>
-
-  <div class="hero-badge">
-
-    <span class="status-dot"></span>
-
-    <div>
-      <strong>Newsletter Center</strong>
-      <span>LocalStorage powered prototype</span>
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- =========================
-     STATS
-========================= -->
-
-<div class="stats">
-
-  <div class="stat-card">
-
-    <div class="stat-top">
-      <span class="stat-label">
-        Subscribers
-      </span>
-
-      <span class="stat-icon">
-        ✉
-      </span>
-    </div>
-
-    <div
-      class="stat-value"
-      id="statSubscribers"
-    >
-      0
-    </div>
-
-    <div class="stat-meta">
-      Total newsletter audience
-    </div>
-
-  </div>
-
-
-  <div class="stat-card">
-
-    <div class="stat-top">
-      <span class="stat-label">
-        Active
-      </span>
-
-      <span class="stat-icon">
-        ✓
-      </span>
-    </div>
-
-    <div
-      class="stat-value"
-      id="statActive"
-    >
-      0
-    </div>
-
-    <div class="stat-meta">
-      Active subscribers
-    </div>
-
-  </div>
-
-
-  <div class="stat-card">
-
-    <div class="stat-top">
-      <span class="stat-label">
-        Campaigns
-      </span>
-
-      <span class="stat-icon">
-        ◈
-      </span>
-    </div>
-
-    <div
-      class="stat-value"
-      id="statCampaigns"
-    >
-      0
-    </div>
-
-    <div class="stat-meta">
-      Saved campaigns
-    </div>
-
-  </div>
-
-
-  <div class="stat-card">
-
-    <div class="stat-top">
-      <span class="stat-label">
-        Sent
-      </span>
-
-      <span class="stat-icon">
-        ↗
-      </span>
-    </div>
-
-    <div
-      class="stat-value"
-      id="statSent"
-    >
-      0
-    </div>
-
-    <div class="stat-meta">
-      Campaigns sent
-    </div>
-
-  </div>
-
-
-  <div class="stat-card">
-
-    <div class="stat-top">
-      <span class="stat-label">
-        Avg. Open
-      </span>
-
-      <span class="stat-icon">
-        ◉
-      </span>
-    </div>
-
-    <div
-      class="stat-value"
-      id="statOpen"
-    >
-      0%
-    </div>
-
-    <div class="stat-meta">
-      Estimated campaign performance
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- =========================
-     COMPOSER + AUDIENCE
-========================= -->
-
-<div class="dashboard-grid">
-
-
-<!-- COMPOSER -->
-
-<div class="panel">
-
-  <div class="panel-header">
-
-    <div>
-      <div class="panel-title">
-        Create Newsletter Campaign
-      </div>
-
-      <div class="panel-subtitle">
-        Compose your next broadcast.
+  <!-- =========================
+       SIDEBAR
+  ========================= -->
+
+  <aside class="sidebar" id="sidebar">
+
+    <div class="brand">
+      <img
+        src="../logo.png"
+        class="brand-logo"
+        alt="Website Deals"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+        <div class="brand-name">Website Deals</div>
+        <div class="brand-sub">Admin Control Center</div>
       </div>
     </div>
 
-    <button
-      class="btn small"
-      onclick="clearComposer()"
-    >
-      Clear
-    </button>
+    <div class="nav-section">
 
-  </div>
+      <div class="nav-label">Marketplace</div>
 
+      <a class="nav-item" href="dashboard.html">
+        <span class="nav-icon">⌂</span>
+        <span>Dashboard</span>
+      </a>
 
-  <div class="panel-body">
+      <a class="nav-item" href="websites.html">
+        <span class="nav-icon">▣</span>
+        <span>Websites</span>
+      </a>
 
-    <div class="field-grid">
+      <a class="nav-item" href="categories.html">
+        <span class="nav-icon">◈</span>
+        <span>Categories</span>
+      </a>
 
-      <div class="field full">
+      <a class="nav-item" href="orders.html">
+        <span class="nav-icon">▤</span>
+        <span>Orders</span>
+      </a>
 
-        <label>
-          Campaign Name
-        </label>
+      <a class="nav-item" href="payments.html">
+        <span class="nav-icon">৳</span>
+        <span>Payments</span>
+      </a>
 
-        <input
-          id="campaignName"
-          type="text"
-          placeholder="e.g. October Website Deals"
-        >
+      <a class="nav-item active" href="customers.html">
+        <span class="nav-icon">♙</span>
+        <span>Customers</span>
+      </a>
 
-      </div>
+      <a class="nav-item" href="newsletter.html">
+        <span class="nav-icon">✉</span>
+        <span>Newsletter</span>
+      </a>
 
+    </div>
 
-      <div class="field">
+    <div class="nav-section">
 
-        <label>
-          Email Subject *
-        </label>
+      <div class="nav-label">Reports</div>
 
-        <input
-          id="campaignSubject"
-          type="text"
-          placeholder="Your subject line..."
-        >
+      <a class="nav-item" href="reports.html">
+        <span class="nav-icon">◫</span>
+        <span>Reports</span>
+      </a>
 
-      </div>
+      <a class="nav-item" href="monthly-report.html">
+        <span class="nav-icon">◷</span>
+        <span>Monthly Report</span>
+      </a>
 
+    </div>
 
-      <div class="field">
+    <div class="nav-section">
 
-        <label>
-          Sender Name
-        </label>
+      <div class="nav-label">Administration</div>
 
-        <input
-          id="senderName"
-          type="text"
-          value="Website Deals"
-        >
+      <a class="nav-item" href="admins.html">
+        <span class="nav-icon">♟</span>
+        <span>Admin Management</span>
+      </a>
 
-      </div>
+      <a class="nav-item" href="settings.html">
+        <span class="nav-icon">⚙</span>
+        <span>System Settings</span>
+      </a>
 
+    </div>
 
-      <div class="field full">
+    <div class="sidebar-bottom">
 
-        <label>
-          Email Content *
-        </label>
+      <div class="admin-mini">
 
-        <textarea
-          id="campaignContent"
-          placeholder="Write your newsletter content here..."
-        ></textarea>
+        <div class="avatar-small" id="adminAvatar">SA</div>
 
-        <div class="help">
-          This prototype stores campaign content locally.
-          Real email delivery requires a backend/email provider.
+        <div style="min-width:0;">
+          <div class="admin-mini-name" id="adminName">Super Admin</div>
+          <div class="admin-mini-role" id="adminRole">Administrator</div>
         </div>
 
       </div>
-
-
-      <div class="field">
-
-        <label>
-          Campaign Status
-        </label>
-
-        <select id="campaignStatus">
-
-          <option value="draft">
-            Save as Draft
-          </option>
-
-          <option value="scheduled">
-            Scheduled
-          </option>
-
-          <option value="sent">
-            Mark as Sent
-          </option>
-
-        </select>
-
-      </div>
-
-
-      <div class="field">
-
-        <label>
-          Schedule Date & Time
-        </label>
-
-        <input
-          id="scheduleDate"
-          type="datetime-local"
-        >
-
-      </div>
-
-
-      <div class="field full">
-
-        <div class="toggle-row">
-
-          <div class="toggle-copy">
-
-            <strong>
-              Include unsubscribe footer
-            </strong>
-
-            <span>
-              Add a standard unsubscribe notice to the campaign.
-            </span>
-
-          </div>
-
-          <label class="switch">
-
-            <input
-              id="unsubscribeFooter"
-              type="checkbox"
-              checked
-            >
-
-            <span class="slider"></span>
-
-          </label>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="composer-actions">
 
       <button
-        class="btn"
-        onclick="previewCampaign()"
+        class="logout-btn"
+        type="button"
+        onclick="logout()"
       >
-        ◉ Preview
-      </button>
-
-      <button
-        class="btn"
-        onclick="saveDraft()"
-      >
-        Save Draft
-      </button>
-
-      <button
-        class="btn primary"
-        onclick="saveCampaign()"
-      >
-        Save Campaign
+        ↪ &nbsp; Sign Out
       </button>
 
     </div>
 
-  </div>
-
-</div>
-
-
-<!-- AUDIENCE -->
-
-<div class="panel">
-
-  <div class="panel-header">
-
-    <div>
-      <div class="panel-title">
-        Audience
-      </div>
-
-      <div class="panel-subtitle">
-        Choose your recipient group.
-      </div>
-    </div>
-
-  </div>
-
-
-  <div class="panel-body">
-
-    <div class="audience-list">
-
-      <label class="audience-item">
-
-        <input
-          class="audience-check"
-          type="radio"
-          name="audience"
-          value="all"
-          checked
-        >
-
-        <div class="audience-icon">
-          ✉
-        </div>
-
-        <div class="audience-copy">
-
-          <strong>
-            All Subscribers
-          </strong>
-
-          <span>
-            Everyone currently subscribed
-          </span>
-
-        </div>
-
-        <div
-          class="audience-count"
-          id="audienceAll"
-        >
-          0
-        </div>
-
-      </label>
-
-
-      <label class="audience-item">
-
-        <input
-          class="audience-check"
-          type="radio"
-          name="audience"
-          value="active"
-        >
-
-        <div class="audience-icon">
-          ✓
-        </div>
-
-        <div class="audience-copy">
-
-          <strong>
-            Active Subscribers
-          </strong>
-
-          <span>
-            Subscribers marked active
-          </span>
-
-        </div>
-
-        <div
-          class="audience-count"
-          id="audienceActive"
-        >
-          0
-        </div>
-
-      </label>
-
-
-      <label class="audience-item">
-
-        <input
-          class="audience-check"
-          type="radio"
-          name="audience"
-          value="customers"
-        >
-
-        <div class="audience-icon">
-          ♙
-        </div>
-
-        <div class="audience-copy">
-
-          <strong>
-            Customers
-          </strong>
-
-          <span>
-            Existing Website Deals customers
-          </span>
-
-        </div>
-
-        <div
-          class="audience-count"
-          id="audienceCustomers"
-        >
-          0
-        </div>
-
-      </label>
-
-    </div>
-
-
-    <div style="height:14px;"></div>
-
-
-    <div class="settings-list">
-
-      <div class="setting-item">
-
-        <strong>
-          Delivery Mode
-        </strong>
-
-        <span>
-          Prototype mode — campaign records are stored
-          in browser LocalStorage.
-        </span>
-
-      </div>
-
-
-      <div class="setting-item">
-
-        <strong>
-          Email Provider
-        </strong>
-
-        <span>
-          Not connected. Connect an email service later
-          for real campaign delivery.
-        </span>
-
-      </div>
-
-
-      <div class="setting-item">
-
-        <strong>
-          Unsubscribe Protection
-        </strong>
-
-        <span>
-          Keep unsubscribe controls enabled for real
-          production campaigns.
-        </span>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-</div>
-
-
-<!-- =========================
-     RECENT CAMPAIGNS
-========================= -->
-
-<div style="height:18px;"></div>
-
-<div class="panel">
-
-  <div class="panel-header">
-
-    <div>
-
-      <div class="panel-title">
-        Recent Campaigns
-      </div>
-
-      <div class="panel-subtitle">
-        Review saved newsletter campaigns.
-      </div>
-
-    </div>
-
-    <button
-      class="btn small"
-      onclick="window.print()"
-    >
-      ⎙ Print
-    </button>
-
-  </div>
-
+  </aside>
 
   <div
-    class="campaign-list"
-    id="campaignList"
+    class="mobile-overlay"
+    id="mobileOverlay"
+    onclick="closeSidebar()"
   ></div>
 
-</div>
+  <!-- =========================
+       MAIN
+  ========================= -->
 
+  <main class="main">
 
-<!-- =========================
-     SUBSCRIBERS
-========================= -->
+    <header class="topbar">
 
-<div style="height:18px;"></div>
+      <div class="topbar-left">
 
-<div class="panel">
+        <button
+          class="icon-btn mobile-menu"
+          type="button"
+          onclick="openSidebar()"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
 
-  <div class="panel-header">
-
-    <div>
-
-      <div class="panel-title">
-        Subscriber Directory
-      </div>
-
-      <div class="panel-subtitle">
-        Manage newsletter subscribers.
-      </div>
-
-    </div>
-
-    <button
-      class="btn small"
-      onclick="addDemoSubscriber()"
-    >
-      + Add Demo Subscriber
-    </button>
-
-  </div>
-
-
-  <div class="table-wrap">
-
-    <table>
-
-      <thead>
-
-        <tr>
-          <th>Subscriber</th>
-          <th>Email</th>
-          <th>Status</th>
-          <th>Joined</th>
-          <th>Source</th>
-          <th>Actions</th>
-        </tr>
-
-      </thead>
-
-      <tbody id="subscriberBody"></tbody>
-
-    </table>
-
-  </div>
-
-  <div
-    class="empty"
-    id="subscriberEmpty"
-    style="display:none;"
-  >
-    No subscribers found.
-  </div>
-
-</div>
-
-
-<div class="footer-note">
-  Website Deals Admin • Newsletter Management • Prototype / LocalStorage
-</div>
-
-</section>
-
-</main>
-
-</div>
-
-
-<!-- =========================
-     PREVIEW MODAL
-========================= -->
-
-<div
-  class="modal-overlay"
-  id="previewModal"
->
-
-  <div class="modal">
-
-    <div class="modal-header">
-
-      <div>
-
-        <div class="modal-title">
-          Newsletter Preview
-        </div>
-
-        <div class="modal-subtitle">
-          Preview the campaign before saving.
+        <div>
+          <div class="page-kicker">Admin / Marketplace</div>
+          <div class="page-title-mini">Customer Management</div>
         </div>
 
       </div>
 
-      <button
-        class="close-btn"
-        onclick="closeModal('previewModal')"
-      >
-        ×
-      </button>
+      <div class="top-actions">
 
-    </div>
+        <button
+          class="outline-btn"
+          type="button"
+          onclick="refreshCustomers()"
+        >
+          ↻ <span>Refresh</span>
+        </button>
 
+        <button
+          class="outline-btn"
+          type="button"
+          onclick="printCustomers()"
+        >
+          ⎙ <span>Print</span>
+        </button>
 
-    <div class="modal-body">
+        <button
+          class="outline-btn"
+          type="button"
+          onclick="exportCSV()"
+        >
+          ↓ <span>CSV</span>
+        </button>
 
-      <div
-        style="
-          border:1px solid var(--border);
-          border-radius:15px;
-          overflow:hidden;
-        "
-      >
+        <a
+          class="outline-btn marketplace"
+          href="../index.html"
+        >
+          ↗ <span>Marketplace</span>
+        </a>
+
+      </div>
+
+    </header>
+
+    <div class="content">
+
+      <!-- =========================
+           HERO
+      ========================= -->
+
+      <section class="hero">
+
+        <div class="hero-content">
+
+          <span class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Customer Intelligence
+          </span>
+
+          <h1>Know your customers better.</h1>
+
+          <p>
+            Manage customer profiles, track order history, understand
+            spending activity and keep your marketplace relationships
+            organized from one premium workspace.
+          </p>
+
+        </div>
+
+        <div class="hero-side">
+
+          <div class="hero-side-label">
+            Customer Revenue
+          </div>
+
+          <div
+            class="hero-side-value"
+            id="heroRevenue"
+          >
+            ৳0
+          </div>
+
+          <div class="hero-side-sub">
+            Total paid-order revenue
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- =========================
+           STATS
+      ========================= -->
+
+      <section class="stats-grid">
+
+        <div class="stat-card">
+
+          <div class="stat-top">
+            <span class="stat-label">Total Customers</span>
+            <span class="stat-icon">♙</span>
+          </div>
+
+          <div
+            class="stat-value"
+            id="statTotal"
+          >
+            0
+          </div>
+
+          <div class="stat-note">
+            All customer profiles
+          </div>
+
+        </div>
+
+        <div class="stat-card">
+
+          <div class="stat-top">
+            <span class="stat-label">Active Customers</span>
+            <span class="stat-icon">✓</span>
+          </div>
+
+          <div
+            class="stat-value"
+            id="statActive"
+          >
+            0
+          </div>
+
+          <div class="stat-note">
+            Currently active
+          </div>
+
+        </div>
+
+        <div class="stat-card">
+
+          <div class="stat-top">
+            <span class="stat-label">New Customers</span>
+            <span class="stat-icon">+</span>
+          </div>
+
+          <div
+            class="stat-value"
+            id="statNew"
+          >
+            0
+          </div>
+
+          <div class="stat-note">
+            Joined in last 30 days
+          </div>
+
+        </div>
+
+        <div class="stat-card">
+
+          <div class="stat-top">
+            <span class="stat-label">Returning</span>
+            <span class="stat-icon">↻</span>
+          </div>
+
+          <div
+            class="stat-value"
+            id="statReturning"
+          >
+            0
+          </div>
+
+          <div class="stat-note">
+            More than one order
+          </div>
+
+        </div>
+
+        <div class="stat-card">
+
+          <div class="stat-top">
+            <span class="stat-label">Total Revenue</span>
+            <span class="stat-icon">৳</span>
+          </div>
+
+          <div
+            class="stat-value"
+            id="statRevenue"
+          >
+            ৳0
+          </div>
+
+          <div class="stat-note">
+            Paid orders only
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- =========================
+           CUSTOMER LIST
+      ========================= -->
+
+      <section class="section-card">
+
+        <div class="toolbar">
+
+          <div class="search-wrap">
+
+            <span class="search-icon">⌕</span>
+
+            <input
+              id="searchInput"
+              class="search-input"
+              type="search"
+              placeholder="Search by name, email, phone or customer ID..."
+              autocomplete="off"
+            >
+
+          </div>
+
+          <select
+            id="statusFilter"
+            class="filter-select"
+          >
+            <option value="all">All Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="suspended">Suspended</option>
+          </select>
+
+          <select
+            id="typeFilter"
+            class="filter-select"
+          >
+            <option value="all">All Customers</option>
+            <option value="new">New Customers</option>
+            <option value="returning">Returning</option>
+          </select>
+
+          <select
+            id="sortFilter"
+            class="filter-select"
+          >
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="spendingHigh">Highest Spending</option>
+            <option value="spendingLow">Lowest Spending</option>
+            <option value="ordersHigh">Most Orders</option>
+            <option value="ordersLow">Fewest Orders</option>
+            <option value="nameAZ">Name A-Z</option>
+          </select>
+
+          <button
+            class="outline-btn"
+            type="button"
+            onclick="resetFilters()"
+          >
+            Reset
+          </button>
+
+          <div
+            class="bulk-wrap"
+            id="bulkWrap"
+          >
+
+            <span
+              class="bulk-count"
+              id="bulkCount"
+            >
+              0 selected
+            </span>
+
+            <button
+              class="outline-btn"
+              type="button"
+              onclick="bulkActivate()"
+            >
+              Activate
+            </button>
+
+            <button
+              class="outline-btn"
+              type="button"
+              onclick="bulkSuspend()"
+            >
+              Suspend
+            </button>
+
+            <button
+              class="outline-btn danger-btn"
+              type="button"
+              onclick="bulkDelete()"
+            >
+              Delete
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- Desktop -->
 
         <div
-          style="
-            background:var(--dark);
-            color:#fff;
-            padding:22px;
-          "
-        >
+          class="table-wrap"
+          id="desktopTable"
+        ></div>
+
+        <!-- Mobile -->
+
+        <div
+          class="mobile-list"
+          id="mobileList"
+        ></div>
+
+        <!-- Pagination -->
+
+        <div class="pagination">
 
           <div
-            style="
-              font-size:10px;
-              opacity:.65;
-              text-transform:uppercase;
-              letter-spacing:.12em;
-              font-weight:800;
-            "
+            class="pagination-info"
+            id="paginationInfo"
           >
-            Website Deals
+            Showing 0 customers
           </div>
 
           <div
-            id="previewSubject"
-            style="
-              font-family:Manrope,sans-serif;
-              font-size:23px;
-              font-weight:800;
-              margin-top:9px;
-            "
-          >
-            Newsletter Subject
-          </div>
-
-        </div>
-
-
-        <div style="padding:24px;">
-
-          <div
-            id="previewContent"
-            style="
-              white-space:pre-wrap;
-              font-size:12px;
-              line-height:1.8;
-              color:var(--text);
-            "
+            class="page-buttons"
+            id="pageButtons"
           ></div>
 
-          <div
-            style="
-              margin-top:25px;
-              padding-top:15px;
-              border-top:1px solid var(--border);
-              color:var(--muted);
-              font-size:9px;
-            "
-            id="previewFooter"
-          >
-            You are receiving this email because you
-            subscribed to Website Deals.
-          </div>
-
         </div>
+
+      </section>
+
+      <div class="footer-note">
+
+        <span>
+          Customer data is currently stored locally in this browser.
+        </span>
+
+        <span class="prototype-pill">
+          ● Prototype / LocalStorage
+        </span>
 
       </div>
 
     </div>
 
-
-    <div class="modal-footer">
-
-      <button
-        class="btn"
-        onclick="closeModal('previewModal')"
-      >
-        Close
-      </button>
-
-    </div>
-
-  </div>
+  </main>
 
 </div>
 
-
 <!-- =========================
-     CAMPAIGN VIEW MODAL
+     CUSTOMER MODAL
 ========================= -->
 
 <div
   class="modal-overlay"
-  id="campaignViewModal"
+  id="customerModal"
 >
 
-  <div class="modal">
+  <div class="modal large">
 
     <div class="modal-header">
 
       <div>
-
         <div
           class="modal-title"
-          id="viewCampaignTitle"
+          id="customerModalTitle"
         >
-          Campaign
+          Customer Details
         </div>
 
         <div
           class="modal-subtitle"
-          id="viewCampaignMeta"
+          id="customerModalSubtitle"
         >
-          Campaign details
+          Review customer information and order history.
         </div>
-
       </div>
 
       <button
-        class="close-btn"
-        onclick="closeModal('campaignViewModal')"
+        class="modal-close"
+        type="button"
+        onclick="closeModal('customerModal')"
       >
         ×
       </button>
@@ -2222,25 +2223,298 @@ tbody td{
 
     <div class="modal-body">
 
-      <div
-        id="viewCampaignContent"
-        style="
-          white-space:pre-wrap;
-          line-height:1.8;
-          font-size:12px;
-        "
-      ></div>
+      <div class="customer-profile">
+
+        <div
+          class="profile-avatar"
+          id="profileAvatar"
+        >
+          CU
+        </div>
+
+        <div style="min-width:0;">
+
+          <div
+            class="profile-name"
+            id="profileName"
+          >
+            Customer
+          </div>
+
+          <div
+            class="profile-email"
+            id="profileEmail"
+          >
+            —
+          </div>
+
+          <div
+            class="profile-id"
+            id="profileId"
+          >
+            —
+          </div>
+
+        </div>
+
+        <div style="margin-left:auto;">
+          <span
+            class="badge active"
+            id="profileStatusBadge"
+          >
+            Active
+          </span>
+        </div>
+
+      </div>
+
+      <div class="modal-summary">
+
+        <div class="summary-card">
+
+          <div class="summary-label">Orders</div>
+
+          <div
+            class="summary-value"
+            id="modalOrders"
+          >
+            0
+          </div>
+
+          <div class="summary-sub">
+            Total orders
+          </div>
+
+        </div>
+
+        <div class="summary-card">
+
+          <div class="summary-label">Spent</div>
+
+          <div
+            class="summary-value"
+            id="modalSpent"
+          >
+            ৳0
+          </div>
+
+          <div class="summary-sub">
+            Paid orders
+          </div>
+
+        </div>
+
+        <div class="summary-card">
+
+          <div class="summary-label">Last Order</div>
+
+          <div
+            class="summary-value"
+            id="modalLastOrder"
+          >
+            —
+          </div>
+
+          <div class="summary-sub">
+            Latest activity
+          </div>
+
+        </div>
+
+      </div>
+
+      <form
+        id="customerForm"
+        onsubmit="saveCustomer(event)"
+      >
+
+        <input
+          type="hidden"
+          id="editCustomerKey"
+        >
+
+        <div class="form-grid">
+
+          <div class="field">
+
+            <label for="customerId">
+              Customer ID
+            </label>
+
+            <input
+              id="customerId"
+              type="text"
+              readonly
+            >
+
+          </div>
+
+          <div class="field">
+
+            <label for="customerStatus">
+              Status
+            </label>
+
+            <select id="customerStatus">
+
+              <option value="active">
+                Active
+              </option>
+
+              <option value="inactive">
+                Inactive
+              </option>
+
+              <option value="suspended">
+                Suspended
+              </option>
+
+            </select>
+
+          </div>
+
+          <div class="field">
+
+            <label for="customerName">
+              Full Name
+            </label>
+
+            <input
+              id="customerName"
+              type="text"
+              required
+              placeholder="Customer full name"
+            >
+
+          </div>
+
+          <div class="field">
+
+            <label for="customerEmail">
+              Email Address
+            </label>
+
+            <input
+              id="customerEmail"
+              type="email"
+              placeholder="customer@example.com"
+            >
+
+          </div>
+
+          <div class="field">
+
+            <label for="customerPhone">
+              Phone Number
+            </label>
+
+            <input
+              id="customerPhone"
+              type="text"
+              placeholder="+880 1XXXXXXXXX"
+            >
+
+          </div>
+
+          <div class="field">
+
+            <label for="customerJoined">
+              Joined Date
+            </label>
+
+            <input
+              id="customerJoined"
+              type="date"
+            >
+
+          </div>
+
+          <div class="field full">
+
+            <label for="customerAddress">
+              Address
+            </label>
+
+            <textarea
+              id="customerAddress"
+              placeholder="Customer address..."
+            ></textarea>
+
+          </div>
+
+          <div class="field full">
+
+            <label for="customerNote">
+              Internal Note
+            </label>
+
+            <textarea
+              id="customerNote"
+              placeholder="Add a private customer note..."
+            ></textarea>
+
+          </div>
+
+        </div>
+
+        <div class="history-title">
+          Order History
+        </div>
+
+        <div
+          class="history-list"
+          id="orderHistory"
+        ></div>
+
+        <div style="height:2px;"></div>
+
+      </form>
 
     </div>
 
     <div class="modal-footer">
 
-      <button
-        class="btn"
-        onclick="closeModal('campaignViewModal')"
-      >
-        Close
-      </button>
+      <div class="modal-footer-left">
+
+        <button
+          class="outline-btn danger-btn"
+          type="button"
+          id="modalDeleteBtn"
+          onclick="deleteCurrentCustomer()"
+        >
+          Delete
+        </button>
+
+        <button
+          class="outline-btn"
+          type="button"
+          id="modalToggleBtn"
+          onclick="toggleCurrentCustomer()"
+        >
+          Suspend
+        </button>
+
+      </div>
+
+      <div class="modal-footer-right">
+
+        <button
+          class="outline-btn"
+          type="button"
+          onclick="closeModal('customerModal')"
+        >
+          Close
+        </button>
+
+        <button
+          class="primary-btn"
+          type="button"
+          onclick="document.getElementById('customerForm').requestSubmit()"
+        >
+          Save Customer
+        </button>
+
+      </div>
 
     </div>
 
@@ -2248,170 +2522,886 @@ tbody td{
 
 </div>
 
+<!-- =========================
+     DELETE CONFIRM
+========================= -->
+
+<div
+  class="modal-overlay"
+  id="confirmModal"
+>
+
+  <div class="modal small">
+
+    <div class="modal-body">
+
+      <div class="confirm-icon">
+        !
+      </div>
+
+      <div class="confirm-title">
+        Delete customer?
+      </div>
+
+      <div
+        class="confirm-text"
+        id="confirmText"
+      >
+        This action cannot be undone.
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <div></div>
+
+      <div class="modal-footer-right">
+
+        <button
+          class="outline-btn"
+          type="button"
+          onclick="closeModal('confirmModal')"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="primary-btn"
+          style="background:var(--danger);border-color:var(--danger);"
+          type="button"
+          id="confirmDeleteBtn"
+        >
+          Delete Customer
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
 
 <!-- =========================
      TOAST
 ========================= -->
 
 <div
-  class="toast"
-  id="toast"
->
-
-  <div class="toast-icon">
-    ✓
-  </div>
-
-  <span id="toastText">
-    Saved successfully.
-  </span>
-
-</div>
+  class="toast-wrap"
+  id="toastWrap"
+></div>
 
 
 <script>
 /* =========================================================
-   WEBSITE DEALS — NEWSLETTER MANAGEMENT
+   WEBSITE DEALS — CUSTOMER MANAGEMENT
+   LocalStorage Prototype
 ========================================================= */
+
+"use strict";
+
+/* =========================
+   AUTH
+========================= */
 
 const AUTH_KEY = "websiteDealsAdminAuth";
 
-const NEWSLETTER_KEY = "websiteDealsNewsletter";
-const SUBSCRIBERS_KEY = "websiteDealsNewsletterSubscribers";
-const CUSTOMERS_KEY = "websiteDealsCustomers";
-
-
-/* =========================================================
-   AUTH
-========================================================= */
-
 function getAdminSession(){
-
   try{
-
-    const raw =
-      sessionStorage.getItem(AUTH_KEY);
+    const raw = sessionStorage.getItem(AUTH_KEY);
 
     if(!raw){
       return null;
     }
 
-    const session =
-      JSON.parse(raw);
+    const session = JSON.parse(raw);
 
-    if(
-      !session ||
-      session.authenticated !== true
-    ){
+    if(!session || session.authenticated !== true){
       return null;
     }
 
     return session;
 
   }catch(error){
-
     return null;
-
   }
-
 }
 
-
-const adminSession =
-  getAdminSession();
-
+const adminSession = getAdminSession();
 
 if(!adminSession){
-
   window.location.replace("login/");
-
 }
 
+/* =========================
+   STORAGE KEYS
+========================= */
 
-/* =========================================================
+const CUSTOMER_KEY = "websiteDealsCustomers";
+const ORDERS_KEY = "websiteDealsOrders";
+const TRANSACTION_KEY = "websiteDealsTransactions";
+const PAYMENT_TRANSACTION_KEY = "websiteDealsPaymentTransactions";
+
+/* =========================
    STATE
-========================================================= */
+========================= */
 
-let campaigns = [];
-let subscribers = [];
+let customers = [];
+let orders = [];
+let transactions = [];
+let paymentTransactions = [];
 
-let editingCampaignId = null;
+let filteredCustomers = [];
 
+let currentPage = 1;
 
-/* =========================================================
-   SAFE JSON
-========================================================= */
+const PAGE_SIZE = 8;
 
-function parseArray(key){
+let editingCustomerKey = null;
 
+let pendingDeleteKey = null;
+
+/* =========================
+   DEMO DATA
+========================= */
+
+const DEMO_CUSTOMERS = [
+  {
+    id:"CUS-1001",
+    name:"Nusrat Jahan",
+    email:"nusrat@example.com",
+    phone:"+880 1712-345678",
+    status:"active",
+    joined:"2026-09-12",
+    address:"Moulvibazar, Bangladesh",
+    note:"Interested in premium business websites."
+  },
+  {
+    id:"CUS-1002",
+    name:"Rahim Ahmed",
+    email:"rahim@example.com",
+    phone:"+880 1812-234567",
+    status:"active",
+    joined:"2026-08-25",
+    address:"Dhaka, Bangladesh",
+    note:"Repeat customer."
+  },
+  {
+    id:"CUS-1003",
+    name:"Sadia Islam",
+    email:"sadia@example.com",
+    phone:"+880 1912-456789",
+    status:"active",
+    joined:"2026-09-22",
+    address:"Sylhet, Bangladesh",
+    note:"Requested restaurant website."
+  },
+  {
+    id:"CUS-1004",
+    name:"Tanvir Hasan",
+    email:"tanvir@example.com",
+    phone:"+880 1612-667788",
+    status:"suspended",
+    joined:"2026-07-19",
+    address:"Chattogram, Bangladesh",
+    note:"Account temporarily suspended."
+  },
+  {
+    id:"CUS-1005",
+    name:"Mahi Rahman",
+    email:"mahi@example.com",
+    phone:"+880 1512-778899",
+    status:"active",
+    joined:"2026-09-28",
+    address:"Dhaka, Bangladesh",
+    note:"New customer."
+  },
+  {
+    id:"CUS-1006",
+    name:"Arif Chowdhury",
+    email:"arif@example.com",
+    phone:"+880 1711-998877",
+    status:"active",
+    joined:"2026-06-08",
+    address:"Rajshahi, Bangladesh",
+    note:"Business owner."
+  },
+  {
+    id:"CUS-1007",
+    name:"Farhana Akter",
+    email:"farhana@example.com",
+    phone:"+880 1811-889900",
+    status:"inactive",
+    joined:"2026-05-15",
+    address:"Khulna, Bangladesh",
+    note:"No recent activity."
+  },
+  {
+    id:"CUS-1008",
+    name:"Imran Hossain",
+    email:"imran@example.com",
+    phone:"+880 1911-223344",
+    status:"active",
+    joined:"2026-08-01",
+    address:"Mymensingh, Bangladesh",
+    note:"Interested in monthly website plan."
+  }
+];
+
+/* =========================
+   DEMO ORDERS
+========================= */
+
+const DEMO_ORDERS = [
+  {
+    id:"WD-1028",
+    customerId:"CUS-1001",
+    customer:"Nusrat Jahan",
+    customerEmail:"nusrat@example.com",
+    customerPhone:"+880 1712-345678",
+    website:"Corporate Pro",
+    category:"Business",
+    amount:8500,
+    orderStatus:"completed",
+    paymentStatus:"paid",
+    paymentMethod:"bKash",
+    createdAt:"2026-09-12"
+  },
+  {
+    id:"WD-1029",
+    customerId:"CUS-1002",
+    customer:"Rahim Ahmed",
+    customerEmail:"rahim@example.com",
+    customerPhone:"+880 1812-234567",
+    website:"Creative Studio",
+    category:"Agency",
+    amount:6500,
+    orderStatus:"completed",
+    paymentStatus:"paid",
+    paymentMethod:"Nagad",
+    createdAt:"2026-08-28"
+  },
+  {
+    id:"WD-1030",
+    customerId:"CUS-1002",
+    customer:"Rahim Ahmed",
+    customerEmail:"rahim@example.com",
+    customerPhone:"+880 1812-234567",
+    website:"Starter Monthly",
+    category:"Monthly",
+    amount:325,
+    orderStatus:"completed",
+    paymentStatus:"paid",
+    paymentMethod:"bKash",
+    createdAt:"2026-09-18"
+  },
+  {
+    id:"WD-1031",
+    customerId:"CUS-1003",
+    customer:"Sadia Islam",
+    customerEmail:"sadia@example.com",
+    customerPhone:"+880 1912-456789",
+    website:"Tasty Bites",
+    category:"Restaurant",
+    amount:7200,
+    orderStatus:"processing",
+    paymentStatus:"paid",
+    paymentMethod:"bKash",
+    createdAt:"2026-09-23"
+  },
+  {
+    id:"WD-1032",
+    customerId:"CUS-1004",
+    customer:"Tanvir Hasan",
+    customerEmail:"tanvir@example.com",
+    customerPhone:"+880 1612-667788",
+    website:"ShopEasy Store",
+    category:"E-commerce",
+    amount:9200,
+    orderStatus:"cancelled",
+    paymentStatus:"cancelled",
+    paymentMethod:"Bank Transfer",
+    createdAt:"2026-07-22"
+  },
+  {
+    id:"WD-1033",
+    customerId:"CUS-1005",
+    customer:"Mahi Rahman",
+    customerEmail:"mahi@example.com",
+    customerPhone:"+880 1512-778899",
+    website:"Personal Folio",
+    category:"Portfolio",
+    amount:4800,
+    orderStatus:"pending",
+    paymentStatus:"pending",
+    paymentMethod:"bKash",
+    createdAt:"2026-09-28"
+  },
+  {
+    id:"WD-1034",
+    customerId:"CUS-1006",
+    customer:"Arif Chowdhury",
+    customerEmail:"arif@example.com",
+    customerPhone:"+880 1711-998877",
+    website:"Biz Launch",
+    category:"Business",
+    amount:7600,
+    orderStatus:"completed",
+    paymentStatus:"paid",
+    paymentMethod:"Bank Transfer",
+    createdAt:"2026-08-11"
+  },
+  {
+    id:"WD-1035",
+    customerId:"CUS-1007",
+    customer:"Farhana Akter",
+    customerEmail:"farhana@example.com",
+    customerPhone:"+880 1811-889900",
+    website:"Cafe Corner",
+    category:"Restaurant",
+    amount:5400,
+    orderStatus:"completed",
+    paymentStatus:"paid",
+    paymentMethod:"Nagad",
+    createdAt:"2026-06-02"
+  },
+  {
+    id:"WD-1036",
+    customerId:"CUS-1008",
+    customer:"Imran Hossain",
+    customerEmail:"imran@example.com",
+    customerPhone:"+880 1911-223344",
+    website:"Starter Monthly",
+    category:"Monthly",
+    amount:325,
+    orderStatus:"completed",
+    paymentStatus:"paid",
+    paymentMethod:"bKash",
+    createdAt:"2026-08-03"
+  }
+];
+
+/* =========================
+   STORAGE HELPERS
+========================= */
+
+function readArray(key){
   try{
-
-    const raw =
-      localStorage.getItem(key);
+    const raw = localStorage.getItem(key);
 
     if(!raw){
       return [];
     }
 
-    const data =
-      JSON.parse(raw);
+    const parsed = JSON.parse(raw);
 
-    return Array.isArray(data)
-      ? data
-      : [];
+    return Array.isArray(parsed) ? parsed : [];
 
   }catch(error){
-
     return [];
+  }
+}
+
+function saveArray(key,data){
+  localStorage.setItem(key,JSON.stringify(data));
+}
+
+function hasStoredData(key){
+  try{
+    const raw = localStorage.getItem(key);
+
+    if(!raw){
+      return false;
+    }
+
+    const parsed = JSON.parse(raw);
+
+    return Array.isArray(parsed) && parsed.length > 0;
+
+  }catch(error){
+    return false;
+  }
+}
+
+/* =========================
+   NORMALIZATION
+========================= */
+
+function normalizeStatus(value){
+  const s = String(value || "").trim().toLowerCase();
+
+  if(
+    s === "suspended" ||
+    s === "blocked" ||
+    s === "banned"
+  ){
+    return "suspended";
+  }
+
+  if(
+    s === "inactive" ||
+    s === "disabled" ||
+    s === "deactivated"
+  ){
+    return "inactive";
+  }
+
+  return "active";
+}
+
+function normalizeOrderStatus(value){
+  const s = String(value || "").trim().toLowerCase();
+
+  if(
+    s.includes("cancel") ||
+    s.includes("failed")
+  ){
+    return "cancelled";
+  }
+
+  if(
+    s.includes("complete") ||
+    s.includes("deliver") ||
+    s.includes("success")
+  ){
+    return "completed";
+  }
+
+  if(
+    s.includes("process")
+  ){
+    return "processing";
+  }
+
+  return "pending";
+}
+
+function normalizePaymentStatus(value){
+  const s = String(value || "").trim().toLowerCase();
+
+  if(
+    s === "paid" ||
+    s === "completed" ||
+    s === "success" ||
+    s === "successful" ||
+    s === "succeeded"
+  ){
+    return "paid";
+  }
+
+  if(
+    s === "cancelled" ||
+    s === "canceled" ||
+    s === "failed" ||
+    s === "refunded" ||
+    s === "refund"
+  ){
+    return s.includes("refund") ? "refunded" : "cancelled";
+  }
+
+  return "pending";
+}
+
+function normalizeDate(value){
+  if(value === null || value === undefined){
+    return "";
+  }
+
+  const date = new Date(value);
+
+  if(Number.isNaN(date.getTime())){
+    return String(value);
+  }
+
+  return date.toISOString().slice(0,10);
+}
+
+function normalizeCustomer(raw,index){
+  raw = raw || {};
+
+  return {
+    id:
+      raw.id ||
+      raw.customerId ||
+      raw.customer_id ||
+      `CUS-${1001 + index}`,
+
+    name:
+      raw.name ||
+      raw.customerName ||
+      raw.fullName ||
+      raw.customer ||
+      "Unnamed Customer",
+
+    email:
+      raw.email ||
+      raw.customerEmail ||
+      raw.emailAddress ||
+      "",
+
+    phone:
+      raw.phone ||
+      raw.customerPhone ||
+      raw.mobile ||
+      raw.mobileNumber ||
+      "",
+
+    status:normalizeStatus(
+      raw.status ||
+      raw.customerStatus
+    ),
+
+    joined:normalizeDate(
+      raw.joined ||
+      raw.joinedAt ||
+      raw.createdAt ||
+      raw.created_at ||
+      raw.date
+    ),
+
+    address:
+      raw.address ||
+      "",
+
+    note:
+      raw.note ||
+      raw.notes ||
+      "",
+
+    avatar:
+      raw.avatar ||
+      raw.photo ||
+      raw.image ||
+      ""
+  };
+}
+
+function normalizeOrder(raw,index){
+  raw = raw || {};
+
+  return {
+    id:
+      raw.id ||
+      raw.orderId ||
+      raw.order_id ||
+      raw.transactionId ||
+      `WD-${1028 + index}`,
+
+    customerId:
+      raw.customerId ||
+      raw.customer_id ||
+      raw.userId ||
+      "",
+
+    customer:
+      raw.customer ||
+      raw.customerName ||
+      raw.fullName ||
+      raw.name ||
+      "",
+
+    customerEmail:
+      raw.customerEmail ||
+      raw.email ||
+      "",
+
+    customerPhone:
+      raw.customerPhone ||
+      raw.phone ||
+      raw.mobile ||
+      "",
+
+    website:
+      raw.website ||
+      raw.websiteName ||
+      raw.product ||
+      raw.productName ||
+      "",
+
+    category:
+      raw.category ||
+      raw.categoryName ||
+      "",
+
+    amount:Number(
+      raw.amount ??
+      raw.total ??
+      raw.price ??
+      raw.paidAmount ??
+      0
+    ) || 0,
+
+    orderStatus:normalizeOrderStatus(
+      raw.orderStatus ||
+      raw.status
+    ),
+
+    paymentStatus:normalizePaymentStatus(
+      raw.paymentStatus ||
+      raw.payment_status ||
+      raw.status
+    ),
+
+    paymentMethod:
+      raw.paymentMethod ||
+      raw.method ||
+      raw.gateway ||
+      raw.type ||
+      "",
+
+    createdAt:normalizeDate(
+      raw.createdAt ||
+      raw.created_at ||
+      raw.date ||
+      raw.timestamp ||
+      raw.updatedAt
+    )
+  };
+}
+
+/* =========================
+   CUSTOMER KEY
+========================= */
+
+function customerKey(customer){
+  const email = String(customer.email || "")
+    .trim()
+    .toLowerCase();
+
+  if(email){
+    return "email:" + email;
+  }
+
+  const phone = String(customer.phone || "")
+    .replace(/\s+/g,"")
+    .trim();
+
+  if(phone){
+    return "phone:" + phone;
+  }
+
+  const id = String(customer.id || "")
+    .trim()
+    .toLowerCase();
+
+  if(id){
+    return "id:" + id;
+  }
+
+  return "name:" +
+    String(customer.name || "")
+      .trim()
+      .toLowerCase();
+}
+
+/* =========================
+   INIT DATA
+========================= */
+
+function loadData(){
+
+  customers = readArray(CUSTOMER_KEY)
+    .map((item,index) => normalizeCustomer(item,index));
+
+  orders = readArray(ORDERS_KEY)
+    .map((item,index) => normalizeOrder(item,index));
+
+  transactions = readArray(TRANSACTION_KEY);
+
+  paymentTransactions = readArray(
+    PAYMENT_TRANSACTION_KEY
+  );
+
+  /*
+    If there is no customer/order/transaction data
+    at all, use demo customers and demo orders.
+  */
+
+  const hasAnyData =
+    customers.length > 0 ||
+    orders.length > 0 ||
+    transactions.length > 0 ||
+    paymentTransactions.length > 0;
+
+  if(!hasAnyData){
+
+    customers = DEMO_CUSTOMERS
+      .map((item,index) => normalizeCustomer(item,index));
+
+    orders = DEMO_ORDERS
+      .map((item,index) => normalizeOrder(item,index));
 
   }
 
-}
+  /*
+    If customer records are empty but orders exist,
+    derive customer profiles from orders.
+  */
 
-
-/* =========================================================
-   ESCAPE
-========================================================= */
-
-function escapeHTML(value){
-
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-
-}
-
-
-/* =========================================================
-   DATE
-========================================================= */
-
-function validDate(value){
-
-  if(!value){
-    return null;
+  if(customers.length === 0 && orders.length > 0){
+    customers = deriveCustomersFromOrders(orders);
   }
 
-  const date =
-    new Date(value);
-
-  return Number.isNaN(date.getTime())
-    ? null
-    : date;
+  enrichCustomers();
 
 }
 
+/* =========================
+   DERIVE CUSTOMERS
+========================= */
+
+function deriveCustomersFromOrders(orderList){
+
+  const map = new Map();
+
+  orderList.forEach((order,index) => {
+
+    const rawCustomer = {
+      id:order.customerId,
+      name:order.customer,
+      email:order.customerEmail,
+      phone:order.customerPhone,
+      status:"active",
+      joined:order.createdAt
+    };
+
+    const normalized =
+      normalizeCustomer(rawCustomer,index);
+
+    const key = customerKey(normalized);
+
+    if(!key){
+      return;
+    }
+
+    if(!map.has(key)){
+      map.set(key,normalized);
+    }
+
+  });
+
+  return Array.from(map.values());
+
+}
+
+/* =========================
+   ENRICH CUSTOMER DATA
+========================= */
+
+function enrichCustomers(){
+
+  customers = customers.map(customer => {
+
+    const key = customerKey(customer);
+
+    const relatedOrders = orders.filter(order =>
+      orderMatchesCustomer(order,customer,key)
+    );
+
+    const paidOrders = relatedOrders.filter(order =>
+      normalizePaymentStatus(order.paymentStatus) === "paid"
+    );
+
+    const totalSpent = paidOrders.reduce(
+      (sum,order) => sum + Number(order.amount || 0),
+      0
+    );
+
+    const dates = relatedOrders
+      .map(order => normalizeDate(order.createdAt))
+      .filter(Boolean)
+      .sort();
+
+    const lastOrder =
+      dates.length ? dates[dates.length - 1] : "";
+
+    return {
+      ...customer,
+      totalOrders:relatedOrders.length,
+      totalSpent,
+      lastOrder
+    };
+
+  });
+
+}
+
+/* =========================
+   MATCH CUSTOMER
+========================= */
+
+function orderMatchesCustomer(order,customer,key){
+
+  const customerEmail =
+    String(customer.email || "")
+      .trim()
+      .toLowerCase();
+
+  const orderEmail =
+    String(order.customerEmail || "")
+      .trim()
+      .toLowerCase();
+
+  if(customerEmail && orderEmail){
+    return customerEmail === orderEmail;
+  }
+
+  const customerPhone =
+    String(customer.phone || "")
+      .replace(/\s+/g,"");
+
+  const orderPhone =
+    String(order.customerPhone || "")
+      .replace(/\s+/g,"");
+
+  if(customerPhone && orderPhone){
+    return customerPhone === orderPhone;
+  }
+
+  const customerId =
+    String(customer.id || "")
+      .trim()
+      .toLowerCase();
+
+  const orderCustomerId =
+    String(order.customerId || "")
+      .trim()
+      .toLowerCase();
+
+  if(customerId && orderCustomerId){
+    return customerId === orderCustomerId;
+  }
+
+  const customerName =
+    String(customer.name || "")
+      .trim()
+      .toLowerCase();
+
+  const orderName =
+    String(order.customer || "")
+      .trim()
+      .toLowerCase();
+
+  return !!customerName &&
+    !!orderName &&
+    customerName === orderName;
+}
+
+/* =========================
+   DATE HELPERS
+========================= */
 
 function formatDate(value){
 
-  const date =
-    validDate(value);
-
-  if(!date){
+  if(!value){
     return "—";
+  }
+
+  const date = new Date(value);
+
+  if(Number.isNaN(date.getTime())){
+    return String(value);
   }
 
   return date.toLocaleDateString(
@@ -2422,1303 +3412,1706 @@ function formatDate(value){
       year:"numeric"
     }
   );
-
 }
 
+function isNewCustomer(customer){
 
-function formatDateTime(value){
-
-  const date =
-    validDate(value);
-
-  if(!date){
-    return "—";
+  if(!customer.joined){
+    return false;
   }
 
-  return date.toLocaleString(
-    "en-GB",
-    {
-      day:"2-digit",
-      month:"short",
-      year:"numeric",
-      hour:"2-digit",
-      minute:"2-digit"
-    }
-  );
+  const joined =
+    new Date(customer.joined);
 
-}
-
-
-/* =========================================================
-   ID
-========================================================= */
-
-function generateCampaignId(){
-
-  return (
-    "CMP-" +
-    Date.now().toString(36).toUpperCase()
-  );
-
-}
-
-
-function generateSubscriberId(){
-
-  const numbers =
-    subscribers
-      .map(s =>
-        parseInt(
-          String(s.id || "")
-            .replace(/\D/g,""),
-          10
-        )
-      )
-      .filter(Number.isFinite);
-
-  return (
-    "SUB-" +
-    (Math.max(1000,...numbers) + 1)
-  );
-
-}
-
-
-/* =========================================================
-   DEMO SUBSCRIBERS
-========================================================= */
-
-function getDemoSubscribers(){
-
-  const now = Date.now();
-
-  function ago(days){
-
-    return new Date(
-      now -
-      days * 24 * 60 * 60 * 1000
-    ).toISOString();
-
+  if(Number.isNaN(joined.getTime())){
+    return false;
   }
 
-  return [
+  const now = new Date();
 
-    {
-      id:"SUB-1001",
-      name:"Nusrat Jahan",
-      email:"nusrat@example.com",
-      status:"active",
-      joined:ago(4),
-      source:"Website"
-    },
+  const diff =
+    now.getTime() - joined.getTime();
 
-    {
-      id:"SUB-1002",
-      name:"Rahim Ahmed",
-      email:"rahim@example.com",
-      status:"active",
-      joined:ago(12),
-      source:"Checkout"
-    },
+  const days =
+    diff / (1000 * 60 * 60 * 24);
 
-    {
-      id:"SUB-1003",
-      name:"Sadia Islam",
-      email:"sadia@example.com",
-      status:"active",
-      joined:ago(18),
-      source:"Homepage"
-    },
-
-    {
-      id:"SUB-1004",
-      name:"Tanvir Hasan",
-      email:"tanvir@example.com",
-      status:"unsubscribed",
-      joined:ago(39),
-      source:"Website"
-    },
-
-    {
-      id:"SUB-1005",
-      name:"Mahi Rahman",
-      email:"mahi@example.com",
-      status:"active",
-      joined:ago(52),
-      source:"Checkout"
-    }
-
-  ];
-
+  return days >= 0 && days <= 30;
 }
 
+/* =========================
+   MONEY
+========================= */
 
-/* =========================================================
-   DEMO CAMPAIGNS
-========================================================= */
+function formatBDT(value){
 
-function getDemoCampaigns(){
+  const amount =
+    Number(value || 0);
 
-  return [
-
-    {
-      id:"CMP-1001",
-      name:"Welcome Campaign",
-      subject:"Welcome to Website Deals",
-      sender:"Website Deals",
-      content:"Discover premium websites that are ready to launch.",
-      status:"sent",
-      audience:"all",
-      createdAt:"2026-09-15T10:00:00",
-      sentAt:"2026-09-15T12:00:00",
-      openRate:42
-    },
-
-    {
-      id:"CMP-1002",
-      name:"New Website Collection",
-      subject:"New websites just arrived",
-      sender:"Website Deals",
-      content:"Explore our latest website collection and discover your next digital project.",
-      status:"sent",
-      audience:"active",
-      createdAt:"2026-09-24T09:30:00",
-      sentAt:"2026-09-24T11:00:00",
-      openRate:48
-    },
-
-    {
-      id:"CMP-1003",
-      name:"October Launch",
-      subject:"October Website Deals",
-      sender:"Website Deals",
-      content:"New month. New websites. New opportunities.",
-      status:"scheduled",
-      audience:"all",
-      createdAt:"2026-09-30T14:00:00",
-      scheduledAt:"2026-10-05T10:00:00",
-      openRate:0
-    }
-
-  ];
-
-}
-
-
-/* =========================================================
-   LOAD
-========================================================= */
-
-function loadNewsletter(){
-
-  campaigns =
-    parseArray(NEWSLETTER_KEY);
-
-  subscribers =
-    parseArray(SUBSCRIBERS_KEY);
-
-
-  /*
-    Demo records only when the related local storage
-    does not exist yet.
-  */
-
-  if(!campaigns.length){
-
-    campaigns =
-      getDemoCampaigns();
-
-  }
-
-
-  if(!subscribers.length){
-
-    subscribers =
-      getDemoSubscribers();
-
-  }
-
-
-  /*
-    If real customers exist, use them as a potential
-    subscriber audience without automatically changing
-    existing subscriber records.
-  */
-
-  updateStats();
-
-  renderCampaigns();
-
-  renderSubscribers();
-
-}
-
-
-/* =========================================================
-   ADMIN IDENTITY
-========================================================= */
-
-function setAdminIdentity(){
-
-  const name =
-    adminSession?.name ||
-    adminSession?.email ||
-    "Super Admin";
-
-  const role =
-    adminSession?.role ||
-    "Super Admin";
-
-  const initials =
-    name
-      .split(/\s+/)
-      .filter(Boolean)
-      .slice(0,2)
-      .map(
-        part =>
-          part.charAt(0).toUpperCase()
-      )
-      .join("") || "SA";
-
-  document.getElementById("adminName")
-    .textContent = name;
-
-  document.getElementById("adminRole")
-    .textContent = role;
-
-  document.getElementById("adminAvatar")
-    .textContent = initials;
-
-}
-
-
-/* =========================================================
-   INIT
-========================================================= */
-
-document.addEventListener(
-  "DOMContentLoaded",
-  () => {
-
-    setAdminIdentity();
-
-    loadNewsletter();
-
-    document.addEventListener(
-      "keydown",
-      event => {
-
-        if(event.key === "Escape"){
-
-          document
-            .querySelectorAll(
-              ".modal-overlay.show"
-            )
-            .forEach(modal => {
-
-              modal.classList.remove("show");
-
-            });
-
-        }
-
+  return "৳" +
+    amount.toLocaleString(
+      "en-BD",
+      {
+        maximumFractionDigits:0
       }
     );
+}
 
-  }
-);
+/* =========================
+   ESCAPE HTML
+========================= */
 
+function escapeHTML(value){
 
-/* =========================================================
-   STATS
-========================================================= */
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+}
 
-function updateStats(){
+/* =========================
+   INITIALS
+========================= */
 
-  const total =
-    subscribers.length;
+function initials(name){
 
-  const active =
-    subscribers.filter(
-      s =>
-        String(s.status || "")
-          .toLowerCase() === "active"
-    ).length;
+  const parts =
+    String(name || "Customer")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
 
-  const campaignCount =
-    campaigns.length;
-
-  const sent =
-    campaigns.filter(
-      c =>
-        String(c.status || "")
-          .toLowerCase() === "sent"
-    ).length;
-
-  const sentCampaigns =
-    campaigns.filter(
-      c =>
-        String(c.status || "")
-          .toLowerCase() === "sent"
-    );
-
-  let openRate = 0;
-
-  if(sentCampaigns.length){
-
-    openRate =
-      sentCampaigns.reduce(
-        (sum,c) =>
-          sum + (Number(c.openRate) || 0),
-        0
-      ) /
-      sentCampaigns.length;
-
+  if(parts.length === 1){
+    return parts[0]
+      .slice(0,2)
+      .toUpperCase();
   }
 
+  return (
+    parts[0][0] +
+    parts[parts.length - 1][0]
+  ).toUpperCase();
+}
 
-  document.getElementById(
-    "statSubscribers"
-  ).textContent = total;
+/* =========================
+   FILTERING
+========================= */
 
-  document.getElementById(
-    "statActive"
-  ).textContent = active;
+function applyFilters(){
 
-  document.getElementById(
-    "statCampaigns"
-  ).textContent = campaignCount;
+  const search =
+    document.getElementById("searchInput")
+      .value
+      .trim()
+      .toLowerCase();
 
-  document.getElementById(
-    "statSent"
-  ).textContent = sent;
+  const status =
+    document.getElementById("statusFilter").value;
 
-  document.getElementById(
-    "statOpen"
-  ).textContent =
-    Math.round(openRate) + "%";
+  const type =
+    document.getElementById("typeFilter").value;
 
+  const sort =
+    document.getElementById("sortFilter").value;
 
-  document.getElementById(
-    "audienceAll"
-  ).textContent = total;
+  filteredCustomers =
+    customers.filter(customer => {
 
-  document.getElementById(
-    "audienceActive"
-  ).textContent = active;
+      const searchable = [
+        customer.id,
+        customer.name,
+        customer.email,
+        customer.phone
+      ]
+      .join(" ")
+      .toLowerCase();
 
+      if(
+        search &&
+        !searchable.includes(search)
+      ){
+        return false;
+      }
 
-  const customers =
-    parseArray(CUSTOMERS_KEY);
+      if(
+        status !== "all" &&
+        customer.status !== status
+      ){
+        return false;
+      }
 
-  document.getElementById(
-    "audienceCustomers"
-  ).textContent =
-    customers.length;
+      if(type === "new" && !isNewCustomer(customer)){
+        return false;
+      }
+
+      if(
+        type === "returning" &&
+        Number(customer.totalOrders || 0) < 2
+      ){
+        return false;
+      }
+
+      return true;
+
+    });
+
+  filteredCustomers.sort((a,b) => {
+
+    switch(sort){
+
+      case "oldest":
+        return compareDates(
+          a.joined,
+          b.joined
+        );
+
+      case "spendingHigh":
+        return Number(b.totalSpent || 0) -
+          Number(a.totalSpent || 0);
+
+      case "spendingLow":
+        return Number(a.totalSpent || 0) -
+          Number(b.totalSpent || 0);
+
+      case "ordersHigh":
+        return Number(b.totalOrders || 0) -
+          Number(a.totalOrders || 0);
+
+      case "ordersLow":
+        return Number(a.totalOrders || 0) -
+          Number(b.totalOrders || 0);
+
+      case "nameAZ":
+        return String(a.name || "")
+          .localeCompare(
+            String(b.name || "")
+          );
+
+      case "newest":
+      default:
+        return compareDates(
+          b.joined,
+          a.joined
+        );
+    }
+
+  });
+
+  currentPage = 1;
+
+  renderCustomers();
+  updateStats();
+  updateBulkUI();
 
 }
 
+/* =========================
+   DATE SORT
+========================= */
 
-/* =========================================================
-   RENDER CAMPAIGNS
-========================================================= */
+function compareDates(a,b){
 
-function renderCampaigns(){
+  const da =
+    new Date(a || "1970-01-01").getTime();
+
+  const db =
+    new Date(b || "1970-01-01").getTime();
+
+  return da - db;
+}
+
+/* =========================
+   RENDER
+========================= */
+
+function renderCustomers(){
+
+  const start =
+    (currentPage - 1) * PAGE_SIZE;
+
+  const pageCustomers =
+    filteredCustomers.slice(
+      start,
+      start + PAGE_SIZE
+    );
+
+  renderDesktop(pageCustomers);
+  renderMobile(pageCustomers);
+  renderPagination();
+
+}
+
+/* =========================
+   DESKTOP TABLE
+========================= */
+
+function renderDesktop(list){
 
   const container =
-    document.getElementById("campaignList");
+    document.getElementById("desktopTable");
 
-
-  if(!campaigns.length){
+  if(!list.length){
 
     container.innerHTML = `
       <div class="empty">
-        No campaigns created yet.
+        <div class="empty-icon">♙</div>
+        <strong>No customers found</strong>
+        <span>Try changing your search or filters.</span>
       </div>
     `;
 
     return;
-
   }
 
+  let html = `
+    <table>
+      <thead>
+        <tr>
 
-  const sorted =
-    [...campaigns].sort(
-      (a,b) =>
-        new Date(
-          b.createdAt || 0
-        ) -
-        new Date(
-          a.createdAt || 0
-        )
-    );
+          <th style="width:40px;">
+            <input
+              class="check"
+              type="checkbox"
+              id="selectAll"
+              onchange="toggleSelectAll(this.checked)"
+            >
+          </th>
 
+          <th>Customer</th>
+          <th>Contact</th>
+          <th>Orders</th>
+          <th>Total Spent</th>
+          <th>Last Order</th>
+          <th>Status</th>
+          <th>Joined</th>
+          <th>Actions</th>
 
-  container.innerHTML =
-    sorted
-      .slice(0,8)
-      .map(campaign => {
+        </tr>
+      </thead>
 
-        const status =
-          String(
-            campaign.status || "draft"
-          ).toLowerCase();
+      <tbody>
+  `;
 
-        return `
+  list.forEach(customer => {
 
-          <div class="campaign">
+    const key =
+      escapeHTML(customerKey(customer));
 
-            <div class="campaign-icon">
-              ✉
+    const type =
+      Number(customer.totalOrders || 0) >= 2
+        ? "returning"
+        : "new";
+
+    html += `
+      <tr>
+
+        <td>
+          <input
+            class="check customer-check"
+            type="checkbox"
+            data-key="${key}"
+            onchange="updateBulkUI()"
+          >
+        </td>
+
+        <td>
+
+          <div class="customer-cell">
+
+            <div class="customer-avatar">
+              ${escapeHTML(initials(customer.name))}
             </div>
 
-            <div class="campaign-main">
+            <div>
 
-              <div class="campaign-name">
-                ${escapeHTML(
-                  campaign.name ||
-                  campaign.subject ||
-                  "Untitled Campaign"
-                )}
+              <div class="customer-name">
+                ${escapeHTML(customer.name)}
               </div>
 
-              <div class="campaign-meta">
-                ${escapeHTML(
-                  campaign.subject || "No subject"
-                )}
-                •
-                ${formatDate(
-                  campaign.createdAt
-                )}
+              <div class="customer-id">
+                ${escapeHTML(customer.id)}
               </div>
-
-            </div>
-
-            <span class="campaign-status ${escapeHTML(status)}">
-              ${escapeHTML(status)}
-            </span>
-
-            <div class="campaign-actions">
-
-              <button
-                class="small-action"
-                title="View"
-                onclick="viewCampaign('${escapeJS(campaign.id)}')"
-              >
-                ◉
-              </button>
-
-              <button
-                class="small-action"
-                title="Edit"
-                onclick="editCampaign('${escapeJS(campaign.id)}')"
-              >
-                ✎
-              </button>
-
-              <button
-                class="small-action"
-                title="Delete"
-                onclick="deleteCampaign('${escapeJS(campaign.id)}')"
-              >
-                ×
-              </button>
 
             </div>
 
           </div>
 
-        `;
+        </td>
 
-      })
-      .join("");
+        <td>
+
+          <div class="contact-main">
+            ${escapeHTML(customer.email || "No email")}
+          </div>
+
+          <div class="contact-sub">
+            ${escapeHTML(customer.phone || "No phone")}
+          </div>
+
+        </td>
+
+        <td>
+
+          <div style="font-weight:800;">
+            ${Number(customer.totalOrders || 0)}
+          </div>
+
+          <div style="margin-top:4px;">
+            <span class="badge ${type}">
+              ${type === "returning" ? "Returning" : "New"}
+            </span>
+          </div>
+
+        </td>
+
+        <td>
+          <span class="money">
+            ${formatBDT(customer.totalSpent)}
+          </span>
+        </td>
+
+        <td>
+          <span class="muted">
+            ${formatDate(customer.lastOrder)}
+          </span>
+        </td>
+
+        <td>
+          <span class="badge ${escapeHTML(customer.status)}">
+            ${escapeHTML(capitalize(customer.status))}
+          </span>
+        </td>
+
+        <td>
+          <span class="muted">
+            ${formatDate(customer.joined)}
+          </span>
+        </td>
+
+        <td>
+
+          <div class="row-actions">
+
+            <button
+              class="row-btn"
+              title="View customer"
+              onclick="openCustomer('${escapeJS(customerKey(customer))}')"
+            >
+              ◉
+            </button>
+
+            <button
+              class="row-btn"
+              title="Edit customer"
+              onclick="editCustomer('${escapeJS(customerKey(customer))}')"
+            >
+              ✎
+            </button>
+
+            <button
+              class="row-btn delete"
+              title="Delete customer"
+              onclick="confirmDelete('${escapeJS(customerKey(customer))}')"
+            >
+              ×
+            </button>
+
+          </div>
+
+        </td>
+
+      </tr>
+    `;
+
+  });
+
+  html += `
+      </tbody>
+    </table>
+  `;
+
+  container.innerHTML = html;
 
 }
 
+/* =========================
+   MOBILE
+========================= */
 
-/* =========================================================
-   RENDER SUBSCRIBERS
-========================================================= */
+function renderMobile(list){
 
-function renderSubscribers(){
+  const container =
+    document.getElementById("mobileList");
 
-  const body =
-    document.getElementById(
-      "subscriberBody"
-    );
+  if(!list.length){
 
-  const empty =
-    document.getElementById(
-      "subscriberEmpty"
-    );
-
-
-  if(!subscribers.length){
-
-    body.innerHTML = "";
-
-    empty.style.display = "block";
+    container.innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">♙</div>
+        <strong>No customers found</strong>
+        <span>Try changing your search or filters.</span>
+      </div>
+    `;
 
     return;
-
   }
 
+  let html = "";
 
-  empty.style.display = "none";
+  list.forEach(customer => {
 
+    const key =
+      escapeHTML(customerKey(customer));
 
-  body.innerHTML =
-    subscribers.map(subscriber => {
+    const type =
+      Number(customer.totalOrders || 0) >= 2
+        ? "returning"
+        : "new";
 
-      const status =
-        String(
-          subscriber.status || "active"
-        ).toLowerCase();
+    html += `
+      <div class="customer-mobile-card">
 
-      return `
+        <div class="mobile-card-top">
 
-        <tr>
+          <div class="mobile-card-customer">
 
-          <td>
+            <input
+              class="check customer-check"
+              type="checkbox"
+              data-key="${key}"
+              onchange="updateBulkUI()"
+            >
 
-            <strong>
-              ${escapeHTML(
-                subscriber.name ||
-                "Subscriber"
-              )}
-            </strong>
-
-            <div class="sub">
-              ${escapeHTML(
-                subscriber.id || ""
-              )}
+            <div class="customer-avatar">
+              ${escapeHTML(initials(customer.name))}
             </div>
 
-          </td>
+            <div>
 
-          <td>
-            ${escapeHTML(
-              subscriber.email || "—"
-            )}
-          </td>
+              <div class="customer-name">
+                ${escapeHTML(customer.name)}
+              </div>
 
-          <td>
+              <div class="customer-id">
+                ${escapeHTML(customer.id)}
+              </div>
 
-            <span
-              class="badge ${
-                status === "active"
-                  ? "sent"
-                  : "cancelled"
-              }"
-            >
-              ${escapeHTML(status)}
-            </span>
+            </div>
 
-          </td>
+          </div>
 
-          <td>
-            ${formatDate(
-              subscriber.joined
-            )}
-          </td>
+          <span class="badge ${escapeHTML(customer.status)}">
+            ${escapeHTML(capitalize(customer.status))}
+          </span>
 
-          <td>
-            ${escapeHTML(
-              subscriber.source || "Website"
-            )}
-          </td>
+        </div>
 
-          <td>
+        <div class="mobile-card-grid">
 
-            <button
-              class="btn small"
-              onclick="toggleSubscriber('${escapeJS(subscriber.id)}')"
-            >
-              ${
-                status === "active"
-                  ? "Suspend"
-                  : "Activate"
-              }
-            </button>
+          <div>
+            <div class="mobile-meta-label">
+              Email
+            </div>
+            <div class="mobile-meta-value">
+              ${escapeHTML(customer.email || "—")}
+            </div>
+          </div>
 
-            <button
-              class="btn small danger"
-              onclick="deleteSubscriber('${escapeJS(subscriber.id)}')"
-            >
-              Delete
-            </button>
+          <div>
+            <div class="mobile-meta-label">
+              Phone
+            </div>
+            <div class="mobile-meta-value">
+              ${escapeHTML(customer.phone || "—")}
+            </div>
+          </div>
 
-          </td>
+          <div>
+            <div class="mobile-meta-label">
+              Orders
+            </div>
+            <div class="mobile-meta-value">
+              ${Number(customer.totalOrders || 0)}
+              ·
+              ${capitalize(type)}
+            </div>
+          </div>
 
-        </tr>
+          <div>
+            <div class="mobile-meta-label">
+              Spent
+            </div>
+            <div class="mobile-meta-value">
+              ${formatBDT(customer.totalSpent)}
+            </div>
+          </div>
 
-      `;
+          <div>
+            <div class="mobile-meta-label">
+              Last Order
+            </div>
+            <div class="mobile-meta-value">
+              ${formatDate(customer.lastOrder)}
+            </div>
+          </div>
 
-    }).join("");
+          <div>
+            <div class="mobile-meta-label">
+              Joined
+            </div>
+            <div class="mobile-meta-value">
+              ${formatDate(customer.joined)}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="mobile-actions">
+
+          <button
+            class="outline-btn"
+            type="button"
+            onclick="openCustomer('${escapeJS(customerKey(customer))}')"
+          >
+            View
+          </button>
+
+          <button
+            class="outline-btn"
+            type="button"
+            onclick="editCustomer('${escapeJS(customerKey(customer))}')"
+          >
+            Edit
+          </button>
+
+          <button
+            class="outline-btn danger-btn"
+            type="button"
+            onclick="confirmDelete('${escapeJS(customerKey(customer))}')"
+          >
+            Delete
+          </button>
+
+        </div>
+
+      </div>
+    `;
+
+  });
+
+  container.innerHTML = html;
 
 }
 
+/* =========================
+   PAGINATION
+========================= */
 
-/* =========================================================
-   SAVE STORAGE
-========================================================= */
+function renderPagination(){
 
-function saveNewsletter(){
+  const total =
+    filteredCustomers.length;
 
-  localStorage.setItem(
-    NEWSLETTER_KEY,
-    JSON.stringify(campaigns)
-  );
-
-}
-
-
-function saveSubscribers(){
-
-  localStorage.setItem(
-    SUBSCRIBERS_KEY,
-    JSON.stringify(subscribers)
-  );
-
-}
-
-
-/* =========================================================
-   COMPOSER
-========================================================= */
-
-function getSelectedAudience(){
-
-  const selected =
-    document.querySelector(
-      'input[name="audience"]:checked'
+  const totalPages =
+    Math.max(
+      1,
+      Math.ceil(total / PAGE_SIZE)
     );
 
-  return selected
-    ? selected.value
-    : "all";
-
-}
-
-
-function getComposerData(){
-
-  return {
-
-    id:
-      editingCampaignId ||
-      generateCampaignId(),
-
-    name:
-      document
-        .getElementById("campaignName")
-        .value
-        .trim(),
-
-    subject:
-      document
-        .getElementById("campaignSubject")
-        .value
-        .trim(),
-
-    sender:
-      document
-        .getElementById("senderName")
-        .value
-        .trim() ||
-      "Website Deals",
-
-    content:
-      document
-        .getElementById("campaignContent")
-        .value
-        .trim(),
-
-    status:
-      document
-        .getElementById("campaignStatus")
-        .value,
-
-    audience:
-      getSelectedAudience(),
-
-    scheduledAt:
-      document
-        .getElementById("scheduleDate")
-        .value,
-
-    unsubscribeFooter:
-      document
-        .getElementById("unsubscribeFooter")
-        .checked,
-
-    createdAt:
-      new Date().toISOString()
-
-  };
-
-}
-
-
-/* =========================================================
-   SAVE CAMPAIGN
-========================================================= */
-
-function saveCampaign(){
-
-  const data =
-    getComposerData();
-
-
-  if(!data.subject){
-
-    showToast(
-      "Email subject is required."
-    );
-
-    document
-      .getElementById("campaignSubject")
-      .focus();
-
-    return;
-
+  if(currentPage > totalPages){
+    currentPage = totalPages;
   }
 
+  const start =
+    total === 0
+      ? 0
+      : (currentPage - 1) * PAGE_SIZE + 1;
 
-  if(!data.content){
-
-    showToast(
-      "Email content is required."
+  const end =
+    Math.min(
+      currentPage * PAGE_SIZE,
+      total
     );
 
-    document
-      .getElementById("campaignContent")
-      .focus();
+  document.getElementById(
+    "paginationInfo"
+  ).textContent =
+    total === 0
+      ? "Showing 0 customers"
+      : `Showing ${start}–${end} of ${total} customers`;
 
-    return;
+  const buttons =
+    document.getElementById("pageButtons");
 
+  let html = "";
+
+  html += `
+    <button
+      class="page-btn"
+      ${currentPage <= 1 ? "disabled" : ""}
+      onclick="goPage(${currentPage - 1})"
+    >
+      ‹
+    </button>
+  `;
+
+  const maxButtons = 5;
+
+  let pageStart =
+    Math.max(
+      1,
+      currentPage - 2
+    );
+
+  let pageEnd =
+    Math.min(
+      totalPages,
+      pageStart + maxButtons - 1
+    );
+
+  if(pageEnd - pageStart < maxButtons - 1){
+    pageStart =
+      Math.max(
+        1,
+        pageEnd - maxButtons + 1
+      );
   }
 
-
-  if(
-    data.status === "scheduled" &&
-    !data.scheduledAt
+  for(
+    let page = pageStart;
+    page <= pageEnd;
+    page++
   ){
 
-    showToast(
-      "Choose a schedule date and time."
-    );
-
-    return;
-
-  }
-
-
-  const existingIndex =
-    campaigns.findIndex(
-      c => c.id === editingCampaignId
-    );
-
-
-  if(existingIndex !== -1){
-
-    data.createdAt =
-      campaigns[existingIndex].createdAt ||
-      data.createdAt;
-
-    campaigns[existingIndex] =
-      {
-        ...campaigns[existingIndex],
-        ...data
-      };
-
-  }else{
-
-    campaigns.unshift(data);
+    html += `
+      <button
+        class="page-btn ${page === currentPage ? "active" : ""}"
+        onclick="goPage(${page})"
+      >
+        ${page}
+      </button>
+    `;
 
   }
 
+  html += `
+    <button
+      class="page-btn"
+      ${currentPage >= totalPages ? "disabled" : ""}
+      onclick="goPage(${currentPage + 1})"
+    >
+      ›
+    </button>
+  `;
 
-  saveNewsletter();
-
-  updateStats();
-
-  renderCampaigns();
-
-  clearComposer();
-
-  editingCampaignId = null;
-
-  showToast(
-    "Campaign saved successfully."
-  );
+  buttons.innerHTML = html;
 
 }
 
+function goPage(page){
 
-/* =========================================================
-   SAVE DRAFT
-========================================================= */
-
-function saveDraft(){
-
-  document.getElementById(
-    "campaignStatus"
-  ).value = "draft";
-
-  saveCampaign();
-
-}
-
-
-/* =========================================================
-   EDIT
-========================================================= */
-
-function editCampaign(id){
-
-  const campaign =
-    campaigns.find(
-      c => c.id === id
+  const totalPages =
+    Math.max(
+      1,
+      Math.ceil(
+        filteredCustomers.length / PAGE_SIZE
+      )
     );
 
-  if(!campaign){
+  if(
+    page < 1 ||
+    page > totalPages
+  ){
     return;
   }
 
+  currentPage = page;
 
-  editingCampaignId =
-    campaign.id;
-
-
-  document.getElementById(
-    "campaignName"
-  ).value =
-    campaign.name || "";
-
-  document.getElementById(
-    "campaignSubject"
-  ).value =
-    campaign.subject || "";
-
-  document.getElementById(
-    "senderName"
-  ).value =
-    campaign.sender ||
-    "Website Deals";
-
-  document.getElementById(
-    "campaignContent"
-  ).value =
-    campaign.content || "";
-
-  document.getElementById(
-    "campaignStatus"
-  ).value =
-    campaign.status || "draft";
-
-  document.getElementById(
-    "scheduleDate"
-  ).value =
-    campaign.scheduledAt || "";
-
-  document.getElementById(
-    "unsubscribeFooter"
-  ).checked =
-    campaign.unsubscribeFooter !== false;
-
-
-  const radio =
-    document.querySelector(
-      `input[name="audience"][value="${CSS.escape(
-        campaign.audience || "all"
-      )}"]`
-    );
-
-  if(radio){
-    radio.checked = true;
-  }
-
+  renderCustomers();
 
   window.scrollTo({
     top:0,
     behavior:"smooth"
   });
 
+}
 
-  showToast(
-    "Campaign loaded for editing."
+/* =========================
+   STATS
+========================= */
+
+function updateStats(){
+
+  const total =
+    customers.length;
+
+  const active =
+    customers.filter(
+      customer => customer.status === "active"
+    ).length;
+
+  const newCustomers =
+    customers.filter(
+      customer => isNewCustomer(customer)
+    ).length;
+
+  const returning =
+    customers.filter(
+      customer =>
+        Number(customer.totalOrders || 0) >= 2
+    ).length;
+
+  const revenue =
+    customers.reduce(
+      (sum,customer) =>
+        sum + Number(customer.totalSpent || 0),
+      0
+    );
+
+  document.getElementById("statTotal")
+    .textContent = total.toLocaleString();
+
+  document.getElementById("statActive")
+    .textContent = active.toLocaleString();
+
+  document.getElementById("statNew")
+    .textContent = newCustomers.toLocaleString();
+
+  document.getElementById("statReturning")
+    .textContent = returning.toLocaleString();
+
+  document.getElementById("statRevenue")
+    .textContent = formatBDT(revenue);
+
+  document.getElementById("heroRevenue")
+    .textContent = formatBDT(revenue);
+
+}
+
+/* =========================
+   CUSTOMER LOOKUP
+========================= */
+
+function findCustomer(key){
+
+  return customers.find(
+    customer =>
+      customerKey(customer) === key
   );
 
 }
 
+/* =========================
+   OPEN CUSTOMER
+========================= */
 
-/* =========================================================
-   CLEAR
-========================================================= */
+function openCustomer(key){
 
-function clearComposer(){
+  const customer =
+    findCustomer(key);
 
-  editingCampaignId = null;
-
-  document.getElementById(
-    "campaignName"
-  ).value = "";
-
-  document.getElementById(
-    "campaignSubject"
-  ).value = "";
-
-  document.getElementById(
-    "senderName"
-  ).value = "Website Deals";
-
-  document.getElementById(
-    "campaignContent"
-  ).value = "";
-
-  document.getElementById(
-    "campaignStatus"
-  ).value = "draft";
-
-  document.getElementById(
-    "scheduleDate"
-  ).value = "";
-
-  document.getElementById(
-    "unsubscribeFooter"
-  ).checked = true;
-
-  const all =
-    document.querySelector(
-      'input[name="audience"][value="all"]'
-    );
-
-  if(all){
-    all.checked = true;
-  }
-
-}
-
-
-/* =========================================================
-   PREVIEW
-========================================================= */
-
-function previewCampaign(){
-
-  const subject =
-    document
-      .getElementById("campaignSubject")
-      .value
-      .trim();
-
-  const content =
-    document
-      .getElementById("campaignContent")
-      .value
-      .trim();
-
-  if(!subject && !content){
-
+  if(!customer){
     showToast(
-      "Add a subject or content first."
+      "Customer not found.",
+      "error"
     );
-
-    return;
-
-  }
-
-
-  document.getElementById(
-    "previewSubject"
-  ).textContent =
-    subject || "Newsletter Subject";
-
-
-  document.getElementById(
-    "previewContent"
-  ).textContent =
-    content ||
-    "Your newsletter content will appear here.";
-
-
-  const footer =
-    document.getElementById(
-      "previewFooter"
-    );
-
-  footer.style.display =
-    document.getElementById(
-      "unsubscribeFooter"
-    ).checked
-      ? "block"
-      : "none";
-
-
-  document.getElementById(
-    "previewModal"
-  ).classList.add("show");
-
-}
-
-
-/* =========================================================
-   VIEW
-========================================================= */
-
-function viewCampaign(id){
-
-  const campaign =
-    campaigns.find(
-      c => c.id === id
-    );
-
-  if(!campaign){
     return;
   }
 
+  editingCustomerKey = key;
 
-  document.getElementById(
-    "viewCampaignTitle"
-  ).textContent =
-    campaign.subject ||
-    campaign.name ||
-    "Campaign";
-
-
-  document.getElementById(
-    "viewCampaignMeta"
-  ).textContent =
-    `${String(
-      campaign.status || "draft"
-    ).toUpperCase()} • ${
-      formatDateTime(
-        campaign.createdAt
-      )
-    }`;
-
-
-  document.getElementById(
-    "viewCampaignContent"
-  ).textContent =
-    campaign.content ||
-    "No campaign content.";
-
-
-  document.getElementById(
-    "campaignViewModal"
-  ).classList.add("show");
-
-}
-
-
-/* =========================================================
-   DELETE CAMPAIGN
-========================================================= */
-
-function deleteCampaign(id){
-
-  const campaign =
-    campaigns.find(
-      c => c.id === id
-    );
-
-  if(!campaign){
-    return;
-  }
-
-
-  const confirmed =
-    confirm(
-      `Delete campaign "${campaign.name || campaign.subject}"?`
-    );
-
-
-  if(!confirmed){
-    return;
-  }
-
-
-  campaigns =
-    campaigns.filter(
-      c => c.id !== id
-    );
-
-
-  saveNewsletter();
-
-  updateStats();
-
-  renderCampaigns();
-
-  showToast(
-    "Campaign deleted."
+  populateCustomerModal(
+    customer,
+    false
   );
 
+  document.getElementById(
+    "customerModal"
+  ).classList.add("show");
+
 }
 
+/* =========================
+   EDIT CUSTOMER
+========================= */
 
-/* =========================================================
-   SUBSCRIBERS
-========================================================= */
+function editCustomer(key){
 
-function addDemoSubscriber(){
+  const customer =
+    findCustomer(key);
 
-  const number =
-    subscribers.length + 1;
+  if(!customer){
+    showToast(
+      "Customer not found.",
+      "error"
+    );
+    return;
+  }
 
-  subscribers.unshift({
+  editingCustomerKey = key;
 
-    id:generateSubscriberId(),
+  populateCustomerModal(
+    customer,
+    true
+  );
 
-    name:
-      "New Subscriber " +
-      number,
+  document.getElementById(
+    "customerModal"
+  ).classList.add("show");
 
-    email:
-      `subscriber${number}@example.com`,
+}
 
-    status:"active",
+/* =========================
+   POPULATE MODAL
+========================= */
 
-    joined:
-      new Date().toISOString(),
+function populateCustomerModal(
+  customer,
+  editMode
+){
 
-    source:"Admin"
+  document.getElementById(
+    "customerModalTitle"
+  ).textContent =
+    editMode
+      ? "Edit Customer"
+      : "Customer Details";
+
+  document.getElementById(
+    "customerModalSubtitle"
+  ).textContent =
+    editMode
+      ? "Update customer profile information."
+      : "Review customer information and order history.";
+
+  document.getElementById(
+    "profileAvatar"
+  ).textContent =
+    initials(customer.name);
+
+  document.getElementById(
+    "profileName"
+  ).textContent =
+    customer.name || "Customer";
+
+  document.getElementById(
+    "profileEmail"
+  ).textContent =
+    customer.email || "No email address";
+
+  document.getElementById(
+    "profileId"
+  ).textContent =
+    customer.id || "No ID";
+
+  const statusBadge =
+    document.getElementById(
+      "profileStatusBadge"
+    );
+
+  statusBadge.className =
+    "badge " + customer.status;
+
+  statusBadge.textContent =
+    capitalize(customer.status);
+
+  document.getElementById(
+    "modalOrders"
+  ).textContent =
+    Number(customer.totalOrders || 0);
+
+  document.getElementById(
+    "modalSpent"
+  ).textContent =
+    formatBDT(customer.totalSpent);
+
+  document.getElementById(
+    "modalLastOrder"
+  ).textContent =
+    customer.lastOrder
+      ? formatDate(customer.lastOrder)
+      : "—";
+
+  document.getElementById(
+    "editCustomerKey"
+  ).value =
+    customerKey(customer);
+
+  document.getElementById(
+    "customerId"
+  ).value =
+    customer.id || "";
+
+  document.getElementById(
+    "customerName"
+  ).value =
+    customer.name || "";
+
+  document.getElementById(
+    "customerEmail"
+  ).value =
+    customer.email || "";
+
+  document.getElementById(
+    "customerPhone"
+  ).value =
+    customer.phone || "";
+
+  document.getElementById(
+    "customerStatus"
+  ).value =
+    customer.status || "active";
+
+  document.getElementById(
+    "customerJoined"
+  ).value =
+    customer.joined || "";
+
+  document.getElementById(
+    "customerAddress"
+  ).value =
+    customer.address || "";
+
+  document.getElementById(
+    "customerNote"
+  ).value =
+    customer.note || "";
+
+  renderOrderHistory(customer);
+
+  updateToggleButton(customer);
+
+}
+
+/* =========================
+   ORDER HISTORY
+========================= */
+
+function renderOrderHistory(customer){
+
+  const container =
+    document.getElementById(
+      "orderHistory"
+    );
+
+  const relatedOrders =
+    orders
+      .filter(order =>
+        orderMatchesCustomer(
+          order,
+          customer,
+          customerKey(customer)
+        )
+      )
+      .sort((a,b) =>
+        compareDates(
+          b.createdAt,
+          a.createdAt
+        )
+      );
+
+  if(!relatedOrders.length){
+
+    container.innerHTML = `
+      <div class="history-empty">
+        No order history found for this customer.
+      </div>
+    `;
+
+    return;
+  }
+
+  let html = "";
+
+  relatedOrders.forEach(order => {
+
+    const paymentStatus =
+      normalizePaymentStatus(
+        order.paymentStatus
+      );
+
+    html += `
+      <div class="history-item">
+
+        <div>
+          <div class="history-id">
+            ${escapeHTML(order.id)}
+          </div>
+          <div class="history-date">
+            ${formatDate(order.createdAt)}
+          </div>
+        </div>
+
+        <div class="history-website">
+          ${escapeHTML(order.website || "Website Order")}
+        </div>
+
+        <div>
+          <strong>
+            ${formatBDT(order.amount)}
+          </strong>
+        </div>
+
+        <div>
+          <span class="badge ${
+            paymentStatus === "paid"
+              ? "active"
+              : paymentStatus === "cancelled"
+                ? "suspended"
+                : "inactive"
+          }">
+            ${escapeHTML(capitalize(paymentStatus))}
+          </span>
+        </div>
+
+      </div>
+    `;
 
   });
 
-
-  saveSubscribers();
-
-  updateStats();
-
-  renderSubscribers();
-
-  showToast(
-    "Subscriber added."
-  );
+  container.innerHTML = html;
 
 }
 
+/* =========================
+   SAVE CUSTOMER
+========================= */
 
-function toggleSubscriber(id){
+function saveCustomer(event){
 
-  const subscriber =
-    subscribers.find(
-      s => s.id === id
+  event.preventDefault();
+
+  const originalKey =
+    document.getElementById(
+      "editCustomerKey"
+    ).value;
+
+  const customer =
+    findCustomer(originalKey);
+
+  if(!customer){
+    showToast(
+      "Customer could not be found.",
+      "error"
     );
-
-  if(!subscriber){
     return;
   }
 
+  const name =
+    document.getElementById(
+      "customerName"
+    ).value.trim();
 
-  subscriber.status =
-    String(
-      subscriber.status || "active"
-    ).toLowerCase() === "active"
-      ? "unsubscribed"
-      : "active";
+  const email =
+    document.getElementById(
+      "customerEmail"
+    ).value.trim();
 
+  const phone =
+    document.getElementById(
+      "customerPhone"
+    ).value.trim();
 
-  saveSubscribers();
-
-  updateStats();
-
-  renderSubscribers();
-
-  showToast(
-    subscriber.status === "active"
-      ? "Subscriber activated."
-      : "Subscriber unsubscribed."
-  );
-
-}
-
-
-function deleteSubscriber(id){
-
-  const subscriber =
-    subscribers.find(
-      s => s.id === id
+  if(!name){
+    showToast(
+      "Customer name is required.",
+      "error"
     );
-
-  if(!subscriber){
     return;
   }
-
-
-  if(
-    !confirm(
-      `Delete ${subscriber.email}?`
-    )
-  ){
-    return;
-  }
-
-
-  subscribers =
-    subscribers.filter(
-      s => s.id !== id
-    );
-
-
-  saveSubscribers();
-
-  updateStats();
-
-  renderSubscribers();
-
-  showToast(
-    "Subscriber deleted."
-  );
-
-}
-
-
-/* =========================================================
-   REFRESH
-========================================================= */
-
-function refreshNewsletter(){
-
-  campaigns =
-    parseArray(NEWSLETTER_KEY);
-
-  subscribers =
-    parseArray(SUBSCRIBERS_KEY);
-
 
   /*
-    If the storage is empty, retain useful demo data.
+    Prevent duplicate email records.
   */
 
-  if(!campaigns.length){
-    campaigns = getDemoCampaigns();
+  if(email){
+
+    const duplicate =
+      customers.find(item =>
+        item !== customer &&
+        String(item.email || "")
+          .trim()
+          .toLowerCase() ===
+        email.toLowerCase()
+      );
+
+    if(duplicate){
+
+      showToast(
+        "Another customer already uses this email.",
+        "error"
+      );
+
+      return;
+    }
+
   }
 
-  if(!subscribers.length){
-    subscribers = getDemoSubscribers();
-  }
+  customer.name = name;
+  customer.email = email;
+  customer.phone = phone;
 
+  customer.status =
+    normalizeStatus(
+      document.getElementById(
+        "customerStatus"
+      ).value
+    );
 
-  updateStats();
+  customer.joined =
+    document.getElementById(
+      "customerJoined"
+    ).value;
 
-  renderCampaigns();
+  customer.address =
+    document.getElementById(
+      "customerAddress"
+    ).value.trim();
 
-  renderSubscribers();
+  customer.note =
+    document.getElementById(
+      "customerNote"
+    ).value.trim();
+
+  /*
+    Recalculate customer aggregate data.
+  */
+
+  enrichCustomers();
+
+  /*
+    Save explicit customer profiles.
+  */
+
+  saveArray(
+    CUSTOMER_KEY,
+    customers
+  );
+
+  /*
+    Re-enrich after saving.
+  */
+
+  enrichCustomers();
+
+  applyFilters();
+
+  closeModal("customerModal");
 
   showToast(
-    "Newsletter data refreshed."
+    "Customer saved successfully.",
+    "success"
   );
 
 }
 
+/* =========================
+   TOGGLE STATUS
+========================= */
 
-/* =========================================================
-   MODAL
-========================================================= */
+function updateToggleButton(customer){
+
+  const button =
+    document.getElementById(
+      "modalToggleBtn"
+    );
+
+  if(customer.status === "suspended"){
+
+    button.textContent =
+      "Activate";
+
+  }else{
+
+    button.textContent =
+      "Suspend";
+
+  }
+
+}
+
+function toggleCurrentCustomer(){
+
+  if(!editingCustomerKey){
+    return;
+  }
+
+  const customer =
+    findCustomer(editingCustomerKey);
+
+  if(!customer){
+    return;
+  }
+
+  if(customer.status === "suspended"){
+    customer.status = "active";
+  }else{
+    customer.status = "suspended";
+  }
+
+  saveArray(
+    CUSTOMER_KEY,
+    customers
+  );
+
+  enrichCustomers();
+
+  applyFilters();
+
+  populateCustomerModal(
+    customer,
+    true
+  );
+
+  showToast(
+    customer.status === "active"
+      ? "Customer activated."
+      : "Customer suspended.",
+    "success"
+  );
+
+}
+
+/* =========================
+   DELETE
+========================= */
+
+function confirmDelete(key){
+
+  const customer =
+    findCustomer(key);
+
+  if(!customer){
+    return;
+  }
+
+  pendingDeleteKey = key;
+
+  document.getElementById(
+    "confirmText"
+  ).textContent =
+    `Delete ${customer.name}? This customer profile will be removed from the customer directory. Existing order records will remain untouched.`;
+
+  document.getElementById(
+    "confirmDeleteBtn"
+  ).onclick =
+    executePendingDelete;
+
+  document.getElementById(
+    "confirmModal"
+  ).classList.add("show");
+
+}
+
+function executePendingDelete(){
+
+  if(!pendingDeleteKey){
+    return;
+  }
+
+  customers =
+    customers.filter(
+      customer =>
+        customerKey(customer) !==
+        pendingDeleteKey
+    );
+
+  saveArray(
+    CUSTOMER_KEY,
+    customers
+  );
+
+  enrichCustomers();
+
+  pendingDeleteKey = null;
+
+  closeModal("confirmModal");
+  closeModal("customerModal");
+
+  applyFilters();
+
+  showToast(
+    "Customer deleted.",
+    "success"
+  );
+
+}
+
+function deleteCurrentCustomer(){
+
+  if(!editingCustomerKey){
+    return;
+  }
+
+  confirmDelete(
+    editingCustomerKey
+  );
+
+}
+
+/* =========================
+   BULK SELECTION
+========================= */
+
+function getSelectedKeys(){
+
+  return Array.from(
+    document.querySelectorAll(
+      ".customer-check:checked"
+    )
+  )
+  .map(input =>
+    input.dataset.key
+  )
+  .filter(Boolean);
+
+}
+
+function updateBulkUI(){
+
+  const selected =
+    getSelectedKeys();
+
+  const wrap =
+    document.getElementById(
+      "bulkWrap"
+    );
+
+  const count =
+    document.getElementById(
+      "bulkCount"
+    );
+
+  count.textContent =
+    `${selected.length} selected`;
+
+  wrap.classList.toggle(
+    "show",
+    selected.length > 0
+  );
+
+}
+
+function toggleSelectAll(checked){
+
+  document
+    .querySelectorAll(".customer-check")
+    .forEach(input => {
+      input.checked = checked;
+    });
+
+  updateBulkUI();
+
+}
+
+function bulkActivate(){
+
+  const keys =
+    getSelectedKeys();
+
+  if(!keys.length){
+    return;
+  }
+
+  customers.forEach(customer => {
+
+    if(keys.includes(customerKey(customer))){
+      customer.status = "active";
+    }
+
+  });
+
+  saveArray(
+    CUSTOMER_KEY,
+    customers
+  );
+
+  applyFilters();
+
+  showToast(
+    `${keys.length} customer(s) activated.`,
+    "success"
+  );
+
+}
+
+function bulkSuspend(){
+
+  const keys =
+    getSelectedKeys();
+
+  if(!keys.length){
+    return;
+  }
+
+  customers.forEach(customer => {
+
+    if(keys.includes(customerKey(customer))){
+      customer.status = "suspended";
+    }
+
+  });
+
+  saveArray(
+    CUSTOMER_KEY,
+    customers
+  );
+
+  applyFilters();
+
+  showToast(
+    `${keys.length} customer(s) suspended.`,
+    "success"
+  );
+
+}
+
+function bulkDelete(){
+
+  const keys =
+    getSelectedKeys();
+
+  if(!keys.length){
+    return;
+  }
+
+  pendingDeleteKey = null;
+
+  document.getElementById(
+    "confirmText"
+  ).textContent =
+    `Delete ${keys.length} selected customer(s)? Existing order records will remain untouched.`;
+
+  document.getElementById(
+    "confirmDeleteBtn"
+  ).onclick =
+    function(){
+
+      customers =
+        customers.filter(
+          customer =>
+            !keys.includes(
+              customerKey(customer)
+            )
+        );
+
+      saveArray(
+        CUSTOMER_KEY,
+        customers
+      );
+
+      enrichCustomers();
+
+      closeModal("confirmModal");
+
+      applyFilters();
+
+      showToast(
+        `${keys.length} customer(s) deleted.`,
+        "success"
+      );
+
+    };
+
+  document.getElementById(
+    "confirmModal"
+  ).classList.add("show");
+
+}
+
+/* =========================
+   FILTER EVENTS
+========================= */
+
+document.getElementById(
+  "searchInput"
+).addEventListener(
+  "input",
+  debounce(
+    applyFilters,
+    180
+  )
+);
+
+document.getElementById(
+  "statusFilter"
+).addEventListener(
+  "change",
+  applyFilters
+);
+
+document.getElementById(
+  "typeFilter"
+).addEventListener(
+  "change",
+  applyFilters
+);
+
+document.getElementById(
+  "sortFilter"
+).addEventListener(
+  "change",
+  applyFilters
+);
+
+/* =========================
+   RESET
+========================= */
+
+function resetFilters(){
+
+  document.getElementById(
+    "searchInput"
+  ).value = "";
+
+  document.getElementById(
+    "statusFilter"
+  ).value = "all";
+
+  document.getElementById(
+    "typeFilter"
+  ).value = "all";
+
+  document.getElementById(
+    "sortFilter"
+  ).value = "newest";
+
+  applyFilters();
+
+}
+
+/* =========================
+   REFRESH
+========================= */
+
+function refreshCustomers(){
+
+  loadData();
+
+  applyFilters();
+
+  showToast(
+    "Customer data refreshed.",
+    "success"
+  );
+
+}
+
+/* =========================
+   CSV EXPORT
+========================= */
+
+function exportCSV(){
+
+  const list =
+    filteredCustomers;
+
+  if(!list.length){
+
+    showToast(
+      "There are no customers to export.",
+      "error"
+    );
+
+    return;
+  }
+
+  const headers = [
+    "Customer ID",
+    "Name",
+    "Email",
+    "Phone",
+    "Status",
+    "Joined",
+    "Orders",
+    "Total Spent",
+    "Last Order",
+    "Address",
+    "Note"
+  ];
+
+  const rows =
+    list.map(customer => [
+      customer.id,
+      customer.name,
+      customer.email,
+      customer.phone,
+      customer.status,
+      customer.joined,
+      customer.totalOrders || 0,
+      customer.totalSpent || 0,
+      customer.lastOrder || "",
+      customer.address || "",
+      customer.note || ""
+    ]);
+
+  const csv = [
+    headers,
+    ...rows
+  ]
+  .map(row =>
+    row.map(csvCell).join(",")
+  )
+  .join("\n");
+
+  const blob =
+    new Blob(
+      ["\uFEFF" + csv],
+      {
+        type:"text/csv;charset=utf-8;"
+      }
+    );
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const link =
+    document.createElement("a");
+
+  link.href = url;
+  link.download =
+    "website-deals-customers.csv";
+
+  document.body.appendChild(link);
+
+  link.click();
+
+  link.remove();
+
+  URL.revokeObjectURL(url);
+
+  showToast(
+    "Customer CSV exported.",
+    "success"
+  );
+
+}
+
+function csvCell(value){
+
+  const text =
+    String(value ?? "");
+
+  return '"' +
+    text.replace(/"/g,'""') +
+    '"';
+
+}
+
+/* =========================
+   PRINT
+========================= */
+
+function printCustomers(){
+
+  window.print();
+
+}
+
+/* =========================
+   MODALS
+========================= */
 
 function closeModal(id){
 
@@ -3731,7 +5124,6 @@ function closeModal(id){
 
 }
 
-
 document
   .querySelectorAll(".modal-overlay")
   .forEach(overlay => {
@@ -3740,14 +5132,8 @@ document
       "click",
       event => {
 
-        if(
-          event.target === overlay
-        ){
-
-          overlay.classList.remove(
-            "show"
-          );
-
+        if(event.target === overlay){
+          overlay.classList.remove("show");
         }
 
       }
@@ -3755,10 +5141,73 @@ document
 
   });
 
+document.addEventListener(
+  "keydown",
+  event => {
 
-/* =========================================================
+    if(event.key === "Escape"){
+
+      document
+        .querySelectorAll(".modal-overlay.show")
+        .forEach(modal => {
+          modal.classList.remove("show");
+        });
+
+    }
+
+  }
+);
+
+/* =========================
+   TOAST
+========================= */
+
+function showToast(
+  message,
+  type="success"
+){
+
+  const wrap =
+    document.getElementById(
+      "toastWrap"
+    );
+
+  const toast =
+    document.createElement("div");
+
+  toast.className =
+    `toast ${type}`;
+
+  toast.innerHTML = `
+    <span class="toast-mark">
+      ${type === "success" ? "✓" : "!"}
+    </span>
+
+    <span>
+      ${escapeHTML(message)}
+    </span>
+  `;
+
+  wrap.appendChild(toast);
+
+  setTimeout(() => {
+
+    toast.style.opacity = "0";
+    toast.style.transform =
+      "translateY(8px)";
+
+    setTimeout(
+      () => toast.remove(),
+      220
+    );
+
+  },3000);
+
+}
+
+/* =========================
    SIDEBAR
-========================================================= */
+========================= */
 
 function openSidebar(){
 
@@ -3767,11 +5216,10 @@ function openSidebar(){
     .classList.add("open");
 
   document
-    .getElementById("sidebarOverlay")
+    .getElementById("mobileOverlay")
     .classList.add("show");
 
 }
-
 
 function closeSidebar(){
 
@@ -3780,15 +5228,14 @@ function closeSidebar(){
     .classList.remove("open");
 
   document
-    .getElementById("sidebarOverlay")
+    .getElementById("mobileOverlay")
     .classList.remove("show");
 
 }
 
-
-/* =========================================================
+/* =========================
    LOGOUT
-========================================================= */
+========================= */
 
 function logout(){
 
@@ -3801,10 +5248,19 @@ function logout(){
 
 }
 
+/* =========================
+   HELPERS
+========================= */
 
-/* =========================================================
-   ESCAPE JS
-========================================================= */
+function capitalize(value){
+
+  const text =
+    String(value || "");
+
+  return text.charAt(0).toUpperCase() +
+    text.slice(1);
+
+}
 
 function escapeJS(value){
 
@@ -3812,42 +5268,81 @@ function escapeJS(value){
     .replace(/\\/g,"\\\\")
     .replace(/'/g,"\\'")
     .replace(/"/g,'\\"')
-    .replace(/\n/g,"\\n")
-    .replace(/\r/g,"\\r");
+    .replace(/\r/g,"\\r")
+    .replace(/\n/g,"\\n");
 
 }
 
+function debounce(
+  callback,
+  delay
+){
 
-/* =========================================================
-   TOAST
-========================================================= */
+  let timer;
 
-let toastTimer = null;
+  return function(){
 
-function showToast(message){
+    clearTimeout(timer);
 
-  const toast =
-    document.getElementById("toast");
+    const args = arguments;
 
-  document.getElementById(
-    "toastText"
-  ).textContent = message;
-
-  toast.classList.add("show");
-
-  clearTimeout(toastTimer);
-
-  toastTimer =
-    setTimeout(
-      () => {
-        toast.classList.remove(
-          "show"
-        );
-      },
-      2800
+    timer = setTimeout(
+      () => callback.apply(this,args),
+      delay
     );
 
+  };
+
 }
+
+/* =========================
+   ADMIN IDENTITY
+========================= */
+
+function setupAdminIdentity(){
+
+  if(!adminSession){
+    return;
+  }
+
+  const name =
+    adminSession.name ||
+    adminSession.email ||
+    "Super Admin";
+
+  const role =
+    adminSession.role ||
+    "Administrator";
+
+  document.getElementById(
+    "adminName"
+  ).textContent = name;
+
+  document.getElementById(
+    "adminRole"
+  ).textContent =
+    capitalize(
+      String(role)
+        .replace(/[-_]/g," ")
+    );
+
+  document.getElementById(
+    "adminAvatar"
+  ).textContent =
+    initials(name);
+
+}
+
+/* =========================
+   START
+========================= */
+
+setupAdminIdentity();
+
+loadData();
+
+applyFilters();
+
 </script>
 
 </body>
