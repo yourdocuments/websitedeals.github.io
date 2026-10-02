@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Browse UI Manager | Website Deals</title>
+<meta name="theme-color" content="#18a957">
+<link rel="icon" href="../logo.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --green:#18a957;
+  --green2:#0f8c47;
+  --dark:#101713;
+  --text:#17211b;
+  --muted:#748078;
+  --bg:#f5f7f6;
+  --card:#fff;
+  --border:#e4e9e6;
+  --danger:#e5484d;
+  --shadow:0 14px 40px rgba(16,23,19,.07);
+  --radius:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,sans-serif;background:var(--bg);color:var(--text)}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.layout{display:flex;min-height:100vh}
+.sidebar{width:260px;background:#111713;color:#fff;position:fixed;inset:0 auto 0 0;padding:24px 16px;z-index:20}
+.brand{display:flex;align-items:center;gap:12px;padding:5px 10px 28px}
+.brand img{width:42px;height:42px;object-fit:contain;border-radius:10px;background:#fff}
+.brand strong{font-family:"Space Grotesk";font-size:18px}
+.brand small{display:block;color:#849087;font-size:11px;margin-top:2px}
+.nav-title{font-size:10px;text-transform:uppercase;letter-spacing:1.4px;color:#68746c;padding:18px 12px 8px}
+.nav a{display:flex;align-items:center;gap:12px;color:#aeb8b1;text-decoration:none;padding:12px;border-radius:11px;font-size:13px;margin:3px 0}
+.nav a:hover,.nav a.active{background:#1c2720;color:#fff}
+.nav a.active{box-shadow:inset 3px 0 var(--green)}
+.main{margin-left:260px;width:calc(100% - 260px);padding:28px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+.eyebrow{font-size:11px;color:var(--green);font-weight:800;text-transform:uppercase;letter-spacing:1.5px}
+h1{font:700 30px "Space Grotesk";margin-top:4px}
+.sub{color:var(--muted);font-size:13px;margin-top:5px}
+.user{background:#fff;border:1px solid var(--border);padding:10px 14px;border-radius:12px;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px;margin-bottom:20px}
+.stat,.panel{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+.stat{padding:20px}
+.stat span{font-size:11px;color:var(--muted)}
+.stat strong{display:block;font:700 25px "Space Grotesk";margin-top:7px}
+.panel{padding:24px;margin-bottom:18px}
+.panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.panel h2{font:700 19px "Space Grotesk"}
+.panel p{font-size:12px;color:var(--muted);margin-top:4px}
+.rows{display:grid;gap:10px}
+.row{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--border);padding:15px 16px;border-radius:13px}
+.row-info{display:flex;align-items:center;gap:13px}
+.icon{width:38px;height:38px;border-radius:11px;background:#eaf8f0;color:var(--green);display:grid;place-items:center;font-weight:800}
+.row-title{font-size:13px;font-weight:700}
+.row-desc{font-size:11px;color:var(--muted);margin-top:3px}
+.switch{position:relative;width:45px;height:25px}
+.switch input{display:none}
+.slider{position:absolute;inset:0;background:#d8dfda;border-radius:30px}
+.slider:before{content:"";position:absolute;width:19px;height:19px;left:3px;top:3px;background:white;border-radius:50%;transition:.2s;box-shadow:0 2px 5px #0002}
+.switch input:checked+.slider{background:var(--green)}
+.switch input:checked+.slider:before{transform:translateX(20px)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.field label{display:block;font-size:11px;font-weight:700;margin-bottom:7px}
+.field input,.field select{width:100%;padding:12px 13px;border:1px solid var(--border);border-radius:11px;outline:none}
+.field input:focus,.field select:focus{border-color:var(--green)}
+.actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
+.btn{border:0;border-radius:11px;padding:11px 17px;font-weight:700;font-size:12px}
+.btn.primary{background:var(--green);color:#fff}
+.btn.secondary{background:#eef2ef;color:#26332b}
+.toast{position:fixed;right:25px;bottom:25px;background:#111713;color:#fff;padding:14px 18px;border-radius:12px;font-size:12px;display:none;z-index:99}
+@media(max-width:1050px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:800px){
+.sidebar{width:70px}.brand strong,.brand small,.nav span,.nav-title{display:none}
+.main{margin-left:70px;width:calc(100% - 70px);padding:18px}
+}
+@media(max-width:600px){
+.grid,.fields{grid-template-columns:1fr}
+.top{align-items:flex-start;gap:10px;flex-direction:column}
+.panel{padding:17px}.row{gap:10px}
+}
+</style>
+</head>
+
+<body>
+<div class="layout">
+
+<aside class="sidebar">
+  <div class="brand">
+    <img src="../logo.png" alt="Website Deals">
+    <div><strong>Website Deals</strong><small>ADMIN PANEL</small></div>
+  </div>
+
+  <div class="nav">
+    <div class="nav-title">Core</div>
+    <a href="dashboard.html">▦ <span>Dashboard</span></a>
+    <a href="websites.html">◫ <span>Websites</span></a>
+    <a href="categories.html">◈ <span>Categories</span></a>
+    <a href="orders.html">⌁ <span>Orders</span></a>
+    <a href="customers.html">♙ <span>Customers</span></a>
+
+    <div class="nav-title">UI Management</div>
+    <a class="active" href="browse-ui.html">◉ <span>Browse UI</span></a>
+    <a href="homepage.html">⌂ <span>Homepage</span></a>
+    <a href="banners.html">▣ <span>Banners</span></a>
+
+    <div class="nav-title">Business</div>
+    <a href="newsletter.html">✉ <span>Newsletter</span></a>
+    <a href="payments.html">৳ <span>Payments</span></a>
+    <a href="monthly-report.html">⌁ <span>Reports</span></a>
+  </div>
+</aside>
+
+<main class="main">
+
+<header class="top">
+  <div>
+    <div class="eyebrow">Marketplace UI</div>
+    <h1>Browse UI Manager</h1>
+    <div class="sub">Control how customers discover and browse websites.</div>
+  </div>
+  <div class="user">● Admin Panel</div>
+</header>
+
+<section class="grid">
+  <div class="stat"><span>Visible Sections</span><strong id="visibleCount">8</strong></div>
+  <div class="stat"><span>Hidden Sections</span><strong id="hiddenCount">0</strong></div>
+  <div class="stat"><span>Card Layout</span><strong>Premium</strong></div>
+  <div class="stat"><span>Marketplace</span><strong>Live</strong></div>
+</section>
+
+<section class="panel">
+<div class="panel-head">
+  <div><h2>Browse Sections</h2><p>Turn marketplace sections on or off.</p></div>
+</div>
+
+<div class="rows">
+  <div class="row"><div class="row-info"><div class="icon">01</div><div><div class="row-title">Hero Search</div><div class="row-desc">Main marketplace search experience</div></div></div><label class="switch"><input checked type="checkbox" data-section><i class="slider"></i></label></div>
+
+  <div class="row"><div class="row-info"><div class="icon">02</div><div><div class="row-title">Categories</div><div class="row-desc">Business, Restaurant, Agency and more</div></div></div><label class="switch"><input checked type="checkbox" data-section><i class="slider"></i></label></div>
+
+  <div class="row"><div class="row-info"><div class="icon">03</div><div><div class="row-title">Popular Websites</div><div class="row-desc">Show popular marketplace products</div></div></div><label class="switch"><input checked type="checkbox" data-section><i class="slider"></i></label></div>
+
+  <div class="row"><div class="row-info"><div class="icon">04</div><div><div class="row-title">New Websites</div><div class="row-desc">Recently added websites</div></div></div><label class="switch"><input checked type="checkbox" data-section><i class="slider"></i></label></div>
+
+  <div class="row"><div class="row-info"><div class="icon">05</div><div><div class="row-title">Monthly Plans</div><div class="row-desc">Subscription-ready websites</div></div></div><label class="switch"><input checked type="checkbox" data-section><i class="slider"></i></label></div>
+
+  <div class="row"><div class="row-info"><div class="icon">06</div><div><div class="row-title">Why Website Deals</div><div class="row-desc">Trust and benefits section</div></div></div><label class="switch"><input checked type="checkbox" data-section><i class="slider"></i></label></div>
+
+  <div class="row"><div class="row-info"><div class="icon">07</div><div><div class="row-title">How It Works</div><div class="row-desc">Customer purchase process</div></div></div><label class="switch"><input checked type="checkbox" data-section><i class="slider"></i></label></div>
+
+  <div class="row"><div class="row-info"><div class="icon">08</div><div><div class="row-title">Newsletter</div><div class="row-desc">Email subscription section</div></div></div><label class="switch"><input checked type="checkbox" data-section><i class="slider"></i></label></div>
+</div>
+</section>
+
+<section class="panel">
+<div class="panel-head">
+<div><h2>Browse Configuration</h2><p>Default marketplace browsing behavior.</p></div>
+</div>
+
+<div class="fields">
+<div class="field"><label>Default Sort</label><select id="sort"><option>Featured</option><option>Newest</option><option>Price: Low to High</option><option>Price: High to Low</option><option>Popular</option></select></div>
+<div class="field"><label>Cards Per Row</label><select id="columns"><option>3</option><option selected>4</option><option>5</option></select></div>
+<div class="field"><label>Search Placeholder</label><input id="placeholder" value="Search premium websites..."></div>
+<div class="field"><label>Starting Price Label</label><input id="price" value="Ready-made websites from ৳999"></div>
+</div>
+
+<div class="actions">
+<button class="btn secondary" onclick="resetSettings()">Reset</button>
+<button class="btn primary" onclick="saveSettings()">Save Browse Settings</button>
+</div>
+</section>
+
+</main>
+</div>
+
+<div class="toast" id="toast">Browse settings saved.</div>
+
+<script>
+const KEY="websiteDealsBrowseUI";
+
+function load(){
+  try{
+    const data=JSON.parse(localStorage.getItem(KEY));
+    if(!data)return;
+    document.querySelectorAll("[data-section]").forEach((el,i)=>{
+      if(data.sections && typeof data.sections[i] !== "undefined")
+        el.checked=data.sections[i];
+    });
+    if(data.sort)document.getElementById("sort").value=data.sort;
+    if(data.columns)document.getElementById("columns").value=data.columns;
+    if(data.placeholder)document.getElementById("placeholder").value=data.placeholder;
+    if(data.price)document.getElementById("price").value=data.price;
+    updateStats();
+  }catch(e){}
+}
+
+function updateStats(){
+  const all=[...document.querySelectorAll("[data-section]")];
+  const visible=all.filter(x=>x.checked).length;
+  document.getElementById("visibleCount").textContent=visible;
+  document.getElementById("hiddenCount").textContent=all.length-visible;
+}
+
+function saveSettings(){
+  const sections=[...document.querySelectorAll("[data-section]")].map(x=>x.checked);
+  localStorage.setItem(KEY,JSON.stringify({
+    sections,
+    sort:document.getElementById("sort").value,
+    columns:document.getElementById("columns").value,
+    placeholder:document.getElementById("placeholder").value,
+    price:document.getElementById("price").value,
+    updatedAt:new Date().toISOString()
+  }));
+  updateStats();
+  const t=document.getElementById("toast");
+  t.style.display="block";
+  setTimeout(()=>t.style.display="none",2200);
+}
+
+function resetSettings(){
+  localStorage.removeItem(KEY);
+  location.reload();
+}
+
+document.querySelectorAll("[data-section]").forEach(x=>x.addEventListener("change",updateStats));
+load();
+updateStats();
+</script>
+</body>
+</html>
