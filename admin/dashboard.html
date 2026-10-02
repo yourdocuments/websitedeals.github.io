@@ -10,7 +10,7 @@
 
   <meta
     name="theme-color"
-    content="#0b0d10"
+    content="#07110c"
   >
 
   <title>Dashboard | Website Deals</title>
@@ -33,58 +33,59 @@
   >
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
     rel="stylesheet"
-  >
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   >
 
   <style>
-
-    /* =====================================================
-       RESET
-    ===================================================== */
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     :root {
       --green: #18a957;
       --green-dark: #108344;
-      --black: #0b0d10;
-      --sidebar: #101317;
-      --sidebar-soft: #171b20;
-      --text: #171a1e;
-      --muted: #737b84;
-      --border: #e8ebee;
-      --bg: #f5f7f8;
+      --green-soft: #eaf8f0;
+
+      --dark: #07110c;
+      --dark-2: #0b1811;
+      --dark-3: #102219;
+
       --white: #ffffff;
-      --danger: #d92d20;
-      --warning: #dc8b00;
-      --shadow: 0 12px 35px rgba(16,24,40,0.06);
-      --radius: 16px;
+      --surface: #f6f8f7;
+      --surface-2: #fbfcfb;
+
+      --text: #111814;
+      --muted: #718078;
+
+      --border: #e4e9e6;
+
+      --orange: #f59e0b;
+      --blue: #3b82f6;
+      --red: #dc3545;
+
+      --shadow:
+        0 15px 45px rgba(7, 17, 12, 0.07);
+
+      --radius-xl: 24px;
+      --radius-lg: 18px;
+      --radius-md: 13px;
     }
 
-    html,
-    body {
-      min-height: 100%;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
     body {
-      font-family: "Inter", "Hind Siliguri", sans-serif;
-      background: var(--bg);
+      min-height: 100vh;
+
+      font-family: "Inter", sans-serif;
+
       color: var(--text);
+
+      background: var(--surface);
     }
 
     button,
-    input,
-    select {
+    input {
       font: inherit;
     }
 
@@ -97,812 +98,1270 @@
       text-decoration: none;
     }
 
-    /* =====================================================
-       LAYOUT
-    ===================================================== */
+    /* =====================================
+       APP
+    ====================================== */
 
-    .admin-layout {
+    .app {
       min-height: 100vh;
+
       display: flex;
     }
 
-    /* =====================================================
+    /* =====================================
        SIDEBAR
-    ===================================================== */
+    ====================================== */
 
     .sidebar {
       position: fixed;
+
       left: 0;
       top: 0;
       bottom: 0;
+
       width: 260px;
-      background: var(--sidebar);
-      color: #fff;
+
       display: flex;
       flex-direction: column;
-      z-index: 100;
-      transition: transform 0.25s ease;
-    }
 
-    .sidebar-header {
-      height: 78px;
-      padding: 0 22px;
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding: 22px 15px;
+
+      color: #fff;
+
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(24,169,87,.18),
+          transparent 25%
+        ),
+        linear-gradient(
+          160deg,
+          #06100a,
+          #0a1710 60%,
+          #102219
+        );
+
+      z-index: 100;
     }
 
     .brand {
       display: flex;
+
       align-items: center;
+
       gap: 11px;
+
+      padding: 4px 8px 25px;
+
+      border-bottom:
+        1px solid rgba(255,255,255,.07);
     }
 
     .brand img {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
+      width: 42px;
+      height: 42px;
+
+      padding: 5px;
+
       object-fit: contain;
+
       background: #fff;
-      padding: 4px;
+
+      border-radius: 11px;
     }
 
     .brand strong {
       display: block;
-      font-size: 15px;
-      font-weight: 800;
+
+      font-family: "Space Grotesk", sans-serif;
+
+      font-size: 17px;
     }
 
     .brand span {
       display: block;
+
       margin-top: 2px;
-      color: #8f98a1;
+
+      color: #7f9186;
+
       font-size: 9px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .sidebar-content {
-      flex: 1;
-      overflow-y: auto;
-      padding: 22px 14px;
-    }
-
-    .menu-label {
-      padding: 0 12px;
-      margin: 12px 0 9px;
-      color: #6f7882;
-      font-size: 10px;
       font-weight: 800;
-      letter-spacing: 1.4px;
+
+      letter-spacing: 1.2px;
+
       text-transform: uppercase;
     }
 
-    .nav-menu {
-      display: grid;
-      gap: 4px;
-    }
+    .nav {
+      padding-top: 22px;
 
-    .nav-item {
-      width: 100%;
       display: flex;
+      flex-direction: column;
+
+      gap: 5px;
+    }
+
+    .nav-label {
+      padding: 0 12px 9px;
+
+      color: #65776c;
+
+      font-size: 9px;
+      font-weight: 800;
+
+      letter-spacing: 1.4px;
+
+      text-transform: uppercase;
+    }
+
+    .nav a {
+      min-height: 43px;
+
+      display: flex;
+
       align-items: center;
+
       gap: 12px;
-      padding: 12px;
+
+      padding: 0 12px;
+
+      color: #9caaa1;
+
       border-radius: 11px;
-      color: #aeb6bf;
-      font-size: 13px;
+
+      font-size: 12px;
       font-weight: 600;
-      transition: 0.2s ease;
+
+      transition: .2s ease;
     }
 
-    .nav-item i {
-      width: 19px;
+    .nav a:hover {
+      color: #fff;
+
+      background: rgba(255,255,255,.05);
+    }
+
+    .nav a.active {
+      color: #fff;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(24,169,87,.20),
+          rgba(24,169,87,.07)
+        );
+
+      box-shadow:
+        inset 3px 0 0 var(--green);
+    }
+
+    .nav-icon {
+      width: 24px;
+
       text-align: center;
-      font-size: 14px;
+
+      font-size: 15px;
     }
 
-    .nav-item:hover {
-      background: var(--sidebar-soft);
+    .nav-badge {
+      margin-left: auto;
+
+      min-width: 21px;
+      height: 21px;
+
+      display: grid;
+      place-items: center;
+
+      padding: 0 6px;
+
+      color: #a8efc1;
+
+      background: rgba(24,169,87,.14);
+
+      border-radius: 20px;
+
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    .sidebar-bottom {
+      margin-top: auto;
+    }
+
+    .profile-mini {
+      padding: 13px;
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      background: rgba(255,255,255,.045);
+
+      border:
+        1px solid rgba(255,255,255,.06);
+
+      border-radius: 14px;
+    }
+
+    .avatar {
+      width: 35px;
+      height: 35px;
+
+      display: grid;
+      place-items: center;
+
+      flex-shrink: 0;
+
       color: #fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--green),
+          var(--green-dark)
+        );
+
+      border-radius: 10px;
+
+      font-size: 12px;
+      font-weight: 800;
     }
 
-    .nav-item.active {
-      background: rgba(24,169,87,0.14);
+    .profile-mini strong {
+      display: block;
+
       color: #fff;
+
+      font-size: 11px;
     }
 
-    .nav-item.active i {
-      color: var(--green);
-    }
+    .profile-mini span {
+      display: block;
 
-    .sidebar-footer {
-      padding: 14px;
-      border-top: 1px solid rgba(255,255,255,0.07);
+      margin-top: 2px;
+
+      color: #718178;
+
+      font-size: 9px;
     }
 
     .logout-btn {
       width: 100%;
-      border: 0;
-      background: transparent;
-      color: #9da5ae;
-      padding: 12px;
-      border-radius: 11px;
+
+      margin-top: 9px;
+
+      height: 40px;
+
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-size: 13px;
-      font-weight: 600;
+
+      gap: 10px;
+
+      padding: 0 12px;
+
+      color: #9aa79f;
+
+      background: transparent;
+
+      border: 0;
+
+      border-radius: 10px;
+
+      font-size: 11px;
+      font-weight: 700;
+
       text-align: left;
     }
 
     .logout-btn:hover {
-      background: rgba(217,45,32,0.10);
-      color: #ff8178;
+      color: #ff9da6;
+
+      background: rgba(220,53,69,.08);
     }
 
-    /* =====================================================
+    /* =====================================
        MAIN
-    ===================================================== */
+    ====================================== */
 
     .main {
       width: calc(100% - 260px);
+
       margin-left: 260px;
+
       min-height: 100vh;
     }
 
-    /* =====================================================
-       TOPBAR
-    ===================================================== */
+    /* =====================================
+       HEADER
+    ====================================== */
 
-    .topbar {
-      height: 78px;
-      background: #fff;
-      border-bottom: 1px solid var(--border);
+    .header {
+      height: 76px;
+
+      padding: 0 34px;
+
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
-      padding: 0 30px;
+
+      background: rgba(255,255,255,.88);
+
+      border-bottom: 1px solid var(--border);
+
       position: sticky;
+
       top: 0;
+
       z-index: 50;
+
+      backdrop-filter: blur(15px);
     }
 
-    .topbar-left {
+    .header-left {
       display: flex;
+
       align-items: center;
+
       gap: 15px;
     }
 
     .mobile-menu {
+      display: none;
+
       width: 40px;
       height: 40px;
-      display: none;
+
       border: 1px solid var(--border);
+
       background: #fff;
-      border-radius: 10px;
+
+      border-radius: 11px;
     }
 
     .page-title h1 {
+      font-family: "Space Grotesk", sans-serif;
+
       font-size: 21px;
-      letter-spacing: -0.5px;
+
+      letter-spacing: -.7px;
     }
 
     .page-title p {
       margin-top: 3px;
+
       color: var(--muted);
-      font-size: 11px;
-    }
 
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-    }
-
-    .view-site {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      color: #626b74;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .view-site:hover {
-      color: var(--green-dark);
-    }
-
-    .user-box {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding-left: 18px;
-      border-left: 1px solid var(--border);
-    }
-
-    .user-avatar {
-      width: 38px;
-      height: 38px;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: #eaf8ef;
-      color: var(--green-dark);
-      font-weight: 800;
-      font-size: 13px;
-    }
-
-    .user-info strong {
-      display: block;
-      max-width: 180px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-size: 12px;
-    }
-
-    .user-info span {
-      display: block;
-      margin-top: 2px;
-      color: var(--muted);
       font-size: 10px;
     }
 
-    /* =====================================================
+    .header-actions {
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
+    }
+
+    .header-btn {
+      height: 38px;
+
+      padding: 0 13px;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 7px;
+
+      color: #526057;
+
+      background: #fff;
+
+      border: 1px solid var(--border);
+
+      border-radius: 10px;
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .header-btn:hover {
+      border-color: #cbd6cf;
+    }
+
+    .header-btn.primary {
+      color: #fff;
+
+      background: var(--green);
+
+      border-color: var(--green);
+    }
+
+    /* =====================================
        CONTENT
-    ===================================================== */
+    ====================================== */
 
     .content {
-      padding: 30px;
-      max-width: 1500px;
+      padding: 30px 34px 45px;
     }
-
-    /* =====================================================
-       WELCOME
-    ===================================================== */
 
     .welcome {
-      background:
-        radial-gradient(
-          circle at 90% 10%,
-          rgba(24,169,87,0.17),
-          transparent 25%
-        ),
-        #101418;
-      border-radius: 20px;
-      color: #fff;
-      padding: 30px;
       margin-bottom: 25px;
-      position: relative;
-      overflow: hidden;
     }
 
-    .welcome::after {
-      content: "";
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 50%;
-      right: -90px;
-      bottom: -150px;
-    }
+    .welcome small {
+      color: var(--green-dark);
 
-    .welcome-content {
-      position: relative;
-      z-index: 2;
+      font-size: 10px;
+      font-weight: 800;
+
+      letter-spacing: 1.2px;
+
+      text-transform: uppercase;
     }
 
     .welcome h2 {
-      font-size: 26px;
-      letter-spacing: -1px;
+      margin-top: 7px;
+
+      font-family: "Space Grotesk", sans-serif;
+
+      font-size: 30px;
+
+      letter-spacing: -1.3px;
     }
 
     .welcome p {
-      max-width: 650px;
-      margin-top: 8px;
-      color: #aeb6bf;
-      font-size: 13px;
-      line-height: 1.7;
+      margin-top: 7px;
+
+      color: var(--muted);
+
+      font-size: 12px;
     }
 
-    /* =====================================================
-       STAT CARDS
-    ===================================================== */
+    /* =====================================
+       STATS
+    ====================================== */
 
-    .stats-grid {
+    .stats {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
+
+      grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+      gap: 15px;
+
       margin-bottom: 25px;
     }
 
     .stat-card {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
+      position: relative;
+
       padding: 20px;
+
+      background: #fff;
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-lg);
+
       box-shadow: var(--shadow);
+
+      overflow: hidden;
+    }
+
+    .stat-card::after {
+      content: "";
+
+      position: absolute;
+
+      width: 90px;
+      height: 90px;
+
+      right: -35px;
+      bottom: -40px;
+
+      background: var(--green-soft);
+
+      border-radius: 50%;
     }
 
     .stat-top {
       display: flex;
-      justify-content: space-between;
+
       align-items: center;
+
+      justify-content: space-between;
+    }
+
+    .stat-label {
+      color: var(--muted);
+
+      font-size: 10px;
+      font-weight: 700;
     }
 
     .stat-icon {
-      width: 42px;
-      height: 42px;
+      width: 32px;
+      height: 32px;
+
       display: grid;
       place-items: center;
-      border-radius: 12px;
-      background: #effaf3;
+
       color: var(--green-dark);
+
+      background: var(--green-soft);
+
+      border-radius: 10px;
     }
 
-    .stat-change {
-      color: #15803d;
-      font-size: 10px;
-      font-weight: 800;
-    }
+    .stat-number {
+      margin-top: 14px;
 
-    .stat-card h3 {
-      margin-top: 19px;
+      font-family: "Space Grotesk", sans-serif;
+
       font-size: 27px;
+      font-weight: 700;
+
       letter-spacing: -1px;
     }
 
-    .stat-card p {
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 11px;
+    .stat-change {
+      margin-top: 7px;
+
+      color: var(--green-dark);
+
+      font-size: 9px;
+      font-weight: 700;
     }
 
-    /* =====================================================
+    /* =====================================
        GRID
-    ===================================================== */
+    ====================================== */
 
     .dashboard-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.75fr);
-      gap: 20px;
+
+      grid-template-columns:
+        minmax(0, 1.55fr)
+        minmax(300px, .85fr);
+
+      gap: 18px;
     }
 
-    .panel {
+    .card {
       background: #fff;
+
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+
+      border-radius: var(--radius-lg);
+
       box-shadow: var(--shadow);
+
       overflow: hidden;
     }
 
-    .panel-header {
-      min-height: 66px;
-      padding: 16px 20px;
+    .card-head {
+      min-height: 67px;
+
+      padding: 0 20px;
+
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
+
       border-bottom: 1px solid var(--border);
     }
 
-    .panel-header h3 {
+    .card-head h3 {
+      font-family: "Space Grotesk", sans-serif;
+
       font-size: 14px;
     }
 
-    .panel-header a {
+    .card-head span {
+      color: var(--muted);
+
+      font-size: 9px;
+    }
+
+    .view-all {
       color: var(--green-dark);
-      font-size: 11px;
+
+      font-size: 10px;
       font-weight: 800;
     }
 
-    /* =====================================================
+    /* =====================================
        ORDERS
-    ===================================================== */
+    ====================================== */
 
     .order-list {
-      display: grid;
+      padding: 7px 20px;
     }
 
-    .order-item {
+    .order-row {
+      min-height: 65px;
+
       display: grid;
-      grid-template-columns: 42px 1fr auto;
-      gap: 13px;
+
+      grid-template-columns:
+        1.15fr 1.3fr .8fr .7fr;
+
       align-items: center;
-      padding: 17px 20px;
-      border-bottom: 1px solid #f0f2f4;
+
+      gap: 12px;
+
+      border-bottom: 1px solid #edf0ee;
     }
 
-    .order-item:last-child {
+    .order-row:last-child {
       border-bottom: 0;
     }
 
-    .order-icon {
-      width: 42px;
-      height: 42px;
+    .customer {
+      display: flex;
+
+      align-items: center;
+
+      gap: 9px;
+    }
+
+    .customer-avatar {
+      width: 32px;
+      height: 32px;
+
       display: grid;
       place-items: center;
-      border-radius: 11px;
-      background: #f4f7f5;
+
+      flex-shrink: 0;
+
       color: var(--green-dark);
-    }
 
-    .order-info strong {
-      display: block;
-      font-size: 12px;
-    }
+      background: var(--green-soft);
 
-    .order-info span {
-      display: block;
-      margin-top: 4px;
-      color: var(--muted);
+      border-radius: 9px;
+
       font-size: 10px;
-    }
-
-    .order-price {
-      font-size: 12px;
       font-weight: 800;
     }
 
-    /* =====================================================
+    .customer strong,
+    .website-name strong {
+      display: block;
+
+      font-size: 10px;
+    }
+
+    .customer span,
+    .website-name span {
+      display: block;
+
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+    }
+
+    .amount {
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .status {
+      width: max-content;
+
+      padding: 5px 8px;
+
+      border-radius: 20px;
+
+      font-size: 8px;
+      font-weight: 800;
+    }
+
+    .status.pending {
+      color: #9a6500;
+
+      background: #fff7df;
+    }
+
+    .status.completed {
+      color: #168246;
+
+      background: #eaf8f0;
+    }
+
+    /* =====================================
        QUICK ACTIONS
-    ===================================================== */
+    ====================================== */
 
     .quick-actions {
       padding: 18px;
+
       display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
       gap: 10px;
     }
 
     .quick-action {
+      min-height: 90px;
+
+      padding: 14px;
+
       display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 13px;
+
+      flex-direction: column;
+
+      justify-content: space-between;
+
+      background: var(--surface-2);
+
       border: 1px solid var(--border);
-      border-radius: 12px;
-      transition: 0.2s ease;
+
+      border-radius: 13px;
+
+      transition: .2s ease;
     }
 
     .quick-action:hover {
-      border-color: #b8e7c9;
-      background: #f7fcf9;
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+
+      border-color: #cbd8d0;
+
+      box-shadow: 0 8px 20px rgba(7,17,12,.05);
     }
 
-    .quick-action-icon {
-      width: 37px;
-      height: 37px;
+    .quick-icon {
+      width: 30px;
+      height: 30px;
+
       display: grid;
       place-items: center;
-      border-radius: 10px;
-      background: #effaf3;
+
       color: var(--green-dark);
-      font-size: 13px;
+
+      background: var(--green-soft);
+
+      border-radius: 9px;
     }
 
     .quick-action strong {
-      display: block;
-      font-size: 11px;
+      font-size: 10px;
     }
 
     .quick-action span {
-      display: block;
       margin-top: 3px;
+
       color: var(--muted);
-      font-size: 9px;
+
+      font-size: 8px;
     }
 
-    /* =====================================================
-       RECENT WEBSITES
-    ===================================================== */
+    /* =====================================
+       TOP WEBSITES
+    ====================================== */
 
-    .website-table {
-      width: 100%;
-      border-collapse: collapse;
+    .website-list {
+      padding: 8px 20px 18px;
     }
 
-    .website-table th,
-    .website-table td {
-      padding: 15px 20px;
-      border-bottom: 1px solid #f0f2f4;
-      text-align: left;
-      font-size: 11px;
-    }
+    .website-item {
+      padding: 13px 0;
 
-    .website-table th {
-      color: #858e97;
-      font-size: 9px;
-      text-transform: uppercase;
-      letter-spacing: 0.8px;
-    }
+      display: flex;
 
-    .website-table td strong {
-      font-size: 11px;
-    }
-
-    .status {
-      display: inline-flex;
       align-items: center;
-      padding: 5px 8px;
-      border-radius: 999px;
+
+      gap: 11px;
+
+      border-bottom: 1px solid #edf0ee;
+    }
+
+    .website-item:last-child {
+      border-bottom: 0;
+    }
+
+    .website-thumb {
+      width: 45px;
+      height: 35px;
+
+      display: grid;
+      place-items: center;
+
+      flex-shrink: 0;
+
+      color: #fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          #13271c,
+          #18a957
+        );
+
+      border-radius: 8px;
+
       font-size: 9px;
       font-weight: 800;
     }
 
-    .status.live {
-      background: #eaf8ef;
-      color: #087443;
+    .website-info {
+      min-width: 0;
+
+      flex: 1;
     }
 
-    .status.draft {
-      background: #fff6df;
-      color: #9a6700;
+    .website-info strong {
+      display: block;
+
+      overflow: hidden;
+
+      white-space: nowrap;
+
+      text-overflow: ellipsis;
+
+      font-size: 10px;
     }
 
-    /* =====================================================
+    .website-info span {
+      display: block;
+
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+    }
+
+    .website-sales {
+      text-align: right;
+    }
+
+    .website-sales strong {
+      display: block;
+
+      font-size: 10px;
+    }
+
+    .website-sales span {
+      display: block;
+
+      margin-top: 3px;
+
+      color: var(--muted);
+
+      font-size: 8px;
+    }
+
+    /* =====================================
+       PERFORMANCE
+    ====================================== */
+
+    .performance {
+      margin-top: 18px;
+
+      padding: 20px;
+    }
+
+    .performance-title {
+      margin-bottom: 18px;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+    }
+
+    .performance-title h3 {
+      font-family: "Space Grotesk", sans-serif;
+
+      font-size: 14px;
+    }
+
+    .performance-title span {
+      color: var(--muted);
+
+      font-size: 9px;
+    }
+
+    .bar-row {
+      margin-bottom: 16px;
+    }
+
+    .bar-info {
+      margin-bottom: 7px;
+
+      display: flex;
+
+      justify-content: space-between;
+
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .bar-info span:last-child {
+      color: var(--muted);
+    }
+
+    .bar {
+      height: 7px;
+
+      overflow: hidden;
+
+      background: #edf1ee;
+
+      border-radius: 10px;
+    }
+
+    .bar span {
+      display: block;
+
+      height: 100%;
+
+      background:
+        linear-gradient(
+          90deg,
+          var(--green),
+          #72d69b
+        );
+
+      border-radius: inherit;
+    }
+
+    /* =====================================
        OVERLAY
-    ===================================================== */
+    ====================================== */
 
     .sidebar-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
-      z-index: 90;
       display: none;
+
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 90;
+
+      background: rgba(0,0,0,.42);
     }
 
-    .sidebar-overlay.show {
-      display: block;
-    }
-
-    /* =====================================================
+    /* =====================================
        TOAST
-    ===================================================== */
+    ====================================== */
 
     .toast {
       position: fixed;
-      right: 25px;
-      bottom: 25px;
+
+      right: 24px;
+      bottom: 24px;
+
       z-index: 500;
-      background: #111418;
+
+      min-width: 280px;
+
+      padding: 15px 17px;
+
       color: #fff;
-      padding: 14px 17px;
-      border-radius: 12px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.18);
-      font-size: 12px;
+
+      background: #101814;
+
+      border-radius: 13px;
+
+      box-shadow:
+        0 20px 45px rgba(0,0,0,.2);
+
       transform: translateY(20px);
+
       opacity: 0;
+
       pointer-events: none;
-      transition: 0.25s ease;
+
+      transition: .25s ease;
     }
 
     .toast.show {
-      transform: translateY(0);
       opacity: 1;
+
+      transform: translateY(0);
     }
 
-    /* =====================================================
+    .toast strong {
+      display: block;
+
+      font-size: 12px;
+    }
+
+    .toast span {
+      display: block;
+
+      margin-top: 4px;
+
+      color: #aab5ae;
+
+      font-size: 10px;
+    }
+
+    /* =====================================
        RESPONSIVE
-    ===================================================== */
+    ====================================== */
 
-    @media (max-width: 1150px) {
+    @media (max-width: 1100px) {
+      .sidebar {
+        width: 230px;
+      }
 
-      .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
+      .main {
+        width: calc(100% - 230px);
+
+        margin-left: 230px;
+      }
+
+      .stats {
+        grid-template-columns:
+          repeat(2, 1fr);
       }
 
       .dashboard-grid {
         grid-template-columns: 1fr;
       }
-
     }
 
-    @media (max-width: 850px) {
-
+    @media (max-width: 800px) {
       .sidebar {
         transform: translateX(-100%);
+
+        transition: transform .25s ease;
       }
 
       .sidebar.open {
         transform: translateX(0);
       }
 
+      .sidebar-overlay.show {
+        display: block;
+      }
+
       .main {
         width: 100%;
+
         margin-left: 0;
       }
 
       .mobile-menu {
         display: grid;
+
         place-items: center;
       }
 
-      .view-site {
-        display: none;
+      .header {
+        padding: 0 18px;
       }
 
       .content {
-        padding: 20px;
+        padding:
+          24px 18px 35px;
       }
 
-      .topbar {
-        padding: 0 20px;
+      .header-actions .header-btn:first-child {
+        display: none;
       }
-
     }
 
-    @media (max-width: 550px) {
-
-      .stats-grid {
+    @media (max-width: 560px) {
+      .stats {
         grid-template-columns: 1fr;
       }
 
-      .welcome {
-        padding: 24px;
-      }
-
       .welcome h2 {
-        font-size: 22px;
+        font-size: 26px;
       }
 
-      .user-info {
+      .header {
+        height: 68px;
+      }
+
+      .header-actions .header-btn {
+        padding: 0 10px;
+      }
+
+      .header-actions .header-btn span {
         display: none;
       }
 
-      .user-box {
-        padding-left: 10px;
-        border-left: 0;
+      .order-row {
+        grid-template-columns:
+          1fr auto;
+        gap: 7px;
+
+        padding: 12px 0;
       }
 
-      .website-table {
-        min-width: 650px;
+      .order-row > :nth-child(2) {
+        display: none;
       }
 
-      .table-scroll {
-        overflow-x: auto;
+      .order-row > :nth-child(3) {
+        text-align: right;
       }
 
-      .order-item {
-        grid-template-columns: 38px 1fr;
+      .quick-actions {
+        grid-template-columns: 1fr 1fr;
       }
 
-      .order-price {
-        grid-column: 2;
-      }
+      .toast {
+        left: 15px;
+        right: 15px;
 
+        min-width: 0;
+      }
     }
-
   </style>
 </head>
 
 <body>
 
-  <div class="admin-layout">
+  <!-- =====================================
+       APP
+  ====================================== -->
 
-    <!-- =================================================
+  <div class="app">
+
+    <!-- ===================================
          SIDEBAR
-    ================================================== -->
+    ==================================== -->
 
     <aside
       class="sidebar"
       id="sidebar"
     >
 
-      <div class="sidebar-header">
+      <a
+        href="../index.html"
+        class="brand"
+      >
+
+        <img
+          src="../logo.png"
+          alt="Website Deals"
+        >
+
+        <div>
+          <strong>Website Deals</strong>
+          <span>Admin Workspace</span>
+        </div>
+
+      </a>
+
+
+      <nav class="nav">
+
+        <div class="nav-label">
+          Marketplace
+        </div>
 
         <a
-          href="../index.html"
-          class="brand"
+          href="dashboard.html"
+          class="active"
         >
-
-          <img
-            src="https://raw.githubusercontent.com/yourdocuments/websitedeals.github.io/main/logo.png"
-            alt="Website Deals"
-          >
-
-          <div>
-            <strong>Website Deals</strong>
-            <span>Management Portal</span>
-          </div>
-
+          <span class="nav-icon">⌂</span>
+          Dashboard
         </a>
 
-      </div>
-
-
-      <div class="sidebar-content">
-
-        <!-- GENERAL -->
-
-        <div class="menu-label">
-          General
-        </div>
-
-        <nav class="nav-menu">
-
-          <a
-            href="dashboard.html"
-            class="nav-item active"
+        <a href="websites.html">
+          <span class="nav-icon">▣</span>
+          Websites
+          <span
+            class="nav-badge"
+            id="website-count"
           >
-            <i class="fa-solid fa-grid-2"></i>
-            <span>Dashboard</span>
-          </a>
+            11
+          </span>
+        </a>
 
-          <a
-            href="websites.html"
-            class="nav-item"
+        <a href="categories.html">
+          <span class="nav-icon">◈</span>
+          Categories
+        </a>
+
+        <a href="orders.html">
+          <span class="nav-icon">◷</span>
+          Orders
+          <span
+            class="nav-badge"
+            id="order-count"
           >
-            <i class="fa-solid fa-window-maximize"></i>
-            <span>Websites</span>
-          </a>
+            8
+          </span>
+        </a>
 
-          <a
-            href="categories.html"
-            class="nav-item"
-          >
-            <i class="fa-solid fa-layer-group"></i>
-            <span>Categories</span>
-          </a>
+        <a href="payments.html">
+          <span class="nav-icon">৳</span>
+          Payments
+        </a>
 
-        </nav>
+        <a href="customers.html">
+          <span class="nav-icon">♙</span>
+          Customers
+        </a>
 
+        <a href="newsletter.html">
+          <span class="nav-icon">✉</span>
+          Newsletter
+        </a>
 
-        <!-- BUSINESS -->
-
-        <div class="menu-label">
-          Business
-        </div>
-
-        <nav class="nav-menu">
-
-          <a
-            href="orders.html"
-            class="nav-item"
-          >
-            <i class="fa-solid fa-bag-shopping"></i>
-            <span>Orders</span>
-          </a>
-
-          <a
-            href="customers.html"
-            class="nav-item"
-          >
-            <i class="fa-solid fa-users"></i>
-            <span>Customers</span>
-          </a>
-
-          <a
-            href="newsletter.html"
-            class="nav-item"
-          >
-            <i class="fa-regular fa-envelope"></i>
-            <span>Newsletter</span>
-          </a>
-
-        </nav>
-
-
-        <!-- ADMIN ONLY ITEMS WILL BE INSERTED
-             HERE BY AUTHORIZATION -->
 
         <div
-          id="protected-menu"
-        ></div>
+          class="nav-label"
+          style="margin-top:18px;"
+        >
+          Reports
+        </div>
 
-      </div>
+        <a href="monthly-report.html">
+          <span class="nav-icon">▤</span>
+          Monthly Report
+        </a>
+
+      </nav>
 
 
-      <div class="sidebar-footer">
+      <div class="sidebar-bottom">
+
+        <div class="profile-mini">
+
+          <div class="avatar">
+            SN
+          </div>
+
+          <div>
+            <strong id="admin-name">
+              Administrator
+            </strong>
+
+            <span id="admin-role">
+              Marketplace Admin
+            </span>
+          </div>
+
+        </div>
 
         <button
-          type="button"
           class="logout-btn"
           id="logout-btn"
+          type="button"
         >
-          <i class="fa-solid fa-arrow-right-from-bracket"></i>
-          <span>Sign Out</span>
+          <span>↪</span>
+          Sign Out
         </button>
 
       </div>
@@ -916,25 +1375,25 @@
     ></div>
 
 
-    <!-- =================================================
+    <!-- ===================================
          MAIN
-    ================================================== -->
+    ==================================== -->
 
-    <main class="main">
+    <section class="main">
 
-      <!-- TOPBAR -->
+      <!-- Header -->
 
-      <header class="topbar">
+      <header class="header">
 
-        <div class="topbar-left">
+        <div class="header-left">
 
           <button
-            type="button"
             class="mobile-menu"
             id="mobile-menu"
+            type="button"
             aria-label="Open menu"
           >
-            <i class="fa-solid fa-bars"></i>
+            ☰
           </button>
 
           <div class="page-title">
@@ -944,7 +1403,7 @@
             </h1>
 
             <p>
-              Marketplace overview
+              Marketplace overview & activity
             </p>
 
           </div>
@@ -952,194 +1411,203 @@
         </div>
 
 
-        <div class="topbar-right">
+        <div class="header-actions">
+
+          <button
+            class="header-btn"
+            id="refresh-btn"
+            type="button"
+          >
+            ↻
+            <span>Refresh</span>
+          </button>
 
           <a
             href="../index.html"
             target="_blank"
-            class="view-site"
+            class="header-btn primary"
           >
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            View Marketplace
+            ↗
+            <span>View Marketplace</span>
           </a>
-
-          <div class="user-box">
-
-            <div
-              class="user-avatar"
-              id="user-avatar"
-            >
-              A
-            </div>
-
-            <div class="user-info">
-
-              <strong id="user-email">
-                Admin
-              </strong>
-
-              <span>
-                Authorized Account
-              </span>
-
-            </div>
-
-          </div>
 
         </div>
 
       </header>
 
 
-      <!-- CONTENT -->
+      <!-- Content -->
 
-      <section class="content">
+      <main class="content">
+
+        <section class="welcome">
+
+          <small>
+            Admin Overview
+          </small>
+
+          <h2>
+            Good morning,
+            <span id="welcome-name">
+              Administrator
+            </span>.
+          </h2>
+
+          <p>
+            Here's what's happening across Website Deals today.
+          </p>
+
+        </section>
 
 
-        <!-- WELCOME -->
+        <!-- =================================
+             STATS
+        ================================== -->
 
-        <div class="welcome">
+        <section class="stats">
 
-          <div class="welcome-content">
+          <div class="stat-card">
 
-            <h2 id="welcome-title">
-              Welcome back 👋
-            </h2>
+            <div class="stat-top">
 
-            <p>
-              Manage your marketplace, websites,
-              orders and customers from one secure
-              workspace.
-            </p>
+              <span class="stat-label">
+                Total Websites
+              </span>
+
+              <span class="stat-icon">
+                ▣
+              </span>
+
+            </div>
+
+            <div
+              class="stat-number"
+              id="total-websites"
+            >
+              11
+            </div>
+
+            <div class="stat-change">
+              ↑ 3 added this month
+            </div>
 
           </div>
 
-        </div>
 
-
-        <!-- STATS -->
-
-        <div class="stats-grid">
-
-          <article class="stat-card">
+          <div class="stat-card">
 
             <div class="stat-top">
 
-              <div class="stat-icon">
-                <i class="fa-solid fa-window-maximize"></i>
-              </div>
+              <span class="stat-label">
+                Total Orders
+              </span>
 
-              <span class="stat-change">
-                +12%
+              <span class="stat-icon">
+                ◷
               </span>
 
             </div>
 
-            <h3 id="stat-websites">
-              8
-            </h3>
+            <div
+              class="stat-number"
+              id="total-orders"
+            >
+              428
+            </div>
 
-            <p>
-              Total Websites
-            </p>
+            <div class="stat-change">
+              ↑ 12.4% from last month
+            </div>
 
-          </article>
+          </div>
 
 
-          <article class="stat-card">
+          <div class="stat-card">
 
             <div class="stat-top">
 
-              <div class="stat-icon">
-                <i class="fa-solid fa-bag-shopping"></i>
-              </div>
+              <span class="stat-label">
+                Customers
+              </span>
 
-              <span class="stat-change">
-                +18%
+              <span class="stat-icon">
+                ♙
               </span>
 
             </div>
 
-            <h3 id="stat-orders">
-              24
-            </h3>
+            <div
+              class="stat-number"
+              id="total-customers"
+            >
+              316
+            </div>
 
-            <p>
-              Total Orders
-            </p>
+            <div class="stat-change">
+              ↑ 8.7% new customers
+            </div>
 
-          </article>
+          </div>
 
 
-          <article class="stat-card">
+          <div class="stat-card">
 
             <div class="stat-top">
 
-              <div class="stat-icon">
-                <i class="fa-solid fa-users"></i>
-              </div>
+              <span class="stat-label">
+                Total Revenue
+              </span>
 
-              <span class="stat-change">
-                +9%
+              <span class="stat-icon">
+                ৳
               </span>
 
             </div>
 
-            <h3 id="stat-customers">
-              19
-            </h3>
-
-            <p>
-              Customers
-            </p>
-
-          </article>
-
-
-          <article class="stat-card">
-
-            <div class="stat-top">
-
-              <div class="stat-icon">
-                <i class="fa-solid fa-chart-line"></i>
-              </div>
-
-              <span class="stat-change">
-                +21%
-              </span>
-
+            <div
+              class="stat-number"
+              id="total-revenue"
+            >
+              ৳8.42L
             </div>
 
-            <h3 id="stat-revenue">
-              ৳42.8K
-            </h3>
+            <div class="stat-change">
+              ↑ 15.2% this month
+            </div>
 
-            <p>
-              Revenue
-            </p>
+          </div>
 
-          </article>
-
-        </div>
+        </section>
 
 
-        <!-- MAIN DASHBOARD -->
+        <!-- =================================
+             MAIN GRID
+        ================================== -->
 
-        <div class="dashboard-grid">
+        <section class="dashboard-grid">
 
 
-          <!-- RECENT ORDERS -->
+          <!-- Recent Orders -->
 
-          <section class="panel">
+          <div class="card">
 
-            <div class="panel-header">
+            <div class="card-head">
 
-              <h3>
-                Recent Orders
-              </h3>
+              <div>
+                <h3>
+                  Recent Orders
+                </h3>
 
-              <a href="orders.html">
-                View all
+                <span>
+                  Latest marketplace activity
+                </span>
+              </div>
+
+              <a
+                href="orders.html"
+                class="view-all"
+              >
+                View all →
               </a>
 
             </div>
@@ -1147,119 +1615,197 @@
 
             <div class="order-list">
 
-              <div class="order-item">
+              <div class="order-row">
 
-                <div class="order-icon">
-                  <i class="fa-solid fa-store"></i>
+                <div class="customer">
+
+                  <div class="customer-avatar">
+                    RK
+                  </div>
+
+                  <div>
+                    <strong>
+                      Rahim Khan
+                    </strong>
+
+                    <span>
+                      WD-2026-00428
+                    </span>
+                  </div>
+
                 </div>
 
-                <div class="order-info">
+                <div class="website-name">
 
                   <strong>
                     Nova Business Pro
                   </strong>
 
                   <span>
-                    Customer #WD1024 • Today
+                    Business
                   </span>
 
                 </div>
 
-                <div class="order-price">
-                  ৳2,499
+                <div class="amount">
+                  ৳1,999
                 </div>
+
+                <span class="status pending">
+                  Pending
+                </span>
 
               </div>
 
 
-              <div class="order-item">
+              <div class="order-row">
 
-                <div class="order-icon">
-                  <i class="fa-solid fa-utensils"></i>
+                <div class="customer">
+
+                  <div class="customer-avatar">
+                    SA
+                  </div>
+
+                  <div>
+                    <strong>
+                      Sara Ahmed
+                    </strong>
+
+                    <span>
+                      WD-2026-00427
+                    </span>
+                  </div>
+
                 </div>
 
-                <div class="order-info">
+                <div class="website-name">
 
                   <strong>
                     Restaurant Royale
                   </strong>
 
                   <span>
-                    Customer #WD1023 • Today
+                    Restaurant
                   </span>
 
                 </div>
 
-                <div class="order-price">
-                  ৳1,999
+                <div class="amount">
+                  ৳2,499
                 </div>
+
+                <span class="status completed">
+                  Completed
+                </span>
 
               </div>
 
 
-              <div class="order-item">
+              <div class="order-row">
 
-                <div class="order-icon">
-                  <i class="fa-solid fa-bullhorn"></i>
+                <div class="customer">
+
+                  <div class="customer-avatar">
+                    MI
+                  </div>
+
+                  <div>
+                    <strong>
+                      Mahin Islam
+                    </strong>
+
+                    <span>
+                      WD-2026-00426
+                    </span>
+                  </div>
+
                 </div>
 
-                <div class="order-info">
+                <div class="website-name">
 
                   <strong>
                     Creative Agency X
                   </strong>
 
                   <span>
-                    Customer #WD1022 • Yesterday
+                    Agency
                   </span>
 
                 </div>
 
-                <div class="order-price">
+                <div class="amount">
                   ৳2,999
                 </div>
+
+                <span class="status completed">
+                  Completed
+                </span>
 
               </div>
 
 
-              <div class="order-item">
+              <div class="order-row">
 
-                <div class="order-icon">
-                  <i class="fa-solid fa-cart-shopping"></i>
+                <div class="customer">
+
+                  <div class="customer-avatar">
+                    TA
+                  </div>
+
+                  <div>
+                    <strong>
+                      Tanvir Ahmed
+                    </strong>
+
+                    <span>
+                      WD-2026-00425
+                    </span>
+                  </div>
+
                 </div>
 
-                <div class="order-info">
+                <div class="website-name">
 
                   <strong>
                     ShopEase Store
                   </strong>
 
                   <span>
-                    Customer #WD1021 • Yesterday
+                    E-commerce
                   </span>
 
                 </div>
 
-                <div class="order-price">
+                <div class="amount">
                   ৳3,499
                 </div>
+
+                <span class="status pending">
+                  Pending
+                </span>
 
               </div>
 
             </div>
 
-          </section>
+          </div>
 
 
-          <!-- QUICK ACTIONS -->
+          <!-- Quick Actions -->
 
-          <section class="panel">
+          <div class="card">
 
-            <div class="panel-header">
+            <div class="card-head">
 
-              <h3>
-                Quick Actions
-              </h3>
+              <div>
+                <h3>
+                  Quick Actions
+                </h3>
+
+                <span>
+                  Manage marketplace
+                </span>
+              </div>
 
             </div>
 
@@ -1271,8 +1817,8 @@
                 class="quick-action"
               >
 
-                <div class="quick-action-icon">
-                  <i class="fa-solid fa-plus"></i>
+                <div class="quick-icon">
+                  ＋
                 </div>
 
                 <div>
@@ -1281,7 +1827,7 @@
                   </strong>
 
                   <span>
-                    Create a new marketplace listing
+                    Create listing
                   </span>
                 </div>
 
@@ -1289,21 +1835,21 @@
 
 
               <a
-                href="websites.html"
+                href="categories.html"
                 class="quick-action"
               >
 
-                <div class="quick-action-icon">
-                  <i class="fa-solid fa-pen-to-square"></i>
+                <div class="quick-icon">
+                  ◈
                 </div>
 
                 <div>
                   <strong>
-                    Manage Websites
+                    Categories
                   </strong>
 
                   <span>
-                    Edit existing listings
+                    Manage categories
                   </span>
                 </div>
 
@@ -1315,17 +1861,17 @@
                 class="quick-action"
               >
 
-                <div class="quick-action-icon">
-                  <i class="fa-solid fa-receipt"></i>
+                <div class="quick-icon">
+                  ◷
                 </div>
 
                 <div>
                   <strong>
-                    Check Orders
+                    Orders
                   </strong>
 
                   <span>
-                    Review recent purchases
+                    Review orders
                   </span>
                 </div>
 
@@ -1333,22 +1879,21 @@
 
 
               <a
-                href="../index.html"
-                target="_blank"
+                href="newsletter.html"
                 class="quick-action"
               >
 
-                <div class="quick-action-icon">
-                  <i class="fa-solid fa-globe"></i>
+                <div class="quick-icon">
+                  ✉
                 </div>
 
                 <div>
                   <strong>
-                    View Marketplace
+                    Newsletter
                   </strong>
 
                   <span>
-                    Open the public website
+                    Subscribers
                   </span>
                 </div>
 
@@ -1356,327 +1901,493 @@
 
             </div>
 
-          </section>
-
-        </div>
-
-
-        <!-- RECENT WEBSITES -->
-
-        <section
-          class="panel"
-          style="margin-top:20px;"
-        >
-
-          <div class="panel-header">
-
-            <h3>
-              Recent Websites
-            </h3>
-
-            <a href="websites.html">
-              Manage
-            </a>
-
-          </div>
-
-          <div class="table-scroll">
-
-            <table class="website-table">
-
-              <thead>
-
-                <tr>
-                  <th>Website</th>
-                  <th>Category</th>
-                  <th>Price</th>
-                  <th>Status</th>
-                </tr>
-
-              </thead>
-
-              <tbody>
-
-                <tr>
-
-                  <td>
-                    <strong>
-                      Nova Business Pro
-                    </strong>
-                  </td>
-
-                  <td>
-                    Business
-                  </td>
-
-                  <td>
-                    ৳2,499
-                  </td>
-
-                  <td>
-                    <span class="status live">
-                      Live
-                    </span>
-                  </td>
-
-                </tr>
-
-
-                <tr>
-
-                  <td>
-                    <strong>
-                      Restaurant Royale
-                    </strong>
-                  </td>
-
-                  <td>
-                    Restaurant
-                  </td>
-
-                  <td>
-                    ৳1,999
-                  </td>
-
-                  <td>
-                    <span class="status live">
-                      Live
-                    </span>
-                  </td>
-
-                </tr>
-
-
-                <tr>
-
-                  <td>
-                    <strong>
-                      Creative Agency X
-                    </strong>
-                  </td>
-
-                  <td>
-                    Agency
-                  </td>
-
-                  <td>
-                    ৳2,999
-                  </td>
-
-                  <td>
-                    <span class="status live">
-                      Live
-                    </span>
-                  </td>
-
-                </tr>
-
-
-                <tr>
-
-                  <td>
-                    <strong>
-                      Personal Portfolio
-                    </strong>
-                  </td>
-
-                  <td>
-                    Portfolio
-                  </td>
-
-                  <td>
-                    ৳1,499
-                  </td>
-
-                  <td>
-                    <span class="status draft">
-                      Draft
-                    </span>
-                  </td>
-
-                </tr>
-
-              </tbody>
-
-            </table>
-
           </div>
 
         </section>
 
 
-      </section>
+        <!-- =================================
+             SECONDARY GRID
+        ================================== -->
 
-    </main>
+        <section
+          class="dashboard-grid"
+          style="margin-top:18px;"
+        >
+
+          <!-- Top Websites -->
+
+          <div class="card">
+
+            <div class="card-head">
+
+              <div>
+                <h3>
+                  Top Websites
+                </h3>
+
+                <span>
+                  By marketplace sales
+                </span>
+              </div>
+
+              <a
+                href="websites.html"
+                class="view-all"
+              >
+                Manage →
+              </a>
+
+            </div>
+
+
+            <div class="website-list">
+
+              <div class="website-item">
+
+                <div class="website-thumb">
+                  NP
+                </div>
+
+                <div class="website-info">
+
+                  <strong>
+                    Nova Business Pro
+                  </strong>
+
+                  <span>
+                    Business • ৳1,999
+                  </span>
+
+                </div>
+
+                <div class="website-sales">
+
+                  <strong>
+                    86 sales
+                  </strong>
+
+                  <span>
+                    4.9 ★
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="website-item">
+
+                <div class="website-thumb">
+                  SS
+                </div>
+
+                <div class="website-info">
+
+                  <strong>
+                    ShopEase Store
+                  </strong>
+
+                  <span>
+                    E-commerce • ৳3,499
+                  </span>
+
+                </div>
+
+                <div class="website-sales">
+
+                  <strong>
+                    74 sales
+                  </strong>
+
+                  <span>
+                    4.9 ★
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="website-item">
+
+                <div class="website-thumb">
+                  CA
+                </div>
+
+                <div class="website-info">
+
+                  <strong>
+                    Creative Agency X
+                  </strong>
+
+                  <span>
+                    Agency • ৳2,999
+                  </span>
+
+                </div>
+
+                <div class="website-sales">
+
+                  <strong>
+                    61 sales
+                  </strong>
+
+                  <span>
+                    4.8 ★
+                  </span>
+
+                </div>
+
+              </div>
+
+
+              <div class="website-item">
+
+                <div class="website-thumb">
+                  RR
+                </div>
+
+                <div class="website-info">
+
+                  <strong>
+                    Restaurant Royale
+                  </strong>
+
+                  <span>
+                    Restaurant • ৳2,499
+                  </span>
+
+                </div>
+
+                <div class="website-sales">
+
+                  <strong>
+                    49 sales
+                  </strong>
+
+                  <span>
+                    4.8 ★
+                  </span>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- Performance -->
+
+          <div class="card performance">
+
+            <div class="performance-title">
+
+              <h3>
+                Marketplace Performance
+              </h3>
+
+              <span>
+                This month
+              </span>
+
+            </div>
+
+
+            <div class="bar-row">
+
+              <div class="bar-info">
+
+                <span>
+                  Website Sales
+                </span>
+
+                <span>
+                  82%
+                </span>
+
+              </div>
+
+              <div class="bar">
+                <span style="width:82%;"></span>
+              </div>
+
+            </div>
+
+
+            <div class="bar-row">
+
+              <div class="bar-info">
+
+                <span>
+                  Customer Growth
+                </span>
+
+                <span>
+                  68%
+                </span>
+
+              </div>
+
+              <div class="bar">
+                <span style="width:68%;"></span>
+              </div>
+
+            </div>
+
+
+            <div class="bar-row">
+
+              <div class="bar-info">
+
+                <span>
+                  Order Completion
+                </span>
+
+                <span>
+                  91%
+                </span>
+
+              </div>
+
+              <div class="bar">
+                <span style="width:91%;"></span>
+              </div>
+
+            </div>
+
+
+            <div class="bar-row">
+
+              <div class="bar-info">
+
+                <span>
+                  Newsletter Growth
+                </span>
+
+                <span>
+                  57%
+                </span>
+
+              </div>
+
+              <div class="bar">
+                <span style="width:57%;"></span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </main>
+
+    </section>
 
   </div>
 
 
-  <!-- TOAST -->
+  <!-- =====================================
+       TOAST
+  ====================================== -->
 
   <div
     class="toast"
     id="toast"
-  ></div>
+  >
+
+    <strong id="toast-title">
+      Notice
+    </strong>
+
+    <span id="toast-message">
+      Something happened.
+    </span>
+
+  </div>
 
 
   <script>
+    /* =================================================
+       WEBSITE DEALS
+       DASHBOARD AUTH — STEP 1
+       ================================================= */
 
-    /* =====================================================
-       SESSION CHECK
-    ===================================================== */
 
-    const sessionRaw =
-      sessionStorage.getItem(
-        "websiteDealsAdminSession"
+    /* ==========================================
+       AUTH CHECK
+    =========================================== */
+
+    function getAdminSession() {
+
+      try {
+
+        const raw =
+          sessionStorage.getItem(
+            "websiteDealsAdminAuth"
+          );
+
+        if (!raw) {
+          return null;
+        }
+
+        const session =
+          JSON.parse(raw);
+
+        if (
+          !session ||
+          session.authenticated !== true
+        ) {
+          return null;
+        }
+
+        return session;
+
+      } catch (error) {
+
+        console.error(
+          "Session error:",
+          error
+        );
+
+        return null;
+      }
+    }
+
+
+    /*
+      IMPORTANT:
+
+      Login page saves:
+
+      websiteDealsAdminAuth
+
+      Dashboard reads exactly the same key.
+
+      No redirect loop.
+    */
+
+    const adminSession =
+      getAdminSession();
+
+
+    if (!adminSession) {
+
+      /*
+        Only redirect when there is
+        genuinely no valid login session.
+
+        dashboard.html
+              ↓
+        ../admin/login/
+
+        Because dashboard is inside /admin/
+        and login is inside /admin/login/.
+      */
+
+      window.location.replace(
+        "login/"
       );
 
-    if (!sessionRaw) {
-
-      window.location.replace("index.html");
-
     }
 
 
-    let session = null;
+    /* ==========================================
+       ELEMENTS
+    =========================================== */
 
-    try {
-
-      session =
-        JSON.parse(sessionRaw);
-
-    } catch (error) {
-
-      sessionStorage.removeItem(
-        "websiteDealsAdminSession"
+    const adminName =
+      document.getElementById(
+        "admin-name"
       );
 
-      window.location.replace("index.html");
-
-    }
-
-
-    if (
-      !session ||
-      session.authenticated !== true
-    ) {
-
-      sessionStorage.removeItem(
-        "websiteDealsAdminSession"
+    const adminRole =
+      document.getElementById(
+        "admin-role"
       );
 
-      window.location.replace("index.html");
+    const welcomeName =
+      document.getElementById(
+        "welcome-name"
+      );
 
-    }
-
-
-    /* =====================================================
-       USER INFORMATION
-    ===================================================== */
-
-    const userEmail =
-      document.getElementById("user-email");
-
-    const userAvatar =
-      document.getElementById("user-avatar");
-
-    const welcomeTitle =
-      document.getElementById("welcome-title");
-
-
-    if (session.email) {
-
-      userEmail.textContent =
-        session.email;
-
-      const firstLetter =
-        session.email
-          .charAt(0)
-          .toUpperCase();
-
-      userAvatar.textContent =
-        firstLetter;
-
-    }
-
-
-    /* =====================================================
-       PROTECTED MANAGEMENT AREA
-       
-       IMPORTANT:
-       This is UI protection only.
-       Real production authorization must also be
-       enforced by Firebase/Firestore security rules.
-    ===================================================== */
-
-    const protectedMenu =
-      document.getElementById("protected-menu");
-
-
-    if (session.role === "superadmin") {
-
-      protectedMenu.innerHTML = `
-
-        <div class="menu-label">
-          Management
-        </div>
-
-        <nav class="nav-menu">
-
-          <a
-            href="admins.html"
-            class="nav-item"
-          >
-            <i class="fa-solid fa-user-shield"></i>
-            <span>Access Management</span>
-          </a>
-
-          <a
-            href="settings.html"
-            class="nav-item"
-          >
-            <i class="fa-solid fa-sliders"></i>
-            <span>Settings</span>
-          </a>
-
-        </nav>
-
-      `;
-
-    }
-
-
-    /* =====================================================
-       MOBILE SIDEBAR
-    ===================================================== */
-
-    const sidebar =
-      document.getElementById("sidebar");
+    const logoutBtn =
+      document.getElementById(
+        "logout-btn"
+      );
 
     const mobileMenu =
-      document.getElementById("mobile-menu");
+      document.getElementById(
+        "mobile-menu"
+      );
+
+    const sidebar =
+      document.getElementById(
+        "sidebar"
+      );
 
     const sidebarOverlay =
       document.getElementById(
         "sidebar-overlay"
       );
 
+    const refreshBtn =
+      document.getElementById(
+        "refresh-btn"
+      );
+
+
+    /* ==========================================
+       SESSION DATA
+    =========================================== */
+
+    if (adminSession) {
+
+      const displayName =
+        adminSession.name ||
+        "Administrator";
+
+      adminName.textContent =
+        displayName;
+
+      welcomeName.textContent =
+        displayName;
+
+      adminRole.textContent =
+        adminSession.role === "superadmin"
+          ? "Super Admin"
+          : "Marketplace Admin";
+    }
+
+
+    /* ==========================================
+       MOBILE SIDEBAR
+    =========================================== */
 
     function openSidebar() {
 
-      sidebar.classList.add("open");
+      sidebar.classList.add(
+        "open"
+      );
 
-      sidebarOverlay.classList.add("show");
-
+      sidebarOverlay.classList.add(
+        "show"
+      );
     }
 
 
     function closeSidebar() {
 
-      sidebar.classList.remove("open");
+      sidebar.classList.remove(
+        "open"
+      );
 
-      sidebarOverlay.classList.remove("show");
-
+      sidebarOverlay.classList.remove(
+        "show"
+      );
     }
 
 
@@ -1685,127 +2396,238 @@
       openSidebar
     );
 
+
     sidebarOverlay.addEventListener(
       "click",
       closeSidebar
     );
 
 
-    /* =====================================================
-       LOGOUT
-    ===================================================== */
+    /* ==========================================
+       TOAST
+    =========================================== */
 
-    document
-      .getElementById("logout-btn")
-      .addEventListener("click", () => {
+    let toastTimer;
+
+    function showToast(
+      title,
+      message
+    ) {
+
+      const toast =
+        document.getElementById(
+          "toast"
+        );
+
+      document.getElementById(
+        "toast-title"
+      ).textContent =
+        title;
+
+      document.getElementById(
+        "toast-message"
+      ).textContent =
+        message;
+
+      toast.classList.add(
+        "show"
+      );
+
+      clearTimeout(
+        toastTimer
+      );
+
+      toastTimer =
+        setTimeout(
+          () => {
+
+            toast.classList.remove(
+              "show"
+            );
+
+          },
+          2800
+        );
+    }
+
+
+    /* ==========================================
+       LOGOUT
+    =========================================== */
+
+    logoutBtn.addEventListener(
+      "click",
+      function () {
+
+        /*
+          Remove ONLY the admin session.
+        */
 
         sessionStorage.removeItem(
-          "websiteDealsAdminSession"
+          "websiteDealsAdminAuth"
         );
+
+
+        /*
+          Send user to the new separated
+          login page.
+        */
 
         window.location.replace(
-          "index.html"
+          "login/"
         );
 
-      });
+      }
+    );
 
 
-    /* =====================================================
-       DEMO LOCALSTORAGE STATS
-    ===================================================== */
+    /* ==========================================
+       REFRESH
+    =========================================== */
 
-    function loadLocalStats() {
+    refreshBtn.addEventListener(
+      "click",
+      function () {
 
-      const orders =
-        JSON.parse(
-          localStorage.getItem(
-            "websiteDealsOrders"
-          ) || "[]"
+        refreshBtn.disabled = true;
+
+        showToast(
+          "Dashboard refreshed",
+          "Marketplace overview has been refreshed."
         );
 
-      const subscribers =
-        JSON.parse(
-          localStorage.getItem(
-            "websiteDealsSubscribers"
-          ) || "[]"
+        setTimeout(
+          () => {
+
+            refreshBtn.disabled =
+              false;
+
+          },
+          700
         );
 
+      }
+    );
 
-      if (orders.length > 0) {
 
-        document.getElementById(
-          "stat-orders"
-        ).textContent =
-          orders.length;
+    /* ==========================================
+       DEMO DATA
+    =========================================== */
 
+    function loadDemoStats() {
+
+      let orders = [];
+
+      let websites = [];
+
+      let subscribers = [];
+
+      try {
+
+        orders =
+          JSON.parse(
+            localStorage.getItem(
+              "websiteDealsOrders"
+            )
+          ) || [];
+
+      } catch (error) {
+        orders = [];
       }
 
 
-      if (subscribers.length > 0) {
+      try {
+
+        websites =
+          JSON.parse(
+            localStorage.getItem(
+              "websiteDealsAdminWebsites"
+            )
+          ) || [];
+
+      } catch (error) {
+        websites = [];
+      }
+
+
+      try {
+
+        subscribers =
+          JSON.parse(
+            localStorage.getItem(
+              "websiteDealsSubscribers"
+            )
+          ) || [];
+
+      } catch (error) {
+        subscribers = [];
+      }
+
+
+      /*
+        Only update if demo/local data
+        actually exists.
+      */
+
+      if (websites.length) {
 
         document.getElementById(
-          "stat-customers"
+          "total-websites"
         ).textContent =
-          Math.max(
-            19,
-            subscribers.length
-          );
+          websites.length;
 
+        document.getElementById(
+          "website-count"
+        ).textContent =
+          websites.length;
+      }
+
+
+      if (orders.length) {
+
+        document.getElementById(
+          "total-orders"
+        ).textContent =
+          orders.length;
+      }
+
+
+      if (subscribers.length) {
+
+        /*
+          Subscriber count is intentionally
+          not replacing customer count because
+          they are different entities.
+        */
       }
 
     }
 
-    loadLocalStats();
+
+    loadDemoStats();
 
 
-    /* =====================================================
-       ACTIVE NAV
-    ===================================================== */
+    /* ==========================================
+       PREVENT FLASH AFTER LOGOUT
+    =========================================== */
 
-    document
-      .querySelectorAll(".nav-item")
-      .forEach(link => {
+    window.addEventListener(
+      "pageshow",
+      function () {
 
-        link.addEventListener(
-          "click",
-          () => {
+        const session =
+          getAdminSession();
 
-            document
-              .querySelectorAll(".nav-item")
-              .forEach(item =>
-                item.classList.remove(
-                  "active"
-                )
-              );
+        if (!session) {
 
-            link.classList.add("active");
+          window.location.replace(
+            "login/"
+          );
 
-          }
-        );
+        }
 
-      });
-
-
-    /* =====================================================
-       FUTURE AUTH NOTE
-    =====================================================
-
-       Production version:
-
-       Firebase Authentication
-             ↓
-       authenticated user
-             ↓
-       Firestore user profile
-             ↓
-       role
-             ↓
-       permission guard
-             ↓
-       dashboard
-
-       Never rely only on hidden menu items.
-    ===================================================== */
+      }
+    );
 
   </script>
 
