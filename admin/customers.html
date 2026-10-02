@@ -9,25 +9,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#07110b">
 
+  <title>Customers | Website Deals Admin</title>
+
   <meta
     name="description"
     content="Website Deals Admin — Customer Management"
   >
 
-  <title>Customers | Website Deals Admin</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap"
     rel="stylesheet"
   >
 
   <style>
     :root{
       --green:#18a957;
-      --green-dark:#108243;
+      --green-dark:#108342;
       --green-soft:#eaf8f0;
 
       --dark:#07110b;
@@ -35,30 +35,30 @@
 
       --bg:#f6f8f7;
       --surface:#ffffff;
-      --surface-2:#f1f5f3;
-
-      --border:#e3eae6;
+      --surface-2:#f8faf9;
 
       --text:#142019;
       --muted:#738079;
 
+      --border:#e3eae6;
+
       --danger:#dc3545;
       --danger-soft:#fff0f1;
 
-      --warning:#d88b00;
-      --warning-soft:#fff7df;
+      --warning:#c98700;
+      --warning-soft:#fff8e8;
 
-      --blue:#3478f6;
-      --blue-soft:#edf4ff;
+      --blue:#2563eb;
+      --blue-soft:#eef4ff;
 
-      --purple:#7657e8;
-      --purple-soft:#f1edff;
+      --purple:#7c3aed;
+      --purple-soft:#f4efff;
 
-      --shadow:0 18px 50px rgba(8,24,14,.07);
-      --shadow-soft:0 8px 24px rgba(8,24,14,.06);
+      --shadow:0 18px 50px rgba(16,35,24,.07);
+      --shadow-sm:0 8px 24px rgba(16,35,24,.055);
 
       --radius:20px;
-      --radius-sm:13px;
+      --radius-sm:14px;
     }
 
     *{
@@ -99,14 +99,14 @@
       display:block;
     }
 
+    /* =========================
+       APP
+    ========================== */
+
     .app{
       min-height:100vh;
       display:flex;
     }
-
-    /* =========================
-       SIDEBAR
-    ========================= */
 
     .sidebar{
       width:270px;
@@ -115,70 +115,122 @@
       color:#fff;
       min-height:100vh;
       position:fixed;
-      left:0;
-      top:0;
-      bottom:0;
+      inset:0 auto 0 0;
       z-index:1000;
       display:flex;
       flex-direction:column;
-      padding:22px 16px 18px;
       overflow-y:auto;
+      border-right:1px solid rgba(255,255,255,.055);
+    }
+
+    .sidebar-top{
+      padding:24px 20px 18px;
     }
 
     .brand{
       display:flex;
       align-items:center;
       gap:12px;
-      padding:4px 8px 24px;
+      min-width:0;
     }
 
     .brand-logo{
       width:44px;
       height:44px;
       border-radius:13px;
+      object-fit:cover;
       background:#fff;
-      padding:6px;
-      object-fit:contain;
-      flex:none;
+      flex:0 0 44px;
     }
 
-    .brand-name{
+    .brand-text{
+      min-width:0;
+    }
+
+    .brand-title{
       font-family:"Manrope",sans-serif;
-      font-size:17px;
+      font-size:16px;
       font-weight:800;
-      letter-spacing:-.4px;
+      letter-spacing:-.3px;
+      white-space:nowrap;
     }
 
     .brand-sub{
-      color:#9ca9a1;
+      color:#8d9b93;
       font-size:11px;
       margin-top:2px;
+      white-space:nowrap;
     }
 
-    .nav-section{
-      margin-top:10px;
-    }
-
-    .nav-label{
-      color:#6e7d74;
-      text-transform:uppercase;
-      font-size:10px;
-      letter-spacing:1.5px;
-      font-weight:700;
-      padding:0 12px 9px;
-    }
-
-    .nav-item{
+    .admin-mini{
+      margin-top:20px;
+      padding:13px;
+      background:rgba(255,255,255,.055);
+      border:1px solid rgba(255,255,255,.065);
+      border-radius:16px;
       display:flex;
       align-items:center;
       gap:11px;
-      min-height:45px;
-      padding:0 12px;
+    }
+
+    .admin-avatar{
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      background:linear-gradient(135deg,#1dc567,#0d7e40);
+      color:#fff;
+      font-weight:800;
+      font-size:13px;
+      flex:0 0 38px;
+    }
+
+    .admin-info{
+      min-width:0;
+    }
+
+    .admin-name{
+      font-size:13px;
+      font-weight:700;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .admin-role{
+      font-size:10px;
+      color:#8d9b93;
+      margin-top:2px;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+    }
+
+    .nav{
+      padding:8px 12px 20px;
+      flex:1;
+    }
+
+    .nav-label{
+      padding:17px 11px 8px;
+      color:#68756e;
+      text-transform:uppercase;
+      font-size:9px;
+      font-weight:800;
+      letter-spacing:1.2px;
+    }
+
+    .nav-item{
+      width:100%;
+      display:flex;
+      align-items:center;
+      gap:11px;
+      padding:11px 12px;
       border-radius:12px;
-      color:#b9c3bd;
-      margin-bottom:4px;
+      color:#aeb9b3;
       font-size:13px;
       font-weight:600;
+      margin-bottom:3px;
       transition:.2s ease;
     }
 
@@ -188,83 +240,56 @@
     }
 
     .nav-item.active{
+      color:#fff;
       background:rgba(24,169,87,.16);
-      color:#72e3a1;
+      box-shadow:inset 3px 0 0 var(--green);
     }
 
     .nav-icon{
-      width:19px;
-      height:19px;
+      width:20px;
+      height:20px;
       display:grid;
       place-items:center;
-      flex:none;
-      font-size:16px;
+      flex:0 0 20px;
+      font-size:15px;
+    }
+
+    .nav-badge{
+      margin-left:auto;
+      min-width:21px;
+      height:21px;
+      padding:0 6px;
+      border-radius:999px;
+      background:rgba(255,255,255,.08);
+      color:#aeb9b3;
+      font-size:9px;
+      display:grid;
+      place-items:center;
     }
 
     .sidebar-bottom{
-      margin-top:auto;
-      padding-top:18px;
-    }
-
-    .admin-mini{
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.07);
-      border-radius:16px;
-      padding:12px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-
-    .avatar-small{
-      width:38px;
-      height:38px;
-      border-radius:12px;
-      display:grid;
-      place-items:center;
-      background:var(--green);
-      color:#fff;
-      font-weight:800;
-      flex:none;
-    }
-
-    .admin-mini-name{
-      color:#fff;
-      font-size:12px;
-      font-weight:700;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .admin-mini-role{
-      color:#819087;
-      font-size:10px;
-      margin-top:2px;
+      padding:14px 14px 18px;
+      border-top:1px solid rgba(255,255,255,.06);
     }
 
     .logout-btn{
       width:100%;
-      margin-top:10px;
-      border:1px solid rgba(255,255,255,.08);
-      background:transparent;
-      color:#b7c1bb;
-      min-height:42px;
+      border:0;
+      background:rgba(255,255,255,.05);
+      color:#aeb9b3;
+      padding:11px 13px;
       border-radius:12px;
-      font-weight:600;
+      display:flex;
+      align-items:center;
+      gap:10px;
       font-size:12px;
-      transition:.2s;
+      font-weight:700;
     }
 
     .logout-btn:hover{
-      background:rgba(220,53,69,.1);
-      color:#ff8f99;
-      border-color:rgba(220,53,69,.2);
+      color:#fff;
+      background:rgba(220,53,69,.13);
     }
-
-    /* =========================
-       MAIN
-    ========================= */
 
     .main{
       width:calc(100% - 270px);
@@ -272,9 +297,13 @@
       min-width:0;
     }
 
+    /* =========================
+       HEADER
+    ========================== */
+
     .topbar{
-      height:76px;
-      background:rgba(255,255,255,.92);
+      height:72px;
+      background:rgba(255,255,255,.94);
       border-bottom:1px solid var(--border);
       display:flex;
       align-items:center;
@@ -290,43 +319,56 @@
       display:flex;
       align-items:center;
       gap:12px;
+      min-width:0;
     }
 
-    .page-kicker{
+    .mobile-menu{
+      width:40px;
+      height:40px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:11px;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      font-size:18px;
+    }
+
+    .breadcrumb{
+      display:flex;
+      align-items:center;
+      gap:7px;
       color:var(--muted);
       font-size:12px;
-      font-weight:600;
     }
 
-    .page-title-mini{
-      font-family:"Manrope",sans-serif;
-      font-size:15px;
-      font-weight:800;
-      margin-top:2px;
+    .breadcrumb strong{
+      color:var(--text);
+      font-weight:700;
     }
 
     .top-actions{
       display:flex;
       align-items:center;
-      gap:8px;
+      gap:9px;
     }
 
     .icon-btn,
     .outline-btn,
     .primary-btn{
+      height:40px;
       border-radius:11px;
-      min-height:40px;
-      padding:0 13px;
+      padding:0 14px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
       border:1px solid var(--border);
       background:#fff;
       color:var(--text);
       font-size:12px;
       font-weight:700;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:7px;
-      transition:.2s;
+      transition:.2s ease;
     }
 
     .icon-btn{
@@ -336,7 +378,7 @@
 
     .icon-btn:hover,
     .outline-btn:hover{
-      border-color:#cbd7d0;
+      border-color:#cbd8d1;
       background:var(--surface-2);
     }
 
@@ -354,147 +396,128 @@
     }
 
     .danger-btn{
-      border-color:#f0c7cb;
-      background:#fff;
       color:var(--danger);
+      border-color:#f1c7cc;
+      background:#fff;
     }
 
     .danger-btn:hover{
       background:var(--danger-soft);
     }
 
-    .mobile-menu{
-      display:none;
-    }
+    /* =========================
+       CONTENT
+    ========================== */
 
     .content{
-      padding:30px;
+      padding:28px 30px 40px;
       max-width:1700px;
-      margin:0 auto;
+      margin:auto;
     }
-
-    /* =========================
-       HERO
-    ========================= */
 
     .hero{
       background:
-        radial-gradient(circle at 90% 20%, rgba(24,169,87,.15), transparent 32%),
-        linear-gradient(135deg,#0b1710,#12251a);
-      border-radius:26px;
+        radial-gradient(circle at 85% 15%,rgba(24,169,87,.15),transparent 28%),
+        linear-gradient(135deg,#07110b 0%,#10251a 100%);
       color:#fff;
+      border-radius:26px;
       padding:30px;
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-      gap:25px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
       position:relative;
+      overflow:hidden;
+      box-shadow:var(--shadow);
     }
 
-    .hero:after{
+    .hero::after{
       content:"";
       position:absolute;
-      width:280px;
-      height:280px;
-      border:1px solid rgba(255,255,255,.07);
+      width:240px;
+      height:240px;
+      border:1px solid rgba(255,255,255,.08);
       border-radius:50%;
-      right:-100px;
-      top:-130px;
+      right:-90px;
+      bottom:-130px;
     }
 
-    .hero-content{
+    .hero-inner{
       position:relative;
-      z-index:2;
+      z-index:1;
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:24px;
     }
 
     .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:7px;
-      background:rgba(24,169,87,.14);
-      color:#7ce6a7;
-      border:1px solid rgba(24,169,87,.25);
-      padding:7px 10px;
-      border-radius:999px;
+      color:#72e5a1;
+      text-transform:uppercase;
+      letter-spacing:1.6px;
       font-size:10px;
       font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:1px;
-    }
-
-    .eyebrow-dot{
-      width:6px;
-      height:6px;
-      border-radius:50%;
-      background:#62df95;
+      margin-bottom:9px;
     }
 
     .hero h1{
       font-family:"Manrope",sans-serif;
-      font-size:clamp(26px,3vw,40px);
+      font-size:clamp(25px,3vw,38px);
       line-height:1.08;
-      letter-spacing:-1.4px;
-      margin-top:15px;
+      letter-spacing:-1.2px;
+      margin-bottom:10px;
     }
 
     .hero p{
-      color:#aebdb4;
+      max-width:650px;
+      color:#aebbb3;
       font-size:13px;
       line-height:1.7;
-      max-width:650px;
-      margin-top:11px;
     }
 
     .hero-side{
-      position:relative;
-      z-index:2;
-      min-width:250px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.09);
-      border-radius:18px;
-      padding:17px;
+      flex:0 0 auto;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
     }
 
-    .hero-side-label{
-      color:#8f9e95;
+    .hero-pill{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      padding:9px 12px;
+      border:1px solid rgba(255,255,255,.1);
+      background:rgba(255,255,255,.055);
+      border-radius:999px;
+      color:#d7e2dc;
       font-size:10px;
-      text-transform:uppercase;
-      letter-spacing:1px;
-      font-weight:800;
+      font-weight:700;
     }
 
-    .hero-side-value{
-      font-family:"Manrope",sans-serif;
-      font-size:25px;
-      font-weight:800;
-      margin-top:5px;
-    }
-
-    .hero-side-sub{
-      color:#8f9e95;
-      font-size:11px;
-      margin-top:3px;
+    .hero-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:#45d983;
+      box-shadow:0 0 0 4px rgba(69,217,131,.1);
     }
 
     /* =========================
        STATS
-    ========================= */
+    ========================== */
 
-    .stats-grid{
+    .stats{
       display:grid;
       grid-template-columns:repeat(5,1fr);
       gap:14px;
       margin-top:18px;
     }
 
-    .stat-card{
-      background:var(--surface);
+    .stat{
+      background:#fff;
       border:1px solid var(--border);
       border-radius:18px;
-      padding:19px;
-      box-shadow:var(--shadow-soft);
+      padding:18px;
+      box-shadow:var(--shadow-sm);
       min-width:0;
     }
 
@@ -502,13 +525,15 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:8px;
+      gap:10px;
     }
 
     .stat-label{
+      font-size:10px;
       color:var(--muted);
-      font-size:11px;
-      font-weight:700;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.65px;
     }
 
     .stat-icon{
@@ -518,34 +543,35 @@
       display:grid;
       place-items:center;
       background:var(--green-soft);
-      color:var(--green);
+      color:var(--green-dark);
       font-size:15px;
     }
 
     .stat-value{
+      margin-top:11px;
       font-family:"Manrope",sans-serif;
-      font-size:25px;
+      font-size:24px;
       font-weight:800;
       letter-spacing:-.8px;
-      margin-top:13px;
     }
 
     .stat-note{
+      margin-top:4px;
       color:var(--muted);
       font-size:10px;
-      margin-top:4px;
     }
 
     /* =========================
        TOOLBAR
-    ========================= */
+    ========================== */
 
     .section-card{
-      background:var(--surface);
+      margin-top:18px;
+      background:#fff;
       border:1px solid var(--border);
       border-radius:20px;
-      box-shadow:var(--shadow-soft);
-      margin-top:18px;
+      box-shadow:var(--shadow-sm);
+      overflow:hidden;
     }
 
     .toolbar{
@@ -553,14 +579,35 @@
       border-bottom:1px solid var(--border);
       display:flex;
       align-items:center;
-      gap:10px;
+      gap:9px;
       flex-wrap:wrap;
     }
 
-    .search-wrap{
+    .search{
+      flex:1 1 260px;
+      min-width:200px;
       position:relative;
-      flex:1 1 280px;
-      min-width:220px;
+    }
+
+    .search input{
+      width:100%;
+      height:42px;
+      border:1px solid var(--border);
+      background:var(--surface-2);
+      border-radius:12px;
+      padding:0 13px 0 39px;
+      outline:none;
+      color:var(--text);
+      font-size:12px;
+    }
+
+    .search input:focus,
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus{
+      border-color:rgba(24,169,87,.55);
+      box-shadow:0 0 0 4px rgba(24,169,87,.08);
+      background:#fff;
     }
 
     .search-icon{
@@ -568,31 +615,8 @@
       left:13px;
       top:50%;
       transform:translateY(-50%);
-      color:#95a099;
-      font-size:13px;
-      pointer-events:none;
-    }
-
-    .search-input{
-      width:100%;
-      height:42px;
-      border:1px solid var(--border);
-      background:var(--surface-2);
-      border-radius:12px;
-      padding:0 13px 0 36px;
-      outline:none;
-      color:var(--text);
-      font-size:12px;
-      transition:.2s;
-    }
-
-    .search-input:focus,
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus{
-      border-color:rgba(24,169,87,.55);
-      box-shadow:0 0 0 3px rgba(24,169,87,.09);
-      background:#fff;
+      color:var(--muted);
+      font-size:14px;
     }
 
     .filter-select{
@@ -601,37 +625,68 @@
       border:1px solid var(--border);
       background:var(--surface-2);
       border-radius:12px;
-      padding:0 11px;
-      outline:none;
+      padding:0 12px;
       color:var(--text);
-      font-size:12px;
+      outline:none;
+      font-size:11px;
       font-weight:600;
     }
 
-    .bulk-wrap{
-      display:none;
-      align-items:center;
-      gap:7px;
-      padding-left:4px;
+    .toolbar-actions{
+      display:flex;
+      gap:8px;
+      margin-left:auto;
     }
 
-    .bulk-wrap.show{
+    /* =========================
+       BULK BAR
+    ========================== */
+
+    .bulk-bar{
+      display:none;
+      padding:10px 16px;
+      background:#f0faf4;
+      border-bottom:1px solid #d9eee1;
+      align-items:center;
+      gap:9px;
+      flex-wrap:wrap;
+    }
+
+    .bulk-bar.show{
       display:flex;
     }
 
     .bulk-count{
-      color:var(--muted);
+      color:var(--green-dark);
       font-size:11px;
-      font-weight:700;
-      margin-right:3px;
+      font-weight:800;
+      margin-right:auto;
+    }
+
+    .bulk-btn{
+      height:34px;
+      padding:0 10px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:9px;
+      font-size:10px;
+      font-weight:800;
+      color:var(--text);
+    }
+
+    .bulk-btn:hover{
+      background:var(--surface-2);
+    }
+
+    .bulk-btn.danger{
+      color:var(--danger);
     }
 
     /* =========================
        TABLE
-    ========================= */
+    ========================== */
 
     .table-wrap{
-      width:100%;
       overflow-x:auto;
     }
 
@@ -643,26 +698,26 @@
 
     th{
       text-align:left;
-      color:#849088;
-      background:#fbfcfb;
-      font-size:10px;
-      text-transform:uppercase;
-      letter-spacing:.7px;
-      font-weight:800;
       padding:13px 16px;
+      background:#fbfcfb;
       border-bottom:1px solid var(--border);
+      color:#7b8881;
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+      font-weight:800;
       white-space:nowrap;
     }
 
     td{
       padding:14px 16px;
       border-bottom:1px solid #edf1ee;
-      font-size:12px;
       vertical-align:middle;
+      font-size:11px;
     }
 
     tbody tr{
-      transition:.15s;
+      transition:.15s ease;
     }
 
     tbody tr:hover{
@@ -670,12 +725,12 @@
     }
 
     tbody tr:last-child td{
-      border-bottom:none;
+      border-bottom:0;
     }
 
     .check{
-      width:16px;
-      height:16px;
+      width:15px;
+      height:15px;
       accent-color:var(--green);
       cursor:pointer;
     }
@@ -684,239 +739,302 @@
       display:flex;
       align-items:center;
       gap:11px;
-      min-width:200px;
+      min-width:210px;
     }
 
     .customer-avatar{
-      width:40px;
-      height:40px;
-      border-radius:13px;
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      background:linear-gradient(135deg,#dff7e9,#bdebd0);
+      color:var(--green-dark);
       display:grid;
       place-items:center;
-      color:#fff;
       font-size:12px;
       font-weight:800;
-      flex:none;
-      background:linear-gradient(135deg,#18a957,#106c38);
+      flex:0 0 38px;
+      overflow:hidden;
+    }
+
+    .customer-avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .customer-main{
+      min-width:0;
     }
 
     .customer-name{
+      font-size:12px;
       font-weight:800;
       color:var(--text);
-      font-size:12px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width:180px;
     }
 
     .customer-id{
-      color:#909a94;
-      font-size:10px;
-      margin-top:2px;
+      margin-top:3px;
+      color:var(--muted);
+      font-size:9px;
+      font-family:monospace;
     }
 
-    .contact-main{
-      font-size:11px;
-      font-weight:700;
+    .contact-line{
+      color:var(--text);
+      font-size:10px;
+      white-space:nowrap;
     }
 
     .contact-sub{
       color:var(--muted);
-      font-size:10px;
+      font-size:9px;
       margin-top:3px;
+      white-space:nowrap;
+    }
+
+    .number-cell{
+      font-weight:800;
     }
 
     .money{
       font-weight:800;
-    }
-
-    .muted{
-      color:var(--muted);
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:5px;
-      padding:6px 9px;
-      border-radius:999px;
-      font-size:10px;
-      font-weight:800;
       white-space:nowrap;
     }
 
-    .badge:before{
+    .date{
+      color:#536159;
+      font-size:10px;
+      white-space:nowrap;
+    }
+
+    .status{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 9px;
+      border-radius:999px;
+      font-size:9px;
+      font-weight:800;
+      text-transform:capitalize;
+    }
+
+    .status::before{
       content:"";
-      width:5px;
-      height:5px;
+      width:6px;
+      height:6px;
       border-radius:50%;
       background:currentColor;
     }
 
-    .badge.active{
+    .status.active{
       background:var(--green-soft);
-      color:var(--green-dark);
+      color:#16824a;
     }
 
-    .badge.inactive{
-      background:#eef1f0;
-      color:#68746d;
+    .status.inactive{
+      background:#f0f2f1;
+      color:#66716c;
     }
 
-    .badge.suspended{
+    .status.suspended{
       background:var(--danger-soft);
-      color:var(--danger);
+      color:#c22e3d;
     }
 
-    .badge.new{
+    .type-badge{
+      display:inline-flex;
+      padding:5px 8px;
+      border-radius:8px;
       background:var(--blue-soft);
       color:var(--blue);
+      font-size:8px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.35px;
     }
 
-    .badge.returning{
-      background:var(--purple-soft);
-      color:var(--purple);
-    }
-
-    .row-actions{
+    .actions{
       display:flex;
-      align-items:center;
       gap:5px;
     }
 
-    .row-btn{
-      width:31px;
-      height:31px;
+    .action-btn{
+      width:32px;
+      height:32px;
       border:1px solid var(--border);
       background:#fff;
+      color:#647069;
       border-radius:9px;
       display:grid;
       place-items:center;
       font-size:12px;
-      color:#647169;
-      transition:.2s;
     }
 
-    .row-btn:hover{
+    .action-btn:hover{
       background:var(--surface-2);
       color:var(--text);
-      border-color:#cbd6cf;
     }
 
-    .row-btn.delete:hover{
-      color:var(--danger);
-      border-color:#efc9cd;
+    .action-btn.delete:hover{
       background:var(--danger-soft);
+      border-color:#f1c7cc;
+      color:var(--danger);
     }
+
+    /* =========================
+       EMPTY
+    ========================== */
 
     .empty{
-      padding:60px 20px;
+      padding:55px 20px;
       text-align:center;
-      color:var(--muted);
+      display:none;
+    }
+
+    .empty.show{
+      display:block;
     }
 
     .empty-icon{
-      width:55px;
-      height:55px;
-      border-radius:17px;
-      background:var(--surface-2);
+      width:58px;
+      height:58px;
+      border-radius:18px;
+      background:var(--green-soft);
+      color:var(--green-dark);
       display:grid;
       place-items:center;
-      margin:0 auto 12px;
-      font-size:22px;
+      margin:0 auto 14px;
+      font-size:23px;
     }
 
-    .empty strong{
-      display:block;
-      color:var(--text);
-      font-size:14px;
-      margin-bottom:4px;
+    .empty h3{
+      font-family:"Manrope",sans-serif;
+      font-size:16px;
+      margin-bottom:6px;
     }
 
-    .empty span{
+    .empty p{
+      color:var(--muted);
       font-size:11px;
     }
 
     /* =========================
        MOBILE CARDS
-    ========================= */
+    ========================== */
 
     .mobile-list{
       display:none;
       padding:12px;
     }
 
-    .customer-mobile-card{
+    .mobile-customer{
       border:1px solid var(--border);
       border-radius:16px;
       padding:14px;
-      margin-bottom:10px;
+      margin-bottom:9px;
       background:#fff;
     }
 
-    .mobile-card-top{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
+    .mobile-customer:last-child{
+      margin-bottom:0;
     }
 
-    .mobile-card-customer{
+    .mobile-customer-top{
       display:flex;
-      gap:10px;
       align-items:center;
+      gap:10px;
     }
 
-    .mobile-card-grid{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:9px;
-      margin-top:13px;
-      padding-top:13px;
-      border-top:1px solid #edf1ee;
+    .mobile-check{
+      margin-left:auto;
     }
 
-    .mobile-meta-label{
-      color:#89938d;
-      font-size:9px;
-      text-transform:uppercase;
-      letter-spacing:.6px;
+    .mobile-customer-info{
+      flex:1;
+      min-width:0;
+    }
+
+    .mobile-customer-name{
+      font-size:12px;
       font-weight:800;
     }
 
-    .mobile-meta-value{
-      color:var(--text);
-      font-size:11px;
-      font-weight:700;
+    .mobile-customer-id{
+      color:var(--muted);
+      font-size:9px;
+      margin-top:2px;
+      font-family:monospace;
+    }
+
+    .mobile-customer-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:8px;
+      margin-top:13px;
+    }
+
+    .mobile-meta{
+      padding:9px;
+      background:var(--surface-2);
+      border-radius:11px;
+    }
+
+    .mobile-meta span{
+      display:block;
+      color:var(--muted);
+      font-size:8px;
+      text-transform:uppercase;
+      font-weight:800;
+      letter-spacing:.5px;
+    }
+
+    .mobile-meta strong{
+      display:block;
       margin-top:3px;
+      font-size:10px;
     }
 
     .mobile-actions{
       display:flex;
       gap:7px;
-      margin-top:13px;
+      margin-top:12px;
     }
 
     .mobile-actions button{
       flex:1;
+      height:34px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:9px;
+      font-size:10px;
+      font-weight:800;
     }
 
     /* =========================
        PAGINATION
-    ========================= */
+    ========================== */
 
     .pagination{
       padding:14px 16px;
       border-top:1px solid var(--border);
       display:flex;
-      justify-content:space-between;
       align-items:center;
+      justify-content:space-between;
       gap:12px;
     }
 
-    .pagination-info{
+    .page-info{
       color:var(--muted);
-      font-size:11px;
+      font-size:10px;
     }
 
     .page-buttons{
       display:flex;
+      align-items:center;
       gap:5px;
     }
 
@@ -927,19 +1045,15 @@
       border:1px solid var(--border);
       background:#fff;
       border-radius:9px;
-      color:#657169;
-      font-size:11px;
-      font-weight:700;
-    }
-
-    .page-btn:hover{
-      background:var(--surface-2);
+      font-size:10px;
+      font-weight:800;
+      color:#58655e;
     }
 
     .page-btn.active{
       background:var(--green);
-      color:#fff;
       border-color:var(--green);
+      color:#fff;
     }
 
     .page-btn:disabled{
@@ -949,100 +1063,115 @@
 
     /* =========================
        FOOTER NOTE
-    ========================= */
+    ========================== */
 
     .footer-note{
-      margin-top:18px;
+      margin-top:14px;
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:12px;
-      color:#89948e;
-      font-size:10px;
-      padding:0 4px 25px;
+      padding:13px 16px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:14px;
+      color:var(--muted);
+      font-size:9px;
     }
 
-    .prototype-pill{
-      display:inline-flex;
+    .prototype{
+      display:flex;
       align-items:center;
-      gap:6px;
-      background:#eef2ef;
-      border:1px solid var(--border);
-      border-radius:999px;
-      padding:6px 9px;
-      font-weight:700;
+      gap:7px;
+    }
+
+    .prototype-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:#f0ad00;
     }
 
     /* =========================
        MODAL
-    ========================= */
+    ========================== */
 
-    .modal-overlay{
+    .modal-backdrop{
       position:fixed;
       inset:0;
-      background:rgba(4,10,7,.58);
+      background:rgba(4,12,7,.62);
       backdrop-filter:blur(8px);
+      z-index:2000;
       display:none;
       align-items:center;
       justify-content:center;
       padding:20px;
-      z-index:2000;
     }
 
-    .modal-overlay.show{
+    .modal-backdrop.show{
       display:flex;
     }
 
     .modal{
-      width:min(760px,100%);
-      max-height:90vh;
+      width:min(920px,100%);
+      max-height:calc(100vh - 40px);
       overflow:auto;
       background:#fff;
-      border-radius:23px;
-      box-shadow:0 30px 100px rgba(0,0,0,.2);
-    }
-
-    .modal.large{
-      width:min(900px,100%);
+      border-radius:24px;
+      box-shadow:0 30px 100px rgba(0,0,0,.25);
+      animation:modalIn .2s ease;
     }
 
     .modal.small{
-      width:min(440px,100%);
+      width:min(480px,100%);
     }
 
-    .modal-header{
-      padding:20px 22px;
+    @keyframes modalIn{
+      from{
+        opacity:0;
+        transform:translateY(12px) scale(.98);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+      }
+    }
+
+    .modal-head{
+      padding:19px 22px;
       border-bottom:1px solid var(--border);
       display:flex;
+      align-items:center;
       justify-content:space-between;
-      align-items:flex-start;
       gap:15px;
       position:sticky;
       top:0;
-      background:#fff;
-      z-index:3;
+      background:rgba(255,255,255,.96);
+      backdrop-filter:blur(10px);
+      z-index:2;
     }
 
     .modal-title{
       font-family:"Manrope",sans-serif;
       font-size:18px;
-      font-weight:800;
-      letter-spacing:-.4px;
+      letter-spacing:-.5px;
     }
 
     .modal-subtitle{
       color:var(--muted);
-      font-size:11px;
-      margin-top:4px;
+      font-size:10px;
+      margin-top:3px;
     }
 
-    .modal-close{
-      width:35px;
-      height:35px;
-      border-radius:10px;
+    .close-btn{
+      width:36px;
+      height:36px;
       border:1px solid var(--border);
       background:#fff;
-      color:#68746d;
+      border-radius:10px;
+      display:grid;
+      place-items:center;
+      color:#6c7771;
       font-size:16px;
     }
 
@@ -1050,94 +1179,14 @@
       padding:22px;
     }
 
-    .customer-profile{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      padding:15px;
-      border:1px solid var(--border);
-      background:var(--surface-2);
-      border-radius:17px;
-      margin-bottom:18px;
-    }
-
-    .profile-avatar{
-      width:58px;
-      height:58px;
-      border-radius:17px;
-      background:linear-gradient(135deg,#18a957,#0d713b);
-      display:grid;
-      place-items:center;
-      color:#fff;
-      font-size:16px;
-      font-weight:800;
-      flex:none;
-    }
-
-    .profile-name{
-      font-family:"Manrope",sans-serif;
-      font-weight:800;
-      font-size:16px;
-    }
-
-    .profile-email{
-      color:var(--muted);
-      font-size:11px;
-      margin-top:3px;
-    }
-
-    .profile-id{
-      color:var(--green-dark);
-      font-size:10px;
-      font-weight:800;
-      margin-top:4px;
-    }
-
-    .modal-summary{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-      margin-bottom:20px;
-    }
-
-    .summary-card{
-      border:1px solid var(--border);
-      border-radius:15px;
-      padding:14px;
-      background:#fff;
-    }
-
-    .summary-label{
-      color:var(--muted);
-      font-size:9px;
-      text-transform:uppercase;
-      letter-spacing:.7px;
-      font-weight:800;
-    }
-
-    .summary-value{
-      font-family:"Manrope",sans-serif;
-      font-weight:800;
-      font-size:17px;
-      margin-top:6px;
-    }
-
-    .summary-sub{
-      color:#89938d;
-      font-size:9px;
-      margin-top:2px;
-    }
-
     .form-grid{
       display:grid;
       grid-template-columns:repeat(2,1fr);
-      gap:14px;
+      gap:15px;
     }
 
     .field{
-      display:flex;
-      flex-direction:column;
-      gap:7px;
+      min-width:0;
     }
 
     .field.full{
@@ -1145,9 +1194,11 @@
     }
 
     .field label{
-      color:#4f5b54;
+      display:block;
       font-size:10px;
       font-weight:800;
+      color:#58655e;
+      margin-bottom:7px;
     }
 
     .field input,
@@ -1155,131 +1206,205 @@
     .field textarea{
       width:100%;
       border:1px solid var(--border);
-      border-radius:11px;
-      height:42px;
-      padding:0 12px;
-      outline:none;
       background:var(--surface-2);
+      border-radius:11px;
+      outline:none;
+      padding:11px 12px;
       color:var(--text);
-      font-size:12px;
+      font-size:11px;
+      transition:.2s ease;
+    }
+
+    .field input,
+    .field select{
+      height:42px;
     }
 
     .field textarea{
-      min-height:90px;
-      height:auto;
-      padding:11px 12px;
+      min-height:92px;
       resize:vertical;
-      line-height:1.55;
+      line-height:1.6;
     }
 
-    .field input[readonly]{
-      color:#7d8881;
-      background:#eef2ef;
+    .readonly{
+      background:#f0f3f1 !important;
+      color:#7b8680 !important;
+      cursor:not-allowed;
     }
 
-    .modal-footer{
+    .modal-foot{
       padding:16px 22px;
       border-top:1px solid var(--border);
       display:flex;
-      justify-content:space-between;
       align-items:center;
+      justify-content:space-between;
       gap:10px;
       position:sticky;
       bottom:0;
       background:#fff;
-      z-index:3;
     }
 
-    .modal-footer-left,
-    .modal-footer-right{
+    .modal-left-actions,
+    .modal-right-actions{
       display:flex;
       gap:8px;
-      align-items:center;
+      flex-wrap:wrap;
     }
 
     /* =========================
-       ORDER HISTORY
-    ========================= */
+       CUSTOMER DETAILS
+    ========================== */
+
+    .profile-head{
+      padding:22px;
+      background:
+        radial-gradient(circle at 85% 15%,rgba(24,169,87,.12),transparent 28%),
+        #f8faf9;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      gap:14px;
+    }
+
+    .profile-avatar{
+      width:62px;
+      height:62px;
+      border-radius:18px;
+      background:linear-gradient(135deg,#dff7e9,#bdebd0);
+      color:var(--green-dark);
+      display:grid;
+      place-items:center;
+      font-size:19px;
+      font-weight:800;
+      overflow:hidden;
+      flex:0 0 62px;
+    }
+
+    .profile-avatar img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .profile-main{
+      min-width:0;
+      flex:1;
+    }
+
+    .profile-name{
+      font-family:"Manrope",sans-serif;
+      font-size:20px;
+      font-weight:800;
+    }
+
+    .profile-contact{
+      margin-top:4px;
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .profile-status{
+      margin-left:auto;
+    }
+
+    .summary-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      padding:18px 22px 0;
+    }
+
+    .summary-card{
+      border:1px solid var(--border);
+      background:var(--surface-2);
+      border-radius:14px;
+      padding:13px;
+    }
+
+    .summary-card span{
+      display:block;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.5px;
+      font-size:8px;
+      font-weight:800;
+    }
+
+    .summary-card strong{
+      display:block;
+      margin-top:6px;
+      font-family:"Manrope",sans-serif;
+      font-size:17px;
+    }
+
+    .history{
+      padding:20px 22px;
+    }
 
     .history-title{
       font-family:"Manrope",sans-serif;
       font-size:14px;
       font-weight:800;
-      margin:22px 0 10px;
+      margin-bottom:11px;
     }
 
-    .history-list{
+    .history-table{
       border:1px solid var(--border);
-      border-radius:15px;
+      border-radius:13px;
       overflow:hidden;
     }
 
-    .history-item{
-      display:grid;
-      grid-template-columns:1fr 1.5fr 100px 100px;
-      gap:10px;
-      align-items:center;
-      padding:12px 14px;
-      border-bottom:1px solid #edf1ee;
-      font-size:11px;
-    }
-
-    .history-item:last-child{
-      border-bottom:none;
-    }
-
-    .history-id{
-      font-weight:800;
-    }
-
-    .history-website{
-      color:#4e5a53;
-      font-weight:600;
-    }
-
-    .history-date{
-      color:var(--muted);
-    }
-
-    .history-empty{
-      padding:25px;
-      text-align:center;
-      color:var(--muted);
-      font-size:11px;
+    .history-table table{
+      min-width:600px;
     }
 
     /* =========================
        CONFIRM
-    ========================= */
+    ========================== */
 
     .confirm-icon{
-      width:55px;
-      height:55px;
-      border-radius:17px;
-      display:grid;
-      place-items:center;
+      width:56px;
+      height:56px;
+      border-radius:18px;
       background:var(--danger-soft);
       color:var(--danger);
-      font-size:23px;
-      margin-bottom:14px;
+      display:grid;
+      place-items:center;
+      margin:0 auto 14px;
+      font-size:22px;
     }
 
-    .confirm-title{
+    .confirm-body{
+      text-align:center;
+      padding:28px 26px 22px;
+    }
+
+    .confirm-body h3{
       font-family:"Manrope",sans-serif;
       font-size:18px;
-      font-weight:800;
+      margin-bottom:7px;
     }
 
-    .confirm-text{
+    .confirm-body p{
       color:var(--muted);
-      font-size:12px;
-      line-height:1.65;
-      margin-top:7px;
+      font-size:11px;
+      line-height:1.7;
+    }
+
+    .confirm-actions{
+      display:flex;
+      gap:8px;
+      justify-content:center;
+      padding:0 22px 22px;
+    }
+
+    .confirm-actions button{
+      min-width:110px;
     }
 
     /* =========================
        TOAST
-    ========================= */
+    ========================== */
 
     .toast-wrap{
       position:fixed;
@@ -1293,81 +1418,106 @@
     }
 
     .toast{
-      min-width:270px;
+      min-width:250px;
       max-width:380px;
-      background:#102017;
+      padding:13px 15px;
+      background:#101713;
       color:#fff;
       border:1px solid rgba(255,255,255,.08);
-      box-shadow:0 20px 50px rgba(0,0,0,.2);
       border-radius:13px;
-      padding:12px 14px;
+      box-shadow:0 18px 45px rgba(0,0,0,.22);
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       gap:10px;
+      animation:toastIn .22s ease;
+      pointer-events:auto;
+    }
+
+    .toast.success{
+      border-left:3px solid #32cf77;
+    }
+
+    .toast.error{
+      border-left:3px solid #ff5362;
+    }
+
+    .toast.warning{
+      border-left:3px solid #f4bd42;
+    }
+
+    .toast-icon{
+      font-size:14px;
+    }
+
+    .toast-content{
+      min-width:0;
+    }
+
+    .toast-title{
       font-size:11px;
-      font-weight:600;
-      animation:toastIn .25s ease;
-    }
-
-    .toast.success .toast-mark{
-      color:#6fe29b;
-    }
-
-    .toast.error .toast-mark{
-      color:#ff8790;
-    }
-
-    .toast-mark{
-      font-size:16px;
       font-weight:800;
+    }
+
+    .toast-text{
+      margin-top:2px;
+      color:#aebbb3;
+      font-size:9px;
+      line-height:1.5;
     }
 
     @keyframes toastIn{
       from{
-        transform:translateY(10px);
         opacity:0;
+        transform:translateY(8px);
       }
       to{
-        transform:translateY(0);
         opacity:1;
+        transform:translateY(0);
       }
     }
 
     /* =========================
-       OVERLAY
-    ========================= */
+       MOBILE SIDEBAR
+    ========================== */
 
-    .mobile-overlay{
+    .overlay{
       position:fixed;
       inset:0;
-      background:rgba(0,0,0,.42);
+      background:rgba(0,0,0,.45);
       z-index:900;
       display:none;
     }
 
-    .mobile-overlay.show{
+    .overlay.show{
       display:block;
     }
 
     /* =========================
        RESPONSIVE
-    ========================= */
+    ========================== */
 
     @media(max-width:1250px){
-      .stats-grid{
+      .stats{
         grid-template-columns:repeat(3,1fr);
+      }
+    }
+
+    @media(max-width:1050px){
+      .hero-inner{
+        align-items:flex-start;
+        flex-direction:column;
       }
 
       .hero-side{
-        min-width:210px;
+        justify-content:flex-start;
       }
     }
 
     @media(max-width:900px){
       .sidebar{
         transform:translateX(-100%);
-        transition:.25s ease;
-        box-shadow:20px 0 60px rgba(0,0,0,.18);
+        transition:transform .25s ease;
+        box-shadow:20px 0 60px rgba(0,0,0,.2);
       }
 
       .sidebar.open{
@@ -1380,7 +1530,7 @@
       }
 
       .mobile-menu{
-        display:grid;
+        display:flex;
       }
 
       .topbar{
@@ -1388,63 +1538,11 @@
       }
 
       .content{
-        padding:18px;
+        padding:20px 17px 30px;
       }
 
-      .hero{
-        padding:23px;
-        flex-direction:column;
-        align-items:stretch;
-      }
-
-      .hero-side{
-        min-width:0;
-      }
-    }
-
-    @media(max-width:700px){
-      .top-actions .outline-btn.marketplace{
-        display:none;
-      }
-
-      .stats-grid{
+      .stats{
         grid-template-columns:repeat(2,1fr);
-        gap:10px;
-      }
-
-      .stat-card{
-        padding:15px;
-      }
-
-      .stat-value{
-        font-size:21px;
-      }
-
-      .section-card{
-        border-radius:17px;
-      }
-
-      .toolbar{
-        padding:12px;
-      }
-
-      .search-wrap{
-        flex-basis:100%;
-      }
-
-      .filter-select{
-        flex:1;
-        min-width:0;
-      }
-
-      .bulk-wrap{
-        flex-wrap:wrap;
-        width:100%;
-        padding-top:5px;
-      }
-
-      .bulk-wrap button{
-        flex:1;
       }
 
       .table-wrap{
@@ -1455,38 +1553,92 @@
         display:block;
       }
 
-      .pagination{
-        flex-direction:column;
-        align-items:stretch;
+      .section-card{
+        border-radius:17px;
+      }
+    }
+
+    @media(max-width:620px){
+      .topbar{
+        height:64px;
       }
 
-      .page-buttons{
+      .breadcrumb{
+        display:none;
+      }
+
+      .top-actions .outline-btn{
+        display:none;
+      }
+
+      .content{
+        padding:15px 12px 25px;
+      }
+
+      .hero{
+        padding:23px 19px;
+        border-radius:20px;
+      }
+
+      .hero h1{
+        font-size:25px;
+      }
+
+      .hero p{
+        font-size:11px;
+      }
+
+      .hero-side{
+        width:100%;
+      }
+
+      .hero-pill{
+        flex:1;
         justify-content:center;
       }
 
-      .modal-overlay{
-        padding:10px;
+      .stats{
+        grid-template-columns:repeat(2,1fr);
+        gap:9px;
       }
 
-      .modal{
-        max-height:94vh;
-        border-radius:19px;
+      .stat{
+        padding:13px;
+        border-radius:15px;
       }
 
-      .modal-body{
-        padding:17px;
+      .stat-value{
+        font-size:19px;
       }
 
-      .modal-header{
-        padding:17px;
+      .stat-label{
+        font-size:8px;
       }
 
-      .modal-footer{
-        padding:13px 17px;
+      .stat-note{
+        font-size:8px;
       }
 
-      .modal-footer-left .danger-btn{
-        display:none;
+      .toolbar{
+        padding:11px;
+      }
+
+      .search{
+        flex-basis:100%;
+      }
+
+      .filter-select{
+        flex:1;
+        min-width:0;
+      }
+
+      .toolbar-actions{
+        width:100%;
+        margin-left:0;
+      }
+
+      .toolbar-actions button{
+        flex:1;
       }
 
       .form-grid{
@@ -1497,100 +1649,63 @@
         grid-column:auto;
       }
 
-      .modal-summary{
-        grid-template-columns:repeat(3,1fr);
+      .modal-backdrop{
+        padding:8px;
       }
 
-      .summary-card{
-        padding:11px;
+      .modal{
+        max-height:calc(100vh - 16px);
+        border-radius:19px;
       }
 
-      .summary-value{
-        font-size:14px;
+      .modal-head,
+      .modal-body,
+      .modal-foot{
+        padding-left:16px;
+        padding-right:16px;
       }
 
-      .history-item{
-        grid-template-columns:1fr 1fr;
+      .modal-foot{
+        flex-direction:column;
+        align-items:stretch;
       }
 
-      .history-item > div:nth-child(3),
-      .history-item > div:nth-child(4){
-        text-align:left;
+      .modal-left-actions,
+      .modal-right-actions{
+        width:100%;
+      }
+
+      .modal-foot button{
+        flex:1;
+      }
+
+      .profile-head{
+        padding:17px;
+      }
+
+      .profile-status{
+        display:none;
+      }
+
+      .summary-grid{
+        padding-left:17px;
+        padding-right:17px;
+      }
+
+      .history{
+        padding-left:17px;
+        padding-right:17px;
       }
 
       .footer-note{
         flex-direction:column;
         align-items:flex-start;
       }
-    }
-
-    @media(max-width:460px){
-      .hero h1{
-        font-size:27px;
-      }
-
-      .stats-grid{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .stat-card:nth-child(5){
-        grid-column:1/-1;
-      }
-
-      .topbar{
-        height:68px;
-      }
-
-      .page-kicker{
-        display:none;
-      }
-
-      .page-title-mini{
-        font-size:14px;
-      }
-
-      .filter-select{
-        flex-basis:100%;
-      }
-
-      .customer-mobile-card{
-        padding:12px;
-      }
-
-      .modal-summary{
-        gap:6px;
-      }
-
-      .summary-card{
-        padding:9px;
-      }
-
-      .summary-label{
-        font-size:8px;
-      }
-
-      .summary-value{
-        font-size:13px;
-      }
-
-      .modal-footer{
-        flex-direction:column;
-        align-items:stretch;
-      }
-
-      .modal-footer-left,
-      .modal-footer-right{
-        width:100%;
-      }
-
-      .modal-footer-right button{
-        flex:1;
-      }
 
       .toast-wrap{
-        left:12px;
-        right:12px;
-        bottom:12px;
+        right:10px;
+        left:10px;
+        bottom:10px;
       }
 
       .toast{
@@ -1601,7 +1716,7 @@
 
     /* =========================
        PRINT
-    ========================= */
+    ========================== */
 
     @media print{
       @page{
@@ -1615,14 +1730,16 @@
 
       .sidebar,
       .topbar,
+      .hero,
       .toolbar,
-      .pagination,
+      .bulk-bar,
       .mobile-list,
+      .pagination,
       .footer-note,
-      .row-actions,
-      .modal-overlay,
-      .toast-wrap{
-        display:none!important;
+      .actions,
+      .toast-wrap,
+      .modal-backdrop{
+        display:none !important;
       }
 
       .main{
@@ -1635,40 +1752,17 @@
         max-width:none;
       }
 
-      .hero{
-        background:#fff;
-        color:#111;
-        box-shadow:none;
-        border:1px solid #ddd;
-        padding:18px;
+      .stats{
+        margin:0 0 15px;
       }
 
-      .hero p,
-      .hero-side-sub,
-      .hero-side-label{
-        color:#555;
-      }
-
-      .hero-side{
-        background:#f6f6f6;
-        border:1px solid #ddd;
-      }
-
-      .hero:after{
-        display:none;
-      }
-
-      .stats-grid{
-        grid-template-columns:repeat(5,1fr);
-      }
-
-      .stat-card,
       .section-card{
+        border:1px solid #ddd;
         box-shadow:none;
       }
 
       .table-wrap{
-        display:block!important;
+        display:block !important;
         overflow:visible;
       }
 
@@ -1676,8 +1770,9 @@
         min-width:0;
       }
 
-      .section-card{
-        margin-top:14px;
+      th,
+      td{
+        padding:7px;
       }
     }
   </style>
@@ -1689,131 +1784,123 @@
 
   <!-- =========================
        SIDEBAR
-  ========================= -->
+  ========================== -->
 
   <aside class="sidebar" id="sidebar">
 
-    <div class="brand">
-      <img
-        src="../logo.png"
-        class="brand-logo"
-        alt="Website Deals"
-        onerror="this.style.display='none'"
-      >
+    <div class="sidebar-top">
 
-      <div>
-        <div class="brand-name">Website Deals</div>
-        <div class="brand-sub">Admin Control Center</div>
+      <div class="brand">
+        <img
+          src="../logo.png"
+          alt="Website Deals"
+          class="brand-logo"
+          onerror="this.style.display='none'"
+        >
+
+        <div class="brand-text">
+          <div class="brand-title">Website Deals</div>
+          <div class="brand-sub">Admin Control Center</div>
+        </div>
       </div>
+
+      <div class="admin-mini">
+        <div class="admin-avatar" id="sidebarAvatar">SA</div>
+
+        <div class="admin-info">
+          <div class="admin-name" id="sidebarAdminName">
+            Super Admin
+          </div>
+
+          <div class="admin-role" id="sidebarAdminRole">
+            Super Admin
+          </div>
+        </div>
+      </div>
+
     </div>
 
-    <div class="nav-section">
+    <nav class="nav">
 
       <div class="nav-label">Marketplace</div>
 
       <a class="nav-item" href="dashboard.html">
         <span class="nav-icon">⌂</span>
-        <span>Dashboard</span>
+        Dashboard
       </a>
 
       <a class="nav-item" href="websites.html">
         <span class="nav-icon">▣</span>
-        <span>Websites</span>
+        Websites
       </a>
 
       <a class="nav-item" href="categories.html">
         <span class="nav-icon">◈</span>
-        <span>Categories</span>
+        Categories
       </a>
 
       <a class="nav-item" href="orders.html">
-        <span class="nav-icon">▤</span>
-        <span>Orders</span>
+        <span class="nav-icon">◫</span>
+        Orders
       </a>
 
       <a class="nav-item" href="payments.html">
         <span class="nav-icon">৳</span>
-        <span>Payments</span>
+        Payments
       </a>
 
       <a class="nav-item active" href="customers.html">
         <span class="nav-icon">♙</span>
-        <span>Customers</span>
+        Customers
       </a>
 
       <a class="nav-item" href="newsletter.html">
         <span class="nav-icon">✉</span>
-        <span>Newsletter</span>
+        Newsletter
       </a>
-
-    </div>
-
-    <div class="nav-section">
 
       <div class="nav-label">Reports</div>
 
       <a class="nav-item" href="reports.html">
-        <span class="nav-icon">◫</span>
-        <span>Reports</span>
+        <span class="nav-icon">▥</span>
+        Reports
       </a>
 
       <a class="nav-item" href="monthly-report.html">
         <span class="nav-icon">◷</span>
-        <span>Monthly Report</span>
+        Monthly Report
       </a>
 
-    </div>
-
-    <div class="nav-section">
-
-      <div class="nav-label">Administration</div>
+      <div class="nav-label">Restricted Controls</div>
 
       <a class="nav-item" href="admins.html">
-        <span class="nav-icon">♟</span>
-        <span>Admin Management</span>
+        <span class="nav-icon">♚</span>
+        Admin Management
       </a>
 
       <a class="nav-item" href="settings.html">
         <span class="nav-icon">⚙</span>
-        <span>System Settings</span>
+        System Settings
       </a>
 
-    </div>
+    </nav>
 
     <div class="sidebar-bottom">
 
-      <div class="admin-mini">
-
-        <div class="avatar-small" id="adminAvatar">SA</div>
-
-        <div style="min-width:0;">
-          <div class="admin-mini-name" id="adminName">Super Admin</div>
-          <div class="admin-mini-role" id="adminRole">Administrator</div>
-        </div>
-
-      </div>
-
-      <button
-        class="logout-btn"
-        type="button"
-        onclick="logout()"
-      >
-        ↪ &nbsp; Sign Out
+      <button class="logout-btn" id="logoutBtn">
+        <span>↪</span>
+        Sign Out
       </button>
 
     </div>
 
   </aside>
 
-  <div
-    class="mobile-overlay"
-    id="mobileOverlay"
-    onclick="closeSidebar()"
-  ></div>
+  <div class="overlay" id="overlay"></div>
 
   <!-- =========================
        MAIN
-  ========================= -->
+  ========================== -->
 
   <main class="main">
 
@@ -1822,53 +1909,34 @@
       <div class="topbar-left">
 
         <button
-          class="icon-btn mobile-menu"
-          type="button"
-          onclick="openSidebar()"
+          class="mobile-menu"
+          id="mobileMenuBtn"
           aria-label="Open menu"
         >
           ☰
         </button>
 
-        <div>
-          <div class="page-kicker">Admin / Marketplace</div>
-          <div class="page-title-mini">Customer Management</div>
+        <div class="breadcrumb">
+          Admin
+          <span>/</span>
+          <strong>Customers</strong>
         </div>
 
       </div>
 
       <div class="top-actions">
 
-        <button
-          class="outline-btn"
-          type="button"
-          onclick="refreshCustomers()"
-        >
-          ↻ <span>Refresh</span>
+        <button class="outline-btn" id="refreshBtn">
+          ↻ Refresh
         </button>
 
-        <button
-          class="outline-btn"
-          type="button"
-          onclick="printCustomers()"
-        >
-          ⎙ <span>Print</span>
+        <button class="outline-btn" id="printBtn">
+          ⎙ Print
         </button>
 
-        <button
-          class="outline-btn"
-          type="button"
-          onclick="exportCSV()"
-        >
-          ↓ <span>CSV</span>
+        <button class="primary-btn" id="marketplaceBtn">
+          Marketplace ↗
         </button>
-
-        <a
-          class="outline-btn marketplace"
-          href="../index.html"
-        >
-          ↗ <span>Marketplace</span>
-        </a>
 
       </div>
 
@@ -1878,42 +1946,39 @@
 
       <!-- =========================
            HERO
-      ========================= -->
+      ========================== -->
 
       <section class="hero">
 
-        <div class="hero-content">
+        <div class="hero-inner">
 
-          <span class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            Customer Intelligence
-          </span>
+          <div>
+            <div class="eyebrow">
+              Customer Relationship
+            </div>
 
-          <h1>Know your customers better.</h1>
+            <h1>
+              Know your customers better.
+            </h1>
 
-          <p>
-            Manage customer profiles, track order history, understand
-            spending activity and keep your marketplace relationships
-            organized from one premium workspace.
-          </p>
-
-        </div>
-
-        <div class="hero-side">
-
-          <div class="hero-side-label">
-            Customer Revenue
+            <p>
+              Manage customer profiles, order history, spending,
+              account status and customer activity from one clean
+              workspace.
+            </p>
           </div>
 
-          <div
-            class="hero-side-value"
-            id="heroRevenue"
-          >
-            ৳0
-          </div>
+          <div class="hero-side">
 
-          <div class="hero-side-sub">
-            Total paid-order revenue
+            <div class="hero-pill">
+              <span class="hero-dot"></span>
+              Customer Center
+            </div>
+
+            <div class="hero-pill">
+              <span>LocalStorage</span>
+            </div>
+
           </div>
 
         </div>
@@ -1922,106 +1987,219 @@
 
       <!-- =========================
            STATS
-      ========================= -->
+      ========================== -->
 
-      <section class="stats-grid">
+      <section class="stats">
 
-        <div class="stat-card">
-
+        <div class="stat">
           <div class="stat-top">
-            <span class="stat-label">Total Customers</span>
-            <span class="stat-icon">♙</span>
+            <div class="stat-label">Total Customers</div>
+            <div class="stat-icon">♙</div>
+          </div>
+          <div class="stat-value" id="statTotal">0</div>
+          <div class="stat-note">All customer profiles</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-top">
+            <div class="stat-label">Active Customers</div>
+            <div class="stat-icon">✓</div>
+          </div>
+          <div class="stat-value" id="statActive">0</div>
+          <div class="stat-note">Currently active</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-top">
+            <div class="stat-label">New Customers</div>
+            <div class="stat-icon">✦</div>
+          </div>
+          <div class="stat-value" id="statNew">0</div>
+          <div class="stat-note">Joined within 30 days</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-top">
+            <div class="stat-label">Customer Revenue</div>
+            <div class="stat-icon">৳</div>
+          </div>
+          <div class="stat-value" id="statRevenue">৳0</div>
+          <div class="stat-note">Paid order revenue</div>
+        </div>
+
+        <div class="stat">
+          <div class="stat-top">
+            <div class="stat-label">Returning</div>
+            <div class="stat-icon">↻</div>
+          </div>
+          <div class="stat-value" id="statReturning">0</div>
+          <div class="stat-note">2+ paid orders</div>
+        </div>
+
+      </section>
+
+      <!-- =========================
+           CUSTOMER LIST
+      ========================== -->
+
+      <section class="section-card">
+
+        <div class="toolbar">
+
+          <div class="search">
+            <span class="search-icon">⌕</span>
+
+            <input
+              type="search"
+              id="searchInput"
+              placeholder="Search name, email, phone or customer ID..."
+            >
           </div>
 
-          <div
-            class="stat-value"
-            id="statTotal"
-          >
-            0
-          </div>
+          <select class="filter-select" id="statusFilter">
+            <option value="all">All Status</option>
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="suspended">Suspended</option>
+          </select>
 
-          <div class="stat-note">
-            All customer profiles
+          <select class="filter-select" id="typeFilter">
+            <option value="all">All Customers</option>
+            <option value="new">New Customers</option>
+            <option value="returning">Returning</option>
+          </select>
+
+          <select class="filter-select" id="sortFilter">
+            <option value="newest">Newest First</option>
+            <option value="oldest">Oldest First</option>
+            <option value="spendingHigh">Spending: High → Low</option>
+            <option value="spendingLow">Spending: Low → High</option>
+            <option value="ordersHigh">Orders: High → Low</option>
+            <option value="ordersLow">Orders: Low → High</option>
+            <option value="name">Name A → Z</option>
+          </select>
+
+          <div class="toolbar-actions">
+
+            <button class="outline-btn" id="resetFiltersBtn">
+              Reset
+            </button>
+
+            <button class="outline-btn" id="exportBtn">
+              ↓ CSV
+            </button>
+
+            <button class="primary-btn" id="addCustomerBtn">
+              + Customer
+            </button>
+
           </div>
 
         </div>
 
-        <div class="stat-card">
+        <!-- BULK -->
 
-          <div class="stat-top">
-            <span class="stat-label">Active Customers</span>
-            <span class="stat-icon">✓</span>
+        <div class="bulk-bar" id="bulkBar">
+
+          <div class="bulk-count" id="bulkCount">
+            0 selected
           </div>
 
-          <div
-            class="stat-value"
-            id="statActive"
-          >
-            0
-          </div>
+          <button class="bulk-btn" id="bulkActivate">
+            Activate
+          </button>
 
-          <div class="stat-note">
-            Currently active
-          </div>
+          <button class="bulk-btn" id="bulkSuspend">
+            Suspend
+          </button>
+
+          <button class="bulk-btn danger" id="bulkDelete">
+            Delete
+          </button>
 
         </div>
 
-        <div class="stat-card">
+        <!-- DESKTOP TABLE -->
 
-          <div class="stat-top">
-            <span class="stat-label">New Customers</span>
-            <span class="stat-icon">+</span>
-          </div>
+        <div class="table-wrap" id="tableWrap">
 
-          <div
-            class="stat-value"
-            id="statNew"
-          >
-            0
-          </div>
+          <table>
 
-          <div class="stat-note">
-            Joined in last 30 days
-          </div>
+            <thead>
+              <tr>
 
-        </div>
+                <th style="width:35px;">
+                  <input
+                    type="checkbox"
+                    class="check"
+                    id="selectAll"
+                  >
+                </th>
 
-        <div class="stat-card">
+                <th>Customer</th>
+                <th>Contact</th>
+                <th>Orders</th>
+                <th>Total Spent</th>
+                <th>Last Order</th>
+                <th>Status</th>
+                <th>Joined</th>
+                <th>Actions</th>
 
-          <div class="stat-top">
-            <span class="stat-label">Returning</span>
-            <span class="stat-icon">↻</span>
-          </div>
+              </tr>
+            </thead>
 
-          <div
-            class="stat-value"
-            id="statReturning"
-          >
-            0
-          </div>
+            <tbody id="customerTableBody"></tbody>
 
-          <div class="stat-note">
-            More than one order
-          </div>
+          </table>
 
         </div>
 
-        <div class="stat-card">
+        <!-- MOBILE -->
 
-          <div class="stat-top">
-            <span class="stat-label">Total Revenue</span>
-            <span class="stat-icon">৳</span>
+        <div class="mobile-list" id="mobileList"></div>
+
+        <!-- EMPTY -->
+
+        <div class="empty" id="emptyState">
+
+          <div class="empty-icon">
+            ♙
           </div>
 
-          <div
-            class="stat-value"
-            id="statRevenue"
-          >
-            ৳0
+          <h3>No customers found</h3>
+
+          <p>
+            Try another search or clear your filters.
+          </p>
+
+        </div>
+
+        <!-- PAGINATION -->
+
+        <div class="pagination">
+
+          <div class="page-info" id="pageInfo">
+            Showing 0 customers
           </div>
 
-          <div class="stat-note">
-            Paid orders only
+          <div class="page-buttons">
+
+            <button
+              class="page-btn"
+              id="prevPage"
+            >
+              ‹
+            </button>
+
+            <div id="pageNumbers"></div>
+
+            <button
+              class="page-btn"
+              id="nextPage"
+            >
+              ›
+            </button>
+
           </div>
 
         </div>
@@ -2029,150 +2207,23 @@
       </section>
 
       <!-- =========================
-           CUSTOMER LIST
-      ========================= -->
-
-      <section class="section-card">
-
-        <div class="toolbar">
-
-          <div class="search-wrap">
-
-            <span class="search-icon">⌕</span>
-
-            <input
-              id="searchInput"
-              class="search-input"
-              type="search"
-              placeholder="Search by name, email, phone or customer ID..."
-              autocomplete="off"
-            >
-
-          </div>
-
-          <select
-            id="statusFilter"
-            class="filter-select"
-          >
-            <option value="all">All Status</option>
-            <option value="active">Active</option>
-            <option value="inactive">Inactive</option>
-            <option value="suspended">Suspended</option>
-          </select>
-
-          <select
-            id="typeFilter"
-            class="filter-select"
-          >
-            <option value="all">All Customers</option>
-            <option value="new">New Customers</option>
-            <option value="returning">Returning</option>
-          </select>
-
-          <select
-            id="sortFilter"
-            class="filter-select"
-          >
-            <option value="newest">Newest First</option>
-            <option value="oldest">Oldest First</option>
-            <option value="spendingHigh">Highest Spending</option>
-            <option value="spendingLow">Lowest Spending</option>
-            <option value="ordersHigh">Most Orders</option>
-            <option value="ordersLow">Fewest Orders</option>
-            <option value="nameAZ">Name A-Z</option>
-          </select>
-
-          <button
-            class="outline-btn"
-            type="button"
-            onclick="resetFilters()"
-          >
-            Reset
-          </button>
-
-          <div
-            class="bulk-wrap"
-            id="bulkWrap"
-          >
-
-            <span
-              class="bulk-count"
-              id="bulkCount"
-            >
-              0 selected
-            </span>
-
-            <button
-              class="outline-btn"
-              type="button"
-              onclick="bulkActivate()"
-            >
-              Activate
-            </button>
-
-            <button
-              class="outline-btn"
-              type="button"
-              onclick="bulkSuspend()"
-            >
-              Suspend
-            </button>
-
-            <button
-              class="outline-btn danger-btn"
-              type="button"
-              onclick="bulkDelete()"
-            >
-              Delete
-            </button>
-
-          </div>
-
-        </div>
-
-        <!-- Desktop -->
-
-        <div
-          class="table-wrap"
-          id="desktopTable"
-        ></div>
-
-        <!-- Mobile -->
-
-        <div
-          class="mobile-list"
-          id="mobileList"
-        ></div>
-
-        <!-- Pagination -->
-
-        <div class="pagination">
-
-          <div
-            class="pagination-info"
-            id="paginationInfo"
-          >
-            Showing 0 customers
-          </div>
-
-          <div
-            class="page-buttons"
-            id="pageButtons"
-          ></div>
-
-        </div>
-
-      </section>
+           FOOTER
+      ========================== -->
 
       <div class="footer-note">
 
-        <span>
-          Customer data is currently stored locally in this browser.
-        </span>
+        <div class="prototype">
+          <span class="prototype-dot"></span>
+          <span>
+            Prototype mode — customer data is currently stored in
+            browser LocalStorage.
+          </span>
+        </div>
 
-        <span class="prototype-pill">
-          ● Prototype / LocalStorage
-        </span>
+        <div>
+          Key:
+          <strong>websiteDealsCustomers</strong>
+        </div>
 
       </div>
 
@@ -2182,334 +2233,228 @@
 
 </div>
 
-<!-- =========================
-     CUSTOMER MODAL
-========================= -->
+<!-- =========================================================
+     CUSTOMER DETAILS / EDIT MODAL
+========================================================= -->
 
-<div
-  class="modal-overlay"
-  id="customerModal"
->
+<div class="modal-backdrop" id="customerModal">
 
-  <div class="modal large">
+  <div class="modal">
 
-    <div class="modal-header">
+    <div class="modal-head">
 
       <div>
-        <div
-          class="modal-title"
-          id="customerModalTitle"
-        >
+        <div class="modal-title" id="customerModalTitle">
           Customer Details
         </div>
 
-        <div
-          class="modal-subtitle"
-          id="customerModalSubtitle"
-        >
-          Review customer information and order history.
+        <div class="modal-subtitle">
+          View profile, edit information and review order history.
         </div>
       </div>
 
-      <button
-        class="modal-close"
-        type="button"
-        onclick="closeModal('customerModal')"
-      >
+      <button class="close-btn" data-close="customerModal">
         ×
       </button>
 
     </div>
 
-    <div class="modal-body">
+    <!-- PROFILE -->
 
-      <div class="customer-profile">
+    <div class="profile-head">
 
-        <div
-          class="profile-avatar"
-          id="profileAvatar"
-        >
-          CU
+      <div class="profile-avatar" id="profileAvatar">
+        --
+      </div>
+
+      <div class="profile-main">
+
+        <div class="profile-name" id="profileName">
+          Customer
         </div>
 
-        <div style="min-width:0;">
-
-          <div
-            class="profile-name"
-            id="profileName"
-          >
-            Customer
-          </div>
-
-          <div
-            class="profile-email"
-            id="profileEmail"
-          >
-            —
-          </div>
-
-          <div
-            class="profile-id"
-            id="profileId"
-          >
-            —
-          </div>
-
-        </div>
-
-        <div style="margin-left:auto;">
-          <span
-            class="badge active"
-            id="profileStatusBadge"
-          >
-            Active
-          </span>
+        <div class="profile-contact" id="profileContact">
+          —
         </div>
 
       </div>
 
-      <div class="modal-summary">
-
-        <div class="summary-card">
-
-          <div class="summary-label">Orders</div>
-
-          <div
-            class="summary-value"
-            id="modalOrders"
-          >
-            0
-          </div>
-
-          <div class="summary-sub">
-            Total orders
-          </div>
-
-        </div>
-
-        <div class="summary-card">
-
-          <div class="summary-label">Spent</div>
-
-          <div
-            class="summary-value"
-            id="modalSpent"
-          >
-            ৳0
-          </div>
-
-          <div class="summary-sub">
-            Paid orders
-          </div>
-
-        </div>
-
-        <div class="summary-card">
-
-          <div class="summary-label">Last Order</div>
-
-          <div
-            class="summary-value"
-            id="modalLastOrder"
-          >
-            —
-          </div>
-
-          <div class="summary-sub">
-            Latest activity
-          </div>
-
-        </div>
-
-      </div>
-
-      <form
-        id="customerForm"
-        onsubmit="saveCustomer(event)"
-      >
-
-        <input
-          type="hidden"
-          id="editCustomerKey"
-        >
-
-        <div class="form-grid">
-
-          <div class="field">
-
-            <label for="customerId">
-              Customer ID
-            </label>
-
-            <input
-              id="customerId"
-              type="text"
-              readonly
-            >
-
-          </div>
-
-          <div class="field">
-
-            <label for="customerStatus">
-              Status
-            </label>
-
-            <select id="customerStatus">
-
-              <option value="active">
-                Active
-              </option>
-
-              <option value="inactive">
-                Inactive
-              </option>
-
-              <option value="suspended">
-                Suspended
-              </option>
-
-            </select>
-
-          </div>
-
-          <div class="field">
-
-            <label for="customerName">
-              Full Name
-            </label>
-
-            <input
-              id="customerName"
-              type="text"
-              required
-              placeholder="Customer full name"
-            >
-
-          </div>
-
-          <div class="field">
-
-            <label for="customerEmail">
-              Email Address
-            </label>
-
-            <input
-              id="customerEmail"
-              type="email"
-              placeholder="customer@example.com"
-            >
-
-          </div>
-
-          <div class="field">
-
-            <label for="customerPhone">
-              Phone Number
-            </label>
-
-            <input
-              id="customerPhone"
-              type="text"
-              placeholder="+880 1XXXXXXXXX"
-            >
-
-          </div>
-
-          <div class="field">
-
-            <label for="customerJoined">
-              Joined Date
-            </label>
-
-            <input
-              id="customerJoined"
-              type="date"
-            >
-
-          </div>
-
-          <div class="field full">
-
-            <label for="customerAddress">
-              Address
-            </label>
-
-            <textarea
-              id="customerAddress"
-              placeholder="Customer address..."
-            ></textarea>
-
-          </div>
-
-          <div class="field full">
-
-            <label for="customerNote">
-              Internal Note
-            </label>
-
-            <textarea
-              id="customerNote"
-              placeholder="Add a private customer note..."
-            ></textarea>
-
-          </div>
-
-        </div>
-
-        <div class="history-title">
-          Order History
-        </div>
-
-        <div
-          class="history-list"
-          id="orderHistory"
-        ></div>
-
-        <div style="height:2px;"></div>
-
-      </form>
+      <div class="profile-status" id="profileStatus"></div>
 
     </div>
 
-    <div class="modal-footer">
+    <!-- SUMMARY -->
 
-      <div class="modal-footer-left">
+    <div class="summary-grid">
+
+      <div class="summary-card">
+        <span>Total Orders</span>
+        <strong id="profileOrders">0</strong>
+      </div>
+
+      <div class="summary-card">
+        <span>Total Spent</span>
+        <strong id="profileSpent">৳0</strong>
+      </div>
+
+      <div class="summary-card">
+        <span>Last Order</span>
+        <strong id="profileLastOrder">—</strong>
+      </div>
+
+    </div>
+
+    <!-- FORM -->
+
+    <div class="modal-body">
+
+      <div class="form-grid">
+
+        <div class="field">
+          <label>Customer ID</label>
+
+          <input
+            type="text"
+            id="customerId"
+            class="readonly"
+            readonly
+          >
+        </div>
+
+        <div class="field">
+          <label>Status</label>
+
+          <select id="customerStatus">
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="suspended">Suspended</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Full Name</label>
+
+          <input
+            type="text"
+            id="customerName"
+            placeholder="Customer full name"
+          >
+        </div>
+
+        <div class="field">
+          <label>Email Address</label>
+
+          <input
+            type="email"
+            id="customerEmail"
+            placeholder="customer@example.com"
+          >
+        </div>
+
+        <div class="field">
+          <label>Phone Number</label>
+
+          <input
+            type="text"
+            id="customerPhone"
+            placeholder="+880 1XXXXXXXXX"
+          >
+        </div>
+
+        <div class="field">
+          <label>Joined Date</label>
+
+          <input
+            type="date"
+            id="customerJoined"
+          >
+        </div>
+
+        <div class="field full">
+          <label>Address</label>
+
+          <input
+            type="text"
+            id="customerAddress"
+            placeholder="Customer address (optional)"
+          >
+        </div>
+
+        <div class="field full">
+          <label>Internal Note</label>
+
+          <textarea
+            id="customerNote"
+            placeholder="Add an internal note about this customer..."
+          ></textarea>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ORDER HISTORY -->
+
+    <div class="history">
+
+      <div class="history-title">
+        Order History
+      </div>
+
+      <div class="history-table">
+
+        <table>
+
+          <thead>
+            <tr>
+              <th>Order</th>
+              <th>Website</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+
+          <tbody id="historyBody"></tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+    <div class="modal-foot">
+
+      <div class="modal-left-actions">
 
         <button
           class="outline-btn danger-btn"
-          type="button"
           id="modalDeleteBtn"
-          onclick="deleteCurrentCustomer()"
         >
           Delete
         </button>
 
         <button
           class="outline-btn"
-          type="button"
-          id="modalToggleBtn"
-          onclick="toggleCurrentCustomer()"
+          id="modalStatusBtn"
         >
           Suspend
         </button>
 
       </div>
 
-      <div class="modal-footer-right">
+      <div class="modal-right-actions">
 
         <button
           class="outline-btn"
-          type="button"
-          onclick="closeModal('customerModal')"
+          data-close="customerModal"
         >
           Close
         </button>
 
         <button
           class="primary-btn"
-          type="button"
-          onclick="document.getElementById('customerForm').requestSubmit()"
+          id="saveCustomerBtn"
         >
           Save Customer
         </button>
@@ -2522,60 +2467,46 @@
 
 </div>
 
-<!-- =========================
-     DELETE CONFIRM
-========================= -->
+<!-- =========================================================
+     DELETE MODAL
+========================================================= -->
 
-<div
-  class="modal-overlay"
-  id="confirmModal"
->
+<div class="modal-backdrop" id="deleteModal">
 
   <div class="modal small">
 
-    <div class="modal-body">
+    <div class="confirm-body">
 
       <div class="confirm-icon">
         !
       </div>
 
-      <div class="confirm-title">
-        Delete customer?
-      </div>
+      <h3 id="deleteTitle">
+        Delete Customer?
+      </h3>
 
-      <div
-        class="confirm-text"
-        id="confirmText"
-      >
+      <p id="deleteText">
         This action cannot be undone.
-      </div>
+      </p>
 
     </div>
 
-    <div class="modal-footer">
+    <div class="confirm-actions">
 
-      <div></div>
+      <button
+        class="outline-btn"
+        data-close="deleteModal"
+      >
+        Cancel
+      </button>
 
-      <div class="modal-footer-right">
-
-        <button
-          class="outline-btn"
-          type="button"
-          onclick="closeModal('confirmModal')"
-        >
-          Cancel
-        </button>
-
-        <button
-          class="primary-btn"
-          style="background:var(--danger);border-color:var(--danger);"
-          type="button"
-          id="confirmDeleteBtn"
-        >
-          Delete Customer
-        </button>
-
-      </div>
+      <button
+        class="primary-btn"
+        style="background:var(--danger);border-color:var(--danger);"
+        id="confirmDeleteBtn"
+      >
+        Delete
+      </button>
 
     </div>
 
@@ -2583,1135 +2514,1793 @@
 
 </div>
 
-<!-- =========================
+<!-- =========================================================
      TOAST
-========================= -->
+========================================================= -->
 
-<div
-  class="toast-wrap"
-  id="toastWrap"
-></div>
-
+<div class="toast-wrap" id="toastWrap"></div>
 
 <script>
 /* =========================================================
    WEBSITE DEALS — CUSTOMER MANAGEMENT
-   LocalStorage Prototype
 ========================================================= */
 
-"use strict";
+(function(){
 
-/* =========================
-   AUTH
-========================= */
+  "use strict";
 
-const AUTH_KEY = "websiteDealsAdminAuth";
+  /* =========================
+     AUTH
+  ========================== */
 
-function getAdminSession(){
-  try{
-    const raw = sessionStorage.getItem(AUTH_KEY);
+  const AUTH_KEY = "websiteDealsAdminAuth";
 
-    if(!raw){
+  function getAdminSession(){
+
+    try{
+
+      const raw = sessionStorage.getItem(AUTH_KEY);
+
+      if(!raw){
+        return null;
+      }
+
+      const session = JSON.parse(raw);
+
+      if(
+        !session ||
+        session.authenticated !== true
+      ){
+        return null;
+      }
+
+      return session;
+
+    }catch(error){
+
       return null;
+
     }
 
-    const session = JSON.parse(raw);
+  }
 
-    if(!session || session.authenticated !== true){
-      return null;
+  const adminSession = getAdminSession();
+
+  if(!adminSession){
+
+    window.location.replace("login/");
+
+    return;
+
+  }
+
+  /* =========================
+     CONFIG
+  ========================== */
+
+  const CUSTOMER_KEY = "websiteDealsCustomers";
+  const ORDERS_KEY = "websiteDealsOrders";
+  const TRANSACTIONS_KEY = "websiteDealsTransactions";
+  const PAYMENT_TRANSACTIONS_KEY = "websiteDealsPaymentTransactions";
+
+  const PAGE_SIZE = 8;
+
+  /* =========================
+     STATE
+  ========================== */
+
+  let customers = [];
+  let orders = [];
+  let transactions = [];
+  let paymentTransactions = [];
+
+  let filteredCustomers = [];
+
+  let currentPage = 1;
+
+  let selectedIds = new Set();
+
+  let editingCustomerId = null;
+
+  let deleteTargetId = null;
+
+  /* =========================
+     ELEMENTS
+  ========================== */
+
+  const $ = id => document.getElementById(id);
+
+  const sidebar = $("sidebar");
+  const overlay = $("overlay");
+
+  const searchInput = $("searchInput");
+  const statusFilter = $("statusFilter");
+  const typeFilter = $("typeFilter");
+  const sortFilter = $("sortFilter");
+
+  const customerTableBody = $("customerTableBody");
+  const mobileList = $("mobileList");
+  const emptyState = $("emptyState");
+
+  const selectAll = $("selectAll");
+  const bulkBar = $("bulkBar");
+  const bulkCount = $("bulkCount");
+
+  const pageInfo = $("pageInfo");
+  const pageNumbers = $("pageNumbers");
+  const prevPage = $("prevPage");
+  const nextPage = $("nextPage");
+
+  /* =========================
+     HELPERS
+  ========================== */
+
+  function parseJSON(key, fallback){
+
+    try{
+
+      const raw = localStorage.getItem(key);
+
+      if(!raw){
+        return fallback;
+      }
+
+      const parsed = JSON.parse(raw);
+
+      return parsed;
+
+    }catch(error){
+
+      return fallback;
+
     }
 
-    return session;
-
-  }catch(error){
-    return null;
   }
-}
 
-const adminSession = getAdminSession();
+  function saveJSON(key, value){
 
-if(!adminSession){
-  window.location.replace("login/");
-}
+    try{
 
-/* =========================
-   STORAGE KEYS
-========================= */
+      localStorage.setItem(
+        key,
+        JSON.stringify(value)
+      );
 
-const CUSTOMER_KEY = "websiteDealsCustomers";
-const ORDERS_KEY = "websiteDealsOrders";
-const TRANSACTION_KEY = "websiteDealsTransactions";
-const PAYMENT_TRANSACTION_KEY = "websiteDealsPaymentTransactions";
+      return true;
 
-/* =========================
-   STATE
-========================= */
+    }catch(error){
 
-let customers = [];
-let orders = [];
-let transactions = [];
-let paymentTransactions = [];
+      showToast(
+        "Storage Error",
+        "Could not save data to LocalStorage.",
+        "error"
+      );
 
-let filteredCustomers = [];
-
-let currentPage = 1;
-
-const PAGE_SIZE = 8;
-
-let editingCustomerKey = null;
-
-let pendingDeleteKey = null;
-
-/* =========================
-   DEMO DATA
-========================= */
-
-const DEMO_CUSTOMERS = [
-  {
-    id:"CUS-1001",
-    name:"Nusrat Jahan",
-    email:"nusrat@example.com",
-    phone:"+880 1712-345678",
-    status:"active",
-    joined:"2026-09-12",
-    address:"Moulvibazar, Bangladesh",
-    note:"Interested in premium business websites."
-  },
-  {
-    id:"CUS-1002",
-    name:"Rahim Ahmed",
-    email:"rahim@example.com",
-    phone:"+880 1812-234567",
-    status:"active",
-    joined:"2026-08-25",
-    address:"Dhaka, Bangladesh",
-    note:"Repeat customer."
-  },
-  {
-    id:"CUS-1003",
-    name:"Sadia Islam",
-    email:"sadia@example.com",
-    phone:"+880 1912-456789",
-    status:"active",
-    joined:"2026-09-22",
-    address:"Sylhet, Bangladesh",
-    note:"Requested restaurant website."
-  },
-  {
-    id:"CUS-1004",
-    name:"Tanvir Hasan",
-    email:"tanvir@example.com",
-    phone:"+880 1612-667788",
-    status:"suspended",
-    joined:"2026-07-19",
-    address:"Chattogram, Bangladesh",
-    note:"Account temporarily suspended."
-  },
-  {
-    id:"CUS-1005",
-    name:"Mahi Rahman",
-    email:"mahi@example.com",
-    phone:"+880 1512-778899",
-    status:"active",
-    joined:"2026-09-28",
-    address:"Dhaka, Bangladesh",
-    note:"New customer."
-  },
-  {
-    id:"CUS-1006",
-    name:"Arif Chowdhury",
-    email:"arif@example.com",
-    phone:"+880 1711-998877",
-    status:"active",
-    joined:"2026-06-08",
-    address:"Rajshahi, Bangladesh",
-    note:"Business owner."
-  },
-  {
-    id:"CUS-1007",
-    name:"Farhana Akter",
-    email:"farhana@example.com",
-    phone:"+880 1811-889900",
-    status:"inactive",
-    joined:"2026-05-15",
-    address:"Khulna, Bangladesh",
-    note:"No recent activity."
-  },
-  {
-    id:"CUS-1008",
-    name:"Imran Hossain",
-    email:"imran@example.com",
-    phone:"+880 1911-223344",
-    status:"active",
-    joined:"2026-08-01",
-    address:"Mymensingh, Bangladesh",
-    note:"Interested in monthly website plan."
-  }
-];
-
-/* =========================
-   DEMO ORDERS
-========================= */
-
-const DEMO_ORDERS = [
-  {
-    id:"WD-1028",
-    customerId:"CUS-1001",
-    customer:"Nusrat Jahan",
-    customerEmail:"nusrat@example.com",
-    customerPhone:"+880 1712-345678",
-    website:"Corporate Pro",
-    category:"Business",
-    amount:8500,
-    orderStatus:"completed",
-    paymentStatus:"paid",
-    paymentMethod:"bKash",
-    createdAt:"2026-09-12"
-  },
-  {
-    id:"WD-1029",
-    customerId:"CUS-1002",
-    customer:"Rahim Ahmed",
-    customerEmail:"rahim@example.com",
-    customerPhone:"+880 1812-234567",
-    website:"Creative Studio",
-    category:"Agency",
-    amount:6500,
-    orderStatus:"completed",
-    paymentStatus:"paid",
-    paymentMethod:"Nagad",
-    createdAt:"2026-08-28"
-  },
-  {
-    id:"WD-1030",
-    customerId:"CUS-1002",
-    customer:"Rahim Ahmed",
-    customerEmail:"rahim@example.com",
-    customerPhone:"+880 1812-234567",
-    website:"Starter Monthly",
-    category:"Monthly",
-    amount:325,
-    orderStatus:"completed",
-    paymentStatus:"paid",
-    paymentMethod:"bKash",
-    createdAt:"2026-09-18"
-  },
-  {
-    id:"WD-1031",
-    customerId:"CUS-1003",
-    customer:"Sadia Islam",
-    customerEmail:"sadia@example.com",
-    customerPhone:"+880 1912-456789",
-    website:"Tasty Bites",
-    category:"Restaurant",
-    amount:7200,
-    orderStatus:"processing",
-    paymentStatus:"paid",
-    paymentMethod:"bKash",
-    createdAt:"2026-09-23"
-  },
-  {
-    id:"WD-1032",
-    customerId:"CUS-1004",
-    customer:"Tanvir Hasan",
-    customerEmail:"tanvir@example.com",
-    customerPhone:"+880 1612-667788",
-    website:"ShopEasy Store",
-    category:"E-commerce",
-    amount:9200,
-    orderStatus:"cancelled",
-    paymentStatus:"cancelled",
-    paymentMethod:"Bank Transfer",
-    createdAt:"2026-07-22"
-  },
-  {
-    id:"WD-1033",
-    customerId:"CUS-1005",
-    customer:"Mahi Rahman",
-    customerEmail:"mahi@example.com",
-    customerPhone:"+880 1512-778899",
-    website:"Personal Folio",
-    category:"Portfolio",
-    amount:4800,
-    orderStatus:"pending",
-    paymentStatus:"pending",
-    paymentMethod:"bKash",
-    createdAt:"2026-09-28"
-  },
-  {
-    id:"WD-1034",
-    customerId:"CUS-1006",
-    customer:"Arif Chowdhury",
-    customerEmail:"arif@example.com",
-    customerPhone:"+880 1711-998877",
-    website:"Biz Launch",
-    category:"Business",
-    amount:7600,
-    orderStatus:"completed",
-    paymentStatus:"paid",
-    paymentMethod:"Bank Transfer",
-    createdAt:"2026-08-11"
-  },
-  {
-    id:"WD-1035",
-    customerId:"CUS-1007",
-    customer:"Farhana Akter",
-    customerEmail:"farhana@example.com",
-    customerPhone:"+880 1811-889900",
-    website:"Cafe Corner",
-    category:"Restaurant",
-    amount:5400,
-    orderStatus:"completed",
-    paymentStatus:"paid",
-    paymentMethod:"Nagad",
-    createdAt:"2026-06-02"
-  },
-  {
-    id:"WD-1036",
-    customerId:"CUS-1008",
-    customer:"Imran Hossain",
-    customerEmail:"imran@example.com",
-    customerPhone:"+880 1911-223344",
-    website:"Starter Monthly",
-    category:"Monthly",
-    amount:325,
-    orderStatus:"completed",
-    paymentStatus:"paid",
-    paymentMethod:"bKash",
-    createdAt:"2026-08-03"
-  }
-];
-
-/* =========================
-   STORAGE HELPERS
-========================= */
-
-function readArray(key){
-  try{
-    const raw = localStorage.getItem(key);
-
-    if(!raw){
-      return [];
-    }
-
-    const parsed = JSON.parse(raw);
-
-    return Array.isArray(parsed) ? parsed : [];
-
-  }catch(error){
-    return [];
-  }
-}
-
-function saveArray(key,data){
-  localStorage.setItem(key,JSON.stringify(data));
-}
-
-function hasStoredData(key){
-  try{
-    const raw = localStorage.getItem(key);
-
-    if(!raw){
       return false;
+
     }
 
-    const parsed = JSON.parse(raw);
-
-    return Array.isArray(parsed) && parsed.length > 0;
-
-  }catch(error){
-    return false;
-  }
-}
-
-/* =========================
-   NORMALIZATION
-========================= */
-
-function normalizeStatus(value){
-  const s = String(value || "").trim().toLowerCase();
-
-  if(
-    s === "suspended" ||
-    s === "blocked" ||
-    s === "banned"
-  ){
-    return "suspended";
   }
 
-  if(
-    s === "inactive" ||
-    s === "disabled" ||
-    s === "deactivated"
-  ){
-    return "inactive";
-  }
+  function escapeHTML(value){
 
-  return "active";
-}
-
-function normalizeOrderStatus(value){
-  const s = String(value || "").trim().toLowerCase();
-
-  if(
-    s.includes("cancel") ||
-    s.includes("failed")
-  ){
-    return "cancelled";
-  }
-
-  if(
-    s.includes("complete") ||
-    s.includes("deliver") ||
-    s.includes("success")
-  ){
-    return "completed";
-  }
-
-  if(
-    s.includes("process")
-  ){
-    return "processing";
-  }
-
-  return "pending";
-}
-
-function normalizePaymentStatus(value){
-  const s = String(value || "").trim().toLowerCase();
-
-  if(
-    s === "paid" ||
-    s === "completed" ||
-    s === "success" ||
-    s === "successful" ||
-    s === "succeeded"
-  ){
-    return "paid";
-  }
-
-  if(
-    s === "cancelled" ||
-    s === "canceled" ||
-    s === "failed" ||
-    s === "refunded" ||
-    s === "refund"
-  ){
-    return s.includes("refund") ? "refunded" : "cancelled";
-  }
-
-  return "pending";
-}
-
-function normalizeDate(value){
-  if(value === null || value === undefined){
-    return "";
-  }
-
-  const date = new Date(value);
-
-  if(Number.isNaN(date.getTime())){
-    return String(value);
-  }
-
-  return date.toISOString().slice(0,10);
-}
-
-function normalizeCustomer(raw,index){
-  raw = raw || {};
-
-  return {
-    id:
-      raw.id ||
-      raw.customerId ||
-      raw.customer_id ||
-      `CUS-${1001 + index}`,
-
-    name:
-      raw.name ||
-      raw.customerName ||
-      raw.fullName ||
-      raw.customer ||
-      "Unnamed Customer",
-
-    email:
-      raw.email ||
-      raw.customerEmail ||
-      raw.emailAddress ||
-      "",
-
-    phone:
-      raw.phone ||
-      raw.customerPhone ||
-      raw.mobile ||
-      raw.mobileNumber ||
-      "",
-
-    status:normalizeStatus(
-      raw.status ||
-      raw.customerStatus
-    ),
-
-    joined:normalizeDate(
-      raw.joined ||
-      raw.joinedAt ||
-      raw.createdAt ||
-      raw.created_at ||
-      raw.date
-    ),
-
-    address:
-      raw.address ||
-      "",
-
-    note:
-      raw.note ||
-      raw.notes ||
-      "",
-
-    avatar:
-      raw.avatar ||
-      raw.photo ||
-      raw.image ||
-      ""
-  };
-}
-
-function normalizeOrder(raw,index){
-  raw = raw || {};
-
-  return {
-    id:
-      raw.id ||
-      raw.orderId ||
-      raw.order_id ||
-      raw.transactionId ||
-      `WD-${1028 + index}`,
-
-    customerId:
-      raw.customerId ||
-      raw.customer_id ||
-      raw.userId ||
-      "",
-
-    customer:
-      raw.customer ||
-      raw.customerName ||
-      raw.fullName ||
-      raw.name ||
-      "",
-
-    customerEmail:
-      raw.customerEmail ||
-      raw.email ||
-      "",
-
-    customerPhone:
-      raw.customerPhone ||
-      raw.phone ||
-      raw.mobile ||
-      "",
-
-    website:
-      raw.website ||
-      raw.websiteName ||
-      raw.product ||
-      raw.productName ||
-      "",
-
-    category:
-      raw.category ||
-      raw.categoryName ||
-      "",
-
-    amount:Number(
-      raw.amount ??
-      raw.total ??
-      raw.price ??
-      raw.paidAmount ??
-      0
-    ) || 0,
-
-    orderStatus:normalizeOrderStatus(
-      raw.orderStatus ||
-      raw.status
-    ),
-
-    paymentStatus:normalizePaymentStatus(
-      raw.paymentStatus ||
-      raw.payment_status ||
-      raw.status
-    ),
-
-    paymentMethod:
-      raw.paymentMethod ||
-      raw.method ||
-      raw.gateway ||
-      raw.type ||
-      "",
-
-    createdAt:normalizeDate(
-      raw.createdAt ||
-      raw.created_at ||
-      raw.date ||
-      raw.timestamp ||
-      raw.updatedAt
-    )
-  };
-}
-
-/* =========================
-   CUSTOMER KEY
-========================= */
-
-function customerKey(customer){
-  const email = String(customer.email || "")
-    .trim()
-    .toLowerCase();
-
-  if(email){
-    return "email:" + email;
-  }
-
-  const phone = String(customer.phone || "")
-    .replace(/\s+/g,"")
-    .trim();
-
-  if(phone){
-    return "phone:" + phone;
-  }
-
-  const id = String(customer.id || "")
-    .trim()
-    .toLowerCase();
-
-  if(id){
-    return "id:" + id;
-  }
-
-  return "name:" +
-    String(customer.name || "")
-      .trim()
-      .toLowerCase();
-}
-
-/* =========================
-   INIT DATA
-========================= */
-
-function loadData(){
-
-  customers = readArray(CUSTOMER_KEY)
-    .map((item,index) => normalizeCustomer(item,index));
-
-  orders = readArray(ORDERS_KEY)
-    .map((item,index) => normalizeOrder(item,index));
-
-  transactions = readArray(TRANSACTION_KEY);
-
-  paymentTransactions = readArray(
-    PAYMENT_TRANSACTION_KEY
-  );
-
-  /*
-    If there is no customer/order/transaction data
-    at all, use demo customers and demo orders.
-  */
-
-  const hasAnyData =
-    customers.length > 0 ||
-    orders.length > 0 ||
-    transactions.length > 0 ||
-    paymentTransactions.length > 0;
-
-  if(!hasAnyData){
-
-    customers = DEMO_CUSTOMERS
-      .map((item,index) => normalizeCustomer(item,index));
-
-    orders = DEMO_ORDERS
-      .map((item,index) => normalizeOrder(item,index));
-
-  }
-
-  /*
-    If customer records are empty but orders exist,
-    derive customer profiles from orders.
-  */
-
-  if(customers.length === 0 && orders.length > 0){
-    customers = deriveCustomersFromOrders(orders);
-  }
-
-  enrichCustomers();
-
-}
-
-/* =========================
-   DERIVE CUSTOMERS
-========================= */
-
-function deriveCustomersFromOrders(orderList){
-
-  const map = new Map();
-
-  orderList.forEach((order,index) => {
-
-    const rawCustomer = {
-      id:order.customerId,
-      name:order.customer,
-      email:order.customerEmail,
-      phone:order.customerPhone,
-      status:"active",
-      joined:order.createdAt
-    };
-
-    const normalized =
-      normalizeCustomer(rawCustomer,index);
-
-    const key = customerKey(normalized);
-
-    if(!key){
-      return;
+    if(value === null || value === undefined){
+      return "";
     }
 
-    if(!map.has(key)){
-      map.set(key,normalized);
-    }
+    return String(value)
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
 
-  });
+  }
 
-  return Array.from(map.values());
+  function escapeCSV(value){
 
-}
-
-/* =========================
-   ENRICH CUSTOMER DATA
-========================= */
-
-function enrichCustomers(){
-
-  customers = customers.map(customer => {
-
-    const key = customerKey(customer);
-
-    const relatedOrders = orders.filter(order =>
-      orderMatchesCustomer(order,customer,key)
+    const string = String(
+      value === null || value === undefined
+        ? ""
+        : value
     );
 
-    const paidOrders = relatedOrders.filter(order =>
-      normalizePaymentStatus(order.paymentStatus) === "paid"
-    );
+    return '"' + string.replace(/"/g,'""') + '"';
 
-    const totalSpent = paidOrders.reduce(
-      (sum,order) => sum + Number(order.amount || 0),
-      0
-    );
-
-    const dates = relatedOrders
-      .map(order => normalizeDate(order.createdAt))
-      .filter(Boolean)
-      .sort();
-
-    const lastOrder =
-      dates.length ? dates[dates.length - 1] : "";
-
-    return {
-      ...customer,
-      totalOrders:relatedOrders.length,
-      totalSpent,
-      lastOrder
-    };
-
-  });
-
-}
-
-/* =========================
-   MATCH CUSTOMER
-========================= */
-
-function orderMatchesCustomer(order,customer,key){
-
-  const customerEmail =
-    String(customer.email || "")
-      .trim()
-      .toLowerCase();
-
-  const orderEmail =
-    String(order.customerEmail || "")
-      .trim()
-      .toLowerCase();
-
-  if(customerEmail && orderEmail){
-    return customerEmail === orderEmail;
   }
 
-  const customerPhone =
-    String(customer.phone || "")
-      .replace(/\s+/g,"");
+  function numberValue(value){
 
-  const orderPhone =
-    String(order.customerPhone || "")
-      .replace(/\s+/g,"");
-
-  if(customerPhone && orderPhone){
-    return customerPhone === orderPhone;
-  }
-
-  const customerId =
-    String(customer.id || "")
-      .trim()
-      .toLowerCase();
-
-  const orderCustomerId =
-    String(order.customerId || "")
-      .trim()
-      .toLowerCase();
-
-  if(customerId && orderCustomerId){
-    return customerId === orderCustomerId;
-  }
-
-  const customerName =
-    String(customer.name || "")
-      .trim()
-      .toLowerCase();
-
-  const orderName =
-    String(order.customer || "")
-      .trim()
-      .toLowerCase();
-
-  return !!customerName &&
-    !!orderName &&
-    customerName === orderName;
-}
-
-/* =========================
-   DATE HELPERS
-========================= */
-
-function formatDate(value){
-
-  if(!value){
-    return "—";
-  }
-
-  const date = new Date(value);
-
-  if(Number.isNaN(date.getTime())){
-    return String(value);
-  }
-
-  return date.toLocaleDateString(
-    "en-GB",
-    {
-      day:"2-digit",
-      month:"short",
-      year:"numeric"
+    if(value === null || value === undefined || value === ""){
+      return 0;
     }
-  );
-}
 
-function isNewCustomer(customer){
+    if(typeof value === "number"){
+      return Number.isFinite(value) ? value : 0;
+    }
 
-  if(!customer.joined){
-    return false;
+    let clean = String(value)
+      .replace(/৳/g,"")
+      .replace(/,/g,"")
+      .replace(/[^\d.-]/g,"");
+
+    const parsed = Number(clean);
+
+    return Number.isFinite(parsed) ? parsed : 0;
+
   }
 
-  const joined =
-    new Date(customer.joined);
+  function formatBDT(value){
 
-  if(Number.isNaN(joined.getTime())){
-    return false;
-  }
+    const amount = numberValue(value);
 
-  const now = new Date();
-
-  const diff =
-    now.getTime() - joined.getTime();
-
-  const days =
-    diff / (1000 * 60 * 60 * 24);
-
-  return days >= 0 && days <= 30;
-}
-
-/* =========================
-   MONEY
-========================= */
-
-function formatBDT(value){
-
-  const amount =
-    Number(value || 0);
-
-  return "৳" +
-    amount.toLocaleString(
+    return "৳" + amount.toLocaleString(
       "en-BD",
       {
         maximumFractionDigits:0
       }
     );
-}
 
-/* =========================
-   ESCAPE HTML
-========================= */
+  }
 
-function escapeHTML(value){
+  function formatDate(value){
 
-  return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
+    if(!value){
+      return "—";
+    }
 
-/* =========================
-   INITIALS
-========================= */
+    const date = new Date(value);
 
-function initials(name){
+    if(Number.isNaN(date.getTime())){
+      return "—";
+    }
 
-  const parts =
-    String(name || "Customer")
+    return date.toLocaleDateString(
+      "en-GB",
+      {
+        day:"2-digit",
+        month:"short",
+        year:"numeric"
+      }
+    );
+
+  }
+
+  function formatInputDate(value){
+
+    if(!value){
+      return "";
+    }
+
+    const date = new Date(value);
+
+    if(Number.isNaN(date.getTime())){
+      return "";
+    }
+
+    const y = date.getFullYear();
+    const m = String(date.getMonth()+1).padStart(2,"0");
+    const d = String(date.getDate()).padStart(2,"0");
+
+    return y + "-" + m + "-" + d;
+
+  }
+
+  function timestamp(value){
+
+    if(!value){
+      return 0;
+    }
+
+    const date = new Date(value);
+
+    const time = date.getTime();
+
+    return Number.isNaN(time) ? 0 : time;
+
+  }
+
+  function initials(name){
+
+    const text = String(name || "Customer")
       .trim()
       .split(/\s+/)
       .filter(Boolean);
 
-  if(parts.length === 1){
-    return parts[0]
-      .slice(0,2)
-      .toUpperCase();
+    if(!text.length){
+      return "CU";
+    }
+
+    if(text.length === 1){
+      return text[0].slice(0,2).toUpperCase();
+    }
+
+    return (
+      text[0].charAt(0) +
+      text[1].charAt(0)
+    ).toUpperCase();
+
   }
 
-  return (
-    parts[0][0] +
-    parts[parts.length - 1][0]
-  ).toUpperCase();
-}
+  function normalizeEmail(value){
 
-/* =========================
-   FILTERING
-========================= */
-
-function applyFilters(){
-
-  const search =
-    document.getElementById("searchInput")
-      .value
+    return String(value || "")
       .trim()
       .toLowerCase();
 
-  const status =
-    document.getElementById("statusFilter").value;
+  }
 
-  const type =
-    document.getElementById("typeFilter").value;
+  function normalizePhone(value){
 
-  const sort =
-    document.getElementById("sortFilter").value;
+    return String(value || "")
+      .replace(/\s+/g,"")
+      .replace(/-/g,"")
+      .trim();
 
-  filteredCustomers =
-    customers.filter(customer => {
+  }
 
-      const searchable = [
-        customer.id,
-        customer.name,
-        customer.email,
-        customer.phone
-      ]
-      .join(" ")
+  function customerKey(data){
+
+    const email = normalizeEmail(
+      data.email ||
+      data.customerEmail
+    );
+
+    if(email){
+      return "email:" + email;
+    }
+
+    const phone = normalizePhone(
+      data.phone ||
+      data.customerPhone ||
+      data.mobile
+    );
+
+    if(phone){
+      return "phone:" + phone;
+    }
+
+    const id = String(
+      data.id ||
+      data.customerId ||
+      ""
+    ).trim();
+
+    if(id){
+      return "id:" + id.toLowerCase();
+    }
+
+    const name = String(
+      data.name ||
+      data.customerName ||
+      data.fullName ||
+      "customer"
+    )
+      .trim()
       .toLowerCase();
 
-      if(
-        search &&
-        !searchable.includes(search)
-      ){
-        return false;
-      }
+    return "name:" + name;
 
-      if(
-        status !== "all" &&
-        customer.status !== status
-      ){
-        return false;
-      }
+  }
 
-      if(type === "new" && !isNewCustomer(customer)){
-        return false;
-      }
+  function normalizeStatus(value){
 
-      if(
-        type === "returning" &&
-        Number(customer.totalOrders || 0) < 2
-      ){
-        return false;
-      }
+    const status = String(
+      value || ""
+    ).trim().toLowerCase();
 
+    if(
+      status === "suspended" ||
+      status === "blocked"
+    ){
+      return "suspended";
+    }
+
+    if(
+      status === "inactive" ||
+      status === "disabled"
+    ){
+      return "inactive";
+    }
+
+    return "active";
+
+  }
+
+  function normalizeOrderStatus(value){
+
+    const status = String(
+      value || ""
+    ).trim().toLowerCase();
+
+    if(
+      status.includes("cancel") ||
+      status.includes("failed")
+    ){
+      return "cancelled";
+    }
+
+    if(
+      status.includes("complete") ||
+      status.includes("deliver")
+    ){
+      return "completed";
+    }
+
+    if(
+      status.includes("process")
+    ){
+      return "processing";
+    }
+
+    if(
+      status.includes("pending") ||
+      status.includes("new")
+    ){
+      return "pending";
+    }
+
+    return status || "pending";
+
+  }
+
+  function normalizePaymentStatus(value){
+
+    const status = String(
+      value || ""
+    ).trim().toLowerCase();
+
+    if(
+      status === "paid" ||
+      status === "completed" ||
+      status === "success" ||
+      status === "successful" ||
+      status === "succeeded"
+    ){
+      return "paid";
+    }
+
+    if(
+      status === "pending" ||
+      status === "processing" ||
+      status === "unpaid"
+    ){
+      return "pending";
+    }
+
+    if(
+      status === "cancelled" ||
+      status === "canceled" ||
+      status === "failed"
+    ){
+      return "cancelled";
+    }
+
+    if(
+      status === "refund" ||
+      status === "refunded"
+    ){
+      return "refunded";
+    }
+
+    return status || "pending";
+
+  }
+
+  function isPaid(order){
+
+    const paymentStatus = normalizePaymentStatus(
+      order.paymentStatus ||
+      order.payment_status ||
+      order.transactionStatus ||
+      order.status
+    );
+
+    if(paymentStatus === "paid"){
       return true;
+    }
+
+    const orderStatus = String(
+      order.orderStatus ||
+      ""
+    ).toLowerCase();
+
+    if(
+      orderStatus === "paid" ||
+      orderStatus === "completed"
+    ){
+      return true;
+    }
+
+    return false;
+
+  }
+
+  function getOrderDate(order){
+
+    return (
+      order.date ||
+      order.createdAt ||
+      order.created_at ||
+      order.timestamp ||
+      order.updatedAt ||
+      order.updated_at ||
+      ""
+    );
+
+  }
+
+  function getOrderCustomerData(order){
+
+    return {
+
+      name:
+        order.customerName ||
+        order.customer ||
+        order.fullName ||
+        order.name ||
+        "",
+
+      email:
+        order.customerEmail ||
+        order.email ||
+        "",
+
+      phone:
+        order.customerPhone ||
+        order.phone ||
+        order.mobile ||
+        "",
+
+      id:
+        order.customerId ||
+        order.customer_id ||
+        ""
+
+    };
+
+  }
+
+  function getOrderAmount(order){
+
+    return numberValue(
+      order.amount ??
+      order.total ??
+      order.price ??
+      order.paidAmount ??
+      order.paid_amount ??
+      0
+    );
+
+  }
+
+  function getOrderWebsite(order){
+
+    return (
+      order.websiteName ||
+      order.website ||
+      order.productName ||
+      order.product ||
+      order.title ||
+      "Website"
+    );
+
+  }
+
+  /* =========================
+     ADMIN IDENTITY
+  ========================== */
+
+  function setupAdminIdentity(){
+
+    const name =
+      adminSession.name ||
+      adminSession.email ||
+      "Super Admin";
+
+    const role =
+      adminSession.role ||
+      "Super Admin";
+
+    $("sidebarAdminName").textContent = name;
+    $("sidebarAdminRole").textContent = String(role);
+
+    $("sidebarAvatar").textContent =
+      initials(name);
+
+  }
+
+  /* =========================
+     LOAD DATA
+  ========================== */
+
+  function loadSourceData(){
+
+    const rawCustomers = parseJSON(
+      CUSTOMER_KEY,
+      []
+    );
+
+    orders = parseJSON(
+      ORDERS_KEY,
+      []
+    );
+
+    transactions = parseJSON(
+      TRANSACTIONS_KEY,
+      []
+    );
+
+    paymentTransactions = parseJSON(
+      PAYMENT_TRANSACTIONS_KEY,
+      []
+    );
+
+    if(!Array.isArray(orders)){
+      orders = [];
+    }
+
+    if(!Array.isArray(transactions)){
+      transactions = [];
+    }
+
+    if(!Array.isArray(paymentTransactions)){
+      paymentTransactions = [];
+    }
+
+    const customerSource =
+      Array.isArray(rawCustomers)
+        ? rawCustomers
+        : [];
+
+    /*
+      If explicit customer records exist,
+      use them first.
+    */
+
+    if(customerSource.length){
+
+      customers = customerSource.map(
+        normalizeCustomerRecord
+      );
+
+      /*
+        Enrich explicit customer records
+        using order history.
+      */
+
+      enrichCustomersFromOrders();
+
+      return;
+
+    }
+
+    /*
+      If customer storage is empty but orders
+      exist, derive customer profiles.
+    */
+
+    if(
+      orders.length ||
+      transactions.length ||
+      paymentTransactions.length
+    ){
+
+      customers = deriveCustomers();
+
+      return;
+
+    }
+
+    /*
+      Absolutely no customer/order/payment data:
+      use demo customers.
+    */
+
+    customers = getDemoCustomers();
+
+  }
+
+  /* =========================
+     NORMALIZE CUSTOMER
+  ========================== */
+
+  function normalizeCustomerRecord(customer){
+
+    const joined =
+      customer.joined ||
+      customer.joinedAt ||
+      customer.createdAt ||
+      customer.created_at ||
+      customer.date ||
+      "";
+
+    const normalized = {
+
+      id:
+        customer.id ||
+        customer.customerId ||
+        "",
+
+      name:
+        customer.name ||
+        customer.customerName ||
+        customer.fullName ||
+        "Unnamed Customer",
+
+      email:
+        customer.email ||
+        customer.customerEmail ||
+        "",
+
+      phone:
+        customer.phone ||
+        customer.customerPhone ||
+        customer.mobile ||
+        "",
+
+      status:
+        normalizeStatus(
+          customer.status
+        ),
+
+      joined: joined,
+
+      lastOrder:
+        customer.lastOrder ||
+        customer.lastOrderDate ||
+        "",
+
+      totalOrders:
+        numberValue(
+          customer.totalOrders
+        ),
+
+      totalSpent:
+        numberValue(
+          customer.totalSpent
+        ),
+
+      note:
+        customer.note ||
+        "",
+
+      address:
+        customer.address ||
+        "",
+
+      avatar:
+        customer.avatar ||
+        customer.photo ||
+        customer.image ||
+        "",
+
+      source:
+        customer.source ||
+        "customer"
+
+    };
+
+    if(!normalized.id){
+
+      normalized.id =
+        generateCustomerId(
+          normalized.name,
+          normalized.email,
+          normalized.phone
+        );
+
+    }
+
+    return normalized;
+
+  }
+
+  /* =========================
+     CUSTOMER ID
+  ========================== */
+
+  function generateCustomerId(
+    name,
+    email,
+    phone
+  ){
+
+    const source =
+      String(
+        email ||
+        phone ||
+        name ||
+        Date.now()
+      )
+      .replace(/[^a-zA-Z0-9]/g,"")
+      .slice(0,6)
+      .toUpperCase();
+
+    const random =
+      Math.floor(
+        1000 +
+        Math.random() * 8999
+      );
+
+    return "CUS-" + source + random;
+
+  }
+
+  /* =========================
+     DERIVE CUSTOMERS
+  ========================== */
+
+  function deriveCustomers(){
+
+    const map = new Map();
+
+    function addCustomer(data, order){
+
+      const name =
+        data.name ||
+        "Unnamed Customer";
+
+      const email =
+        data.email || "";
+
+      const phone =
+        data.phone || "";
+
+      const key =
+        customerKey({
+          name,
+          email,
+          phone,
+          id:data.id
+        });
+
+      if(!map.has(key)){
+
+        map.set(
+          key,
+          {
+
+            id:
+              data.id ||
+              generateCustomerId(
+                name,
+                email,
+                phone
+              ),
+
+            name,
+            email,
+            phone,
+
+            status:"active",
+
+            joined:
+              getOrderDate(order) ||
+              new Date().toISOString(),
+
+            lastOrder:"",
+            totalOrders:0,
+            totalSpent:0,
+
+            note:"",
+            address:"",
+            avatar:"",
+
+            source:"derived"
+
+          }
+        );
+
+      }
+
+      const customer = map.get(key);
+
+      const orderDate =
+        getOrderDate(order);
+
+      if(
+        orderDate &&
+        (
+          !customer.joined ||
+          timestamp(orderDate) <
+          timestamp(customer.joined)
+        )
+      ){
+
+        customer.joined = orderDate;
+
+      }
+
+      if(
+        orderDate &&
+        (
+          !customer.lastOrder ||
+          timestamp(orderDate) >
+          timestamp(customer.lastOrder)
+        )
+      ){
+
+        customer.lastOrder =
+          orderDate;
+
+      }
+
+      customer.totalOrders += 1;
+
+      if(isPaid(order)){
+
+        customer.totalSpent +=
+          getOrderAmount(order);
+
+      }
+
+    }
+
+    orders.forEach(order => {
+
+      const data =
+        getOrderCustomerData(order);
+
+      if(
+        data.name ||
+        data.email ||
+        data.phone ||
+        data.id
+      ){
+
+        addCustomer(
+          data,
+          order
+        );
+
+      }
 
     });
 
-  filteredCustomers.sort((a,b) => {
+    /*
+      Also derive from transactions when
+      there are no usable customer details
+      in orders.
+    */
 
-    switch(sort){
+    transactions.forEach(transaction => {
 
-      case "oldest":
-        return compareDates(
-          a.joined,
-          b.joined
-        );
+      const data = {
 
-      case "spendingHigh":
-        return Number(b.totalSpent || 0) -
-          Number(a.totalSpent || 0);
+        name:
+          transaction.customerName ||
+          transaction.customer ||
+          transaction.fullName ||
+          transaction.name ||
+          "",
 
-      case "spendingLow":
-        return Number(a.totalSpent || 0) -
-          Number(b.totalSpent || 0);
+        email:
+          transaction.customerEmail ||
+          transaction.email ||
+          "",
 
-      case "ordersHigh":
-        return Number(b.totalOrders || 0) -
-          Number(a.totalOrders || 0);
+        phone:
+          transaction.customerPhone ||
+          transaction.phone ||
+          transaction.mobile ||
+          "",
 
-      case "ordersLow":
-        return Number(a.totalOrders || 0) -
-          Number(b.totalOrders || 0);
+        id:
+          transaction.customerId ||
+          transaction.customer_id ||
+          ""
 
-      case "nameAZ":
-        return String(a.name || "")
-          .localeCompare(
-            String(b.name || "")
+      };
+
+      if(
+        data.name ||
+        data.email ||
+        data.phone ||
+        data.id
+      ){
+
+        const fakeOrder = {
+
+          date:
+            transaction.date ||
+            transaction.createdAt ||
+            transaction.created_at ||
+            transaction.timestamp,
+
+          amount:
+            transaction.amount ??
+            transaction.total ??
+            transaction.price ??
+            0,
+
+          paymentStatus:
+            transaction.status ||
+            transaction.paymentStatus ||
+            "pending"
+
+        };
+
+        /*
+          Only add transaction-derived customer
+          when customer isn't already represented
+          by an order.
+        */
+
+        const key =
+          customerKey(data);
+
+        if(!map.has(key)){
+
+          addCustomer(
+            data,
+            fakeOrder
           );
 
-      case "newest":
-      default:
-        return compareDates(
-          b.joined,
-          a.joined
-        );
+        }
+
+      }
+
+    });
+
+    paymentTransactions.forEach(transaction => {
+
+      const data = {
+
+        name:
+          transaction.customerName ||
+          transaction.customer ||
+          transaction.fullName ||
+          transaction.name ||
+          "",
+
+        email:
+          transaction.customerEmail ||
+          transaction.email ||
+          "",
+
+        phone:
+          transaction.customerPhone ||
+          transaction.phone ||
+          transaction.mobile ||
+          "",
+
+        id:
+          transaction.customerId ||
+          transaction.customer_id ||
+          ""
+
+      };
+
+      if(
+        data.name ||
+        data.email ||
+        data.phone ||
+        data.id
+      ){
+
+        const key =
+          customerKey(data);
+
+        if(!map.has(key)){
+
+          const fakeOrder = {
+
+            date:
+              transaction.date ||
+              transaction.createdAt ||
+              transaction.timestamp,
+
+            amount:
+              transaction.amount ??
+              transaction.total ??
+              transaction.price ??
+              0,
+
+            paymentStatus:
+              transaction.status ||
+              transaction.paymentStatus ||
+              "pending"
+
+          };
+
+          addCustomer(
+            data,
+            fakeOrder
+          );
+
+        }
+
+      }
+
+    });
+
+    return Array.from(map.values());
+
+  }
+
+  /* =========================
+     ENRICH EXPLICIT CUSTOMERS
+  ========================== */
+
+  function enrichCustomersFromOrders(){
+
+    customers.forEach(customer => {
+
+      const key =
+        customerKey(customer);
+
+      const relatedOrders =
+        orders.filter(order => {
+
+          const data =
+            getOrderCustomerData(order);
+
+          return customerMatches(
+            customer,
+            data
+          );
+
+        });
+
+      if(!relatedOrders.length){
+        return;
+      }
+
+      let totalOrders = 0;
+      let totalSpent = 0;
+      let lastOrder = "";
+
+      relatedOrders.forEach(order => {
+
+        totalOrders++;
+
+        if(isPaid(order)){
+
+          totalSpent +=
+            getOrderAmount(order);
+
+        }
+
+        const date =
+          getOrderDate(order);
+
+        if(
+          date &&
+          (
+            !lastOrder ||
+            timestamp(date) >
+            timestamp(lastOrder)
+          )
+        ){
+
+          lastOrder = date;
+
+        }
+
+      });
+
+      /*
+        Explicit customer values can be preserved,
+        but calculated values are more reliable.
+      */
+
+      customer.totalOrders =
+        totalOrders;
+
+      customer.totalSpent =
+        totalSpent;
+
+      customer.lastOrder =
+        lastOrder ||
+        customer.lastOrder ||
+        "";
+
+      if(
+        !customer.joined &&
+        relatedOrders.length
+      ){
+
+        const dates =
+          relatedOrders
+            .map(getOrderDate)
+            .filter(Boolean)
+            .sort(
+              (a,b) =>
+                timestamp(a) -
+                timestamp(b)
+            );
+
+        customer.joined =
+          dates[0] || "";
+
+      }
+
+    });
+
+  }
+
+  /* =========================
+     MATCH CUSTOMER
+  ========================== */
+
+  function customerMatches(
+    customer,
+    data
+  ){
+
+    const customerEmail =
+      normalizeEmail(
+        customer.email
+      );
+
+    const dataEmail =
+      normalizeEmail(
+        data.email
+      );
+
+    if(
+      customerEmail &&
+      dataEmail
+    ){
+
+      return customerEmail === dataEmail;
+
     }
 
-  });
+    const customerPhone =
+      normalizePhone(
+        customer.phone
+      );
 
-  currentPage = 1;
+    const dataPhone =
+      normalizePhone(
+        data.phone
+      );
 
-  renderCustomers();
-  updateStats();
-  updateBulkUI();
+    if(
+      customerPhone &&
+      dataPhone
+    ){
 
-}
+      return customerPhone === dataPhone;
 
-/* =========================
-   DATE SORT
-========================= */
+    }
 
-function compareDates(a,b){
+    if(
+      customer.id &&
+      data.id
+    ){
 
-  const da =
-    new Date(a || "1970-01-01").getTime();
+      return String(customer.id) ===
+        String(data.id);
 
-  const db =
-    new Date(b || "1970-01-01").getTime();
+    }
 
-  return da - db;
-}
+    const customerName =
+      String(customer.name || "")
+        .trim()
+        .toLowerCase();
 
-/* =========================
-   RENDER
-========================= */
+    const dataName =
+      String(data.name || "")
+        .trim()
+        .toLowerCase();
 
-function renderCustomers(){
+    return Boolean(
+      customerName &&
+      dataName &&
+      customerName === dataName
+    );
 
-  const start =
-    (currentPage - 1) * PAGE_SIZE;
+  }
 
-  const pageCustomers =
-    filteredCustomers.slice(
+  /* =========================
+     DEMO CUSTOMERS
+  ========================== */
+
+  function getDemoCustomers(){
+
+    const now =
+      new Date();
+
+    const daysAgo = days => {
+
+      const d =
+        new Date(now);
+
+      d.setDate(
+        d.getDate() - days
+      );
+
+      return d.toISOString();
+
+    };
+
+    return [
+
+      {
+        id:"CUS-1001",
+        name:"Nusrat Jahan",
+        email:"nusrat@example.com",
+        phone:"+8801711000001",
+        status:"active",
+        joined:daysAgo(12),
+        lastOrder:daysAgo(2),
+        totalOrders:3,
+        totalSpent:19500,
+        note:"Interested in premium business websites.",
+        address:"Moulvibazar, Bangladesh",
+        avatar:"",
+        source:"demo"
+      },
+
+      {
+        id:"CUS-1002",
+        name:"Rahim Ahmed",
+        email:"rahim@example.com",
+        phone:"+8801711000002",
+        status:"active",
+        joined:daysAgo(48),
+        lastOrder:daysAgo(8),
+        totalOrders:2,
+        totalSpent:12900,
+        note:"",
+        address:"Dhaka, Bangladesh",
+        avatar:"",
+        source:"demo"
+      },
+
+      {
+        id:"CUS-1003",
+        name:"Sadia Islam",
+        email:"sadia@example.com",
+        phone:"+8801711000003",
+        status:"active",
+        joined:daysAgo(76),
+        lastOrder:daysAgo(17),
+        totalOrders:1,
+        totalSpent:6500,
+        note:"",
+        address:"Sylhet, Bangladesh",
+        avatar:"",
+        source:"demo"
+      },
+
+      {
+        id:"CUS-1004",
+        name:"Tanvir Hasan",
+        email:"tanvir@example.com",
+        phone:"+8801711000004",
+        status:"suspended",
+        joined:daysAgo(105),
+        lastOrder:daysAgo(41),
+        totalOrders:4,
+        totalSpent:28600,
+        note:"Account temporarily suspended.",
+        address:"Chattogram, Bangladesh",
+        avatar:"",
+        source:"demo"
+      },
+
+      {
+        id:"CUS-1005",
+        name:"Mahi Rahman",
+        email:"mahi@example.com",
+        phone:"+8801711000005",
+        status:"active",
+        joined:daysAgo(7),
+        lastOrder:daysAgo(3),
+        totalOrders:1,
+        totalSpent:8500,
+        note:"",
+        address:"Dhaka, Bangladesh",
+        avatar:"",
+        source:"demo"
+      },
+
+      {
+        id:"CUS-1006",
+        name:"Arif Chowdhury",
+        email:"arif@example.com",
+        phone:"+8801711000006",
+        status:"inactive",
+        joined:daysAgo(160),
+        lastOrder:daysAgo(95),
+        totalOrders:1,
+        totalSpent:4500,
+        note:"",
+        address:"Rajshahi, Bangladesh",
+        avatar:"",
+        source:"demo"
+      },
+
+      {
+        id:"CUS-1007",
+        name:"Farhana Akter",
+        email:"farhana@example.com",
+        phone:"+8801711000007",
+        status:"active",
+        joined:daysAgo(22),
+        lastOrder:daysAgo(4),
+        totalOrders:5,
+        totalSpent:34750,
+        note:"Returning customer.",
+        address:"Sylhet, Bangladesh",
+        avatar:"",
+        source:"demo"
+      },
+
+      {
+        id:"CUS-1008",
+        name:"Imran Hossain",
+        email:"imran@example.com",
+        phone:"+8801711000008",
+        status:"active",
+        joined:daysAgo(210),
+        lastOrder:daysAgo(67),
+        totalOrders:2,
+        totalSpent:10900,
+        note:"",
+        address:"Cumilla, Bangladesh",
+        avatar:"",
+        source:"demo"
+      }
+
+    ];
+
+  }
+
+  /* =========================
+     CUSTOMER ORDERS
+  ========================== */
+
+  function getCustomerOrders(customer){
+
+    return orders
+      .filter(order => {
+
+        return customerMatches(
+          customer,
+          getOrderCustomerData(order)
+        );
+
+      })
+      .sort(
+        (a,b) =>
+          timestamp(getOrderDate(b)) -
+          timestamp(getOrderDate(a))
+      );
+
+  }
+
+  /* =========================
+     APPLY FILTERS
+  ========================== */
+
+  function applyFilters(){
+
+    const search =
+      String(
+        searchInput.value || ""
+      )
+      .trim()
+      .toLowerCase();
+
+    const status =
+      statusFilter.value;
+
+    const type =
+      typeFilter.value;
+
+    const sort =
+      sortFilter.value;
+
+    filteredCustomers =
+      customers.filter(customer => {
+
+        const searchable = [
+
+          customer.id,
+          customer.name,
+          customer.email,
+          customer.phone,
+          customer.address
+
+        ]
+        .join(" ")
+        .toLowerCase();
+
+        if(
+          search &&
+          !searchable.includes(search)
+        ){
+
+          return false;
+
+        }
+
+        if(
+          status !== "all" &&
+          customer.status !== status
+        ){
+
+          return false;
+
+        }
+
+        const isNew =
+          isNewCustomer(customer);
+
+        const isReturning =
+          Number(customer.totalOrders || 0) >= 2;
+
+        if(
+          type === "new" &&
+          !isNew
+        ){
+
+          return false;
+
+        }
+
+        if(
+          type === "returning" &&
+          !isReturning
+        ){
+
+          return false;
+
+        }
+
+        return true;
+
+      });
+
+    filteredCustomers.sort(
+      (a,b) => {
+
+        switch(sort){
+
+          case "oldest":
+            return (
+              timestamp(a.joined) -
+              timestamp(b.joined)
+            );
+
+          case "spendingHigh":
+            return (
+              numberValue(b.totalSpent) -
+              numberValue(a.totalSpent)
+            );
+
+          case "spendingLow":
+            return (
+              numberValue(a.totalSpent) -
+              numberValue(b.totalSpent)
+            );
+
+          case "ordersHigh":
+            return (
+              numberValue(b.totalOrders) -
+              numberValue(a.totalOrders)
+            );
+
+          case "ordersLow":
+            return (
+              numberValue(a.totalOrders) -
+              numberValue(b.totalOrders)
+            );
+
+          case "name":
+            return String(a.name)
+              .localeCompare(
+                String(b.name)
+              );
+
+          case "newest":
+          default:
+            return (
+              timestamp(b.joined) -
+              timestamp(a.joined)
+            );
+
+        }
+
+      }
+    );
+
+    currentPage = 1;
+
+    render();
+
+  }
+
+  /* =========================
+     NEW CUSTOMER
+  ========================== */
+
+  function isNewCustomer(customer){
+
+    const joined =
+      timestamp(customer.joined);
+
+    if(!joined){
+      return false;
+    }
+
+    const thirtyDays =
+      30 * 24 * 60 * 60 * 1000;
+
+    return (
+      Date.now() - joined <=
+      thirtyDays
+    );
+
+  }
+
+  /* =========================
+     RENDER
+  ========================== */
+
+  function render(){
+
+    renderStats();
+
+    renderTable();
+
+    renderMobile();
+
+    renderPagination();
+
+    renderBulk();
+
+  }
+
+  /* =========================
+     STATS
+  ========================== */
+
+  function renderStats(){
+
+    const total =
+      customers.length;
+
+    const active =
+      customers.filter(
+        c => c.status === "active"
+      ).length;
+
+    const fresh =
+      customers.filter(
+        isNewCustomer
+      ).length;
+
+    const returning =
+      customers.filter(
+        c =>
+          numberValue(c.totalOrders) >= 2
+      ).length;
+
+    const revenue =
+      customers.reduce(
+        (sum,c) =>
+          sum + numberValue(c.totalSpent),
+        0
+      );
+
+    $("statTotal").textContent =
+      total.toLocaleString();
+
+    $("statActive").textContent =
+      active.toLocaleString();
+
+    $("statNew").textContent =
+      fresh.toLocaleString();
+
+    $("statRevenue").textContent =
+      formatBDT(revenue);
+
+    $("statReturning").textContent =
+      returning.toLocaleString();
+
+  }
+
+  /* =========================
+     PAGED DATA
+  ========================== */
+
+  function getPagedCustomers(){
+
+    const start =
+      (currentPage - 1) *
+      PAGE_SIZE;
+
+    return filteredCustomers.slice(
       start,
       start + PAGE_SIZE
     );
 
-  renderDesktop(pageCustomers);
-  renderMobile(pageCustomers);
-  renderPagination();
+  }
 
-}
+  /* =========================
+     CUSTOMER ROW
+  ========================== */
 
-/* =========================
-   DESKTOP TABLE
-========================= */
+  function customerAvatarHTML(customer, className){
 
-function renderDesktop(list){
+    const cls =
+      className ||
+      "customer-avatar";
 
-  const container =
-    document.getElementById("desktopTable");
+    if(customer.avatar){
 
-  if(!list.length){
+      return `
+        <div class="${cls}">
+          <img
+            src="${escapeHTML(customer.avatar)}"
+            alt=""
+            onerror="this.parentElement.innerHTML='${escapeHTML(initials(customer.name))}'"
+          >
+        </div>
+      `;
 
-    container.innerHTML = `
-      <div class="empty">
-        <div class="empty-icon">♙</div>
-        <strong>No customers found</strong>
-        <span>Try changing your search or filters.</span>
+    }
+
+    return `
+      <div class="${cls}">
+        ${escapeHTML(initials(customer.name))}
       </div>
     `;
 
-    return;
   }
 
-  let html = `
-    <table>
-      <thead>
-        <tr>
+  function statusHTML(status){
 
-          <th style="width:40px;">
-            <input
-              class="check"
-              type="checkbox"
-              id="selectAll"
-              onchange="toggleSelectAll(this.checked)"
-            >
-          </th>
+    const normalized =
+      normalizeStatus(status);
 
-          <th>Customer</th>
-          <th>Contact</th>
-          <th>Orders</th>
-          <th>Total Spent</th>
-          <th>Last Order</th>
-          <th>Status</th>
-          <th>Joined</th>
-          <th>Actions</th>
+    return `
+      <span class="status ${normalized}">
+        ${escapeHTML(normalized)}
+      </span>
+    `;
 
-        </tr>
-      </thead>
+  }
 
-      <tbody>
-  `;
+  function renderTable(){
 
-  list.forEach(customer => {
+    const page =
+      getPagedCustomers();
 
-    const key =
-      escapeHTML(customerKey(customer));
+    customerTableBody.innerHTML = "";
 
-    const type =
-      Number(customer.totalOrders || 0) >= 2
-        ? "returning"
-        : "new";
+    if(!page.length){
 
-    html += `
-      <tr>
+      emptyState.classList.add("show");
+
+      return;
+
+    }
+
+    emptyState.classList.remove("show");
+
+    page.forEach(customer => {
+
+      const tr =
+        document.createElement("tr");
+
+      const selected =
+        selectedIds.has(customer.id);
+
+      tr.innerHTML = `
 
         <td>
           <input
-            class="check customer-check"
             type="checkbox"
-            data-key="${key}"
-            onchange="updateBulkUI()"
+            class="check customer-check"
+            data-id="${escapeHTML(customer.id)}"
+            ${selected ? "checked" : ""}
           >
         </td>
 
@@ -3719,11 +4308,9 @@ function renderDesktop(list){
 
           <div class="customer-cell">
 
-            <div class="customer-avatar">
-              ${escapeHTML(initials(customer.name))}
-            </div>
+            ${customerAvatarHTML(customer)}
 
-            <div>
+            <div class="customer-main">
 
               <div class="customer-name">
                 ${escapeHTML(customer.name)}
@@ -3741,7 +4328,7 @@ function renderDesktop(list){
 
         <td>
 
-          <div class="contact-main">
+          <div class="contact-line">
             ${escapeHTML(customer.email || "No email")}
           </div>
 
@@ -3751,68 +4338,57 @@ function renderDesktop(list){
 
         </td>
 
-        <td>
+        <td class="number-cell">
+          ${numberValue(customer.totalOrders)}
+        </td>
 
-          <div style="font-weight:800;">
-            ${Number(customer.totalOrders || 0)}
-          </div>
-
-          <div style="margin-top:4px;">
-            <span class="badge ${type}">
-              ${type === "returning" ? "Returning" : "New"}
-            </span>
-          </div>
-
+        <td class="money">
+          ${formatBDT(customer.totalSpent)}
         </td>
 
         <td>
-          <span class="money">
-            ${formatBDT(customer.totalSpent)}
-          </span>
-        </td>
-
-        <td>
-          <span class="muted">
+          <span class="date">
             ${formatDate(customer.lastOrder)}
           </span>
         </td>
 
         <td>
-          <span class="badge ${escapeHTML(customer.status)}">
-            ${escapeHTML(capitalize(customer.status))}
-          </span>
+          ${statusHTML(customer.status)}
         </td>
 
         <td>
-          <span class="muted">
+          <span class="date">
             ${formatDate(customer.joined)}
           </span>
         </td>
 
         <td>
 
-          <div class="row-actions">
+          <div class="actions">
 
             <button
-              class="row-btn"
+              class="action-btn"
               title="View customer"
-              onclick="openCustomer('${escapeJS(customerKey(customer))}')"
+              data-action="view"
+              data-id="${escapeHTML(customer.id)}"
             >
               ◉
             </button>
 
             <button
-              class="row-btn"
+              class="action-btn"
               title="Edit customer"
-              onclick="editCustomer('${escapeJS(customerKey(customer))}')"
+              data-action="edit"
+              data-id="${escapeHTML(customer.id)}"
             >
               ✎
             </button>
 
             <button
-              class="row-btn delete"
+              class="action-btn delete"
               title="Delete customer"
-              onclick="confirmDelete('${escapeJS(customerKey(customer))}')"
+              data-action="delete"
+              data-id="${escapeHTML(customer.id)}"
             >
               ×
             </button>
@@ -3821,148 +4397,118 @@ function renderDesktop(list){
 
         </td>
 
-      </tr>
-    `;
+      `;
 
-  });
+      customerTableBody.appendChild(tr);
 
-  html += `
-      </tbody>
-    </table>
-  `;
+    });
 
-  container.innerHTML = html;
+    bindCustomerActions();
 
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-function renderMobile(list){
-
-  const container =
-    document.getElementById("mobileList");
-
-  if(!list.length){
-
-    container.innerHTML = `
-      <div class="empty">
-        <div class="empty-icon">♙</div>
-        <strong>No customers found</strong>
-        <span>Try changing your search or filters.</span>
-      </div>
-    `;
-
-    return;
   }
 
-  let html = "";
+  /* =========================
+     MOBILE RENDER
+  ========================== */
 
-  list.forEach(customer => {
+  function renderMobile(){
 
-    const key =
-      escapeHTML(customerKey(customer));
+    const page =
+      getPagedCustomers();
 
-    const type =
-      Number(customer.totalOrders || 0) >= 2
-        ? "returning"
-        : "new";
+    mobileList.innerHTML = "";
 
-    html += `
-      <div class="customer-mobile-card">
+    if(!page.length){
+      return;
+    }
 
-        <div class="mobile-card-top">
+    page.forEach(customer => {
 
-          <div class="mobile-card-customer">
+      const card =
+        document.createElement("div");
 
-            <input
-              class="check customer-check"
-              type="checkbox"
-              data-key="${key}"
-              onchange="updateBulkUI()"
-            >
+      card.className =
+        "mobile-customer";
 
-            <div class="customer-avatar">
-              ${escapeHTML(initials(customer.name))}
+      const selected =
+        selectedIds.has(customer.id);
+
+      card.innerHTML = `
+
+        <div class="mobile-customer-top">
+
+          ${customerAvatarHTML(
+            customer,
+            "customer-avatar"
+          )}
+
+          <div class="mobile-customer-info">
+
+            <div class="mobile-customer-name">
+              ${escapeHTML(customer.name)}
             </div>
 
-            <div>
-
-              <div class="customer-name">
-                ${escapeHTML(customer.name)}
-              </div>
-
-              <div class="customer-id">
-                ${escapeHTML(customer.id)}
-              </div>
-
+            <div class="mobile-customer-id">
+              ${escapeHTML(customer.id)}
             </div>
 
           </div>
 
-          <span class="badge ${escapeHTML(customer.status)}">
-            ${escapeHTML(capitalize(customer.status))}
-          </span>
+          <input
+            type="checkbox"
+            class="check mobile-check customer-check"
+            data-id="${escapeHTML(customer.id)}"
+            ${selected ? "checked" : ""}
+          >
 
         </div>
 
-        <div class="mobile-card-grid">
+        <div style="margin-top:10px;">
+          ${statusHTML(customer.status)}
+        </div>
 
-          <div>
-            <div class="mobile-meta-label">
-              Email
-            </div>
-            <div class="mobile-meta-value">
+        <div class="mobile-customer-grid">
+
+          <div class="mobile-meta">
+            <span>Email</span>
+            <strong>
               ${escapeHTML(customer.email || "—")}
-            </div>
+            </strong>
           </div>
 
-          <div>
-            <div class="mobile-meta-label">
-              Phone
-            </div>
-            <div class="mobile-meta-value">
+          <div class="mobile-meta">
+            <span>Phone</span>
+            <strong>
               ${escapeHTML(customer.phone || "—")}
-            </div>
+            </strong>
           </div>
 
-          <div>
-            <div class="mobile-meta-label">
-              Orders
-            </div>
-            <div class="mobile-meta-value">
-              ${Number(customer.totalOrders || 0)}
-              ·
-              ${capitalize(type)}
-            </div>
+          <div class="mobile-meta">
+            <span>Orders</span>
+            <strong>
+              ${numberValue(customer.totalOrders)}
+            </strong>
           </div>
 
-          <div>
-            <div class="mobile-meta-label">
-              Spent
-            </div>
-            <div class="mobile-meta-value">
+          <div class="mobile-meta">
+            <span>Spent</span>
+            <strong>
               ${formatBDT(customer.totalSpent)}
-            </div>
+            </strong>
           </div>
 
-          <div>
-            <div class="mobile-meta-label">
-              Last Order
-            </div>
-            <div class="mobile-meta-value">
+          <div class="mobile-meta">
+            <span>Last Order</span>
+            <strong>
               ${formatDate(customer.lastOrder)}
-            </div>
+            </strong>
           </div>
 
-          <div>
-            <div class="mobile-meta-label">
-              Joined
-            </div>
-            <div class="mobile-meta-value">
+          <div class="mobile-meta">
+            <span>Joined</span>
+            <strong>
               ${formatDate(customer.joined)}
-            </div>
+            </strong>
           </div>
 
         </div>
@@ -3970,1170 +4516,1077 @@ function renderMobile(list){
         <div class="mobile-actions">
 
           <button
-            class="outline-btn"
-            type="button"
-            onclick="openCustomer('${escapeJS(customerKey(customer))}')"
+            data-action="view"
+            data-id="${escapeHTML(customer.id)}"
           >
             View
           </button>
 
           <button
-            class="outline-btn"
-            type="button"
-            onclick="editCustomer('${escapeJS(customerKey(customer))}')"
+            data-action="edit"
+            data-id="${escapeHTML(customer.id)}"
           >
             Edit
           </button>
 
           <button
-            class="outline-btn danger-btn"
-            type="button"
-            onclick="confirmDelete('${escapeJS(customerKey(customer))}')"
+            data-action="delete"
+            data-id="${escapeHTML(customer.id)}"
           >
             Delete
           </button>
 
         </div>
 
-      </div>
-    `;
+      `;
 
-  });
+      mobileList.appendChild(card);
 
-  container.innerHTML = html;
+    });
 
-}
+    bindCustomerActions();
 
-/* =========================
-   PAGINATION
-========================= */
-
-function renderPagination(){
-
-  const total =
-    filteredCustomers.length;
-
-  const totalPages =
-    Math.max(
-      1,
-      Math.ceil(total / PAGE_SIZE)
-    );
-
-  if(currentPage > totalPages){
-    currentPage = totalPages;
   }
 
-  const start =
-    total === 0
-      ? 0
-      : (currentPage - 1) * PAGE_SIZE + 1;
+  /* =========================
+     BIND CUSTOMER ACTIONS
+  ========================== */
 
-  const end =
-    Math.min(
-      currentPage * PAGE_SIZE,
-      total
-    );
+  function bindCustomerActions(){
 
-  document.getElementById(
-    "paginationInfo"
-  ).textContent =
-    total === 0
-      ? "Showing 0 customers"
-      : `Showing ${start}–${end} of ${total} customers`;
+    document
+      .querySelectorAll("[data-action]")
+      .forEach(button => {
 
-  const buttons =
-    document.getElementById("pageButtons");
+        button.onclick = function(){
 
-  let html = "";
+          const action =
+            this.dataset.action;
 
-  html += `
-    <button
-      class="page-btn"
-      ${currentPage <= 1 ? "disabled" : ""}
-      onclick="goPage(${currentPage - 1})"
-    >
-      ‹
-    </button>
-  `;
+          const id =
+            this.dataset.id;
 
-  const maxButtons = 5;
+          if(action === "view"){
+            openCustomerModal(
+              id,
+              false
+            );
+          }
 
-  let pageStart =
-    Math.max(
-      1,
-      currentPage - 2
-    );
+          if(action === "edit"){
+            openCustomerModal(
+              id,
+              true
+            );
+          }
 
-  let pageEnd =
-    Math.min(
-      totalPages,
-      pageStart + maxButtons - 1
-    );
+          if(action === "delete"){
+            openDeleteModal(id);
+          }
 
-  if(pageEnd - pageStart < maxButtons - 1){
-    pageStart =
+        };
+
+      });
+
+    document
+      .querySelectorAll(".customer-check")
+      .forEach(check => {
+
+        check.onchange = function(){
+
+          const id =
+            this.dataset.id;
+
+          if(this.checked){
+            selectedIds.add(id);
+          }else{
+            selectedIds.delete(id);
+          }
+
+          renderBulk();
+
+          updateSelectAllState();
+
+        };
+
+      });
+
+  }
+
+  /* =========================
+     PAGINATION
+  ========================== */
+
+  function renderPagination(){
+
+    const total =
+      filteredCustomers.length;
+
+    const totalPages =
       Math.max(
         1,
-        pageEnd - maxButtons + 1
-      );
-  }
-
-  for(
-    let page = pageStart;
-    page <= pageEnd;
-    page++
-  ){
-
-    html += `
-      <button
-        class="page-btn ${page === currentPage ? "active" : ""}"
-        onclick="goPage(${page})"
-      >
-        ${page}
-      </button>
-    `;
-
-  }
-
-  html += `
-    <button
-      class="page-btn"
-      ${currentPage >= totalPages ? "disabled" : ""}
-      onclick="goPage(${currentPage + 1})"
-    >
-      ›
-    </button>
-  `;
-
-  buttons.innerHTML = html;
-
-}
-
-function goPage(page){
-
-  const totalPages =
-    Math.max(
-      1,
-      Math.ceil(
-        filteredCustomers.length / PAGE_SIZE
-      )
-    );
-
-  if(
-    page < 1 ||
-    page > totalPages
-  ){
-    return;
-  }
-
-  currentPage = page;
-
-  renderCustomers();
-
-  window.scrollTo({
-    top:0,
-    behavior:"smooth"
-  });
-
-}
-
-/* =========================
-   STATS
-========================= */
-
-function updateStats(){
-
-  const total =
-    customers.length;
-
-  const active =
-    customers.filter(
-      customer => customer.status === "active"
-    ).length;
-
-  const newCustomers =
-    customers.filter(
-      customer => isNewCustomer(customer)
-    ).length;
-
-  const returning =
-    customers.filter(
-      customer =>
-        Number(customer.totalOrders || 0) >= 2
-    ).length;
-
-  const revenue =
-    customers.reduce(
-      (sum,customer) =>
-        sum + Number(customer.totalSpent || 0),
-      0
-    );
-
-  document.getElementById("statTotal")
-    .textContent = total.toLocaleString();
-
-  document.getElementById("statActive")
-    .textContent = active.toLocaleString();
-
-  document.getElementById("statNew")
-    .textContent = newCustomers.toLocaleString();
-
-  document.getElementById("statReturning")
-    .textContent = returning.toLocaleString();
-
-  document.getElementById("statRevenue")
-    .textContent = formatBDT(revenue);
-
-  document.getElementById("heroRevenue")
-    .textContent = formatBDT(revenue);
-
-}
-
-/* =========================
-   CUSTOMER LOOKUP
-========================= */
-
-function findCustomer(key){
-
-  return customers.find(
-    customer =>
-      customerKey(customer) === key
-  );
-
-}
-
-/* =========================
-   OPEN CUSTOMER
-========================= */
-
-function openCustomer(key){
-
-  const customer =
-    findCustomer(key);
-
-  if(!customer){
-    showToast(
-      "Customer not found.",
-      "error"
-    );
-    return;
-  }
-
-  editingCustomerKey = key;
-
-  populateCustomerModal(
-    customer,
-    false
-  );
-
-  document.getElementById(
-    "customerModal"
-  ).classList.add("show");
-
-}
-
-/* =========================
-   EDIT CUSTOMER
-========================= */
-
-function editCustomer(key){
-
-  const customer =
-    findCustomer(key);
-
-  if(!customer){
-    showToast(
-      "Customer not found.",
-      "error"
-    );
-    return;
-  }
-
-  editingCustomerKey = key;
-
-  populateCustomerModal(
-    customer,
-    true
-  );
-
-  document.getElementById(
-    "customerModal"
-  ).classList.add("show");
-
-}
-
-/* =========================
-   POPULATE MODAL
-========================= */
-
-function populateCustomerModal(
-  customer,
-  editMode
-){
-
-  document.getElementById(
-    "customerModalTitle"
-  ).textContent =
-    editMode
-      ? "Edit Customer"
-      : "Customer Details";
-
-  document.getElementById(
-    "customerModalSubtitle"
-  ).textContent =
-    editMode
-      ? "Update customer profile information."
-      : "Review customer information and order history.";
-
-  document.getElementById(
-    "profileAvatar"
-  ).textContent =
-    initials(customer.name);
-
-  document.getElementById(
-    "profileName"
-  ).textContent =
-    customer.name || "Customer";
-
-  document.getElementById(
-    "profileEmail"
-  ).textContent =
-    customer.email || "No email address";
-
-  document.getElementById(
-    "profileId"
-  ).textContent =
-    customer.id || "No ID";
-
-  const statusBadge =
-    document.getElementById(
-      "profileStatusBadge"
-    );
-
-  statusBadge.className =
-    "badge " + customer.status;
-
-  statusBadge.textContent =
-    capitalize(customer.status);
-
-  document.getElementById(
-    "modalOrders"
-  ).textContent =
-    Number(customer.totalOrders || 0);
-
-  document.getElementById(
-    "modalSpent"
-  ).textContent =
-    formatBDT(customer.totalSpent);
-
-  document.getElementById(
-    "modalLastOrder"
-  ).textContent =
-    customer.lastOrder
-      ? formatDate(customer.lastOrder)
-      : "—";
-
-  document.getElementById(
-    "editCustomerKey"
-  ).value =
-    customerKey(customer);
-
-  document.getElementById(
-    "customerId"
-  ).value =
-    customer.id || "";
-
-  document.getElementById(
-    "customerName"
-  ).value =
-    customer.name || "";
-
-  document.getElementById(
-    "customerEmail"
-  ).value =
-    customer.email || "";
-
-  document.getElementById(
-    "customerPhone"
-  ).value =
-    customer.phone || "";
-
-  document.getElementById(
-    "customerStatus"
-  ).value =
-    customer.status || "active";
-
-  document.getElementById(
-    "customerJoined"
-  ).value =
-    customer.joined || "";
-
-  document.getElementById(
-    "customerAddress"
-  ).value =
-    customer.address || "";
-
-  document.getElementById(
-    "customerNote"
-  ).value =
-    customer.note || "";
-
-  renderOrderHistory(customer);
-
-  updateToggleButton(customer);
-
-}
-
-/* =========================
-   ORDER HISTORY
-========================= */
-
-function renderOrderHistory(customer){
-
-  const container =
-    document.getElementById(
-      "orderHistory"
-    );
-
-  const relatedOrders =
-    orders
-      .filter(order =>
-        orderMatchesCustomer(
-          order,
-          customer,
-          customerKey(customer)
-        )
-      )
-      .sort((a,b) =>
-        compareDates(
-          b.createdAt,
-          a.createdAt
+        Math.ceil(
+          total / PAGE_SIZE
         )
       );
 
-  if(!relatedOrders.length){
+    if(currentPage > totalPages){
+      currentPage = totalPages;
+    }
 
-    container.innerHTML = `
-      <div class="history-empty">
-        No order history found for this customer.
-      </div>
-    `;
+    const start =
+      total
+        ? (currentPage - 1) *
+            PAGE_SIZE + 1
+        : 0;
 
-    return;
-  }
-
-  let html = "";
-
-  relatedOrders.forEach(order => {
-
-    const paymentStatus =
-      normalizePaymentStatus(
-        order.paymentStatus
+    const end =
+      Math.min(
+        currentPage * PAGE_SIZE,
+        total
       );
 
-    html += `
-      <div class="history-item">
+    pageInfo.textContent =
+      total
+        ? `Showing ${start}-${end} of ${total} customers`
+        : "Showing 0 customers";
 
-        <div>
-          <div class="history-id">
-            ${escapeHTML(order.id)}
-          </div>
-          <div class="history-date">
-            ${formatDate(order.createdAt)}
-          </div>
-        </div>
+    prevPage.disabled =
+      currentPage <= 1;
 
-        <div class="history-website">
-          ${escapeHTML(order.website || "Website Order")}
-        </div>
+    nextPage.disabled =
+      currentPage >= totalPages;
 
-        <div>
+    pageNumbers.innerHTML = "";
+
+    const maxButtons = 5;
+
+    let first =
+      Math.max(
+        1,
+        currentPage -
+        Math.floor(maxButtons / 2)
+      );
+
+    let last =
+      Math.min(
+        totalPages,
+        first + maxButtons - 1
+      );
+
+    if(
+      last - first + 1 <
+      maxButtons
+    ){
+
+      first =
+        Math.max(
+          1,
+          last - maxButtons + 1
+        );
+
+    }
+
+    for(
+      let i = first;
+      i <= last;
+      i++
+    ){
+
+      const btn =
+        document.createElement("button");
+
+      btn.className =
+        "page-btn" +
+        (
+          i === currentPage
+            ? " active"
+            : ""
+        );
+
+      btn.textContent = i;
+
+      btn.onclick = function(){
+
+        currentPage = i;
+
+        render();
+
+        window.scrollTo({
+          top:0,
+          behavior:"smooth"
+        });
+
+      };
+
+      pageNumbers.appendChild(btn);
+
+    }
+
+  }
+
+  /* =========================
+     BULK
+  ========================== */
+
+  function renderBulk(){
+
+    const count =
+      selectedIds.size;
+
+    bulkCount.textContent =
+      count +
+      (
+        count === 1
+          ? " customer selected"
+          : " customers selected"
+      );
+
+    if(count){
+      bulkBar.classList.add("show");
+    }else{
+      bulkBar.classList.remove("show");
+    }
+
+    updateSelectAllState();
+
+  }
+
+  function updateSelectAllState(){
+
+    const page =
+      getPagedCustomers();
+
+    if(!page.length){
+
+      selectAll.checked = false;
+      selectAll.indeterminate = false;
+
+      return;
+
+    }
+
+    const selectedCount =
+      page.filter(
+        customer =>
+          selectedIds.has(customer.id)
+      ).length;
+
+    selectAll.checked =
+      selectedCount === page.length;
+
+    selectAll.indeterminate =
+      selectedCount > 0 &&
+      selectedCount < page.length;
+
+  }
+
+  /* =========================
+     CUSTOMER MODAL
+  ========================== */
+
+  function openCustomerModal(
+    id,
+    editMode
+  ){
+
+    const customer =
+      customers.find(
+        c => String(c.id) === String(id)
+      );
+
+    if(!customer){
+      return;
+    }
+
+    editingCustomerId =
+      customer.id;
+
+    $("customerModalTitle").textContent =
+      editMode
+        ? "Edit Customer"
+        : "Customer Details";
+
+    $("customerId").value =
+      customer.id;
+
+    $("customerName").value =
+      customer.name || "";
+
+    $("customerEmail").value =
+      customer.email || "";
+
+    $("customerPhone").value =
+      customer.phone || "";
+
+    $("customerStatus").value =
+      customer.status || "active";
+
+    $("customerJoined").value =
+      formatInputDate(
+        customer.joined
+      );
+
+    $("customerAddress").value =
+      customer.address || "";
+
+    $("customerNote").value =
+      customer.note || "";
+
+    $("profileName").textContent =
+      customer.name || "Customer";
+
+    $("profileContact").textContent =
+      [
+        customer.email,
+        customer.phone
+      ]
+      .filter(Boolean)
+      .join(" • ") ||
+      "No contact information";
+
+    if(customer.avatar){
+
+      $("profileAvatar").innerHTML = `
+        <img
+          src="${escapeHTML(customer.avatar)}"
+          alt=""
+        >
+      `;
+
+    }else{
+
+      $("profileAvatar").textContent =
+        initials(customer.name);
+
+    }
+
+    $("profileStatus").innerHTML =
+      statusHTML(customer.status);
+
+    $("profileOrders").textContent =
+      numberValue(
+        customer.totalOrders
+      );
+
+    $("profileSpent").textContent =
+      formatBDT(
+        customer.totalSpent
+      );
+
+    $("profileLastOrder").textContent =
+      formatDate(
+        customer.lastOrder
+      );
+
+    renderOrderHistory(customer);
+
+    const isSuspended =
+      customer.status === "suspended";
+
+    $("modalStatusBtn").textContent =
+      isSuspended
+        ? "Activate"
+        : "Suspend";
+
+    /*
+      View mode:
+      Keep form usable so user can edit directly,
+      but title makes current context clear.
+    */
+
+    $("customerModal").classList.add("show");
+
+  }
+
+  /* =========================
+     ORDER HISTORY
+  ========================== */
+
+  function renderOrderHistory(customer){
+
+    const related =
+      getCustomerOrders(customer);
+
+    const historyBody =
+      $("historyBody");
+
+    historyBody.innerHTML = "";
+
+    if(!related.length){
+
+      historyBody.innerHTML = `
+
+        <tr>
+          <td colspan="5"
+              style="text-align:center;color:#738079;padding:25px;">
+            No order history found for this customer.
+          </td>
+        </tr>
+
+      `;
+
+      return;
+
+    }
+
+    related.slice(0,10).forEach(order => {
+
+      const id =
+        order.id ||
+        order.orderId ||
+        "Order";
+
+      const website =
+        getOrderWebsite(order);
+
+      const amount =
+        getOrderAmount(order);
+
+      const orderStatus =
+        normalizeOrderStatus(
+          order.orderStatus ||
+          order.order_status ||
+          order.status
+        );
+
+      const tr =
+        document.createElement("tr");
+
+      tr.innerHTML = `
+
+        <td>
           <strong>
-            ${formatBDT(order.amount)}
+            ${escapeHTML(id)}
           </strong>
-        </div>
+        </td>
 
-        <div>
-          <span class="badge ${
-            paymentStatus === "paid"
-              ? "active"
-              : paymentStatus === "cancelled"
-                ? "suspended"
-                : "inactive"
-          }">
-            ${escapeHTML(capitalize(paymentStatus))}
+        <td>
+          ${escapeHTML(website)}
+        </td>
+
+        <td>
+          <strong>
+            ${formatBDT(amount)}
+          </strong>
+        </td>
+
+        <td>
+          <span class="type-badge">
+            ${escapeHTML(orderStatus)}
           </span>
-        </div>
+        </td>
 
-      </div>
-    `;
+        <td>
+          <span class="date">
+            ${formatDate(
+              getOrderDate(order)
+            )}
+          </span>
+        </td>
 
-  });
+      `;
 
-  container.innerHTML = html;
+      historyBody.appendChild(tr);
 
-}
+    });
 
-/* =========================
-   SAVE CUSTOMER
-========================= */
-
-function saveCustomer(event){
-
-  event.preventDefault();
-
-  const originalKey =
-    document.getElementById(
-      "editCustomerKey"
-    ).value;
-
-  const customer =
-    findCustomer(originalKey);
-
-  if(!customer){
-    showToast(
-      "Customer could not be found.",
-      "error"
-    );
-    return;
   }
 
-  const name =
-    document.getElementById(
-      "customerName"
-    ).value.trim();
+  /* =========================
+     SAVE CUSTOMER
+  ========================== */
 
-  const email =
-    document.getElementById(
-      "customerEmail"
-    ).value.trim();
+  function saveCustomer(){
 
-  const phone =
-    document.getElementById(
-      "customerPhone"
-    ).value.trim();
-
-  if(!name){
-    showToast(
-      "Customer name is required.",
-      "error"
-    );
-    return;
-  }
-
-  /*
-    Prevent duplicate email records.
-  */
-
-  if(email){
-
-    const duplicate =
-      customers.find(item =>
-        item !== customer &&
-        String(item.email || "")
-          .trim()
-          .toLowerCase() ===
-        email.toLowerCase()
-      );
-
-    if(duplicate){
+    if(!editingCustomerId){
 
       showToast(
-        "Another customer already uses this email.",
+        "No Customer",
+        "Please select a customer first.",
         "error"
       );
 
       return;
+
     }
 
-  }
+    const customer =
+      customers.find(
+        c =>
+          String(c.id) ===
+          String(editingCustomerId)
+      );
 
-  customer.name = name;
-  customer.email = email;
-  customer.phone = phone;
+    if(!customer){
+      return;
+    }
 
-  customer.status =
-    normalizeStatus(
-      document.getElementById(
-        "customerStatus"
-      ).value
+    const name =
+      $("customerName").value.trim();
+
+    const email =
+      $("customerEmail").value.trim();
+
+    const phone =
+      $("customerPhone").value.trim();
+
+    if(!name){
+
+      showToast(
+        "Name Required",
+        "Please enter the customer's name.",
+        "warning"
+      );
+
+      $("customerName").focus();
+
+      return;
+
+    }
+
+    /*
+      Prevent duplicate explicit customer records.
+    */
+
+    const duplicate =
+      customers.find(c => {
+
+        if(
+          String(c.id) ===
+          String(customer.id)
+        ){
+
+          return false;
+
+        }
+
+        const sameEmail =
+          email &&
+          normalizeEmail(c.email) ===
+          normalizeEmail(email);
+
+        const samePhone =
+          phone &&
+          normalizePhone(c.phone) ===
+          normalizePhone(phone);
+
+        return (
+          sameEmail ||
+          samePhone
+        );
+
+      });
+
+    if(duplicate){
+
+      showToast(
+        "Duplicate Customer",
+        "Another customer already uses this email or phone.",
+        "error"
+      );
+
+      return;
+
+    }
+
+    customer.name =
+      name;
+
+    customer.email =
+      email;
+
+    customer.phone =
+      phone;
+
+    customer.status =
+      normalizeStatus(
+        $("customerStatus").value
+      );
+
+    const joined =
+      $("customerJoined").value;
+
+    customer.joined =
+      joined
+        ? new Date(
+            joined + "T00:00:00"
+          ).toISOString()
+        : customer.joined;
+
+    customer.address =
+      $("customerAddress").value.trim();
+
+    customer.note =
+      $("customerNote").value.trim();
+
+    /*
+      Explicit customer record.
+    */
+
+    customer.source =
+      "customer";
+
+    saveJSON(
+      CUSTOMER_KEY,
+      customers
     );
 
-  customer.joined =
-    document.getElementById(
-      "customerJoined"
-    ).value;
-
-  customer.address =
-    document.getElementById(
-      "customerAddress"
-    ).value.trim();
-
-  customer.note =
-    document.getElementById(
-      "customerNote"
-    ).value.trim();
-
-  /*
-    Recalculate customer aggregate data.
-  */
-
-  enrichCustomers();
-
-  /*
-    Save explicit customer profiles.
-  */
-
-  saveArray(
-    CUSTOMER_KEY,
-    customers
-  );
-
-  /*
-    Re-enrich after saving.
-  */
-
-  enrichCustomers();
-
-  applyFilters();
-
-  closeModal("customerModal");
-
-  showToast(
-    "Customer saved successfully.",
-    "success"
-  );
-
-}
-
-/* =========================
-   TOGGLE STATUS
-========================= */
-
-function updateToggleButton(customer){
-
-  const button =
-    document.getElementById(
-      "modalToggleBtn"
+    showToast(
+      "Customer Saved",
+      `${customer.name} was updated successfully.`,
+      "success"
     );
 
-  if(customer.status === "suspended"){
+    render();
 
-    button.textContent =
-      "Activate";
-
-  }else{
-
-    button.textContent =
-      "Suspend";
+    closeModal("customerModal");
 
   }
 
-}
+  /* =========================
+     ADD CUSTOMER
+  ========================== */
 
-function toggleCurrentCustomer(){
+  function addCustomer(){
 
-  if(!editingCustomerKey){
-    return;
-  }
+    const id =
+      generateCustomerId(
+        "Customer",
+        "",
+        ""
+      );
 
-  const customer =
-    findCustomer(editingCustomerKey);
+    const newCustomer = {
 
-  if(!customer){
-    return;
-  }
+      id,
 
-  if(customer.status === "suspended"){
-    customer.status = "active";
-  }else{
-    customer.status = "suspended";
-  }
+      name:"New Customer",
 
-  saveArray(
-    CUSTOMER_KEY,
-    customers
-  );
+      email:"",
 
-  enrichCustomers();
+      phone:"",
 
-  applyFilters();
+      status:"active",
 
-  populateCustomerModal(
-    customer,
-    true
-  );
+      joined:
+        new Date().toISOString(),
 
-  showToast(
-    customer.status === "active"
-      ? "Customer activated."
-      : "Customer suspended.",
-    "success"
-  );
+      lastOrder:"",
 
-}
+      totalOrders:0,
 
-/* =========================
-   DELETE
-========================= */
+      totalSpent:0,
 
-function confirmDelete(key){
+      note:"",
 
-  const customer =
-    findCustomer(key);
+      address:"",
 
-  if(!customer){
-    return;
-  }
+      avatar:"",
 
-  pendingDeleteKey = key;
+      source:"customer"
 
-  document.getElementById(
-    "confirmText"
-  ).textContent =
-    `Delete ${customer.name}? This customer profile will be removed from the customer directory. Existing order records will remain untouched.`;
+    };
 
-  document.getElementById(
-    "confirmDeleteBtn"
-  ).onclick =
-    executePendingDelete;
-
-  document.getElementById(
-    "confirmModal"
-  ).classList.add("show");
-
-}
-
-function executePendingDelete(){
-
-  if(!pendingDeleteKey){
-    return;
-  }
-
-  customers =
-    customers.filter(
-      customer =>
-        customerKey(customer) !==
-        pendingDeleteKey
+    customers.unshift(
+      newCustomer
     );
 
-  saveArray(
-    CUSTOMER_KEY,
-    customers
-  );
+    /*
+      Explicitly save because user has
+      intentionally created a customer.
+    */
 
-  enrichCustomers();
+    saveJSON(
+      CUSTOMER_KEY,
+      customers
+    );
 
-  pendingDeleteKey = null;
+    applyFilters();
 
-  closeModal("confirmModal");
-  closeModal("customerModal");
+    openCustomerModal(
+      id,
+      true
+    );
 
-  applyFilters();
+    setTimeout(() => {
 
-  showToast(
-    "Customer deleted.",
-    "success"
-  );
+      $("customerName").focus();
 
-}
+      $("customerName").select();
 
-function deleteCurrentCustomer(){
+    },100);
 
-  if(!editingCustomerKey){
-    return;
   }
 
-  confirmDelete(
-    editingCustomerKey
-  );
+  /* =========================
+     DELETE
+  ========================== */
 
-}
+  function openDeleteModal(id){
 
-/* =========================
-   BULK SELECTION
-========================= */
+    const customer =
+      customers.find(
+        c =>
+          String(c.id) ===
+          String(id)
+      );
 
-function getSelectedKeys(){
+    if(!customer){
+      return;
+    }
 
-  return Array.from(
-    document.querySelectorAll(
-      ".customer-check:checked"
-    )
-  )
-  .map(input =>
-    input.dataset.key
-  )
-  .filter(Boolean);
+    deleteTargetId =
+      customer.id;
 
-}
+    $("deleteTitle").textContent =
+      "Delete Customer?";
 
-function updateBulkUI(){
+    $("deleteText").textContent =
+      `Delete ${customer.name}? This will remove the customer profile from this browser's LocalStorage.`;
 
-  const selected =
-    getSelectedKeys();
+    $("deleteModal").classList.add("show");
 
-  const wrap =
-    document.getElementById(
-      "bulkWrap"
+  }
+
+  function deleteCustomer(id){
+
+    const customer =
+      customers.find(
+        c =>
+          String(c.id) ===
+          String(id)
+      );
+
+    if(!customer){
+      return;
+    }
+
+    customers =
+      customers.filter(
+        c =>
+          String(c.id) !==
+          String(id)
+      );
+
+    selectedIds.delete(id);
+
+    saveJSON(
+      CUSTOMER_KEY,
+      customers
     );
 
-  const count =
-    document.getElementById(
-      "bulkCount"
+    showToast(
+      "Customer Deleted",
+      `${customer.name} was removed.`,
+      "success"
     );
 
-  count.textContent =
-    `${selected.length} selected`;
+    closeModal("deleteModal");
 
-  wrap.classList.toggle(
-    "show",
-    selected.length > 0
-  );
+    closeModal("customerModal");
 
-}
+    applyFilters();
 
-function toggleSelectAll(checked){
+  }
 
-  document
-    .querySelectorAll(".customer-check")
-    .forEach(input => {
-      input.checked = checked;
+  /* =========================
+     BULK STATUS
+  ========================== */
+
+  function bulkSetStatus(status){
+
+    if(!selectedIds.size){
+      return;
+    }
+
+    let changed = 0;
+
+    customers.forEach(customer => {
+
+      if(
+        selectedIds.has(
+          customer.id
+        )
+      ){
+
+        customer.status =
+          status;
+
+        changed++;
+
+      }
+
     });
 
-  updateBulkUI();
+    saveJSON(
+      CUSTOMER_KEY,
+      customers
+    );
 
-}
+    selectedIds.clear();
 
-function bulkActivate(){
+    showToast(
+      "Customers Updated",
+      `${changed} customer${changed === 1 ? "" : "s"} updated.`,
+      "success"
+    );
 
-  const keys =
-    getSelectedKeys();
+    render();
 
-  if(!keys.length){
-    return;
   }
 
-  customers.forEach(customer => {
+  /* =========================
+     BULK DELETE
+  ========================== */
 
-    if(keys.includes(customerKey(customer))){
-      customer.status = "active";
+  function bulkDelete(){
+
+    if(!selectedIds.size){
+      return;
     }
 
-  });
+    const count =
+      selectedIds.size;
 
-  saveArray(
-    CUSTOMER_KEY,
-    customers
-  );
+    $("deleteTitle").textContent =
+      "Delete Selected Customers?";
 
-  applyFilters();
+    $("deleteText").textContent =
+      `You are about to delete ${count} customer${count === 1 ? "" : "s"}. This action cannot be undone.`;
 
-  showToast(
-    `${keys.length} customer(s) activated.`,
-    "success"
-  );
+    deleteTargetId =
+      "__bulk__";
 
-}
+    $("deleteModal").classList.add("show");
 
-function bulkSuspend(){
-
-  const keys =
-    getSelectedKeys();
-
-  if(!keys.length){
-    return;
   }
 
-  customers.forEach(customer => {
+  function confirmDelete(){
 
-    if(keys.includes(customerKey(customer))){
-      customer.status = "suspended";
-    }
+    if(deleteTargetId === "__bulk__"){
 
-  });
+      const ids =
+        new Set(
+          Array.from(
+            selectedIds
+          ).map(String)
+        );
 
-  saveArray(
-    CUSTOMER_KEY,
-    customers
-  );
-
-  applyFilters();
-
-  showToast(
-    `${keys.length} customer(s) suspended.`,
-    "success"
-  );
-
-}
-
-function bulkDelete(){
-
-  const keys =
-    getSelectedKeys();
-
-  if(!keys.length){
-    return;
-  }
-
-  pendingDeleteKey = null;
-
-  document.getElementById(
-    "confirmText"
-  ).textContent =
-    `Delete ${keys.length} selected customer(s)? Existing order records will remain untouched.`;
-
-  document.getElementById(
-    "confirmDeleteBtn"
-  ).onclick =
-    function(){
+      const before =
+        customers.length;
 
       customers =
         customers.filter(
           customer =>
-            !keys.includes(
-              customerKey(customer)
+            !ids.has(
+              String(customer.id)
             )
         );
 
-      saveArray(
+      const deleted =
+        before -
+        customers.length;
+
+      selectedIds.clear();
+
+      saveJSON(
         CUSTOMER_KEY,
         customers
       );
 
-      enrichCustomers();
-
-      closeModal("confirmModal");
-
-      applyFilters();
-
       showToast(
-        `${keys.length} customer(s) deleted.`,
+        "Customers Deleted",
+        `${deleted} customer${deleted === 1 ? "" : "s"} removed.`,
         "success"
       );
 
-    };
+      closeModal("deleteModal");
 
-  document.getElementById(
-    "confirmModal"
-  ).classList.add("show");
+      applyFilters();
 
-}
+      return;
 
-/* =========================
-   FILTER EVENTS
-========================= */
+    }
 
-document.getElementById(
-  "searchInput"
-).addEventListener(
-  "input",
-  debounce(
-    applyFilters,
-    180
-  )
-);
+    if(deleteTargetId){
 
-document.getElementById(
-  "statusFilter"
-).addEventListener(
-  "change",
-  applyFilters
-);
+      deleteCustomer(
+        deleteTargetId
+      );
 
-document.getElementById(
-  "typeFilter"
-).addEventListener(
-  "change",
-  applyFilters
-);
+    }
 
-document.getElementById(
-  "sortFilter"
-).addEventListener(
-  "change",
-  applyFilters
-);
+  }
 
-/* =========================
-   RESET
-========================= */
+  /* =========================
+     EXPORT CSV
+  ========================== */
 
-function resetFilters(){
+  function exportCSV(){
 
-  document.getElementById(
-    "searchInput"
-  ).value = "";
+    if(!filteredCustomers.length){
 
-  document.getElementById(
-    "statusFilter"
-  ).value = "all";
+      showToast(
+        "Nothing to Export",
+        "There are no customers in the current result.",
+        "warning"
+      );
 
-  document.getElementById(
-    "typeFilter"
-  ).value = "all";
+      return;
 
-  document.getElementById(
-    "sortFilter"
-  ).value = "newest";
+    }
 
-  applyFilters();
+    const headers = [
 
-}
+      "Customer ID",
+      "Name",
+      "Email",
+      "Phone",
+      "Status",
+      "Joined",
+      "Last Order",
+      "Total Orders",
+      "Total Spent",
+      "Address",
+      "Note"
 
-/* =========================
-   REFRESH
-========================= */
+    ];
 
-function refreshCustomers(){
+    const rows =
+      filteredCustomers.map(
+        customer => [
 
-  loadData();
+          customer.id,
 
-  applyFilters();
+          customer.name,
 
-  showToast(
-    "Customer data refreshed.",
-    "success"
-  );
+          customer.email,
 
-}
+          customer.phone,
 
-/* =========================
-   CSV EXPORT
-========================= */
+          customer.status,
 
-function exportCSV(){
+          formatDate(customer.joined),
 
-  const list =
-    filteredCustomers;
+          formatDate(customer.lastOrder),
 
-  if(!list.length){
+          customer.totalOrders,
+
+          customer.totalSpent,
+
+          customer.address,
+
+          customer.note
+
+        ]
+      );
+
+    const csv = [
+
+      headers.map(
+        escapeCSV
+      ).join(","),
+
+      ...rows.map(
+        row =>
+          row.map(
+            escapeCSV
+          ).join(",")
+      )
+
+    ].join("\n");
+
+    const blob =
+      new Blob(
+        [csv],
+        {
+          type:"text/csv;charset=utf-8;"
+        }
+      );
+
+    const url =
+      URL.createObjectURL(blob);
+
+    const link =
+      document.createElement("a");
+
+    link.href = url;
+
+    link.download =
+      "website-deals-customers-" +
+      new Date()
+        .toISOString()
+        .slice(0,10) +
+      ".csv";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+
+    URL.revokeObjectURL(url);
 
     showToast(
-      "There are no customers to export.",
-      "error"
+      "CSV Exported",
+      `${filteredCustomers.length} customers exported.`,
+      "success"
     );
 
-    return;
   }
 
-  const headers = [
-    "Customer ID",
-    "Name",
-    "Email",
-    "Phone",
-    "Status",
-    "Joined",
-    "Orders",
-    "Total Spent",
-    "Last Order",
-    "Address",
-    "Note"
-  ];
+  /* =========================
+     MODALS
+  ========================== */
 
-  const rows =
-    list.map(customer => [
-      customer.id,
-      customer.name,
-      customer.email,
-      customer.phone,
-      customer.status,
-      customer.joined,
-      customer.totalOrders || 0,
-      customer.totalSpent || 0,
-      customer.lastOrder || "",
-      customer.address || "",
-      customer.note || ""
-    ]);
+  function closeModal(id){
 
-  const csv = [
-    headers,
-    ...rows
-  ]
-  .map(row =>
-    row.map(csvCell).join(",")
-  )
-  .join("\n");
+    const modal =
+      $(id);
 
-  const blob =
-    new Blob(
-      ["\uFEFF" + csv],
-      {
-        type:"text/csv;charset=utf-8;"
-      }
-    );
+    if(modal){
+      modal.classList.remove("show");
+    }
 
-  const url =
-    URL.createObjectURL(blob);
-
-  const link =
-    document.createElement("a");
-
-  link.href = url;
-  link.download =
-    "website-deals-customers.csv";
-
-  document.body.appendChild(link);
-
-  link.click();
-
-  link.remove();
-
-  URL.revokeObjectURL(url);
-
-  showToast(
-    "Customer CSV exported.",
-    "success"
-  );
-
-}
-
-function csvCell(value){
-
-  const text =
-    String(value ?? "");
-
-  return '"' +
-    text.replace(/"/g,'""') +
-    '"';
-
-}
-
-/* =========================
-   PRINT
-========================= */
-
-function printCustomers(){
-
-  window.print();
-
-}
-
-/* =========================
-   MODALS
-========================= */
-
-function closeModal(id){
-
-  const modal =
-    document.getElementById(id);
-
-  if(modal){
-    modal.classList.remove("show");
   }
 
-}
+  document
+    .querySelectorAll("[data-close]")
+    .forEach(button => {
 
-document
-  .querySelectorAll(".modal-overlay")
-  .forEach(overlay => {
+      button.addEventListener(
+        "click",
+        function(){
 
-    overlay.addEventListener(
+          closeModal(
+            this.dataset.close
+          );
+
+        }
+      );
+
+    });
+
+  /*
+    Close modal by clicking backdrop.
+  */
+
+  [
+    "customerModal",
+    "deleteModal"
+  ].forEach(id => {
+
+    $(id).addEventListener(
       "click",
-      event => {
+      function(event){
 
-        if(event.target === overlay){
-          overlay.classList.remove("show");
+        if(
+          event.target === this
+        ){
+
+          closeModal(id);
+
         }
 
       }
@@ -5141,208 +5594,466 @@ document
 
   });
 
-document.addEventListener(
-  "keydown",
-  event => {
+  document.addEventListener(
+    "keydown",
+    function(event){
 
-    if(event.key === "Escape"){
+      if(event.key === "Escape"){
 
-      document
-        .querySelectorAll(".modal-overlay.show")
-        .forEach(modal => {
-          modal.classList.remove("show");
-        });
+        closeModal(
+          "customerModal"
+        );
+
+        closeModal(
+          "deleteModal"
+        );
+
+      }
 
     }
-
-  }
-);
-
-/* =========================
-   TOAST
-========================= */
-
-function showToast(
-  message,
-  type="success"
-){
-
-  const wrap =
-    document.getElementById(
-      "toastWrap"
-    );
-
-  const toast =
-    document.createElement("div");
-
-  toast.className =
-    `toast ${type}`;
-
-  toast.innerHTML = `
-    <span class="toast-mark">
-      ${type === "success" ? "✓" : "!"}
-    </span>
-
-    <span>
-      ${escapeHTML(message)}
-    </span>
-  `;
-
-  wrap.appendChild(toast);
-
-  setTimeout(() => {
-
-    toast.style.opacity = "0";
-    toast.style.transform =
-      "translateY(8px)";
-
-    setTimeout(
-      () => toast.remove(),
-      220
-    );
-
-  },3000);
-
-}
-
-/* =========================
-   SIDEBAR
-========================= */
-
-function openSidebar(){
-
-  document
-    .getElementById("sidebar")
-    .classList.add("open");
-
-  document
-    .getElementById("mobileOverlay")
-    .classList.add("show");
-
-}
-
-function closeSidebar(){
-
-  document
-    .getElementById("sidebar")
-    .classList.remove("open");
-
-  document
-    .getElementById("mobileOverlay")
-    .classList.remove("show");
-
-}
-
-/* =========================
-   LOGOUT
-========================= */
-
-function logout(){
-
-  sessionStorage.removeItem(
-    AUTH_KEY
   );
 
-  window.location.href =
-    "login/";
+  /* =========================
+     EVENTS
+  ========================== */
 
-}
+  searchInput.addEventListener(
+    "input",
+    applyFilters
+  );
 
-/* =========================
-   HELPERS
-========================= */
+  statusFilter.addEventListener(
+    "change",
+    applyFilters
+  );
 
-function capitalize(value){
+  typeFilter.addEventListener(
+    "change",
+    applyFilters
+  );
 
-  const text =
-    String(value || "");
+  sortFilter.addEventListener(
+    "change",
+    applyFilters
+  );
 
-  return text.charAt(0).toUpperCase() +
-    text.slice(1);
+  $("resetFiltersBtn")
+    .addEventListener(
+      "click",
+      function(){
 
-}
+        searchInput.value = "";
 
-function escapeJS(value){
+        statusFilter.value =
+          "all";
 
-  return String(value ?? "")
-    .replace(/\\/g,"\\\\")
-    .replace(/'/g,"\\'")
-    .replace(/"/g,'\\"')
-    .replace(/\r/g,"\\r")
-    .replace(/\n/g,"\\n");
+        typeFilter.value =
+          "all";
 
-}
+        sortFilter.value =
+          "newest";
 
-function debounce(
-  callback,
-  delay
-){
+        selectedIds.clear();
 
-  let timer;
+        applyFilters();
 
-  return function(){
-
-    clearTimeout(timer);
-
-    const args = arguments;
-
-    timer = setTimeout(
-      () => callback.apply(this,args),
-      delay
+      }
     );
 
-  };
+  $("selectAll")
+    .addEventListener(
+      "change",
+      function(){
 
-}
+        const page =
+          getPagedCustomers();
 
-/* =========================
-   ADMIN IDENTITY
-========================= */
+        if(this.checked){
 
-function setupAdminIdentity(){
+          page.forEach(
+            customer =>
+              selectedIds.add(
+                customer.id
+              )
+          );
 
-  if(!adminSession){
-    return;
+        }else{
+
+          page.forEach(
+            customer =>
+              selectedIds.delete(
+                customer.id
+              )
+          );
+
+        }
+
+        render();
+
+      }
+    );
+
+  $("prevPage")
+    .addEventListener(
+      "click",
+      function(){
+
+        if(currentPage > 1){
+
+          currentPage--;
+
+          render();
+
+        }
+
+      }
+    );
+
+  $("nextPage")
+    .addEventListener(
+      "click",
+      function(){
+
+        const totalPages =
+          Math.max(
+            1,
+            Math.ceil(
+              filteredCustomers.length /
+              PAGE_SIZE
+            )
+          );
+
+        if(
+          currentPage <
+          totalPages
+        ){
+
+          currentPage++;
+
+          render();
+
+        }
+
+      }
+    );
+
+  $("addCustomerBtn")
+    .addEventListener(
+      "click",
+      addCustomer
+    );
+
+  $("saveCustomerBtn")
+    .addEventListener(
+      "click",
+      saveCustomer
+    );
+
+  $("modalDeleteBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        if(editingCustomerId){
+
+          openDeleteModal(
+            editingCustomerId
+          );
+
+        }
+
+      }
+    );
+
+  $("modalStatusBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        if(!editingCustomerId){
+          return;
+        }
+
+        const customer =
+          customers.find(
+            c =>
+              String(c.id) ===
+              String(editingCustomerId)
+          );
+
+        if(!customer){
+          return;
+        }
+
+        customer.status =
+          customer.status === "suspended"
+            ? "active"
+            : "suspended";
+
+        saveJSON(
+          CUSTOMER_KEY,
+          customers
+        );
+
+        showToast(
+          customer.status === "suspended"
+            ? "Customer Suspended"
+            : "Customer Activated",
+          `${customer.name} is now ${customer.status}.`,
+          "success"
+        );
+
+        openCustomerModal(
+          customer.id,
+          true
+        );
+
+        applyFilters();
+
+      }
+    );
+
+  $("confirmDeleteBtn")
+    .addEventListener(
+      "click",
+      confirmDelete
+    );
+
+  $("bulkActivate")
+    .addEventListener(
+      "click",
+      function(){
+
+        bulkSetStatus(
+          "active"
+        );
+
+      }
+    );
+
+  $("bulkSuspend")
+    .addEventListener(
+      "click",
+      function(){
+
+        bulkSetStatus(
+          "suspended"
+        );
+
+      }
+    );
+
+  $("bulkDelete")
+    .addEventListener(
+      "click",
+      bulkDelete
+    );
+
+  $("exportBtn")
+    .addEventListener(
+      "click",
+      exportCSV
+    );
+
+  $("printBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        window.print();
+
+      }
+    );
+
+  $("refreshBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        loadSourceData();
+
+        selectedIds.clear();
+
+        applyFilters();
+
+        showToast(
+          "Refreshed",
+          "Customer data has been refreshed.",
+          "success"
+        );
+
+      }
+    );
+
+  $("marketplaceBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        window.open(
+          "../index.html",
+          "_blank"
+        );
+
+      }
+    );
+
+  $("logoutBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        sessionStorage.removeItem(
+          AUTH_KEY
+        );
+
+        window.location.href =
+          "login/";
+
+      }
+    );
+
+  /* =========================
+     MOBILE MENU
+  ========================== */
+
+  $("mobileMenuBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        sidebar.classList.add("open");
+
+        overlay.classList.add("show");
+
+      }
+    );
+
+  overlay.addEventListener(
+    "click",
+    function(){
+
+      sidebar.classList.remove(
+        "open"
+      );
+
+      overlay.classList.remove(
+        "show"
+      );
+
+    }
+  );
+
+  document
+    .querySelectorAll(".nav-item")
+    .forEach(item => {
+
+      item.addEventListener(
+        "click",
+        function(){
+
+          sidebar.classList.remove(
+            "open"
+          );
+
+          overlay.classList.remove(
+            "show"
+          );
+
+        }
+      );
+
+    });
+
+  /* =========================
+     TOAST
+  ========================== */
+
+  function showToast(
+    title,
+    message,
+    type
+  ){
+
+    const wrap =
+      $("toastWrap");
+
+    const toast =
+      document.createElement("div");
+
+    toast.className =
+      "toast " +
+      (
+        type ||
+        "success"
+      );
+
+    let icon = "✓";
+
+    if(type === "error"){
+      icon = "!";
+    }
+
+    if(type === "warning"){
+      icon = "!";
+    }
+
+    toast.innerHTML = `
+
+      <div class="toast-icon">
+        ${icon}
+      </div>
+
+      <div class="toast-content">
+
+        <div class="toast-title">
+          ${escapeHTML(title)}
+        </div>
+
+        <div class="toast-text">
+          ${escapeHTML(message)}
+        </div>
+
+      </div>
+
+    `;
+
+    wrap.appendChild(toast);
+
+    setTimeout(
+      () => {
+
+        toast.style.opacity =
+          "0";
+
+        toast.style.transform =
+          "translateY(8px)";
+
+        toast.style.transition =
+          ".2s ease";
+
+        setTimeout(
+          () => toast.remove(),
+          220
+        );
+
+      },
+      3200
+    );
+
   }
 
-  const name =
-    adminSession.name ||
-    adminSession.email ||
-    "Super Admin";
+  /* =========================
+     INITIALIZE
+  ========================== */
 
-  const role =
-    adminSession.role ||
-    "Administrator";
+  setupAdminIdentity();
 
-  document.getElementById(
-    "adminName"
-  ).textContent = name;
+  loadSourceData();
 
-  document.getElementById(
-    "adminRole"
-  ).textContent =
-    capitalize(
-      String(role)
-        .replace(/[-_]/g," ")
-    );
+  applyFilters();
 
-  document.getElementById(
-    "adminAvatar"
-  ).textContent =
-    initials(name);
-
-}
-
-/* =========================
-   START
-========================= */
-
-setupAdminIdentity();
-
-loadData();
-
-applyFilters();
-
+})();
 </script>
 
 </body>
