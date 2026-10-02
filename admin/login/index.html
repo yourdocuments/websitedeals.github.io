@@ -10,60 +10,49 @@
 
   <meta
     name="theme-color"
-    content="#07110c"
+    content="#07110b"
   >
 
   <meta
     name="description"
-    content="Website Deals Admin Login"
+    content="Website Deals Admin Login — Secure administration portal."
   >
 
   <title>Admin Login | Website Deals</title>
 
-  <link
-    rel="icon"
-    type="image/png"
-    href="../../logo.png"
-  >
+  <link rel="icon" type="image/png" href="../../logo.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
-
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
     rel="stylesheet"
   >
 
   <style>
     :root {
       --green: #18a957;
-      --green-dark: #108344;
+      --green-dark: #108844;
       --green-soft: #eaf8f0;
 
-      --dark: #07110c;
-      --dark-2: #0b1811;
-      --dark-3: #102219;
+      --dark: #07110b;
+      --dark-2: #0c1710;
+      --dark-3: #122019;
 
       --white: #ffffff;
-      --surface: #f7f9f8;
+      --text: #17211b;
+      --muted: #718078;
 
-      --text: #111814;
-      --muted: #6b756f;
-
-      --border: #e4e9e6;
+      --border: #e2e9e4;
+      --surface: #f6f8f7;
 
       --danger: #dc3545;
+      --danger-soft: #fff0f1;
 
       --shadow-lg:
-        0 30px 80px rgba(7, 17, 12, 0.16);
+        0 35px 80px rgba(7, 17, 11, .18),
+        0 8px 30px rgba(7, 17, 11, .08);
 
       --radius-xl: 30px;
       --radius-lg: 20px;
@@ -82,26 +71,21 @@
 
     body {
       min-height: 100vh;
-      font-family: "Inter", sans-serif;
+      font-family: "DM Sans", sans-serif;
       color: var(--text);
       background:
         radial-gradient(
           circle at 10% 10%,
-          rgba(24, 169, 87, 0.07),
+          rgba(24, 169, 87, .12),
           transparent 28%
         ),
         radial-gradient(
           circle at 90% 90%,
-          rgba(24, 169, 87, 0.06),
-          transparent 25%
+          rgba(24, 169, 87, .08),
+          transparent 28%
         ),
-        #eef2ef;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 24px;
+        #eef3f0;
+      overflow-x: hidden;
     }
 
     button,
@@ -110,7 +94,7 @@
     }
 
     button {
-      cursor: pointer;
+      border: 0;
     }
 
     a {
@@ -118,77 +102,130 @@
       text-decoration: none;
     }
 
-    /* =========================
-       PAGE
-    ========================== */
+    /* =========================================
+       BACKGROUND
+    ========================================= */
 
-    .login-shell {
-      width: min(1180px, 100%);
-      min-height: 700px;
-
-      display: grid;
-      grid-template-columns: 1.02fr 0.98fr;
-
-      background: var(--white);
-
-      border: 1px solid rgba(0, 0, 0, 0.05);
-
-      border-radius: var(--radius-xl);
-
+    .page-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
       overflow: hidden;
-
-      box-shadow: var(--shadow-lg);
+      z-index: 0;
     }
 
-    /* =========================
+    .glow {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(3px);
+      opacity: .55;
+    }
+
+    .glow-one {
+      width: 320px;
+      height: 320px;
+      left: -130px;
+      top: 90px;
+      background: rgba(24, 169, 87, .10);
+    }
+
+    .glow-two {
+      width: 420px;
+      height: 420px;
+      right: -180px;
+      bottom: -140px;
+      background: rgba(24, 169, 87, .08);
+    }
+
+    .grid-pattern {
+      position: absolute;
+      inset: 0;
+      opacity: .22;
+      background-image:
+        linear-gradient(
+          rgba(7, 17, 11, .035) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(7, 17, 11, .035) 1px,
+          transparent 1px
+        );
+      background-size: 38px 38px;
+    }
+
+    /* =========================================
+       LAYOUT
+    ========================================= */
+
+    .login-shell {
+      position: relative;
+      z-index: 1;
+
+      min-height: 100vh;
+      width: 100%;
+
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(460px, .95fr);
+
+      padding: 28px;
+      gap: 28px;
+    }
+
+    /* =========================================
        BRAND PANEL
-    ========================== */
+    ========================================= */
 
     .brand-panel {
       position: relative;
 
-      padding: 58px;
-
-      color: #fff;
-
-      background:
-        radial-gradient(
-          circle at 85% 12%,
-          rgba(24, 169, 87, 0.28),
-          transparent 25%
-        ),
-        radial-gradient(
-          circle at 15% 85%,
-          rgba(24, 169, 87, 0.16),
-          transparent 30%
-        ),
-        linear-gradient(
-          145deg,
-          #06100a,
-          #0a1710 52%,
-          #102319
-        );
+      min-height: calc(100vh - 56px);
 
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+
+      padding: 46px;
+
+      border-radius: var(--radius-xl);
+
+      background:
+        radial-gradient(
+          circle at 80% 15%,
+          rgba(24, 169, 87, .18),
+          transparent 25%
+        ),
+        linear-gradient(
+          145deg,
+          #07110b 0%,
+          #0b1710 55%,
+          #101e16 100%
+        );
+
+      color: var(--white);
 
       overflow: hidden;
+
+      box-shadow:
+        0 25px 60px rgba(7, 17, 11, .20);
     }
 
     .brand-panel::before {
       content: "";
-
       position: absolute;
 
-      width: 360px;
-      height: 360px;
+      width: 430px;
+      height: 430px;
 
       right: -180px;
-      top: -160px;
-
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      top: -150px;
 
       border-radius: 50%;
+
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow:
+        0 0 0 50px rgba(255,255,255,.015),
+        0 0 0 100px rgba(255,255,255,.012);
     }
 
     .brand-panel::after {
@@ -196,90 +233,95 @@
 
       position: absolute;
 
-      width: 520px;
-      height: 520px;
+      width: 220px;
+      height: 220px;
 
-      left: -310px;
-      bottom: -330px;
-
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      left: -110px;
+      bottom: -100px;
 
       border-radius: 50%;
+
+      background: rgba(24,169,87,.08);
+      filter: blur(5px);
     }
 
-    .brand-content {
+    .brand-content,
+    .brand-bottom {
       position: relative;
       z-index: 2;
     }
 
-    /* =========================
-       LOGO
-    ========================== */
+    .brand-logo-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
 
     .brand-logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 13px;
+      width: 58px;
+      height: 58px;
+
+      border-radius: 17px;
+
+      background: rgba(255,255,255,.96);
+
+      display: grid;
+      place-items: center;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 12px 28px rgba(0,0,0,.22);
     }
 
     .brand-logo img {
-      width: 52px;
-      height: 52px;
-
+      width: 80%;
+      height: 80%;
       object-fit: contain;
-
-      background: #fff;
-
-      border-radius: 14px;
-
-      padding: 7px;
     }
 
-    .brand-logo-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+    .brand-name {
+      font-family: "Manrope", sans-serif;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -.5px;
     }
 
-    .brand-logo-text strong {
-      font-family: "Space Grotesk", sans-serif;
+    .brand-label {
+      margin-top: 4px;
 
-      font-size: 21px;
-      font-weight: 700;
-
-      letter-spacing: -0.5px;
-    }
-
-    .brand-logo-text span {
-      color: #91a69a;
-
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
 
       letter-spacing: 1.5px;
       text-transform: uppercase;
+
+      color: rgba(255,255,255,.52);
     }
 
-    /* =========================
-       BRAND HERO
-    ========================== */
-
-    .brand-hero {
-      margin-top: 115px;
+    .brand-main {
+      max-width: 680px;
+      margin-top: 70px;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 9px;
 
-      color: #9fe7ba;
+      padding: 9px 13px;
 
-      font-size: 11px;
-      font-weight: 800;
+      border-radius: 999px;
 
-      letter-spacing: 1.6px;
+      background: rgba(24,169,87,.12);
+      border: 1px solid rgba(24,169,87,.24);
 
+      color: #80e9ad;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      letter-spacing: .9px;
       text-transform: uppercase;
     }
 
@@ -289,144 +331,133 @@
 
       border-radius: 50%;
 
-      background: var(--green);
+      background: #43d87e;
 
       box-shadow:
-        0 0 0 5px rgba(24, 169, 87, 0.13);
+        0 0 0 5px rgba(67,216,126,.10);
     }
 
-    .brand-hero h1 {
-      max-width: 480px;
+    .brand-title {
+      margin-top: 25px;
+
+      font-family: "Manrope", sans-serif;
+
+      font-size: clamp(38px, 4vw, 65px);
+      line-height: 1.02;
+      letter-spacing: -2.8px;
+
+      font-weight: 800;
+    }
+
+    .brand-title span {
+      color: #56dc8a;
+    }
+
+    .brand-description {
+      max-width: 590px;
 
       margin-top: 22px;
 
-      font-family: "Space Grotesk", sans-serif;
+      color: rgba(255,255,255,.62);
 
-      font-size: clamp(42px, 5vw, 67px);
-
-      line-height: 0.98;
-
-      letter-spacing: -3.5px;
+      font-size: 16px;
+      line-height: 1.75;
     }
-
-    .brand-hero h1 span {
-      color: #8ff0b2;
-    }
-
-    .brand-hero p {
-      max-width: 465px;
-
-      margin-top: 25px;
-
-      color: #a7b6ad;
-
-      font-size: 15px;
-      line-height: 1.8;
-    }
-
-    /* =========================
-       FEATURE LIST
-    ========================== */
 
     .feature-list {
-      margin-top: 45px;
+      margin-top: 38px;
 
       display: grid;
-
-      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
     }
 
     .feature {
       display: flex;
       align-items: center;
+      gap: 11px;
 
-      gap: 13px;
+      padding: 14px;
 
-      color: #cbd6cf;
+      border-radius: 14px;
 
-      font-size: 13px;
-      font-weight: 600;
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.07);
     }
 
     .feature-icon {
-      width: 31px;
-      height: 31px;
+      width: 34px;
+      height: 34px;
+
+      flex: 0 0 34px;
 
       display: grid;
       place-items: center;
-
-      flex-shrink: 0;
-
-      color: #8ff0b2;
-
-      background: rgba(24, 169, 87, 0.12);
-
-      border: 1px solid rgba(24, 169, 87, 0.2);
 
       border-radius: 10px;
 
-      font-size: 14px;
+      background: rgba(24,169,87,.13);
+      color: #66df96;
     }
 
-    /* =========================
-       BRAND FOOTER
-    ========================== */
+    .feature-icon svg {
+      width: 17px;
+      height: 17px;
+    }
 
-    .brand-footer {
-      position: relative;
-      z-index: 2;
+    .feature-text {
+      color: rgba(255,255,255,.72);
 
-      margin-top: auto;
+      font-size: 12px;
+      font-weight: 600;
+    }
 
-      padding-top: 40px;
-
+    .brand-bottom {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-
-      color: #718177;
-
-      font-size: 11px;
-    }
-
-    .secure-mini {
-      display: flex;
       align-items: center;
-      gap: 7px;
+
+      gap: 20px;
+
+      color: rgba(255,255,255,.38);
+
+      font-size: 12px;
     }
 
-    .secure-mini::before {
-      content: "✓";
-
-      width: 19px;
-      height: 19px;
-
-      display: grid;
-      place-items: center;
-
-      color: #8ff0b2;
-
-      border: 1px solid rgba(143, 240, 178, 0.22);
-
-      border-radius: 50%;
+    .brand-bottom strong {
+      color: rgba(255,255,255,.62);
     }
 
-    /* =========================
+    /* =========================================
        LOGIN PANEL
-    ========================== */
+    ========================================= */
 
     .login-panel {
-      padding: 58px;
+      min-height: calc(100vh - 56px);
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      background: #fff;
+      padding: 20px;
     }
 
-    .login-content {
-      width: min(420px, 100%);
+    .login-card {
+      width: 100%;
+      max-width: 510px;
+
+      padding: 42px;
+
+      border-radius: var(--radius-xl);
+
+      background: rgba(255,255,255,.92);
+
+      border: 1px solid rgba(255,255,255,.9);
+
+      box-shadow: var(--shadow-lg);
+
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     .mobile-brand {
@@ -434,179 +465,171 @@
     }
 
     .login-heading {
-      margin-bottom: 36px;
-    }
+      font-family: "Manrope", sans-serif;
 
-    .login-heading .small-label {
-      color: var(--green);
+      font-size: 31px;
+      line-height: 1.15;
 
-      font-size: 11px;
+      letter-spacing: -1.2px;
+
       font-weight: 800;
-
-      letter-spacing: 1.4px;
-
-      text-transform: uppercase;
     }
 
-    .login-heading h2 {
-      margin-top: 11px;
-
-      font-family: "Space Grotesk", sans-serif;
-
-      font-size: 37px;
-
-      line-height: 1.08;
-
-      letter-spacing: -1.7px;
-    }
-
-    .login-heading p {
-      margin-top: 12px;
+    .login-subtitle {
+      margin-top: 10px;
 
       color: var(--muted);
 
       font-size: 14px;
-      line-height: 1.7;
+      line-height: 1.65;
     }
 
-    /* =========================
+    /* =========================================
        FORM
-    ========================== */
+    ========================================= */
 
-    .form-group {
-      margin-bottom: 21px;
+    .login-form {
+      margin-top: 31px;
     }
 
-    .form-label {
-      display: block;
+    .field {
+      margin-bottom: 19px;
+    }
 
-      margin-bottom: 9px;
+    .field-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
 
-      color: #27322c;
+      margin-bottom: 8px;
 
       font-size: 12px;
-      font-weight: 800;
+      font-weight: 700;
+
+      color: #354239;
     }
 
-    .input-wrap {
+    .field-wrap {
       position: relative;
     }
 
-    .input-icon {
+    .field-icon {
       position: absolute;
 
-      left: 16px;
+      left: 15px;
       top: 50%;
 
       transform: translateY(-50%);
 
-      color: #89948d;
-
-      font-size: 14px;
+      color: #8a9790;
 
       pointer-events: none;
     }
 
-    .form-input {
+    .field-icon svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .input {
       width: 100%;
 
       height: 53px;
 
       padding:
-        0
-        47px
-        0
-        46px;
+        0 48px 0 46px;
 
-      color: var(--text);
-
-      background: #fbfcfb;
+      border-radius: 14px;
 
       border: 1px solid var(--border);
 
-      border-radius: var(--radius-md);
+      background: #fbfcfb;
 
       outline: none;
+
+      color: var(--text);
 
       font-size: 14px;
 
       transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
+        border-color .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
     }
 
-    .form-input:hover {
-      border-color: #d2dad5;
+    .input:hover {
+      border-color: #cbd8d0;
     }
 
-    .form-input:focus {
+    .input:focus {
       background: #fff;
 
-      border-color: var(--green);
+      border-color: rgba(24,169,87,.65);
 
       box-shadow:
-        0 0 0 4px rgba(24, 169, 87, 0.09);
+        0 0 0 4px rgba(24,169,87,.10);
     }
 
     .password-toggle {
       position: absolute;
 
-      right: 14px;
+      right: 10px;
       top: 50%;
 
       transform: translateY(-50%);
 
-      width: 32px;
-      height: 32px;
+      width: 34px;
+      height: 34px;
 
       display: grid;
       place-items: center;
 
-      color: #87928b;
+      border-radius: 9px;
 
       background: transparent;
 
-      border: 0;
+      color: #7c8881;
 
-      border-radius: 8px;
+      cursor: pointer;
+
+      transition:
+        background .2s ease,
+        color .2s ease;
     }
 
     .password-toggle:hover {
+      background: #edf3ef;
       color: var(--green);
-
-      background: var(--green-soft);
     }
 
-    /* =========================
-       FORM OPTIONS
-    ========================== */
+    .password-toggle svg {
+      width: 18px;
+      height: 18px;
+    }
 
-    .form-options {
+    .form-row {
       display: flex;
-
       align-items: center;
       justify-content: space-between;
 
       gap: 15px;
 
-      margin-top: 4px;
-
+      margin-top: 2px;
       margin-bottom: 24px;
     }
 
     .remember {
       display: inline-flex;
-
       align-items: center;
-
       gap: 8px;
 
-      color: #68736c;
+      color: #66736b;
 
       font-size: 12px;
+      font-weight: 600;
 
       cursor: pointer;
+      user-select: none;
     }
 
     .remember input {
@@ -618,118 +641,104 @@
       cursor: pointer;
     }
 
-    .forgot {
-      color: var(--green-dark);
+    .secure-text {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
 
-      font-size: 12px;
-      font-weight: 700;
+      color: #87928c;
 
-      background: none;
-
-      border: 0;
-    }
-
-    .forgot:hover {
-      text-decoration: underline;
-    }
-
-    /* =========================
-       ERROR
-    ========================== */
-
-    .login-error {
-      display: none;
-
-      margin-bottom: 18px;
-
-      padding: 12px 14px;
-
-      color: #a92c39;
-
-      background: #fff1f2;
-
-      border: 1px solid #ffd4d8;
-
-      border-radius: 12px;
-
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
-
-      line-height: 1.5;
     }
 
-    .login-error.show {
-      display: block;
+    .secure-text svg {
+      width: 14px;
+      height: 14px;
     }
 
-    /* =========================
-       SIGN IN BUTTON
-    ========================== */
+    .login-button {
+      position: relative;
 
-    .sign-in-btn {
       width: 100%;
-
       height: 55px;
 
       display: flex;
-
       align-items: center;
       justify-content: center;
+      gap: 9px;
 
-      gap: 10px;
-
-      color: #fff;
+      border-radius: 15px;
 
       background:
         linear-gradient(
           135deg,
-          var(--green),
-          var(--green-dark)
+          #18a957,
+          #129348
         );
 
-      border: 0;
-
-      border-radius: 14px;
-
-      box-shadow:
-        0 12px 24px rgba(24, 169, 87, 0.18);
+      color: #fff;
 
       font-size: 14px;
       font-weight: 800;
 
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease;
-    }
-
-    .sign-in-btn:hover {
-      transform: translateY(-2px);
+      cursor: pointer;
 
       box-shadow:
-        0 17px 32px rgba(24, 169, 87, 0.24);
+        0 13px 25px rgba(24,169,87,.22);
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        opacity .2s ease;
     }
 
-    .sign-in-btn:active {
+    .login-button:hover {
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 17px 30px rgba(24,169,87,.27);
+    }
+
+    .login-button:active {
       transform: translateY(0);
     }
 
-    .sign-in-btn.loading {
-      pointer-events: none;
-
-      opacity: 0.8;
+    .login-button:disabled {
+      cursor: not-allowed;
+      opacity: .7;
+      transform: none;
     }
 
-    .spinner {
-      width: 16px;
-      height: 16px;
+    .login-button svg {
+      width: 18px;
+      height: 18px;
+    }
 
-      border: 2px solid rgba(255, 255, 255, 0.35);
+    .button-loader {
+      display: none;
 
-      border-top-color: #fff;
+      width: 18px;
+      height: 18px;
 
       border-radius: 50%;
 
-      animation: spin 0.7s linear infinite;
+      border:
+        2px solid rgba(255,255,255,.35);
+
+      border-top-color: #fff;
+
+      animation:
+        spin .7s linear infinite;
+    }
+
+    .login-button.loading .button-icon,
+    .login-button.loading .button-text {
+      display: none;
+    }
+
+    .login-button.loading .button-loader {
+      display: block;
     }
 
     @keyframes spin {
@@ -738,156 +747,307 @@
       }
     }
 
-    /* =========================
-       SECURITY
-    ========================== */
+    /* =========================================
+       STATUS
+    ========================================= */
 
-    .security-note {
-      margin-top: 23px;
+    .form-message {
+      display: none;
 
-      padding: 14px 15px;
+      margin-top: 17px;
 
-      display: flex;
+      padding: 12px 14px;
 
-      align-items: flex-start;
+      border-radius: 12px;
 
-      gap: 11px;
-
-      color: #68736c;
-
-      background: #f7faf8;
-
-      border: 1px solid #e8eeea;
-
-      border-radius: 13px;
-
-      font-size: 11px;
-
-      line-height: 1.6;
+      font-size: 12px;
+      line-height: 1.5;
+      font-weight: 600;
     }
 
-    .security-note-icon {
-      width: 25px;
-      height: 25px;
+    .form-message.show {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+    }
 
-      flex-shrink: 0;
+    .form-message.error {
+      color: #a92635;
+      background: var(--danger-soft);
+      border: 1px solid #ffd4d9;
+    }
+
+    .form-message.success {
+      color: #08713a;
+      background: var(--green-soft);
+      border: 1px solid #c9efd9;
+    }
+
+    .form-message svg {
+      flex: 0 0 16px;
+
+      width: 16px;
+      height: 16px;
+
+      margin-top: 1px;
+    }
+
+    /* =========================================
+       DEMO ACCESS
+    ========================================= */
+
+    .demo-box {
+      margin-top: 25px;
+
+      padding: 17px;
+
+      border-radius: 15px;
+
+      background: #f5f8f6;
+
+      border: 1px solid #e4ebe6;
+    }
+
+    .demo-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 12px;
+    }
+
+    .demo-title {
+      font-size: 11px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+      letter-spacing: .8px;
+
+      color: #536058;
+    }
+
+    .demo-badge {
+      padding: 5px 8px;
+
+      border-radius: 999px;
+
+      background: #e5f7ec;
+
+      color: #108844;
+
+      font-size: 9px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+      letter-spacing: .6px;
+    }
+
+    .demo-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+
+      align-items: center;
+
+      gap: 12px;
+
+      margin-top: 8px;
+    }
+
+    .demo-label {
+      font-size: 10px;
+      color: #8a948e;
+      margin-bottom: 3px;
+    }
+
+    .demo-value {
+      font-size: 12px;
+      font-weight: 700;
+
+      color: #354239;
+
+      word-break: break-word;
+    }
+
+    .copy-button {
+      width: 34px;
+      height: 34px;
 
       display: grid;
       place-items: center;
 
-      color: var(--green-dark);
+      border-radius: 9px;
 
-      background: var(--green-soft);
+      background: #fff;
 
-      border-radius: 8px;
+      border: 1px solid #e1e8e3;
+
+      color: #738078;
+
+      cursor: pointer;
+
+      transition: .2s ease;
     }
 
-    /* =========================
-       BOTTOM LINKS
-    ========================== */
+    .copy-button:hover {
+      color: var(--green);
+      border-color: #bde5cc;
+      background: #f4fcf7;
+    }
 
-    .bottom-links {
-      margin-top: 28px;
+    .copy-button svg {
+      width: 15px;
+      height: 15px;
+    }
 
-      padding-top: 22px;
+    /* =========================================
+       FOOTER
+    ========================================= */
+
+    .login-footer {
+      margin-top: 27px;
+
+      padding-top: 21px;
 
       border-top: 1px solid #edf0ee;
 
       display: flex;
-
       align-items: center;
       justify-content: space-between;
 
-      color: #8a938d;
+      gap: 15px;
 
-      font-size: 11px;
+      color: #909a94;
+
+      font-size: 10px;
+      font-weight: 600;
     }
 
-    .market-link {
-      color: var(--green-dark);
+    .back-marketplace {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
 
-      font-weight: 700;
+      color: #69756e;
+
+      transition: color .2s ease;
     }
 
-    .market-link:hover {
-      text-decoration: underline;
+    .back-marketplace:hover {
+      color: var(--green);
     }
 
-    /* =========================
+    .back-marketplace svg {
+      width: 13px;
+      height: 13px;
+    }
+
+    /* =========================================
        TOAST
-    ========================== */
+    ========================================= */
 
     .toast {
       position: fixed;
 
-      right: 25px;
-      bottom: 25px;
+      right: 24px;
+      bottom: 24px;
 
-      z-index: 1000;
+      z-index: 100;
 
-      min-width: 280px;
-      max-width: 380px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
 
-      padding: 15px 17px;
+      min-width: 250px;
+
+      padding: 13px 15px;
+
+      border-radius: 13px;
+
+      background: #101713;
 
       color: #fff;
 
-      background: #101814;
-
-      border: 1px solid rgba(255, 255, 255, 0.08);
-
-      border-radius: 14px;
-
       box-shadow:
-        0 20px 45px rgba(0, 0, 0, 0.2);
+        0 18px 40px rgba(0,0,0,.18);
 
-      transform:
-        translateY(25px);
+      font-size: 12px;
+      font-weight: 700;
 
       opacity: 0;
+      visibility: hidden;
 
-      pointer-events: none;
+      transform: translateY(12px);
 
       transition:
-        opacity 0.25s ease,
-        transform 0.25s ease;
+        opacity .25s ease,
+        visibility .25s ease,
+        transform .25s ease;
     }
 
     .toast.show {
       opacity: 1;
-
+      visibility: visible;
       transform: translateY(0);
     }
 
-    .toast strong {
-      display: block;
+    .toast-icon {
+      width: 28px;
+      height: 28px;
 
-      margin-bottom: 4px;
+      flex: 0 0 28px;
 
-      font-size: 13px;
+      display: grid;
+      place-items: center;
+
+      border-radius: 8px;
+
+      background: rgba(24,169,87,.16);
+      color: #57dc8a;
     }
 
-    .toast span {
-      color: #aab5ae;
-
-      font-size: 11px;
+    .toast-icon svg {
+      width: 15px;
+      height: 15px;
     }
 
-    /* =========================
+    /* =========================================
        RESPONSIVE
-    ========================== */
+    ========================================= */
 
-    @media (max-width: 980px) {
-      body {
-        padding: 15px;
-      }
-
+    @media (max-width: 1100px) {
       .login-shell {
         grid-template-columns: 1fr;
+        padding: 20px;
+      }
 
+      .brand-panel {
         min-height: auto;
+        padding: 34px;
+      }
 
-        max-width: 620px;
+      .brand-main {
+        margin-top: 48px;
+      }
+
+      .brand-title {
+        max-width: 700px;
+        font-size: 48px;
+      }
+
+      .brand-bottom {
+        margin-top: 55px;
+      }
+
+      .login-panel {
+        min-height: auto;
+        padding: 0;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .login-shell {
+        padding: 0;
+        display: block;
       }
 
       .brand-panel {
@@ -895,125 +1055,125 @@
       }
 
       .login-panel {
-        padding: 42px 35px;
+        min-height: 100vh;
+        padding: 18px;
+      }
+
+      .login-card {
+        max-width: none;
+
+        padding: 28px 22px;
+
+        border-radius: 24px;
       }
 
       .mobile-brand {
         display: flex;
 
         align-items: center;
-
         gap: 11px;
 
-        margin-bottom: 42px;
+        margin-bottom: 32px;
       }
 
-      .mobile-brand img {
+      .mobile-brand-logo {
         width: 45px;
         height: 45px;
 
-        padding: 6px;
+        display: grid;
+        place-items: center;
 
-        object-fit: contain;
+        border-radius: 13px;
 
         background: #fff;
 
-        border: 1px solid var(--border);
+        overflow: hidden;
 
-        border-radius: 12px;
+        box-shadow:
+          0 7px 20px rgba(7,17,11,.08);
       }
 
-      .mobile-brand strong {
-        font-family: "Space Grotesk", sans-serif;
-
-        font-size: 19px;
+      .mobile-brand-logo img {
+        width: 80%;
+        height: 80%;
+        object-fit: contain;
       }
 
-      .mobile-brand span {
-        display: block;
+      .mobile-brand-name {
+        font-family: "Manrope", sans-serif;
+        font-size: 17px;
+        font-weight: 800;
+      }
 
+      .mobile-brand-label {
         margin-top: 2px;
 
-        color: var(--muted);
+        color: #87928c;
 
         font-size: 9px;
-
         font-weight: 800;
 
-        letter-spacing: 1.2px;
-
+        letter-spacing: 1px;
         text-transform: uppercase;
-      }
-    }
-
-    @media (max-width: 560px) {
-      body {
-        padding: 0;
-
-        background: #fff;
-      }
-
-      .login-shell {
-        width: 100%;
-
-        border: 0;
-
-        border-radius: 0;
-
-        box-shadow: none;
-      }
-
-      .login-panel {
-        min-height: 100vh;
-
-        padding:
-          30px
-          22px;
-      }
-
-      .mobile-brand {
-        margin-bottom: 55px;
       }
 
       .login-heading {
-        margin-bottom: 30px;
+        font-size: 28px;
       }
 
-      .login-heading h2 {
-        font-size: 32px;
-      }
-
-      .form-input {
-        height: 51px;
-      }
-
-      .bottom-links {
-        flex-direction: column;
-
+      .form-row {
         align-items: flex-start;
+        flex-direction: column;
+      }
 
-        gap: 10px;
+      .secure-text {
+        display: none;
+      }
+
+      .login-footer {
+        flex-direction: column;
+        align-items: flex-start;
       }
 
       .toast {
-        left: 15px;
-        right: 15px;
-
-        bottom: 15px;
-
+        left: 18px;
+        right: 18px;
+        bottom: 18px;
         min-width: 0;
       }
+    }
+
+    @media (max-width: 380px) {
+      .login-card {
+        padding: 24px 17px;
+      }
+
+      .demo-box {
+        padding: 14px;
+      }
+
+      .demo-value {
+        font-size: 11px;
+      }
+    }
+
+    /* =========================================
+       ACCESSIBILITY
+    ========================================= */
+
+    :focus-visible {
+      outline: 3px solid rgba(24,169,87,.25);
+      outline-offset: 2px;
     }
 
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
       *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
         scroll-behavior: auto !important;
-
-        animation-duration: 0.01ms !important;
-
-        transition-duration: 0.01ms !important;
       }
     }
   </style>
@@ -1021,65 +1181,153 @@
 
 <body>
 
+  <div class="page-bg">
+    <div class="glow glow-one"></div>
+    <div class="glow glow-two"></div>
+    <div class="grid-pattern"></div>
+  </div>
+
   <main class="login-shell">
 
-    <!-- =========================
+    <!-- =====================================
          BRAND PANEL
-    ========================== -->
+    ====================================== -->
 
     <section class="brand-panel">
 
       <div class="brand-content">
 
-        <a
-          href="../../index.html"
-          class="brand-logo"
-          aria-label="Website Deals Marketplace"
-        >
-          <img
-            src="../../logo.png"
-            alt="Website Deals"
-          >
+        <div class="brand-logo-row">
 
-          <div class="brand-logo-text">
-            <strong>Website Deals</strong>
-            <span>Admin Portal</span>
+          <div class="brand-logo">
+            <img
+              src="../../logo.png"
+              alt="Website Deals Logo"
+              onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=&quot;color:#18a957;font-weight:900;font-size:20px;&quot;>WD</span>';"
+            >
           </div>
-        </a>
 
-        <div class="brand-hero">
+          <div>
+            <div class="brand-name">
+              Website Deals
+            </div>
+
+            <div class="brand-label">
+              Administration Portal
+            </div>
+          </div>
+
+        </div>
+
+        <div class="brand-main">
 
           <div class="eyebrow">
             <span class="eyebrow-dot"></span>
-            Secure Workspace
+            Secure Admin Access
           </div>
 
-          <h1>
+          <h1 class="brand-title">
             Manage your
-            <span>marketplace.</span>
+            <span>digital marketplace.</span>
           </h1>
 
-          <p>
-            Manage websites, orders, customers, payments and
-            marketplace content from one professional admin
-            workspace.
+          <p class="brand-description">
+            A premium control center for managing websites,
+            orders, customers, payments, reports and marketplace
+            settings from one place.
           </p>
 
           <div class="feature-list">
 
             <div class="feature">
-              <span class="feature-icon">✓</span>
-              Website & marketplace management
+
+              <div class="feature-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/>
+                  <path d="m9 12 2 2 4-4"/>
+                </svg>
+              </div>
+
+              <div class="feature-text">
+                Protected Admin Access
+              </div>
+
             </div>
 
             <div class="feature">
-              <span class="feature-icon">✓</span>
-              Orders, customers & payments
+
+              <div class="feature-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect x="3" y="3" width="18" height="18" rx="2"/>
+                  <path d="M3 9h18"/>
+                  <path d="M9 21V9"/>
+                </svg>
+              </div>
+
+              <div class="feature-text">
+                Centralized Management
+              </div>
+
             </div>
 
             <div class="feature">
-              <span class="feature-icon">✓</span>
-              Reports & newsletter management
+
+              <div class="feature-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 3v18h18"/>
+                  <path d="m7 16 4-5 3 3 5-7"/>
+                </svg>
+              </div>
+
+              <div class="feature-text">
+                Reports & Analytics
+              </div>
+
+            </div>
+
+            <div class="feature">
+
+              <div class="feature-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M20 7h-9"/>
+                  <path d="M14 17H5"/>
+                  <circle cx="17" cy="17" r="3"/>
+                  <circle cx="7" cy="7" r="3"/>
+                </svg>
+              </div>
+
+              <div class="feature-text">
+                Flexible Marketplace Controls
+              </div>
+
             </div>
 
           </div>
@@ -1088,14 +1336,15 @@
 
       </div>
 
-      <div class="brand-footer">
-
-        <div class="secure-mini">
-          Protected Admin Workspace
-        </div>
+      <div class="brand-bottom">
 
         <span>
-          © <span id="brand-year"></span> Website Deals
+          <strong>Website Deals</strong>
+          &nbsp;•&nbsp; Admin Console
+        </span>
+
+        <span>
+          © <span id="brandYear">2026</span>
         </span>
 
       </div>
@@ -1103,94 +1352,96 @@
     </section>
 
 
-    <!-- =========================
+    <!-- =====================================
          LOGIN PANEL
-    ========================== -->
+    ====================================== -->
 
     <section class="login-panel">
 
-      <div class="login-content">
+      <div class="login-card">
 
-        <!-- Mobile Brand -->
+        <!-- Mobile brand -->
 
-        <a
-          href="../../index.html"
-          class="mobile-brand"
-        >
-          <img
-            src="../../logo.png"
-            alt="Website Deals"
-          >
+        <div class="mobile-brand">
+
+          <div class="mobile-brand-logo">
+            <img
+              src="../../logo.png"
+              alt="Website Deals"
+              onerror="this.style.display='none'; this.parentElement.innerHTML='<span style=&quot;color:#18a957;font-weight:900;&quot;>WD</span>';"
+            >
+          </div>
 
           <div>
-            <strong>Website Deals</strong>
+            <div class="mobile-brand-name">
+              Website Deals
+            </div>
 
-            <span>
+            <div class="mobile-brand-label">
               Admin Portal
-            </span>
+            </div>
           </div>
-        </a>
-
-
-        <!-- Heading -->
-
-        <div class="login-heading">
-
-          <div class="small-label">
-            Admin Access
-          </div>
-
-          <h2>
-            Welcome back.
-          </h2>
-
-          <p>
-            Sign in to continue to your marketplace dashboard.
-          </p>
 
         </div>
 
 
-        <!-- Error -->
+        <h2 class="login-heading">
+          Welcome back.
+        </h2>
 
-        <div
-          id="login-error"
-          class="login-error"
-          role="alert"
-        ></div>
+        <p class="login-subtitle">
+          Sign in to access your Website Deals administration
+          dashboard.
+        </p>
 
 
         <!-- Login Form -->
 
         <form
-          id="login-form"
-          autocomplete="on"
+          class="login-form"
+          id="loginForm"
           novalidate
         >
 
           <!-- Email -->
 
-          <div class="form-group">
+          <div class="field">
 
             <label
-              class="form-label"
+              class="field-label"
               for="email"
             >
-              Email Address
+              <span>Email Address</span>
             </label>
 
-            <div class="input-wrap">
+            <div class="field-wrap">
 
-              <span class="input-icon">
-                ✉
+              <span class="field-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect
+                    x="3"
+                    y="5"
+                    width="18"
+                    height="14"
+                    rx="2"
+                  />
+                  <path d="m3 7 9 6 9-6"/>
+                </svg>
               </span>
 
               <input
+                class="input"
+                type="email"
                 id="email"
                 name="email"
-                class="form-input"
-                type="email"
-                placeholder="admin@websitedeals.com"
+                placeholder="admin@example.com"
                 autocomplete="username"
                 required
               >
@@ -1202,38 +1453,68 @@
 
           <!-- Password -->
 
-          <div class="form-group">
+          <div class="field">
 
             <label
-              class="form-label"
+              class="field-label"
               for="password"
             >
-              Password
+              <span>Password</span>
             </label>
 
-            <div class="input-wrap">
+            <div class="field-wrap">
 
-              <span class="input-icon">
-                🔒
+              <span class="field-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <rect
+                    x="4"
+                    y="10"
+                    width="16"
+                    height="11"
+                    rx="2"
+                  />
+                  <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+                </svg>
               </span>
 
               <input
+                class="input"
+                type="password"
                 id="password"
                 name="password"
-                class="form-input"
-                type="password"
                 placeholder="Enter your password"
                 autocomplete="current-password"
                 required
               >
 
               <button
-                type="button"
-                id="password-toggle"
                 class="password-toggle"
+                type="button"
+                id="passwordToggle"
                 aria-label="Show password"
+                title="Show password"
               >
-                ◉
+
+                <svg
+                  id="eyeIcon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+
               </button>
 
             </div>
@@ -1241,9 +1522,9 @@
           </div>
 
 
-          <!-- Options -->
+          <!-- Form Options -->
 
-          <div class="form-options">
+          <div class="form-row">
 
             <label class="remember">
 
@@ -1253,84 +1534,224 @@
               >
 
               <span>
-                Remember me
+                Keep me signed in
               </span>
 
             </label>
 
+            <div class="secure-text">
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect
+                  x="4"
+                  y="10"
+                  width="16"
+                  height="11"
+                  rx="2"
+                />
+                <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+              </svg>
+
+              Protected session
+
+            </div>
+
+          </div>
+
+
+          <!-- Login Button -->
+
+          <button
+            class="login-button"
+            type="submit"
+            id="loginButton"
+          >
+
+            <span class="button-icon">
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/>
+                <path d="m10 17 5-5-5-5"/>
+                <path d="M15 12H3"/>
+              </svg>
+
+            </span>
+
+            <span class="button-text">
+              Sign In to Admin
+            </span>
+
+            <span class="button-loader"></span>
+
+          </button>
+
+
+          <!-- Message -->
+
+          <div
+            class="form-message"
+            id="formMessage"
+            role="alert"
+          ></div>
+
+        </form>
+
+
+        <!-- Demo Credentials -->
+
+        <div class="demo-box">
+
+          <div class="demo-head">
+
+            <span class="demo-title">
+              Demo Admin Access
+            </span>
+
+            <span class="demo-badge">
+              Prototype
+            </span>
+
+          </div>
+
+
+          <div class="demo-row">
+
+            <div>
+
+              <div class="demo-label">
+                Email
+              </div>
+
+              <div
+                class="demo-value"
+                id="demoEmail"
+              >
+                superadmin@websitedeals.com
+              </div>
+
+            </div>
+
             <button
+              class="copy-button"
               type="button"
-              class="forgot"
-              id="forgot-password"
+              data-copy="superadmin@websitedeals.com"
+              aria-label="Copy demo email"
+              title="Copy email"
             >
-              Forgot password?
+
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect
+                  x="9"
+                  y="9"
+                  width="13"
+                  height="13"
+                  rx="2"
+                />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
+
             </button>
 
           </div>
 
 
-          <!-- Submit -->
+          <div class="demo-row">
 
-          <button
-            type="submit"
-            class="sign-in-btn"
-            id="sign-in-btn"
-          >
-            <span id="sign-in-text">
-              Sign In
-            </span>
+            <div>
 
-            <span
-              id="sign-in-spinner"
-              class="spinner"
-              style="display:none;"
-            ></span>
+              <div class="demo-label">
+                Password
+              </div>
 
-            <span
-              id="sign-in-arrow"
+              <div
+                class="demo-value"
+                id="demoPassword"
+              >
+                123456
+              </div>
+
+            </div>
+
+            <button
+              class="copy-button"
+              type="button"
+              data-copy="123456"
+              aria-label="Copy demo password"
+              title="Copy password"
             >
-              →
-            </span>
 
-          </button>
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect
+                  x="9"
+                  y="9"
+                  width="13"
+                  height="13"
+                  rx="2"
+                />
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+              </svg>
 
-        </form>
+            </button>
 
-
-        <!-- Security -->
-
-        <div class="security-note">
-
-          <div class="security-note-icon">
-            🔐
-          </div>
-
-          <div>
-            <strong>
-              Secure administrator access
-            </strong>
-            <br>
-
-            Your admin workspace is intended for authorized
-            marketplace administrators only.
           </div>
 
         </div>
 
 
-        <!-- Bottom -->
+        <!-- Footer -->
 
-        <div class="bottom-links">
+        <div class="login-footer">
 
           <span>
-            Website Deals Admin Portal
+            Website Deals Admin Console
           </span>
 
           <a
+            class="back-marketplace"
             href="../../index.html"
-            class="market-link"
           >
-            ← Back to Marketplace
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m15 18-6-6 6-6"/>
+            </svg>
+
+            Back to Marketplace
+
           </a>
 
         </div>
@@ -1342,51 +1763,59 @@
   </main>
 
 
-  <!-- =========================
-       TOAST
-  ========================== -->
+  <!-- Toast -->
 
   <div
-    id="toast"
     class="toast"
+    id="toast"
     role="status"
     aria-live="polite"
   >
-    <strong id="toast-title">
-      Notice
-    </strong>
 
-    <span id="toast-message">
-      Something happened.
+    <div class="toast-icon">
+
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="m5 12 4 4L19 6"/>
+      </svg>
+
+    </div>
+
+    <span id="toastText">
+      Copied successfully.
     </span>
+
   </div>
 
 
   <script>
-    /*
-      ==========================================
-      WEBSITE DEALS ADMIN LOGIN
-      ==========================================
+    /* =====================================================
+       WEBSITE DEALS — ADMIN LOGIN
+       Prototype Authentication
+    ===================================================== */
 
-      DEMO LOGIN
+    const AUTH_KEY = "websiteDealsAdminAuth";
+    const REMEMBER_KEY = "websiteDealsRememberAdmin";
 
-      Email:
-      superadmin@websitedeals.com
+    const ADMIN_EMAIL =
+      "superadmin@websitedeals.com";
 
-      Password:
-      123456
-
-      Firebase authentication will be connected
-      at the final integration stage.
-    */
+    const ADMIN_PASSWORD =
+      "123456";
 
 
-    /* =========================
+    /* =====================================================
        ELEMENTS
-    ========================== */
+    ===================================================== */
 
     const loginForm =
-      document.getElementById("login-form");
+      document.getElementById("loginForm");
 
     const emailInput =
       document.getElementById("email");
@@ -1397,70 +1826,116 @@
     const rememberInput =
       document.getElementById("remember");
 
+    const loginButton =
+      document.getElementById("loginButton");
+
     const passwordToggle =
-      document.getElementById("password-toggle");
+      document.getElementById("passwordToggle");
 
-    const forgotPassword =
-      document.getElementById("forgot-password");
-
-    const signInButton =
-      document.getElementById("sign-in-btn");
-
-    const signInText =
-      document.getElementById("sign-in-text");
-
-    const signInSpinner =
-      document.getElementById("sign-in-spinner");
-
-    const signInArrow =
-      document.getElementById("sign-in-arrow");
-
-    const loginError =
-      document.getElementById("login-error");
+    const formMessage =
+      document.getElementById("formMessage");
 
     const toast =
       document.getElementById("toast");
 
-    const toastTitle =
-      document.getElementById("toast-title");
-
-    const toastMessage =
-      document.getElementById("toast-message");
+    const toastText =
+      document.getElementById("toastText");
 
     const brandYear =
-      document.getElementById("brand-year");
+      document.getElementById("brandYear");
 
 
-    /* =========================
+    /* =====================================================
        YEAR
-    ========================== */
+    ===================================================== */
 
     brandYear.textContent =
       new Date().getFullYear();
 
 
-    /* =========================
-       REMEMBERED EMAIL
-    ========================== */
+    /* =====================================================
+       SESSION HELPERS
+    ===================================================== */
 
-    const savedEmail =
-      localStorage.getItem(
-        "websiteDealsRememberedEmail"
-      );
+    function getAdminSession() {
 
-    if (savedEmail) {
+      try {
 
-      emailInput.value =
-        savedEmail;
+        const raw =
+          sessionStorage.getItem(AUTH_KEY);
 
-      rememberInput.checked =
-        true;
+        if (!raw) {
+          return null;
+        }
+
+        const session =
+          JSON.parse(raw);
+
+        if (
+          !session ||
+          session.authenticated !== true
+        ) {
+          return null;
+        }
+
+        return session;
+
+      } catch (error) {
+
+        return null;
+
+      }
+
     }
 
 
-    /* =========================
+    /* =====================================================
+       IF ALREADY LOGGED IN
+    ===================================================== */
+
+    const existingSession =
+      getAdminSession();
+
+    if (existingSession) {
+
+      window.location.replace(
+        "../dashboard.html"
+      );
+
+    }
+
+
+    /* =====================================================
+       REMEMBERED EMAIL
+    ===================================================== */
+
+    try {
+
+      const remembered =
+        localStorage.getItem(REMEMBER_KEY);
+
+      if (remembered) {
+
+        emailInput.value =
+          remembered;
+
+        rememberInput.checked =
+          true;
+
+      }
+
+    } catch (error) {
+
+      console.warn(
+        "Remembered login could not be loaded."
+      );
+
+    }
+
+
+    /* =====================================================
        PASSWORD SHOW / HIDE
-    ========================== */
+    ===================================================== */
 
     passwordToggle.addEventListener(
       "click",
@@ -1474,11 +1949,6 @@
             ? "text"
             : "password";
 
-        passwordToggle.textContent =
-          isPassword
-            ? "◉"
-            : "◉";
-
         passwordToggle.setAttribute(
           "aria-label",
           isPassword
@@ -1486,117 +1956,151 @@
             : "Show password"
         );
 
+        passwordToggle.setAttribute(
+          "title",
+          isPassword
+            ? "Hide password"
+            : "Show password"
+        );
+
+        if (isPassword) {
+
+          document.getElementById(
+            "eyeIcon"
+          ).innerHTML = `
+            <path d="M3 3l18 18"/>
+            <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"/>
+            <path d="M9.9 4.2A10.9 10.9 0 0 1 12 4c6.5 0 10 8 10 8a17.8 17.8 0 0 1-3.1 4.7"/>
+            <path d="M6.6 6.6C3.8 8.4 2 12 2 12s3.5 8 10 8a10.7 10.7 0 0 0 4.2-.9"/>
+          `;
+
+        } else {
+
+          document.getElementById(
+            "eyeIcon"
+          ).innerHTML = `
+            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/>
+            <circle cx="12" cy="12" r="3"/>
+          `;
+
+        }
+
       }
     );
 
 
-    /* =========================
-       ERROR
-    ========================== */
+    /* =====================================================
+       MESSAGE
+    ===================================================== */
 
-    function showError(message) {
-
-      loginError.textContent =
-        message;
-
-      loginError.classList.add(
-        "show"
-      );
-    }
-
-
-    function hideError() {
-
-      loginError.classList.remove(
-        "show"
-      );
-
-      loginError.textContent =
-        "";
-    }
-
-
-    /* =========================
-       TOAST
-    ========================== */
-
-    let toastTimer;
-
-    function showToast(
-      title,
+    function showMessage(
+      type,
       message
     ) {
 
-      toastTitle.textContent =
-        title;
+      formMessage.className =
+        "form-message show " + type;
 
-      toastMessage.textContent =
-        message;
+      if (type === "error") {
 
-      toast.classList.add(
-        "show"
-      );
-
-      clearTimeout(
-        toastTimer
-      );
-
-      toastTimer =
-        setTimeout(
-          () => {
-            toast.classList.remove(
-              "show"
-            );
-          },
-          3500
-        );
-    }
-
-
-    /* =========================
-       LOADING
-    ========================== */
-
-    function setLoading(
-      loading
-    ) {
-
-      if (loading) {
-
-        signInButton.classList.add(
-          "loading"
-        );
-
-        signInText.textContent =
-          "Signing in...";
-
-        signInSpinner.style.display =
-          "block";
-
-        signInArrow.style.display =
-          "none";
+        formMessage.innerHTML = `
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 8v4"/>
+            <path d="M12 16h.01"/>
+          </svg>
+          <span>${escapeHTML(message)}</span>
+        `;
 
       } else {
 
-        signInButton.classList.remove(
-          "loading"
-        );
+        formMessage.innerHTML = `
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="12" cy="12" r="10"/>
+            <path d="m8 12 2.5 2.5L16 9"/>
+          </svg>
+          <span>${escapeHTML(message)}</span>
+        `;
 
-        signInText.textContent =
-          "Sign In";
-
-        signInSpinner.style.display =
-          "none";
-
-        signInArrow.style.display =
-          "inline";
       }
+
     }
 
 
-    /* =========================
+    function clearMessage() {
+
+      formMessage.className =
+        "form-message";
+
+      formMessage.innerHTML =
+        "";
+
+    }
+
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    let toastTimer;
+
+    function showToast(message) {
+
+      toastText.textContent =
+        message;
+
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+
+      toastTimer =
+        setTimeout(
+          function () {
+
+            toast.classList.remove(
+              "show"
+            );
+
+          },
+          2400
+        );
+
+    }
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ===================================================== */
+
+    function escapeHTML(value) {
+
+      return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+    }
+
+
+    /* =====================================================
        LOGIN
-    ========================== */
+    ===================================================== */
 
     loginForm.addEventListener(
       "submit",
@@ -1604,8 +2108,7 @@
 
         event.preventDefault();
 
-        hideError();
-
+        clearMessage();
 
         const email =
           emailInput.value.trim();
@@ -1613,247 +2116,325 @@
         const password =
           passwordInput.value;
 
-
-        /* Validation */
-
         if (!email) {
 
-          showError(
+          showMessage(
+            "error",
             "Please enter your email address."
           );
 
           emailInput.focus();
 
           return;
+
         }
 
+        if (!isValidEmail(email)) {
 
-        if (!email.includes("@")) {
-
-          showError(
+          showMessage(
+            "error",
             "Please enter a valid email address."
           );
 
           emailInput.focus();
 
           return;
-        }
 
+        }
 
         if (!password) {
 
-          showError(
+          showMessage(
+            "error",
             "Please enter your password."
           );
 
           passwordInput.focus();
 
           return;
+
         }
 
 
-        setLoading(true);
+        /* Loading */
 
+        loginButton.disabled =
+          true;
 
-        /*
-          Small delay makes the demo feel
-          like a real authentication request.
-        */
+        loginButton.classList.add(
+          "loading"
+        );
+
 
         setTimeout(
           function () {
 
-            const demoEmail =
-              "superadmin@websitedeals.com";
-
-            const demoPassword =
-              "123456";
-
-
-            /* =========================
-               SUCCESS
-            ========================== */
-
-            if (
+            const validLogin =
               email.toLowerCase() ===
-                demoEmail &&
+                ADMIN_EMAIL.toLowerCase()
+              &&
               password ===
-                demoPassword
-            ) {
+                ADMIN_PASSWORD;
+
+
+            if (!validLogin) {
+
+              loginButton.disabled =
+                false;
+
+              loginButton.classList.remove(
+                "loading"
+              );
+
+              showMessage(
+                "error",
+                "Incorrect email or password. Please check your credentials and try again."
+              );
+
+              passwordInput.focus();
+
+              passwordInput.select();
+
+              return;
+
+            }
+
+
+            /* =========================================
+               SAVE SESSION
+            ========================================= */
+
+            const session = {
+
+              authenticated: true,
+
+              email:
+                ADMIN_EMAIL,
+
+              role:
+                "superadmin",
+
+              name:
+                "Super Admin",
+
+              loginTime:
+                new Date().toISOString()
+
+            };
+
+
+            try {
+
+              sessionStorage.setItem(
+                AUTH_KEY,
+                JSON.stringify(session)
+              );
 
               if (
                 rememberInput.checked
               ) {
 
                 localStorage.setItem(
-                  "websiteDealsRememberedEmail",
+                  REMEMBER_KEY,
                   email
                 );
 
               } else {
 
                 localStorage.removeItem(
-                  "websiteDealsRememberedEmail"
+                  REMEMBER_KEY
                 );
+
               }
 
+            } catch (error) {
 
-              /*
-                Demo session.
-                Firebase Auth will replace this
-                during final integration.
-              */
+              loginButton.disabled =
+                false;
 
-              sessionStorage.setItem(
-                "websiteDealsAdminAuth",
-                JSON.stringify({
-
-                  authenticated: true,
-
-                  email:
-                    demoEmail,
-
-                  role:
-                    "superadmin",
-
-                  name:
-                    "Super Admin",
-
-                  loginTime:
-                    new Date().toISOString()
-
-                })
+              loginButton.classList.remove(
+                "loading"
               );
 
-
-              showToast(
-                "Welcome back",
-                "Opening your admin dashboard..."
+              showMessage(
+                "error",
+                "Your browser blocked session storage. Please enable browser storage and try again."
               );
 
-
-              setTimeout(
-                function () {
-
-                  /*
-                    login/index.html
-                         ↓
-                    ../dashboard.html
-                  */
-
-                  window.location.href =
-                    "../dashboard.html";
-
-                },
-                650
-              );
+              return;
 
             }
 
 
-            /* =========================
-               INVALID LOGIN
-            ========================== */
+            showMessage(
+              "success",
+              "Login successful. Opening your admin dashboard..."
+            );
 
-            else {
 
-              setLoading(false);
+            loginButton.classList.remove(
+              "loading"
+            );
 
-              showError(
-                "Invalid email or password. Please check your credentials and try again."
-              );
+            showToast(
+              "Welcome back, Super Admin."
+            );
 
-              passwordInput.focus();
 
-            }
+            setTimeout(
+              function () {
+
+                window.location.replace(
+                  "../dashboard.html"
+                );
+
+              },
+              700
+            );
 
           },
-          650
+          550
         );
 
       }
     );
 
 
-    /* =========================
-       FORGOT PASSWORD
-    ========================== */
+    /* =====================================================
+       EMAIL VALIDATION
+    ===================================================== */
 
-    forgotPassword.addEventListener(
-      "click",
-      function () {
+    function isValidEmail(email) {
 
-        showToast(
-          "Password Recovery",
-          "Password recovery will be connected with Firebase Authentication later."
-        );
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        .test(email);
 
-      }
-    );
+    }
 
 
-    /* =========================
-       ENTER KEY
-    ========================== */
+    /* =====================================================
+       DEMO COPY BUTTONS
+    ===================================================== */
+
+    document
+      .querySelectorAll(".copy-button")
+      .forEach(
+        function (button) {
+
+          button.addEventListener(
+            "click",
+            async function () {
+
+              const value =
+                button.dataset.copy;
+
+              try {
+
+                await navigator.clipboard.writeText(
+                  value
+                );
+
+                showToast(
+                  "Copied to clipboard."
+                );
+
+              } catch (error) {
+
+                /* Fallback */
+
+                const textarea =
+                  document.createElement(
+                    "textarea"
+                  );
+
+                textarea.value =
+                  value;
+
+                textarea.style.position =
+                  "fixed";
+
+                textarea.style.opacity =
+                  "0";
+
+                document.body.appendChild(
+                  textarea
+                );
+
+                textarea.select();
+
+                document.execCommand(
+                  "copy"
+                );
+
+                textarea.remove();
+
+                showToast(
+                  "Copied to clipboard."
+                );
+
+              }
+
+            }
+          );
+
+        }
+      );
+
+
+    /* =====================================================
+       ENTER KEY FRIENDLY FLOW
+    ===================================================== */
 
     emailInput.addEventListener(
-      "keydown",
-      function (event) {
+      "input",
+      clearMessage
+    );
 
-        if (
-          event.key === "Enter"
-        ) {
+    passwordInput.addEventListener(
+      "input",
+      clearMessage
+    );
 
-          event.preventDefault();
+
+    /* =====================================================
+       AUTO FOCUS
+    ===================================================== */
+
+    setTimeout(
+      function () {
+
+        if (!emailInput.value) {
+
+          emailInput.focus();
+
+        } else {
 
           passwordInput.focus();
 
         }
 
-      }
+      },
+      250
     );
 
 
-    /* =========================
-       ALREADY LOGGED IN
-    ========================== */
+    /* =====================================================
+       PREVENT ACCIDENTAL DOUBLE SUBMIT
+    ===================================================== */
 
-    /*
-      If the browser already has a valid
-      demo session, the login page can
-      send the administrator directly
-      to the dashboard.
+    window.addEventListener(
+      "pageshow",
+      function () {
 
-      This is disabled by default so the
-      login page remains visible while
-      testing.
-    */
+        loginButton.disabled =
+          false;
 
-    /*
-    try {
-
-      const session =
-        JSON.parse(
-          sessionStorage.getItem(
-            "websiteDealsAdminAuth"
-          )
+        loginButton.classList.remove(
+          "loading"
         );
 
-      if (
-        session &&
-        session.authenticated
-      ) {
-
-        window.location.href =
-          "../dashboard.html";
-
       }
-
-    } catch (error) {
-      console.log(error);
-    }
-    */
-
+    );
 
   </script>
 
