@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#07110c"
+  >
+
+  <meta
+    name="description"
+    content="Website Deals Admin Login"
+  >
+
+  <title>Admin Login | Website Deals</title>
+
+  <link
+    rel="icon"
+    type="image/png"
+    href="../../logo.png"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      --green: #18a957;
+      --green-dark: #108344;
+      --green-soft: #eaf8f0;
+
+      --dark: #07110c;
+      --dark-2: #0b1811;
+      --dark-3: #102219;
+
+      --white: #ffffff;
+      --surface: #f7f9f8;
+
+      --text: #111814;
+      --muted: #6b756f;
+
+      --border: #e4e9e6;
+
+      --danger: #dc3545;
+
+      --shadow-lg:
+        0 30px 80px rgba(7, 17, 12, 0.16);
+
+      --radius-xl: 30px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(24, 169, 87, 0.07),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 90% 90%,
+          rgba(24, 169, 87, 0.06),
+          transparent 25%
+        ),
+        #eef2ef;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 24px;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================
+       PAGE
+    ========================== */
+
+    .login-shell {
+      width: min(1180px, 100%);
+      min-height: 700px;
+
+      display: grid;
+      grid-template-columns: 1.02fr 0.98fr;
+
+      background: var(--white);
+
+      border: 1px solid rgba(0, 0, 0, 0.05);
+
+      border-radius: var(--radius-xl);
+
+      overflow: hidden;
+
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* =========================
+       BRAND PANEL
+    ========================== */
+
+    .brand-panel {
+      position: relative;
+
+      padding: 58px;
+
+      color: #fff;
+
+      background:
+        radial-gradient(
+          circle at 85% 12%,
+          rgba(24, 169, 87, 0.28),
+          transparent 25%
+        ),
+        radial-gradient(
+          circle at 15% 85%,
+          rgba(24, 169, 87, 0.16),
+          transparent 30%
+        ),
+        linear-gradient(
+          145deg,
+          #06100a,
+          #0a1710 52%,
+          #102319
+        );
+
+      display: flex;
+      flex-direction: column;
+
+      overflow: hidden;
+    }
+
+    .brand-panel::before {
+      content: "";
+
+      position: absolute;
+
+      width: 360px;
+      height: 360px;
+
+      right: -180px;
+      top: -160px;
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+      border-radius: 50%;
+    }
+
+    .brand-panel::after {
+      content: "";
+
+      position: absolute;
+
+      width: 520px;
+      height: 520px;
+
+      left: -310px;
+      bottom: -330px;
+
+      border: 1px solid rgba(255, 255, 255, 0.06);
+
+      border-radius: 50%;
+    }
+
+    .brand-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    /* =========================
+       LOGO
+    ========================== */
+
+    .brand-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .brand-logo img {
+      width: 52px;
+      height: 52px;
+
+      object-fit: contain;
+
+      background: #fff;
+
+      border-radius: 14px;
+
+      padding: 7px;
+    }
+
+    .brand-logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-logo-text strong {
+      font-family: "Space Grotesk", sans-serif;
+
+      font-size: 21px;
+      font-weight: 700;
+
+      letter-spacing: -0.5px;
+    }
+
+    .brand-logo-text span {
+      color: #91a69a;
+
+      font-size: 11px;
+      font-weight: 700;
+
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    /* =========================
+       BRAND HERO
+    ========================== */
+
+    .brand-hero {
+      margin-top: 115px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      color: #9fe7ba;
+
+      font-size: 11px;
+      font-weight: 800;
+
+      letter-spacing: 1.6px;
+
+      text-transform: uppercase;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 0 5px rgba(24, 169, 87, 0.13);
+    }
+
+    .brand-hero h1 {
+      max-width: 480px;
+
+      margin-top: 22px;
+
+      font-family: "Space Grotesk", sans-serif;
+
+      font-size: clamp(42px, 5vw, 67px);
+
+      line-height: 0.98;
+
+      letter-spacing: -3.5px;
+    }
+
+    .brand-hero h1 span {
+      color: #8ff0b2;
+    }
+
+    .brand-hero p {
+      max-width: 465px;
+
+      margin-top: 25px;
+
+      color: #a7b6ad;
+
+      font-size: 15px;
+      line-height: 1.8;
+    }
+
+    /* =========================
+       FEATURE LIST
+    ========================== */
+
+    .feature-list {
+      margin-top: 45px;
+
+      display: grid;
+
+      gap: 14px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+
+      gap: 13px;
+
+      color: #cbd6cf;
+
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .feature-icon {
+      width: 31px;
+      height: 31px;
+
+      display: grid;
+      place-items: center;
+
+      flex-shrink: 0;
+
+      color: #8ff0b2;
+
+      background: rgba(24, 169, 87, 0.12);
+
+      border: 1px solid rgba(24, 169, 87, 0.2);
+
+      border-radius: 10px;
+
+      font-size: 14px;
+    }
+
+    /* =========================
+       BRAND FOOTER
+    ========================== */
+
+    .brand-footer {
+      position: relative;
+      z-index: 2;
+
+      margin-top: auto;
+
+      padding-top: 40px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      color: #718177;
+
+      font-size: 11px;
+    }
+
+    .secure-mini {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .secure-mini::before {
+      content: "✓";
+
+      width: 19px;
+      height: 19px;
+
+      display: grid;
+      place-items: center;
+
+      color: #8ff0b2;
+
+      border: 1px solid rgba(143, 240, 178, 0.22);
+
+      border-radius: 50%;
+    }
+
+    /* =========================
+       LOGIN PANEL
+    ========================== */
+
+    .login-panel {
+      padding: 58px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: #fff;
+    }
+
+    .login-content {
+      width: min(420px, 100%);
+    }
+
+    .mobile-brand {
+      display: none;
+    }
+
+    .login-heading {
+      margin-bottom: 36px;
+    }
+
+    .login-heading .small-label {
+      color: var(--green);
+
+      font-size: 11px;
+      font-weight: 800;
+
+      letter-spacing: 1.4px;
+
+      text-transform: uppercase;
+    }
+
+    .login-heading h2 {
+      margin-top: 11px;
+
+      font-family: "Space Grotesk", sans-serif;
+
+      font-size: 37px;
+
+      line-height: 1.08;
+
+      letter-spacing: -1.7px;
+    }
+
+    .login-heading p {
+      margin-top: 12px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    /* =========================
+       FORM
+    ========================== */
+
+    .form-group {
+      margin-bottom: 21px;
+    }
+
+    .form-label {
+      display: block;
+
+      margin-bottom: 9px;
+
+      color: #27322c;
+
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+
+      left: 16px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      color: #89948d;
+
+      font-size: 14px;
+
+      pointer-events: none;
+    }
+
+    .form-input {
+      width: 100%;
+
+      height: 53px;
+
+      padding:
+        0
+        47px
+        0
+        46px;
+
+      color: var(--text);
+
+      background: #fbfcfb;
+
+      border: 1px solid var(--border);
+
+      border-radius: var(--radius-md);
+
+      outline: none;
+
+      font-size: 14px;
+
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .form-input:hover {
+      border-color: #d2dad5;
+    }
+
+    .form-input:focus {
+      background: #fff;
+
+      border-color: var(--green);
+
+      box-shadow:
+        0 0 0 4px rgba(24, 169, 87, 0.09);
+    }
+
+    .password-toggle {
+      position: absolute;
+
+      right: 14px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      width: 32px;
+      height: 32px;
+
+      display: grid;
+      place-items: center;
+
+      color: #87928b;
+
+      background: transparent;
+
+      border: 0;
+
+      border-radius: 8px;
+    }
+
+    .password-toggle:hover {
+      color: var(--green);
+
+      background: var(--green-soft);
+    }
+
+    /* =========================
+       FORM OPTIONS
+    ========================== */
+
+    .form-options {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+
+      margin-top: 4px;
+
+      margin-bottom: 24px;
+    }
+
+    .remember {
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      color: #68736c;
+
+      font-size: 12px;
+
+      cursor: pointer;
+    }
+
+    .remember input {
+      width: 16px;
+      height: 16px;
+
+      accent-color: var(--green);
+
+      cursor: pointer;
+    }
+
+    .forgot {
+      color: var(--green-dark);
+
+      font-size: 12px;
+      font-weight: 700;
+
+      background: none;
+
+      border: 0;
+    }
+
+    .forgot:hover {
+      text-decoration: underline;
+    }
+
+    /* =========================
+       ERROR
+    ========================== */
+
+    .login-error {
+      display: none;
+
+      margin-bottom: 18px;
+
+      padding: 12px 14px;
+
+      color: #a92c39;
+
+      background: #fff1f2;
+
+      border: 1px solid #ffd4d8;
+
+      border-radius: 12px;
+
+      font-size: 12px;
+      font-weight: 600;
+
+      line-height: 1.5;
+    }
+
+    .login-error.show {
+      display: block;
+    }
+
+    /* =========================
+       SIGN IN BUTTON
+    ========================== */
+
+    .sign-in-btn {
+      width: 100%;
+
+      height: 55px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: center;
+
+      gap: 10px;
+
+      color: #fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--green),
+          var(--green-dark)
+        );
+
+      border: 0;
+
+      border-radius: 14px;
+
+      box-shadow:
+        0 12px 24px rgba(24, 169, 87, 0.18);
+
+      font-size: 14px;
+      font-weight: 800;
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .sign-in-btn:hover {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 17px 32px rgba(24, 169, 87, 0.24);
+    }
+
+    .sign-in-btn:active {
+      transform: translateY(0);
+    }
+
+    .sign-in-btn.loading {
+      pointer-events: none;
+
+      opacity: 0.8;
+    }
+
+    .spinner {
+      width: 16px;
+      height: 16px;
+
+      border: 2px solid rgba(255, 255, 255, 0.35);
+
+      border-top-color: #fff;
+
+      border-radius: 50%;
+
+      animation: spin 0.7s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =========================
+       SECURITY
+    ========================== */
+
+    .security-note {
+      margin-top: 23px;
+
+      padding: 14px 15px;
+
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 11px;
+
+      color: #68736c;
+
+      background: #f7faf8;
+
+      border: 1px solid #e8eeea;
+
+      border-radius: 13px;
+
+      font-size: 11px;
+
+      line-height: 1.6;
+    }
+
+    .security-note-icon {
+      width: 25px;
+      height: 25px;
+
+      flex-shrink: 0;
+
+      display: grid;
+      place-items: center;
+
+      color: var(--green-dark);
+
+      background: var(--green-soft);
+
+      border-radius: 8px;
+    }
+
+    /* =========================
+       BOTTOM LINKS
+    ========================== */
+
+    .bottom-links {
+      margin-top: 28px;
+
+      padding-top: 22px;
+
+      border-top: 1px solid #edf0ee;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      color: #8a938d;
+
+      font-size: 11px;
+    }
+
+    .market-link {
+      color: var(--green-dark);
+
+      font-weight: 700;
+    }
+
+    .market-link:hover {
+      text-decoration: underline;
+    }
+
+    /* =========================
+       TOAST
+    ========================== */
+
+    .toast {
+      position: fixed;
+
+      right: 25px;
+      bottom: 25px;
+
+      z-index: 1000;
+
+      min-width: 280px;
+      max-width: 380px;
+
+      padding: 15px 17px;
+
+      color: #fff;
+
+      background: #101814;
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+      border-radius: 14px;
+
+      box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.2);
+
+      transform:
+        translateY(25px);
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      transition:
+        opacity 0.25s ease,
+        transform 0.25s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+
+      transform: translateY(0);
+    }
+
+    .toast strong {
+      display: block;
+
+      margin-bottom: 4px;
+
+      font-size: 13px;
+    }
+
+    .toast span {
+      color: #aab5ae;
+
+      font-size: 11px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 980px) {
+      body {
+        padding: 15px;
+      }
+
+      .login-shell {
+        grid-template-columns: 1fr;
+
+        min-height: auto;
+
+        max-width: 620px;
+      }
+
+      .brand-panel {
+        display: none;
+      }
+
+      .login-panel {
+        padding: 42px 35px;
+      }
+
+      .mobile-brand {
+        display: flex;
+
+        align-items: center;
+
+        gap: 11px;
+
+        margin-bottom: 42px;
+      }
+
+      .mobile-brand img {
+        width: 45px;
+        height: 45px;
+
+        padding: 6px;
+
+        object-fit: contain;
+
+        background: #fff;
+
+        border: 1px solid var(--border);
+
+        border-radius: 12px;
+      }
+
+      .mobile-brand strong {
+        font-family: "Space Grotesk", sans-serif;
+
+        font-size: 19px;
+      }
+
+      .mobile-brand span {
+        display: block;
+
+        margin-top: 2px;
+
+        color: var(--muted);
+
+        font-size: 9px;
+
+        font-weight: 800;
+
+        letter-spacing: 1.2px;
+
+        text-transform: uppercase;
+      }
+    }
+
+    @media (max-width: 560px) {
+      body {
+        padding: 0;
+
+        background: #fff;
+      }
+
+      .login-shell {
+        width: 100%;
+
+        border: 0;
+
+        border-radius: 0;
+
+        box-shadow: none;
+      }
+
+      .login-panel {
+        min-height: 100vh;
+
+        padding:
+          30px
+          22px;
+      }
+
+      .mobile-brand {
+        margin-bottom: 55px;
+      }
+
+      .login-heading {
+        margin-bottom: 30px;
+      }
+
+      .login-heading h2 {
+        font-size: 32px;
+      }
+
+      .form-input {
+        height: 51px;
+      }
+
+      .bottom-links {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 10px;
+      }
+
+      .toast {
+        left: 15px;
+        right: 15px;
+
+        bottom: 15px;
+
+        min-width: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+
+        animation-duration: 0.01ms !important;
+
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="login-shell">
+
+    <!-- =========================
+         BRAND PANEL
+    ========================== -->
+
+    <section class="brand-panel">
+
+      <div class="brand-content">
+
+        <a
+          href="../../index.html"
+          class="brand-logo"
+          aria-label="Website Deals Marketplace"
+        >
+          <img
+            src="../../logo.png"
+            alt="Website Deals"
+          >
+
+          <div class="brand-logo-text">
+            <strong>Website Deals</strong>
+            <span>Admin Portal</span>
+          </div>
+        </a>
+
+        <div class="brand-hero">
+
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Secure Workspace
+          </div>
+
+          <h1>
+            Manage your
+            <span>marketplace.</span>
+          </h1>
+
+          <p>
+            Manage websites, orders, customers, payments and
+            marketplace content from one professional admin
+            workspace.
+          </p>
+
+          <div class="feature-list">
+
+            <div class="feature">
+              <span class="feature-icon">✓</span>
+              Website & marketplace management
+            </div>
+
+            <div class="feature">
+              <span class="feature-icon">✓</span>
+              Orders, customers & payments
+            </div>
+
+            <div class="feature">
+              <span class="feature-icon">✓</span>
+              Reports & newsletter management
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="brand-footer">
+
+        <div class="secure-mini">
+          Protected Admin Workspace
+        </div>
+
+        <span>
+          © <span id="brand-year"></span> Website Deals
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================
+         LOGIN PANEL
+    ========================== -->
+
+    <section class="login-panel">
+
+      <div class="login-content">
+
+        <!-- Mobile Brand -->
+
+        <a
+          href="../../index.html"
+          class="mobile-brand"
+        >
+          <img
+            src="../../logo.png"
+            alt="Website Deals"
+          >
+
+          <div>
+            <strong>Website Deals</strong>
+
+            <span>
+              Admin Portal
+            </span>
+          </div>
+        </a>
+
+
+        <!-- Heading -->
+
+        <div class="login-heading">
+
+          <div class="small-label">
+            Admin Access
+          </div>
+
+          <h2>
+            Welcome back.
+          </h2>
+
+          <p>
+            Sign in to continue to your marketplace dashboard.
+          </p>
+
+        </div>
+
+
+        <!-- Error -->
+
+        <div
+          id="login-error"
+          class="login-error"
+          role="alert"
+        ></div>
+
+
+        <!-- Login Form -->
+
+        <form
+          id="login-form"
+          autocomplete="on"
+          novalidate
+        >
+
+          <!-- Email -->
+
+          <div class="form-group">
+
+            <label
+              class="form-label"
+              for="email"
+            >
+              Email Address
+            </label>
+
+            <div class="input-wrap">
+
+              <span class="input-icon">
+                ✉
+              </span>
+
+              <input
+                id="email"
+                name="email"
+                class="form-input"
+                type="email"
+                placeholder="admin@websitedeals.com"
+                autocomplete="username"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <!-- Password -->
+
+          <div class="form-group">
+
+            <label
+              class="form-label"
+              for="password"
+            >
+              Password
+            </label>
+
+            <div class="input-wrap">
+
+              <span class="input-icon">
+                🔒
+              </span>
+
+              <input
+                id="password"
+                name="password"
+                class="form-input"
+                type="password"
+                placeholder="Enter your password"
+                autocomplete="current-password"
+                required
+              >
+
+              <button
+                type="button"
+                id="password-toggle"
+                class="password-toggle"
+                aria-label="Show password"
+              >
+                ◉
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- Options -->
+
+          <div class="form-options">
+
+            <label class="remember">
+
+              <input
+                type="checkbox"
+                id="remember"
+              >
+
+              <span>
+                Remember me
+              </span>
+
+            </label>
+
+            <button
+              type="button"
+              class="forgot"
+              id="forgot-password"
+            >
+              Forgot password?
+            </button>
+
+          </div>
+
+
+          <!-- Submit -->
+
+          <button
+            type="submit"
+            class="sign-in-btn"
+            id="sign-in-btn"
+          >
+            <span id="sign-in-text">
+              Sign In
+            </span>
+
+            <span
+              id="sign-in-spinner"
+              class="spinner"
+              style="display:none;"
+            ></span>
+
+            <span
+              id="sign-in-arrow"
+            >
+              →
+            </span>
+
+          </button>
+
+        </form>
+
+
+        <!-- Security -->
+
+        <div class="security-note">
+
+          <div class="security-note-icon">
+            🔐
+          </div>
+
+          <div>
+            <strong>
+              Secure administrator access
+            </strong>
+            <br>
+
+            Your admin workspace is intended for authorized
+            marketplace administrators only.
+          </div>
+
+        </div>
+
+
+        <!-- Bottom -->
+
+        <div class="bottom-links">
+
+          <span>
+            Website Deals Admin Portal
+          </span>
+
+          <a
+            href="../../index.html"
+            class="market-link"
+          >
+            ← Back to Marketplace
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================
+       TOAST
+  ========================== -->
+
+  <div
+    id="toast"
+    class="toast"
+    role="status"
+    aria-live="polite"
+  >
+    <strong id="toast-title">
+      Notice
+    </strong>
+
+    <span id="toast-message">
+      Something happened.
+    </span>
+  </div>
+
+
+  <script>
+    /*
+      ==========================================
+      WEBSITE DEALS ADMIN LOGIN
+      ==========================================
+
+      DEMO LOGIN
+
+      Email:
+      superadmin@websitedeals.com
+
+      Password:
+      123456
+
+      Firebase authentication will be connected
+      at the final integration stage.
+    */
+
+
+    /* =========================
+       ELEMENTS
+    ========================== */
+
+    const loginForm =
+      document.getElementById("login-form");
+
+    const emailInput =
+      document.getElementById("email");
+
+    const passwordInput =
+      document.getElementById("password");
+
+    const rememberInput =
+      document.getElementById("remember");
+
+    const passwordToggle =
+      document.getElementById("password-toggle");
+
+    const forgotPassword =
+      document.getElementById("forgot-password");
+
+    const signInButton =
+      document.getElementById("sign-in-btn");
+
+    const signInText =
+      document.getElementById("sign-in-text");
+
+    const signInSpinner =
+      document.getElementById("sign-in-spinner");
+
+    const signInArrow =
+      document.getElementById("sign-in-arrow");
+
+    const loginError =
+      document.getElementById("login-error");
+
+    const toast =
+      document.getElementById("toast");
+
+    const toastTitle =
+      document.getElementById("toast-title");
+
+    const toastMessage =
+      document.getElementById("toast-message");
+
+    const brandYear =
+      document.getElementById("brand-year");
+
+
+    /* =========================
+       YEAR
+    ========================== */
+
+    brandYear.textContent =
+      new Date().getFullYear();
+
+
+    /* =========================
+       REMEMBERED EMAIL
+    ========================== */
+
+    const savedEmail =
+      localStorage.getItem(
+        "websiteDealsRememberedEmail"
+      );
+
+    if (savedEmail) {
+
+      emailInput.value =
+        savedEmail;
+
+      rememberInput.checked =
+        true;
+    }
+
+
+    /* =========================
+       PASSWORD SHOW / HIDE
+    ========================== */
+
+    passwordToggle.addEventListener(
+      "click",
+      function () {
+
+        const isPassword =
+          passwordInput.type === "password";
+
+        passwordInput.type =
+          isPassword
+            ? "text"
+            : "password";
+
+        passwordToggle.textContent =
+          isPassword
+            ? "◉"
+            : "◉";
+
+        passwordToggle.setAttribute(
+          "aria-label",
+          isPassword
+            ? "Hide password"
+            : "Show password"
+        );
+
+      }
+    );
+
+
+    /* =========================
+       ERROR
+    ========================== */
+
+    function showError(message) {
+
+      loginError.textContent =
+        message;
+
+      loginError.classList.add(
+        "show"
+      );
+    }
+
+
+    function hideError() {
+
+      loginError.classList.remove(
+        "show"
+      );
+
+      loginError.textContent =
+        "";
+    }
+
+
+    /* =========================
+       TOAST
+    ========================== */
+
+    let toastTimer;
+
+    function showToast(
+      title,
+      message
+    ) {
+
+      toastTitle.textContent =
+        title;
+
+      toastMessage.textContent =
+        message;
+
+      toast.classList.add(
+        "show"
+      );
+
+      clearTimeout(
+        toastTimer
+      );
+
+      toastTimer =
+        setTimeout(
+          () => {
+            toast.classList.remove(
+              "show"
+            );
+          },
+          3500
+        );
+    }
+
+
+    /* =========================
+       LOADING
+    ========================== */
+
+    function setLoading(
+      loading
+    ) {
+
+      if (loading) {
+
+        signInButton.classList.add(
+          "loading"
+        );
+
+        signInText.textContent =
+          "Signing in...";
+
+        signInSpinner.style.display =
+          "block";
+
+        signInArrow.style.display =
+          "none";
+
+      } else {
+
+        signInButton.classList.remove(
+          "loading"
+        );
+
+        signInText.textContent =
+          "Sign In";
+
+        signInSpinner.style.display =
+          "none";
+
+        signInArrow.style.display =
+          "inline";
+      }
+    }
+
+
+    /* =========================
+       LOGIN
+    ========================== */
+
+    loginForm.addEventListener(
+      "submit",
+      function (event) {
+
+        event.preventDefault();
+
+        hideError();
+
+
+        const email =
+          emailInput.value.trim();
+
+        const password =
+          passwordInput.value;
+
+
+        /* Validation */
+
+        if (!email) {
+
+          showError(
+            "Please enter your email address."
+          );
+
+          emailInput.focus();
+
+          return;
+        }
+
+
+        if (!email.includes("@")) {
+
+          showError(
+            "Please enter a valid email address."
+          );
+
+          emailInput.focus();
+
+          return;
+        }
+
+
+        if (!password) {
+
+          showError(
+            "Please enter your password."
+          );
+
+          passwordInput.focus();
+
+          return;
+        }
+
+
+        setLoading(true);
+
+
+        /*
+          Small delay makes the demo feel
+          like a real authentication request.
+        */
+
+        setTimeout(
+          function () {
+
+            const demoEmail =
+              "superadmin@websitedeals.com";
+
+            const demoPassword =
+              "123456";
+
+
+            /* =========================
+               SUCCESS
+            ========================== */
+
+            if (
+              email.toLowerCase() ===
+                demoEmail &&
+              password ===
+                demoPassword
+            ) {
+
+              if (
+                rememberInput.checked
+              ) {
+
+                localStorage.setItem(
+                  "websiteDealsRememberedEmail",
+                  email
+                );
+
+              } else {
+
+                localStorage.removeItem(
+                  "websiteDealsRememberedEmail"
+                );
+              }
+
+
+              /*
+                Demo session.
+                Firebase Auth will replace this
+                during final integration.
+              */
+
+              sessionStorage.setItem(
+                "websiteDealsAdminAuth",
+                JSON.stringify({
+
+                  authenticated: true,
+
+                  email:
+                    demoEmail,
+
+                  role:
+                    "superadmin",
+
+                  name:
+                    "Super Admin",
+
+                  loginTime:
+                    new Date().toISOString()
+
+                })
+              );
+
+
+              showToast(
+                "Welcome back",
+                "Opening your admin dashboard..."
+              );
+
+
+              setTimeout(
+                function () {
+
+                  /*
+                    login/index.html
+                         ↓
+                    ../dashboard.html
+                  */
+
+                  window.location.href =
+                    "../dashboard.html";
+
+                },
+                650
+              );
+
+            }
+
+
+            /* =========================
+               INVALID LOGIN
+            ========================== */
+
+            else {
+
+              setLoading(false);
+
+              showError(
+                "Invalid email or password. Please check your credentials and try again."
+              );
+
+              passwordInput.focus();
+
+            }
+
+          },
+          650
+        );
+
+      }
+    );
+
+
+    /* =========================
+       FORGOT PASSWORD
+    ========================== */
+
+    forgotPassword.addEventListener(
+      "click",
+      function () {
+
+        showToast(
+          "Password Recovery",
+          "Password recovery will be connected with Firebase Authentication later."
+        );
+
+      }
+    );
+
+
+    /* =========================
+       ENTER KEY
+    ========================== */
+
+    emailInput.addEventListener(
+      "keydown",
+      function (event) {
+
+        if (
+          event.key === "Enter"
+        ) {
+
+          event.preventDefault();
+
+          passwordInput.focus();
+
+        }
+
+      }
+    );
+
+
+    /* =========================
+       ALREADY LOGGED IN
+    ========================== */
+
+    /*
+      If the browser already has a valid
+      demo session, the login page can
+      send the administrator directly
+      to the dashboard.
+
+      This is disabled by default so the
+      login page remains visible while
+      testing.
+    */
+
+    /*
+    try {
+
+      const session =
+        JSON.parse(
+          sessionStorage.getItem(
+            "websiteDealsAdminAuth"
+          )
+        );
+
+      if (
+        session &&
+        session.authenticated
+      ) {
+
+        window.location.href =
+          "../dashboard.html";
+
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
+    */
+
+
+  </script>
+
+</body>
+</html>
