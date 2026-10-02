@@ -2,36 +2,43 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-<title>Newsletter Manager | Website Deals</title>
-<meta name="description" content="Website Deals Admin Newsletter Manager">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" type="image/png" href="../logo.png">
 
-<link rel="icon" href="../logo.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07110b">
+
+<title>Newsletter | Website Deals Admin</title>
+<meta name="description" content="Website Deals Admin — Newsletter Management">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --green:#18a957;
-  --green-dark:#118743;
-  --green-soft:#eaf8f0;
-  --dark:#101713;
-  --dark-2:#151d18;
-  --dark-3:#1d2821;
-  --text:#17211b;
-  --muted:#748078;
-  --bg:#f5f7f6;
-  --card:#fff;
-  --border:#e3e9e5;
-  --danger:#dc4545;
-  --warning:#e39a22;
-  --blue:#3578e5;
-  --blue-soft:#edf4ff;
-  --shadow:0 14px 40px rgba(16,23,19,.06);
-  --shadow-lg:0 24px 60px rgba(16,23,19,.10);
+  --green-dark:#118344;
+  --green-soft:#e9f8ef;
+  --dark:#07110b;
+  --sidebar:#101713;
+  --sidebar-soft:#18231d;
+  --white:#fff;
+  --surface:#f6f8f7;
+  --surface-2:#fbfcfb;
+  --border:#e3eae6;
+  --text:#142019;
+  --muted:#738079;
+  --danger:#dc3d4b;
+  --danger-soft:#fff0f1;
+  --warning:#c88700;
+  --warning-soft:#fff8e8;
+  --blue:#2563eb;
+  --blue-soft:#edf3ff;
+  --shadow:0 14px 40px rgba(8,25,15,.07);
+  --shadow-lg:0 25px 70px rgba(8,25,15,.14);
+  --radius:20px;
 }
 
 *{
@@ -41,8 +48,8 @@
 }
 
 body{
-  font-family:Inter,Arial,sans-serif;
-  background:var(--bg);
+  font-family:"DM Sans",sans-serif;
+  background:var(--surface);
   color:var(--text);
   min-height:100vh;
 }
@@ -56,214 +63,297 @@ button{
 }
 
 a{
-  text-decoration:none;
   color:inherit;
+  text-decoration:none;
 }
 
 /* =========================
-   SIDEBAR
+   LAYOUT
 ========================= */
 
+.app{
+  min-height:100vh;
+  display:flex;
+}
+
 .sidebar{
-  position:fixed;
-  z-index:1000;
-  inset:0 auto 0 0;
-  width:260px;
-  background:var(--dark);
+  width:270px;
+  background:var(--sidebar);
   color:#fff;
-  padding:20px 14px;
-  overflow-y:auto;
-  transition:.25s ease;
+  position:fixed;
+  inset:0 auto 0 0;
+  z-index:1000;
+  display:flex;
+  flex-direction:column;
+  padding:22px 16px;
+  transition:transform .25s ease;
 }
 
 .brand{
   display:flex;
   align-items:center;
-  gap:11px;
-  padding:5px 10px 24px;
-  border-bottom:1px solid rgba(255,255,255,.07);
-  margin-bottom:10px;
+  gap:12px;
+  padding:4px 10px 24px;
 }
 
 .brand-logo{
   width:42px;
   height:42px;
-  object-fit:contain;
+  border-radius:13px;
+  object-fit:cover;
   background:#fff;
-  border-radius:11px;
-  padding:4px;
 }
 
-.brand-name{
-  font:700 18px "Space Grotesk";
+.brand-title{
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+  font-size:15px;
 }
 
 .brand-sub{
-  display:block;
+  color:#8c9a91;
+  font-size:11px;
   margin-top:2px;
-  color:#758179;
-  font-size:9px;
-  font-weight:700;
-  letter-spacing:1.4px;
 }
 
-.nav-title{
-  padding:18px 11px 7px;
-  color:#69756e;
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:1.5px;
+.nav{
+  flex:1;
+  overflow:auto;
+}
+
+.nav-section{
+  margin:18px 8px 8px;
+  color:#718077;
   text-transform:uppercase;
+  font-size:10px;
+  letter-spacing:.12em;
+  font-weight:700;
 }
 
 .nav-link{
   display:flex;
   align-items:center;
   gap:11px;
-  width:100%;
-  min-height:43px;
-  padding:10px 12px;
-  margin:2px 0;
-  border-radius:10px;
-  color:#aeb8b1;
-  font-size:12px;
+  padding:11px 12px;
+  border-radius:12px;
+  color:#aeb9b2;
+  font-size:13px;
   font-weight:600;
-  transition:.18s;
+  margin-bottom:3px;
 }
 
 .nav-link:hover{
-  background:var(--dark-3);
+  background:var(--sidebar-soft);
   color:#fff;
 }
 
 .nav-link.active{
-  background:#1d2b22;
+  background:var(--green);
   color:#fff;
-  box-shadow:inset 3px 0 var(--green);
+  box-shadow:0 9px 22px rgba(24,169,87,.18);
 }
 
 .nav-icon{
-  width:20px;
+  width:18px;
   text-align:center;
-  font-size:15px;
 }
 
 .sidebar-bottom{
-  margin-top:22px;
-  padding:13px;
-  border:1px solid rgba(255,255,255,.07);
-  border-radius:13px;
-  background:rgba(255,255,255,.025);
+  border-top:1px solid rgba(255,255,255,.07);
+  padding-top:15px;
+  margin-top:12px;
 }
 
-.sidebar-status{
+.admin-mini{
   display:flex;
   align-items:center;
-  gap:7px;
-  color:#87938b;
-  font-size:10px;
+  gap:10px;
+  padding:9px 10px;
 }
 
-.status-dot{
-  width:7px;
-  height:7px;
+.admin-avatar{
+  width:35px;
+  height:35px;
   border-radius:50%;
   background:var(--green);
-  box-shadow:0 0 0 4px rgba(24,169,87,.1);
+  display:grid;
+  place-items:center;
+  font-size:12px;
+  font-weight:800;
+}
+
+.admin-mini-text{
+  min-width:0;
+  flex:1;
+}
+
+.admin-name{
+  color:#fff;
+  font-size:12px;
+  font-weight:700;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.admin-role{
+  color:#819087;
+  font-size:10px;
+  margin-top:2px;
 }
 
 .logout-btn{
   width:100%;
-  margin-top:11px;
-  border:0;
-  background:#202b24;
-  color:#b8c1bb;
-  border-radius:9px;
-  padding:9px;
-  font-size:11px;
+  border:1px solid rgba(255,255,255,.08);
+  background:transparent;
+  color:#b4c0b8;
+  padding:10px 12px;
+  border-radius:11px;
+  margin-top:8px;
+  font-size:12px;
   font-weight:700;
+  text-align:left;
 }
 
 .logout-btn:hover{
-  background:#29362e;
+  background:rgba(255,255,255,.05);
   color:#fff;
 }
 
-/* =========================
-   MAIN
-========================= */
-
 .main{
-  margin-left:260px;
-  width:calc(100% - 260px);
-  min-height:100vh;
-  padding:28px;
+  margin-left:270px;
+  width:calc(100% - 270px);
+  min-width:0;
 }
 
 .topbar{
+  height:74px;
+  background:rgba(255,255,255,.94);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 30px;
+  position:sticky;
+  top:0;
+  z-index:800;
+  backdrop-filter:blur(16px);
+}
+
+.topbar-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.page-kicker{
+  color:var(--muted);
+  font-size:12px;
+  font-weight:600;
+}
+
+.top-actions{
+  display:flex;
+  gap:8px;
+}
+
+.icon-btn,
+.top-btn{
+  min-height:39px;
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--text);
+  border-radius:11px;
+  padding:0 13px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.top-btn:hover,
+.icon-btn:hover{
+  background:var(--surface-2);
+}
+
+.mobile-menu{
+  display:none;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+  padding:30px;
+  max-width:1700px;
+  margin:auto;
+}
+
+.hero{
   display:flex;
   justify-content:space-between;
-  align-items:center;
-  gap:20px;
+  align-items:flex-end;
+  gap:25px;
   margin-bottom:24px;
 }
 
 .eyebrow{
   color:var(--green);
+  text-transform:uppercase;
+  letter-spacing:.13em;
   font-size:10px;
   font-weight:800;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
+  margin-bottom:9px;
 }
 
-h1{
-  margin-top:4px;
-  font:700 30px "Space Grotesk";
-  letter-spacing:-.8px;
+.hero h1{
+  font-family:"Manrope",sans-serif;
+  font-size:clamp(28px,3vw,42px);
+  letter-spacing:-.045em;
+  line-height:1.08;
 }
 
-.subtitle{
-  margin-top:5px;
+.hero p{
   color:var(--muted);
-  font-size:12px;
-  line-height:1.6;
+  margin-top:10px;
+  max-width:700px;
+  font-size:14px;
+  line-height:1.7;
 }
 
-.top-actions{
-  display:flex;
-  align-items:center;
-  gap:9px;
-}
-
-.admin-badge{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  padding:10px 13px;
+.hero-badge{
   background:#fff;
   border:1px solid var(--border);
-  border-radius:11px;
-  font-size:11px;
-  font-weight:700;
-  white-space:nowrap;
+  border-radius:15px;
+  padding:12px 15px;
+  display:flex;
+  align-items:center;
+  gap:10px;
   box-shadow:var(--shadow);
+  white-space:nowrap;
 }
 
-.admin-dot{
-  width:7px;
-  height:7px;
-  background:var(--green);
+.status-dot{
+  width:9px;
+  height:9px;
   border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 0 5px var(--green-soft);
 }
 
-.mobile-menu{
-  display:none;
-  width:42px;
-  height:42px;
-  border:1px solid var(--border);
-  background:#fff;
-  border-radius:11px;
-  font-size:19px;
+.hero-badge strong{
+  display:block;
+  font-size:12px;
+}
+
+.hero-badge span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:2px;
 }
 
 /* =========================
@@ -272,104 +362,111 @@ h1{
 
 .stats{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:11px;
-  margin-bottom:18px;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:14px;
+  margin-bottom:20px;
 }
 
-.stat{
+.stat-card{
   background:#fff;
   border:1px solid var(--border);
-  border-radius:14px;
-  padding:16px;
+  border-radius:var(--radius);
+  padding:19px;
   box-shadow:var(--shadow);
 }
 
-.stat-icon{
-  width:31px;
-  height:31px;
-  display:grid;
-  place-items:center;
-  border-radius:9px;
-  background:var(--green-soft);
-  color:var(--green-dark);
-  font-size:14px;
+.stat-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
 .stat-label{
-  margin-top:11px;
   color:var(--muted);
-  font-size:9px;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:.8px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.stat-icon{
+  width:33px;
+  height:33px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:var(--green-soft);
+  color:var(--green-dark);
 }
 
 .stat-value{
-  margin-top:5px;
-  font:700 22px "Space Grotesk";
+  margin-top:13px;
+  font-family:"Manrope",sans-serif;
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:-.04em;
 }
 
-.stat-value.green{
-  color:var(--green);
+.stat-meta{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:6px;
 }
 
 /* =========================
    GRID
 ========================= */
 
-.content-grid{
+.dashboard-grid{
   display:grid;
-  grid-template-columns:minmax(0,1.35fr) minmax(340px,.8fr);
+  grid-template-columns:minmax(0,1.55fr) minmax(310px,.75fr);
   gap:18px;
-  align-items:start;
 }
 
 .panel{
   background:#fff;
   border:1px solid var(--border);
-  border-radius:18px;
+  border-radius:var(--radius);
   box-shadow:var(--shadow);
-  padding:22px;
-  margin-bottom:18px;
 }
 
 .panel-header{
+  padding:18px 19px;
+  border-bottom:1px solid var(--border);
   display:flex;
+  align-items:center;
   justify-content:space-between;
-  align-items:flex-start;
-  gap:15px;
-  margin-bottom:18px;
+  gap:12px;
 }
 
 .panel-title{
-  font:700 18px "Space Grotesk";
-}
-
-.panel-desc{
-  margin-top:4px;
-  color:var(--muted);
-  font-size:11px;
-  line-height:1.55;
-}
-
-.panel-tag{
-  padding:6px 9px;
-  border-radius:8px;
-  background:var(--green-soft);
-  color:var(--green-dark);
-  font-size:9px;
+  font-family:"Manrope",sans-serif;
+  font-size:15px;
   font-weight:800;
 }
 
+.panel-subtitle{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:4px;
+}
+
+.panel-body{
+  padding:18px;
+}
+
 /* =========================
-   COMPOSER
+   CAMPAIGN COMPOSER
 ========================= */
 
-.fields{
+.field-grid{
   display:grid;
-  grid-template-columns:1fr 1fr;
+  grid-template-columns:repeat(2,minmax(0,1fr));
   gap:14px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
 }
 
 .field.full{
@@ -377,139 +474,99 @@ h1{
 }
 
 .field label{
-  display:block;
-  margin-bottom:7px;
-  color:#344039;
+  color:#526058;
   font-size:10px;
   font-weight:800;
 }
 
 .field input,
-.field textarea,
-.field select{
+.field select,
+.field textarea{
   width:100%;
   border:1px solid var(--border);
+  background:var(--surface-2);
+  border-radius:11px;
+  min-height:42px;
+  padding:10px 12px;
   outline:none;
-  background:#fff;
   color:var(--text);
-  border-radius:10px;
-  padding:11px 12px;
-  font-size:12px;
+  font-size:11px;
 }
 
 .field textarea{
-  min-height:100px;
+  min-height:120px;
   resize:vertical;
-  line-height:1.55;
 }
 
 .field input:focus,
-.field textarea:focus,
-.field select:focus{
-  border-color:var(--green);
-  box-shadow:0 0 0 3px rgba(24,169,87,.08);
+.field select:focus,
+.field textarea:focus{
+  border-color:rgba(24,169,87,.55);
+  box-shadow:0 0 0 4px rgba(24,169,87,.08);
+  background:#fff;
 }
 
-.counter{
-  margin-top:5px;
-  color:#929b95;
+.help{
+  color:#8a958f;
   font-size:9px;
-  text-align:right;
+  line-height:1.5;
 }
 
-.composer-actions{
+.toggle-row{
   display:flex;
-  justify-content:flex-end;
-  gap:8px;
-  margin-top:17px;
-}
-
-.btn{
-  border:0;
-  border-radius:9px;
-  padding:10px 14px;
-  font-size:10px;
-  font-weight:800;
-}
-
-.btn-primary{
-  background:var(--green);
-  color:#fff;
-}
-
-.btn-secondary{
-  background:#edf1ee;
-  color:#29342d;
-}
-
-.btn-danger{
-  background:#fff0f0;
-  color:var(--danger);
-}
-
-.btn-blue{
-  background:var(--blue-soft);
-  color:#2f67c6;
-}
-
-/* =========================
-   SWITCH
-========================= */
-
-.switch-row{
-  display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:15px;
-  margin-top:15px;
-  padding:13px;
-  background:#fafcfb;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px;
   border:1px solid var(--border);
-  border-radius:11px;
+  border-radius:12px;
+  background:var(--surface-2);
 }
 
-.switch-copy strong{
+.toggle-copy strong{
   display:block;
   font-size:11px;
 }
 
-.switch-copy small{
+.toggle-copy span{
   display:block;
-  margin-top:3px;
   color:var(--muted);
   font-size:9px;
+  margin-top:3px;
 }
 
 .switch{
   position:relative;
-  width:42px;
-  height:23px;
-  flex-shrink:0;
+  width:43px;
+  height:24px;
+  flex:0 0 43px;
 }
 
 .switch input{
-  display:none;
+  opacity:0;
+  width:0;
+  height:0;
 }
 
 .slider{
   position:absolute;
   inset:0;
-  background:#d6ddd8;
-  border-radius:30px;
+  background:#cfd7d2;
+  border-radius:999px;
   transition:.2s;
 }
 
 .slider:before{
   content:"";
   position:absolute;
-  width:17px;
-  height:17px;
+  width:18px;
+  height:18px;
   left:3px;
   top:3px;
   background:#fff;
   border-radius:50%;
-  box-shadow:0 1px 3px rgba(0,0,0,.15);
   transition:.2s;
+  box-shadow:0 2px 5px rgba(0,0,0,.15);
 }
 
 .switch input:checked + .slider{
@@ -520,276 +577,381 @@ h1{
   transform:translateX(19px);
 }
 
-/* =========================
-   SUBSCRIBER TABLE
-========================= */
-
-.table-wrap{
-  overflow-x:auto;
-}
-
-.subscriber-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:620px;
-}
-
-.subscriber-table th{
-  padding:10px;
-  text-align:left;
-  color:#89938d;
-  font-size:9px;
-  text-transform:uppercase;
-  letter-spacing:.7px;
-  border-bottom:1px solid var(--border);
-}
-
-.subscriber-table td{
-  padding:13px 10px;
-  border-bottom:1px solid #edf1ee;
-  font-size:10px;
-  vertical-align:middle;
-}
-
-.subscriber-table tr:last-child td{
-  border-bottom:0;
-}
-
-.email{
-  font-weight:700;
-}
-
-.date{
-  color:var(--muted);
-}
-
-.status{
-  display:inline-flex;
-  align-items:center;
-  padding:5px 8px;
-  border-radius:7px;
-  font-size:8px;
-  font-weight:800;
-}
-
-.status.subscribed{
-  color:var(--green-dark);
-  background:var(--green-soft);
-}
-
-.status.unsubscribed{
-  color:var(--danger);
-  background:#fff0f0;
-}
-
-.row-delete{
-  width:27px;
-  height:27px;
-  border:1px solid var(--border);
-  background:#fff;
-  border-radius:7px;
-  color:#79847d;
-}
-
-.row-delete:hover{
-  color:var(--danger);
-  background:#fff0f0;
-}
-
-/* =========================
-   PREVIEW
-========================= */
-
-.preview-sticky{
-  position:sticky;
-  top:20px;
-}
-
-.preview-window{
-  border:1px solid #e0e6e2;
-  border-radius:14px;
-  overflow:hidden;
-  box-shadow:var(--shadow-lg);
-}
-
-.preview-top{
-  padding:9px 11px;
-  background:#f0f3f1;
-  border-bottom:1px solid #e0e6e2;
+.composer-actions{
   display:flex;
-  gap:5px;
-}
-
-.browser-dot{
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:#c4ccc6;
-}
-
-.email-preview{
-  padding:22px;
-  background:#f7faf8;
-}
-
-.email-card{
-  background:#fff;
-  border:1px solid #e3e9e5;
-  border-radius:12px;
-  overflow:hidden;
-}
-
-.email-brand{
-  padding:17px;
-  border-bottom:1px solid #edf1ee;
-  display:flex;
-  align-items:center;
+  justify-content:flex-end;
   gap:8px;
-}
-
-.email-brand img{
-  width:28px;
-  height:28px;
-  object-fit:contain;
-  border-radius:7px;
-}
-
-.email-brand span{
-  font:700 12px "Space Grotesk";
-}
-
-.email-body{
-  padding:27px 20px;
-  text-align:center;
-}
-
-.email-body small{
-  color:var(--green);
-  font-size:8px;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
-.email-body h3{
-  margin-top:8px;
-  font:700 21px "Space Grotesk";
-  line-height:1.15;
-}
-
-.email-body p{
-  margin:9px auto 0;
-  max-width:300px;
-  color:var(--muted);
-  font-size:9px;
-  line-height:1.6;
-}
-
-.email-input{
-  display:flex;
-  margin:17px auto 0;
-  max-width:300px;
-  border:1px solid var(--border);
-  border-radius:8px;
-  overflow:hidden;
-}
-
-.email-input span{
-  flex:1;
-  padding:9px;
-  color:#a1aaa4;
-  text-align:left;
-  font-size:8px;
-}
-
-.email-input button{
-  border:0;
-  padding:0 11px;
-  background:var(--green);
-  color:#fff;
-  font-size:8px;
-  font-weight:800;
-}
-
-.email-footer{
-  padding:14px;
-  text-align:center;
-  background:#f5f7f6;
-  color:#909a94;
-  font-size:7px;
+  margin-top:16px;
+  padding-top:16px;
+  border-top:1px solid var(--border);
 }
 
 /* =========================
-   CAMPAIGN LIST
+   AUDIENCE
 ========================= */
 
-.campaign-list{
-  display:flex;
-  flex-direction:column;
+.audience-list{
+  display:grid;
   gap:9px;
 }
 
-.campaign{
-  padding:12px;
+.audience-item{
   border:1px solid var(--border);
-  border-radius:10px;
-}
-
-.campaign-top{
+  border-radius:13px;
+  padding:12px;
   display:flex;
-  justify-content:space-between;
+  align-items:center;
   gap:10px;
 }
 
-.campaign-name{
+.audience-check{
+  width:16px;
+  height:16px;
+  accent-color:var(--green);
+}
+
+.audience-icon{
+  width:35px;
+  height:35px;
+  border-radius:10px;
+  background:var(--green-soft);
+  color:var(--green-dark);
+  display:grid;
+  place-items:center;
+  font-size:14px;
+}
+
+.audience-copy{
+  flex:1;
+}
+
+.audience-copy strong{
+  display:block;
+  font-size:11px;
+}
+
+.audience-copy span{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  margin-top:3px;
+}
+
+.audience-count{
   font-size:11px;
   font-weight:800;
 }
 
-.campaign-date{
-  color:var(--muted);
-  font-size:8px;
+/* =========================
+   RECENT CAMPAIGNS
+========================= */
+
+.campaign-list{
+  display:grid;
 }
 
-.campaign-bottom{
+.campaign{
+  padding:14px 18px;
+  border-bottom:1px solid #edf1ee;
   display:flex;
-  justify-content:space-between;
-  margin-top:8px;
+  align-items:center;
+  gap:12px;
+}
+
+.campaign:last-child{
+  border-bottom:0;
+}
+
+.campaign-icon{
+  width:39px;
+  height:39px;
+  border-radius:12px;
+  background:var(--green-soft);
+  color:var(--green-dark);
+  display:grid;
+  place-items:center;
+  flex:0 0 39px;
+}
+
+.campaign-main{
+  min-width:0;
+  flex:1;
+}
+
+.campaign-name{
+  font-weight:800;
+  font-size:11px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.campaign-meta{
   color:var(--muted);
+  font-size:9px;
+  margin-top:3px;
+}
+
+.campaign-status{
+  padding:5px 8px;
+  border-radius:999px;
+  font-size:8px;
+  font-weight:800;
+}
+
+.campaign-status.sent{
+  background:var(--green-soft);
+  color:var(--green-dark);
+}
+
+.campaign-status.draft{
+  background:#eef1ef;
+  color:#69756e;
+}
+
+.campaign-status.scheduled{
+  background:var(--blue-soft);
+  color:var(--blue);
+}
+
+.campaign-actions{
+  display:flex;
+  gap:5px;
+}
+
+.small-action{
+  width:30px;
+  height:30px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#fff;
+  font-size:11px;
+}
+
+/* =========================
+   SETTINGS
+========================= */
+
+.settings-list{
+  display:grid;
+  gap:10px;
+}
+
+.setting-item{
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:13px;
+}
+
+.setting-item strong{
+  display:block;
+  font-size:11px;
+}
+
+.setting-item span{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  line-height:1.5;
+  margin-top:4px;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:850px;
+}
+
+thead th{
+  background:#fbfcfb;
+  color:#7d8982;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  text-align:left;
+  padding:13px 15px;
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+
+tbody td{
+  padding:13px 15px;
+  border-bottom:1px solid #edf1ee;
+  font-size:11px;
+}
+
+.sub{
+  color:var(--muted);
+  font-size:9px;
+  margin-top:3px;
+}
+
+.badge{
+  display:inline-flex;
+  padding:5px 8px;
+  border-radius:999px;
+  font-size:9px;
+  font-weight:800;
+}
+
+.badge.sent{
+  color:var(--green-dark);
+  background:var(--green-soft);
+}
+
+.badge.draft{
+  color:#68746d;
+  background:#eef1ef;
+}
+
+.badge.scheduled{
+  color:var(--blue);
+  background:var(--blue-soft);
+}
+
+.badge.cancelled{
+  color:var(--danger);
+  background:var(--danger-soft);
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn{
+  height:39px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:10px;
+  padding:0 13px;
+  font-size:11px;
+  font-weight:700;
+  color:var(--text);
+}
+
+.btn:hover{
+  background:var(--surface);
+}
+
+.btn.primary{
+  background:var(--green);
+  border-color:var(--green);
+  color:#fff;
+}
+
+.btn.dark{
+  background:var(--dark);
+  border-color:var(--dark);
+  color:#fff;
+}
+
+.btn.danger{
+  color:var(--danger);
+  border-color:#f1d2d5;
+}
+
+.btn.small{
+  height:31px;
+  padding:0 9px;
   font-size:9px;
 }
 
 /* =========================
-   SAVE BAR
+   EMPTY
 ========================= */
 
-.save-bar{
-  position:sticky;
-  bottom:14px;
-  z-index:20;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  padding:12px 14px;
-  background:rgba(255,255,255,.94);
-  backdrop-filter:blur(14px);
-  border:1px solid var(--border);
-  border-radius:14px;
-  box-shadow:0 18px 45px rgba(16,23,19,.1);
+.empty{
+  padding:38px 20px;
+  text-align:center;
+  color:var(--muted);
+  font-size:11px;
 }
 
-.save-status{
+/* =========================
+   MODAL
+========================= */
+
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(4,12,7,.57);
+  backdrop-filter:blur(7px);
+}
+
+.modal-overlay.show{
+  display:flex;
+}
+
+.modal{
+  width:min(780px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:23px;
+  box-shadow:var(--shadow-lg);
+}
+
+.modal.small{
+  width:min(450px,100%);
+}
+
+.modal-header{
+  position:sticky;
+  top:0;
+  z-index:2;
+  background:rgba(255,255,255,.96);
+  border-bottom:1px solid var(--border);
+  padding:18px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.modal-title{
+  font-family:"Manrope",sans-serif;
+  font-size:17px;
+  font-weight:800;
+}
+
+.modal-subtitle{
   color:var(--muted);
   font-size:10px;
+  margin-top:4px;
 }
 
-.save-status strong{
-  color:var(--text);
+.close-btn{
+  width:34px;
+  height:34px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:9px;
+  font-size:17px;
 }
 
-.save-actions{
+.modal-body{
+  padding:20px;
+}
+
+.modal-footer{
+  padding:15px 20px;
+  border-top:1px solid var(--border);
+  background:#fbfcfb;
   display:flex;
+  justify-content:flex-end;
   gap:8px;
 }
 
@@ -799,23 +961,23 @@ h1{
 
 .toast{
   position:fixed;
-  z-index:2000;
   right:24px;
   bottom:24px;
+  z-index:5000;
+  background:var(--dark);
+  color:#fff;
+  border-radius:13px;
+  padding:12px 15px;
   display:flex;
   align-items:center;
   gap:9px;
-  padding:13px 16px;
-  border-radius:11px;
-  background:#111713;
-  color:#fff;
-  box-shadow:0 18px 40px rgba(0,0,0,.18);
-  font-size:11px;
-  font-weight:700;
+  box-shadow:var(--shadow-lg);
   opacity:0;
-  transform:translateY(10px);
+  transform:translateY(20px);
   pointer-events:none;
   transition:.25s;
+  font-size:11px;
+  font-weight:700;
 }
 
 .toast.show{
@@ -824,55 +986,58 @@ h1{
 }
 
 .toast-icon{
-  width:21px;
-  height:21px;
+  width:22px;
+  height:22px;
+  border-radius:7px;
+  background:var(--green);
   display:grid;
   place-items:center;
-  border-radius:50%;
-  background:var(--green);
 }
 
 /* =========================
-   MOBILE
+   OVERLAY
 ========================= */
 
 .sidebar-overlay{
   display:none;
   position:fixed;
-  z-index:900;
   inset:0;
-  background:rgba(0,0,0,.42);
+  z-index:900;
+  background:rgba(0,0,0,.45);
 }
 
-@media(max-width:1100px){
+/* =========================
+   FOOTER
+========================= */
 
-  .content-grid{
+.footer-note{
+  text-align:center;
+  color:#8b958f;
+  font-size:9px;
+  padding:18px 0 5px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1250px){
+  .stats{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .dashboard-grid{
     grid-template-columns:1fr;
   }
-
-  .preview-sticky{
-    position:relative;
-    top:auto;
-  }
-
 }
 
-@media(max-width:900px){
-
-  .stats{
-    grid-template-columns:repeat(2,1fr);
-  }
-
-}
-
-@media(max-width:850px){
+@media(max-width:1050px){
 
   .sidebar{
     transform:translateX(-100%);
-    box-shadow:20px 0 50px rgba(0,0,0,.18);
   }
 
-  .sidebar.mobile-open{
+  .sidebar.open{
     transform:translateX(0);
   }
 
@@ -883,34 +1048,37 @@ h1{
   .main{
     margin-left:0;
     width:100%;
-    padding:18px;
   }
 
   .mobile-menu{
-    display:block;
+    display:inline-flex;
   }
 
-  .admin-badge{
-    display:none;
+  .topbar{
+    padding:0 18px;
   }
 
+  .content{
+    padding:22px 18px;
+  }
 }
 
-@media(max-width:650px){
-
-  .main{
-    padding:14px;
-  }
-
-  h1{
-    font-size:25px;
-  }
+@media(max-width:760px){
 
   .stats{
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(2,1fr);
   }
 
-  .fields{
+  .hero{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .hero-badge{
+    width:100%;
+  }
+
+  .field-grid{
     grid-template-columns:1fr;
   }
 
@@ -918,39 +1086,125 @@ h1{
     grid-column:auto;
   }
 
-  .panel{
-    padding:17px;
-    border-radius:15px;
+  .composer-actions{
+    flex-wrap:wrap;
   }
 
-  .save-bar{
-    align-items:flex-start;
-    flex-direction:column;
+  .composer-actions .btn{
+    flex:1;
+  }
+}
+
+@media(max-width:480px){
+
+  .content{
+    padding:17px 12px;
   }
 
-  .save-actions{
-    width:100%;
+  .topbar{
+    height:66px;
+    padding:0 12px;
   }
 
-  .save-actions .btn{
+  .page-kicker{
+    display:none;
+  }
+
+  .top-actions .marketplace{
+    display:none;
+  }
+
+  .stat-card{
+    padding:14px;
+    border-radius:16px;
+  }
+
+  .stat-value{
+    font-size:21px;
+  }
+
+  .hero h1{
+    font-size:27px;
+  }
+
+  .modal-overlay{
+    padding:10px;
+  }
+
+  .modal{
+    max-height:96vh;
+    border-radius:19px;
+  }
+
+  .modal-header,
+  .modal-body,
+  .modal-footer{
+    padding-left:15px;
+    padding-right:15px;
+  }
+
+  .modal-footer{
+    flex-wrap:wrap;
+  }
+
+  .modal-footer .btn{
     flex:1;
   }
 
+  .toast{
+    left:12px;
+    right:12px;
+    bottom:12px;
+  }
 }
 
-@media(max-width:430px){
+/* =========================
+   PRINT
+========================= */
 
-  .stats{
-    grid-template-columns:1fr;
+@media print{
+
+  @page{
+    size:A4 landscape;
+    margin:12mm;
   }
 
+  body{
+    background:#fff;
+  }
+
+  .sidebar,
+  .topbar,
+  .hero-badge,
+  .btn,
+  .composer-actions,
+  .campaign-actions,
+  .modal-overlay,
+  .toast,
+  .footer-note{
+    display:none !important;
+  }
+
+  .main{
+    margin:0;
+    width:100%;
+  }
+
+  .content{
+    padding:0;
+  }
+
+  .panel,
+  .stat-card{
+    box-shadow:none;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<div class="app">
 
 <!-- =========================
      SIDEBAR
@@ -959,145 +1213,112 @@ h1{
 <aside class="sidebar" id="sidebar">
 
   <div class="brand">
-
-    <img
-      src="../logo.png"
-      class="brand-logo"
-      alt="Website Deals"
-    >
+    <img src="../logo.png" class="brand-logo" alt="Website Deals">
 
     <div>
-      <div class="brand-name">
-        Website Deals
-      </div>
-
-      <small class="brand-sub">
-        ADMIN PANEL
-      </small>
+      <div class="brand-title">Website Deals</div>
+      <div class="brand-sub">Admin Control Center</div>
     </div>
-
   </div>
 
+  <nav class="nav">
 
-  <nav>
-
-    <div class="nav-title">
-      Core
-    </div>
+    <div class="nav-section">Marketplace</div>
 
     <a class="nav-link" href="dashboard.html">
-      <span class="nav-icon">▦</span>
-      <span>Dashboard</span>
+      <span class="nav-icon">⌂</span>
+      Dashboard
     </a>
 
     <a class="nav-link" href="websites.html">
       <span class="nav-icon">◫</span>
-      <span>Websites</span>
+      Websites
     </a>
 
     <a class="nav-link" href="categories.html">
-      <span class="nav-icon">◈</span>
-      <span>Categories</span>
+      <span class="nav-icon">▦</span>
+      Categories
     </a>
 
     <a class="nav-link" href="orders.html">
-      <span class="nav-icon">⌁</span>
-      <span>Orders</span>
-    </a>
-
-    <a class="nav-link" href="customers.html">
-      <span class="nav-icon">♙</span>
-      <span>Customers</span>
-    </a>
-
-
-    <div class="nav-title">
-      UI Management
-    </div>
-
-    <a class="nav-link" href="browse-ui.html">
-      <span class="nav-icon">◉</span>
-      <span>Browse UI</span>
-    </a>
-
-    <a class="nav-link" href="homepage.html">
-      <span class="nav-icon">⌂</span>
-      <span>Homepage</span>
-    </a>
-
-    <a class="nav-link" href="banners.html">
-      <span class="nav-icon">▣</span>
-      <span>Banners</span>
-    </a>
-
-
-    <div class="nav-title">
-      Business
-    </div>
-
-    <a class="nav-link active" href="newsletter.html">
-      <span class="nav-icon">✉</span>
-      <span>Newsletter</span>
+      <span class="nav-icon">◌</span>
+      Orders
     </a>
 
     <a class="nav-link" href="payments.html">
       <span class="nav-icon">৳</span>
-      <span>Payments</span>
+      Payments
+    </a>
+
+    <a class="nav-link" href="customers.html">
+      <span class="nav-icon">♙</span>
+      Customers
+    </a>
+
+    <a class="nav-link active" href="newsletter.html">
+      <span class="nav-icon">✉</span>
+      Newsletter
+    </a>
+
+    <div class="nav-section">Reports</div>
+
+    <a class="nav-link" href="reports.html">
+      <span class="nav-icon">◒</span>
+      Reports
     </a>
 
     <a class="nav-link" href="monthly-report.html">
-      <span class="nav-icon">⌁</span>
-      <span>Reports</span>
+      <span class="nav-icon">▤</span>
+      Monthly Report
     </a>
 
+    <div class="nav-section">Restricted Controls</div>
 
-    <div class="nav-title" id="superAdminTitle">
-      Super Admin
-    </div>
-
-    <a
-      class="nav-link"
-      id="adminsLink"
-      href="admins.html"
-    >
+    <a class="nav-link" href="admins.html">
       <span class="nav-icon">♙</span>
-      <span>Admin Management</span>
+      Admin Management
     </a>
 
-    <a
-      class="nav-link"
-      id="settingsLink"
-      href="settings.html"
-    >
+    <a class="nav-link" href="settings.html">
       <span class="nav-icon">⚙</span>
-      <span>System Settings</span>
+      System Settings
     </a>
 
   </nav>
 
-
   <div class="sidebar-bottom">
 
-    <div class="sidebar-status">
+    <div class="admin-mini">
 
-      <span class="status-dot"></span>
+      <div class="admin-avatar" id="adminAvatar">
+        SA
+      </div>
 
-      <span>
-        Admin session active
-      </span>
+      <div class="admin-mini-text">
+        <div class="admin-name" id="adminName">
+          Super Admin
+        </div>
+
+        <div class="admin-role" id="adminRole">
+          Super Admin
+        </div>
+      </div>
 
     </div>
 
-    <button
-      class="logout-btn"
-      id="logoutBtn"
-    >
-      Logout
+    <button class="logout-btn" onclick="logout()">
+      ↪ &nbsp; Sign Out
     </button>
 
   </div>
 
 </aside>
+
+<div
+  class="sidebar-overlay"
+  id="sidebarOverlay"
+  onclick="closeSidebar()"
+></div>
 
 
 <!-- =========================
@@ -1106,410 +1327,389 @@ h1{
 
 <main class="main">
 
-  <header class="topbar">
+<header class="topbar">
+
+  <div class="topbar-left">
+
+    <button
+      class="icon-btn mobile-menu"
+      onclick="openSidebar()"
+    >
+      ☰
+    </button>
+
+    <div class="page-kicker">
+      Admin / Newsletter
+    </div>
+
+  </div>
+
+  <div class="top-actions">
+
+    <button
+      class="top-btn"
+      onclick="refreshNewsletter()"
+    >
+      ↻ <span>Refresh</span>
+    </button>
+
+    <a
+      class="top-btn marketplace"
+      href="../index.html"
+    >
+      ↗ <span>Marketplace</span>
+    </a>
+
+  </div>
+
+</header>
+
+
+<section class="content">
+
+<!-- =========================
+     HERO
+========================= -->
+
+<div class="hero">
+
+  <div>
+
+    <div class="eyebrow">
+      Audience & Campaigns
+    </div>
+
+    <h1>
+      Stay connected with your audience.
+    </h1>
+
+    <p>
+      Manage newsletter subscribers, create campaigns,
+      schedule broadcasts and keep your Website Deals
+      community informed.
+    </p>
+
+  </div>
+
+  <div class="hero-badge">
+
+    <span class="status-dot"></span>
 
     <div>
-
-      <div class="eyebrow">
-        Business
-      </div>
-
-      <h1>
-        Newsletter
-      </h1>
-
-      <p class="subtitle">
-        Manage subscribers, newsletter messaging and email campaigns.
-      </p>
-
+      <strong>Newsletter Center</strong>
+      <span>LocalStorage powered prototype</span>
     </div>
 
+  </div>
 
-    <div class="top-actions">
-
-      <button
-        class="mobile-menu"
-        id="mobileMenu"
-        aria-label="Open menu"
-      >
-        ☰
-      </button>
-
-      <div class="admin-badge">
-
-        <span class="admin-dot"></span>
-
-        <span id="adminName">
-          Admin Panel
-        </span>
-
-      </div>
-
-    </div>
-
-  </header>
+</div>
 
 
-  <!-- =========================
-       STATS
-  ========================== -->
+<!-- =========================
+     STATS
+========================= -->
 
-  <div class="stats">
+<div class="stats">
 
-    <div class="stat">
+  <div class="stat-card">
 
-      <div class="stat-icon">
+    <div class="stat-top">
+      <span class="stat-label">
+        Subscribers
+      </span>
+
+      <span class="stat-icon">
         ✉
-      </div>
-
-      <div class="stat-label">
-        Total Subscribers
-      </div>
-
-      <div
-        class="stat-value"
-        id="totalSubscribers"
-      >
-        0
-      </div>
-
+      </span>
     </div>
 
-
-    <div class="stat">
-
-      <div class="stat-icon">
-        ✓
-      </div>
-
-      <div class="stat-label">
-        Active Subscribers
-      </div>
-
-      <div
-        class="stat-value green"
-        id="activeSubscribers"
-      >
-        0
-      </div>
-
+    <div
+      class="stat-value"
+      id="statSubscribers"
+    >
+      0
     </div>
 
-
-    <div class="stat">
-
-      <div class="stat-icon">
-        ↗
-      </div>
-
-      <div class="stat-label">
-        Campaigns Sent
-      </div>
-
-      <div
-        class="stat-value"
-        id="campaignCount"
-      >
-        0
-      </div>
-
-    </div>
-
-
-    <div class="stat">
-
-      <div class="stat-icon">
-        %
-      </div>
-
-      <div class="stat-label">
-        Open Rate
-      </div>
-
-      <div class="stat-value green">
-        68%
-      </div>
-
+    <div class="stat-meta">
+      Total newsletter audience
     </div>
 
   </div>
 
 
-  <div class="content-grid">
+  <div class="stat-card">
 
-    <!-- =====================
-         LEFT COLUMN
-    ====================== -->
+    <div class="stat-top">
+      <span class="stat-label">
+        Active
+      </span>
+
+      <span class="stat-icon">
+        ✓
+      </span>
+    </div>
+
+    <div
+      class="stat-value"
+      id="statActive"
+    >
+      0
+    </div>
+
+    <div class="stat-meta">
+      Active subscribers
+    </div>
+
+  </div>
+
+
+  <div class="stat-card">
+
+    <div class="stat-top">
+      <span class="stat-label">
+        Campaigns
+      </span>
+
+      <span class="stat-icon">
+        ◈
+      </span>
+    </div>
+
+    <div
+      class="stat-value"
+      id="statCampaigns"
+    >
+      0
+    </div>
+
+    <div class="stat-meta">
+      Saved campaigns
+    </div>
+
+  </div>
+
+
+  <div class="stat-card">
+
+    <div class="stat-top">
+      <span class="stat-label">
+        Sent
+      </span>
+
+      <span class="stat-icon">
+        ↗
+      </span>
+    </div>
+
+    <div
+      class="stat-value"
+      id="statSent"
+    >
+      0
+    </div>
+
+    <div class="stat-meta">
+      Campaigns sent
+    </div>
+
+  </div>
+
+
+  <div class="stat-card">
+
+    <div class="stat-top">
+      <span class="stat-label">
+        Avg. Open
+      </span>
+
+      <span class="stat-icon">
+        ◉
+      </span>
+    </div>
+
+    <div
+      class="stat-value"
+      id="statOpen"
+    >
+      0%
+    </div>
+
+    <div class="stat-meta">
+      Estimated campaign performance
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     COMPOSER + AUDIENCE
+========================= -->
+
+<div class="dashboard-grid">
+
+
+<!-- COMPOSER -->
+
+<div class="panel">
+
+  <div class="panel-header">
 
     <div>
+      <div class="panel-title">
+        Create Newsletter Campaign
+      </div>
 
-      <!-- NEWSLETTER SETTINGS -->
+      <div class="panel-subtitle">
+        Compose your next broadcast.
+      </div>
+    </div>
 
-      <section class="panel">
+    <button
+      class="btn small"
+      onclick="clearComposer()"
+    >
+      Clear
+    </button>
 
-        <div class="panel-header">
+  </div>
 
-          <div>
 
-            <h2 class="panel-title">
-              Newsletter Content
-            </h2>
+  <div class="panel-body">
 
-            <p class="panel-desc">
-              Control the public newsletter subscription section.
-            </p>
+    <div class="field-grid">
 
-          </div>
+      <div class="field full">
 
-          <span class="panel-tag">
-            SETTINGS
-          </span>
+        <label>
+          Campaign Name
+        </label>
 
+        <input
+          id="campaignName"
+          type="text"
+          placeholder="e.g. October Website Deals"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Email Subject *
+        </label>
+
+        <input
+          id="campaignSubject"
+          type="text"
+          placeholder="Your subject line..."
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Sender Name
+        </label>
+
+        <input
+          id="senderName"
+          type="text"
+          value="Website Deals"
+        >
+
+      </div>
+
+
+      <div class="field full">
+
+        <label>
+          Email Content *
+        </label>
+
+        <textarea
+          id="campaignContent"
+          placeholder="Write your newsletter content here..."
+        ></textarea>
+
+        <div class="help">
+          This prototype stores campaign content locally.
+          Real email delivery requires a backend/email provider.
         </div>
 
-
-        <div class="fields">
-
-          <div class="field full">
-
-            <label for="newsletterTitle">
-              Newsletter Title
-            </label>
-
-            <input
-              id="newsletterTitle"
-              maxlength="90"
-              placeholder="Get the latest website deals"
-            >
-
-            <div
-              class="counter"
-              id="titleCounter"
-            >
-              0 / 90
-            </div>
-
-          </div>
+      </div>
 
 
-          <div class="field full">
+      <div class="field">
 
-            <label for="newsletterDescription">
-              Description
-            </label>
+        <label>
+          Campaign Status
+        </label>
 
-            <textarea
-              id="newsletterDescription"
-              maxlength="180"
-              placeholder="New website deals, offers and marketplace updates delivered to your inbox."
-            ></textarea>
+        <select id="campaignStatus">
 
-            <div
-              class="counter"
-              id="descriptionCounter"
-            >
-              0 / 180
-            </div>
+          <option value="draft">
+            Save as Draft
+          </option>
 
-          </div>
+          <option value="scheduled">
+            Scheduled
+          </option>
 
+          <option value="sent">
+            Mark as Sent
+          </option>
 
-          <div class="field">
+        </select>
 
-            <label for="inputPlaceholder">
-              Email Input Placeholder
-            </label>
-
-            <input
-              id="inputPlaceholder"
-              placeholder="Enter your email address"
-            >
-
-          </div>
+      </div>
 
 
-          <div class="field">
+      <div class="field">
 
-            <label for="subscribeButton">
-              Button Text
-            </label>
+        <label>
+          Schedule Date & Time
+        </label>
 
-            <input
-              id="subscribeButton"
-              placeholder="Subscribe"
-            >
+        <input
+          id="scheduleDate"
+          type="datetime-local"
+        >
 
-          </div>
-
-
-          <div class="field">
-
-            <label for="successMessage">
-              Success Message
-            </label>
-
-            <input
-              id="successMessage"
-              placeholder="You're successfully subscribed!"
-            >
-
-          </div>
+      </div>
 
 
-          <div class="field">
+      <div class="field full">
 
-            <label for="footerNote">
-              Privacy / Footer Note
-            </label>
+        <div class="toggle-row">
 
-            <input
-              id="footerNote"
-              placeholder="No spam. Unsubscribe anytime."
-            >
-
-          </div>
-
-        </div>
-
-
-        <div class="switch-row">
-
-          <div class="switch-copy">
+          <div class="toggle-copy">
 
             <strong>
-              Newsletter Section Enabled
+              Include unsubscribe footer
             </strong>
 
-            <small>
-              Display the newsletter signup section on the public website.
-            </small>
+            <span>
+              Add a standard unsubscribe notice to the campaign.
+            </span>
 
           </div>
 
           <label class="switch">
 
             <input
+              id="unsubscribeFooter"
               type="checkbox"
-              id="newsletterEnabled"
               checked
             >
 
-            <i class="slider"></i>
+            <span class="slider"></span>
 
           </label>
-
-        </div>
-
-
-        <div class="composer-actions">
-
-          <button
-            class="btn btn-secondary"
-            id="restoreNewsletter"
-            type="button"
-          >
-            Restore Default
-          </button>
-
-          <button
-            class="btn btn-primary"
-            id="saveNewsletter"
-            type="button"
-          >
-            Save Newsletter
-          </button>
-
-        </div>
-
-      </section>
-
-
-      <!-- SUBSCRIBERS -->
-
-      <section class="panel">
-
-        <div class="panel-header">
-
-          <div>
-
-            <h2 class="panel-title">
-              Subscribers
-            </h2>
-
-            <p class="panel-desc">
-              Review and manage newsletter subscribers.
-            </p>
-
-          </div>
-
-          <button
-            class="btn btn-secondary"
-            id="exportBtn"
-            type="button"
-          >
-            Export CSV
-          </button>
-
-        </div>
-
-
-        <div class="table-wrap">
-
-          <table class="subscriber-table">
-
-            <thead>
-
-              <tr>
-
-                <th>Email</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Action</th>
-
-              </tr>
-
-            </thead>
-
-            <tbody id="subscriberTable"></tbody>
-
-          </table>
-
-        </div>
-
-      </section>
-
-
-      <!-- SAVE BAR -->
-
-      <div class="save-bar">
-
-        <div class="save-status">
-
-          Status:
-          <strong id="saveStatus">
-            All changes saved
-          </strong>
-
-        </div>
-
-
-        <div class="save-actions">
-
-          <button
-            class="btn btn-secondary"
-            id="resetBtn"
-            type="button"
-          >
-            Reset
-          </button>
-
-          <button
-            class="btn btn-primary"
-            id="saveAllBtn"
-            type="button"
-          >
-            Save Changes
-          </button>
 
         </div>
 
@@ -1518,148 +1718,210 @@ h1{
     </div>
 
 
-    <!-- =====================
-         RIGHT COLUMN
-    ====================== -->
+    <div class="composer-actions">
+
+      <button
+        class="btn"
+        onclick="previewCampaign()"
+      >
+        ◉ Preview
+      </button>
+
+      <button
+        class="btn"
+        onclick="saveDraft()"
+      >
+        Save Draft
+      </button>
+
+      <button
+        class="btn primary"
+        onclick="saveCampaign()"
+      >
+        Save Campaign
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- AUDIENCE -->
+
+<div class="panel">
+
+  <div class="panel-header">
 
     <div>
+      <div class="panel-title">
+        Audience
+      </div>
 
-      <div class="preview-sticky">
+      <div class="panel-subtitle">
+        Choose your recipient group.
+      </div>
+    </div>
 
-        <!-- LIVE PREVIEW -->
-
-        <section class="panel">
-
-          <div class="panel-header">
-
-            <div>
-
-              <h2 class="panel-title">
-                Live Preview
-              </h2>
-
-              <p class="panel-desc">
-                Public newsletter section preview.
-              </p>
-
-            </div>
-
-            <span class="panel-tag">
-              LIVE
-            </span>
-
-          </div>
+  </div>
 
 
-          <div class="preview-window">
+  <div class="panel-body">
 
-            <div class="preview-top">
+    <div class="audience-list">
 
-              <span class="browser-dot"></span>
-              <span class="browser-dot"></span>
-              <span class="browser-dot"></span>
+      <label class="audience-item">
 
-            </div>
+        <input
+          class="audience-check"
+          type="radio"
+          name="audience"
+          value="all"
+          checked
+        >
 
+        <div class="audience-icon">
+          ✉
+        </div>
 
-            <div class="email-preview">
+        <div class="audience-copy">
 
-              <div class="email-card">
+          <strong>
+            All Subscribers
+          </strong>
 
-                <div class="email-brand">
+          <span>
+            Everyone currently subscribed
+          </span>
 
-                  <img
-                    src="../logo.png"
-                    alt=""
-                  >
+        </div>
 
-                  <span>
-                    Website Deals
-                  </span>
+        <div
+          class="audience-count"
+          id="audienceAll"
+        >
+          0
+        </div>
 
-                </div>
-
-
-                <div class="email-body">
-
-                  <small>
-                    Stay Updated
-                  </small>
-
-                  <h3 id="previewTitle">
-                    Get the latest website deals
-                  </h3>
-
-                  <p id="previewDescription">
-                    New website deals, offers and marketplace updates delivered to your inbox.
-                  </p>
+      </label>
 
 
-                  <div class="email-input">
+      <label class="audience-item">
 
-                    <span id="previewPlaceholder">
-                      Enter your email address
-                    </span>
+        <input
+          class="audience-check"
+          type="radio"
+          name="audience"
+          value="active"
+        >
 
-                    <button
-                      type="button"
-                      id="previewButton"
-                    >
-                      Subscribe
-                    </button>
+        <div class="audience-icon">
+          ✓
+        </div>
 
-                  </div>
+        <div class="audience-copy">
 
-                </div>
+          <strong>
+            Active Subscribers
+          </strong>
 
+          <span>
+            Subscribers marked active
+          </span>
 
-                <div
-                  class="email-footer"
-                  id="previewFooter"
-                >
-                  No spam. Unsubscribe anytime.
-                </div>
+        </div>
 
-              </div>
+        <div
+          class="audience-count"
+          id="audienceActive"
+        >
+          0
+        </div>
 
-            </div>
-
-          </div>
-
-        </section>
-
-
-        <!-- CAMPAIGNS -->
-
-        <section class="panel">
-
-          <div class="panel-header">
-
-            <div>
-
-              <h2 class="panel-title">
-                Recent Campaigns
-              </h2>
-
-              <p class="panel-desc">
-                Latest newsletter activity.
-              </p>
-
-            </div>
-
-            <span class="panel-tag">
-              ACTIVITY
-            </span>
-
-          </div>
+      </label>
 
 
-          <div
-            class="campaign-list"
-            id="campaignList"
-          ></div>
+      <label class="audience-item">
 
-        </section>
+        <input
+          class="audience-check"
+          type="radio"
+          name="audience"
+          value="customers"
+        >
+
+        <div class="audience-icon">
+          ♙
+        </div>
+
+        <div class="audience-copy">
+
+          <strong>
+            Customers
+          </strong>
+
+          <span>
+            Existing Website Deals customers
+          </span>
+
+        </div>
+
+        <div
+          class="audience-count"
+          id="audienceCustomers"
+        >
+          0
+        </div>
+
+      </label>
+
+    </div>
+
+
+    <div style="height:14px;"></div>
+
+
+    <div class="settings-list">
+
+      <div class="setting-item">
+
+        <strong>
+          Delivery Mode
+        </strong>
+
+        <span>
+          Prototype mode — campaign records are stored
+          in browser LocalStorage.
+        </span>
+
+      </div>
+
+
+      <div class="setting-item">
+
+        <strong>
+          Email Provider
+        </strong>
+
+        <span>
+          Not connected. Connect an email service later
+          for real campaign delivery.
+        </span>
+
+      </div>
+
+
+      <div class="setting-item">
+
+        <strong>
+          Unsubscribe Protection
+        </strong>
+
+        <span>
+          Keep unsubscribe controls enabled for real
+          production campaigns.
+        </span>
 
       </div>
 
@@ -1667,19 +1929,338 @@ h1{
 
   </div>
 
+</div>
+
+</div>
+
+
+<!-- =========================
+     RECENT CAMPAIGNS
+========================= -->
+
+<div style="height:18px;"></div>
+
+<div class="panel">
+
+  <div class="panel-header">
+
+    <div>
+
+      <div class="panel-title">
+        Recent Campaigns
+      </div>
+
+      <div class="panel-subtitle">
+        Review saved newsletter campaigns.
+      </div>
+
+    </div>
+
+    <button
+      class="btn small"
+      onclick="window.print()"
+    >
+      ⎙ Print
+    </button>
+
+  </div>
+
+
+  <div
+    class="campaign-list"
+    id="campaignList"
+  ></div>
+
+</div>
+
+
+<!-- =========================
+     SUBSCRIBERS
+========================= -->
+
+<div style="height:18px;"></div>
+
+<div class="panel">
+
+  <div class="panel-header">
+
+    <div>
+
+      <div class="panel-title">
+        Subscriber Directory
+      </div>
+
+      <div class="panel-subtitle">
+        Manage newsletter subscribers.
+      </div>
+
+    </div>
+
+    <button
+      class="btn small"
+      onclick="addDemoSubscriber()"
+    >
+      + Add Demo Subscriber
+    </button>
+
+  </div>
+
+
+  <div class="table-wrap">
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>Subscriber</th>
+          <th>Email</th>
+          <th>Status</th>
+          <th>Joined</th>
+          <th>Source</th>
+          <th>Actions</th>
+        </tr>
+
+      </thead>
+
+      <tbody id="subscriberBody"></tbody>
+
+    </table>
+
+  </div>
+
+  <div
+    class="empty"
+    id="subscriberEmpty"
+    style="display:none;"
+  >
+    No subscribers found.
+  </div>
+
+</div>
+
+
+<div class="footer-note">
+  Website Deals Admin • Newsletter Management • Prototype / LocalStorage
+</div>
+
+</section>
+
 </main>
 
+</div>
 
-<!-- TOAST -->
+
+<!-- =========================
+     PREVIEW MODAL
+========================= -->
+
+<div
+  class="modal-overlay"
+  id="previewModal"
+>
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <div class="modal-title">
+          Newsletter Preview
+        </div>
+
+        <div class="modal-subtitle">
+          Preview the campaign before saving.
+        </div>
+
+      </div>
+
+      <button
+        class="close-btn"
+        onclick="closeModal('previewModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div
+        style="
+          border:1px solid var(--border);
+          border-radius:15px;
+          overflow:hidden;
+        "
+      >
+
+        <div
+          style="
+            background:var(--dark);
+            color:#fff;
+            padding:22px;
+          "
+        >
+
+          <div
+            style="
+              font-size:10px;
+              opacity:.65;
+              text-transform:uppercase;
+              letter-spacing:.12em;
+              font-weight:800;
+            "
+          >
+            Website Deals
+          </div>
+
+          <div
+            id="previewSubject"
+            style="
+              font-family:Manrope,sans-serif;
+              font-size:23px;
+              font-weight:800;
+              margin-top:9px;
+            "
+          >
+            Newsletter Subject
+          </div>
+
+        </div>
+
+
+        <div style="padding:24px;">
+
+          <div
+            id="previewContent"
+            style="
+              white-space:pre-wrap;
+              font-size:12px;
+              line-height:1.8;
+              color:var(--text);
+            "
+          ></div>
+
+          <div
+            style="
+              margin-top:25px;
+              padding-top:15px;
+              border-top:1px solid var(--border);
+              color:var(--muted);
+              font-size:9px;
+            "
+            id="previewFooter"
+          >
+            You are receiving this email because you
+            subscribed to Website Deals.
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+
+      <button
+        class="btn"
+        onclick="closeModal('previewModal')"
+      >
+        Close
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     CAMPAIGN VIEW MODAL
+========================= -->
+
+<div
+  class="modal-overlay"
+  id="campaignViewModal"
+>
+
+  <div class="modal">
+
+    <div class="modal-header">
+
+      <div>
+
+        <div
+          class="modal-title"
+          id="viewCampaignTitle"
+        >
+          Campaign
+        </div>
+
+        <div
+          class="modal-subtitle"
+          id="viewCampaignMeta"
+        >
+          Campaign details
+        </div>
+
+      </div>
+
+      <button
+        class="close-btn"
+        onclick="closeModal('campaignViewModal')"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <div class="modal-body">
+
+      <div
+        id="viewCampaignContent"
+        style="
+          white-space:pre-wrap;
+          line-height:1.8;
+          font-size:12px;
+        "
+      ></div>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button
+        class="btn"
+        onclick="closeModal('campaignViewModal')"
+      >
+        Close
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================
+     TOAST
+========================= -->
 
 <div
   class="toast"
   id="toast"
 >
 
-  <span class="toast-icon">
+  <div class="toast-icon">
     ✓
-  </span>
+  </div>
 
   <span id="toastText">
     Saved successfully.
@@ -1690,128 +2271,14 @@ h1{
 
 <script>
 /* =========================================================
-   WEBSITE DEALS — NEWSLETTER MANAGER
+   WEBSITE DEALS — NEWSLETTER MANAGEMENT
 ========================================================= */
 
-const NEWSLETTER_KEY =
-  "websiteDealsNewsletter";
+const AUTH_KEY = "websiteDealsAdminAuth";
 
-const SUBSCRIBERS_KEY =
-  "websiteDealsNewsletterSubscribers";
-
-const CAMPAIGNS_KEY =
-  "websiteDealsNewsletterCampaigns";
-
-const AUTH_KEY =
-  "websiteDealsAdminAuth";
-
-
-/* =========================================================
-   DOM HELPER
-========================================================= */
-
-function $(id){
-  return document.getElementById(id);
-}
-
-
-/* =========================================================
-   DEFAULT SETTINGS
-========================================================= */
-
-const DEFAULT_NEWSLETTER = {
-
-  title:
-    "Get the latest website deals",
-
-  description:
-    "New website deals, offers and marketplace updates delivered to your inbox.",
-
-  placeholder:
-    "Enter your email address",
-
-  button:
-    "Subscribe",
-
-  success:
-    "You're successfully subscribed!",
-
-  footer:
-    "No spam. Unsubscribe anytime.",
-
-  enabled:
-    true
-
-};
-
-
-/* =========================================================
-   DEMO SUBSCRIBERS
-========================================================= */
-
-const DEFAULT_SUBSCRIBERS = [
-
-  {
-    id:"sub-1",
-    email:"hello@example.com",
-    date:"2026-09-28",
-    status:"subscribed"
-  },
-
-  {
-    id:"sub-2",
-    email:"customer@example.com",
-    date:"2026-09-26",
-    status:"subscribed"
-  },
-
-  {
-    id:"sub-3",
-    email:"design@example.com",
-    date:"2026-09-21",
-    status:"subscribed"
-  },
-
-  {
-    id:"sub-4",
-    email:"oldsubscriber@example.com",
-    date:"2026-08-19",
-    status:"unsubscribed"
-  }
-
-];
-
-
-/* =========================================================
-   DEMO CAMPAIGNS
-========================================================= */
-
-const DEFAULT_CAMPAIGNS = [
-
-  {
-    name:"September Website Deals",
-    date:"Sep 28, 2026",
-    recipients:316
-  },
-
-  {
-    name:"New Premium Templates",
-    date:"Sep 15, 2026",
-    recipients:284
-  },
-
-  {
-    name:"Monthly Marketplace Update",
-    date:"Aug 30, 2026",
-    recipients:251
-  }
-
-];
-
-
-let newsletter = {};
-let subscribers = [];
-let campaigns = [];
+const NEWSLETTER_KEY = "websiteDealsNewsletter";
+const SUBSCRIBERS_KEY = "websiteDealsNewsletterSubscribers";
+const CUSTOMERS_KEY = "websiteDealsCustomers";
 
 
 /* =========================================================
@@ -1861,30 +2328,41 @@ if(!adminSession){
 }
 
 
-if(adminSession){
+/* =========================================================
+   STATE
+========================================================= */
 
-  const role =
-    String(
-      adminSession.role || ""
-    ).toLowerCase();
+let campaigns = [];
+let subscribers = [];
 
-
-  $("adminName").textContent =
-    adminSession.name ||
-    adminSession.email ||
-    "Admin";
+let editingCampaignId = null;
 
 
-  if(role !== "superadmin"){
+/* =========================================================
+   SAFE JSON
+========================================================= */
 
-    $("superAdminTitle").style.display =
-      "none";
+function parseArray(key){
 
-    $("adminsLink").style.display =
-      "none";
+  try{
 
-    $("settingsLink").style.display =
-      "none";
+    const raw =
+      localStorage.getItem(key);
+
+    if(!raw){
+      return [];
+    }
+
+    const data =
+      JSON.parse(raw);
+
+    return Array.isArray(data)
+      ? data
+      : [];
+
+  }catch(error){
+
+    return [];
 
   }
 
@@ -1892,73 +2370,284 @@ if(adminSession){
 
 
 /* =========================================================
-   LOAD NEWSLETTER
+   ESCAPE
+========================================================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   DATE
+========================================================= */
+
+function validDate(value){
+
+  if(!value){
+    return null;
+  }
+
+  const date =
+    new Date(value);
+
+  return Number.isNaN(date.getTime())
+    ? null
+    : date;
+
+}
+
+
+function formatDate(value){
+
+  const date =
+    validDate(value);
+
+  if(!date){
+    return "—";
+  }
+
+  return date.toLocaleDateString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric"
+    }
+  );
+
+}
+
+
+function formatDateTime(value){
+
+  const date =
+    validDate(value);
+
+  if(!date){
+    return "—";
+  }
+
+  return date.toLocaleString(
+    "en-GB",
+    {
+      day:"2-digit",
+      month:"short",
+      year:"numeric",
+      hour:"2-digit",
+      minute:"2-digit"
+    }
+  );
+
+}
+
+
+/* =========================================================
+   ID
+========================================================= */
+
+function generateCampaignId(){
+
+  return (
+    "CMP-" +
+    Date.now().toString(36).toUpperCase()
+  );
+
+}
+
+
+function generateSubscriberId(){
+
+  const numbers =
+    subscribers
+      .map(s =>
+        parseInt(
+          String(s.id || "")
+            .replace(/\D/g,""),
+          10
+        )
+      )
+      .filter(Number.isFinite);
+
+  return (
+    "SUB-" +
+    (Math.max(1000,...numbers) + 1)
+  );
+
+}
+
+
+/* =========================================================
+   DEMO SUBSCRIBERS
+========================================================= */
+
+function getDemoSubscribers(){
+
+  const now = Date.now();
+
+  function ago(days){
+
+    return new Date(
+      now -
+      days * 24 * 60 * 60 * 1000
+    ).toISOString();
+
+  }
+
+  return [
+
+    {
+      id:"SUB-1001",
+      name:"Nusrat Jahan",
+      email:"nusrat@example.com",
+      status:"active",
+      joined:ago(4),
+      source:"Website"
+    },
+
+    {
+      id:"SUB-1002",
+      name:"Rahim Ahmed",
+      email:"rahim@example.com",
+      status:"active",
+      joined:ago(12),
+      source:"Checkout"
+    },
+
+    {
+      id:"SUB-1003",
+      name:"Sadia Islam",
+      email:"sadia@example.com",
+      status:"active",
+      joined:ago(18),
+      source:"Homepage"
+    },
+
+    {
+      id:"SUB-1004",
+      name:"Tanvir Hasan",
+      email:"tanvir@example.com",
+      status:"unsubscribed",
+      joined:ago(39),
+      source:"Website"
+    },
+
+    {
+      id:"SUB-1005",
+      name:"Mahi Rahman",
+      email:"mahi@example.com",
+      status:"active",
+      joined:ago(52),
+      source:"Checkout"
+    }
+
+  ];
+
+}
+
+
+/* =========================================================
+   DEMO CAMPAIGNS
+========================================================= */
+
+function getDemoCampaigns(){
+
+  return [
+
+    {
+      id:"CMP-1001",
+      name:"Welcome Campaign",
+      subject:"Welcome to Website Deals",
+      sender:"Website Deals",
+      content:"Discover premium websites that are ready to launch.",
+      status:"sent",
+      audience:"all",
+      createdAt:"2026-09-15T10:00:00",
+      sentAt:"2026-09-15T12:00:00",
+      openRate:42
+    },
+
+    {
+      id:"CMP-1002",
+      name:"New Website Collection",
+      subject:"New websites just arrived",
+      sender:"Website Deals",
+      content:"Explore our latest website collection and discover your next digital project.",
+      status:"sent",
+      audience:"active",
+      createdAt:"2026-09-24T09:30:00",
+      sentAt:"2026-09-24T11:00:00",
+      openRate:48
+    },
+
+    {
+      id:"CMP-1003",
+      name:"October Launch",
+      subject:"October Website Deals",
+      sender:"Website Deals",
+      content:"New month. New websites. New opportunities.",
+      status:"scheduled",
+      audience:"all",
+      createdAt:"2026-09-30T14:00:00",
+      scheduledAt:"2026-10-05T10:00:00",
+      openRate:0
+    }
+
+  ];
+
+}
+
+
+/* =========================================================
+   LOAD
 ========================================================= */
 
 function loadNewsletter(){
 
-  try{
+  campaigns =
+    parseArray(NEWSLETTER_KEY);
 
-    const raw =
-      localStorage.getItem(
-        NEWSLETTER_KEY
-      );
+  subscribers =
+    parseArray(SUBSCRIBERS_KEY);
 
-    newsletter =
-      raw
-        ? {
-            ...DEFAULT_NEWSLETTER,
-            ...JSON.parse(raw)
-          }
-        : {
-            ...DEFAULT_NEWSLETTER
-          };
 
-  }catch(error){
+  /*
+    Demo records only when the related local storage
+    does not exist yet.
+  */
 
-    newsletter =
-      {
-        ...DEFAULT_NEWSLETTER
-      };
+  if(!campaigns.length){
+
+    campaigns =
+      getDemoCampaigns();
 
   }
 
 
-  fillNewsletterForm();
-
-}
-
-
-/* =========================================================
-   LOAD SUBSCRIBERS
-========================================================= */
-
-function loadSubscribers(){
-
-  try{
-
-    const raw =
-      localStorage.getItem(
-        SUBSCRIBERS_KEY
-      );
+  if(!subscribers.length){
 
     subscribers =
-      raw
-        ? JSON.parse(raw)
-        : DEFAULT_SUBSCRIBERS.map(
-            item => ({...item})
-          );
-
-    if(!Array.isArray(subscribers)){
-      subscribers = [];
-    }
-
-  }catch(error){
-
-    subscribers = [];
+      getDemoSubscribers();
 
   }
 
+
+  /*
+    If real customers exist, use them as a potential
+    subscriber audience without automatically changing
+    existing subscriber records.
+  */
+
+  updateStats();
+
+  renderCampaigns();
 
   renderSubscribers();
 
@@ -1966,528 +2655,78 @@ function loadSubscribers(){
 
 
 /* =========================================================
-   LOAD CAMPAIGNS
+   ADMIN IDENTITY
 ========================================================= */
 
-function loadCampaigns(){
+function setAdminIdentity(){
 
-  try{
+  const name =
+    adminSession?.name ||
+    adminSession?.email ||
+    "Super Admin";
 
-    const raw =
-      localStorage.getItem(
-        CAMPAIGNS_KEY
-      );
+  const role =
+    adminSession?.role ||
+    "Super Admin";
 
-    campaigns =
-      raw
-        ? JSON.parse(raw)
-        : DEFAULT_CAMPAIGNS.map(
-            item => ({...item})
-          );
+  const initials =
+    name
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0,2)
+      .map(
+        part =>
+          part.charAt(0).toUpperCase()
+      )
+      .join("") || "SA";
 
-    if(!Array.isArray(campaigns)){
-      campaigns = [];
-    }
+  document.getElementById("adminName")
+    .textContent = name;
 
-  }catch(error){
+  document.getElementById("adminRole")
+    .textContent = role;
 
-    campaigns = [];
-
-  }
-
-
-  renderCampaigns();
+  document.getElementById("adminAvatar")
+    .textContent = initials;
 
 }
 
 
 /* =========================================================
-   FILL FORM
+   INIT
 ========================================================= */
 
-function fillNewsletterForm(){
+document.addEventListener(
+  "DOMContentLoaded",
+  () => {
 
-  $("newsletterTitle").value =
-    newsletter.title || "";
+    setAdminIdentity();
 
-  $("newsletterDescription").value =
-    newsletter.description || "";
+    loadNewsletter();
 
-  $("inputPlaceholder").value =
-    newsletter.placeholder || "";
+    document.addEventListener(
+      "keydown",
+      event => {
 
-  $("subscribeButton").value =
-    newsletter.button || "";
+        if(event.key === "Escape"){
 
-  $("successMessage").value =
-    newsletter.success || "";
+          document
+            .querySelectorAll(
+              ".modal-overlay.show"
+            )
+            .forEach(modal => {
 
-  $("footerNote").value =
-    newsletter.footer || "";
+              modal.classList.remove("show");
 
-  $("newsletterEnabled").checked =
-    newsletter.enabled !== false;
+            });
 
+        }
 
-  updateCounters();
-
-  updatePreview();
-
-}
-
-
-/* =========================================================
-   GET FORM DATA
-========================================================= */
-
-function getNewsletterForm(){
-
-  return {
-
-    title:
-      $("newsletterTitle").value.trim(),
-
-    description:
-      $("newsletterDescription").value.trim(),
-
-    placeholder:
-      $("inputPlaceholder").value.trim(),
-
-    button:
-      $("subscribeButton").value.trim() ||
-      "Subscribe",
-
-    success:
-      $("successMessage").value.trim(),
-
-    footer:
-      $("footerNote").value.trim(),
-
-    enabled:
-      $("newsletterEnabled").checked
-
-  };
-
-}
-
-
-/* =========================================================
-   SAVE NEWSLETTER
-========================================================= */
-
-$("saveNewsletter").addEventListener(
-  "click",
-  function(){
-
-    const data =
-      getNewsletterForm();
-
-
-    if(!data.title){
-
-      showToast(
-        "Please enter a newsletter title."
-      );
-
-      $("newsletterTitle").focus();
-
-      return;
-
-    }
-
-
-    newsletter =
-      data;
-
-
-    localStorage.setItem(
-      NEWSLETTER_KEY,
-      JSON.stringify(newsletter)
-    );
-
-
-    setSavedState();
-
-    updatePreview();
-
-    showToast(
-      "Newsletter settings saved."
+      }
     );
 
   }
 );
-
-
-/* =========================================================
-   RESTORE
-========================================================= */
-
-$("restoreNewsletter").addEventListener(
-  "click",
-  function(){
-
-    const confirmed =
-      confirm(
-        "Restore newsletter settings to default?"
-      );
-
-
-    if(!confirmed){
-      return;
-    }
-
-
-    newsletter =
-      {
-        ...DEFAULT_NEWSLETTER
-      };
-
-
-    fillNewsletterForm();
-
-    markDirty();
-
-    showToast(
-      "Default newsletter restored."
-    );
-
-  }
-);
-
-
-/* =========================================================
-   RESET
-========================================================= */
-
-$("resetBtn").addEventListener(
-  "click",
-  function(){
-
-    const confirmed =
-      confirm(
-        "Reset newsletter settings, subscribers and campaign demo data?"
-      );
-
-
-    if(!confirmed){
-      return;
-    }
-
-
-    localStorage.removeItem(
-      NEWSLETTER_KEY
-    );
-
-    localStorage.removeItem(
-      SUBSCRIBERS_KEY
-    );
-
-    localStorage.removeItem(
-      CAMPAIGNS_KEY
-    );
-
-
-    newsletter =
-      {
-        ...DEFAULT_NEWSLETTER
-      };
-
-    subscribers =
-      DEFAULT_SUBSCRIBERS.map(
-        item => ({...item})
-      );
-
-    campaigns =
-      DEFAULT_CAMPAIGNS.map(
-        item => ({...item})
-      );
-
-
-    fillNewsletterForm();
-
-    renderSubscribers();
-
-    renderCampaigns();
-
-    setSavedState();
-
-    showToast(
-      "Newsletter data reset."
-    );
-
-  }
-);
-
-
-/* =========================================================
-   SAVE ALL
-========================================================= */
-
-$("saveAllBtn").addEventListener(
-  "click",
-  function(){
-
-    const data =
-      getNewsletterForm();
-
-
-    if(!data.title){
-
-      showToast(
-        "Newsletter title is required."
-      );
-
-      return;
-
-    }
-
-
-    newsletter =
-      data;
-
-
-    localStorage.setItem(
-      NEWSLETTER_KEY,
-      JSON.stringify(newsletter)
-    );
-
-
-    localStorage.setItem(
-      SUBSCRIBERS_KEY,
-      JSON.stringify(subscribers)
-    );
-
-
-    localStorage.setItem(
-      CAMPAIGNS_KEY,
-      JSON.stringify(campaigns)
-    );
-
-
-    setSavedState();
-
-    showToast(
-      "All newsletter changes saved."
-    );
-
-  }
-);
-
-
-/* =========================================================
-   SUBSCRIBERS
-========================================================= */
-
-function renderSubscribers(){
-
-  const tbody =
-    $("subscriberTable");
-
-  tbody.innerHTML = "";
-
-
-  if(!subscribers.length){
-
-    tbody.innerHTML = `
-      <tr>
-        <td
-          colspan="4"
-          style="
-            text-align:center;
-            padding:30px;
-            color:#89938d;
-          "
-        >
-          No subscribers yet.
-        </td>
-      </tr>
-    `;
-
-  }
-
-
-  subscribers.forEach(
-    subscriber => {
-
-      const tr =
-        document.createElement("tr");
-
-
-      tr.innerHTML = `
-
-        <td>
-          <span class="email">
-            ${escapeHTML(subscriber.email)}
-          </span>
-        </td>
-
-        <td>
-          <span class="date">
-            ${escapeHTML(subscriber.date)}
-          </span>
-        </td>
-
-        <td>
-          <span class="status ${
-            subscriber.status === "subscribed"
-              ? "subscribed"
-              : "unsubscribed"
-          }">
-            ${
-              subscriber.status === "subscribed"
-                ? "SUBSCRIBED"
-                : "UNSUBSCRIBED"
-            }
-          </span>
-        </td>
-
-        <td>
-          <button
-            class="row-delete"
-            data-delete="${subscriber.id}"
-            title="Delete subscriber"
-          >
-            ×
-          </button>
-        </td>
-
-      `;
-
-
-      tbody.appendChild(tr);
-
-    }
-  );
-
-
-  updateStats();
-
-}
-
-
-/* =========================================================
-   DELETE SUBSCRIBER
-========================================================= */
-
-$("subscriberTable").addEventListener(
-  "click",
-  function(event){
-
-    const button =
-      event.target.closest(
-        "[data-delete]"
-      );
-
-    if(!button){
-      return;
-    }
-
-
-    const id =
-      button.dataset.delete;
-
-
-    const subscriber =
-      subscribers.find(
-        item => item.id === id
-      );
-
-
-    if(!subscriber){
-      return;
-    }
-
-
-    const confirmed =
-      confirm(
-        `Delete ${subscriber.email}?`
-      );
-
-
-    if(!confirmed){
-      return;
-    }
-
-
-    subscribers =
-      subscribers.filter(
-        item => item.id !== id
-      );
-
-
-    renderSubscribers();
-
-    markDirty();
-
-    showToast(
-      "Subscriber removed."
-    );
-
-  }
-);
-
-
-/* =========================================================
-   CAMPAIGNS
-========================================================= */
-
-function renderCampaigns(){
-
-  const list =
-    $("campaignList");
-
-  list.innerHTML = "";
-
-
-  campaigns.forEach(
-    campaign => {
-
-      const item =
-        document.createElement("div");
-
-      item.className =
-        "campaign";
-
-
-      item.innerHTML = `
-
-        <div class="campaign-top">
-
-          <span class="campaign-name">
-            ${escapeHTML(campaign.name)}
-          </span>
-
-          <span class="campaign-date">
-            ${escapeHTML(campaign.date)}
-          </span>
-
-        </div>
-
-        <div class="campaign-bottom">
-
-          <span>
-            Recipients
-          </span>
-
-          <strong>
-            ${Number(campaign.recipients || 0).toLocaleString()}
-          </strong>
-
-        </div>
-
-      `;
-
-
-      list.appendChild(item);
-
-    }
-  );
-
-
-  $("campaignCount").textContent =
-    campaigns.length;
-
-}
 
 
 /* =========================================================
@@ -2501,19 +2740,663 @@ function updateStats(){
 
   const active =
     subscribers.filter(
-      item =>
-        item.status === "subscribed"
+      s =>
+        String(s.status || "")
+          .toLowerCase() === "active"
     ).length;
 
-
-  $("totalSubscribers").textContent =
-    total;
-
-  $("activeSubscribers").textContent =
-    active;
-
-  $("campaignCount").textContent =
+  const campaignCount =
     campaigns.length;
+
+  const sent =
+    campaigns.filter(
+      c =>
+        String(c.status || "")
+          .toLowerCase() === "sent"
+    ).length;
+
+  const sentCampaigns =
+    campaigns.filter(
+      c =>
+        String(c.status || "")
+          .toLowerCase() === "sent"
+    );
+
+  let openRate = 0;
+
+  if(sentCampaigns.length){
+
+    openRate =
+      sentCampaigns.reduce(
+        (sum,c) =>
+          sum + (Number(c.openRate) || 0),
+        0
+      ) /
+      sentCampaigns.length;
+
+  }
+
+
+  document.getElementById(
+    "statSubscribers"
+  ).textContent = total;
+
+  document.getElementById(
+    "statActive"
+  ).textContent = active;
+
+  document.getElementById(
+    "statCampaigns"
+  ).textContent = campaignCount;
+
+  document.getElementById(
+    "statSent"
+  ).textContent = sent;
+
+  document.getElementById(
+    "statOpen"
+  ).textContent =
+    Math.round(openRate) + "%";
+
+
+  document.getElementById(
+    "audienceAll"
+  ).textContent = total;
+
+  document.getElementById(
+    "audienceActive"
+  ).textContent = active;
+
+
+  const customers =
+    parseArray(CUSTOMERS_KEY);
+
+  document.getElementById(
+    "audienceCustomers"
+  ).textContent =
+    customers.length;
+
+}
+
+
+/* =========================================================
+   RENDER CAMPAIGNS
+========================================================= */
+
+function renderCampaigns(){
+
+  const container =
+    document.getElementById("campaignList");
+
+
+  if(!campaigns.length){
+
+    container.innerHTML = `
+      <div class="empty">
+        No campaigns created yet.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  const sorted =
+    [...campaigns].sort(
+      (a,b) =>
+        new Date(
+          b.createdAt || 0
+        ) -
+        new Date(
+          a.createdAt || 0
+        )
+    );
+
+
+  container.innerHTML =
+    sorted
+      .slice(0,8)
+      .map(campaign => {
+
+        const status =
+          String(
+            campaign.status || "draft"
+          ).toLowerCase();
+
+        return `
+
+          <div class="campaign">
+
+            <div class="campaign-icon">
+              ✉
+            </div>
+
+            <div class="campaign-main">
+
+              <div class="campaign-name">
+                ${escapeHTML(
+                  campaign.name ||
+                  campaign.subject ||
+                  "Untitled Campaign"
+                )}
+              </div>
+
+              <div class="campaign-meta">
+                ${escapeHTML(
+                  campaign.subject || "No subject"
+                )}
+                •
+                ${formatDate(
+                  campaign.createdAt
+                )}
+              </div>
+
+            </div>
+
+            <span class="campaign-status ${escapeHTML(status)}">
+              ${escapeHTML(status)}
+            </span>
+
+            <div class="campaign-actions">
+
+              <button
+                class="small-action"
+                title="View"
+                onclick="viewCampaign('${escapeJS(campaign.id)}')"
+              >
+                ◉
+              </button>
+
+              <button
+                class="small-action"
+                title="Edit"
+                onclick="editCampaign('${escapeJS(campaign.id)}')"
+              >
+                ✎
+              </button>
+
+              <button
+                class="small-action"
+                title="Delete"
+                onclick="deleteCampaign('${escapeJS(campaign.id)}')"
+              >
+                ×
+              </button>
+
+            </div>
+
+          </div>
+
+        `;
+
+      })
+      .join("");
+
+}
+
+
+/* =========================================================
+   RENDER SUBSCRIBERS
+========================================================= */
+
+function renderSubscribers(){
+
+  const body =
+    document.getElementById(
+      "subscriberBody"
+    );
+
+  const empty =
+    document.getElementById(
+      "subscriberEmpty"
+    );
+
+
+  if(!subscribers.length){
+
+    body.innerHTML = "";
+
+    empty.style.display = "block";
+
+    return;
+
+  }
+
+
+  empty.style.display = "none";
+
+
+  body.innerHTML =
+    subscribers.map(subscriber => {
+
+      const status =
+        String(
+          subscriber.status || "active"
+        ).toLowerCase();
+
+      return `
+
+        <tr>
+
+          <td>
+
+            <strong>
+              ${escapeHTML(
+                subscriber.name ||
+                "Subscriber"
+              )}
+            </strong>
+
+            <div class="sub">
+              ${escapeHTML(
+                subscriber.id || ""
+              )}
+            </div>
+
+          </td>
+
+          <td>
+            ${escapeHTML(
+              subscriber.email || "—"
+            )}
+          </td>
+
+          <td>
+
+            <span
+              class="badge ${
+                status === "active"
+                  ? "sent"
+                  : "cancelled"
+              }"
+            >
+              ${escapeHTML(status)}
+            </span>
+
+          </td>
+
+          <td>
+            ${formatDate(
+              subscriber.joined
+            )}
+          </td>
+
+          <td>
+            ${escapeHTML(
+              subscriber.source || "Website"
+            )}
+          </td>
+
+          <td>
+
+            <button
+              class="btn small"
+              onclick="toggleSubscriber('${escapeJS(subscriber.id)}')"
+            >
+              ${
+                status === "active"
+                  ? "Suspend"
+                  : "Activate"
+              }
+            </button>
+
+            <button
+              class="btn small danger"
+              onclick="deleteSubscriber('${escapeJS(subscriber.id)}')"
+            >
+              Delete
+            </button>
+
+          </td>
+
+        </tr>
+
+      `;
+
+    }).join("");
+
+}
+
+
+/* =========================================================
+   SAVE STORAGE
+========================================================= */
+
+function saveNewsletter(){
+
+  localStorage.setItem(
+    NEWSLETTER_KEY,
+    JSON.stringify(campaigns)
+  );
+
+}
+
+
+function saveSubscribers(){
+
+  localStorage.setItem(
+    SUBSCRIBERS_KEY,
+    JSON.stringify(subscribers)
+  );
+
+}
+
+
+/* =========================================================
+   COMPOSER
+========================================================= */
+
+function getSelectedAudience(){
+
+  const selected =
+    document.querySelector(
+      'input[name="audience"]:checked'
+    );
+
+  return selected
+    ? selected.value
+    : "all";
+
+}
+
+
+function getComposerData(){
+
+  return {
+
+    id:
+      editingCampaignId ||
+      generateCampaignId(),
+
+    name:
+      document
+        .getElementById("campaignName")
+        .value
+        .trim(),
+
+    subject:
+      document
+        .getElementById("campaignSubject")
+        .value
+        .trim(),
+
+    sender:
+      document
+        .getElementById("senderName")
+        .value
+        .trim() ||
+      "Website Deals",
+
+    content:
+      document
+        .getElementById("campaignContent")
+        .value
+        .trim(),
+
+    status:
+      document
+        .getElementById("campaignStatus")
+        .value,
+
+    audience:
+      getSelectedAudience(),
+
+    scheduledAt:
+      document
+        .getElementById("scheduleDate")
+        .value,
+
+    unsubscribeFooter:
+      document
+        .getElementById("unsubscribeFooter")
+        .checked,
+
+    createdAt:
+      new Date().toISOString()
+
+  };
+
+}
+
+
+/* =========================================================
+   SAVE CAMPAIGN
+========================================================= */
+
+function saveCampaign(){
+
+  const data =
+    getComposerData();
+
+
+  if(!data.subject){
+
+    showToast(
+      "Email subject is required."
+    );
+
+    document
+      .getElementById("campaignSubject")
+      .focus();
+
+    return;
+
+  }
+
+
+  if(!data.content){
+
+    showToast(
+      "Email content is required."
+    );
+
+    document
+      .getElementById("campaignContent")
+      .focus();
+
+    return;
+
+  }
+
+
+  if(
+    data.status === "scheduled" &&
+    !data.scheduledAt
+  ){
+
+    showToast(
+      "Choose a schedule date and time."
+    );
+
+    return;
+
+  }
+
+
+  const existingIndex =
+    campaigns.findIndex(
+      c => c.id === editingCampaignId
+    );
+
+
+  if(existingIndex !== -1){
+
+    data.createdAt =
+      campaigns[existingIndex].createdAt ||
+      data.createdAt;
+
+    campaigns[existingIndex] =
+      {
+        ...campaigns[existingIndex],
+        ...data
+      };
+
+  }else{
+
+    campaigns.unshift(data);
+
+  }
+
+
+  saveNewsletter();
+
+  updateStats();
+
+  renderCampaigns();
+
+  clearComposer();
+
+  editingCampaignId = null;
+
+  showToast(
+    "Campaign saved successfully."
+  );
+
+}
+
+
+/* =========================================================
+   SAVE DRAFT
+========================================================= */
+
+function saveDraft(){
+
+  document.getElementById(
+    "campaignStatus"
+  ).value = "draft";
+
+  saveCampaign();
+
+}
+
+
+/* =========================================================
+   EDIT
+========================================================= */
+
+function editCampaign(id){
+
+  const campaign =
+    campaigns.find(
+      c => c.id === id
+    );
+
+  if(!campaign){
+    return;
+  }
+
+
+  editingCampaignId =
+    campaign.id;
+
+
+  document.getElementById(
+    "campaignName"
+  ).value =
+    campaign.name || "";
+
+  document.getElementById(
+    "campaignSubject"
+  ).value =
+    campaign.subject || "";
+
+  document.getElementById(
+    "senderName"
+  ).value =
+    campaign.sender ||
+    "Website Deals";
+
+  document.getElementById(
+    "campaignContent"
+  ).value =
+    campaign.content || "";
+
+  document.getElementById(
+    "campaignStatus"
+  ).value =
+    campaign.status || "draft";
+
+  document.getElementById(
+    "scheduleDate"
+  ).value =
+    campaign.scheduledAt || "";
+
+  document.getElementById(
+    "unsubscribeFooter"
+  ).checked =
+    campaign.unsubscribeFooter !== false;
+
+
+  const radio =
+    document.querySelector(
+      `input[name="audience"][value="${CSS.escape(
+        campaign.audience || "all"
+      )}"]`
+    );
+
+  if(radio){
+    radio.checked = true;
+  }
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+
+  showToast(
+    "Campaign loaded for editing."
+  );
+
+}
+
+
+/* =========================================================
+   CLEAR
+========================================================= */
+
+function clearComposer(){
+
+  editingCampaignId = null;
+
+  document.getElementById(
+    "campaignName"
+  ).value = "";
+
+  document.getElementById(
+    "campaignSubject"
+  ).value = "";
+
+  document.getElementById(
+    "senderName"
+  ).value = "Website Deals";
+
+  document.getElementById(
+    "campaignContent"
+  ).value = "";
+
+  document.getElementById(
+    "campaignStatus"
+  ).value = "draft";
+
+  document.getElementById(
+    "scheduleDate"
+  ).value = "";
+
+  document.getElementById(
+    "unsubscribeFooter"
+  ).checked = true;
+
+  const all =
+    document.querySelector(
+      'input[name="audience"][value="all"]'
+    );
+
+  if(all){
+    all.checked = true;
+  }
 
 }
 
@@ -2522,225 +3405,383 @@ function updateStats(){
    PREVIEW
 ========================================================= */
 
-function updatePreview(){
+function previewCampaign(){
 
-  const data =
-    getNewsletterForm();
+  const subject =
+    document
+      .getElementById("campaignSubject")
+      .value
+      .trim();
 
+  const content =
+    document
+      .getElementById("campaignContent")
+      .value
+      .trim();
 
-  $("previewTitle").textContent =
-    data.title ||
-    "Get the latest website deals";
-
-
-  $("previewDescription").textContent =
-    data.description ||
-    "New website deals, offers and marketplace updates delivered to your inbox.";
-
-
-  $("previewPlaceholder").textContent =
-    data.placeholder ||
-    "Enter your email address";
-
-
-  $("previewButton").textContent =
-    data.button ||
-    "Subscribe";
-
-
-  $("previewFooter").textContent =
-    data.footer ||
-    "No spam. Unsubscribe anytime.";
-
-}
-
-
-/* =========================================================
-   COUNTERS
-========================================================= */
-
-function updateCounters(){
-
-  const titleLength =
-    $("newsletterTitle").value.length;
-
-  const descriptionLength =
-    $("newsletterDescription").value.length;
-
-
-  $("titleCounter").textContent =
-    `${titleLength} / 90`;
-
-  $("descriptionCounter").textContent =
-    `${descriptionLength} / 180`;
-
-}
-
-
-/* =========================================================
-   LIVE INPUT
-========================================================= */
-
-[
-  "newsletterTitle",
-  "newsletterDescription",
-  "inputPlaceholder",
-  "subscribeButton",
-  "successMessage",
-  "footerNote",
-  "newsletterEnabled"
-].forEach(
-  id => {
-
-    $(id).addEventListener(
-      "input",
-      function(){
-
-        updateCounters();
-
-        updatePreview();
-
-        markDirty();
-
-      }
-    );
-
-  }
-);
-
-
-/* =========================================================
-   EXPORT CSV
-========================================================= */
-
-$("exportBtn").addEventListener(
-  "click",
-  function(){
-
-    if(!subscribers.length){
-
-      showToast(
-        "There are no subscribers to export."
-      );
-
-      return;
-
-    }
-
-
-    const rows = [
-      [
-        "Email",
-        "Date",
-        "Status"
-      ]
-    ];
-
-
-    subscribers.forEach(
-      subscriber => {
-
-        rows.push([
-          subscriber.email,
-          subscriber.date,
-          subscriber.status
-        ]);
-
-      }
-    );
-
-
-    const csv =
-      rows
-        .map(
-          row =>
-            row
-              .map(
-                value =>
-                  `"${String(value)
-                    .replace(/"/g,'""')}"`
-              )
-              .join(",")
-        )
-        .join("\n");
-
-
-    const blob =
-      new Blob(
-        [csv],
-        {
-          type:"text/csv;charset=utf-8;"
-        }
-      );
-
-
-    const url =
-      URL.createObjectURL(blob);
-
-
-    const link =
-      document.createElement("a");
-
-    link.href = url;
-
-    link.download =
-      "website-deals-subscribers.csv";
-
-    document.body.appendChild(link);
-
-    link.click();
-
-    link.remove();
-
-    URL.revokeObjectURL(url);
-
+  if(!subject && !content){
 
     showToast(
-      "Subscriber CSV exported."
+      "Add a subject or content first."
     );
 
+    return;
+
   }
-);
 
 
-/* =========================================================
-   DIRTY STATE
-========================================================= */
+  document.getElementById(
+    "previewSubject"
+  ).textContent =
+    subject || "Newsletter Subject";
 
-function markDirty(){
 
-  $("saveStatus").textContent =
-    "Unsaved changes";
+  document.getElementById(
+    "previewContent"
+  ).textContent =
+    content ||
+    "Your newsletter content will appear here.";
 
-  $("saveStatus").style.color =
-    "#e39a22";
+
+  const footer =
+    document.getElementById(
+      "previewFooter"
+    );
+
+  footer.style.display =
+    document.getElementById(
+      "unsubscribeFooter"
+    ).checked
+      ? "block"
+      : "none";
+
+
+  document.getElementById(
+    "previewModal"
+  ).classList.add("show");
 
 }
 
 
-function setSavedState(){
+/* =========================================================
+   VIEW
+========================================================= */
 
-  $("saveStatus").textContent =
-    "All changes saved";
+function viewCampaign(id){
 
-  $("saveStatus").style.color =
-    "";
+  const campaign =
+    campaigns.find(
+      c => c.id === id
+    );
+
+  if(!campaign){
+    return;
+  }
+
+
+  document.getElementById(
+    "viewCampaignTitle"
+  ).textContent =
+    campaign.subject ||
+    campaign.name ||
+    "Campaign";
+
+
+  document.getElementById(
+    "viewCampaignMeta"
+  ).textContent =
+    `${String(
+      campaign.status || "draft"
+    ).toUpperCase()} • ${
+      formatDateTime(
+        campaign.createdAt
+      )
+    }`;
+
+
+  document.getElementById(
+    "viewCampaignContent"
+  ).textContent =
+    campaign.content ||
+    "No campaign content.";
+
+
+  document.getElementById(
+    "campaignViewModal"
+  ).classList.add("show");
 
 }
 
 
 /* =========================================================
-   ESCAPE
+   DELETE CAMPAIGN
 ========================================================= */
 
-function escapeHTML(value){
+function deleteCampaign(id){
 
-  return String(value || "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  const campaign =
+    campaigns.find(
+      c => c.id === id
+    );
+
+  if(!campaign){
+    return;
+  }
+
+
+  const confirmed =
+    confirm(
+      `Delete campaign "${campaign.name || campaign.subject}"?`
+    );
+
+
+  if(!confirmed){
+    return;
+  }
+
+
+  campaigns =
+    campaigns.filter(
+      c => c.id !== id
+    );
+
+
+  saveNewsletter();
+
+  updateStats();
+
+  renderCampaigns();
+
+  showToast(
+    "Campaign deleted."
+  );
+
+}
+
+
+/* =========================================================
+   SUBSCRIBERS
+========================================================= */
+
+function addDemoSubscriber(){
+
+  const number =
+    subscribers.length + 1;
+
+  subscribers.unshift({
+
+    id:generateSubscriberId(),
+
+    name:
+      "New Subscriber " +
+      number,
+
+    email:
+      `subscriber${number}@example.com`,
+
+    status:"active",
+
+    joined:
+      new Date().toISOString(),
+
+    source:"Admin"
+
+  });
+
+
+  saveSubscribers();
+
+  updateStats();
+
+  renderSubscribers();
+
+  showToast(
+    "Subscriber added."
+  );
+
+}
+
+
+function toggleSubscriber(id){
+
+  const subscriber =
+    subscribers.find(
+      s => s.id === id
+    );
+
+  if(!subscriber){
+    return;
+  }
+
+
+  subscriber.status =
+    String(
+      subscriber.status || "active"
+    ).toLowerCase() === "active"
+      ? "unsubscribed"
+      : "active";
+
+
+  saveSubscribers();
+
+  updateStats();
+
+  renderSubscribers();
+
+  showToast(
+    subscriber.status === "active"
+      ? "Subscriber activated."
+      : "Subscriber unsubscribed."
+  );
+
+}
+
+
+function deleteSubscriber(id){
+
+  const subscriber =
+    subscribers.find(
+      s => s.id === id
+    );
+
+  if(!subscriber){
+    return;
+  }
+
+
+  if(
+    !confirm(
+      `Delete ${subscriber.email}?`
+    )
+  ){
+    return;
+  }
+
+
+  subscribers =
+    subscribers.filter(
+      s => s.id !== id
+    );
+
+
+  saveSubscribers();
+
+  updateStats();
+
+  renderSubscribers();
+
+  showToast(
+    "Subscriber deleted."
+  );
+
+}
+
+
+/* =========================================================
+   REFRESH
+========================================================= */
+
+function refreshNewsletter(){
+
+  campaigns =
+    parseArray(NEWSLETTER_KEY);
+
+  subscribers =
+    parseArray(SUBSCRIBERS_KEY);
+
+
+  /*
+    If the storage is empty, retain useful demo data.
+  */
+
+  if(!campaigns.length){
+    campaigns = getDemoCampaigns();
+  }
+
+  if(!subscribers.length){
+    subscribers = getDemoSubscribers();
+  }
+
+
+  updateStats();
+
+  renderCampaigns();
+
+  renderSubscribers();
+
+  showToast(
+    "Newsletter data refreshed."
+  );
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function closeModal(id){
+
+  const modal =
+    document.getElementById(id);
+
+  if(modal){
+    modal.classList.remove("show");
+  }
+
+}
+
+
+document
+  .querySelectorAll(".modal-overlay")
+  .forEach(overlay => {
+
+    overlay.addEventListener(
+      "click",
+      event => {
+
+        if(
+          event.target === overlay
+        ){
+
+          overlay.classList.remove(
+            "show"
+          );
+
+        }
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+function openSidebar(){
+
+  document
+    .getElementById("sidebar")
+    .classList.add("open");
+
+  document
+    .getElementById("sidebarOverlay")
+    .classList.add("show");
+
+}
+
+
+function closeSidebar(){
+
+  document
+    .getElementById("sidebar")
+    .classList.remove("open");
+
+  document
+    .getElementById("sidebarOverlay")
+    .classList.remove("show");
 
 }
 
@@ -2749,156 +3790,64 @@ function escapeHTML(value){
    LOGOUT
 ========================================================= */
 
-$("logoutBtn").addEventListener(
-  "click",
-  function(){
+function logout(){
 
-    const confirmed =
-      confirm(
-        "Logout from the admin panel?"
-      );
+  sessionStorage.removeItem(
+    AUTH_KEY
+  );
 
+  window.location.href =
+    "login/";
 
-    if(!confirmed){
-      return;
-    }
-
-
-    sessionStorage.removeItem(
-      AUTH_KEY
-    );
-
-
-    window.location.replace(
-      "login/"
-    );
-
-  }
-);
+}
 
 
 /* =========================================================
-   MOBILE MENU
+   ESCAPE JS
 ========================================================= */
 
-const sidebar =
-  $("sidebar");
+function escapeJS(value){
 
-const overlay =
-  $("sidebarOverlay");
+  return String(value ?? "")
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'")
+    .replace(/"/g,'\\"')
+    .replace(/\n/g,"\\n")
+    .replace(/\r/g,"\\r");
 
-const mobileMenu =
-  $("mobileMenu");
-
-
-mobileMenu.addEventListener(
-  "click",
-  function(){
-
-    sidebar.classList.add(
-      "mobile-open"
-    );
-
-    overlay.classList.add(
-      "show"
-    );
-
-  }
-);
-
-
-overlay.addEventListener(
-  "click",
-  function(){
-
-    sidebar.classList.remove(
-      "mobile-open"
-    );
-
-    overlay.classList.remove(
-      "show"
-    );
-
-  }
-);
-
-
-document.querySelectorAll(
-  ".nav-link"
-).forEach(
-  link => {
-
-    link.addEventListener(
-      "click",
-      function(){
-
-        sidebar.classList.remove(
-          "mobile-open"
-        );
-
-        overlay.classList.remove(
-          "show"
-        );
-
-      }
-    );
-
-  }
-);
+}
 
 
 /* =========================================================
    TOAST
 ========================================================= */
 
-let toastTimer;
-
+let toastTimer = null;
 
 function showToast(message){
 
   const toast =
-    $("toast");
+    document.getElementById("toast");
 
+  document.getElementById(
+    "toastText"
+  ).textContent = message;
 
-  $("toastText").textContent =
-    message;
+  toast.classList.add("show");
 
-
-  toast.classList.add(
-    "show"
-  );
-
-
-  clearTimeout(
-    toastTimer
-  );
-
+  clearTimeout(toastTimer);
 
   toastTimer =
     setTimeout(
-      function(){
-
+      () => {
         toast.classList.remove(
           "show"
         );
-
       },
-      2400
+      2800
     );
 
 }
-
-
-/* =========================================================
-   INIT
-========================================================= */
-
-loadNewsletter();
-
-loadSubscribers();
-
-loadCampaigns();
-
 </script>
 
 </body>
