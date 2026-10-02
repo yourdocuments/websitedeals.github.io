@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Website Management | Website Deals Admin</title>
-  <meta name="theme-color" content="#07110c">
+  <meta name="theme-color" content="#08110d">
+  <meta name="description" content="Manage Website Deals marketplace websites">
+  <title>Websites | Website Deals Admin</title>
 
   <link rel="icon" type="image/png" href="../logo.png">
 
@@ -19,29 +19,39 @@
 
   <style>
     :root{
-      --green:#19b45b;
-      --green-dark:#0d8f45;
-      --green-soft:#eafaf1;
-      --black:#07110c;
-      --dark:#0c1711;
-      --text:#142019;
+      --green:#18a957;
+      --green-dark:#108344;
+      --green-soft:#eaf9f0;
+
+      --black:#07100c;
+      --sidebar:#0a120e;
+
+      --text:#101713;
       --muted:#718078;
-      --white:#ffffff;
-      --bg:#f5f8f6;
-      --surface:#ffffff;
-      --border:#e3ebe6;
-      --danger:#e5484d;
-      --warning:#e9a23b;
-      --shadow:0 18px 55px rgba(8,30,18,.08);
-      --shadow-sm:0 8px 28px rgba(8,30,18,.06);
-      --radius:20px;
-      --sidebar:268px;
+
+      --white:#fff;
+      --surface:#f6f8f7;
+      --border:#e3eae6;
+
+      --danger:#dc3d4b;
+      --danger-soft:#fff0f1;
+
+      --warning:#d99000;
+      --warning-soft:#fff7df;
+
+      --blue:#3d70b2;
+      --blue-soft:#edf4ff;
+
+      --shadow:0 18px 50px rgba(8,30,18,.08);
+
+      --radius:18px;
+      --radius-sm:12px;
     }
 
     *{
+      box-sizing:border-box;
       margin:0;
       padding:0;
-      box-sizing:border-box;
     }
 
     html{
@@ -50,9 +60,10 @@
 
     body{
       font-family:"DM Sans",sans-serif;
-      background:var(--bg);
+      background:var(--surface);
       color:var(--text);
       min-height:100vh;
+      overflow-x:hidden;
     }
 
     button,
@@ -71,14 +82,9 @@
       text-decoration:none;
     }
 
-    img{
-      display:block;
-      max-width:100%;
-    }
-
     /* =========================
        APP
-    ========================== */
+    ========================= */
 
     .app{
       min-height:100vh;
@@ -86,53 +92,61 @@
 
     /* =========================
        SIDEBAR
-    ========================== */
+    ========================= */
 
     .sidebar{
+      width:270px;
       position:fixed;
-      inset:0 auto 0 0;
-      width:var(--sidebar);
-      background:
-        radial-gradient(circle at 10% 0%,rgba(25,180,91,.16),transparent 30%),
-        linear-gradient(180deg,#07110c 0%,#0a1510 100%);
-      color:#fff;
+      left:0;
+      top:0;
+      bottom:0;
       z-index:1000;
       display:flex;
       flex-direction:column;
+
+      background:
+        radial-gradient(
+          circle at 20% 10%,
+          rgba(24,169,87,.16),
+          transparent 28%
+        ),
+        linear-gradient(
+          180deg,
+          #0b1510 0%,
+          #07100c 100%
+        );
+
+      color:#fff;
       border-right:1px solid rgba(255,255,255,.07);
     }
 
     .brand{
-      height:82px;
-      padding:0 24px;
+      height:86px;
+      padding:20px 22px;
       display:flex;
       align-items:center;
-      gap:13px;
+      gap:12px;
       border-bottom:1px solid rgba(255,255,255,.07);
     }
 
-    .brand img{
+    .brand-logo{
       width:42px;
       height:42px;
-      object-fit:contain;
       border-radius:12px;
+      object-fit:contain;
       background:#fff;
-      padding:4px;
+      padding:5px;
     }
 
-    .brand-text{
-      min-width:0;
-    }
-
-    .brand-title{
+    .brand-name{
       font-family:"Manrope",sans-serif;
-      font-size:17px;
+      font-size:18px;
       font-weight:800;
-      letter-spacing:-.4px;
+      letter-spacing:-.5px;
     }
 
-    .brand-subtitle{
-      color:#8fa198;
+    .brand-sub{
+      color:#8ea198;
       font-size:11px;
       margin-top:2px;
     }
@@ -140,418 +154,491 @@
     .sidebar-scroll{
       flex:1;
       overflow-y:auto;
-      padding:22px 14px;
+      padding:18px 13px;
     }
 
     .nav-label{
-      color:#6e7f76;
+      color:#607068;
+      text-transform:uppercase;
+      letter-spacing:1.4px;
       font-size:10px;
       font-weight:700;
-      letter-spacing:1.4px;
-      text-transform:uppercase;
-      padding:0 12px 9px;
+      padding:10px 12px 8px;
     }
 
-    .nav-group{
-      margin-bottom:24px;
+    .nav{
+      display:flex;
+      flex-direction:column;
+      gap:4px;
     }
 
     .nav-item{
-      position:relative;
       display:flex;
       align-items:center;
       gap:12px;
-      min-height:46px;
-      padding:0 13px;
-      border-radius:13px;
-      color:#9eada6;
-      font-size:13px;
+      padding:12px 13px;
+      border-radius:11px;
+      color:#aebbb4;
+      font-size:14px;
       font-weight:600;
-      margin:3px 0;
       transition:.2s ease;
     }
 
     .nav-item:hover{
-      background:rgba(255,255,255,.055);
       color:#fff;
+      background:rgba(255,255,255,.055);
     }
 
     .nav-item.active{
       color:#fff;
-      background:linear-gradient(135deg,rgba(25,180,91,.22),rgba(25,180,91,.09));
-      box-shadow:inset 0 0 0 1px rgba(25,180,91,.18);
-    }
-
-    .nav-item.active::before{
-      content:"";
-      position:absolute;
-      left:0;
-      top:11px;
-      bottom:11px;
-      width:3px;
-      border-radius:10px;
-      background:var(--green);
+      background:linear-gradient(
+        135deg,
+        rgba(24,169,87,.22),
+        rgba(24,169,87,.08)
+      );
+      box-shadow:
+        inset 3px 0 0 var(--green),
+        0 8px 20px rgba(0,0,0,.12);
     }
 
     .nav-icon{
-      width:21px;
+      width:20px;
       text-align:center;
-      font-size:15px;
-    }
-
-    .nav-text{
-      flex:1;
+      flex:none;
     }
 
     .nav-badge{
+      margin-left:auto;
       min-width:22px;
-      height:21px;
-      padding:0 6px;
+      height:22px;
+      padding:0 7px;
+      display:grid;
+      place-items:center;
       border-radius:20px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      background:rgba(25,180,91,.16);
-      color:#7af0a9;
+      background:rgba(24,169,87,.15);
+      color:#8df0b4;
       font-size:10px;
       font-weight:800;
     }
 
-    .sidebar-bottom{
+    .sidebar-footer{
       padding:14px;
       border-top:1px solid rgba(255,255,255,.07);
     }
 
-    .admin-profile{
+    .profile-mini{
       display:flex;
       align-items:center;
-      gap:11px;
-      padding:12px;
-      border-radius:15px;
+      gap:10px;
+      padding:10px;
+      border-radius:14px;
       background:rgba(255,255,255,.045);
     }
 
-    .admin-avatar{
-      width:37px;
-      height:37px;
-      border-radius:11px;
+    .profile-avatar{
+      width:38px;
+      height:38px;
+      border-radius:12px;
+      background:linear-gradient(
+        135deg,
+        var(--green),
+        #0f7540
+      );
       display:grid;
       place-items:center;
-      background:linear-gradient(135deg,#20c86a,#087f3d);
-      font-size:13px;
       font-weight:800;
-    }
-
-    .admin-info{
-      flex:1;
-      min-width:0;
-    }
-
-    .admin-name{
       color:#fff;
-      font-size:12px;
-      font-weight:700;
+      flex:none;
     }
 
-    .admin-role{
-      color:#7f9188;
+    .profile-info{
+      min-width:0;
+      flex:1;
+    }
+
+    .profile-name{
+      color:#fff;
+      font-size:13px;
+      font-weight:700;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .profile-role{
+      color:#7f9087;
       font-size:10px;
       margin-top:2px;
     }
 
-    .logout-btn{
+    .logout-small{
+      width:32px;
+      height:32px;
       border:0;
-      background:none;
-      color:#8b9c94;
-      padding:8px;
-      font-size:14px;
+      border-radius:9px;
+      background:rgba(255,255,255,.05);
+      color:#94a39c;
+    }
+
+    .logout-small:hover{
+      color:#fff;
+      background:rgba(220,61,75,.18);
+    }
+
+    .sidebar-overlay{
+      display:none;
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.48);
+      backdrop-filter:blur(3px);
+      z-index:900;
     }
 
     /* =========================
        MAIN
-    ========================== */
+    ========================= */
 
     .main{
-      margin-left:var(--sidebar);
+      width:calc(100% - 270px);
+      margin-left:270px;
       min-height:100vh;
     }
 
-    .topbar{
-      height:82px;
-      background:rgba(255,255,255,.88);
+    /* =========================
+       HEADER
+    ========================= */
+
+    .top-header{
+      height:86px;
+      background:rgba(255,255,255,.92);
       backdrop-filter:blur(18px);
       border-bottom:1px solid var(--border);
+      position:sticky;
+      top:0;
+      z-index:700;
+
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:0 34px;
-      position:sticky;
-      top:0;
-      z-index:500;
+
+      padding:0 32px;
     }
 
-    .topbar-left{
+    .header-left{
       display:flex;
       align-items:center;
-      gap:15px;
+      gap:14px;
     }
 
-    .mobile-sidebar-btn{
+    .mobile-menu{
       display:none;
-      width:40px;
-      height:40px;
+      width:42px;
+      height:42px;
       border:1px solid var(--border);
-      background:#fff;
       border-radius:12px;
+      background:#fff;
+      font-size:18px;
     }
 
     .page-heading h1{
       font-family:"Manrope",sans-serif;
-      font-size:23px;
-      letter-spacing:-.8px;
-      font-weight:800;
+      font-size:25px;
+      line-height:1.1;
+      letter-spacing:-1px;
     }
 
     .page-heading p{
       color:var(--muted);
       font-size:12px;
-      margin-top:3px;
+      margin-top:5px;
     }
 
-    .top-actions{
+    .header-actions{
       display:flex;
       align-items:center;
       gap:9px;
     }
 
-    .icon-btn,
-    .outline-btn{
-      height:42px;
-      border:1px solid var(--border);
-      background:#fff;
-      color:var(--text);
-      border-radius:12px;
+    .header-btn{
+      height:40px;
       padding:0 14px;
+      border:1px solid var(--border);
+      border-radius:11px;
+      background:#fff;
+      color:#33413a;
       display:inline-flex;
       align-items:center;
       justify-content:center;
       gap:8px;
       font-size:12px;
       font-weight:700;
-      transition:.2s ease;
+      transition:.2s;
     }
 
-    .icon-btn{
-      width:42px;
-      padding:0;
-    }
-
-    .icon-btn:hover,
-    .outline-btn:hover{
-      border-color:#c8d7ce;
+    .header-btn:hover{
       transform:translateY(-1px);
+      border-color:#c5d2ca;
     }
 
-    .primary-btn{
-      height:42px;
-      border:0;
-      background:linear-gradient(135deg,var(--green),var(--green-dark));
+    .header-btn.primary{
+      background:var(--black);
+      border-color:var(--black);
       color:#fff;
-      border-radius:12px;
-      padding:0 17px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      font-size:12px;
-      font-weight:800;
-      box-shadow:0 9px 20px rgba(25,180,91,.18);
-      transition:.2s ease;
-    }
-
-    .primary-btn:hover{
-      transform:translateY(-1px);
-      box-shadow:0 13px 25px rgba(25,180,91,.24);
     }
 
     /* =========================
        CONTENT
-    ========================== */
+    ========================= */
 
     .content{
-      padding:32px;
       max-width:1600px;
       margin:auto;
+      padding:30px 32px 55px;
+    }
+
+    /* =========================
+       PAGE HERO
+    ========================= */
+
+    .page-hero{
+      position:relative;
+      overflow:hidden;
+      border-radius:23px;
+      padding:26px 28px;
+      color:#fff;
+      margin-bottom:20px;
+
+      background:
+        radial-gradient(
+          circle at 85% 0%,
+          rgba(24,169,87,.22),
+          transparent 32%
+        ),
+        linear-gradient(
+          135deg,
+          #10231a,
+          #07100c
+        );
+
+      box-shadow:var(--shadow);
+    }
+
+    .page-hero::after{
+      content:"";
+      position:absolute;
+      width:260px;
+      height:260px;
+      right:-100px;
+      bottom:-150px;
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:50%;
+      box-shadow:
+        0 0 0 40px rgba(255,255,255,.025),
+        0 0 0 80px rgba(255,255,255,.018);
+    }
+
+    .hero-content{
+      position:relative;
+      z-index:2;
+      max-width:760px;
+    }
+
+    .hero-kicker{
+      color:#80e8aa;
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:1.5px;
+      font-weight:800;
+      margin-bottom:9px;
+    }
+
+    .page-hero h2{
+      font-family:"Manrope",sans-serif;
+      font-size:29px;
+      letter-spacing:-1.3px;
+      margin-bottom:7px;
+    }
+
+    .page-hero p{
+      color:#aabbb2;
+      font-size:12px;
+      line-height:1.7;
     }
 
     /* =========================
        STATS
-    ========================== */
+    ========================= */
 
-    .stats-grid{
+    .stats{
       display:grid;
       grid-template-columns:repeat(4,1fr);
-      gap:16px;
-      margin-bottom:24px;
+      gap:15px;
+      margin-bottom:20px;
     }
 
-    .stat-card{
-      position:relative;
-      overflow:hidden;
-      background:var(--surface);
+    .stat{
+      background:#fff;
       border:1px solid var(--border);
-      border-radius:19px;
-      padding:21px;
-      box-shadow:var(--shadow-sm);
-    }
-
-    .stat-card::after{
-      content:"";
-      position:absolute;
-      width:100px;
-      height:100px;
-      right:-40px;
-      top:-45px;
-      border-radius:50%;
-      background:var(--green-soft);
+      border-radius:17px;
+      padding:18px;
+      box-shadow:0 7px 24px rgba(10,30,20,.035);
     }
 
     .stat-top{
       display:flex;
       justify-content:space-between;
       align-items:center;
-      position:relative;
-      z-index:1;
+      margin-bottom:15px;
+    }
+
+    .stat-icon{
+      width:38px;
+      height:38px;
+      border-radius:11px;
+      background:var(--green-soft);
+      color:var(--green-dark);
+      display:grid;
+      place-items:center;
+      font-weight:800;
+    }
+
+    .stat-tag{
+      color:var(--green-dark);
+      background:var(--green-soft);
+      font-size:9px;
+      font-weight:800;
+      border-radius:7px;
+      padding:5px 7px;
     }
 
     .stat-label{
       color:var(--muted);
       font-size:11px;
-      font-weight:700;
-    }
-
-    .stat-icon{
-      width:39px;
-      height:39px;
-      border-radius:12px;
-      background:var(--green-soft);
-      color:var(--green-dark);
-      display:grid;
-      place-items:center;
-      font-size:15px;
+      margin-bottom:5px;
     }
 
     .stat-value{
       font-family:"Manrope",sans-serif;
-      font-size:27px;
+      font-size:25px;
       font-weight:800;
       letter-spacing:-1px;
-      margin-top:15px;
-      position:relative;
-      z-index:1;
-    }
-
-    .stat-change{
-      margin-top:7px;
-      font-size:10px;
-      color:#1b9c53;
-      font-weight:700;
-      position:relative;
-      z-index:1;
     }
 
     /* =========================
        TOOLBAR
-    ========================== */
-
-    .management-card{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:22px;
-      box-shadow:var(--shadow-sm);
-      overflow:hidden;
-    }
-
-    .management-head{
-      padding:22px 23px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      border-bottom:1px solid var(--border);
-    }
-
-    .management-title h2{
-      font-family:"Manrope",sans-serif;
-      font-size:17px;
-      font-weight:800;
-      letter-spacing:-.4px;
-    }
-
-    .management-title p{
-      color:var(--muted);
-      font-size:11px;
-      margin-top:4px;
-    }
+    ========================= */
 
     .toolbar{
-      padding:17px 22px;
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:17px;
+      padding:14px;
+      margin-bottom:15px;
+
       display:flex;
       align-items:center;
       gap:10px;
       flex-wrap:wrap;
-      background:#fbfcfb;
-      border-bottom:1px solid var(--border);
     }
 
     .search-box{
-      position:relative;
+      min-width:260px;
       flex:1;
-      min-width:220px;
+      height:43px;
+      border:1px solid var(--border);
+      border-radius:11px;
+      background:#fbfcfb;
+
+      display:flex;
+      align-items:center;
+      padding:0 12px;
+      gap:9px;
     }
 
-    .search-box span{
-      position:absolute;
-      left:14px;
-      top:50%;
-      transform:translateY(-50%);
-      color:#91a097;
-      font-size:13px;
+    .search-icon{
+      color:#8a9790;
     }
 
     .search-box input{
       width:100%;
-      height:42px;
-      border:1px solid var(--border);
-      border-radius:12px;
-      outline:none;
-      background:#fff;
-      padding:0 14px 0 39px;
-      font-size:12px;
+      border:0;
+      outline:0;
+      background:transparent;
       color:var(--text);
-    }
-
-    .search-box input:focus{
-      border-color:rgba(25,180,91,.55);
-      box-shadow:0 0 0 4px rgba(25,180,91,.08);
+      font-size:12px;
     }
 
     .filter-select{
-      height:42px;
+      height:43px;
+      min-width:145px;
       border:1px solid var(--border);
-      border-radius:12px;
+      border-radius:11px;
+      padding:0 12px;
+      outline:0;
       background:#fff;
-      padding:0 34px 0 13px;
-      outline:none;
-      color:#34443c;
+      color:#3b4942;
       font-size:11px;
       font-weight:600;
-      min-width:145px;
+    }
+
+    .add-btn{
+      height:43px;
+      padding:0 16px;
+      border:0;
+      border-radius:11px;
+      background:var(--green);
+      color:#fff;
+      font-size:11px;
+      font-weight:800;
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      box-shadow:0 8px 20px rgba(24,169,87,.18);
+    }
+
+    .add-btn:hover{
+      background:var(--green-dark);
     }
 
     /* =========================
-       TABLE
-    ========================== */
+       TABLE PANEL
+    ========================= */
+
+    .panel{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:18px;
+      overflow:hidden;
+      box-shadow:0 7px 24px rgba(10,30,20,.035);
+    }
+
+    .panel-head{
+      min-height:68px;
+      padding:15px 20px;
+      border-bottom:1px solid var(--border);
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+    }
+
+    .panel-title{
+      font-family:"Manrope",sans-serif;
+      font-size:14px;
+      font-weight:800;
+    }
+
+    .panel-sub{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:3px;
+    }
+
+    .result-count{
+      color:var(--muted);
+      font-size:10px;
+    }
 
     .table-wrap{
       overflow-x:auto;
@@ -559,126 +646,143 @@
 
     table{
       width:100%;
-      min-width:1050px;
+      min-width:920px;
       border-collapse:collapse;
     }
 
     th{
       text-align:left;
-      padding:13px 20px;
+      padding:13px 18px;
       background:#fbfcfb;
-      color:#89968f;
-      font-size:9px;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.8px;
       border-bottom:1px solid var(--border);
-      white-space:nowrap;
+
+      color:#849088;
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-weight:800;
     }
 
     td{
-      padding:14px 20px;
-      border-bottom:1px solid #edf1ee;
-      vertical-align:middle;
+      padding:13px 18px;
+      border-bottom:1px solid #edf1ef;
       font-size:11px;
+      vertical-align:middle;
     }
 
-    tbody tr{
-      transition:.18s ease;
-    }
-
-    tbody tr:hover{
-      background:#fbfdfc;
-    }
-
-    tbody tr:last-child td{
+    tr:last-child td{
       border-bottom:0;
     }
 
-    .website-info{
+    /* =========================
+       WEBSITE CELL
+    ========================= */
+
+    .website-cell{
       display:flex;
       align-items:center;
-      gap:12px;
-      min-width:250px;
+      gap:11px;
+      min-width:230px;
     }
 
-    .thumb{
-      width:67px;
-      height:47px;
+    .website-image{
+      width:62px;
+      height:44px;
       border-radius:10px;
+      background:#edf5f0;
       overflow:hidden;
-      background:#edf2ee;
-      border:1px solid #e1e9e4;
       flex:none;
-      position:relative;
+      display:grid;
+      place-items:center;
+      color:var(--green-dark);
+      font-weight:800;
     }
 
-    .thumb img{
+    .website-image img{
       width:100%;
       height:100%;
       object-fit:cover;
+      display:block;
     }
 
-    .thumb-fallback{
-      width:100%;
-      height:100%;
-      display:grid;
-      place-items:center;
-      color:#789084;
-      font-size:13px;
-      background:linear-gradient(135deg,#edf7f1,#dfece4);
-    }
-
-    .website-name{
+    .website-title{
       font-weight:800;
-      color:#16221b;
-      font-size:12px;
+      font-size:11px;
+      line-height:1.3;
     }
 
     .website-id{
-      color:#9aa69f;
+      color:#89958f;
       font-size:9px;
       margin-top:3px;
-      font-family:monospace;
     }
 
-    .category-pill{
-      display:inline-flex;
-      align-items:center;
-      min-height:25px;
-      padding:0 9px;
-      border-radius:30px;
-      background:#f0f5f2;
-      color:#53645b;
-      font-size:10px;
-      font-weight:700;
+    .category-text{
+      color:#55635c;
+      font-weight:600;
     }
 
     .price{
       font-weight:800;
-      font-size:12px;
+      white-space:nowrap;
     }
 
     .old-price{
-      color:#a4afa9;
+      color:#9ca7a1;
       text-decoration:line-through;
       font-size:9px;
-      margin-top:2px;
+      margin-left:4px;
+    }
+
+    /* =========================
+       BADGES
+    ========================= */
+
+    .badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:4px;
+    }
+
+    .badge{
+      display:inline-flex;
+      padding:4px 6px;
+      border-radius:6px;
+      font-size:8px;
+      font-weight:800;
+    }
+
+    .badge.popular{
+      background:#edf4ff;
+      color:#3d70b2;
+    }
+
+    .badge.new{
+      background:var(--green-soft);
+      color:var(--green-dark);
+    }
+
+    .badge.sale{
+      background:var(--danger-soft);
+      color:#c0323f;
+    }
+
+    .badge.featured{
+      background:#fff7df;
+      color:#a76c00;
     }
 
     .status{
       display:inline-flex;
       align-items:center;
       gap:5px;
-      min-height:25px;
-      padding:0 9px;
-      border-radius:30px;
+      padding:5px 8px;
+      border-radius:7px;
       font-size:9px;
       font-weight:800;
     }
 
-    .status::before{
-      content:"";
+    .status-dot{
       width:5px;
       height:5px;
       border-radius:50%;
@@ -686,57 +790,40 @@
     }
 
     .status.published{
-      color:#16834a;
-      background:#eaf8f0;
+      background:var(--green-soft);
+      color:var(--green-dark);
     }
 
     .status.draft{
-      color:#9b6b18;
-      background:#fff6df;
+      background:var(--warning-soft);
+      color:#a66d00;
     }
 
-    .badges{
-      display:flex;
-      flex-wrap:wrap;
-      gap:4px;
-      max-width:130px;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      padding:4px 6px;
-      border-radius:5px;
-      background:#eef5f1;
-      color:#64746c;
-      font-size:8px;
-      font-weight:800;
-    }
-
-    .badge.green{
-      color:#128148;
-      background:#e7f8ee;
-    }
-
-    .badge.orange{
-      color:#a36c13;
-      background:#fff3d7;
-    }
-
-    .badge.red{
-      color:#b23e43;
-      background:#fff0f0;
-    }
-
-    .sales{
-      font-weight:800;
-    }
+    /* =========================
+       RATING
+    ========================= */
 
     .rating{
-      color:#b77912;
-      font-weight:800;
-      font-size:10px;
+      white-space:nowrap;
     }
+
+    .star{
+      color:#e5a900;
+    }
+
+    .rating-number{
+      font-weight:800;
+      margin-left:3px;
+    }
+
+    .rating-reviews{
+      color:#929d97;
+      font-size:9px;
+    }
+
+    /* =========================
+       ACTIONS
+    ========================= */
 
     .actions{
       display:flex;
@@ -745,317 +832,158 @@
     }
 
     .action-btn{
-      width:33px;
-      height:33px;
+      width:31px;
+      height:31px;
       border:1px solid var(--border);
+      border-radius:8px;
       background:#fff;
-      border-radius:9px;
+      color:#637069;
       display:grid;
       place-items:center;
-      color:#66766e;
       font-size:11px;
-      transition:.2s ease;
+      transition:.2s;
     }
 
     .action-btn:hover{
-      border-color:#bfd1c6;
-      color:var(--green-dark);
-      background:#f7fbf8;
+      border-color:#c4d0c9;
+      color:var(--text);
+      background:#f8faf9;
     }
 
-    .action-btn.delete:hover{
+    .action-btn.danger:hover{
       color:var(--danger);
-      border-color:#f0c7c9;
-      background:#fff7f7;
+      border-color:#f0c7cc;
+      background:var(--danger-soft);
     }
 
     /* =========================
        EMPTY
-    ========================== */
+    ========================= */
 
     .empty-state{
       display:none;
-      padding:65px 20px;
       text-align:center;
+      padding:65px 20px;
+    }
+
+    .empty-state.show{
+      display:block;
     }
 
     .empty-icon{
-      width:58px;
-      height:58px;
-      margin:0 auto 15px;
+      width:60px;
+      height:60px;
+      margin:0 auto 13px;
       border-radius:17px;
       background:var(--green-soft);
       color:var(--green-dark);
       display:grid;
       place-items:center;
-      font-size:20px;
+      font-size:22px;
     }
 
     .empty-state h3{
       font-family:"Manrope",sans-serif;
-      font-size:17px;
+      font-size:16px;
+      margin-bottom:5px;
     }
 
     .empty-state p{
       color:var(--muted);
       font-size:11px;
-      margin-top:6px;
+      margin-bottom:14px;
+    }
+
+    .reset-btn{
+      height:37px;
+      padding:0 13px;
+      border:1px solid var(--border);
+      border-radius:9px;
+      background:#fff;
+      font-size:10px;
+      font-weight:700;
     }
 
     /* =========================
-       MODAL
-    ========================== */
+       MODALS
+    ========================= */
 
-    .modal-overlay{
+    .modal{
       position:fixed;
       inset:0;
-      background:rgba(4,13,8,.68);
-      backdrop-filter:blur(12px);
-      z-index:2000;
+      z-index:2500;
       display:none;
       align-items:center;
       justify-content:center;
-      padding:25px;
+      padding:20px;
+      background:rgba(4,12,8,.62);
+      backdrop-filter:blur(8px);
     }
 
-    .modal-overlay.show{
+    .modal.show{
       display:flex;
     }
 
-    .modal{
-      width:min(1080px,100%);
+    .modal-card{
+      width:min(680px,100%);
       max-height:92vh;
       overflow:auto;
       background:#fff;
-      border-radius:24px;
-      box-shadow:0 35px 100px rgba(0,0,0,.25);
-      animation:modalIn .22s ease;
+      border-radius:22px;
+      box-shadow:0 30px 90px rgba(0,0,0,.28);
     }
 
-    @keyframes modalIn{
-      from{
-        opacity:0;
-        transform:translateY(15px) scale(.98);
-      }
-      to{
-        opacity:1;
-        transform:none;
-      }
+    .modal-card.preview-card{
+      width:min(1100px,100%);
     }
 
-    .modal.small{
-      width:min(570px,100%);
+    .modal-card.small{
+      width:min(430px,100%);
     }
 
     .modal-head{
-      min-height:72px;
-      padding:16px 21px;
+      min-height:68px;
+      padding:16px 20px;
       border-bottom:1px solid var(--border);
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:15px;
+      gap:12px;
+      position:sticky;
+      top:0;
+      background:#fff;
+      z-index:2;
     }
 
     .modal-title{
       font-family:"Manrope",sans-serif;
-      font-size:17px;
+      font-size:15px;
       font-weight:800;
     }
 
     .modal-subtitle{
       color:var(--muted);
-      font-size:10px;
+      font-size:9px;
       margin-top:3px;
     }
 
     .close-btn{
-      width:38px;
-      height:38px;
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:11px;
-      display:grid;
-      place-items:center;
-      color:#68776f;
-    }
-
-    /* =========================
-       PREVIEW
-    ========================== */
-
-    .preview-toolbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:15px;
-      padding:13px 18px;
-      background:#f8faf9;
-      border-bottom:1px solid var(--border);
-    }
-
-    .device-switch{
-      display:flex;
-      padding:4px;
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:11px;
-      gap:3px;
-    }
-
-    .device-btn{
+      width:34px;
       height:34px;
-      border:0;
-      border-radius:8px;
-      background:transparent;
-      color:#829088;
-      padding:0 12px;
-      font-size:10px;
-      font-weight:800;
-    }
-
-    .device-btn.active{
-      background:#eaf8f0;
-      color:var(--green-dark);
-    }
-
-    .preview-title-mini{
-      font-size:11px;
-      color:#64736b;
-      font-weight:700;
-    }
-
-    .preview-stage{
-      min-height:600px;
-      padding:28px;
-      background:
-        radial-gradient(circle at 20% 10%,rgba(25,180,91,.09),transparent 25%),
-        #eef2ef;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      overflow:auto;
-    }
-
-    .browser{
-      width:min(900px,100%);
-      height:560px;
+      border:1px solid var(--border);
+      border-radius:10px;
       background:#fff;
-      border-radius:14px;
-      overflow:hidden;
-      box-shadow:0 25px 60px rgba(12,25,18,.18);
-      border:1px solid #dce5df;
-      transition:.3s ease;
-      display:flex;
-      flex-direction:column;
+      font-size:16px;
+      color:#65726b;
     }
 
-    .browser.mobile{
-      width:375px;
-      height:650px;
-      border:7px solid #101612;
-      border-radius:35px;
-      box-shadow:0 30px 70px rgba(0,0,0,.27);
-      position:relative;
-    }
-
-    .browser.mobile::before{
-      content:"";
-      position:absolute;
-      width:105px;
-      height:22px;
-      top:0;
-      left:50%;
-      transform:translateX(-50%);
-      background:#101612;
-      border-radius:0 0 14px 14px;
-      z-index:10;
-    }
-
-    .browser.mobile .browser-top{
-      padding-top:19px;
-    }
-
-    .browser-top{
-      height:38px;
-      flex:none;
-      background:#f7f8f7;
-      border-bottom:1px solid #e8ece9;
-      display:flex;
-      align-items:center;
-      gap:7px;
-      padding:0 13px;
-    }
-
-    .browser-dot{
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:#ccd4cf;
-    }
-
-    .browser-url{
-      flex:1;
-      height:23px;
-      border-radius:6px;
-      background:#edf1ee;
-      color:#89958f;
-      font-size:8px;
-      display:flex;
-      align-items:center;
-      padding:0 9px;
-      margin-left:5px;
-    }
-
-    .browser-content{
-      flex:1;
-      position:relative;
-      overflow:hidden;
-      background:#fff;
-    }
-
-    .preview-placeholder{
-      height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      flex-direction:column;
-      gap:10px;
-      color:#7d8c84;
-      text-align:center;
-      padding:25px;
-    }
-
-    .preview-placeholder .icon{
-      width:62px;
-      height:62px;
-      border-radius:18px;
-      display:grid;
-      place-items:center;
-      background:#eaf8f0;
-      color:#14894a;
-      font-size:23px;
-    }
-
-    .preview-placeholder strong{
-      font-family:"Manrope",sans-serif;
-      font-size:15px;
-      color:#26352d;
-    }
-
-    .preview-placeholder span{
-      font-size:10px;
-      max-width:340px;
-      line-height:1.6;
+    .modal-body{
+      padding:20px;
     }
 
     /* =========================
-       FORM MODAL
-    ========================== */
-
-    .form-body{
-      padding:22px;
-    }
+       FORM
+    ========================= */
 
     .form-grid{
       display:grid;
@@ -1063,16 +991,20 @@
       gap:15px;
     }
 
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+    }
+
     .field.full{
       grid-column:1/-1;
     }
 
     .field label{
-      display:block;
-      color:#526159;
+      color:#48564f;
       font-size:10px;
       font-weight:800;
-      margin-bottom:7px;
     }
 
     .field input,
@@ -1080,60 +1012,346 @@
     .field textarea{
       width:100%;
       border:1px solid var(--border);
-      border-radius:11px;
-      outline:none;
-      background:#fff;
+      border-radius:10px;
+      outline:0;
+      padding:11px 12px;
+      background:#fbfcfb;
       color:var(--text);
       font-size:11px;
-      padding:0 12px;
-    }
-
-    .field input,
-    .field select{
-      height:42px;
     }
 
     .field textarea{
-      padding:11px 12px;
-      min-height:100px;
+      min-height:95px;
       resize:vertical;
+      line-height:1.6;
     }
 
     .field input:focus,
     .field select:focus,
     .field textarea:focus{
-      border-color:rgba(25,180,91,.55);
-      box-shadow:0 0 0 4px rgba(25,180,91,.07);
+      border-color:#9bcaae;
+      box-shadow:0 0 0 3px rgba(24,169,87,.08);
+      background:#fff;
     }
 
-    .modal-footer{
-      padding:16px 22px;
+    .checkbox-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+    }
+
+    .check-card{
+      border:1px solid var(--border);
+      border-radius:10px;
+      padding:10px;
+      cursor:pointer;
+      background:#fff;
+    }
+
+    .check-card:hover{
+      border-color:#b9cbbf;
+    }
+
+    .check-card input{
+      margin-right:5px;
+      accent-color:var(--green);
+    }
+
+    .check-card span{
+      font-size:9px;
+      font-weight:700;
+    }
+
+    .image-preview{
+      width:100%;
+      height:150px;
+      border-radius:12px;
+      overflow:hidden;
+      background:#edf5f0;
+      margin-top:5px;
+      display:grid;
+      place-items:center;
+      color:#6d7b73;
+      font-size:10px;
+    }
+
+    .image-preview img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .modal-foot{
+      padding:14px 20px;
       border-top:1px solid var(--border);
       display:flex;
       justify-content:flex-end;
+      gap:8px;
+      position:sticky;
+      bottom:0;
+      background:#fff;
+      z-index:2;
+    }
+
+    .btn{
+      height:40px;
+      padding:0 15px;
+      border-radius:10px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .btn.primary{
+      background:var(--green);
+      color:#fff;
+      border-color:var(--green);
+    }
+
+    .btn.primary:hover{
+      background:var(--green-dark);
+    }
+
+    .btn.danger{
+      background:var(--danger);
+      color:#fff;
+      border-color:var(--danger);
+    }
+
+    /* =========================
+       PREVIEW
+    ========================= */
+
+    .preview-toolbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:13px 20px;
+      border-bottom:1px solid var(--border);
+    }
+
+    .preview-switch{
+      display:flex;
+      padding:3px;
+      border-radius:9px;
+      background:#eef2f0;
+    }
+
+    .preview-switch button{
+      border:0;
+      background:transparent;
+      border-radius:7px;
+      padding:7px 11px;
+      font-size:9px;
+      font-weight:800;
+      color:#748079;
+    }
+
+    .preview-switch button.active{
+      background:#fff;
+      color:var(--text);
+      box-shadow:0 2px 8px rgba(0,0,0,.07);
+    }
+
+    .preview-url{
+      color:var(--muted);
+      font-size:9px;
+      max-width:55%;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    .preview-stage{
+      min-height:590px;
+      background:
+        radial-gradient(
+          circle at 50% 0%,
+          #e8efeb,
+          #dfe7e2
+        );
+
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:30px;
+    }
+
+    .browser{
+      width:min(920px,100%);
+      height:530px;
+      border-radius:15px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:0 30px 70px rgba(0,0,0,.20);
+      border:1px solid rgba(0,0,0,.08);
+    }
+
+    .browser-bar{
+      height:36px;
+      background:#f4f5f5;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      padding:0 12px;
+      border-bottom:1px solid #e2e4e3;
+    }
+
+    .browser-dot{
+      width:8px;
+      height:8px;
+      border-radius:50%;
+      background:#c5cbc8;
+    }
+
+    .browser-address{
+      flex:1;
+      height:21px;
+      margin-left:7px;
+      border-radius:6px;
+      background:#fff;
+      border:1px solid #e3e5e4;
+      color:#9aa39e;
+      font-size:8px;
+      padding:5px 8px;
+      overflow:hidden;
+      white-space:nowrap;
+      text-overflow:ellipsis;
+    }
+
+    .browser iframe{
+      width:100%;
+      height:calc(100% - 36px);
+      border:0;
+      background:#fff;
+    }
+
+    .preview-placeholder{
+      height:calc(100% - 36px);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
       gap:9px;
+      padding:30px;
+      text-align:center;
+    }
+
+    .placeholder-icon{
+      width:58px;
+      height:58px;
+      border-radius:17px;
+      background:var(--green-soft);
+      color:var(--green-dark);
+      display:grid;
+      place-items:center;
+      font-size:22px;
+    }
+
+    .preview-placeholder h3{
+      font-family:"Manrope",sans-serif;
+      font-size:16px;
+    }
+
+    .preview-placeholder p{
+      max-width:420px;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.6;
+    }
+
+    .phone{
+      width:310px;
+      height:560px;
+      padding:9px;
+      border-radius:34px;
+      background:#101512;
+      box-shadow:0 28px 70px rgba(0,0,0,.25);
+    }
+
+    .phone-screen{
+      width:100%;
+      height:100%;
+      border-radius:27px;
+      overflow:hidden;
+      background:#fff;
+      position:relative;
+    }
+
+    .phone-notch{
+      position:absolute;
+      z-index:3;
+      top:7px;
+      left:50%;
+      transform:translateX(-50%);
+      width:105px;
+      height:20px;
+      border-radius:0 0 12px 12px;
+      background:#101512;
+    }
+
+    .phone-screen iframe{
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    /* =========================
+       CONFIRM
+    ========================= */
+
+    .confirm-icon{
+      width:58px;
+      height:58px;
+      margin:0 auto 14px;
+      border-radius:17px;
+      background:var(--danger-soft);
+      color:var(--danger);
+      display:grid;
+      place-items:center;
+      font-size:22px;
+    }
+
+    .confirm-text{
+      text-align:center;
+    }
+
+    .confirm-text h3{
+      font-family:"Manrope",sans-serif;
+      font-size:17px;
+      margin-bottom:6px;
+    }
+
+    .confirm-text p{
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.6;
     }
 
     /* =========================
        TOAST
-    ========================== */
+    ========================= */
 
     .toast{
       position:fixed;
-      right:24px;
-      bottom:24px;
-      z-index:5000;
-      min-width:290px;
-      max-width:380px;
-      background:#0b1710;
+      right:22px;
+      bottom:22px;
+      width:min(350px,calc(100vw - 30px));
+      z-index:4000;
+
+      background:#0c1712;
       color:#fff;
-      border:1px solid rgba(255,255,255,.09);
-      border-radius:15px;
-      padding:14px 15px;
-      box-shadow:0 20px 50px rgba(0,0,0,.22);
+      border-radius:14px;
+      padding:14px 16px;
+
       display:flex;
       align-items:flex-start;
-      gap:11px;
+      gap:10px;
+
+      box-shadow:0 20px 50px rgba(0,0,0,.25);
+
       transform:translateY(120px);
       opacity:0;
       pointer-events:none;
@@ -1141,7 +1359,7 @@
     }
 
     .toast.show{
-      transform:none;
+      transform:translateY(0);
       opacity:1;
     }
 
@@ -1149,15 +1367,11 @@
       width:30px;
       height:30px;
       border-radius:9px;
-      background:rgba(25,180,91,.18);
-      color:#72eda5;
+      background:rgba(24,169,87,.16);
+      color:#70e6a1;
       display:grid;
       place-items:center;
       flex:none;
-    }
-
-    .toast-text{
-      flex:1;
     }
 
     .toast-title{
@@ -1166,57 +1380,52 @@
     }
 
     .toast-message{
-      color:#9baaa2;
-      font-size:10px;
+      color:#aab8b0;
+      font-size:9px;
       line-height:1.5;
       margin-top:2px;
     }
 
-    .toast-close{
-      border:0;
-      background:none;
-      color:#82918a;
-      padding:2px;
-    }
-
-    /* =========================
-       OVERLAY SIDEBAR
-    ========================== */
-
-    .sidebar-overlay{
-      display:none;
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.45);
-      z-index:900;
-    }
-
     /* =========================
        RESPONSIVE
-    ========================== */
+    ========================= */
 
     @media(max-width:1200px){
-      .stats-grid{
-        grid-template-columns:repeat(2,1fr);
+
+      .sidebar{
+        width:245px;
+      }
+
+      .main{
+        width:calc(100% - 245px);
+        margin-left:245px;
       }
 
       .content{
-        padding:25px;
+        padding-left:22px;
+        padding-right:22px;
       }
+
+      .top-header{
+        padding-left:22px;
+        padding-right:22px;
+      }
+
+      .stats{
+        grid-template-columns:repeat(2,1fr);
+      }
+
     }
 
-    @media(max-width:900px){
-      :root{
-        --sidebar:250px;
-      }
+    @media(max-width:980px){
 
       .sidebar{
         transform:translateX(-100%);
-        transition:.25s ease;
+        transition:transform .28s ease;
       }
 
       .sidebar.open{
-        transform:none;
+        transform:translateX(0);
       }
 
       .sidebar-overlay.show{
@@ -1224,69 +1433,70 @@
       }
 
       .main{
+        width:100%;
         margin-left:0;
       }
 
-      .mobile-sidebar-btn{
-        display:grid;
-        place-items:center;
+      .mobile-menu{
+        display:block;
       }
 
-      .topbar{
-        padding:0 20px;
-      }
-
-      .preview-stage{
-        min-height:500px;
-      }
     }
 
-    @media(max-width:680px){
-      .content{
-        padding:17px;
+    @media(max-width:760px){
+
+      .top-header{
+        height:76px;
+        padding:0 15px;
       }
 
-      .topbar{
-        height:72px;
+      .content{
+        padding:18px 14px 35px;
       }
 
       .page-heading h1{
-        font-size:18px;
+        font-size:21px;
       }
 
       .page-heading p{
+        font-size:10px;
+      }
+
+      .header-actions .view-marketplace{
         display:none;
       }
 
-      .top-actions .outline-btn{
-        display:none;
+      .page-hero{
+        padding:22px 20px;
+        border-radius:19px;
       }
 
-      .stats-grid{
-        grid-template-columns:1fr 1fr;
+      .page-hero h2{
+        font-size:23px;
+      }
+
+      .page-hero p{
+        font-size:10px;
+      }
+
+      .stats{
         gap:10px;
       }
 
-      .stat-card{
-        padding:16px;
+      .stat{
+        padding:14px;
       }
 
       .stat-value{
-        font-size:22px;
+        font-size:21px;
       }
 
-      .management-head{
-        align-items:flex-start;
-        flex-direction:column;
-        padding:18px;
-      }
-
-      .management-head .primary-btn{
-        width:100%;
+      .stat-tag{
+        display:none;
       }
 
       .toolbar{
-        padding:13px;
+        align-items:stretch;
       }
 
       .search-box{
@@ -1295,20 +1505,20 @@
 
       .filter-select{
         flex:1;
-        min-width:0;
+        min-width:120px;
       }
 
-      .preview-stage{
-        padding:15px;
+      .add-btn{
+        flex:1;
       }
 
-      .browser{
-        height:500px;
+      .modal{
+        padding:10px;
       }
 
-      .browser.mobile{
-        width:320px;
-        height:570px;
+      .modal-card{
+        max-height:96vh;
+        border-radius:17px;
       }
 
       .form-grid{
@@ -1319,34 +1529,81 @@
         grid-column:auto;
       }
 
-      .toast{
-        left:15px;
-        right:15px;
-        bottom:15px;
-        min-width:0;
+      .checkbox-grid{
+        grid-template-columns:1fr 1fr;
       }
+
+      .preview-stage{
+        min-height:500px;
+        padding:15px;
+      }
+
+      .browser{
+        height:470px;
+      }
+
+      .phone{
+        width:275px;
+        height:510px;
+      }
+
     }
 
-    @media(max-width:440px){
-      .stats-grid{
-        grid-template-columns:1fr;
+    @media(max-width:500px){
+
+      .stats{
+        grid-template-columns:1fr 1fr;
       }
 
-      .top-actions .primary-btn{
-        padding:0 11px;
+      .stat{
+        padding:12px;
       }
 
-      .top-actions .primary-btn span{
+      .stat-icon{
+        width:33px;
+        height:33px;
+      }
+
+      .stat-label{
+        font-size:9px;
+      }
+
+      .stat-value{
+        font-size:19px;
+      }
+
+      .header-btn.refresh-btn{
+        width:40px;
+        padding:0;
+      }
+
+      .header-btn.refresh-btn span{
         display:none;
       }
 
-      .modal-overlay{
-        padding:10px;
+      .checkbox-grid{
+        grid-template-columns:1fr;
       }
 
-      .modal{
-        border-radius:19px;
+      .modal-body{
+        padding:15px;
       }
+
+      .modal-foot{
+        padding:12px 15px;
+      }
+
+    }
+
+    @media(prefers-reduced-motion:reduce){
+
+      *,
+      *::before,
+      *::after{
+        transition:none!important;
+        scroll-behavior:auto!important;
+      }
+
     }
   </style>
 </head>
@@ -1355,243 +1612,498 @@
 
 <div class="app">
 
-  <!-- ================= SIDEBAR ================= -->
+  <!-- =========================
+       SIDEBAR
+  ========================= -->
 
   <aside class="sidebar" id="sidebar">
 
     <div class="brand">
-      <img src="../logo.png" alt="Website Deals">
-      <div class="brand-text">
-        <div class="brand-title">Website Deals</div>
-        <div class="brand-subtitle">Admin Marketplace</div>
+
+      <img
+        src="../logo.png"
+        alt="Website Deals"
+        class="brand-logo"
+        onerror="this.style.display='none'"
+      >
+
+      <div>
+        <div class="brand-name">
+          Website Deals
+        </div>
+
+        <div class="brand-sub">
+          Admin Portal
+        </div>
       </div>
+
     </div>
 
     <div class="sidebar-scroll">
 
-      <div class="nav-group">
-        <div class="nav-label">Marketplace</div>
+      <div class="nav-label">
+        Marketplace
+      </div>
 
-        <a class="nav-item" href="dashboard.html">
+      <nav class="nav">
+
+        <a href="dashboard.html" class="nav-item">
           <span class="nav-icon">⌂</span>
-          <span class="nav-text">Dashboard</span>
+          <span>Dashboard</span>
         </a>
 
-        <a class="nav-item active" href="websites.html">
+        <a href="websites.html" class="nav-item active">
           <span class="nav-icon">▣</span>
-          <span class="nav-text">Websites</span>
-          <span class="nav-badge" id="sideWebsiteCount">8</span>
+          <span>Websites</span>
         </a>
 
-        <a class="nav-item" href="categories.html">
+        <a href="categories.html" class="nav-item">
+          <span class="nav-icon">◈</span>
+          <span>Categories</span>
+        </a>
+
+        <a href="orders.html" class="nav-item">
           <span class="nav-icon">◫</span>
-          <span class="nav-text">Categories</span>
-        </a>
-
-        <a class="nav-item" href="orders.html">
-          <span class="nav-icon">⌁</span>
-          <span class="nav-text">Orders</span>
+          <span>Orders</span>
           <span class="nav-badge">12</span>
         </a>
 
-        <a class="nav-item" href="customers.html">
-          <span class="nav-icon">♙</span>
-          <span class="nav-text">Customers</span>
+        <a href="payments.html" class="nav-item">
+          <span class="nav-icon">৳</span>
+          <span>Payments</span>
         </a>
 
-        <a class="nav-item" href="newsletter.html">
-          <span class="nav-icon">✉</span>
-          <span class="nav-text">Newsletter</span>
+        <a href="customers.html" class="nav-item">
+          <span class="nav-icon">♙</span>
+          <span>Customers</span>
         </a>
+
+        <a href="newsletter.html" class="nav-item">
+          <span class="nav-icon">✉</span>
+          <span>Newsletter</span>
+        </a>
+
+      </nav>
+
+      <div class="nav-label" style="margin-top:12px;">
+        Reports
       </div>
+
+      <nav class="nav">
+
+        <a href="monthly-report.html" class="nav-item">
+          <span class="nav-icon">▥</span>
+          <span>Monthly Report</span>
+        </a>
+
+      </nav>
 
     </div>
 
-    <div class="sidebar-bottom">
-      <div class="admin-profile">
-        <div class="admin-avatar">A</div>
+    <div class="sidebar-footer">
 
-        <div class="admin-info">
-          <div class="admin-name">Administrator</div>
-          <div class="admin-role">Marketplace Admin</div>
+      <div class="profile-mini">
+
+        <div class="profile-avatar" id="profile-avatar">
+          AD
         </div>
 
-        <button class="logout-btn" onclick="logout()" title="Sign out">
+        <div class="profile-info">
+
+          <div class="profile-name" id="profile-name">
+            Admin
+          </div>
+
+          <div class="profile-role" id="profile-role">
+            Administrator
+          </div>
+
+        </div>
+
+        <button
+          class="logout-small"
+          id="sidebar-logout"
+          type="button"
+          title="Sign out"
+        >
           ↪
         </button>
+
       </div>
+
     </div>
 
   </aside>
 
-  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+  <div
+    class="sidebar-overlay"
+    id="sidebar-overlay"
+  ></div>
 
-  <!-- ================= MAIN ================= -->
+
+  <!-- =========================
+       MAIN
+  ========================= -->
 
   <main class="main">
 
-    <header class="topbar">
+    <header class="top-header">
 
-      <div class="topbar-left">
+      <div class="header-left">
 
         <button
-          class="mobile-sidebar-btn"
-          onclick="openSidebar()"
-          aria-label="Open menu"
+          class="mobile-menu"
+          id="mobile-menu"
+          type="button"
         >
           ☰
         </button>
 
         <div class="page-heading">
-          <h1>Website Management</h1>
-          <p>Manage your marketplace websites and previews.</p>
+
+          <h1>
+            Websites
+          </h1>
+
+          <p>
+            Manage your ready-made marketplace websites
+          </p>
+
         </div>
 
       </div>
 
-      <div class="top-actions">
+      <div class="header-actions">
 
-        <button class="icon-btn" onclick="refreshPage()" title="Refresh">
+        <button
+          class="header-btn refresh-btn"
+          id="refresh-btn"
+          type="button"
+        >
           ↻
+          <span>Refresh</span>
         </button>
 
         <a
           href="../index.html"
           target="_blank"
-          class="outline-btn"
+          class="header-btn primary view-marketplace"
         >
-          ↗ <span>View Marketplace</span>
+          ↗
+          View Marketplace
         </a>
-
-        <button class="primary-btn" onclick="openAddModal()">
-          ＋ <span>Add Website</span>
-        </button>
 
       </div>
 
     </header>
 
-    <section class="content">
 
-      <!-- ================= STATS ================= -->
+    <div class="content">
 
-      <div class="stats-grid">
+      <!-- =========================
+           HERO
+      ========================= -->
 
-        <div class="stat-card">
+      <section class="page-hero">
+
+        <div class="hero-content">
+
+          <div class="hero-kicker">
+            Marketplace Content
+          </div>
+
+          <h2>
+            Manage your website collection.
+          </h2>
+
+          <p>
+            Add, edit, preview and organize the websites
+            customers see on the public Website Deals marketplace.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           STATS
+      ========================= -->
+
+      <section class="stats">
+
+        <div class="stat">
+
           <div class="stat-top">
-            <div class="stat-label">Total Websites</div>
-            <div class="stat-icon">▣</div>
-          </div>
-          <div class="stat-value" id="totalWebsites">8</div>
-          <div class="stat-change">All marketplace listings</div>
-        </div>
 
-        <div class="stat-card">
-          <div class="stat-top">
-            <div class="stat-label">Published</div>
-            <div class="stat-icon">✓</div>
-          </div>
-          <div class="stat-value" id="publishedWebsites">7</div>
-          <div class="stat-change">Visible on marketplace</div>
-        </div>
+            <div class="stat-icon">
+              ▣
+            </div>
 
-        <div class="stat-card">
-          <div class="stat-top">
-            <div class="stat-label">Drafts</div>
-            <div class="stat-icon">◷</div>
-          </div>
-          <div class="stat-value" id="draftWebsites">1</div>
-          <div class="stat-change">Not publicly visible</div>
-        </div>
+            <div class="stat-tag">
+              LIVE
+            </div>
 
-        <div class="stat-card">
-          <div class="stat-top">
-            <div class="stat-label">Total Sales</div>
-            <div class="stat-icon">↗</div>
-          </div>
-          <div class="stat-value" id="totalSales">1,248</div>
-          <div class="stat-change">Across all websites</div>
-        </div>
-
-      </div>
-
-      <!-- ================= MANAGEMENT ================= -->
-
-      <div class="management-card">
-
-        <div class="management-head">
-
-          <div class="management-title">
-            <h2>Marketplace Websites</h2>
-            <p>View, preview, edit and manage every website listing.</p>
           </div>
 
-          <button class="primary-btn" onclick="openAddModal()">
-            ＋ Add Website
-          </button>
-
-        </div>
-
-        <!-- TOOLBAR -->
-
-        <div class="toolbar">
-
-          <div class="search-box">
-            <span>⌕</span>
-            <input
-              type="search"
-              id="searchInput"
-              placeholder="Search website name, ID or category..."
-              oninput="renderWebsites()"
-            >
+          <div class="stat-label">
+            Total Websites
           </div>
 
-          <select
-            class="filter-select"
-            id="categoryFilter"
-            onchange="renderWebsites()"
+          <div
+            class="stat-value"
+            id="total-websites"
           >
-            <option value="all">All Categories</option>
-            <option value="Business">Business</option>
-            <option value="Restaurant">Restaurant</option>
-            <option value="Agency">Agency</option>
-            <option value="E-commerce">E-commerce</option>
-            <option value="Portfolio">Portfolio</option>
-            <option value="Monthly">Monthly</option>
-          </select>
-
-          <select
-            class="filter-select"
-            id="statusFilter"
-            onchange="renderWebsites()"
-          >
-            <option value="all">All Status</option>
-            <option value="published">Published</option>
-            <option value="draft">Draft</option>
-          </select>
-
-          <select
-            class="filter-select"
-            id="sortFilter"
-            onchange="renderWebsites()"
-          >
-            <option value="newest">Newest</option>
-            <option value="oldest">Oldest</option>
-            <option value="price-low">Price: Low</option>
-            <option value="price-high">Price: High</option>
-            <option value="sales-high">Sales: High</option>
-            <option value="name">Name A–Z</option>
-          </select>
+            0
+          </div>
 
         </div>
 
-        <!-- TABLE -->
+
+        <div class="stat">
+
+          <div class="stat-top">
+
+            <div class="stat-icon">
+              ✓
+            </div>
+
+            <div class="stat-tag">
+              ACTIVE
+            </div>
+
+          </div>
+
+          <div class="stat-label">
+            Published
+          </div>
+
+          <div
+            class="stat-value"
+            id="published-websites"
+          >
+            0
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-top">
+
+            <div class="stat-icon">
+              ◷
+            </div>
+
+            <div class="stat-tag">
+              DRAFT
+            </div>
+
+          </div>
+
+          <div class="stat-label">
+            Drafts
+          </div>
+
+          <div
+            class="stat-value"
+            id="draft-websites"
+          >
+            0
+          </div>
+
+        </div>
+
+
+        <div class="stat">
+
+          <div class="stat-top">
+
+            <div class="stat-icon">
+              ↗
+            </div>
+
+            <div class="stat-tag">
+              SALES
+            </div>
+
+          </div>
+
+          <div class="stat-label">
+            Total Sales
+          </div>
+
+          <div
+            class="stat-value"
+            id="total-sales"
+          >
+            0
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =========================
+           TOOLBAR
+      ========================= -->
+
+      <section class="toolbar">
+
+        <div class="search-box">
+
+          <span class="search-icon">
+            ⌕
+          </span>
+
+          <input
+            type="search"
+            id="search-input"
+            placeholder="Search websites, IDs or categories..."
+            autocomplete="off"
+          >
+
+        </div>
+
+
+        <select
+          id="category-filter"
+          class="filter-select"
+        >
+
+          <option value="all">
+            All Categories
+          </option>
+
+          <option value="Business">
+            Business
+          </option>
+
+          <option value="Restaurant">
+            Restaurant
+          </option>
+
+          <option value="Agency">
+            Agency
+          </option>
+
+          <option value="E-commerce">
+            E-commerce
+          </option>
+
+          <option value="Portfolio">
+            Portfolio
+          </option>
+
+          <option value="Monthly">
+            Monthly
+          </option>
+
+        </select>
+
+
+        <select
+          id="status-filter"
+          class="filter-select"
+        >
+
+          <option value="all">
+            All Status
+          </option>
+
+          <option value="published">
+            Published
+          </option>
+
+          <option value="draft">
+            Draft
+          </option>
+
+        </select>
+
+
+        <select
+          id="sort-filter"
+          class="filter-select"
+        >
+
+          <option value="newest">
+            Newest
+          </option>
+
+          <option value="oldest">
+            Oldest
+          </option>
+
+          <option value="price-high">
+            Price: High
+          </option>
+
+          <option value="price-low">
+            Price: Low
+          </option>
+
+          <option value="sales-high">
+            Sales: High
+          </option>
+
+          <option value="name">
+            Name A–Z
+          </option>
+
+        </select>
+
+
+        <button
+          class="add-btn"
+          id="add-website-btn"
+          type="button"
+        >
+          ＋
+          Add Website
+        </button>
+
+      </section>
+
+
+      <!-- =========================
+           WEBSITE TABLE
+      ========================= -->
+
+      <section class="panel">
+
+        <div class="panel-head">
+
+          <div>
+
+            <div class="panel-title">
+              Website Collection
+            </div>
+
+            <div class="panel-sub">
+              Marketplace website inventory
+            </div>
+
+          </div>
+
+          <div
+            class="result-count"
+            id="result-count"
+          >
+            0 websites
+          </div>
+
+        </div>
+
 
         <div class="table-wrap">
 
           <table>
 
             <thead>
+
               <tr>
                 <th>Website</th>
                 <th>Category</th>
@@ -1602,271 +2114,409 @@
                 <th>Sales</th>
                 <th>Actions</th>
               </tr>
+
             </thead>
 
-            <tbody id="websiteTableBody"></tbody>
+            <tbody id="website-table-body">
+            </tbody>
 
           </table>
 
-          <div class="empty-state" id="emptyState">
+        </div>
 
-            <div class="empty-icon">⌕</div>
 
-            <h3>No websites found</h3>
+        <div
+          class="empty-state"
+          id="empty-state"
+        >
 
-            <p>
-              Try another search or change your filters.
-            </p>
-
+          <div class="empty-icon">
+            ▣
           </div>
+
+          <h3>
+            No websites found
+          </h3>
+
+          <p>
+            Try another search or reset your filters.
+          </p>
+
+          <button
+            class="reset-btn"
+            id="reset-filters"
+            type="button"
+          >
+            Reset Filters
+          </button>
 
         </div>
 
-      </div>
+      </section>
 
-    </section>
+    </div>
 
   </main>
 
 </div>
 
 
-<!-- ================= PREVIEW MODAL ================= -->
+<!-- =========================================================
+     ADD / EDIT MODAL
+========================================================= -->
 
-<div class="modal-overlay" id="previewModal">
+<div
+  class="modal"
+  id="website-modal"
+>
 
-  <div class="modal">
-
-    <div class="modal-head">
-
-      <div>
-        <div class="modal-title" id="previewModalTitle">
-          Website Preview
-        </div>
-
-        <div class="modal-subtitle" id="previewModalSubtitle">
-          Live website preview
-        </div>
-      </div>
-
-      <button class="close-btn" onclick="closePreview()">
-        ✕
-      </button>
-
-    </div>
-
-    <div class="preview-toolbar">
-
-      <div class="preview-title-mini">
-        <span id="previewDeviceText">Desktop Preview</span>
-      </div>
-
-      <div class="device-switch">
-
-        <button
-          class="device-btn active"
-          id="desktopBtn"
-          onclick="setDevice('desktop')"
-        >
-          🖥 Desktop
-        </button>
-
-        <button
-          class="device-btn"
-          id="mobileBtn"
-          onclick="setDevice('mobile')"
-        >
-          📱 Mobile
-        </button>
-
-      </div>
-
-    </div>
-
-    <div class="preview-stage">
-
-      <div class="browser" id="browserPreview">
-
-        <div class="browser-top">
-
-          <span class="browser-dot"></span>
-          <span class="browser-dot"></span>
-          <span class="browser-dot"></span>
-
-          <div class="browser-url" id="browserUrl">
-            website-preview.local
-          </div>
-
-        </div>
-
-        <div class="browser-content">
-
-          <iframe
-            id="previewFrame"
-            title="Website Preview"
-            style="
-              width:100%;
-              height:100%;
-              border:0;
-              display:none;
-              background:#fff;
-            "
-          ></iframe>
-
-          <div
-            class="preview-placeholder"
-            id="previewPlaceholder"
-          >
-
-            <div class="icon">◫</div>
-
-            <strong id="placeholderTitle">
-              Website Preview
-            </strong>
-
-            <span id="placeholderText">
-              Add a real Live Preview URL to display this website here.
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<!-- ================= ADD / EDIT MODAL ================= -->
-
-<div class="modal-overlay" id="formModal">
-
-  <div class="modal small">
+  <div class="modal-card">
 
     <div class="modal-head">
 
       <div>
-        <div class="modal-title" id="formModalTitle">
+
+        <div
+          class="modal-title"
+          id="website-modal-title"
+        >
           Add Website
         </div>
 
         <div class="modal-subtitle">
-          Create a marketplace website listing.
+          Create or update marketplace website information
         </div>
+
       </div>
 
-      <button class="close-btn" onclick="closeFormModal()">
-        ✕
+      <button
+        class="close-btn"
+        type="button"
+        data-close="website-modal"
+      >
+        ×
       </button>
 
     </div>
 
-    <form id="websiteForm" onsubmit="saveWebsite(event)">
 
-      <div class="form-body">
+    <form id="website-form">
+
+      <div class="modal-body">
+
+        <input
+          type="hidden"
+          id="website-id"
+        >
+
 
         <div class="form-grid">
 
-          <div class="field full">
-            <label>Website Name</label>
+          <div class="field">
+
+            <label for="website-title">
+              Website Name
+            </label>
+
             <input
               type="text"
-              id="websiteName"
-              placeholder="e.g. Corporate Pro"
+              id="website-title"
+              placeholder="Example: Corporate Pro"
               required
             >
+
           </div>
 
+
           <div class="field">
-            <label>Category</label>
-            <select id="websiteCategory" required>
-              <option value="Business">Business</option>
-              <option value="Restaurant">Restaurant</option>
-              <option value="Agency">Agency</option>
-              <option value="E-commerce">E-commerce</option>
-              <option value="Portfolio">Portfolio</option>
-              <option value="Monthly">Monthly</option>
+
+            <label for="website-category">
+              Category
+            </label>
+
+            <select
+              id="website-category"
+              required
+            >
+
+              <option value="Business">
+                Business
+              </option>
+
+              <option value="Restaurant">
+                Restaurant
+              </option>
+
+              <option value="Agency">
+                Agency
+              </option>
+
+              <option value="E-commerce">
+                E-commerce
+              </option>
+
+              <option value="Portfolio">
+                Portfolio
+              </option>
+
+              <option value="Monthly">
+                Monthly
+              </option>
+
             </select>
+
           </div>
 
-          <div class="field">
-            <label>Status</label>
-            <select id="websiteStatus">
-              <option value="published">Published</option>
-              <option value="draft">Draft</option>
-            </select>
-          </div>
 
           <div class="field">
-            <label>Selling Price (৳)</label>
+
+            <label for="website-price">
+              Selling Price
+            </label>
+
             <input
               type="number"
-              id="websitePrice"
+              id="website-price"
               min="0"
+              step="1"
               placeholder="999"
               required
             >
+
           </div>
+
 
           <div class="field">
-            <label>Original Price (৳)</label>
+
+            <label for="website-old-price">
+              Original Price
+            </label>
+
             <input
               type="number"
-              id="websiteOldPrice"
+              id="website-old-price"
               min="0"
+              step="1"
               placeholder="1499"
             >
+
           </div>
 
+
+          <div class="field">
+
+            <label for="website-status">
+              Status
+            </label>
+
+            <select id="website-status">
+
+              <option value="published">
+                Published
+              </option>
+
+              <option value="draft">
+                Draft
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="website-rating">
+              Rating
+            </label>
+
+            <input
+              type="number"
+              id="website-rating"
+              min="0"
+              max="5"
+              step="0.1"
+              value="4.8"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="website-reviews">
+              Reviews
+            </label>
+
+            <input
+              type="number"
+              id="website-reviews"
+              min="0"
+              value="0"
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="website-sales-input">
+              Sales
+            </label>
+
+            <input
+              type="number"
+              id="website-sales-input"
+              min="0"
+              value="0"
+            >
+
+          </div>
+
+
           <div class="field full">
-            <label>Thumbnail Image URL</label>
+
+            <label for="website-image">
+              Thumbnail Image URL
+            </label>
+
             <input
               type="url"
-              id="websiteImage"
-              placeholder="https://..."
+              id="website-image"
+              placeholder="https://example.com/website-preview.jpg"
             >
+
           </div>
 
+
           <div class="field full">
-            <label>Live Preview URL</label>
+
+            <div
+              class="image-preview"
+              id="image-preview"
+            >
+              Image preview will appear here
+            </div>
+
+          </div>
+
+
+          <div class="field full">
+
+            <label for="website-preview">
+              Live Preview URL
+            </label>
+
             <input
               type="url"
-              id="websitePreviewUrl"
-              placeholder="https://..."
+              id="website-preview"
+              placeholder="https://example.com/"
             >
+
           </div>
 
+
           <div class="field full">
-            <label>Description</label>
+
+            <label for="website-description">
+              Description
+            </label>
+
             <textarea
-              id="websiteDescription"
-              placeholder="Short description of this website..."
+              id="website-description"
+              placeholder="Describe this website..."
             ></textarea>
+
+          </div>
+
+
+          <div class="field full">
+
+            <label>
+              Marketplace Badges
+            </label>
+
+            <div class="checkbox-grid">
+
+              <label class="check-card">
+
+                <input
+                  type="checkbox"
+                  id="badge-popular"
+                >
+
+                <span>
+                  Popular
+                </span>
+
+              </label>
+
+
+              <label class="check-card">
+
+                <input
+                  type="checkbox"
+                  id="badge-new"
+                >
+
+                <span>
+                  New
+                </span>
+
+              </label>
+
+
+              <label class="check-card">
+
+                <input
+                  type="checkbox"
+                  id="badge-sale"
+                >
+
+                <span>
+                  Sale
+                </span>
+
+              </label>
+
+
+              <label class="check-card">
+
+                <input
+                  type="checkbox"
+                  id="badge-featured"
+                >
+
+                <span>
+                  Featured
+                </span>
+
+              </label>
+
+            </div>
+
           </div>
 
         </div>
 
       </div>
 
-      <div class="modal-footer">
+
+      <div class="modal-foot">
 
         <button
           type="button"
-          class="outline-btn"
-          onclick="closeFormModal()"
+          class="btn"
+          data-close="website-modal"
         >
           Cancel
         </button>
 
         <button
           type="submit"
-          class="primary-btn"
+          class="btn primary"
         >
-          ✓ Save Website
+          Save Website
         </button>
 
       </div>
@@ -1878,56 +2528,252 @@
 </div>
 
 
-<!-- ================= DELETE MODAL ================= -->
+<!-- =========================================================
+     PREVIEW MODAL
+========================================================= -->
 
-<div class="modal-overlay" id="deleteModal">
+<div
+  class="modal"
+  id="preview-modal"
+>
 
-  <div class="modal small">
+  <div class="modal-card preview-card">
 
     <div class="modal-head">
 
       <div>
-        <div class="modal-title">
-          Delete Website?
+
+        <div
+          class="modal-title"
+          id="preview-title"
+        >
+          Website Preview
         </div>
 
-        <div class="modal-subtitle">
-          This action cannot be undone in the demo.
+        <div
+          class="modal-subtitle"
+          id="preview-subtitle"
+        >
+          Live marketplace preview
         </div>
+
       </div>
 
-      <button class="close-btn" onclick="closeDeleteModal()">
-        ✕
+      <button
+        class="close-btn"
+        type="button"
+        data-close="preview-modal"
+      >
+        ×
       </button>
 
     </div>
 
-    <div class="form-body">
 
-      <p
-        id="deleteText"
-        style="
-          color:#596860;
-          font-size:12px;
-          line-height:1.7;
-        "
-      ></p>
+    <div class="preview-toolbar">
+
+      <div
+        class="preview-url"
+        id="preview-url"
+      >
+        No preview URL
+      </div>
+
+      <div class="preview-switch">
+
+        <button
+          type="button"
+          class="active"
+          id="desktop-preview-btn"
+        >
+          Desktop
+        </button>
+
+        <button
+          type="button"
+          id="mobile-preview-btn"
+        >
+          Mobile
+        </button>
+
+      </div>
 
     </div>
 
-    <div class="modal-footer">
+
+    <div class="preview-stage">
+
+      <div
+        class="browser"
+        id="desktop-preview"
+      >
+
+        <div class="browser-bar">
+
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+          <span class="browser-dot"></span>
+
+          <div
+            class="browser-address"
+            id="desktop-address"
+          >
+            Website preview
+          </div>
+
+        </div>
+
+        <div
+          class="preview-placeholder"
+          id="desktop-placeholder"
+        >
+
+          <div class="placeholder-icon">
+            ◉
+          </div>
+
+          <h3>
+            Preview Ready
+          </h3>
+
+          <p>
+            Add a live preview URL to this website from
+            the editor to display the actual website here.
+          </p>
+
+        </div>
+
+        <iframe
+          id="desktop-iframe"
+          title="Desktop website preview"
+          style="display:none;"
+        ></iframe>
+
+      </div>
+
+
+      <div
+        class="phone"
+        id="mobile-preview"
+        style="display:none;"
+      >
+
+        <div class="phone-screen">
+
+          <div class="phone-notch"></div>
+
+          <div
+            class="preview-placeholder"
+            id="mobile-placeholder"
+          >
+
+            <div class="placeholder-icon">
+              ◉
+            </div>
+
+            <h3>
+              Mobile Preview
+            </h3>
+
+            <p>
+              Add a live preview URL to display the
+              mobile version.
+            </p>
+
+          </div>
+
+          <iframe
+            id="mobile-iframe"
+            title="Mobile website preview"
+            style="display:none;"
+          ></iframe>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     DELETE CONFIRMATION
+========================================================= -->
+
+<div
+  class="modal"
+  id="delete-modal"
+>
+
+  <div class="modal-card small">
+
+    <div class="modal-head">
+
+      <div>
+
+        <div class="modal-title">
+          Delete Website
+        </div>
+
+        <div class="modal-subtitle">
+          This action removes the demo record
+        </div>
+
+      </div>
 
       <button
-        class="outline-btn"
-        onclick="closeDeleteModal()"
+        class="close-btn"
+        type="button"
+        data-close="delete-modal"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="modal-body">
+
+      <div class="confirm-icon">
+        !
+      </div>
+
+      <div class="confirm-text">
+
+        <h3>
+          Are you sure?
+        </h3>
+
+        <p>
+          You are about to delete
+          <strong id="delete-website-name">
+            this website
+          </strong>.
+          This cannot be undone in the current demo storage.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="modal-foot">
+
+      <button
+        type="button"
+        class="btn"
+        data-close="delete-modal"
       >
         Cancel
       </button>
 
       <button
-        class="primary-btn"
-        style="background:linear-gradient(135deg,#e5484d,#bd3035);"
-        onclick="confirmDelete()"
+        type="button"
+        class="btn danger"
+        id="confirm-delete"
       >
         Delete Website
       </button>
@@ -1939,53 +2785,112 @@
 </div>
 
 
-<!-- ================= TOAST ================= -->
+<!-- =========================================================
+     TOAST
+========================================================= -->
 
-<div class="toast" id="toast">
+<div
+  class="toast"
+  id="toast"
+>
 
-  <div class="toast-icon">✓</div>
+  <div class="toast-icon">
+    ✓
+  </div>
 
-  <div class="toast-text">
-    <div class="toast-title" id="toastTitle">
+  <div>
+
+    <div
+      class="toast-title"
+      id="toast-title"
+    >
       Done
     </div>
 
-    <div class="toast-message" id="toastMessage">
+    <div
+      class="toast-message"
+      id="toast-message"
+    >
       Action completed.
     </div>
-  </div>
 
-  <button
-    class="toast-close"
-    onclick="hideToast()"
-  >
-    ✕
-  </button>
+  </div>
 
 </div>
 
 
 <script>
-
   /* =========================================================
-     WEBSITE DEALS — WEBSITE MANAGEMENT
-     Demo storage now.
-     Firebase integration will replace this later.
+     STEP 3
+     WEBSITE MANAGEMENT
   ========================================================= */
 
-  const STORAGE_KEY = "websiteDealsAdminWebsites";
+  const AUTH_KEY =
+    "websiteDealsAdminAuth";
 
-  let websites = [];
-  let editingId = null;
-  let deletingId = null;
-  let currentPreview = null;
+  const STORAGE_KEY =
+    "websiteDealsAdminWebsites";
 
 
-  /* =========================
-     DEMO DATA
-  ========================== */
+  /* =========================================================
+     AUTH PROTECTION
+  ========================================================= */
+
+  function getAdminSession(){
+
+    try{
+
+      const raw =
+        sessionStorage.getItem(AUTH_KEY);
+
+      if(!raw){
+        return null;
+      }
+
+      const session =
+        JSON.parse(raw);
+
+      if(
+        !session ||
+        session.authenticated !== true
+      ){
+        return null;
+      }
+
+      return session;
+
+    }catch(error){
+
+      console.error(
+        "Session error:",
+        error
+      );
+
+      return null;
+    }
+
+  }
+
+
+  const adminSession =
+    getAdminSession();
+
+
+  if(!adminSession){
+
+    window.location.replace(
+      "login/"
+    );
+
+  }
+
+
+  /* =========================================================
+     DEMO WEBSITES
+  ========================================================= */
 
   const defaultWebsites = [
+
     {
       id:"wd001",
       title:"Corporate Pro",
@@ -1993,15 +2898,20 @@
       price:999,
       oldPrice:1499,
       status:"published",
-      badge:"POPULAR",
       rating:4.9,
       reviews:42,
-      sales:284,
+      sales:74,
       image:"",
       previewUrl:"",
-      description:"Premium corporate business website.",
-      createdAt:"2026-09-28"
+      description:
+        "Professional corporate website for modern businesses.",
+      isPopular:true,
+      isNew:false,
+      isSale:true,
+      isFeatured:true,
+      createdAt:"2026-09-01T10:00:00"
     },
+
     {
       id:"wd002",
       title:"Tasty Bites",
@@ -2009,15 +2919,20 @@
       price:1499,
       oldPrice:1999,
       status:"published",
-      badge:"SALE",
       rating:4.8,
-      reviews:31,
-      sales:196,
+      reviews:36,
+      sales:52,
       image:"",
       previewUrl:"",
-      description:"Modern restaurant and food website.",
-      createdAt:"2026-09-27"
+      description:
+        "Modern restaurant website with menu and reservation sections.",
+      isPopular:false,
+      isNew:false,
+      isSale:true,
+      isFeatured:true,
+      createdAt:"2026-09-04T10:00:00"
     },
+
     {
       id:"wd003",
       title:"Creative Studio",
@@ -2025,15 +2940,20 @@
       price:1999,
       oldPrice:2499,
       status:"published",
-      badge:"POPULAR",
       rating:4.7,
-      reviews:28,
-      sales:164,
+      reviews:29,
+      sales:38,
       image:"",
       previewUrl:"",
-      description:"Creative agency portfolio website.",
-      createdAt:"2026-09-26"
+      description:
+        "Creative agency website for studios and digital teams.",
+      isPopular:false,
+      isNew:true,
+      isSale:true,
+      isFeatured:false,
+      createdAt:"2026-09-08T10:00:00"
     },
+
     {
       id:"wd004",
       title:"ShopEasy Store",
@@ -2041,15 +2961,20 @@
       price:2999,
       oldPrice:3999,
       status:"published",
-      badge:"POPULAR",
       rating:4.9,
-      reviews:55,
-      sales:221,
+      reviews:57,
+      sales:86,
       image:"",
       previewUrl:"",
-      description:"Complete modern e-commerce storefront.",
-      createdAt:"2026-09-25"
+      description:
+        "Complete e-commerce storefront for online businesses.",
+      isPopular:true,
+      isNew:false,
+      isSale:true,
+      isFeatured:true,
+      createdAt:"2026-09-10T10:00:00"
     },
+
     {
       id:"wd005",
       title:"Personal Folio",
@@ -2057,15 +2982,20 @@
       price:999,
       oldPrice:1299,
       status:"published",
-      badge:"NEW",
       rating:4.6,
-      reviews:19,
-      sales:108,
+      reviews:21,
+      sales:44,
       image:"",
       previewUrl:"",
-      description:"Minimal portfolio website for professionals.",
-      createdAt:"2026-09-24"
+      description:
+        "Minimal portfolio website for creators and professionals.",
+      isPopular:false,
+      isNew:false,
+      isSale:true,
+      isFeatured:false,
+      createdAt:"2026-09-12T10:00:00"
     },
+
     {
       id:"wd006",
       title:"Starter Monthly",
@@ -2073,102 +3003,123 @@
       price:999,
       oldPrice:1299,
       status:"published",
-      badge:"MONTHLY",
       rating:4.8,
-      reviews:36,
-      sales:143,
+      reviews:31,
+      sales:61,
       image:"",
       previewUrl:"",
-      description:"Affordable monthly website package.",
-      createdAt:"2026-09-23"
+      description:
+        "Affordable monthly website package for new businesses.",
+      isPopular:true,
+      isNew:true,
+      isSale:false,
+      isFeatured:true,
+      createdAt:"2026-09-15T10:00:00"
     },
+
     {
       id:"wd007",
       title:"Biz Launch",
       category:"Business",
       price:1299,
-      oldPrice:1699,
+      oldPrice:1799,
       status:"published",
-      badge:"NEW",
       rating:4.5,
       reviews:17,
-      sales:76,
+      sales:31,
       image:"",
       previewUrl:"",
-      description:"Fast business launch website.",
-      createdAt:"2026-09-22"
+      description:
+        "Business launch website for startups and small companies.",
+      isPopular:false,
+      isNew:true,
+      isSale:true,
+      isFeatured:false,
+      createdAt:"2026-09-20T10:00:00"
     },
+
     {
       id:"wd008",
       title:"Cafe Corner",
       category:"Restaurant",
       price:1199,
       oldPrice:1599,
-      status:"draft",
-      badge:"NEW",
+      status:"published",
       rating:4.7,
-      reviews:12,
-      sales:56,
+      reviews:19,
+      sales:28,
       image:"",
       previewUrl:"",
-      description:"Elegant cafe and restaurant website.",
-      createdAt:"2026-09-21"
+      description:
+        "Elegant cafe and restaurant website with a visual menu.",
+      isPopular:false,
+      isNew:true,
+      isSale:true,
+      isFeatured:false,
+      createdAt:"2026-09-25T10:00:00"
     }
+
   ];
 
 
-  /* =========================
-     INIT
-  ========================== */
+  /* =========================================================
+     STATE
+  ========================================================= */
 
-  document.addEventListener("DOMContentLoaded", () => {
+  let websites = [];
 
-    loadWebsites();
+  let deleteTargetId = null;
 
-    renderWebsites();
-
-    updateStats();
-
-    document.addEventListener("keydown", handleKeyboard);
-
-  });
+  let currentPreview = null;
 
 
-  /* =========================
-     LOAD
-  ========================== */
+  /* =========================================================
+     STORAGE
+  ========================================================= */
 
   function loadWebsites(){
 
-    const saved = localStorage.getItem(STORAGE_KEY);
+    try{
 
-    if(saved){
+      const saved =
+        localStorage.getItem(
+          STORAGE_KEY
+        );
 
-      try{
-        websites = JSON.parse(saved);
-      }catch(error){
-        websites = [...defaultWebsites];
+      if(saved){
+
+        const parsed =
+          JSON.parse(saved);
+
+        if(Array.isArray(parsed)){
+
+          websites =
+            parsed;
+
+          return;
+        }
+
       }
 
-    }else{
+    }catch(error){
 
-      websites = [...defaultWebsites];
-
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(websites)
+      console.warn(
+        "Could not load website data:",
+        error
       );
 
     }
 
+
+    websites =
+      [...defaultWebsites];
+
+    saveWebsites();
+
   }
 
 
-  /* =========================
-     SAVE
-  ========================== */
-
-  function persist(){
+  function saveWebsites(){
 
     localStorage.setItem(
       STORAGE_KEY,
@@ -2178,136 +3129,344 @@
   }
 
 
-  /* =========================
-     RENDER
-  ========================== */
+  /* =========================================================
+     HELPERS
+  ========================================================= */
 
-  function renderWebsites(){
+  function escapeHTML(value){
 
-    const tbody =
-      document.getElementById("websiteTableBody");
+    return String(
+      value ?? ""
+    )
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
 
-    const empty =
-      document.getElementById("emptyState");
+  }
+
+
+  function formatPrice(price){
+
+    const number =
+      Number(price) || 0;
+
+    return (
+      "৳" +
+      number.toLocaleString(
+        "en-BD"
+      )
+    );
+
+  }
+
+
+  function initials(title){
+
+    const words =
+      String(title || "")
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+
+    if(!words.length){
+      return "WD";
+    }
+
+    if(words.length === 1){
+
+      return words[0]
+        .slice(0,2)
+        .toUpperCase();
+
+    }
+
+    return (
+      words[0][0] +
+      words[1][0]
+    ).toUpperCase();
+
+  }
+
+
+  function showToast(
+    title,
+    message
+  ){
+
+    const toast =
+      document.getElementById(
+        "toast"
+      );
+
+    const titleEl =
+      document.getElementById(
+        "toast-title"
+      );
+
+    const messageEl =
+      document.getElementById(
+        "toast-message"
+      );
+
+    if(!toast){
+      return;
+    }
+
+    titleEl.textContent =
+      title || "Done";
+
+    messageEl.textContent =
+      message || "";
+
+    toast.classList.add(
+      "show"
+    );
+
+    clearTimeout(
+      window.__toastTimer
+    );
+
+    window.__toastTimer =
+      setTimeout(
+        () => {
+
+          toast.classList.remove(
+            "show"
+          );
+
+        },
+        3000
+      );
+
+  }
+
+
+  /* =========================================================
+     RENDER STATS
+  ========================================================= */
+
+  function renderStats(){
+
+    const total =
+      websites.length;
+
+    const published =
+      websites.filter(
+        item =>
+          item.status === "published"
+      ).length;
+
+    const drafts =
+      websites.filter(
+        item =>
+          item.status === "draft"
+      ).length;
+
+    const sales =
+      websites.reduce(
+        (sum,item) =>
+          sum +
+          (Number(item.sales) || 0),
+        0
+      );
+
+
+    document.getElementById(
+      "total-websites"
+    ).textContent =
+      total;
+
+    document.getElementById(
+      "published-websites"
+    ).textContent =
+      published;
+
+    document.getElementById(
+      "draft-websites"
+    ).textContent =
+      drafts;
+
+    document.getElementById(
+      "total-sales"
+    ).textContent =
+      sales.toLocaleString();
+
+  }
+
+
+  /* =========================================================
+     FILTER + SORT
+  ========================================================= */
+
+  function getFilteredWebsites(){
 
     const search =
       document
-        .getElementById("searchInput")
+        .getElementById("search-input")
         .value
         .trim()
         .toLowerCase();
 
     const category =
-      document.getElementById("categoryFilter").value;
+      document.getElementById(
+        "category-filter"
+      ).value;
 
     const status =
-      document.getElementById("statusFilter").value;
+      document.getElementById(
+        "status-filter"
+      ).value;
 
     const sort =
-      document.getElementById("sortFilter").value;
+      document.getElementById(
+        "sort-filter"
+      ).value;
 
 
-    let filtered = websites.filter(site => {
+    let result =
+      websites.filter(
+        item => {
 
-      const matchesSearch =
-        !search ||
-        site.title.toLowerCase().includes(search) ||
-        site.id.toLowerCase().includes(search) ||
-        site.category.toLowerCase().includes(search);
+          const matchesSearch =
+            !search ||
+            String(item.title)
+              .toLowerCase()
+              .includes(search) ||
+            String(item.id)
+              .toLowerCase()
+              .includes(search) ||
+            String(item.category)
+              .toLowerCase()
+              .includes(search);
 
-      const matchesCategory =
-        category === "all" ||
-        site.category === category;
+          const matchesCategory =
+            category === "all" ||
+            item.category === category;
 
-      const matchesStatus =
-        status === "all" ||
-        site.status === status;
+          const matchesStatus =
+            status === "all" ||
+            item.status === status;
 
-      return (
-        matchesSearch &&
-        matchesCategory &&
-        matchesStatus
+          return (
+            matchesSearch &&
+            matchesCategory &&
+            matchesStatus
+          );
+
+        }
       );
 
-    });
 
+    result.sort(
+      (a,b) => {
 
-    filtered.sort((a,b) => {
+        if(sort === "oldest"){
 
-      if(sort === "price-low"){
-        return Number(a.price) - Number(b.price);
+          return (
+            new Date(a.createdAt || 0) -
+            new Date(b.createdAt || 0)
+          );
+
+        }
+
+        if(sort === "price-high"){
+
+          return (
+            Number(b.price || 0) -
+            Number(a.price || 0)
+          );
+
+        }
+
+        if(sort === "price-low"){
+
+          return (
+            Number(a.price || 0) -
+            Number(b.price || 0)
+          );
+
+        }
+
+        if(sort === "sales-high"){
+
+          return (
+            Number(b.sales || 0) -
+            Number(a.sales || 0)
+          );
+
+        }
+
+        if(sort === "name"){
+
+          return String(a.title)
+            .localeCompare(
+              String(b.title)
+            );
+
+        }
+
+        return (
+          new Date(b.createdAt || 0) -
+          new Date(a.createdAt || 0)
+        );
+
       }
-
-      if(sort === "price-high"){
-        return Number(b.price) - Number(a.price);
-      }
-
-      if(sort === "sales-high"){
-        return Number(b.sales || 0) - Number(a.sales || 0);
-      }
-
-      if(sort === "name"){
-        return a.title.localeCompare(b.title);
-      }
-
-      if(sort === "oldest"){
-        return new Date(a.createdAt || 0) -
-               new Date(b.createdAt || 0);
-      }
-
-      return new Date(b.createdAt || 0) -
-             new Date(a.createdAt || 0);
-
-    });
+    );
 
 
-    tbody.innerHTML = filtered
-      .map(createRow)
-      .join("");
-
-
-    if(filtered.length){
-
-      empty.style.display = "none";
-
-    }else{
-
-      empty.style.display = "block";
-
-    }
+    return result;
 
   }
 
 
-  /* =========================
-     TABLE ROW
-  ========================== */
+  /* =========================================================
+     WEBSITE ROW
+  ========================================================= */
 
-  function createRow(site){
+  function createWebsiteRow(item){
 
-    const safeTitle =
-      escapeHTML(site.title);
-
-    const safeCategory =
-      escapeHTML(site.category);
-
-    const image =
-      site.image
+    const imageHTML =
+      item.image
         ? `
           <img
-            src="${escapeAttr(site.image)}"
-            alt="${safeTitle}"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='grid';"
+            src="${escapeHTML(item.image)}"
+            alt="${escapeHTML(item.title)}"
+            onerror="this.style.display='none';this.parentElement.innerHTML='${escapeHTML(initials(item.title))}'"
           >
-          <div class="thumb-fallback" style="display:none;">▣</div>
         `
-        : `
-          <div class="thumb-fallback">▣</div>
-        `;
+        : escapeHTML(
+            initials(item.title)
+          );
 
 
-    const badge =
-      getBadge(site.badge);
+    const badges = [];
+
+
+    if(item.isPopular){
+      badges.push(
+        `<span class="badge popular">POPULAR</span>`
+      );
+    }
+
+    if(item.isNew){
+      badges.push(
+        `<span class="badge new">NEW</span>`
+      );
+    }
+
+    if(item.isSale){
+      badges.push(
+        `<span class="badge sale">SALE</span>`
+      );
+    }
+
+    if(item.isFeatured){
+      badges.push(
+        `<span class="badge featured">FEATURED</span>`
+      );
+    }
 
 
     return `
@@ -2316,20 +3475,22 @@
 
         <td>
 
-          <div class="website-info">
+          <div class="website-cell">
 
-            <div class="thumb">
-              ${image}
+            <div class="website-image">
+              ${imageHTML}
             </div>
 
             <div>
-              <div class="website-name">
-                ${safeTitle}
+
+              <div class="website-title">
+                ${escapeHTML(item.title)}
               </div>
 
               <div class="website-id">
-                ${escapeHTML(site.id)}
+                ${escapeHTML(item.id)}
               </div>
+
             </div>
 
           </div>
@@ -2338,28 +3499,26 @@
 
 
         <td>
-
-          <span class="category-pill">
-            ${safeCategory}
+          <span class="category-text">
+            ${escapeHTML(item.category)}
           </span>
-
         </td>
 
 
         <td>
 
-          <div class="price">
-            ৳${formatNumber(site.price)}
-          </div>
+          <span class="price">
+            ${formatPrice(item.price)}
+          </span>
 
           ${
-            site.oldPrice
-            ?
-            `<div class="old-price">
-              ৳${formatNumber(site.oldPrice)}
-            </div>`
-            :
-            ""
+            Number(item.oldPrice) > Number(item.price)
+              ? `
+                <span class="old-price">
+                  ${formatPrice(item.oldPrice)}
+                </span>
+              `
+              : ""
           }
 
         </td>
@@ -2367,10 +3526,22 @@
 
         <td>
 
-          <span class="status ${site.status}">
-            ${site.status === "published"
-              ? "Published"
-              : "Draft"}
+          <span
+            class="status ${
+              item.status === "draft"
+                ? "draft"
+                : "published"
+            }"
+          >
+
+            <span class="status-dot"></span>
+
+            ${
+              item.status === "draft"
+                ? "Draft"
+                : "Published"
+            }
+
           </span>
 
         </td>
@@ -2379,7 +3550,13 @@
         <td>
 
           <div class="badges">
-            ${badge}
+
+            ${
+              badges.length
+                ? badges.join("")
+                : `<span style="color:#9aa39e;font-size:9px;">—</span>`
+            }
+
           </div>
 
         </td>
@@ -2387,18 +3564,30 @@
 
         <td>
 
-          <span class="rating">
-            ★ ${site.rating || "—"}
-          </span>
+          <div class="rating">
+
+            <span class="star">
+              ★
+            </span>
+
+            <span class="rating-number">
+              ${Number(item.rating || 0).toFixed(1)}
+            </span>
+
+            <span class="rating-reviews">
+              (${Number(item.reviews || 0)})
+            </span>
+
+          </div>
 
         </td>
 
 
         <td>
 
-          <span class="sales">
-            ${formatNumber(site.sales || 0)}
-          </span>
+          <strong>
+            ${Number(item.sales || 0).toLocaleString()}
+          </strong>
 
         </td>
 
@@ -2409,26 +3598,29 @@
 
             <button
               class="action-btn"
-              onclick="openPreview('${escapeJS(site.id)}')"
-              title="View"
+              type="button"
+              title="Preview"
+              onclick="openPreview('${escapeHTML(item.id)}')"
             >
               👁
             </button>
 
             <button
               class="action-btn"
-              onclick="editWebsite('${escapeJS(site.id)}')"
+              type="button"
               title="Edit"
+              onclick="editWebsite('${escapeHTML(item.id)}')"
             >
               ✎
             </button>
 
             <button
-              class="action-btn delete"
-              onclick="openDeleteModal('${escapeJS(site.id)}')"
+              class="action-btn danger"
+              type="button"
               title="Delete"
+              onclick="askDeleteWebsite('${escapeHTML(item.id)}')"
             >
-              ♲
+              ×
             </button>
 
           </div>
@@ -2442,859 +3634,1273 @@
   }
 
 
-  /* =========================
-     BADGE
-  ========================== */
+  /* =========================================================
+     RENDER TABLE
+  ========================================================= */
 
-  function getBadge(badge){
+  function renderWebsites(){
 
-    if(!badge){
-      return "";
-    }
+    const list =
+      getFilteredWebsites();
 
-    const value =
-      String(badge).toUpperCase();
+    const tbody =
+      document.getElementById(
+        "website-table-body"
+      );
 
-    let cls = "";
+    const empty =
+      document.getElementById(
+        "empty-state"
+      );
 
-    if(value === "POPULAR"){
-      cls = "green";
-    }
-
-    if(value === "SALE"){
-      cls = "red";
-    }
-
-    if(value === "NEW"){
-      cls = "orange";
-    }
-
-    if(value === "MONTHLY"){
-      cls = "green";
-    }
-
-    return `
-      <span class="badge ${cls}">
-        ${escapeHTML(value)}
-      </span>
-    `;
-
-  }
-
-
-  /* =========================
-     STATS
-  ========================== */
-
-  function updateStats(){
-
-    const total =
-      websites.length;
-
-    const published =
-      websites.filter(
-        x => x.status === "published"
-      ).length;
-
-    const drafts =
-      websites.filter(
-        x => x.status === "draft"
-      ).length;
-
-    const sales =
-      websites.reduce(
-        (sum,x) =>
-          sum + Number(x.sales || 0),
-        0
+    const resultCount =
+      document.getElementById(
+        "result-count"
       );
 
 
-    document.getElementById(
-      "totalWebsites"
-    ).textContent = formatNumber(total);
+    resultCount.textContent =
+      `${list.length} website${list.length === 1 ? "" : "s"}`;
 
 
-    document.getElementById(
-      "publishedWebsites"
-    ).textContent = formatNumber(published);
+    if(!list.length){
 
+      tbody.innerHTML = "";
 
-    document.getElementById(
-      "draftWebsites"
-    ).textContent = formatNumber(drafts);
-
-
-    document.getElementById(
-      "totalSales"
-    ).textContent = formatNumber(sales);
-
-
-    document.getElementById(
-      "sideWebsiteCount"
-    ).textContent = total;
-
-  }
-
-
-  /* =========================
-     PREVIEW
-  ========================== */
-
-  function openPreview(id){
-
-    const site =
-      websites.find(
-        x => x.id === id
+      empty.classList.add(
+        "show"
       );
 
-    if(!site){
       return;
+
     }
 
-    currentPreview = site;
 
-    document.getElementById(
-      "previewModalTitle"
-    ).textContent =
-      site.title;
+    empty.classList.remove(
+      "show"
+    );
 
 
-    document.getElementById(
-      "previewModalSubtitle"
-    ).textContent =
-      `${site.category} · ${site.id}`;
+    tbody.innerHTML =
+      list
+        .map(createWebsiteRow)
+        .join("");
+
+  }
 
 
-    document.getElementById(
-      "browserUrl"
-    ).textContent =
-      site.previewUrl ||
-      "preview.website-deals.local";
+  /* =========================================================
+     MODAL HELPERS
+  ========================================================= */
+
+  function openModal(id){
+
+    document
+      .getElementById(id)
+      ?.classList.add("show");
+
+    document.body.style.overflow =
+      "hidden";
+
+  }
 
 
-    document.getElementById(
-      "placeholderTitle"
-    ).textContent =
-      site.title;
+  function closeModal(id){
+
+    document
+      .getElementById(id)
+      ?.classList.remove("show");
+
+    const anyModal =
+      document.querySelector(
+        ".modal.show"
+      );
+
+    if(!anyModal){
+
+      document.body.style.overflow =
+        "";
+
+    }
+
+  }
 
 
-    document.getElementById(
-      "placeholderText"
-    ).textContent =
-      site.previewUrl
-      ? "Loading live preview..."
-      : "Add a real Live Preview URL to display this website here.";
+  document
+    .querySelectorAll("[data-close]")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          closeModal(
+            button.dataset.close
+          );
+
+        }
+      );
+
+    });
 
 
-    const frame =
-      document.getElementById("previewFrame");
+  document
+    .querySelectorAll(".modal")
+    .forEach(modal => {
 
-    const placeholder =
-      document.getElementById("previewPlaceholder");
+      modal.addEventListener(
+        "click",
+        event => {
+
+          if(
+            event.target === modal
+          ){
+
+            closeModal(
+              modal.id
+            );
+
+          }
+
+        }
+      );
+
+    });
 
 
-    frame.style.display = "none";
+  document.addEventListener(
+    "keydown",
+    event => {
 
-    placeholder.style.display = "flex";
+      if(event.key === "Escape"){
 
+        document
+          .querySelectorAll(
+            ".modal.show"
+          )
+          .forEach(modal => {
 
-    if(site.previewUrl){
+            closeModal(
+              modal.id
+            );
 
-      try{
-
-        frame.src = site.previewUrl;
-
-        frame.onload = () => {
-
-          frame.style.display = "block";
-          placeholder.style.display = "none";
-
-        };
-
-      }catch(error){
-
-        placeholder.style.display = "flex";
+          });
 
       }
 
     }
+  );
 
 
-    setDevice("desktop");
+  /* =========================================================
+     OPEN ADD
+  ========================================================= */
 
-    document
-      .getElementById("previewModal")
-      .classList.add("show");
-
-    document.body.style.overflow = "hidden";
-
-  }
-
-
-  function setDevice(device){
-
-    const browser =
-      document.getElementById(
-        "browserPreview"
-      );
-
-    const desktopBtn =
-      document.getElementById(
-        "desktopBtn"
-      );
-
-    const mobileBtn =
-      document.getElementById(
-        "mobileBtn"
-      );
-
-    const text =
-      document.getElementById(
-        "previewDeviceText"
-      );
-
-
-    if(device === "mobile"){
-
-      browser.classList.add("mobile");
-
-      mobileBtn.classList.add("active");
-      desktopBtn.classList.remove("active");
-
-      text.textContent =
-        "Mobile Phone Preview";
-
-    }else{
-
-      browser.classList.remove("mobile");
-
-      desktopBtn.classList.add("active");
-      mobileBtn.classList.remove("active");
-
-      text.textContent =
-        "Desktop Preview";
-
-    }
-
-  }
-
-
-  function closePreview(){
-
-    document
-      .getElementById("previewModal")
-      .classList.remove("show");
-
-    document.body.style.overflow = "";
-
-    const frame =
-      document.getElementById("previewFrame");
-
-    frame.src = "";
-
-  }
-
-
-  /* =========================
-     ADD MODAL
-  ========================== */
-
-  function openAddModal(){
-
-    editingId = null;
+  function openAddWebsite(){
 
     document.getElementById(
-      "formModalTitle"
+      "website-modal-title"
     ).textContent =
       "Add Website";
 
 
     document.getElementById(
-      "websiteForm"
+      "website-form"
     ).reset();
 
 
     document.getElementById(
-      "websiteStatus"
+      "website-id"
+    ).value = "";
+
+
+    document.getElementById(
+      "website-status"
     ).value =
       "published";
 
 
-    document
-      .getElementById("formModal")
-      .classList.add("show");
+    document.getElementById(
+      "website-rating"
+    ).value =
+      "4.8";
 
-    document.body.style.overflow = "hidden";
+
+    document.getElementById(
+      "website-reviews"
+    ).value =
+      "0";
+
+
+    document.getElementById(
+      "website-sales-input"
+    ).value =
+      "0";
+
+
+    updateImagePreview();
+
+
+    openModal(
+      "website-modal"
+    );
 
   }
 
 
-  /* =========================
+  document
+    .getElementById(
+      "add-website-btn"
+    )
+    .addEventListener(
+      "click",
+      openAddWebsite
+    );
+
+
+  /* =========================================================
      EDIT
-  ========================== */
+  ========================================================= */
 
   function editWebsite(id){
 
-    const site =
+    const item =
       websites.find(
-        x => x.id === id
+        website =>
+          website.id === id
       );
 
-    if(!site){
+    if(!item){
       return;
     }
 
-    editingId = id;
 
     document.getElementById(
-      "formModalTitle"
+      "website-modal-title"
     ).textContent =
       "Edit Website";
 
 
     document.getElementById(
-      "websiteName"
+      "website-id"
     ).value =
-      site.title || "";
+      item.id;
 
 
     document.getElementById(
-      "websiteCategory"
+      "website-title"
     ).value =
-      site.category || "Business";
+      item.title || "";
 
 
     document.getElementById(
-      "websiteStatus"
+      "website-category"
     ).value =
-      site.status || "published";
+      item.category || "Business";
 
 
     document.getElementById(
-      "websitePrice"
+      "website-price"
     ).value =
-      site.price || "";
+      item.price ?? "";
 
 
     document.getElementById(
-      "websiteOldPrice"
+      "website-old-price"
     ).value =
-      site.oldPrice || "";
+      item.oldPrice ?? "";
 
 
     document.getElementById(
-      "websiteImage"
+      "website-status"
     ).value =
-      site.image || "";
+      item.status || "published";
 
 
     document.getElementById(
-      "websitePreviewUrl"
+      "website-rating"
     ).value =
-      site.previewUrl || "";
+      item.rating ?? 4.8;
 
 
     document.getElementById(
-      "websiteDescription"
+      "website-reviews"
     ).value =
-      site.description || "";
+      item.reviews ?? 0;
 
 
-    document
-      .getElementById("formModal")
-      .classList.add("show");
+    document.getElementById(
+      "website-sales-input"
+    ).value =
+      item.sales ?? 0;
 
-    document.body.style.overflow = "hidden";
+
+    document.getElementById(
+      "website-image"
+    ).value =
+      item.image || "";
+
+
+    document.getElementById(
+      "website-preview"
+    ).value =
+      item.previewUrl || "";
+
+
+    document.getElementById(
+      "website-description"
+    ).value =
+      item.description || "";
+
+
+    document.getElementById(
+      "badge-popular"
+    ).checked =
+      !!item.isPopular;
+
+
+    document.getElementById(
+      "badge-new"
+    ).checked =
+      !!item.isNew;
+
+
+    document.getElementById(
+      "badge-sale"
+    ).checked =
+      !!item.isSale;
+
+
+    document.getElementById(
+      "badge-featured"
+    ).checked =
+      !!item.isFeatured;
+
+
+    updateImagePreview();
+
+
+    openModal(
+      "website-modal"
+    );
 
   }
 
 
-  /* =========================
-     SAVE
-  ========================== */
+  /* =========================================================
+     SAVE WEBSITE
+  ========================================================= */
 
-  function saveWebsite(event){
+  document
+    .getElementById(
+      "website-form"
+    )
+    .addEventListener(
+      "submit",
+      event => {
 
-    event.preventDefault();
-
-
-    const title =
-      document.getElementById(
-        "websiteName"
-      ).value.trim();
-
-
-    const category =
-      document.getElementById(
-        "websiteCategory"
-      ).value;
+        event.preventDefault();
 
 
-    const status =
-      document.getElementById(
-        "websiteStatus"
-      ).value;
+        const id =
+          document.getElementById(
+            "website-id"
+          ).value.trim();
 
 
-    const price =
-      Number(
-        document.getElementById(
-          "websitePrice"
-        ).value
-      );
+        const title =
+          document.getElementById(
+            "website-title"
+          ).value.trim();
 
 
-    const oldPrice =
-      Number(
-        document.getElementById(
-          "websiteOldPrice"
-        ).value
-      ) || 0;
+        const category =
+          document.getElementById(
+            "website-category"
+          ).value;
 
 
-    const image =
-      document.getElementById(
-        "websiteImage"
-      ).value.trim();
+        const price =
+          Number(
+            document.getElementById(
+              "website-price"
+            ).value
+          ) || 0;
 
 
-    const previewUrl =
-      document.getElementById(
-        "websitePreviewUrl"
-      ).value.trim();
+        const oldPrice =
+          Number(
+            document.getElementById(
+              "website-old-price"
+            ).value
+          ) || 0;
 
 
-    const description =
-      document.getElementById(
-        "websiteDescription"
-      ).value.trim();
+        const status =
+          document.getElementById(
+            "website-status"
+          ).value;
 
 
-    if(editingId){
+        const rating =
+          Number(
+            document.getElementById(
+              "website-rating"
+            ).value
+          ) || 0;
 
-      const index =
-        websites.findIndex(
-          x => x.id === editingId
+
+        const reviews =
+          Number(
+            document.getElementById(
+              "website-reviews"
+            ).value
+          ) || 0;
+
+
+        const sales =
+          Number(
+            document.getElementById(
+              "website-sales-input"
+            ).value
+          ) || 0;
+
+
+        const image =
+          document.getElementById(
+            "website-image"
+          ).value.trim();
+
+
+        const previewUrl =
+          document.getElementById(
+            "website-preview"
+          ).value.trim();
+
+
+        const description =
+          document.getElementById(
+            "website-description"
+          ).value.trim();
+
+
+        const isPopular =
+          document.getElementById(
+            "badge-popular"
+          ).checked;
+
+
+        const isNew =
+          document.getElementById(
+            "badge-new"
+          ).checked;
+
+
+        const isSale =
+          document.getElementById(
+            "badge-sale"
+          ).checked;
+
+
+        const isFeatured =
+          document.getElementById(
+            "badge-featured"
+          ).checked;
+
+
+        if(!title){
+
+          showToast(
+            "Website name required",
+            "Please enter a website name."
+          );
+
+          return;
+
+        }
+
+
+        if(price < 0){
+
+          showToast(
+            "Invalid price",
+            "Price cannot be negative."
+          );
+
+          return;
+
+        }
+
+
+        if(id){
+
+          const index =
+            websites.findIndex(
+              item =>
+                item.id === id
+            );
+
+
+          if(index !== -1){
+
+            websites[index] = {
+
+              ...websites[index],
+
+              title,
+              category,
+              price,
+              oldPrice,
+              status,
+              rating,
+              reviews,
+              sales,
+              image,
+              previewUrl,
+              description,
+              isPopular,
+              isNew,
+              isSale,
+              isFeatured
+
+            };
+
+          }
+
+
+          showToast(
+            "Website updated",
+            `${title} has been updated successfully.`
+          );
+
+        }else{
+
+          const newId =
+            generateWebsiteId();
+
+
+          websites.unshift({
+
+            id:newId,
+            title,
+            category,
+            price,
+            oldPrice,
+            status,
+            rating,
+            reviews,
+            sales,
+            image,
+            previewUrl,
+            description,
+            isPopular,
+            isNew,
+            isSale,
+            isFeatured,
+            createdAt:
+              new Date().toISOString()
+
+          });
+
+
+          showToast(
+            "Website added",
+            `${title} was added to the marketplace collection.`
+          );
+
+        }
+
+
+        saveWebsites();
+
+        renderStats();
+
+        renderWebsites();
+
+        closeModal(
+          "website-modal"
         );
 
-
-      if(index !== -1){
-
-        websites[index] = {
-          ...websites[index],
-          title,
-          category,
-          status,
-          price,
-          oldPrice,
-          image,
-          previewUrl,
-          description
-        };
-
       }
-
-      showToast(
-        "Website Updated",
-        `${title} has been updated successfully.`
-      );
-
-    }else{
-
-      const newId =
-        generateId();
-
-
-      websites.unshift({
-
-        id:newId,
-
-        title,
-
-        category,
-
-        price,
-
-        oldPrice,
-
-        status,
-
-        badge:"NEW",
-
-        rating:5,
-
-        reviews:0,
-
-        sales:0,
-
-        image,
-
-        previewUrl,
-
-        description,
-
-        createdAt:
-          new Date()
-            .toISOString()
-            .slice(0,10)
-
-      });
-
-
-      showToast(
-        "Website Added",
-        `${title} has been added to the marketplace manager.`
-      );
-
-    }
-
-
-    persist();
-
-    renderWebsites();
-
-    updateStats();
-
-    closeFormModal();
-
-  }
-
-
-  /* =========================
-     CLOSE FORM
-  ========================== */
-
-  function closeFormModal(){
-
-    document
-      .getElementById("formModal")
-      .classList.remove("show");
-
-    document.body.style.overflow = "";
-
-  }
-
-
-  /* =========================
-     DELETE
-  ========================== */
-
-  function openDeleteModal(id){
-
-    const site =
-      websites.find(
-        x => x.id === id
-      );
-
-    if(!site){
-      return;
-    }
-
-    deletingId = id;
-
-    document.getElementById(
-      "deleteText"
-    ).innerHTML =
-      `You are about to delete <strong>${escapeHTML(site.title)}</strong> (${escapeHTML(site.id)}). This will remove the listing from the demo admin storage.`;
-
-
-    document
-      .getElementById("deleteModal")
-      .classList.add("show");
-
-    document.body.style.overflow = "hidden";
-
-  }
-
-
-  function confirmDelete(){
-
-    if(!deletingId){
-      return;
-    }
-
-    const site =
-      websites.find(
-        x => x.id === deletingId
-      );
-
-
-    websites =
-      websites.filter(
-        x => x.id !== deletingId
-      );
-
-
-    persist();
-
-    renderWebsites();
-
-    updateStats();
-
-    closeDeleteModal();
-
-
-    showToast(
-      "Website Deleted",
-      `${site ? site.title : "Website"} was removed.`
     );
 
 
-    deletingId = null;
+  /* =========================================================
+     ID GENERATOR
+  ========================================================= */
 
-  }
+  function generateWebsiteId(){
 
+    let number =
+      websites.length + 1;
 
-  function closeDeleteModal(){
-
-    document
-      .getElementById("deleteModal")
-      .classList.remove("show");
-
-    document.body.style.overflow = "";
-
-    deletingId = null;
-
-  }
-
-
-  /* =========================
-     ID
-  ========================== */
-
-  function generateId(){
-
-    let number = websites.length + 1;
 
     let id =
-      "wd" +
-      String(number).padStart(3,"0");
+      `wd${String(number).padStart(3,"0")}`;
 
 
     while(
       websites.some(
-        x => x.id === id
+        item =>
+          item.id === id
       )
     ){
 
       number++;
 
       id =
-        "wd" +
-        String(number).padStart(3,"0");
+        `wd${String(number).padStart(3,"0")}`;
 
     }
+
 
     return id;
 
   }
 
 
-  /* =========================
-     HELPERS
-  ========================== */
+  /* =========================================================
+     IMAGE PREVIEW
+  ========================================================= */
 
-  function formatNumber(value){
+  function updateImagePreview(){
 
-    return Number(value || 0)
-      .toLocaleString("en-US");
+    const url =
+      document.getElementById(
+        "website-image"
+      ).value.trim();
 
-  }
-
-
-  function escapeHTML(value){
-
-    return String(value ?? "")
-      .replace(/&/g,"&amp;")
-      .replace(/</g,"&lt;")
-      .replace(/>/g,"&gt;")
-      .replace(/"/g,"&quot;")
-      .replace(/'/g,"&#039;");
-
-  }
-
-
-  function escapeAttr(value){
-
-    return String(value ?? "")
-      .replace(/"/g,"&quot;");
-
-  }
-
-
-  function escapeJS(value){
-
-    return String(value ?? "")
-      .replace(/\\/g,"\\\\")
-      .replace(/'/g,"\\'");
-
-  }
-
-
-  /* =========================
-     TOAST
-  ========================== */
-
-  let toastTimer;
-
-
-  function showToast(title,message){
-
-    const toast =
-      document.getElementById("toast");
-
-
-    document.getElementById(
-      "toastTitle"
-    ).textContent =
-      title;
-
-
-    document.getElementById(
-      "toastMessage"
-    ).textContent =
-      message;
-
-
-    toast.classList.add("show");
-
-
-    clearTimeout(toastTimer);
-
-
-    toastTimer =
-      setTimeout(
-        hideToast,
-        3500
+    const box =
+      document.getElementById(
+        "image-preview"
       );
 
-  }
 
+    if(!url){
 
-  function hideToast(){
+      box.innerHTML =
+        "Image preview will appear here";
 
-    document
-      .getElementById("toast")
-      .classList.remove("show");
-
-  }
-
-
-  /* =========================
-     SIDEBAR
-  ========================== */
-
-  function openSidebar(){
-
-    document
-      .getElementById("sidebar")
-      .classList.add("open");
-
-    document
-      .getElementById("sidebarOverlay")
-      .classList.add("show");
-
-  }
-
-
-  function closeSidebar(){
-
-    document
-      .getElementById("sidebar")
-      .classList.remove("open");
-
-    document
-      .getElementById("sidebarOverlay")
-      .classList.remove("show");
-
-  }
-
-
-  /* =========================
-     REFRESH
-  ========================== */
-
-  function refreshPage(){
-
-    loadWebsites();
-
-    renderWebsites();
-
-    updateStats();
-
-    showToast(
-      "Refreshed",
-      "Website management data has been refreshed."
-    );
-
-  }
-
-
-  /* =========================
-     LOGOUT
-  ========================== */
-
-  function logout(){
-
-    localStorage.removeItem(
-      "websiteDealsAdminSession"
-    );
-
-    window.location.href =
-      "index.html";
-
-  }
-
-
-  /* =========================
-     KEYBOARD
-  ========================== */
-
-  function handleKeyboard(event){
-
-    if(event.key === "Escape"){
-
-      closePreview();
-
-      closeFormModal();
-
-      closeDeleteModal();
-
-      closeSidebar();
+      return;
 
     }
 
+
+    box.innerHTML = `
+
+      <img
+        src="${escapeHTML(url)}"
+        alt="Website image preview"
+        onerror="this.style.display='none';this.parentElement.innerHTML='Unable to load image'"
+      >
+
+    `;
+
   }
 
 
-  /* =========================
-     MODAL OUTSIDE CLICK
-  ========================== */
+  document
+    .getElementById(
+      "website-image"
+    )
+    .addEventListener(
+      "input",
+      updateImagePreview
+    );
 
-  document.addEventListener(
+
+  /* =========================================================
+     DELETE
+  ========================================================= */
+
+  function askDeleteWebsite(id){
+
+    const item =
+      websites.find(
+        website =>
+          website.id === id
+      );
+
+    if(!item){
+      return;
+    }
+
+
+    deleteTargetId =
+      id;
+
+
+    document.getElementById(
+      "delete-website-name"
+    ).textContent =
+      item.title;
+
+
+    openModal(
+      "delete-modal"
+    );
+
+  }
+
+
+  document
+    .getElementById(
+      "confirm-delete"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        if(!deleteTargetId){
+          return;
+        }
+
+
+        const item =
+          websites.find(
+            website =>
+              website.id ===
+              deleteTargetId
+          );
+
+
+        websites =
+          websites.filter(
+            website =>
+              website.id !==
+              deleteTargetId
+          );
+
+
+        saveWebsites();
+
+        renderStats();
+
+        renderWebsites();
+
+        closeModal(
+          "delete-modal"
+        );
+
+
+        showToast(
+          "Website deleted",
+          item
+            ? `${item.title} has been removed.`
+            : "Website removed successfully."
+        );
+
+
+        deleteTargetId =
+          null;
+
+      }
+    );
+
+
+  /* =========================================================
+     PREVIEW
+  ========================================================= */
+
+  function openPreview(id){
+
+    const item =
+      websites.find(
+        website =>
+          website.id === id
+      );
+
+    if(!item){
+      return;
+    }
+
+
+    currentPreview =
+      item;
+
+
+    document.getElementById(
+      "preview-title"
+    ).textContent =
+      item.title;
+
+
+    document.getElementById(
+      "preview-subtitle"
+    ).textContent =
+      `${item.category} · ${item.id}`;
+
+
+    document.getElementById(
+      "preview-url"
+    ).textContent =
+      item.previewUrl ||
+      "No live preview URL added";
+
+
+    document.getElementById(
+      "desktop-address"
+    ).textContent =
+      item.previewUrl ||
+      "Preview URL not configured";
+
+
+    resetPreviewView();
+
+
+    if(item.previewUrl){
+
+      const desktopFrame =
+        document.getElementById(
+          "desktop-iframe"
+        );
+
+      const desktopPlaceholder =
+        document.getElementById(
+          "desktop-placeholder"
+        );
+
+
+      desktopFrame.src =
+        item.previewUrl;
+
+      desktopFrame.style.display =
+        "block";
+
+      desktopPlaceholder.style.display =
+        "none";
+
+
+      const mobileFrame =
+        document.getElementById(
+          "mobile-iframe"
+        );
+
+      const mobilePlaceholder =
+        document.getElementById(
+          "mobile-placeholder"
+        );
+
+
+      mobileFrame.src =
+        item.previewUrl;
+
+      mobileFrame.style.display =
+        "block";
+
+      mobilePlaceholder.style.display =
+        "none";
+
+    }
+
+
+    openModal(
+      "preview-modal"
+    );
+
+  }
+
+
+  function resetPreviewView(){
+
+    document.getElementById(
+      "desktop-preview"
+    ).style.display =
+      "block";
+
+
+    document.getElementById(
+      "mobile-preview"
+    ).style.display =
+      "none";
+
+
+    document.getElementById(
+      "desktop-preview-btn"
+    ).classList.add(
+      "active"
+    );
+
+
+    document.getElementById(
+      "mobile-preview-btn"
+    ).classList.remove(
+      "active"
+    );
+
+  }
+
+
+  document
+    .getElementById(
+      "desktop-preview-btn"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        document.getElementById(
+          "desktop-preview"
+        ).style.display =
+          "block";
+
+
+        document.getElementById(
+          "mobile-preview"
+        ).style.display =
+          "none";
+
+
+        document.getElementById(
+          "desktop-preview-btn"
+        ).classList.add(
+          "active"
+        );
+
+
+        document.getElementById(
+          "mobile-preview-btn"
+        ).classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      "mobile-preview-btn"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        document.getElementById(
+          "desktop-preview"
+        ).style.display =
+          "none";
+
+
+        document.getElementById(
+          "mobile-preview"
+        ).style.display =
+          "block";
+
+
+        document.getElementById(
+          "desktop-preview-btn"
+        ).classList.remove(
+          "active"
+        );
+
+
+        document.getElementById(
+          "mobile-preview-btn"
+        ).classList.add(
+          "active"
+        );
+
+      }
+    );
+
+
+  /* =========================================================
+     SEARCH / FILTER
+  ========================================================= */
+
+  [
+    "search-input",
+    "category-filter",
+    "status-filter",
+    "sort-filter"
+  ].forEach(id => {
+
+    document
+      .getElementById(id)
+      .addEventListener(
+        "input",
+        renderWebsites
+      );
+
+    document
+      .getElementById(id)
+      .addEventListener(
+        "change",
+        renderWebsites
+      );
+
+  });
+
+
+  document
+    .getElementById(
+      "reset-filters"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        document.getElementById(
+          "search-input"
+        ).value = "";
+
+        document.getElementById(
+          "category-filter"
+        ).value = "all";
+
+        document.getElementById(
+          "status-filter"
+        ).value = "all";
+
+        document.getElementById(
+          "sort-filter"
+        ).value = "newest";
+
+        renderWebsites();
+
+      }
+    );
+
+
+  /* =========================================================
+     REFRESH
+  ========================================================= */
+
+  document
+    .getElementById(
+      "refresh-btn"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        loadWebsites();
+
+        renderStats();
+
+        renderWebsites();
+
+        showToast(
+          "Websites refreshed",
+          "Latest available demo data has been loaded."
+        );
+
+      }
+    );
+
+
+  /* =========================================================
+     MOBILE SIDEBAR
+  ========================================================= */
+
+  const sidebar =
+    document.getElementById(
+      "sidebar"
+    );
+
+  const mobileMenu =
+    document.getElementById(
+      "mobile-menu"
+    );
+
+  const sidebarOverlay =
+    document.getElementById(
+      "sidebar-overlay"
+    );
+
+
+  mobileMenu?.addEventListener(
     "click",
-    function(event){
+    () => {
 
-      if(
-        event.target.id === "previewModal"
-      ){
-        closePreview();
+      sidebar.classList.add(
+        "open"
+      );
+
+      sidebarOverlay.classList.add(
+        "show"
+      );
+
+    }
+  );
+
+
+  sidebarOverlay?.addEventListener(
+    "click",
+    () => {
+
+      sidebar.classList.remove(
+        "open"
+      );
+
+      sidebarOverlay.classList.remove(
+        "show"
+      );
+
+    }
+  );
+
+
+  document
+    .querySelectorAll(".nav-item")
+    .forEach(item => {
+
+      item.addEventListener(
+        "click",
+        () => {
+
+          sidebar.classList.remove(
+            "open"
+          );
+
+          sidebarOverlay.classList.remove(
+            "show"
+          );
+
+        }
+      );
+
+    });
+
+
+  /* =========================================================
+     LOGOUT
+  ========================================================= */
+
+  document
+    .getElementById(
+      "sidebar-logout"
+    )
+    .addEventListener(
+      "click",
+      () => {
+
+        sessionStorage.removeItem(
+          AUTH_KEY
+        );
+
+        window.location.replace(
+          "login/"
+        );
+
       }
+    );
+
+
+  /* =========================================================
+     BACK/FORWARD PROTECTION
+  ========================================================= */
+
+  window.addEventListener(
+    "pageshow",
+    () => {
+
+      const session =
+        getAdminSession();
 
       if(
-        event.target.id === "formModal"
+        !session ||
+        session.authenticated !== true
       ){
-        closeFormModal();
-      }
 
-      if(
-        event.target.id === "deleteModal"
-      ){
-        closeDeleteModal();
+        window.location.replace(
+          "login/"
+        );
+
       }
 
     }
   );
+
+
+  /* =========================================================
+     PROFILE
+  ========================================================= */
+
+  function updateProfile(){
+
+    if(!adminSession){
+      return;
+    }
+
+
+    const name =
+      adminSession.name ||
+      "Admin";
+
+
+    const role =
+      adminSession.role === "superadmin"
+        ? "Administrator"
+        : (
+            adminSession.role ||
+            "Administrator"
+          );
+
+
+    document.getElementById(
+      "profile-name"
+    ).textContent =
+      name;
+
+
+    document.getElementById(
+      "profile-role"
+    ).textContent =
+      role;
+
+
+    document.getElementById(
+      "profile-avatar"
+    ).textContent =
+      getInitials(name);
+
+  }
+
+
+  function getInitials(name){
+
+    const words =
+      String(name || "")
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+
+
+    if(!words.length){
+      return "AD";
+    }
+
+
+    if(words.length === 1){
+
+      return words[0]
+        .slice(0,2)
+        .toUpperCase();
+
+    }
+
+
+    return (
+      words[0][0] +
+      words[words.length - 1][0]
+    ).toUpperCase();
+
+  }
+
+
+  /* =========================================================
+     INITIALIZE
+  ========================================================= */
+
+  updateProfile();
+
+  loadWebsites();
+
+  renderStats();
+
+  renderWebsites();
 
 </script>
 
