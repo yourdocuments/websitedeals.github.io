@@ -1,1703 +1,1470 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-
-  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
-  <link rel="icon" type="image/png" href="../logo.png">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07110b">
-
-  <title>Customers | Website Deals Admin</title>
-
-  <meta
-    name="description"
-    content="Website Deals Admin Customer Management"
-  >
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
-
-  <style>
-    :root{
-      --green:#18a957;
-      --green-dark:#0f8c45;
-      --green-soft:#eaf8f0;
-
-      --dark:#07110b;
-      --sidebar:#101713;
-
-      --bg:#f6f8f7;
-      --surface:#ffffff;
-      --surface-2:#f8faf9;
-
-      --text:#142019;
-      --muted:#738079;
-
-      --border:#e3eae6;
-
-      --red:#e5484d;
-      --red-soft:#fff0f1;
-
-      --orange:#e58a22;
-      --orange-soft:#fff5e8;
-
-      --blue:#3578e5;
-      --blue-soft:#edf4ff;
-
-      --purple:#7b61ff;
-      --purple-soft:#f1eeff;
-
-      --shadow:0 18px 50px rgba(15,30,20,.07);
-      --shadow-sm:0 8px 24px rgba(15,30,20,.06);
-
-      --radius:20px;
-    }
-
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
-
-    body{
-      font-family:"DM Sans",sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      min-height:100vh;
-    }
-
-    button,
-    input,
-    select,
-    textarea{
-      font:inherit;
-    }
-
-    button{
-      cursor:pointer;
-    }
-
-    a{
-      color:inherit;
-      text-decoration:none;
-    }
-
-    .app{
-      display:flex;
-      min-height:100vh;
-    }
-
-    /* =========================
-       SIDEBAR
-    ========================= */
-
-    .sidebar{
-      width:270px;
-      background:var(--sidebar);
-      color:#fff;
-      position:fixed;
-      inset:0 auto 0 0;
-      z-index:1000;
-      display:flex;
-      flex-direction:column;
-      padding:22px 16px;
-      overflow-y:auto;
-      transition:.25s ease;
-    }
-
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      padding:4px 10px 24px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      margin-bottom:18px;
-    }
-
-    .brand-logo{
-      width:44px;
-      height:44px;
-      border-radius:13px;
-      object-fit:cover;
-      background:#fff;
-      padding:4px;
-      flex:none;
-    }
-
-    .brand-copy{
-      min-width:0;
-    }
-
-    .brand-copy strong{
-      display:block;
-      font-family:"Manrope",sans-serif;
-      font-size:15px;
-      font-weight:800;
-      line-height:1.2;
-    }
-
-    .brand-copy span{
-      display:block;
-      color:#8c9891;
-      font-size:11px;
-      margin-top:4px;
-    }
-
-    .nav-section{
-      margin-bottom:20px;
-    }
-
-    .nav-label{
-      padding:0 11px 8px;
-      color:#68736d;
-      text-transform:uppercase;
-      letter-spacing:.12em;
-      font-size:10px;
-      font-weight:700;
-    }
-
-    .nav{
-      display:grid;
-      gap:4px;
-    }
-
-    .nav-link{
-      display:flex;
-      align-items:center;
-      gap:11px;
-      min-height:44px;
-      padding:10px 12px;
-      color:#aeb8b2;
-      border-radius:12px;
-      font-size:13px;
-      font-weight:600;
-      transition:.2s ease;
-    }
-
-    .nav-link svg{
-      width:18px;
-      height:18px;
-      flex:none;
-      stroke:currentColor;
-    }
-
-    .nav-link:hover{
-      color:#fff;
-      background:rgba(255,255,255,.06);
-    }
-
-    .nav-link.active{
-      color:#fff;
-      background:linear-gradient(
-        135deg,
-        rgba(24,169,87,.28),
-        rgba(24,169,87,.12)
-      );
-      box-shadow:inset 0 0 0 1px rgba(24,169,87,.22);
-    }
-
-    .nav-link.active svg{
-      color:#62e19a;
-    }
-
-    .sidebar-bottom{
-      margin-top:auto;
-      padding-top:18px;
-    }
-
-    .admin-mini{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      padding:12px;
-      border:1px solid rgba(255,255,255,.08);
-      background:rgba(255,255,255,.035);
-      border-radius:15px;
-    }
-
-    .admin-avatar{
-      width:36px;
-      height:36px;
-      border-radius:50%;
-      background:var(--green);
-      display:grid;
-      place-items:center;
-      color:#fff;
-      font-size:13px;
-      font-weight:800;
-      flex:none;
-    }
-
-    .admin-info{
-      min-width:0;
-      flex:1;
-    }
-
-    .admin-info strong{
-      display:block;
-      font-size:12px;
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .admin-info span{
-      display:block;
-      color:#7e8983;
-      font-size:10px;
-      margin-top:3px;
-    }
-
-    .logout-btn{
-      border:0;
-      background:transparent;
-      color:#89938e;
-      padding:7px;
-      border-radius:8px;
-    }
-
-    .logout-btn:hover{
-      background:rgba(255,255,255,.06);
-      color:#fff;
-    }
-
-    /* =========================
-       MAIN
-    ========================= */
-
-    .main{
-      width:calc(100% - 270px);
-      margin-left:270px;
-      min-width:0;
-    }
-
-    .topbar{
-      height:76px;
-      background:rgba(255,255,255,.92);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid var(--border);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:0 32px;
-      position:sticky;
-      top:0;
-      z-index:500;
-    }
-
-    .topbar-left{
-      display:flex;
-      align-items:center;
-      gap:12px;
-    }
-
-    .mobile-menu{
-      display:none;
-      width:42px;
-      height:42px;
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:12px;
-      place-items:center;
-    }
-
-    .mobile-menu svg{
-      width:20px;
-      height:20px;
-    }
-
-    .breadcrumb{
-      display:flex;
-      align-items:center;
-      gap:7px;
-      color:var(--muted);
-      font-size:12px;
-    }
-
-    .breadcrumb strong{
-      color:var(--text);
-      font-weight:700;
-    }
-
-    .top-actions{
-      display:flex;
-      align-items:center;
-      gap:9px;
-    }
-
-    .icon-btn,
-    .top-btn{
-      height:40px;
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:11px;
-      padding:0 13px;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      color:#344139;
-      font-size:12px;
-      font-weight:700;
-      transition:.2s ease;
-    }
-
-    .icon-btn{
-      width:40px;
-      padding:0;
-    }
-
-    .icon-btn:hover,
-    .top-btn:hover{
-      border-color:#cbd8d0;
-      transform:translateY(-1px);
-    }
-
-    .top-btn.primary{
-      color:#fff;
-      background:var(--green);
-      border-color:var(--green);
-    }
-
-    .top-btn.primary:hover{
-      background:var(--green-dark);
-    }
-
-    .top-btn svg,
-    .icon-btn svg{
-      width:16px;
-      height:16px;
-    }
-
-    .content{
-      padding:30px 32px 42px;
-      max-width:1600px;
-      margin:auto;
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .hero{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-end;
-      gap:24px;
-      margin-bottom:26px;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:7px;
-      color:var(--green-dark);
-      background:var(--green-soft);
-      border:1px solid #d4efdf;
-      border-radius:999px;
-      padding:6px 10px;
-      font-size:10px;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      margin-bottom:12px;
-    }
-
-    .eyebrow-dot{
-      width:6px;
-      height:6px;
-      border-radius:50%;
-      background:var(--green);
-    }
-
-    .hero h1{
-      font-family:"Manrope",sans-serif;
-      font-size:clamp(27px,3vw,39px);
-      line-height:1.08;
-      letter-spacing:-.045em;
-      margin-bottom:9px;
-    }
-
-    .hero p{
-      max-width:650px;
-      color:var(--muted);
-      font-size:14px;
-      line-height:1.65;
-    }
-
-    .hero-side{
-      display:flex;
-      align-items:center;
-      gap:9px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
-    .status-pill{
-      display:inline-flex;
-      align-items:center;
-      gap:7px;
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:999px;
-      padding:9px 12px;
-      color:#59655e;
-      font-size:11px;
-      font-weight:700;
-    }
-
-    .status-pill .dot{
-      width:7px;
-      height:7px;
-      background:var(--green);
-      border-radius:50%;
-      box-shadow:0 0 0 4px var(--green-soft);
-    }
-
-    /* =========================
-       STATS
-    ========================= */
-
-    .stats{
-      display:grid;
-      grid-template-columns:repeat(5,minmax(0,1fr));
-      gap:14px;
-      margin-bottom:22px;
-    }
-
-    .stat{
-      background:var(--surface);
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:18px;
-      box-shadow:var(--shadow-sm);
-      min-width:0;
-    }
-
-    .stat-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:8px;
-      margin-bottom:13px;
-    }
-
-    .stat-label{
-      color:var(--muted);
-      font-size:11px;
-      font-weight:700;
-    }
-
-    .stat-icon{
-      width:34px;
-      height:34px;
-      border-radius:10px;
-      display:grid;
-      place-items:center;
-      background:var(--green-soft);
-      color:var(--green-dark);
-    }
-
-    .stat-icon.blue{
-      background:var(--blue-soft);
-      color:var(--blue);
-    }
-
-    .stat-icon.orange{
-      background:var(--orange-soft);
-      color:var(--orange);
-    }
-
-    .stat-icon.purple{
-      background:var(--purple-soft);
-      color:var(--purple);
-    }
-
-    .stat-icon svg{
-      width:17px;
-      height:17px;
-    }
-
-    .stat-value{
-      font-family:"Manrope",sans-serif;
-      font-size:23px;
-      line-height:1;
-      font-weight:800;
-      letter-spacing:-.03em;
-    }
-
-    .stat-meta{
-      margin-top:8px;
-      color:#849089;
-      font-size:10px;
-    }
-
-    /* =========================
-       TOOLBAR
-    ========================= */
-
-    .panel{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow-sm);
-    }
-
-    .toolbar{
-      padding:17px;
-      display:flex;
-      gap:10px;
-      align-items:center;
-      flex-wrap:wrap;
-      border-bottom:1px solid var(--border);
-    }
-
-    .search{
-      position:relative;
-      flex:1 1 270px;
-      min-width:220px;
-    }
-
-    .search svg{
-      position:absolute;
-      left:13px;
-      top:50%;
-      transform:translateY(-50%);
-      width:17px;
-      height:17px;
-      color:#8a9690;
-      pointer-events:none;
-    }
-
-    .search input{
-      width:100%;
-      height:42px;
-      border:1px solid var(--border);
-      background:var(--surface-2);
-      border-radius:11px;
-      outline:none;
-      padding:0 13px 0 39px;
-      color:var(--text);
-      font-size:12px;
-    }
-
-    .search input:focus,
-    .select:focus,
-    .field input:focus,
-    .field select:focus,
-    .field textarea:focus{
-      border-color:rgba(24,169,87,.55);
-      box-shadow:0 0 0 4px rgba(24,169,87,.08);
-      background:#fff;
-    }
-
-    .select{
-      height:42px;
-      border:1px solid var(--border);
-      background:var(--surface-2);
-      border-radius:11px;
-      padding:0 35px 0 12px;
-      color:#455149;
-      font-size:12px;
-      outline:none;
-      min-width:140px;
-    }
-
-    .toolbar-btn{
-      height:42px;
-      padding:0 13px;
-      border-radius:11px;
-      border:1px solid var(--border);
-      background:#fff;
-      color:#445149;
-      font-size:11px;
-      font-weight:800;
-      display:inline-flex;
-      align-items:center;
-      gap:7px;
-    }
-
-    .toolbar-btn:hover{
-      border-color:#c8d4cd;
-      background:#fafcfb;
-    }
-
-    .toolbar-btn.primary{
-      background:var(--green);
-      border-color:var(--green);
-      color:#fff;
-    }
-
-    .toolbar-btn.danger{
-      color:var(--red);
-    }
-
-    .toolbar-btn svg{
-      width:15px;
-      height:15px;
-    }
-
-    /* =========================
-       BULK BAR
-    ========================= */
-
-    .bulk-bar{
-      display:none;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      padding:11px 17px;
-      background:#f1fbf5;
-      border-bottom:1px solid #d7eee0;
-    }
-
-    .bulk-bar.show{
-      display:flex;
-    }
-
-    .bulk-count{
-      font-size:11px;
-      color:#42604f;
-      font-weight:800;
-    }
-
-    .bulk-actions{
-      display:flex;
-      gap:7px;
-      flex-wrap:wrap;
-    }
-
-    .bulk-btn{
-      height:34px;
-      border:1px solid #d7e6dc;
-      background:#fff;
-      border-radius:9px;
-      padding:0 10px;
-      font-size:10px;
-      font-weight:800;
-      color:#445149;
-    }
-
-    .bulk-btn:hover{
-      background:#f8fbf9;
-    }
-
-    .bulk-btn.danger{
-      color:var(--red);
-    }
-
-    /* =========================
-       TABLE
-    ========================= */
-
-    .table-wrap{
-      width:100%;
-      overflow-x:auto;
-    }
-
-    table{
-      width:100%;
-      border-collapse:collapse;
-      min-width:1050px;
-    }
-
-    th{
-      text-align:left;
-      padding:13px 15px;
-      color:#8a958f;
-      background:#fbfcfb;
-      border-bottom:1px solid var(--border);
-      font-size:9px;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      white-space:nowrap;
-    }
-
-    td{
-      padding:14px 15px;
-      border-bottom:1px solid #edf1ee;
-      font-size:11px;
-      color:#344139;
-      vertical-align:middle;
-    }
-
-    tbody tr{
-      transition:.15s ease;
-    }
-
-    tbody tr:hover{
-      background:#fbfdfc;
-    }
-
-    tbody tr:last-child td{
-      border-bottom:0;
-    }
-
-    .checkbox{
-      width:16px;
-      height:16px;
-      accent-color:var(--green);
-      cursor:pointer;
-    }
-
-    .customer-cell{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      min-width:200px;
-    }
-
-    .customer-avatar{
-      width:38px;
-      height:38px;
-      border-radius:12px;
-      display:grid;
-      place-items:center;
-      flex:none;
-      color:#fff;
-      font-size:11px;
-      font-weight:800;
-      background:linear-gradient(135deg,#18a957,#0f7e40);
-      overflow:hidden;
-    }
-
-    .customer-avatar img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-
-    .customer-name{
-      font-weight:800;
-      color:var(--text);
-      line-height:1.25;
-    }
-
-    .customer-id{
-      color:#8a958f;
-      font-size:9px;
-      margin-top:3px;
-    }
-
-    .contact-line{
-      line-height:1.55;
-    }
-
-    .contact-line strong{
-      display:block;
-      color:#344139;
-      font-weight:600;
-    }
-
-    .contact-line span{
-      display:block;
-      color:#8a958f;
-      font-size:10px;
-    }
-
-    .money{
-      font-family:"Manrope",sans-serif;
-      font-weight:800;
-      color:#17251d;
-    }
-
-    .muted{
-      color:#8a958f;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:5px;
-      padding:6px 9px;
-      border-radius:999px;
-      font-size:9px;
-      font-weight:800;
-      text-transform:capitalize;
-      white-space:nowrap;
-    }
-
-    .badge::before{
-      content:"";
-      width:5px;
-      height:5px;
-      border-radius:50%;
-      background:currentColor;
-    }
-
-    .badge.active{
-      color:#168b4a;
-      background:#eaf8f0;
-    }
-
-    .badge.inactive{
-      color:#7b8580;
-      background:#eef1ef;
-    }
-
-    .badge.suspended{
-      color:#d33c42;
-      background:#fff0f1;
-    }
-
-    .badge.new{
-      color:#3474d9;
-      background:#edf4ff;
-    }
-
-    .actions{
-      display:flex;
-      align-items:center;
-      gap:5px;
-      justify-content:flex-end;
-    }
-
-    .action-btn{
-      width:31px;
-      height:31px;
-      display:grid;
-      place-items:center;
-      border:1px solid var(--border);
-      background:#fff;
-      color:#5d6962;
-      border-radius:9px;
-    }
-
-    .action-btn:hover{
-      color:var(--green-dark);
-      border-color:#c9d8ce;
-      background:#f7fbf8;
-    }
-
-    .action-btn.danger:hover{
-      color:var(--red);
-      border-color:#f2c8cb;
-      background:#fff7f7;
-    }
-
-    .action-btn svg{
-      width:14px;
-      height:14px;
-    }
-
-    /* =========================
-       EMPTY
-    ========================= */
-
-    .empty{
-      padding:58px 20px;
-      text-align:center;
-      display:none;
-    }
-
-    .empty.show{
-      display:block;
-    }
-
-    .empty-icon{
-      width:54px;
-      height:54px;
-      margin:0 auto 14px;
-      border-radius:16px;
-      background:var(--green-soft);
-      color:var(--green-dark);
-      display:grid;
-      place-items:center;
-    }
-
-    .empty-icon svg{
-      width:24px;
-      height:24px;
-    }
-
-    .empty h3{
-      font-family:"Manrope",sans-serif;
-      font-size:16px;
-      margin-bottom:6px;
-    }
-
-    .empty p{
-      color:var(--muted);
-      font-size:11px;
-    }
-
-    /* =========================
-       PAGINATION
-    ========================= */
-
-    .table-footer{
-      padding:14px 17px;
-      border-top:1px solid var(--border);
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:15px;
-      flex-wrap:wrap;
-    }
-
-    .result-count{
-      color:#7e8983;
-      font-size:10px;
-    }
-
-    .pagination{
-      display:flex;
-      gap:5px;
-    }
-
-    .page-btn{
-      min-width:32px;
-      height:32px;
-      padding:0 9px;
-      border:1px solid var(--border);
-      background:#fff;
-      color:#536059;
-      border-radius:9px;
-      font-size:10px;
-      font-weight:800;
-    }
-
-    .page-btn:hover{
-      background:#f8fbf9;
-    }
-
-    .page-btn.active{
-      color:#fff;
-      background:var(--green);
-      border-color:var(--green);
-    }
-
-    .page-btn:disabled{
-      opacity:.45;
-      cursor:not-allowed;
-    }
-
-    /* =========================
-       CUSTOMER DRAWER / MODAL
-    ========================= */
-
-    .modal-backdrop{
-      position:fixed;
-      inset:0;
-      background:rgba(4,10,7,.58);
-      backdrop-filter:blur(5px);
-      z-index:2000;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-    }
-
-    .modal-backdrop.show{
-      display:flex;
-    }
-
-    .modal{
-      width:min(880px,100%);
-      max-height:calc(100vh - 40px);
-      overflow:auto;
-      background:#fff;
-      border-radius:24px;
-      box-shadow:0 30px 90px rgba(0,0,0,.25);
-      animation:modalIn .2s ease;
-    }
-
-    @keyframes modalIn{
-      from{
-        opacity:0;
-        transform:translateY(10px) scale(.985);
-      }
-      to{
-        opacity:1;
-        transform:none;
-      }
-    }
-
-    .modal.small{
-      width:min(460px,100%);
-    }
-
-    .modal-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-      gap:15px;
-      padding:22px 22px 17px;
-      border-bottom:1px solid var(--border);
-      position:sticky;
-      top:0;
-      background:#fff;
-      z-index:2;
-    }
-
-    .modal-title{
-      font-family:"Manrope",sans-serif;
-      font-size:19px;
-      font-weight:800;
-      letter-spacing:-.03em;
-    }
-
-    .modal-subtitle{
-      color:var(--muted);
-      font-size:10px;
-      margin-top:5px;
-    }
-
-    .modal-close{
-      width:34px;
-      height:34px;
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:10px;
-      display:grid;
-      place-items:center;
-      color:#65716a;
-      flex:none;
-    }
-
-    .modal-close:hover{
-      background:#f7f9f8;
-    }
-
-    .modal-close svg{
-      width:16px;
-      height:16px;
-    }
-
-    .modal-body{
-      padding:21px 22px;
-    }
-
-    .profile-head{
-      display:flex;
-      align-items:center;
-      gap:15px;
-      padding:16px;
-      border:1px solid var(--border);
-      background:var(--surface-2);
-      border-radius:17px;
-      margin-bottom:18px;
-    }
-
-    .profile-avatar{
-      width:62px;
-      height:62px;
-      border-radius:17px;
-      background:linear-gradient(135deg,#18a957,#0f7e40);
-      color:#fff;
-      display:grid;
-      place-items:center;
-      font-size:17px;
-      font-weight:800;
-      overflow:hidden;
-      flex:none;
-    }
-
-    .profile-avatar img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-    }
-
-    .profile-name{
-      font-family:"Manrope",sans-serif;
-      font-size:17px;
-      font-weight:800;
-    }
-
-    .profile-email{
-      color:#7b8780;
-      font-size:10px;
-      margin-top:4px;
-    }
-
-    .profile-meta{
-      display:flex;
-      gap:7px;
-      margin-top:8px;
-      flex-wrap:wrap;
-    }
-
-    .summary-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:11px;
-      margin-bottom:20px;
-    }
-
-    .summary-card{
-      border:1px solid var(--border);
-      border-radius:15px;
-      padding:14px;
-      background:#fff;
-    }
-
-    .summary-card span{
-      display:block;
-      color:#8a958f;
-      font-size:9px;
-      font-weight:700;
-      text-transform:uppercase;
-      letter-spacing:.06em;
-      margin-bottom:8px;
-    }
-
-    .summary-card strong{
-      font-family:"Manrope",sans-serif;
-      font-size:18px;
-      font-weight:800;
-    }
-
-    .section-title{
-      font-family:"Manrope",sans-serif;
-      font-size:13px;
-      font-weight:800;
-      margin-bottom:12px;
-    }
-
-    .fields{
-      display:grid;
-      grid-template-columns:repeat(2,minmax(0,1fr));
-      gap:14px;
-    }
-
-    .field.full{
-      grid-column:1/-1;
-    }
-
-    .field label{
-      display:block;
-      color:#526058;
-      font-size:10px;
-      font-weight:800;
-      margin-bottom:7px;
-    }
-
-    .field input,
-    .field select,
-    .field textarea{
-      width:100%;
-      border:1px solid var(--border);
-      background:var(--surface-2);
-      border-radius:11px;
-      min-height:42px;
-      outline:none;
-      padding:10px 12px;
-      color:var(--text);
-      font-size:11px;
-    }
-
-    .field textarea{
-      min-height:90px;
-      resize:vertical;
-      line-height:1.5;
-    }
-
-    .field small{
-      display:block;
-      color:#8b958f;
-      font-size:9px;
-      margin-top:5px;
-    }
-
-    .history{
-      margin-top:20px;
-    }
-
-    .history-list{
-      border:1px solid var(--border);
-      border-radius:15px;
-      overflow:hidden;
-    }
-
-    .history-item{
-      display:grid;
-      grid-template-columns:100px 1fr 110px 90px;
-      gap:12px;
-      align-items:center;
-      padding:12px 14px;
-      border-bottom:1px solid #edf1ee;
-      font-size:10px;
-    }
-
-    .history-item:last-child{
-      border-bottom:0;
-    }
-
-    .history-id{
-      color:var(--green-dark);
-      font-weight:800;
-    }
-
-    .history-name{
-      color:#344139;
-      font-weight:700;
-    }
-
-    .history-date{
-      color:#7f8a84;
-    }
-
-    .history-money{
-      text-align:right;
-      font-family:"Manrope",sans-serif;
-      font-weight:800;
-    }
-
-    .history-empty{
-      padding:22px;
-      color:#8a958f;
-      text-align:center;
-      font-size:10px;
-    }
-
-    .modal-foot{
-      padding:15px 22px;
-      border-top:1px solid var(--border);
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:center;
-      position:sticky;
-      bottom:0;
-      background:#fff;
-    }
-
-    .modal-left-actions,
-    .modal-right-actions{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-
-    .modal-btn{
-      min-height:38px;
-      border:1px solid var(--border);
-      background:#fff;
-      border-radius:10px;
-      padding:0 13px;
-      color:#4b5850;
-      font-size:10px;
-      font-weight:800;
-    }
-
-    .modal-btn:hover{
-      background:#f8faf9;
-    }
-
-    .modal-btn.primary{
-      background:var(--green);
-      border-color:var(--green);
-      color:#fff;
-    }
-
-    .modal-btn.primary:hover{
-      background:var(--green-dark);
-    }
-
-    .modal-btn.danger{
-      color:var(--red);
-      border-color:#f0d0d2;
-      background:#fffafa;
-    }
-
-    .confirm-icon{
-      width:54px;
-      height:54px;
-      border-radius:16px;
-      background:var(--red-soft);
-      color:var(--red);
-      display:grid;
-      place-items:center;
-      margin-bottom:15px;
-    }
-
-    .confirm-icon svg{
-      width:25px;
-      height:25px;
-    }
-
-    .confirm-text{
-      color:var(--muted);
-      font-size:11px;
-      line-height:1.6;
-      margin-top:7px;
-    }
-
-    /* =========================
-       TOAST
-    ========================= */
-
-    .toast-wrap{
-      position:fixed;
-      right:22px;
-      bottom:22px;
-      z-index:4000;
-      display:grid;
-      gap:9px;
-      pointer-events:none;
-    }
-
-    .toast{
-      min-width:260px;
-      max-width:380px;
-      background:#101713;
-      color:#fff;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:13px;
-      padding:12px 14px;
-      display:flex;
-      align-items:flex-start;
-      gap:10px;
-      box-shadow:0 18px 50px rgba(0,0,0,.22);
-      animation:toastIn .22s ease;
-      pointer-events:auto;
-    }
-
-    @keyframes toastIn{
-      from{
-        opacity:0;
-        transform:translateY(10px);
-      }
-      to{
-        opacity:1;
-        transform:none;
-      }
-    }
-
-    .toast-icon{
-      width:22px;
-      height:22px;
-      border-radius:7px;
-      background:rgba(24,169,87,.2);
-      color:#62e19a;
-      display:grid;
-      place-items:center;
-      flex:none;
-    }
-
-    .toast-icon svg{
-      width:13px;
-      height:13px;
-    }
-
-    .toast strong{
-      display:block;
-      font-size:11px;
-      line-height:1.3;
-    }
-
-    .toast span{
-      display:block;
-      color:#9ca7a1;
-      font-size:9px;
-      margin-top:3px;
-      line-height:1.4;
-    }
-
-    /* =========================
-       MOBILE SIDEBAR OVERLAY
-    ========================= */
-
-    .overlay{
-      position:fixed;
-      inset:0;
-      background:rgba(4,10,7,.45);
-      z-index:900;
-      display:none;
-    }
-
-    .overlay.show{
-      display:block;
-    }
-
-    /* =========================
-       FOOTER
-    ========================= */
-
-    .footer-note{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:15px;
-      margin-top:18px;
-      color:#8a958f;
-      font-size:9px;
-      padding:0 4px;
-    }
-
-    .footer-note strong{
-      color:#5f6c64;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media(max-width:1250px){
-      .stats{
-        grid-template-columns:repeat(3,minmax(0,1fr));
-      }
-    }
-
-    @media(max-width:1000px){
-      .sidebar{
-        transform:translateX(-100%);
-        box-shadow:30px 0 70px rgba(0,0,0,.2);
-      }
-
-      .sidebar.open{
-        transform:translateX(0);
-      }
-
-      .main{
-        width:100%;
-        margin-left:0;
-      }
-
-      .mobile-menu{
-        display:grid;
-      }
-
-      .topbar{
-        padding:0 20px;
-      }
-
-      .content{
-        padding:24px 20px 35px;
-      }
-    }
-
-    @media(max-width:760px){
-      .stats{
-        grid-template-columns:repeat(2,minmax(0,1fr));
-      }
-
-      .hero{
-        align-items:flex-start;
-        flex-direction:column;
-      }
-
-      .hero-side{
-        justify-content:flex-start;
-      }
-
-      .top-actions .marketplace-btn{
-        display:none;
-      }
-
-      .toolbar{
-        align-items:stretch;
-      }
-
-      .search{
-        flex-basis:100%;
-      }
-
-      .select{
-        flex:1;
-        min-width:0;
-      }
-
-      .toolbar-btn{
-        flex:1;
-      }
-
-      .summary-grid{
-        grid-template-columns:1fr;
-      }
-
-      .fields{
-        grid-template-columns:1fr;
-      }
-
-      .field.full{
-        grid-column:auto;
-      }
-
-      .modal-backdrop{
-        padding:10px;
-      }
-
-      .modal{
-        max-height:calc(100vh - 20px);
-        border-radius:19px;
-      }
-
-      .history-item{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .history-money{
-        text-align:left;
-      }
-
-      .modal-foot{
-        flex-direction:column;
-        align-items:stretch;
-      }
-
-      .modal-left-actions,
-      .modal-right-actions{
-        width:100%;
-      }
-
-      .modal-btn{
-        flex:1;
-      }
-
-      .footer-note{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-    }
-
-    @media(max-width:520px){
-      .content{
-        padding:20px 13px 30px;
-      }
-
-      .topbar{
-        height:66px;
-        padding:0 13px;
-      }
-
-      .breadcrumb{
-        display:none;
-      }
-
-      .top-actions .refresh-btn{
-        display:none;
-      }
-
-      .stats{
-        gap:9px;
-      }
-
-      .stat{
-        padding:14px;
-        border-radius:15px;
-      }
-
-      .stat-value{
-        font-size:19px;
-      }
-
-      .stat-icon{
-        width:30px;
-        height:30px;
-      }
-
-      .hero h1{
-        font-size:28px;
-      }
-
-      .hero p{
-        font-size:12px;
-      }
-
-      .panel{
-        border-radius:17px;
-      }
-
-      .bulk-bar{
-        align-items:flex-start;
-        flex-direction:column;
-      }
-
-      .bulk-actions{
-        width:100%;
-      }
-
-      .bulk-btn{
-        flex:1;
-      }
-
-      .toast-wrap{
-        left:13px;
-        right:13px;
-        bottom:13px;
-      }
-
-      .toast{
-        min-width:0;
-        width:100%;
-      }
-    }
-
-    /* =========================
-       PRINT
-    ========================= */
-
-    @media print{
-      body{
-        background:#fff;
-      }
-
-      .sidebar,
-      .topbar,
-      .hero-side,
-      .toolbar,
-      .bulk-bar,
-      .table-footer,
-      .footer-note,
-      .modal-backdrop,
-      .toast-wrap{
-        display:none!important;
-      }
-
-      .main{
-        width:100%;
-        margin:0;
-      }
-
-      .content{
-        padding:0;
-        max-width:none;
-      }
-
-      .hero{
-        margin-bottom:20px;
-      }
-
-      .stats{
-        grid-template-columns:repeat(4,1fr);
-      }
-
-      .panel{
-        box-shadow:none;
-        border:1px solid #ddd;
-      }
-
-      table{
-        min-width:0;
-      }
-
-      th,
-      td{
-        padding:8px;
-        font-size:9px;
-      }
-
-      .actions,
-      th:first-child,
-      td:first-child{
-        display:none;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="icon" type="image/png" href="../logo.png">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07110b">
+
+<title>Customers | Website Deals Admin</title>
+<meta
+  name="description"
+  content="Website Deals Admin — Customer Management"
+/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --green:#18a957;
+  --green-dark:#118344;
+  --green-soft:#e9f8ef;
+  --dark:#07110b;
+  --sidebar:#101713;
+  --sidebar-soft:#18231d;
+  --white:#ffffff;
+  --surface:#f6f8f7;
+  --surface-2:#fbfcfb;
+  --border:#e3eae6;
+  --text:#142019;
+  --muted:#738079;
+  --danger:#dc3d4b;
+  --danger-soft:#fff0f1;
+  --warning:#c88700;
+  --warning-soft:#fff8e8;
+  --blue:#2563eb;
+  --blue-soft:#edf3ff;
+  --shadow:0 14px 40px rgba(8,25,15,.07);
+  --shadow-lg:0 25px 70px rgba(8,25,15,.14);
+  --radius:20px;
+  --radius-sm:14px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:"DM Sans",sans-serif;
+  background:var(--surface);
+  color:var(--text);
+  min-height:100vh;
+}
+
+button,
+input,
+select,
+textarea{
+  font:inherit;
+}
+
+button{
+  cursor:pointer;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+img{
+  max-width:100%;
+  display:block;
+}
+
+/* =========================
+   APP LAYOUT
+========================= */
+
+.app{
+  min-height:100vh;
+  display:flex;
+}
+
+.sidebar{
+  width:270px;
+  background:var(--sidebar);
+  color:#fff;
+  position:fixed;
+  inset:0 auto 0 0;
+  z-index:1000;
+  display:flex;
+  flex-direction:column;
+  padding:22px 16px;
+  transition:transform .25s ease;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:4px 10px 24px;
+}
+
+.brand-logo{
+  width:42px;
+  height:42px;
+  border-radius:13px;
+  object-fit:cover;
+  background:#fff;
+}
+
+.brand-copy{
+  min-width:0;
+}
+
+.brand-title{
+  font-family:"Manrope",sans-serif;
+  font-weight:800;
+  font-size:15px;
+  letter-spacing:-.02em;
+}
+
+.brand-sub{
+  color:#8c9a91;
+  font-size:11px;
+  margin-top:2px;
+}
+
+.nav{
+  flex:1;
+  overflow:auto;
+  padding-right:3px;
+}
+
+.nav-section{
+  margin:18px 8px 8px;
+  color:#718077;
+  text-transform:uppercase;
+  font-size:10px;
+  letter-spacing:.12em;
+  font-weight:700;
+}
+
+.nav-link{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:11px 12px;
+  border-radius:12px;
+  color:#aeb9b2;
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:3px;
+  transition:.2s ease;
+}
+
+.nav-link:hover{
+  background:var(--sidebar-soft);
+  color:#fff;
+}
+
+.nav-link.active{
+  background:var(--green);
+  color:#fff;
+  box-shadow:0 9px 22px rgba(24,169,87,.18);
+}
+
+.nav-icon{
+  width:18px;
+  text-align:center;
+  font-size:15px;
+  flex:0 0 18px;
+}
+
+.sidebar-bottom{
+  border-top:1px solid rgba(255,255,255,.07);
+  padding-top:15px;
+  margin-top:12px;
+}
+
+.admin-mini{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:9px 10px;
+}
+
+.admin-avatar{
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  background:var(--green);
+  color:#fff;
+  display:grid;
+  place-items:center;
+  font-size:12px;
+  font-weight:800;
+}
+
+.admin-mini-text{
+  min-width:0;
+  flex:1;
+}
+
+.admin-name{
+  color:#fff;
+  font-size:12px;
+  font-weight:700;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.admin-role{
+  color:#819087;
+  font-size:10px;
+  margin-top:2px;
+}
+
+.logout-btn{
+  width:100%;
+  border:1px solid rgba(255,255,255,.08);
+  background:transparent;
+  color:#b4c0b8;
+  padding:10px 12px;
+  border-radius:11px;
+  margin-top:8px;
+  font-size:12px;
+  font-weight:700;
+  text-align:left;
+}
+
+.logout-btn:hover{
+  background:rgba(255,255,255,.05);
+  color:#fff;
+}
+
+.main{
+  margin-left:270px;
+  width:calc(100% - 270px);
+  min-width:0;
+}
+
+.topbar{
+  height:74px;
+  background:rgba(255,255,255,.94);
+  border-bottom:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 30px;
+  position:sticky;
+  top:0;
+  z-index:800;
+  backdrop-filter:blur(16px);
+}
+
+.topbar-left{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.page-kicker{
+  font-size:12px;
+  color:var(--muted);
+  font-weight:600;
+}
+
+.top-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.icon-btn,
+.top-btn{
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--text);
+  min-height:39px;
+  border-radius:11px;
+  padding:0 13px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  font-size:12px;
+  font-weight:700;
+}
+
+.icon-btn:hover,
+.top-btn:hover{
+  border-color:#c9d5ce;
+  background:var(--surface-2);
+}
+
+.top-btn.primary{
+  background:var(--dark);
+  color:#fff;
+  border-color:var(--dark);
+}
+
+.mobile-menu{
+  display:none;
+}
+
+/* =========================
+   CONTENT
+========================= */
+
+.content{
+  padding:30px;
+  max-width:1700px;
+  margin:auto;
+}
+
+.hero{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:25px;
+  margin-bottom:24px;
+}
+
+.eyebrow{
+  color:var(--green);
+  text-transform:uppercase;
+  letter-spacing:.13em;
+  font-size:10px;
+  font-weight:800;
+  margin-bottom:9px;
+}
+
+h1,
+h2,
+h3{
+  font-family:"Manrope",sans-serif;
+}
+
+.hero h1{
+  font-size:clamp(27px,3vw,42px);
+  letter-spacing:-.045em;
+  line-height:1.08;
+}
+
+.hero p{
+  color:var(--muted);
+  margin-top:10px;
+  max-width:680px;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.hero-badge{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:12px 15px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  box-shadow:var(--shadow);
+  white-space:nowrap;
+}
+
+.status-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 0 5px var(--green-soft);
+}
+
+.hero-badge strong{
+  font-size:12px;
+}
+
+.hero-badge span{
+  display:block;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:2px;
+}
+
+/* =========================
+   STATS
+========================= */
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+  gap:14px;
+  margin-bottom:20px;
+}
+
+.stat-card{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:19px;
+  box-shadow:var(--shadow);
+  min-width:0;
+}
+
+.stat-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.stat-label{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:700;
+}
+
+.stat-icon{
+  width:33px;
+  height:33px;
+  display:grid;
+  place-items:center;
+  border-radius:10px;
+  background:var(--green-soft);
+  color:var(--green-dark);
+  font-size:15px;
+}
+
+.stat-value{
+  margin-top:13px;
+  font-family:"Manrope",sans-serif;
+  font-size:25px;
+  font-weight:800;
+  letter-spacing:-.04em;
+}
+
+.stat-meta{
+  margin-top:6px;
+  color:var(--muted);
+  font-size:10px;
+}
+
+/* =========================
+   TOOLBAR
+========================= */
+
+.panel{
+  background:#fff;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+.toolbar{
+  padding:16px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+  border-bottom:1px solid var(--border);
+}
+
+.search-box{
+  flex:1 1 280px;
+  position:relative;
+}
+
+.search-box span{
+  position:absolute;
+  left:13px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#93a099;
+  font-size:13px;
+}
+
+.search-box input{
+  width:100%;
+  height:42px;
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:0 13px 0 36px;
+  outline:none;
+  color:var(--text);
+  background:var(--surface-2);
+  font-size:12px;
+}
+
+.search-box input:focus,
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  border-color:rgba(24,169,87,.55);
+  box-shadow:0 0 0 4px rgba(24,169,87,.08);
+  background:#fff;
+}
+
+.filter-select{
+  height:42px;
+  min-width:145px;
+  border:1px solid var(--border);
+  background:var(--surface-2);
+  border-radius:11px;
+  padding:0 11px;
+  color:var(--text);
+  outline:none;
+  font-size:11px;
+  font-weight:600;
+}
+
+.toolbar-btn{
+  height:42px;
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--text);
+  border-radius:11px;
+  padding:0 13px;
+  font-size:11px;
+  font-weight:700;
+}
+
+.toolbar-btn:hover{
+  background:var(--surface-2);
+}
+
+.toolbar-btn.primary{
+  background:var(--green);
+  border-color:var(--green);
+  color:#fff;
+}
+
+.toolbar-btn.danger{
+  color:var(--danger);
+  border-color:#f1d2d5;
+  background:#fff;
+}
+
+/* =========================
+   BULK BAR
+========================= */
+
+.bulk-bar{
+  display:none;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:11px 16px;
+  background:#f0faf4;
+  border-bottom:1px solid #d9efdf;
+}
+
+.bulk-bar.show{
+  display:flex;
+}
+
+.bulk-left{
+  font-size:11px;
+  font-weight:700;
+  color:var(--green-dark);
+}
+
+.bulk-actions{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+}
+
+.bulk-btn{
+  height:32px;
+  padding:0 10px;
+  border:1px solid #cfe5d6;
+  background:#fff;
+  border-radius:9px;
+  font-size:10px;
+  font-weight:700;
+}
+
+.bulk-btn:hover{
+  background:#f7fffa;
+}
+
+.bulk-btn.danger{
+  color:var(--danger);
+  border-color:#f1d2d5;
+}
+
+/* =========================
+   TABLE
+========================= */
+
+.table-wrap{
+  overflow:auto;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:980px;
+}
+
+thead th{
+  background:#fbfcfb;
+  color:#7d8982;
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  text-align:left;
+  padding:13px 15px;
+  border-bottom:1px solid var(--border);
+  white-space:nowrap;
+}
+
+tbody td{
+  padding:14px 15px;
+  border-bottom:1px solid #edf1ee;
+  vertical-align:middle;
+  font-size:11px;
+}
+
+tbody tr:hover{
+  background:#fcfefd;
+}
+
+.checkbox{
+  width:15px;
+  height:15px;
+  accent-color:var(--green);
+}
+
+.customer-cell{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:190px;
+}
+
+.customer-avatar{
+  width:39px;
+  height:39px;
+  border-radius:12px;
+  background:var(--green-soft);
+  color:var(--green-dark);
+  display:grid;
+  place-items:center;
+  font-size:12px;
+  font-weight:800;
+  flex:0 0 39px;
+  overflow:hidden;
+}
+
+.customer-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.customer-name{
+  font-weight:800;
+  color:var(--text);
+}
+
+.customer-id{
+  color:#8a958f;
+  font-size:9px;
+  margin-top:3px;
+}
+
+.contact-main{
+  font-weight:700;
+}
+
+.contact-sub{
+  color:var(--muted);
+  margin-top:3px;
+  font-size:10px;
+}
+
+.money{
+  font-weight:800;
+}
+
+.muted{
+  color:var(--muted);
+}
+
+.status{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 9px;
+  border-radius:999px;
+  font-size:9px;
+  font-weight:800;
+  text-transform:capitalize;
+}
+
+.status::before{
+  content:"";
+  width:6px;
+  height:6px;
+  border-radius:50%;
+  background:currentColor;
+}
+
+.status.active{
+  color:#138144;
+  background:#eaf8ef;
+}
+
+.status.inactive{
+  color:#707a75;
+  background:#eef1ef;
+}
+
+.status.suspended{
+  color:#c03d49;
+  background:#fff0f1;
+}
+
+.type-badge{
+  display:inline-block;
+  padding:5px 8px;
+  border-radius:8px;
+  background:#f0f4f2;
+  color:#64716a;
+  font-size:9px;
+  font-weight:800;
+}
+
+.actions{
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.action-btn{
+  width:31px;
+  height:31px;
+  display:grid;
+  place-items:center;
+  border:1px solid var(--border);
+  background:#fff;
+  color:#59665e;
+  border-radius:9px;
+  font-size:12px;
+}
+
+.action-btn:hover{
+  background:var(--surface);
+  color:var(--green-dark);
+}
+
+.action-btn.delete:hover{
+  color:var(--danger);
+  background:var(--danger-soft);
+  border-color:#f1d2d5;
+}
+
+/* =========================
+   EMPTY
+========================= */
+
+.empty-state{
+  padding:55px 20px;
+  text-align:center;
+  display:none;
+}
+
+.empty-icon{
+  width:54px;
+  height:54px;
+  border-radius:17px;
+  background:var(--green-soft);
+  color:var(--green-dark);
+  display:grid;
+  place-items:center;
+  margin:0 auto 13px;
+  font-size:21px;
+}
+
+.empty-state h3{
+  font-size:17px;
+}
+
+.empty-state p{
+  color:var(--muted);
+  font-size:12px;
+  margin-top:6px;
+}
+
+/* =========================
+   MOBILE CARDS
+========================= */
+
+.mobile-list{
+  display:none;
+  padding:12px;
+}
+
+.mobile-customer{
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:10px;
+  background:#fff;
+}
+
+.mobile-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.mobile-customer-main{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  min-width:0;
+}
+
+.mobile-customer-info{
+  min-width:0;
+}
+
+.mobile-customer-info strong{
+  display:block;
+  font-size:12px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+.mobile-customer-info span{
+  display:block;
+  color:var(--muted);
+  font-size:9px;
+  margin-top:3px;
+}
+
+.mobile-details{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:8px;
+  margin-top:13px;
+}
+
+.mobile-detail{
+  background:var(--surface);
+  border-radius:10px;
+  padding:9px;
+}
+
+.mobile-detail label{
+  display:block;
+  color:#8b958f;
+  font-size:8px;
+  text-transform:uppercase;
+  letter-spacing:.06em;
+  font-weight:800;
+}
+
+.mobile-detail strong{
+  display:block;
+  font-size:11px;
+  margin-top:4px;
+}
+
+.mobile-actions{
+  display:flex;
+  gap:7px;
+  margin-top:12px;
+}
+
+.mobile-actions button{
+  flex:1;
+  height:34px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:9px;
+  font-size:10px;
+  font-weight:700;
+}
+
+/* =========================
+   PAGINATION
+========================= */
+
+.pagination{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:14px 16px;
+  border-top:1px solid var(--border);
+}
+
+.pagination-info{
+  color:var(--muted);
+  font-size:10px;
+}
+
+.page-buttons{
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+
+.page-btn{
+  min-width:31px;
+  height:31px;
+  padding:0 8px;
+  border:1px solid var(--border);
+  border-radius:8px;
+  background:#fff;
+  font-size:10px;
+  font-weight:700;
+}
+
+.page-btn.active{
+  background:var(--green);
+  border-color:var(--green);
+  color:#fff;
+}
+
+.page-btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+
+/* =========================
+   MODAL
+========================= */
+
+.modal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(4,12,7,.57);
+  backdrop-filter:blur(7px);
+  z-index:3000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+.modal-overlay.show{
+  display:flex;
+}
+
+.modal{
+  width:min(920px,100%);
+  max-height:92vh;
+  overflow:auto;
+  background:#fff;
+  border-radius:24px;
+  box-shadow:var(--shadow-lg);
+  border:1px solid rgba(255,255,255,.45);
+}
+
+.modal.small{
+  width:min(460px,100%);
+}
+
+.modal-header{
+  position:sticky;
+  top:0;
+  z-index:2;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:19px 21px;
+  border-bottom:1px solid var(--border);
+}
+
+.modal-title{
+  font-family:"Manrope",sans-serif;
+  font-size:17px;
+  font-weight:800;
+  letter-spacing:-.025em;
+}
+
+.modal-subtitle{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:4px;
+}
+
+.close-btn{
+  width:34px;
+  height:34px;
+  border:1px solid var(--border);
+  background:#fff;
+  border-radius:10px;
+  font-size:16px;
+  color:#66736b;
+}
+
+.modal-body{
+  padding:21px;
+}
+
+.modal-footer{
+  display:flex;
+  justify-content:flex-end;
+  gap:8px;
+  padding:15px 21px;
+  border-top:1px solid var(--border);
+  background:#fbfcfb;
+}
+
+/* =========================
+   FORM
+========================= */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.field{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.field.full{
+  grid-column:1/-1;
+}
+
+.field label{
+  font-size:10px;
+  font-weight:800;
+  color:#526058;
+}
+
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  border:1px solid var(--border);
+  background:var(--surface-2);
+  border-radius:11px;
+  min-height:42px;
+  outline:none;
+  padding:10px 12px;
+  color:var(--text);
+  font-size:11px;
+}
+
+.field textarea{
+  min-height:92px;
+  resize:vertical;
+}
+
+.readonly{
+  background:#f0f3f1 !important;
+  color:#79857e !important;
+}
+
+.form-help{
+  color:#8a958f;
+  font-size:9px;
+  line-height:1.5;
+}
+
+.summary-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.summary-card{
+  background:var(--surface);
+  border-radius:13px;
+  padding:13px;
+}
+
+.summary-card label{
+  color:#87918b;
+  display:block;
+  font-size:9px;
+  font-weight:700;
+}
+
+.summary-card strong{
+  display:block;
+  margin-top:5px;
+  font-family:"Manrope",sans-serif;
+  font-size:16px;
+}
+
+.history-title{
+  font-family:"Manrope",sans-serif;
+  font-size:13px;
+  font-weight:800;
+  margin:18px 0 10px;
+}
+
+.history{
+  border:1px solid var(--border);
+  border-radius:13px;
+  overflow:auto;
+}
+
+.history table{
+  min-width:650px;
+}
+
+.history-empty{
+  padding:24px;
+  text-align:center;
+  color:var(--muted);
+  font-size:10px;
+}
+
+/* =========================
+   CONFIRM
+========================= */
+
+.confirm-icon{
+  width:50px;
+  height:50px;
+  border-radius:16px;
+  background:var(--danger-soft);
+  color:var(--danger);
+  display:grid;
+  place-items:center;
+  font-size:21px;
+  margin-bottom:14px;
+}
+
+.confirm-title{
+  font-family:"Manrope",sans-serif;
+  font-size:19px;
+  font-weight:800;
+}
+
+.confirm-text{
+  color:var(--muted);
+  font-size:12px;
+  line-height:1.7;
+  margin-top:7px;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+.toast{
+  position:fixed;
+  right:24px;
+  bottom:24px;
+  z-index:5000;
+  background:var(--dark);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:13px;
+  padding:12px 15px;
+  box-shadow:var(--shadow-lg);
+  display:flex;
+  align-items:center;
+  gap:9px;
+  font-size:11px;
+  font-weight:700;
+  transform:translateY(20px);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s ease;
+}
+
+.toast.show{
+  transform:translateY(0);
+  opacity:1;
+}
+
+.toast-icon{
+  width:22px;
+  height:22px;
+  border-radius:7px;
+  background:var(--green);
+  display:grid;
+  place-items:center;
+  font-size:11px;
+}
+
+/* =========================
+   OVERLAY
+========================= */
+
+.sidebar-overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.45);
+  z-index:900;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer-note{
+  text-align:center;
+  color:#8b958f;
+  font-size:9px;
+  padding:18px 0 5px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1250px){
+  .stats{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+@media(max-width:1050px){
+  .sidebar{
+    transform:translateX(-100%);
+  }
+
+  .sidebar.open{
+    transform:translateX(0);
+  }
+
+  .sidebar-overlay.show{
+    display:block;
+  }
+
+  .main{
+    margin-left:0;
+    width:100%;
+  }
+
+  .mobile-menu{
+    display:inline-flex;
+  }
+
+  .topbar{
+    padding:0 18px;
+  }
+
+  .content{
+    padding:22px 18px;
+  }
+}
+
+@media(max-width:760px){
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .hero{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .hero-badge{
+    width:100%;
+  }
+
+  .toolbar{
+    align-items:stretch;
+  }
+
+  .search-box{
+    flex-basis:100%;
+  }
+
+  .filter-select{
+    flex:1 1 130px;
+    min-width:0;
+  }
+
+  .toolbar-btn{
+    flex:1 1 auto;
+  }
+
+  .desktop-table{
+    display:none;
+  }
+
+  .mobile-list{
+    display:block;
+  }
+
+  .form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .field.full{
+    grid-column:auto;
+  }
+
+  .summary-grid{
+    grid-template-columns:1fr;
+  }
+
+  .pagination{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .modal-overlay{
+    padding:10px;
+  }
+
+  .modal{
+    max-height:96vh;
+    border-radius:19px;
+  }
+}
+
+@media(max-width:480px){
+  .content{
+    padding:17px 12px;
+  }
+
+  .topbar{
+    height:66px;
+    padding:0 12px;
+  }
+
+  .page-kicker{
+    display:none;
+  }
+
+  .top-actions .top-btn.marketplace{
+    display:none;
+  }
+
+  .stats{
+    gap:9px;
+  }
+
+  .stat-card{
+    padding:14px;
+    border-radius:16px;
+  }
+
+  .stat-value{
+    font-size:21px;
+  }
+
+  .hero h1{
+    font-size:27px;
+  }
+
+  .toolbar{
+    padding:11px;
+  }
+
+  .bulk-bar{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+
+  .bulk-actions{
+    width:100%;
+  }
+
+  .bulk-btn{
+    flex:1;
+  }
+
+  .modal-header,
+  .modal-body,
+  .modal-footer{
+    padding-left:15px;
+    padding-right:15px;
+  }
+
+  .modal-footer{
+    flex-wrap:wrap;
+  }
+
+  .modal-footer button{
+    flex:1;
+  }
+
+  .toast{
+    left:12px;
+    right:12px;
+    bottom:12px;
+  }
+}
+
+/* =========================
+   PRINT
+========================= */
+
+@media print{
+  @page{
+    size:A4 landscape;
+    margin:12mm;
+  }
+
+  body{
+    background:#fff;
+  }
+
+  .sidebar,
+  .topbar,
+  .toolbar,
+  .bulk-bar,
+  .actions,
+  .pagination,
+  .mobile-list,
+  .footer-note,
+  .modal-overlay,
+  .toast{
+    display:none !important;
+  }
+
+  .main{
+    margin:0;
+    width:100%;
+  }
+
+  .content{
+    padding:0;
+    max-width:none;
+  }
+
+  .hero{
+    margin-bottom:15px;
+  }
+
+  .panel,
+  .stat-card{
+    box-shadow:none;
+  }
+
+  .stats{
+    grid-template-columns:repeat(5,1fr);
+  }
+
+  table{
+    min-width:0;
+  }
+
+  tbody td,
+  thead th{
+    padding:7px;
+  }
+}
+</style>
 </head>
 
 <body>
@@ -1710,171 +1477,98 @@
   <aside class="sidebar" id="sidebar">
 
     <div class="brand">
-      <img
-        src="../logo.png"
-        alt="Website Deals"
-        class="brand-logo"
-        onerror="this.style.display='none'"
-      >
-
+      <img src="../logo.png" class="brand-logo" alt="Website Deals">
       <div class="brand-copy">
-        <strong>Website Deals</strong>
-        <span>Admin Control Center</span>
+        <div class="brand-title">Website Deals</div>
+        <div class="brand-sub">Admin Control Center</div>
       </div>
     </div>
 
-    <div class="nav-section">
-      <div class="nav-label">Marketplace</div>
+    <nav class="nav">
 
-      <nav class="nav">
+      <div class="nav-section">Marketplace</div>
 
-        <a class="nav-link" href="dashboard.html">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-            <rect x="3" y="3" width="7" height="7" rx="1"/>
-            <rect x="14" y="3" width="7" height="7" rx="1"/>
-            <rect x="3" y="14" width="7" height="7" rx="1"/>
-            <rect x="14" y="14" width="7" height="7" rx="1"/>
-          </svg>
-          Dashboard
-        </a>
+      <a class="nav-link" href="dashboard.html">
+        <span class="nav-icon">⌂</span>
+        Dashboard
+      </a>
 
-        <a class="nav-link" href="websites.html">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-            <rect x="3" y="4" width="18" height="16" rx="2"/>
-            <path d="M3 9h18"/>
-            <path d="M8 13h8"/>
-            <path d="M8 16h5"/>
-          </svg>
-          Websites
-        </a>
+      <a class="nav-link" href="websites.html">
+        <span class="nav-icon">◫</span>
+        Websites
+      </a>
 
-        <a class="nav-link" href="categories.html">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-            <path d="M4 5h16v14H4z"/>
-            <path d="M4 9h16"/>
-            <path d="M9 9v10"/>
-          </svg>
-          Categories
-        </a>
+      <a class="nav-link" href="categories.html">
+        <span class="nav-icon">▦</span>
+        Categories
+      </a>
 
-        <a class="nav-link" href="orders.html">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-            <path d="M6 3h12l2 4v14H4V7l2-4z"/>
-            <path d="M4 7h16"/>
-            <path d="M8 11h8"/>
-            <path d="M8 15h5"/>
-          </svg>
-          Orders
-        </a>
+      <a class="nav-link" href="orders.html">
+        <span class="nav-icon">◌</span>
+        Orders
+      </a>
 
-        <a class="nav-link" href="payments.html">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-            <rect x="3" y="5" width="18" height="14" rx="2"/>
-            <path d="M3 10h18"/>
-            <path d="M7 15h4"/>
-          </svg>
-          Payments
-        </a>
+      <a class="nav-link" href="payments.html">
+        <span class="nav-icon">৳</span>
+        Payments
+      </a>
 
-        <a class="nav-link active" href="customers.html">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
-          Customers
-        </a>
+      <a class="nav-link active" href="customers.html">
+        <span class="nav-icon">♙</span>
+        Customers
+      </a>
 
-        <a class="nav-link" href="newsletter.html">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-            <path d="M4 4h16v16H4z"/>
-            <path d="m4 7 8 5 8-5"/>
-          </svg>
-          Newsletter
-        </a>
+      <a class="nav-link" href="newsletter.html">
+        <span class="nav-icon">✉</span>
+        Newsletter
+      </a>
 
-      </nav>
-    </div>
+      <div class="nav-section">Reports</div>
 
-    <div class="nav-section">
-      <div class="nav-label">Reports</div>
+      <a class="nav-link" href="reports.html">
+        <span class="nav-icon">◒</span>
+        Reports
+      </a>
 
-      <nav class="nav">
+      <a class="nav-link" href="monthly-report.html">
+        <span class="nav-icon">▤</span>
+        Monthly Report
+      </a>
 
-        <a class="nav-link" href="reports.html">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-            <path d="M4 19V5"/>
-            <path d="M4 19h17"/>
-            <path d="m7 15 4-5 3 3 5-7"/>
-          </svg>
-          Reports
-        </a>
+      <div class="nav-section">Restricted Controls</div>
 
-        <a class="nav-link" href="monthly-report.html">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-            <rect x="3" y="4" width="18" height="17" rx="2"/>
-            <path d="M16 2v4M8 2v4M3 9h18"/>
-            <path d="M8 13h3M8 17h6"/>
-          </svg>
-          Monthly Report
-        </a>
+      <a class="nav-link" href="admins.html">
+        <span class="nav-icon">♙</span>
+        Admin Management
+      </a>
 
-      </nav>
-    </div>
+      <a class="nav-link" href="settings.html">
+        <span class="nav-icon">⚙</span>
+        System Settings
+      </a>
 
-    <div class="nav-section">
-      <div class="nav-label">Restricted Controls</div>
-
-      <nav class="nav">
-
-        <a class="nav-link" href="admins.html">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-            <circle cx="12" cy="8" r="3"/>
-            <path d="M5 21a7 7 0 0 1 14 0"/>
-            <path d="M18 4h3v3"/>
-          </svg>
-          Admin Management
-        </a>
-
-        <a class="nav-link" href="settings.html">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-1.7 1.7-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1 1.55V20h-2.4v-.21a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.88.34l-.06.06-1.7-1.7.06-.06A1.7 1.7 0 0 0 8.6 15a1.7 1.7 0 0 0-1.55-1H6.8v-2.4h.25a1.7 1.7 0 0 0 1.55-1 1.7 1.7 0 0 0-.34-1.88L8.2 8.66l1.7-1.7.06.06a1.7 1.7 0 0 0 1.88.34 1.7 1.7 0 0 0 1-1.55V5.6h2.4v.21a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.88-.34l.06-.06 1.7 1.7-.06.06A1.7 1.7 0 0 0 19.4 11a1.7 1.7 0 0 0 1.55 1h.25v2.4h-.25a1.7 1.7 0 0 0-1.55.6z"/>
-          </svg>
-          System Settings
-        </a>
-
-      </nav>
-    </div>
+    </nav>
 
     <div class="sidebar-bottom">
+
       <div class="admin-mini">
         <div class="admin-avatar" id="adminAvatar">SA</div>
 
-        <div class="admin-info">
-          <strong id="adminName">Super Admin</strong>
-          <span id="adminRole">Super Administrator</span>
+        <div class="admin-mini-text">
+          <div class="admin-name" id="adminName">Super Admin</div>
+          <div class="admin-role" id="adminRole">Super Admin</div>
         </div>
-
-        <button
-          class="logout-btn"
-          type="button"
-          id="logoutBtn"
-          title="Logout"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M10 17l5-5-5-5"/>
-            <path d="M15 12H3"/>
-            <path d="M21 3v18"/>
-          </svg>
-        </button>
       </div>
+
+      <button class="logout-btn" onclick="logout()">
+        ↪ &nbsp; Sign Out
+      </button>
+
     </div>
 
   </aside>
 
-  <div class="overlay" id="overlay"></div>
+  <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
 
   <!-- =========================
        MAIN
@@ -1884,53 +1578,18 @@
     <header class="topbar">
 
       <div class="topbar-left">
-
-        <button
-          class="mobile-menu"
-          type="button"
-          id="mobileMenu"
-          aria-label="Open menu"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
-
-        <div class="breadcrumb">
-          <span>Admin</span>
-          <span>/</span>
-          <strong>Customers</strong>
-        </div>
-
+        <button class="icon-btn mobile-menu" onclick="openSidebar()">☰</button>
+        <div class="page-kicker">Admin / Customers</div>
       </div>
 
       <div class="top-actions">
 
-        <button
-          class="top-btn refresh-btn"
-          type="button"
-          id="refreshBtn"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <path d="M20 11a8.1 8.1 0 0 0-14.9-4L3 10"/>
-            <path d="M3 5v5h5"/>
-            <path d="M4 13a8.1 8.1 0 0 0 14.9 4L21 14"/>
-            <path d="M21 19v-5h-5"/>
-          </svg>
-          Refresh
+        <button class="top-btn" onclick="refreshCustomers()">
+          ↻ <span>Refresh</span>
         </button>
 
-        <a
-          href="../index.html"
-          class="top-btn primary marketplace-btn"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-            <circle cx="12" cy="12" r="9"/>
-            <path d="M3 12h18"/>
-            <path d="M12 3a14 14 0 0 1 0 18"/>
-            <path d="M12 3a14 14 0 0 0 0 18"/>
-          </svg>
-          Marketplace
+        <a class="top-btn marketplace" href="../index.html">
+          ↗ <span>Marketplace</span>
         </a>
 
       </div>
@@ -1943,199 +1602,130 @@
       <div class="hero">
 
         <div>
-          <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            Customer Intelligence
-          </div>
+          <div class="eyebrow">Customer Intelligence</div>
 
           <h1>Know your customers better.</h1>
 
           <p>
-            Manage customer profiles, purchase history, spending activity,
-            account status and marketplace relationships from one clean workspace.
+            Manage customer profiles, order history, spending,
+            activity and account status from one polished workspace.
           </p>
         </div>
 
-        <div class="hero-side">
+        <div class="hero-badge">
+          <span class="status-dot"></span>
 
-          <div class="status-pill">
-            <span class="dot"></span>
-            Customer data synced
+          <div>
+            <strong>Customer Center</strong>
+            <span>LocalStorage powered prototype</span>
           </div>
-
-          <button
-            class="top-btn primary"
-            type="button"
-            id="addCustomerBtn"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M12 5v14M5 12h14"/>
-            </svg>
-            Add Customer
-          </button>
-
         </div>
 
       </div>
 
       <!-- STATS -->
-      <section class="stats">
+      <div class="stats">
 
-        <div class="stat">
+        <div class="stat-card">
           <div class="stat-top">
             <span class="stat-label">Total Customers</span>
-            <div class="stat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                <circle cx="9" cy="7" r="4"/>
-                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-              </svg>
-            </div>
+            <span class="stat-icon">♙</span>
           </div>
-          <div class="stat-value" id="totalCustomers">0</div>
-          <div class="stat-meta">All registered customers</div>
+          <div class="stat-value" id="statTotal">0</div>
+          <div class="stat-meta">All customer profiles</div>
         </div>
 
-        <div class="stat">
+        <div class="stat-card">
           <div class="stat-top">
             <span class="stat-label">Active Customers</span>
-            <div class="stat-icon blue">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M20 6 9 17l-5-5"/>
-              </svg>
-            </div>
+            <span class="stat-icon">✓</span>
           </div>
-          <div class="stat-value" id="activeCustomers">0</div>
-          <div class="stat-meta">Currently active accounts</div>
+          <div class="stat-value" id="statActive">0</div>
+          <div class="stat-meta">Currently active</div>
         </div>
 
-        <div class="stat">
+        <div class="stat-card">
           <div class="stat-top">
             <span class="stat-label">New Customers</span>
-            <div class="stat-icon purple">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M12 5v14M5 12h14"/>
-              </svg>
-            </div>
+            <span class="stat-icon">✦</span>
           </div>
-          <div class="stat-value" id="newCustomers">0</div>
-          <div class="stat-meta">Joined within 30 days</div>
+          <div class="stat-value" id="statNew">0</div>
+          <div class="stat-meta">Joined in last 30 days</div>
         </div>
 
-        <div class="stat">
+        <div class="stat-card">
           <div class="stat-top">
             <span class="stat-label">Customer Revenue</span>
-            <div class="stat-icon orange">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M12 1v22"/>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H7"/>
-              </svg>
-            </div>
+            <span class="stat-icon">৳</span>
           </div>
-          <div class="stat-value" id="customerRevenue">৳0</div>
-          <div class="stat-meta">Paid customer purchases</div>
+          <div class="stat-value" id="statRevenue">৳0</div>
+          <div class="stat-meta">Paid customer spending</div>
         </div>
 
-        <div class="stat">
+        <div class="stat-card">
           <div class="stat-top">
             <span class="stat-label">Returning</span>
-            <div class="stat-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <path d="M20 11a8.1 8.1 0 0 0-14.9-4L3 10"/>
-                <path d="M3 5v5h5"/>
-                <path d="M4 13a8.1 8.1 0 0 0 14.9 4L21 14"/>
-                <path d="M21 19v-5h-5"/>
-              </svg>
-            </div>
+            <span class="stat-icon">↻</span>
           </div>
-          <div class="stat-value" id="returningCustomers">0</div>
-          <div class="stat-meta">Customers with 2+ orders</div>
+          <div class="stat-value" id="statReturning">0</div>
+          <div class="stat-meta">2+ completed orders</div>
         </div>
 
-      </section>
+      </div>
 
-      <!-- MAIN PANEL -->
-      <section class="panel">
+      <!-- CUSTOMER PANEL -->
+      <div class="panel">
 
+        <!-- TOOLBAR -->
         <div class="toolbar">
 
-          <div class="search">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <circle cx="11" cy="11" r="7"/>
-              <path d="m20 20-4-4"/>
-            </svg>
-
+          <div class="search-box">
+            <span>⌕</span>
             <input
               type="search"
               id="searchInput"
-              placeholder="Search customer, email, phone or ID..."
-              autocomplete="off"
+              placeholder="Search name, email, phone or customer ID..."
+              oninput="applyFilters()"
             >
           </div>
 
-          <select class="select" id="statusFilter">
+          <select class="filter-select" id="statusFilter" onchange="applyFilters()">
             <option value="all">All Status</option>
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
             <option value="suspended">Suspended</option>
           </select>
 
-          <select class="select" id="typeFilter">
+          <select class="filter-select" id="typeFilter" onchange="applyFilters()">
             <option value="all">All Customers</option>
             <option value="new">New Customers</option>
             <option value="returning">Returning</option>
           </select>
 
-          <select class="select" id="sortFilter">
+          <select class="filter-select" id="sortFilter" onchange="applyFilters()">
             <option value="newest">Newest First</option>
             <option value="oldest">Oldest First</option>
-            <option value="spendingHigh">Highest Spending</option>
-            <option value="spendingLow">Lowest Spending</option>
-            <option value="ordersHigh">Most Orders</option>
-            <option value="ordersLow">Fewest Orders</option>
-            <option value="nameAZ">Name A–Z</option>
-            <option value="nameZA">Name Z–A</option>
+            <option value="spending-high">Highest Spending</option>
+            <option value="spending-low">Lowest Spending</option>
+            <option value="orders-high">Most Orders</option>
+            <option value="orders-low">Fewest Orders</option>
+            <option value="name">Name A-Z</option>
           </select>
 
-          <button
-            class="toolbar-btn"
-            type="button"
-            id="resetFiltersBtn"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M20 11a8.1 8.1 0 0 0-14.9-4L3 10"/>
-              <path d="M3 5v5h5"/>
-              <path d="M4 13a8.1 8.1 0 0 0 14.9 4L21 14"/>
-              <path d="M21 19v-5h-5"/>
-            </svg>
+          <button class="toolbar-btn" onclick="resetFilters()">
             Reset
           </button>
 
-          <button
-            class="toolbar-btn"
-            type="button"
-            id="exportBtn"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M12 3v12"/>
-              <path d="m7 10 5 5 5-5"/>
-              <path d="M5 21h14"/>
-            </svg>
-            CSV
+          <button class="toolbar-btn" onclick="exportCSV()">
+            ↓ CSV
           </button>
 
-          <button
-            class="toolbar-btn"
-            type="button"
-            id="printBtn"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M6 9V3h12v6"/>
-              <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
-              <path d="M6 14h12v7H6z"/>
-            </svg>
-            Print
+          <button class="toolbar-btn" onclick="window.print()">
+            ⎙ Print
+          </button>
+
+          <button class="toolbar-btn primary" onclick="openCustomerModal()">
+            + Add Customer
           </button>
 
         </div>
@@ -2143,54 +1733,45 @@
         <!-- BULK -->
         <div class="bulk-bar" id="bulkBar">
 
-          <div class="bulk-count">
-            <span id="selectedCount">0</span> customers selected
+          <div class="bulk-left">
+            <span id="selectedCount">0</span> customer(s) selected
           </div>
 
           <div class="bulk-actions">
 
-            <button
-              class="bulk-btn"
-              type="button"
-              id="bulkActivateBtn"
-            >
-              Activate
+            <button class="bulk-btn" onclick="bulkUpdateStatus('active')">
+              ✓ Activate
             </button>
 
-            <button
-              class="bulk-btn"
-              type="button"
-              id="bulkSuspendBtn"
-            >
-              Suspend
+            <button class="bulk-btn" onclick="bulkUpdateStatus('suspended')">
+              ⏸ Suspend
             </button>
 
-            <button
-              class="bulk-btn danger"
-              type="button"
-              id="bulkDeleteBtn"
-            >
-              Delete
+            <button class="bulk-btn danger" onclick="bulkDelete()">
+              × Delete
             </button>
 
           </div>
 
         </div>
 
-        <!-- TABLE -->
-        <div class="table-wrap">
+        <!-- DESKTOP TABLE -->
+        <div class="table-wrap desktop-table">
 
           <table>
 
             <thead>
               <tr>
-                <th style="width:38px;">
+
+                <th style="width:35px;">
                   <input
-                    type="checkbox"
                     class="checkbox"
+                    type="checkbox"
                     id="selectAll"
+                    onchange="toggleAll(this)"
                   >
                 </th>
+
                 <th>Customer</th>
                 <th>Contact</th>
                 <th>Orders</th>
@@ -2198,7 +1779,8 @@
                 <th>Last Order</th>
                 <th>Status</th>
                 <th>Joined</th>
-                <th style="text-align:right;">Actions</th>
+                <th>Actions</th>
+
               </tr>
             </thead>
 
@@ -2208,44 +1790,37 @@
 
         </div>
 
-        <div class="empty" id="emptyState">
+        <!-- MOBILE LIST -->
+        <div class="mobile-list" id="mobileCustomerList"></div>
 
-          <div class="empty-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <circle cx="11" cy="11" r="7"/>
-              <path d="m20 20-4-4"/>
-            </svg>
-          </div>
+        <!-- EMPTY -->
+        <div class="empty-state" id="emptyState">
+
+          <div class="empty-icon">⌕</div>
 
           <h3>No customers found</h3>
 
           <p>
-            Try changing your search or filters.
+            Try changing your search or filter settings.
           </p>
 
         </div>
 
-        <!-- FOOTER -->
-        <div class="table-footer">
+        <!-- PAGINATION -->
+        <div class="pagination">
 
-          <div class="result-count" id="resultCount">
+          <div class="pagination-info" id="paginationInfo">
             Showing 0 customers
           </div>
 
-          <div class="pagination" id="pagination"></div>
+          <div class="page-buttons" id="pageButtons"></div>
 
         </div>
 
-      </section>
+      </div>
 
       <div class="footer-note">
-        <span>
-          Customer Management · <strong>Website Deals Admin</strong>
-        </span>
-
-        <span>
-          Prototype data is stored in LocalStorage.
-        </span>
+        Website Deals Admin • Customer Management • Prototype / LocalStorage
       </div>
 
     </section>
@@ -2257,95 +1832,66 @@
 
 <!-- =========================
      CUSTOMER MODAL
-========================== -->
-<div class="modal-backdrop" id="customerModal">
+========================= -->
+
+<div class="modal-overlay" id="customerModal">
 
   <div class="modal">
 
-    <div class="modal-head">
+    <div class="modal-header">
 
       <div>
         <div class="modal-title" id="customerModalTitle">
-          Customer Details
+          Add Customer
         </div>
 
-        <div class="modal-subtitle" id="customerModalSubtitle">
-          View and manage customer information.
+        <div class="modal-subtitle">
+          Create or update customer profile information.
         </div>
       </div>
 
-      <button
-        class="modal-close"
-        type="button"
-        data-close-modal="customerModal"
-        aria-label="Close"
-      >
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M6 6l12 12M18 6 6 18"/>
-        </svg>
+      <button class="close-btn" onclick="closeModal('customerModal')">
+        ×
       </button>
 
     </div>
 
     <div class="modal-body">
 
-      <div class="profile-head">
+      <div class="summary-grid" id="customerSummary">
 
-        <div class="profile-avatar" id="modalAvatar">
-          SA
+        <div class="summary-card">
+          <label>Total Orders</label>
+          <strong id="summaryOrders">0</strong>
         </div>
 
-        <div>
-          <div class="profile-name" id="modalProfileName">
-            Customer Name
-          </div>
+        <div class="summary-card">
+          <label>Total Spent</label>
+          <strong id="summarySpent">৳0</strong>
+        </div>
 
-          <div class="profile-email" id="modalProfileEmail">
-            customer@example.com
-          </div>
-
-          <div class="profile-meta">
-            <span class="badge active" id="modalStatusBadge">
-              active
-            </span>
-          </div>
+        <div class="summary-card">
+          <label>Last Order</label>
+          <strong id="summaryLastOrder">—</strong>
         </div>
 
       </div>
 
-      <div class="summary-grid">
-
-        <div class="summary-card">
-          <span>Total Orders</span>
-          <strong id="modalOrders">0</strong>
-        </div>
-
-        <div class="summary-card">
-          <span>Total Spent</span>
-          <strong id="modalSpent">৳0</strong>
-        </div>
-
-        <div class="summary-card">
-          <span>Last Order</span>
-          <strong id="modalLastOrder">—</strong>
-        </div>
-
-      </div>
-
-      <div class="section-title">
-        Customer Information
-      </div>
-
-      <div class="fields">
+      <div class="form-grid">
 
         <div class="field">
-          <label for="customerId">Customer ID</label>
-          <input id="customerId" type="text" readonly>
-          <small>Automatically assigned customer identifier.</small>
+          <label>Customer ID</label>
+          <input
+            id="customerId"
+            class="readonly"
+            readonly
+            placeholder="Auto generated"
+          >
         </div>
 
         <div class="field">
-          <label for="customerStatus">Status</label>
+          <label>Status</label>
+
           <select id="customerStatus">
             <option value="active">Active</option>
             <option value="inactive">Inactive</option>
@@ -2354,93 +1900,103 @@
         </div>
 
         <div class="field">
-          <label for="customerName">Full Name</label>
-          <input id="customerName" type="text" placeholder="Customer full name">
+          <label>Full Name *</label>
+          <input
+            id="customerName"
+            type="text"
+            placeholder="Customer full name"
+          >
         </div>
 
         <div class="field">
-          <label for="customerEmail">Email Address</label>
-          <input id="customerEmail" type="email" placeholder="customer@example.com">
+          <label>Email *</label>
+          <input
+            id="customerEmail"
+            type="email"
+            placeholder="customer@example.com"
+          >
         </div>
 
         <div class="field">
-          <label for="customerPhone">Phone Number</label>
-          <input id="customerPhone" type="text" placeholder="+880 1XXXXXXXXX">
+          <label>Phone</label>
+          <input
+            id="customerPhone"
+            type="text"
+            placeholder="+880 1XXXXXXXXX"
+          >
         </div>
 
         <div class="field">
-          <label for="customerJoined">Joined Date</label>
-          <input id="customerJoined" type="date">
+          <label>Joined Date</label>
+          <input
+            id="customerJoined"
+            type="date"
+          >
         </div>
 
         <div class="field full">
-          <label for="customerAddress">Address</label>
-          <input id="customerAddress" type="text" placeholder="Customer address">
+          <label>Address</label>
+          <input
+            id="customerAddress"
+            type="text"
+            placeholder="Customer address"
+          >
         </div>
 
         <div class="field full">
-          <label for="customerNote">Internal Note</label>
+          <label>Customer Note</label>
+
           <textarea
             id="customerNote"
-            placeholder="Add an internal note about this customer..."
+            placeholder="Internal note about this customer..."
           ></textarea>
+
+          <div class="form-help">
+            This note is for admin use only.
+          </div>
         </div>
 
       </div>
 
-      <div class="history">
-
-        <div class="section-title">
-          Order History
-        </div>
-
-        <div class="history-list" id="historyList"></div>
-
+      <div class="history-title">
+        Order History
       </div>
+
+      <div class="history" id="customerHistory"></div>
 
     </div>
 
-    <div class="modal-foot">
+    <div class="modal-footer">
 
-      <div class="modal-left-actions">
+      <button
+        class="toolbar-btn danger"
+        id="modalDeleteBtn"
+        onclick="deleteCurrentCustomer()"
+      >
+        Delete
+      </button>
 
-        <button
-          class="modal-btn danger"
-          type="button"
-          id="modalDeleteBtn"
-        >
-          Delete
-        </button>
+      <button
+        class="toolbar-btn"
+        id="modalStatusBtn"
+        onclick="toggleCurrentCustomerStatus()"
+      >
+        Suspend
+      </button>
 
-        <button
-          class="modal-btn"
-          type="button"
-          id="modalStatusBtn"
-        >
-          Suspend
-        </button>
+      <button
+        class="toolbar-btn"
+        onclick="closeModal('customerModal')"
+      >
+        Cancel
+      </button>
 
-      </div>
-
-      <div class="modal-right-actions">
-
-        <button
-          class="modal-btn"
-          type="button"
-          data-close-modal="customerModal"
-        >
-          Cancel
-        </button>
-
-        <button
-          class="modal-btn primary"
-          type="button"
-          id="saveCustomerBtn"
-        >
-          Save Customer
-        </button>
-
-      </div>
+      <button
+        class="toolbar-btn primary"
+        onclick="saveCustomer()"
+      >
+        Save Customer
+      </button>
 
     </div>
 
@@ -2450,57 +2006,42 @@
 
 
 <!-- =========================
-     DELETE MODAL
-========================== -->
-<div class="modal-backdrop" id="deleteModal">
+     DELETE CONFIRM MODAL
+========================= -->
+
+<div class="modal-overlay" id="deleteModal">
 
   <div class="modal small">
 
     <div class="modal-body">
 
-      <div class="confirm-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-          <path d="M3 6h18"/>
-          <path d="M8 6V4h8v2"/>
-          <path d="m19 6-1 15H6L5 6"/>
-          <path d="M10 11v6M14 11v6"/>
-        </svg>
+      <div class="confirm-icon">!</div>
+
+      <div class="confirm-title">
+        Delete customer?
       </div>
 
-      <div class="modal-title">
-        Delete Customer?
+      <div class="confirm-text" id="deleteMessage">
+        This action cannot be undone.
       </div>
-
-      <p class="confirm-text">
-        This will remove the customer profile from the customer management
-        database. Existing orders will not be deleted.
-      </p>
 
     </div>
 
-    <div class="modal-foot">
+    <div class="modal-footer">
 
-      <div></div>
+      <button
+        class="toolbar-btn"
+        onclick="closeModal('deleteModal')"
+      >
+        Cancel
+      </button>
 
-      <div class="modal-right-actions">
-
-        <button
-          class="modal-btn"
-          type="button"
-          data-close-modal="deleteModal"
-        >
-          Keep Customer
-        </button>
-
-        <button
-          class="modal-btn danger"
-          type="button"
-          id="confirmDeleteBtn"
-        >
-          Delete Customer
-        </button>
-
-      </div>
+      <button
+        class="toolbar-btn danger"
+        onclick="confirmDelete()"
+      >
+        Delete Customer
+      </button>
 
     </div>
 
@@ -2511,267 +2052,646 @@
 
 <!-- =========================
      TOAST
-========================== -->
-<div class="toast-wrap" id="toastWrap"></div>
+========================= -->
+
+<div class="toast" id="toast">
+
+  <div class="toast-icon">✓</div>
+
+  <span id="toastText">Saved successfully.</span>
+
+</div>
 
 
 <script>
 /* =========================================================
-   WEBSITE DEALS
-   CUSTOMER MANAGEMENT
-   Prototype / LocalStorage Edition
+   WEBSITE DEALS — CUSTOMER MANAGEMENT
 ========================================================= */
 
-(function(){
+const AUTH_KEY = "websiteDealsAdminAuth";
 
-  "use strict";
+const CUSTOMER_KEY = "websiteDealsCustomers";
+const ORDERS_KEY = "websiteDealsOrders";
+const TRANSACTIONS_KEY = "websiteDealsTransactions";
+const PAYMENT_TRANSACTIONS_KEY = "websiteDealsPaymentTransactions";
+
+const PAGE_SIZE = 8;
+
+let customers = [];
+let orders = [];
+let transactions = [];
+let paymentTransactions = [];
+
+let filteredCustomers = [];
+
+let currentPage = 1;
+let editingCustomerId = null;
+let pendingDeleteId = null;
 
 
-  /* =======================================================
-     AUTH
-  ======================================================= */
+/* =========================================================
+   AUTH
+========================================================= */
 
-  const AUTH_KEY = "websiteDealsAdminAuth";
+function getAdminSession(){
 
-  function getAdminSession(){
+  try{
 
-    try{
+    const raw = sessionStorage.getItem(AUTH_KEY);
 
-      const raw = sessionStorage.getItem(AUTH_KEY);
-
-      if(!raw){
-        return null;
-      }
-
-      const session = JSON.parse(raw);
-
-      if(!session || session.authenticated !== true){
-        return null;
-      }
-
-      return session;
-
-    }catch(error){
-
+    if(!raw){
       return null;
-
     }
 
-  }
+    const session = JSON.parse(raw);
 
-  const adminSession = getAdminSession();
-
-  if(!adminSession){
-
-    window.location.replace("login/");
-
-    return;
-
-  }
-
-
-  /* =======================================================
-     CONSTANTS
-  ======================================================= */
-
-  const CUSTOMER_KEY = "websiteDealsCustomers";
-  const ORDERS_KEY = "websiteDealsOrders";
-  const TRANSACTIONS_KEY = "websiteDealsTransactions";
-  const PAYMENT_TRANSACTIONS_KEY = "websiteDealsPaymentTransactions";
-
-  const PAGE_SIZE = 8;
-
-  let currentPage = 1;
-
-  let customers = [];
-
-  let filteredCustomers = [];
-
-  let selectedIds = new Set();
-
-  let editingCustomerId = null;
-
-  let pendingDeleteId = null;
-
-
-  /* =======================================================
-     DOM
-  ======================================================= */
-
-  const $ = (id) => document.getElementById(id);
-
-
-  /* =======================================================
-     ADMIN IDENTITY
-  ======================================================= */
-
-  function getInitials(name){
-
-    const value = String(name || "Super Admin").trim();
-
-    const parts = value.split(/\s+/).filter(Boolean);
-
-    if(parts.length === 1){
-      return parts[0].slice(0,2).toUpperCase();
+    if(!session || session.authenticated !== true){
+      return null;
     }
 
-    return (
-      String(parts[0][0] || "") +
-      String(parts[parts.length - 1][0] || "")
-    ).toUpperCase();
+    return session;
+
+  }catch(error){
+
+    return null;
 
   }
 
-  const adminName =
-    adminSession.name ||
-    adminSession.fullName ||
-    adminSession.email ||
+}
+
+const adminSession = getAdminSession();
+
+if(!adminSession){
+
+  window.location.replace("login/");
+
+}
+
+
+/* =========================================================
+   ADMIN IDENTITY
+========================================================= */
+
+function setAdminIdentity(){
+
+  const name =
+    adminSession?.name ||
+    adminSession?.email ||
     "Super Admin";
 
-  const adminRole =
-    String(adminSession.role || "admin").toLowerCase();
+  const role =
+    adminSession?.role ||
+    "Super Admin";
 
-  $("adminName").textContent = adminName;
+  const avatar =
+    name
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0,2)
+      .map(part => part.charAt(0).toUpperCase())
+      .join("") || "SA";
 
-  $("adminAvatar").textContent = getInitials(adminName);
+  document.getElementById("adminName").textContent = name;
+  document.getElementById("adminRole").textContent = role;
+  document.getElementById("adminAvatar").textContent = avatar;
 
-  $("adminRole").textContent =
-    adminRole === "superadmin"
-      ? "Super Administrator"
-      : adminRole.charAt(0).toUpperCase() + adminRole.slice(1);
+}
 
 
-  /* =======================================================
-     STORAGE HELPERS
-  ======================================================= */
+/* =========================================================
+   SAFE JSON
+========================================================= */
 
-  function readArray(key){
+function parseArray(key){
 
-    try{
+  try{
 
-      const raw = localStorage.getItem(key);
+    const raw = localStorage.getItem(key);
 
-      if(!raw){
-        return [];
-      }
-
-      const parsed = JSON.parse(raw);
-
-      return Array.isArray(parsed) ? parsed : [];
-
-    }catch(error){
-
+    if(!raw){
       return [];
+    }
 
+    const parsed = JSON.parse(raw);
+
+    return Array.isArray(parsed) ? parsed : [];
+
+  }catch(error){
+
+    return [];
+
+  }
+
+}
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================================================
+   DATE HELPERS
+========================================================= */
+
+function validDate(value){
+
+  if(!value){
+    return null;
+  }
+
+  const date = new Date(value);
+
+  if(Number.isNaN(date.getTime())){
+    return null;
+  }
+
+  return date;
+
+}
+
+
+function formatDate(value){
+
+  const date = validDate(value);
+
+  if(!date){
+    return "—";
+  }
+
+  return date.toLocaleDateString("en-GB",{
+    day:"2-digit",
+    month:"short",
+    year:"numeric"
+  });
+
+}
+
+
+function formatDateInput(value){
+
+  const date = validDate(value);
+
+  if(!date){
+    return "";
+  }
+
+  const y = date.getFullYear();
+  const m = String(date.getMonth()+1).padStart(2,"0");
+  const d = String(date.getDate()).padStart(2,"0");
+
+  return `${y}-${m}-${d}`;
+
+}
+
+
+function toTimestamp(value){
+
+  const date = validDate(value);
+
+  return date ? date.getTime() : 0;
+
+}
+
+
+/* =========================================================
+   MONEY
+========================================================= */
+
+function money(value){
+
+  const amount = Number(value) || 0;
+
+  return "৳" + amount.toLocaleString("en-BD",{
+    maximumFractionDigits:0
+  });
+
+}
+
+
+/* =========================================================
+   NORMALIZATION
+========================================================= */
+
+function normalizeOrderStatus(value){
+
+  const status = String(value || "")
+    .toLowerCase()
+    .trim();
+
+  if(
+    [
+      "completed",
+      "complete",
+      "delivered",
+      "done",
+      "success",
+      "successful"
+    ].includes(status)
+  ){
+    return "completed";
+  }
+
+  if(
+    [
+      "processing",
+      "process",
+      "in progress"
+    ].includes(status)
+  ){
+    return "processing";
+  }
+
+  if(
+    [
+      "cancelled",
+      "canceled",
+      "cancel",
+      "failed"
+    ].includes(status)
+  ){
+    return "cancelled";
+  }
+
+  if(
+    [
+      "pending",
+      "new",
+      "placed"
+    ].includes(status)
+  ){
+    return "pending";
+  }
+
+  return status || "pending";
+
+}
+
+
+function normalizePaymentStatus(value){
+
+  const status = String(value || "")
+    .toLowerCase()
+    .trim();
+
+  if(
+    [
+      "paid",
+      "completed",
+      "complete",
+      "success",
+      "successful",
+      "succeeded"
+    ].includes(status)
+  ){
+    return "paid";
+  }
+
+  if(
+    [
+      "pending",
+      "processing",
+      "unpaid",
+      "awaiting"
+    ].includes(status)
+  ){
+    return "pending";
+  }
+
+  if(
+    [
+      "cancelled",
+      "canceled",
+      "failed"
+    ].includes(status)
+  ){
+    return "cancelled";
+  }
+
+  if(
+    [
+      "refunded",
+      "refund"
+    ].includes(status)
+  ){
+    return "refunded";
+  }
+
+  return status || "pending";
+
+}
+
+
+function normalizeCustomerStatus(value){
+
+  const status = String(value || "")
+    .toLowerCase()
+    .trim();
+
+  if(
+    [
+      "suspended",
+      "blocked",
+      "banned"
+    ].includes(status)
+  ){
+    return "suspended";
+  }
+
+  if(
+    [
+      "inactive",
+      "disabled"
+    ].includes(status)
+  ){
+    return "inactive";
+  }
+
+  return "active";
+
+}
+
+
+/* =========================================================
+   FIELD HELPERS
+========================================================= */
+
+function firstValue(...values){
+
+  for(const value of values){
+
+    if(
+      value !== undefined &&
+      value !== null &&
+      String(value).trim() !== ""
+    ){
+      return value;
     }
 
   }
 
-  function saveArray(key, data){
+  return "";
 
-    localStorage.setItem(
-      key,
-      JSON.stringify(data)
-    );
+}
 
+
+/* =========================================================
+   NORMALIZE ORDER
+========================================================= */
+
+function normalizeOrder(raw){
+
+  const amount = Number(
+    firstValue(
+      raw.amount,
+      raw.total,
+      raw.price,
+      raw.orderTotal,
+      raw.paidAmount,
+      0
+    )
+  ) || 0;
+
+  const date = firstValue(
+    raw.date,
+    raw.createdAt,
+    raw.created_at,
+    raw.timestamp,
+    raw.updatedAt
+  );
+
+  const email = String(
+    firstValue(
+      raw.customerEmail,
+      raw.email,
+      raw.customer?.email
+    )
+  ).trim().toLowerCase();
+
+  const phone = String(
+    firstValue(
+      raw.customerPhone,
+      raw.phone,
+      raw.mobile,
+      raw.customer?.phone
+    )
+  ).trim();
+
+  const name = String(
+    firstValue(
+      raw.customerName,
+      raw.customer,
+      raw.fullName,
+      raw.name,
+      raw.customer?.name,
+      email
+    )
+  ).trim();
+
+  const id = String(
+    firstValue(
+      raw.id,
+      raw.orderId,
+      raw.orderID,
+      raw.reference,
+      "ORD-" + Math.random().toString(36).slice(2,8)
+    )
+  );
+
+  return {
+    raw,
+    id,
+    customerId:String(
+      firstValue(
+        raw.customerId,
+        raw.customerID
+      )
+    ),
+    name,
+    email,
+    phone,
+    website:String(
+      firstValue(
+        raw.website,
+        raw.websiteName,
+        raw.product,
+        raw.productName,
+        raw.title
+      )
+    ),
+    category:String(
+      firstValue(
+        raw.category,
+        raw.categoryName
+      )
+    ),
+    amount,
+    orderStatus:normalizeOrderStatus(
+      firstValue(
+        raw.orderStatus,
+        raw.status
+      )
+    ),
+    paymentStatus:normalizePaymentStatus(
+      firstValue(
+        raw.paymentStatus,
+        raw.payment_status,
+        raw.payment?.status
+      )
+    ),
+    paymentMethod:String(
+      firstValue(
+        raw.paymentMethod,
+        raw.method,
+        raw.gateway,
+        raw.payment?.method
+      )
+    ),
+    date
+  };
+
+}
+
+
+/* =========================================================
+   NORMALIZE TRANSACTION
+========================================================= */
+
+function normalizeTransaction(raw){
+
+  const amount = Number(
+    firstValue(
+      raw.amount,
+      raw.total,
+      raw.price,
+      raw.paidAmount,
+      0
+    )
+  ) || 0;
+
+  const email = String(
+    firstValue(
+      raw.customerEmail,
+      raw.email
+    )
+  ).trim().toLowerCase();
+
+  const phone = String(
+    firstValue(
+      raw.customerPhone,
+      raw.phone,
+      raw.mobile
+    )
+  ).trim();
+
+  const name = String(
+    firstValue(
+      raw.customerName,
+      raw.customer,
+      raw.fullName,
+      raw.name,
+      email
+    )
+  ).trim();
+
+  return {
+    id:String(
+      firstValue(
+        raw.id,
+        raw.transactionId,
+        raw.transactionID,
+        raw.paymentId,
+        "TXN-" + Math.random().toString(36).slice(2,8)
+      )
+    ),
+    name,
+    email,
+    phone,
+    amount,
+    status:normalizePaymentStatus(
+      firstValue(
+        raw.status,
+        raw.paymentStatus
+      )
+    ),
+    date:firstValue(
+      raw.date,
+      raw.createdAt,
+      raw.created_at,
+      raw.timestamp,
+      raw.updatedAt
+    ),
+    method:String(
+      firstValue(
+        raw.method,
+        raw.paymentMethod,
+        raw.gateway,
+        raw.type
+      )
+    )
+  };
+
+}
+
+
+/* =========================================================
+   CUSTOMER KEY
+========================================================= */
+
+function customerKey(customer){
+
+  const email = String(customer.email || "")
+    .trim()
+    .toLowerCase();
+
+  if(email){
+    return "email:" + email;
   }
 
+  const phone = String(customer.phone || "")
+    .replace(/\s+/g,"")
+    .trim();
 
-  /* =======================================================
-     HTML SAFETY
-  ======================================================= */
-
-  function escapeHTML(value){
-
-    return String(value ?? "")
-      .replace(/&/g,"&amp;")
-      .replace(/</g,"&lt;")
-      .replace(/>/g,"&gt;")
-      .replace(/"/g,"&quot;")
-      .replace(/'/g,"&#039;");
-
+  if(phone){
+    return "phone:" + phone;
   }
 
+  const id = String(customer.id || "").trim();
 
-  /* =======================================================
-     GENERAL HELPERS
-  ======================================================= */
-
-  function number(value){
-
-    const n = Number(value);
-
-    return Number.isFinite(n) ? n : 0;
-
+  if(id){
+    return "id:" + id.toLowerCase();
   }
 
-  function money(value){
+  return "name:" +
+    String(customer.name || "")
+      .trim()
+      .toLowerCase();
 
-    return "৳" + number(value).toLocaleString(
-      "en-BD",
-      {
-        maximumFractionDigits:0
-      }
-    );
+}
 
-  }
 
-  function parseDate(value){
+/* =========================================================
+   DEMO CUSTOMERS
+========================================================= */
 
-    if(!value){
-      return null;
-    }
+function getDemoCustomers(){
 
-    const date = new Date(value);
-
-    if(Number.isNaN(date.getTime())){
-      return null;
-    }
-
-    return date;
-
-  }
-
-  function dateISO(value){
-
-    const date = parseDate(value);
-
-    if(!date){
-      return "";
-    }
-
-    const y = date.getFullYear();
-
-    const m = String(date.getMonth()+1).padStart(2,"0");
-
-    const d = String(date.getDate()).padStart(2,"0");
-
-    return `${y}-${m}-${d}`;
-
-  }
-
-  function formatDate(value){
-
-    const date = parseDate(value);
-
-    if(!date){
-      return "—";
-    }
-
-    return date.toLocaleDateString(
-      "en-GB",
-      {
-        day:"2-digit",
-        month:"short",
-        year:"numeric"
-      }
-    );
-
-  }
+  const today = new Date();
 
   function daysAgo(days){
 
-    const d = new Date();
+    const d = new Date(today);
 
     d.setDate(d.getDate() - days);
 
@@ -2779,3007 +2699,2171 @@
 
   }
 
-  function isWithin30Days(value){
-
-    const date = parseDate(value);
-
-    if(!date){
-      return false;
-    }
-
-    const now = new Date();
-
-    const diff =
-      now.getTime() - date.getTime();
-
-    return (
-      diff >= 0 &&
-      diff <= 30 * 24 * 60 * 60 * 1000
-    );
-
-  }
-
-  function initials(name){
-
-    return getInitials(name);
-
-  }
-
-  function customerStatus(value){
-
-    const raw = String(value || "active").toLowerCase().trim();
-
-    if(
-      ["suspended","blocked","banned"].includes(raw)
-    ){
-      return "suspended";
-    }
-
-    if(
-      ["inactive","disabled","deactivated"].includes(raw)
-    ){
-      return "inactive";
-    }
-
-    return "active";
-
-  }
-
-  function normalizeStatus(value){
-
-    return customerStatus(value);
-
-  }
-
-  function normalizeOrderStatus(value){
-
-    const raw = String(value || "").toLowerCase().trim();
-
-    if(
-      ["cancelled","canceled","failed","rejected"].includes(raw)
-    ){
-      return "cancelled";
-    }
-
-    if(
-      ["completed","complete","delivered","success","successful"].includes(raw)
-    ){
-      return "completed";
-    }
-
-    if(
-      ["processing","in-progress","in progress"].includes(raw)
-    ){
-      return "processing";
-    }
-
-    if(
-      ["pending","new","placed","confirmed"].includes(raw)
-    ){
-      return "pending";
-    }
-
-    return raw || "pending";
-
-  }
-
-  function normalizePaymentStatus(value){
-
-    const raw = String(value || "").toLowerCase().trim();
-
-    if(
-      ["paid","completed","complete","success","successful","succeeded","verified"].includes(raw)
-    ){
-      return "paid";
-    }
-
-    if(
-      ["cancelled","canceled","failed","refunded","refund"].includes(raw)
-    ){
-      return "cancelled";
-    }
-
-    if(
-      ["pending","processing","unpaid","awaiting"].includes(raw)
-    ){
-      return "pending";
-    }
-
-    return raw || "pending";
-
-  }
-
-  function getOrderAmount(order){
-
-    return number(
-      order.amount ??
-      order.total ??
-      order.price ??
-      order.paidAmount ??
-      order.totalAmount ??
-      order.value ??
-      0
-    );
-
-  }
-
-  function getOrderDate(order){
-
-    return (
-      order.date ||
-      order.createdAt ||
-      order.created_at ||
-      order.timestamp ||
-      order.updatedAt ||
-      ""
-    );
-
-  }
-
-  function getOrderId(order){
-
-    return String(
-      order.id ||
-      order.orderId ||
-      order.orderID ||
-      order.invoice ||
-      order.reference ||
-      ""
-    );
-
-  }
-
-  function getOrderCustomerName(order){
-
-    return String(
-      order.customer ||
-      order.customerName ||
-      order.fullName ||
-      order.name ||
-      order.buyerName ||
-      ""
-    ).trim();
-
-  }
-
-  function getOrderEmail(order){
-
-    return String(
-      order.email ||
-      order.customerEmail ||
-      order.buyerEmail ||
-      ""
-    ).trim().toLowerCase();
-
-  }
-
-  function getOrderPhone(order){
-
-    return String(
-      order.phone ||
-      order.customerPhone ||
-      order.mobile ||
-      order.contact ||
-      order.phoneNumber ||
-      ""
-    ).trim();
-
-  }
-
-  function getCustomerKey(data){
-
-    const email = String(
-      data.email ||
-      data.customerEmail ||
-      ""
-    ).trim().toLowerCase();
-
-    if(email){
-      return "email:" + email;
-    }
-
-    const phone = String(
-      data.phone ||
-      data.customerPhone ||
-      ""
-    ).replace(/\s+/g,"");
-
-    if(phone){
-      return "phone:" + phone;
-    }
-
-    const id = String(
-      data.id ||
-      data.customerId ||
-      ""
-    ).trim().toLowerCase();
-
-    if(id){
-      return "id:" + id;
-    }
-
-    const name = String(
-      data.name ||
-      data.customerName ||
-      data.fullName ||
-      ""
-    ).trim().toLowerCase();
-
-    return "name:" + name;
-
-  }
-
-
-  /* =======================================================
-     DEMO DATA
-  ======================================================= */
-
-  const DEMO_CUSTOMERS = [
+  return [
 
     {
       id:"CUS-1001",
       name:"Nusrat Jahan",
       email:"nusrat@example.com",
-      phone:"+880 1712-345678",
+      phone:"+880 1711-223344",
       status:"active",
-      joined:daysAgo(12),
+      joined:daysAgo(14),
       address:"Moulvibazar, Bangladesh",
-      note:"Interested in business and portfolio websites.",
+      note:"Interested in business website packages.",
       avatar:"",
-      demo:true
+      totalOrders:3,
+      totalSpent:18700,
+      lastOrder:daysAgo(4)
     },
 
     {
       id:"CUS-1002",
       name:"Rahim Ahmed",
       email:"rahim@example.com",
-      phone:"+880 1812-458912",
+      phone:"+880 1812-334455",
       status:"active",
-      joined:daysAgo(44),
-      address:"Sylhet, Bangladesh",
-      note:"Returning customer.",
+      joined:daysAgo(45),
+      address:"Dhaka, Bangladesh",
+      note:"",
       avatar:"",
-      demo:true
+      totalOrders:2,
+      totalSpent:12900,
+      lastOrder:daysAgo(8)
     },
 
     {
       id:"CUS-1003",
       name:"Sadia Islam",
       email:"sadia@example.com",
-      phone:"+880 1911-783421",
+      phone:"+880 1913-445566",
       status:"active",
-      joined:daysAgo(75),
-      address:"Dhaka, Bangladesh",
-      note:"",
+      joined:daysAgo(6),
+      address:"Sylhet, Bangladesh",
+      note:"Portfolio website customer.",
       avatar:"",
-      demo:true
+      totalOrders:1,
+      totalSpent:6500,
+      lastOrder:daysAgo(6)
     },
 
     {
       id:"CUS-1004",
       name:"Tanvir Hasan",
       email:"tanvir@example.com",
-      phone:"+880 1610-884522",
-      status:"inactive",
-      joined:daysAgo(140),
+      phone:"+880 1614-556677",
+      status:"suspended",
+      joined:daysAgo(95),
       address:"Chattogram, Bangladesh",
-      note:"No recent activity.",
+      note:"Payment verification required.",
       avatar:"",
-      demo:true
+      totalOrders:2,
+      totalSpent:8400,
+      lastOrder:daysAgo(23)
     },
 
     {
       id:"CUS-1005",
       name:"Mahi Rahman",
       email:"mahi@example.com",
-      phone:"+880 1715-234111",
+      phone:"+880 1515-667788",
       status:"active",
-      joined:daysAgo(21),
-      address:"Dhaka, Bangladesh",
-      note:"Purchased a restaurant website.",
+      joined:daysAgo(18),
+      address:"Rajshahi, Bangladesh",
+      note:"",
       avatar:"",
-      demo:true
+      totalOrders:4,
+      totalSpent:23400,
+      lastOrder:daysAgo(2)
     },
 
     {
       id:"CUS-1006",
       name:"Arif Chowdhury",
       email:"arif@example.com",
-      phone:"+880 1819-442210",
-      status:"active",
-      joined:daysAgo(185),
-      address:"Sylhet, Bangladesh",
+      phone:"+880 1416-778899",
+      status:"inactive",
+      joined:daysAgo(150),
+      address:"Khulna, Bangladesh",
       note:"",
       avatar:"",
-      demo:true
+      totalOrders:1,
+      totalSpent:4200,
+      lastOrder:daysAgo(120)
     },
 
     {
       id:"CUS-1007",
       name:"Farhana Akter",
       email:"farhana@example.com",
-      phone:"+880 1914-992321",
-      status:"suspended",
-      joined:daysAgo(220),
-      address:"Dhaka, Bangladesh",
-      note:"Account temporarily suspended.",
+      phone:"+880 1317-889900",
+      status:"active",
+      joined:daysAgo(31),
+      address:"Mymensingh, Bangladesh",
+      note:"Agency website inquiry.",
       avatar:"",
-      demo:true
+      totalOrders:2,
+      totalSpent:10800,
+      lastOrder:daysAgo(12)
     },
 
     {
       id:"CUS-1008",
       name:"Imran Hossain",
       email:"imran@example.com",
-      phone:"+880 1677-773311",
+      phone:"+880 1218-990011",
       status:"active",
-      joined:daysAgo(9),
-      address:"Moulvibazar, Bangladesh",
-      note:"New customer.",
+      joined:daysAgo(74),
+      address:"Comilla, Bangladesh",
+      note:"",
       avatar:"",
-      demo:true
+      totalOrders:1,
+      totalSpent:5500,
+      lastOrder:daysAgo(41)
     }
 
   ];
 
-
-  const DEMO_ORDERS = [
-
-    {
-      id:"WD-1028",
-      customer:"Nusrat Jahan",
-      customerEmail:"nusrat@example.com",
-      customerPhone:"+880 1712-345678",
-      website:"Corporate Pro",
-      category:"Business",
-      amount:8500,
-      orderStatus:"completed",
-      paymentStatus:"paid",
-      date:daysAgo(5)
-    },
-
-    {
-      id:"WD-1029",
-      customer:"Rahim Ahmed",
-      customerEmail:"rahim@example.com",
-      customerPhone:"+880 1812-458912",
-      website:"Creative Studio",
-      category:"Agency",
-      amount:6500,
-      orderStatus:"completed",
-      paymentStatus:"paid",
-      date:daysAgo(17)
-    },
-
-    {
-      id:"WD-1030",
-      customer:"Rahim Ahmed",
-      customerEmail:"rahim@example.com",
-      customerPhone:"+880 1812-458912",
-      website:"Starter Monthly",
-      category:"Monthly",
-      amount:3250,
-      orderStatus:"completed",
-      paymentStatus:"paid",
-      date:daysAgo(48)
-    },
-
-    {
-      id:"WD-1031",
-      customer:"Sadia Islam",
-      customerEmail:"sadia@example.com",
-      customerPhone:"+880 1911-783421",
-      website:"ShopEasy Store",
-      category:"E-commerce",
-      amount:12500,
-      orderStatus:"processing",
-      paymentStatus:"pending",
-      date:daysAgo(3)
-    },
-
-    {
-      id:"WD-1032",
-      customer:"Mahi Rahman",
-      customerEmail:"mahi@example.com",
-      customerPhone:"+880 1715-234111",
-      website:"Cafe Corner",
-      category:"Restaurant",
-      amount:5500,
-      orderStatus:"completed",
-      paymentStatus:"paid",
-      date:daysAgo(11)
-    },
-
-    {
-      id:"WD-1033",
-      customer:"Arif Chowdhury",
-      customerEmail:"arif@example.com",
-      customerPhone:"+880 1819-442210",
-      website:"Personal Folio",
-      category:"Portfolio",
-      amount:4200,
-      orderStatus:"completed",
-      paymentStatus:"paid",
-      date:daysAgo(76)
-    },
-
-    {
-      id:"WD-1034",
-      customer:"Farhana Akter",
-      customerEmail:"farhana@example.com",
-      customerPhone:"+880 1914-992321",
-      website:"Corporate Pro",
-      category:"Business",
-      amount:8500,
-      orderStatus:"cancelled",
-      paymentStatus:"cancelled",
-      date:daysAgo(91)
-    },
-
-    {
-      id:"WD-1035",
-      customer:"Imran Hossain",
-      customerEmail:"imran@example.com",
-      customerPhone:"+880 1677-773311",
-      website:"Biz Launch",
-      category:"Business",
-      amount:7200,
-      orderStatus:"completed",
-      paymentStatus:"paid",
-      date:daysAgo(6)
-    }
-
-  ];
+}
 
 
-  /* =======================================================
-     LOAD RAW DATA
-  ======================================================= */
+/* =========================================================
+   LOAD DATA
+========================================================= */
 
-  function loadRawData(){
+function loadData(){
 
-    let storedCustomers = readArray(CUSTOMER_KEY);
+  const storedCustomers = parseArray(CUSTOMER_KEY);
 
-    const storedOrders = readArray(ORDERS_KEY);
+  orders = parseArray(ORDERS_KEY).map(normalizeOrder);
 
-    const storedTransactions = readArray(TRANSACTIONS_KEY);
+  transactions = parseArray(TRANSACTIONS_KEY).map(normalizeTransaction);
 
-    const storedPaymentTransactions =
-      readArray(PAYMENT_TRANSACTIONS_KEY);
+  paymentTransactions =
+    parseArray(PAYMENT_TRANSACTIONS_KEY).map(normalizeTransaction);
 
-    const hasAnyRealData =
-      storedCustomers.length > 0 ||
-      storedOrders.length > 0 ||
-      storedTransactions.length > 0 ||
-      storedPaymentTransactions.length > 0;
+  /*
+    If there is no explicit customer storage but there are
+    orders / transactions, derive customers from those records.
+  */
+
+  const hasCustomerStorage = storedCustomers.length > 0;
+
+  const map = new Map();
+
+  if(hasCustomerStorage){
+
+    storedCustomers.forEach(raw => {
+
+      const customer = normalizeStoredCustomer(raw);
+
+      const key = customerKey(customer);
+
+      if(key){
+        map.set(key,customer);
+      }
+
+    });
+
+  }
+
+
+  /*
+    Add customers from orders.
+  */
+
+  orders.forEach(order => {
 
     if(
-      !hasAnyRealData
+      !order.email &&
+      !order.phone &&
+      !order.name
     ){
-
-      storedCustomers = DEMO_CUSTOMERS.map(item => ({
-        ...item
-      }));
-
-      localStorage.setItem(
-        CUSTOMER_KEY,
-        JSON.stringify(storedCustomers)
-      );
-
-      return {
-        customers:storedCustomers,
-        orders:DEMO_ORDERS.map(item => ({...item}))
-      };
-
-    }
-
-    return {
-      customers:storedCustomers,
-      orders:storedOrders
-    };
-
-  }
-
-
-  /* =======================================================
-     DERIVE CUSTOMER DATA
-  ======================================================= */
-
-  function buildCustomers(){
-
-    const raw = loadRawData();
-
-    const explicitCustomers = raw.customers || [];
-
-    const orders = raw.orders || [];
-
-    const map = new Map();
-
-    /*
-      First create customer records from explicit customer storage.
-    */
-
-    explicitCustomers.forEach(item => {
-
-      const key = getCustomerKey(item);
-
-      if(!key){
-        return;
-      }
-
-      map.set(
-        key,
-        {
-          id:
-            item.id ||
-            item.customerId ||
-            generateCustomerId(map.size + 1),
-
-          name:
-            item.name ||
-            item.customerName ||
-            item.fullName ||
-            "Unnamed Customer",
-
-          email:
-            item.email ||
-            item.customerEmail ||
-            "",
-
-          phone:
-            item.phone ||
-            item.customerPhone ||
-            item.mobile ||
-            "",
-
-          status:
-            normalizeStatus(item.status),
-
-          joined:
-            item.joined ||
-            item.joinedAt ||
-            item.createdAt ||
-            item.date ||
-            "",
-
-          address:
-            item.address ||
-            "",
-
-          note:
-            item.note ||
-            item.notes ||
-            "",
-
-          avatar:
-            item.avatar ||
-            item.image ||
-            item.photo ||
-            "",
-
-          explicit:true
-
-        }
-      );
-
-    });
-
-
-    /*
-      Then derive customers from orders.
-    */
-
-    orders.forEach(order => {
-
-      const name = getOrderCustomerName(order);
-      const email = getOrderEmail(order);
-      const phone = getOrderPhone(order);
-
-      if(!name && !email && !phone){
-        return;
-      }
-
-      const key = getCustomerKey({
-        name,
-        email,
-        phone
-      });
-
-      if(!key){
-        return;
-      }
-
-      if(!map.has(key)){
-
-        map.set(
-          key,
-          {
-            id:
-              order.customerId ||
-              order.customerID ||
-              generateCustomerId(map.size + 1),
-
-            name:
-              name ||
-              email ||
-              phone ||
-              "Unnamed Customer",
-
-            email,
-            phone,
-
-            status:"active",
-
-            joined:
-              getOrderDate(order) ||
-              new Date().toISOString(),
-
-            address:"",
-            note:"",
-            avatar:"",
-            explicit:false
-
-          }
-        );
-
-      }else{
-
-        const customer = map.get(key);
-
-        if(!customer.name && name){
-          customer.name = name;
-        }
-
-        if(!customer.email && email){
-          customer.email = email;
-        }
-
-        if(!customer.phone && phone){
-          customer.phone = phone;
-        }
-
-        map.set(key,customer);
-
-      }
-
-    });
-
-
-    const result = [];
-
-
-    map.forEach(customer => {
-
-      const customerOrders =
-        orders.filter(order => {
-
-          const orderKey = getCustomerKey({
-            id:
-              order.customerId ||
-              order.customerID,
-
-            name:getOrderCustomerName(order),
-
-            email:getOrderEmail(order),
-
-            phone:getOrderPhone(order)
-          });
-
-          return orderKey === getCustomerKey(customer);
-
-        });
-
-
-      const paidOrders =
-        customerOrders.filter(order =>
-          normalizePaymentStatus(
-            order.paymentStatus ||
-            order.payment_state ||
-            order.payment_state_label ||
-            order.payment
-          ) === "paid"
-        );
-
-
-      const totalSpent =
-        paidOrders.reduce(
-          (sum,order) =>
-            sum + getOrderAmount(order),
-          0
-        );
-
-
-      const sortedDates =
-        customerOrders
-          .map(order => parseDate(getOrderDate(order)))
-          .filter(Boolean)
-          .sort(
-            (a,b) => b.getTime() - a.getTime()
-          );
-
-
-      const lastOrder =
-        sortedDates.length
-          ? sortedDates[0].toISOString()
-          : "";
-
-
-      /*
-        Joined date should remain the explicit
-        customer date if available.
-      */
-
-      const joined =
-        customer.joined ||
-        (
-          customerOrders.length
-            ? customerOrders
-                .map(order => parseDate(getOrderDate(order)))
-                .filter(Boolean)
-                .sort(
-                  (a,b) => a.getTime() - b.getTime()
-                )[0]
-                ?.toISOString() || ""
-            : ""
-        );
-
-
-      result.push({
-
-        ...customer,
-
-        joined,
-
-        totalOrders:
-          customerOrders.length,
-
-        totalSpent,
-
-        lastOrder,
-
-        isNew:
-          isWithin30Days(joined),
-
-        isReturning:
-          customerOrders.length >= 2,
-
-        orders:customerOrders
-
-      });
-
-    });
-
-
-    return result;
-
-  }
-
-
-  function generateCustomerId(index){
-
-    return "CUS-" + String(
-      1000 + index
-    );
-
-  }
-
-
-  /* =======================================================
-     INIT DATA
-  ======================================================= */
-
-  customers = buildCustomers();
-
-
-  /* =======================================================
-     STATS
-  ======================================================= */
-
-  function updateStats(){
-
-    const total =
-      customers.length;
-
-    const active =
-      customers.filter(
-        customer =>
-          customer.status === "active"
-      ).length;
-
-    const newCount =
-      customers.filter(
-        customer =>
-          customer.isNew
-      ).length;
-
-    const revenue =
-      customers.reduce(
-        (sum,customer) =>
-          sum + number(customer.totalSpent),
-        0
-      );
-
-    const returning =
-      customers.filter(
-        customer =>
-          customer.totalOrders >= 2
-      ).length;
-
-    $("totalCustomers").textContent =
-      total.toLocaleString("en-BD");
-
-    $("activeCustomers").textContent =
-      active.toLocaleString("en-BD");
-
-    $("newCustomers").textContent =
-      newCount.toLocaleString("en-BD");
-
-    $("customerRevenue").textContent =
-      money(revenue);
-
-    $("returningCustomers").textContent =
-      returning.toLocaleString("en-BD");
-
-  }
-
-
-  /* =======================================================
-     FILTER + SORT
-  ======================================================= */
-
-  function applyFilters(){
-
-    const search =
-      $("searchInput").value
-        .trim()
-        .toLowerCase();
-
-    const status =
-      $("statusFilter").value;
-
-    const type =
-      $("typeFilter").value;
-
-    const sort =
-      $("sortFilter").value;
-
-
-    filteredCustomers =
-      customers.filter(customer => {
-
-        const searchable = [
-          customer.id,
-          customer.name,
-          customer.email,
-          customer.phone
-        ]
-          .join(" ")
-          .toLowerCase();
-
-
-        if(
-          search &&
-          !searchable.includes(search)
-        ){
-          return false;
-        }
-
-
-        if(
-          status !== "all" &&
-          customer.status !== status
-        ){
-          return false;
-        }
-
-
-        if(
-          type === "new" &&
-          !customer.isNew
-        ){
-          return false;
-        }
-
-
-        if(
-          type === "returning" &&
-          !customer.isReturning
-        ){
-          return false;
-        }
-
-
-        return true;
-
-      });
-
-
-    filteredCustomers.sort(
-      (a,b) => {
-
-        switch(sort){
-
-          case "oldest":
-            return (
-              (parseDate(a.joined)?.getTime() || 0) -
-              (parseDate(b.joined)?.getTime() || 0)
-            );
-
-          case "spendingHigh":
-            return (
-              number(b.totalSpent) -
-              number(a.totalSpent)
-            );
-
-          case "spendingLow":
-            return (
-              number(a.totalSpent) -
-              number(b.totalSpent)
-            );
-
-          case "ordersHigh":
-            return (
-              number(b.totalOrders) -
-              number(a.totalOrders)
-            );
-
-          case "ordersLow":
-            return (
-              number(a.totalOrders) -
-              number(b.totalOrders)
-            );
-
-          case "nameAZ":
-            return String(a.name).localeCompare(
-              String(b.name)
-            );
-
-          case "nameZA":
-            return String(b.name).localeCompare(
-              String(a.name)
-            );
-
-          case "newest":
-          default:
-            return (
-              (parseDate(b.joined)?.getTime() || 0) -
-              (parseDate(a.joined)?.getTime() || 0)
-            );
-
-        }
-
-      }
-    );
-
-
-    currentPage = 1;
-
-    render();
-
-  }
-
-
-  /* =======================================================
-     RENDER
-  ======================================================= */
-
-  function render(){
-
-    const tbody =
-      $("customerTableBody");
-
-    const empty =
-      $("emptyState");
-
-    const total =
-      filteredCustomers.length;
-
-    const totalPages =
-      Math.max(
-        1,
-        Math.ceil(total / PAGE_SIZE)
-      );
-
-
-    if(currentPage > totalPages){
-      currentPage = totalPages;
-    }
-
-
-    const start =
-      (currentPage - 1) * PAGE_SIZE;
-
-    const pageItems =
-      filteredCustomers.slice(
-        start,
-        start + PAGE_SIZE
-      );
-
-
-    tbody.innerHTML = "";
-
-
-    if(!pageItems.length){
-
-      empty.classList.add("show");
-
-    }else{
-
-      empty.classList.remove("show");
-
-
-      pageItems.forEach(customer => {
-
-        const tr =
-          document.createElement("tr");
-
-
-        const checked =
-          selectedIds.has(customer.id)
-            ? "checked"
-            : "";
-
-
-        const statusClass =
-          customer.status;
-
-
-        const statusLabel =
-          customer.status;
-
-
-        const customerType =
-          customer.isNew
-            ? `<span class="badge new">new</span>`
-            : "";
-
-
-        tr.innerHTML = `
-
-          <td>
-            <input
-              type="checkbox"
-              class="checkbox row-check"
-              data-id="${escapeHTML(customer.id)}"
-              ${checked}
-            >
-          </td>
-
-          <td>
-
-            <div class="customer-cell">
-
-              <div class="customer-avatar">
-
-                ${
-                  customer.avatar
-                    ? `<img
-                        src="${escapeHTML(customer.avatar)}"
-                        alt="${escapeHTML(customer.name)}"
-                        onerror="this.parentElement.textContent='${escapeHTML(initials(customer.name))}'"
-                      >`
-                    : escapeHTML(initials(customer.name))
-                }
-
-              </div>
-
-              <div>
-
-                <div class="customer-name">
-                  ${escapeHTML(customer.name)}
-                </div>
-
-                <div class="customer-id">
-                  ${escapeHTML(customer.id)}
-                </div>
-
-              </div>
-
-            </div>
-
-          </td>
-
-          <td>
-
-            <div class="contact-line">
-
-              <strong>
-                ${escapeHTML(customer.email || "No email")}
-              </strong>
-
-              <span>
-                ${escapeHTML(customer.phone || "No phone")}
-              </span>
-
-            </div>
-
-          </td>
-
-          <td>
-            <strong>${number(customer.totalOrders)}</strong>
-          </td>
-
-          <td>
-            <span class="money">
-              ${money(customer.totalSpent)}
-            </span>
-          </td>
-
-          <td>
-            <span class="muted">
-              ${formatDate(customer.lastOrder)}
-            </span>
-          </td>
-
-          <td>
-            <span class="badge ${statusClass}">
-              ${escapeHTML(statusLabel)}
-            </span>
-
-            <div style="margin-top:5px;">
-              ${customerType}
-            </div>
-          </td>
-
-          <td>
-            <span class="muted">
-              ${formatDate(customer.joined)}
-            </span>
-          </td>
-
-          <td>
-
-            <div class="actions">
-
-              <button
-                class="action-btn"
-                type="button"
-                title="View customer"
-                data-action="view"
-                data-id="${escapeHTML(customer.id)}"
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/>
-                  <circle cx="12" cy="12" r="3"/>
-                </svg>
-              </button>
-
-              <button
-                class="action-btn"
-                type="button"
-                title="Edit customer"
-                data-action="edit"
-                data-id="${escapeHTML(customer.id)}"
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <path d="M12 20h9"/>
-                  <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"/>
-                </svg>
-              </button>
-
-              <button
-                class="action-btn danger"
-                type="button"
-                title="Delete customer"
-                data-action="delete"
-                data-id="${escapeHTML(customer.id)}"
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <path d="M3 6h18"/>
-                  <path d="M8 6V4h8v2"/>
-                  <path d="m19 6-1 15H6L5 6"/>
-                  <path d="M10 11v6M14 11v6"/>
-                </svg>
-              </button>
-
-            </div>
-
-          </td>
-
-        `;
-
-
-        tbody.appendChild(tr);
-
-      });
-
-    }
-
-
-    const shownStart =
-      total === 0 ? 0 : start + 1;
-
-    const shownEnd =
-      Math.min(
-        start + PAGE_SIZE,
-        total
-      );
-
-
-    $("resultCount").textContent =
-      `Showing ${shownStart}-${shownEnd} of ${total} customers`;
-
-
-    renderPagination(totalPages);
-
-    updateSelectAllState();
-
-    updateBulkBar();
-
-  }
-
-
-  /* =======================================================
-     PAGINATION
-  ======================================================= */
-
-  function renderPagination(totalPages){
-
-    const pagination =
-      $("pagination");
-
-    pagination.innerHTML = "";
-
-
-    const prev =
-      document.createElement("button");
-
-    prev.className = "page-btn";
-
-    prev.textContent = "‹";
-
-    prev.disabled =
-      currentPage <= 1;
-
-    prev.addEventListener(
-      "click",
-      () => {
-
-        if(currentPage > 1){
-
-          currentPage--;
-
-          render();
-
-        }
-
-      }
-    );
-
-    pagination.appendChild(prev);
-
-
-    const pages = [];
-
-    const maxVisible = 5;
-
-    let startPage =
-      Math.max(
-        1,
-        currentPage - 2
-      );
-
-    let endPage =
-      Math.min(
-        totalPages,
-        startPage + maxVisible - 1
-      );
-
-
-    if(endPage - startPage < maxVisible - 1){
-
-      startPage =
-        Math.max(
-          1,
-          endPage - maxVisible + 1
-        );
-
-    }
-
-
-    for(
-      let page = startPage;
-      page <= endPage;
-      page++
-    ){
-
-      pages.push(page);
-
-    }
-
-
-    pages.forEach(page => {
-
-      const btn =
-        document.createElement("button");
-
-      btn.className =
-        "page-btn" +
-        (
-          page === currentPage
-            ? " active"
-            : ""
-        );
-
-      btn.textContent = page;
-
-      btn.addEventListener(
-        "click",
-        () => {
-
-          currentPage = page;
-
-          render();
-
-        }
-      );
-
-      pagination.appendChild(btn);
-
-    });
-
-
-    const next =
-      document.createElement("button");
-
-    next.className = "page-btn";
-
-    next.textContent = "›";
-
-    next.disabled =
-      currentPage >= totalPages;
-
-    next.addEventListener(
-      "click",
-      () => {
-
-        if(currentPage < totalPages){
-
-          currentPage++;
-
-          render();
-
-        }
-
-      }
-    );
-
-    pagination.appendChild(next);
-
-  }
-
-
-  /* =======================================================
-     SELECTION
-  ======================================================= */
-
-  function updateSelectAllState(){
-
-    const visibleIds =
-      filteredCustomers
-        .slice(
-          (currentPage - 1) * PAGE_SIZE,
-          currentPage * PAGE_SIZE
-        )
-        .map(customer => customer.id);
-
-
-    const selectedVisible =
-      visibleIds.filter(
-        id => selectedIds.has(id)
-      );
-
-
-    const selectAll =
-      $("selectAll");
-
-
-    selectAll.checked =
-      visibleIds.length > 0 &&
-      selectedVisible.length === visibleIds.length;
-
-
-    selectAll.indeterminate =
-      selectedVisible.length > 0 &&
-      selectedVisible.length < visibleIds.length;
-
-  }
-
-
-  function updateBulkBar(){
-
-    const count =
-      selectedIds.size;
-
-    $("selectedCount").textContent =
-      count;
-
-    $("bulkBar").classList.toggle(
-      "show",
-      count > 0
-    );
-
-  }
-
-
-  function handleRowSelection(event){
-
-    const checkbox =
-      event.target.closest(".row-check");
-
-    if(!checkbox){
       return;
     }
 
-    const id =
-      checkbox.dataset.id;
+    const key = customerKey({
+      id:order.customerId,
+      email:order.email,
+      phone:order.phone,
+      name:order.name
+    });
 
-    if(checkbox.checked){
-
-      selectedIds.add(id);
-
-    }else{
-
-      selectedIds.delete(id);
-
-    }
-
-    updateSelectAllState();
-
-    updateBulkBar();
-
-  }
-
-
-  $("selectAll").addEventListener(
-    "change",
-    function(){
-
-      const visibleCustomers =
-        filteredCustomers.slice(
-          (currentPage - 1) * PAGE_SIZE,
-          currentPage * PAGE_SIZE
-        );
-
-
-      visibleCustomers.forEach(
-        customer => {
-
-          if(this.checked){
-
-            selectedIds.add(
-              customer.id
-            );
-
-          }else{
-
-            selectedIds.delete(
-              customer.id
-            );
-
-          }
-
-        }
-      );
-
-
-      render();
-
-    }
-  );
-
-
-  $("customerTableBody").addEventListener(
-    "change",
-    handleRowSelection
-  );
-
-
-  /* =======================================================
-     MODAL
-  ======================================================= */
-
-  function openModal(id, mode){
-
-    const customer =
-      customers.find(
-        item => item.id === id
-      );
-
+    let customer = map.get(key);
 
     if(!customer){
-      return;
-    }
 
+      customer = {
+        id:order.customerId || generateCustomerId(),
+        name:order.name || "Customer",
+        email:order.email,
+        phone:order.phone,
+        status:"active",
+        joined:order.date || new Date().toISOString(),
+        address:"",
+        note:"",
+        avatar:"",
+        totalOrders:0,
+        totalSpent:0,
+        lastOrder:""
+      };
 
-    editingCustomerId = id;
-
-
-    $("customerModalTitle").textContent =
-      mode === "view"
-        ? "Customer Details"
-        : "Edit Customer";
-
-
-    $("customerModalSubtitle").textContent =
-      mode === "view"
-        ? "Review profile information and order history."
-        : "Update customer profile and account status.";
-
-
-    $("customerId").value =
-      customer.id || "";
-
-    $("customerName").value =
-      customer.name || "";
-
-    $("customerEmail").value =
-      customer.email || "";
-
-    $("customerPhone").value =
-      customer.phone || "";
-
-    $("customerStatus").value =
-      customer.status || "active";
-
-    $("customerJoined").value =
-      dateISO(customer.joined);
-
-    $("customerAddress").value =
-      customer.address || "";
-
-    $("customerNote").value =
-      customer.note || "";
-
-
-    renderModalProfile(customer);
-
-    renderHistory(customer);
-
-    updateModalStatusButton(customer);
-
-
-    const readOnly =
-      mode === "view";
-
-
-    [
-      "customerName",
-      "customerEmail",
-      "customerPhone",
-      "customerStatus",
-      "customerJoined",
-      "customerAddress",
-      "customerNote"
-    ].forEach(id => {
-
-      $(id).disabled = readOnly;
-
-    });
-
-
-    $("saveCustomerBtn").style.display =
-      readOnly
-        ? "none"
-        : "inline-flex";
-
-
-    $("modalStatusBtn").textContent =
-      customer.status === "suspended"
-        ? "Activate"
-        : "Suspend";
-
-
-    $("customerModal").classList.add("show");
-
-    document.body.style.overflow = "hidden";
-
-  }
-
-
-  function renderModalProfile(customer){
-
-    const avatar =
-      $("modalAvatar");
-
-
-    if(customer.avatar){
-
-      avatar.innerHTML =
-        `<img
-          src="${escapeHTML(customer.avatar)}"
-          alt="${escapeHTML(customer.name)}"
-        >`;
-
-    }else{
-
-      avatar.textContent =
-        initials(customer.name);
+      map.set(key,customer);
 
     }
 
-
-    $("modalProfileName").textContent =
-      customer.name || "Unnamed Customer";
-
-    $("modalProfileEmail").textContent =
-      customer.email || "No email address";
-
-
-    const badge =
-      $("modalStatusBadge");
-
-    badge.className =
-      "badge " + customer.status;
-
-    badge.textContent =
-      customer.status;
-
-    $("modalOrders").textContent =
-      number(customer.totalOrders);
-
-    $("modalSpent").textContent =
-      money(customer.totalSpent);
-
-    $("modalLastOrder").textContent =
-      formatDate(customer.lastOrder);
-
-  }
-
-
-  function updateModalStatusButton(customer){
-
-    const btn =
-      $("modalStatusBtn");
-
-    if(customer.status === "suspended"){
-
-      btn.textContent = "Activate";
-
-    }else{
-
-      btn.textContent = "Suspend";
-
+    if(!customer.name && order.name){
+      customer.name = order.name;
     }
 
-  }
-
-
-  function renderHistory(customer){
-
-    const list =
-      $("historyList");
-
-
-    const orders =
-      Array.isArray(customer.orders)
-        ? [...customer.orders]
-        : [];
-
-
-    orders.sort(
-      (a,b) => {
-
-        return (
-          (parseDate(getOrderDate(b))?.getTime() || 0) -
-          (parseDate(getOrderDate(a))?.getTime() || 0)
-        );
-
-      }
-    );
-
-
-    if(!orders.length){
-
-      list.innerHTML =
-        `
-          <div class="history-empty">
-            No order history found for this customer.
-          </div>
-        `;
-
-      return;
-
+    if(!customer.email && order.email){
+      customer.email = order.email;
     }
 
-
-    list.innerHTML =
-      orders.map(order => {
-
-        const payment =
-          normalizePaymentStatus(
-            order.paymentStatus ||
-            order.payment
-          );
-
-
-        return `
-          <div class="history-item">
-
-            <div class="history-id">
-              ${escapeHTML(
-                getOrderId(order) || "Order"
-              )}
-            </div>
-
-            <div>
-              <div class="history-name">
-                ${escapeHTML(
-                  order.website ||
-                  order.websiteName ||
-                  order.product ||
-                  order.productName ||
-                  "Website"
-                )}
-              </div>
-
-              <div style="margin-top:4px;">
-                <span class="badge ${
-                  payment === "paid"
-                    ? "active"
-                    : payment === "cancelled"
-                      ? "suspended"
-                      : "inactive"
-                }">
-                  ${escapeHTML(payment)}
-                </span>
-              </div>
-            </div>
-
-            <div class="history-date">
-              ${formatDate(getOrderDate(order))}
-            </div>
-
-            <div class="history-money">
-              ${money(getOrderAmount(order))}
-            </div>
-
-          </div>
-        `;
-
-      }).join("");
-
-  }
-
-
-  function closeModal(id){
-
-    $(id).classList.remove("show");
-
-    if(
-      !document.querySelector(
-        ".modal-backdrop.show"
-      )
-    ){
-
-      document.body.style.overflow = "";
-
+    if(!customer.phone && order.phone){
+      customer.phone = order.phone;
     }
-
-    if(id === "customerModal"){
-
-      editingCustomerId = null;
-
-    }
-
-  }
-
-
-  document.addEventListener(
-    "click",
-    function(event){
-
-      const close =
-        event.target.closest(
-          "[data-close-modal]"
-        );
-
-      if(close){
-
-        closeModal(
-          close.dataset.closeModal
-        );
-
-      }
-
-    }
-  );
-
-
-  document.querySelectorAll(
-    ".modal-backdrop"
-  ).forEach(backdrop => {
-
-    backdrop.addEventListener(
-      "click",
-      function(event){
-
-        if(event.target === backdrop){
-
-          closeModal(
-            backdrop.id
-          );
-
-        }
-
-      }
-    );
 
   });
 
 
-  document.addEventListener(
-    "keydown",
-    function(event){
+  /*
+    Add customers from transactions if needed.
+  */
 
-      if(event.key === "Escape"){
+  [...transactions,...paymentTransactions].forEach(tx => {
 
-        document.querySelectorAll(
-          ".modal-backdrop.show"
-        ).forEach(modal => {
+    if(
+      !tx.email &&
+      !tx.phone &&
+      !tx.name
+    ){
+      return;
+    }
 
-          closeModal(modal.id);
+    const key = customerKey({
+      email:tx.email,
+      phone:tx.phone,
+      name:tx.name
+    });
 
-        });
+    if(!map.has(key)){
+
+      map.set(key,{
+        id:generateCustomerId(),
+        name:tx.name || "Customer",
+        email:tx.email,
+        phone:tx.phone,
+        status:"active",
+        joined:tx.date || new Date().toISOString(),
+        address:"",
+        note:"",
+        avatar:"",
+        totalOrders:0,
+        totalSpent:0,
+        lastOrder:""
+      });
+
+    }
+
+  });
+
+
+  /*
+    If absolutely nothing exists, use demo data.
+  */
+
+  if(
+    storedCustomers.length === 0 &&
+    orders.length === 0 &&
+    transactions.length === 0 &&
+    paymentTransactions.length === 0
+  ){
+
+    customers = getDemoCustomers();
+
+  }else{
+
+    customers = Array.from(map.values());
+
+  }
+
+
+  enrichCustomers();
+
+}
+
+
+/* =========================================================
+   NORMALIZE STORED CUSTOMER
+========================================================= */
+
+function normalizeStoredCustomer(raw){
+
+  return {
+
+    id:String(
+      firstValue(
+        raw.id,
+        raw.customerId,
+        raw.customerID,
+        generateCustomerId()
+      )
+    ),
+
+    name:String(
+      firstValue(
+        raw.name,
+        raw.customerName,
+        raw.fullName,
+        "Customer"
+      )
+    ),
+
+    email:String(
+      firstValue(
+        raw.email,
+        raw.customerEmail
+      )
+    ).trim().toLowerCase(),
+
+    phone:String(
+      firstValue(
+        raw.phone,
+        raw.customerPhone,
+        raw.mobile
+      )
+    ),
+
+    status:normalizeCustomerStatus(raw.status),
+
+    joined:firstValue(
+      raw.joined,
+      raw.joinedAt,
+      raw.createdAt,
+      raw.created_at,
+      raw.date
+    ),
+
+    address:String(
+      firstValue(
+        raw.address,
+        raw.customerAddress
+      )
+    ),
+
+    note:String(
+      firstValue(
+        raw.note,
+        raw.notes,
+        raw.customerNote
+      )
+    ),
+
+    avatar:String(
+      firstValue(
+        raw.avatar,
+        raw.avatarUrl,
+        raw.photo
+      )
+    ),
+
+    totalOrders:Number(raw.totalOrders) || 0,
+
+    totalSpent:Number(raw.totalSpent) || 0,
+
+    lastOrder:firstValue(
+      raw.lastOrder,
+      raw.lastOrderAt
+    )
+
+  };
+
+}
+
+
+/* =========================================================
+   ENRICH CUSTOMERS
+========================================================= */
+
+function enrichCustomers(){
+
+  customers.forEach(customer => {
+
+    const relatedOrders = orders.filter(order =>
+      matchesCustomer(customer,order)
+    );
+
+    /*
+      Only override aggregate data when actual orders exist.
+    */
+
+    if(relatedOrders.length > 0){
+
+      customer.totalOrders = relatedOrders.length;
+
+      const paidOrders = relatedOrders.filter(order =>
+        order.paymentStatus === "paid" ||
+        order.orderStatus === "completed"
+      );
+
+      /*
+        Total spent is based on paid/completed orders.
+      */
+
+      if(paidOrders.length > 0){
+
+        customer.totalSpent = paidOrders.reduce(
+          (sum,order) => sum + order.amount,
+          0
+        );
+
+      }else{
+
+        customer.totalSpent = 0;
+
+      }
+
+      const dates = relatedOrders
+        .map(order => toTimestamp(order.date))
+        .filter(Boolean);
+
+      if(dates.length){
+
+        customer.lastOrder =
+          new Date(Math.max(...dates)).toISOString();
+
+      }
+
+      /*
+        If joined date is missing, use earliest order.
+      */
+
+      if(!customer.joined){
+
+        customer.joined =
+          new Date(Math.min(...dates)).toISOString();
 
       }
 
     }
+
+    customer.status =
+      normalizeCustomerStatus(customer.status);
+
+  });
+
+}
+
+
+/* =========================================================
+   MATCH CUSTOMER
+========================================================= */
+
+function matchesCustomer(customer,order){
+
+  const cEmail =
+    String(customer.email || "").trim().toLowerCase();
+
+  const oEmail =
+    String(order.email || "").trim().toLowerCase();
+
+  if(cEmail && oEmail && cEmail === oEmail){
+    return true;
+  }
+
+  const cPhone =
+    String(customer.phone || "")
+      .replace(/\s+/g,"");
+
+  const oPhone =
+    String(order.phone || "")
+      .replace(/\s+/g,"");
+
+  if(cPhone && oPhone && cPhone === oPhone){
+    return true;
+  }
+
+  const cId =
+    String(customer.id || "").toLowerCase();
+
+  const oCustomerId =
+    String(order.customerId || "").toLowerCase();
+
+  if(cId && oCustomerId && cId === oCustomerId){
+    return true;
+  }
+
+  const cName =
+    String(customer.name || "")
+      .trim()
+      .toLowerCase();
+
+  const oName =
+    String(order.name || "")
+      .trim()
+      .toLowerCase();
+
+  return Boolean(
+    cName &&
+    oName &&
+    cName === oName
   );
 
+}
 
-  /* =======================================================
-     SAVE CUSTOMER
-  ======================================================= */
 
-  function saveCustomer(){
+/* =========================================================
+   ID
+========================================================= */
 
-    if(!editingCustomerId){
-      return;
+function generateCustomerId(){
+
+  const nums = customers
+    .map(customer =>
+      parseInt(
+        String(customer.id || "")
+          .replace(/\D/g,""),
+        10
+      )
+    )
+    .filter(Number.isFinite);
+
+  const next =
+    Math.max(1000,...nums) + 1;
+
+  return "CUS-" + next;
+
+}
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.addEventListener("DOMContentLoaded",() => {
+
+  setAdminIdentity();
+
+  loadData();
+
+  updateStats();
+
+  applyFilters();
+
+  document.addEventListener("keydown",event => {
+
+    if(event.key === "Escape"){
+
+      document
+        .querySelectorAll(".modal-overlay.show")
+        .forEach(modal => {
+          modal.classList.remove("show");
+        });
+
     }
 
+  });
+
+});
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+  const total = customers.length;
+
+  const active = customers.filter(
+    c => c.status === "active"
+  ).length;
+
+  const now = Date.now();
+
+  const newCustomers = customers.filter(customer => {
+
+    const joined = toTimestamp(customer.joined);
+
+    if(!joined){
+      return false;
+    }
+
+    const diff = now - joined;
+
+    return diff >= 0 &&
+      diff <= 30 * 24 * 60 * 60 * 1000;
+
+  }).length;
+
+  const revenue = customers.reduce(
+    (sum,c) => sum + (Number(c.totalSpent) || 0),
+    0
+  );
+
+  const returning = customers.filter(
+    c => Number(c.totalOrders) >= 2
+  ).length;
+
+  document.getElementById("statTotal").textContent = total;
+  document.getElementById("statActive").textContent = active;
+  document.getElementById("statNew").textContent = newCustomers;
+  document.getElementById("statRevenue").textContent = money(revenue);
+  document.getElementById("statReturning").textContent = returning;
+
+}
+
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+function applyFilters(){
+
+  const search =
+    String(
+      document.getElementById("searchInput").value || ""
+    )
+    .trim()
+    .toLowerCase();
+
+  const status =
+    document.getElementById("statusFilter").value;
+
+  const type =
+    document.getElementById("typeFilter").value;
+
+  const sort =
+    document.getElementById("sortFilter").value;
+
+
+  filteredCustomers = customers.filter(customer => {
+
+    const searchable = [
+
+      customer.id,
+      customer.name,
+      customer.email,
+      customer.phone
+
+    ]
+    .join(" ")
+    .toLowerCase();
+
+    if(
+      search &&
+      !searchable.includes(search)
+    ){
+      return false;
+    }
+
+    if(
+      status !== "all" &&
+      customer.status !== status
+    ){
+      return false;
+    }
+
+    if(type === "new"){
+
+      const joined = toTimestamp(customer.joined);
+
+      const isNew =
+        joined &&
+        Date.now() - joined <=
+        30 * 24 * 60 * 60 * 1000;
+
+      if(!isNew){
+        return false;
+      }
+
+    }
+
+    if(type === "returning"){
+
+      if(Number(customer.totalOrders) < 2){
+        return false;
+      }
+
+    }
+
+    return true;
+
+  });
+
+
+  filteredCustomers.sort((a,b) => {
+
+    switch(sort){
+
+      case "oldest":
+        return toTimestamp(a.joined) -
+          toTimestamp(b.joined);
+
+      case "spending-high":
+        return Number(b.totalSpent) -
+          Number(a.totalSpent);
+
+      case "spending-low":
+        return Number(a.totalSpent) -
+          Number(b.totalSpent);
+
+      case "orders-high":
+        return Number(b.totalOrders) -
+          Number(a.totalOrders);
+
+      case "orders-low":
+        return Number(a.totalOrders) -
+          Number(b.totalOrders);
+
+      case "name":
+        return String(a.name || "")
+          .localeCompare(
+            String(b.name || "")
+          );
+
+      case "newest":
+      default:
+        return toTimestamp(b.joined) -
+          toTimestamp(a.joined);
+
+    }
+
+  });
+
+
+  currentPage = 1;
+
+  renderCustomers();
+
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+function resetFilters(){
+
+  document.getElementById("searchInput").value = "";
+  document.getElementById("statusFilter").value = "all";
+  document.getElementById("typeFilter").value = "all";
+  document.getElementById("sortFilter").value = "newest";
+
+  applyFilters();
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderCustomers(){
+
+  const total = filteredCustomers.length;
+
+  const totalPages =
+    Math.max(
+      1,
+      Math.ceil(total / PAGE_SIZE)
+    );
+
+  if(currentPage > totalPages){
+    currentPage = totalPages;
+  }
+
+  const start =
+    (currentPage - 1) * PAGE_SIZE;
+
+  const visible =
+    filteredCustomers.slice(
+      start,
+      start + PAGE_SIZE
+    );
+
+
+  renderDesktopTable(visible);
+
+  renderMobileList(visible);
+
+  renderPagination(total,totalPages,start,visible.length);
+
+  updateBulkBar();
+
+}
+
+
+/* =========================================================
+   DESKTOP TABLE
+========================================================= */
+
+function renderDesktopTable(list){
+
+  const tbody =
+    document.getElementById("customerTableBody");
+
+  if(!list.length){
+
+    tbody.innerHTML = "";
+
+    document.getElementById("emptyState")
+      .style.display = "block";
+
+    return;
+
+  }
+
+  document.getElementById("emptyState")
+    .style.display = "none";
+
+
+  tbody.innerHTML = list.map(customer => {
+
+    const initials =
+      getInitials(customer.name);
+
+    const avatar = customer.avatar
+      ? `
+        <img
+          src="${escapeHTML(customer.avatar)}"
+          alt="${escapeHTML(customer.name)}"
+        >
+      `
+      : escapeHTML(initials);
+
+    return `
+
+      <tr>
+
+        <td>
+          <input
+            class="checkbox customer-check"
+            type="checkbox"
+            value="${escapeHTML(customer.id)}"
+            onchange="updateBulkBar()"
+          >
+        </td>
+
+        <td>
+
+          <div class="customer-cell">
+
+            <div class="customer-avatar">
+              ${avatar}
+            </div>
+
+            <div>
+              <div class="customer-name">
+                ${escapeHTML(customer.name)}
+              </div>
+
+              <div class="customer-id">
+                ${escapeHTML(customer.id)}
+              </div>
+            </div>
+
+          </div>
+
+        </td>
+
+        <td>
+
+          <div class="contact-main">
+            ${escapeHTML(customer.email || "—")}
+          </div>
+
+          <div class="contact-sub">
+            ${escapeHTML(customer.phone || "No phone")}
+          </div>
+
+        </td>
+
+        <td>
+          <strong>${Number(customer.totalOrders) || 0}</strong>
+        </td>
+
+        <td>
+          <span class="money">
+            ${money(customer.totalSpent)}
+          </span>
+        </td>
+
+        <td>
+          <span class="muted">
+            ${formatDate(customer.lastOrder)}
+          </span>
+        </td>
+
+        <td>
+          <span class="status ${escapeHTML(customer.status)}">
+            ${escapeHTML(customer.status)}
+          </span>
+        </td>
+
+        <td>
+          <span class="muted">
+            ${formatDate(customer.joined)}
+          </span>
+        </td>
+
+        <td>
+
+          <div class="actions">
+
+            <button
+              class="action-btn"
+              title="View customer"
+              onclick="openCustomerModal('${escapeJS(customer.id)}')"
+            >
+              ◉
+            </button>
+
+            <button
+              class="action-btn"
+              title="Edit customer"
+              onclick="openCustomerModal('${escapeJS(customer.id)}')"
+            >
+              ✎
+            </button>
+
+            <button
+              class="action-btn delete"
+              title="Delete customer"
+              onclick="askDeleteCustomer('${escapeJS(customer.id)}')"
+            >
+              ×
+            </button>
+
+          </div>
+
+        </td>
+
+      </tr>
+
+    `;
+
+  }).join("");
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+function renderMobileList(list){
+
+  const container =
+    document.getElementById("mobileCustomerList");
+
+  if(!list.length){
+
+    container.innerHTML = "";
+
+    return;
+
+  }
+
+
+  container.innerHTML = list.map(customer => {
+
+    const initials =
+      getInitials(customer.name);
+
+    return `
+
+      <div class="mobile-customer">
+
+        <div class="mobile-top">
+
+          <div class="mobile-customer-main">
+
+            <input
+              class="checkbox customer-check"
+              type="checkbox"
+              value="${escapeHTML(customer.id)}"
+              onchange="updateBulkBar()"
+            >
+
+            <div class="customer-avatar">
+              ${
+                customer.avatar
+                  ? `
+                    <img
+                      src="${escapeHTML(customer.avatar)}"
+                      alt="${escapeHTML(customer.name)}"
+                    >
+                  `
+                  : escapeHTML(initials)
+              }
+            </div>
+
+            <div class="mobile-customer-info">
+
+              <strong>
+                ${escapeHTML(customer.name)}
+              </strong>
+
+              <span>
+                ${escapeHTML(customer.id)}
+              </span>
+
+            </div>
+
+          </div>
+
+          <span class="status ${escapeHTML(customer.status)}">
+            ${escapeHTML(customer.status)}
+          </span>
+
+        </div>
+
+        <div class="mobile-details">
+
+          <div class="mobile-detail">
+            <label>Email</label>
+            <strong>
+              ${escapeHTML(customer.email || "—")}
+            </strong>
+          </div>
+
+          <div class="mobile-detail">
+            <label>Phone</label>
+            <strong>
+              ${escapeHTML(customer.phone || "—")}
+            </strong>
+          </div>
+
+          <div class="mobile-detail">
+            <label>Orders</label>
+            <strong>
+              ${Number(customer.totalOrders) || 0}
+            </strong>
+          </div>
+
+          <div class="mobile-detail">
+            <label>Spent</label>
+            <strong>
+              ${money(customer.totalSpent)}
+            </strong>
+          </div>
+
+          <div class="mobile-detail">
+            <label>Last Order</label>
+            <strong>
+              ${formatDate(customer.lastOrder)}
+            </strong>
+          </div>
+
+          <div class="mobile-detail">
+            <label>Joined</label>
+            <strong>
+              ${formatDate(customer.joined)}
+            </strong>
+          </div>
+
+        </div>
+
+        <div class="mobile-actions">
+
+          <button onclick="openCustomerModal('${escapeJS(customer.id)}')">
+            View / Edit
+          </button>
+
+          <button onclick="askDeleteCustomer('${escapeJS(customer.id)}')">
+            Delete
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+  }).join("");
+
+}
+
+
+/* =========================================================
+   PAGINATION
+========================================================= */
+
+function renderPagination(
+  total,
+  totalPages,
+  start,
+  visibleCount
+){
+
+  const info =
+    document.getElementById("paginationInfo");
+
+  if(total === 0){
+
+    info.textContent = "Showing 0 customers";
+
+  }else{
+
+    info.textContent =
+      `Showing ${start + 1}-${start + visibleCount} of ${total} customers`;
+
+  }
+
+
+  const buttons =
+    document.getElementById("pageButtons");
+
+  let html = "";
+
+  html += `
+    <button
+      class="page-btn"
+      onclick="goPage(${currentPage - 1})"
+      ${currentPage <= 1 ? "disabled" : ""}
+    >
+      ‹
+    </button>
+  `;
+
+
+  const maxButtons = 5;
+
+  let startPage =
+    Math.max(
+      1,
+      currentPage - Math.floor(maxButtons / 2)
+    );
+
+  let endPage =
+    Math.min(
+      totalPages,
+      startPage + maxButtons - 1
+    );
+
+  if(endPage - startPage + 1 < maxButtons){
+
+    startPage =
+      Math.max(
+        1,
+        endPage - maxButtons + 1
+      );
+
+  }
+
+
+  for(let page = startPage; page <= endPage; page++){
+
+    html += `
+      <button
+        class="page-btn ${page === currentPage ? "active" : ""}"
+        onclick="goPage(${page})"
+      >
+        ${page}
+      </button>
+    `;
+
+  }
+
+
+  html += `
+    <button
+      class="page-btn"
+      onclick="goPage(${currentPage + 1})"
+      ${currentPage >= totalPages ? "disabled" : ""}
+    >
+      ›
+    </button>
+  `;
+
+  buttons.innerHTML = html;
+
+}
+
+
+function goPage(page){
+
+  const totalPages =
+    Math.max(
+      1,
+      Math.ceil(
+        filteredCustomers.length / PAGE_SIZE
+      )
+    );
+
+  if(
+    page < 1 ||
+    page > totalPages
+  ){
+    return;
+  }
+
+  currentPage = page;
+
+  renderCustomers();
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================================================
+   CHECKBOXES
+========================================================= */
+
+function toggleAll(checkbox){
+
+  document
+    .querySelectorAll(".customer-check")
+    .forEach(input => {
+      input.checked = checkbox.checked;
+    });
+
+  updateBulkBar();
+
+}
+
+
+function getSelectedIds(){
+
+  return [
+    ...document.querySelectorAll(".customer-check:checked")
+  ].map(input => input.value);
+
+}
+
+
+function updateBulkBar(){
+
+  const ids = getSelectedIds();
+
+  document.getElementById("selectedCount")
+    .textContent = ids.length;
+
+  const bar =
+    document.getElementById("bulkBar");
+
+  if(ids.length){
+    bar.classList.add("show");
+  }else{
+    bar.classList.remove("show");
+  }
+
+  const all =
+    document.querySelectorAll(".customer-check");
+
+  const checked =
+    document.querySelectorAll(".customer-check:checked");
+
+  const selectAll =
+    document.getElementById("selectAll");
+
+  if(selectAll){
+
+    selectAll.checked =
+      all.length > 0 &&
+      all.length === checked.length;
+
+  }
+
+}
+
+
+/* =========================================================
+   BULK STATUS
+========================================================= */
+
+function bulkUpdateStatus(status){
+
+  const ids = getSelectedIds();
+
+  if(!ids.length){
+
+    showToast("Select at least one customer.");
+
+    return;
+
+  }
+
+
+  customers.forEach(customer => {
+
+    if(ids.includes(customer.id)){
+
+      customer.status = status;
+
+    }
+
+  });
+
+
+  saveCustomers();
+
+  updateStats();
+
+  applyFilters();
+
+  showToast(
+    `${ids.length} customer(s) updated.`
+  );
+
+}
+
+
+/* =========================================================
+   BULK DELETE
+========================================================= */
+
+function bulkDelete(){
+
+  const ids = getSelectedIds();
+
+  if(!ids.length){
+
+    showToast("Select at least one customer.");
+
+    return;
+
+  }
+
+  pendingDeleteId = "__BULK__";
+
+  document.getElementById("deleteMessage")
+    .textContent =
+      `You are about to delete ${ids.length} selected customer(s). This action cannot be undone.`;
+
+  document.getElementById("deleteModal")
+    .classList.add("show");
+
+}
+
+
+/* =========================================================
+   CUSTOMER MODAL
+========================================================= */
+
+function openCustomerModal(id = null){
+
+  editingCustomerId = id;
+
+  const customer = id
+    ? customers.find(c => c.id === id)
+    : null;
+
+
+  document.getElementById("customerModalTitle")
+    .textContent =
+      customer
+        ? "Customer Profile"
+        : "Add Customer";
+
+
+  document.getElementById("customerId").value =
+    customer?.id || generateCustomerId();
+
+  document.getElementById("customerName").value =
+    customer?.name || "";
+
+  document.getElementById("customerEmail").value =
+    customer?.email || "";
+
+  document.getElementById("customerPhone").value =
+    customer?.phone || "";
+
+  document.getElementById("customerStatus").value =
+    customer?.status || "active";
+
+  document.getElementById("customerJoined").value =
+    formatDateInput(
+      customer?.joined || new Date()
+    );
+
+  document.getElementById("customerAddress").value =
+    customer?.address || "";
+
+  document.getElementById("customerNote").value =
+    customer?.note || "";
+
+
+  document.getElementById("summaryOrders")
+    .textContent =
+      customer
+        ? Number(customer.totalOrders) || 0
+        : 0;
+
+  document.getElementById("summarySpent")
+    .textContent =
+      customer
+        ? money(customer.totalSpent)
+        : "৳0";
+
+  document.getElementById("summaryLastOrder")
+    .textContent =
+      customer
+        ? formatDate(customer.lastOrder)
+        : "—";
+
+
+  renderCustomerHistory(customer);
+
+
+  const statusBtn =
+    document.getElementById("modalStatusBtn");
+
+  if(customer){
+
+    statusBtn.style.display = "inline-flex";
+
+    statusBtn.textContent =
+      customer.status === "suspended"
+        ? "✓ Activate"
+        : "⏸ Suspend";
+
+  }else{
+
+    statusBtn.style.display = "none";
+
+  }
+
+
+  document.getElementById("modalDeleteBtn")
+    .style.display =
+      customer
+        ? "inline-flex"
+        : "none";
+
+
+  document.getElementById("customerModal")
+    .classList.add("show");
+
+}
+
+
+/* =========================================================
+   CUSTOMER HISTORY
+========================================================= */
+
+function renderCustomerHistory(customer){
+
+  const container =
+    document.getElementById("customerHistory");
+
+  if(!customer){
+
+    container.innerHTML = `
+      <div class="history-empty">
+        Save the customer first to view order history.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  const related =
+    orders
+      .filter(order =>
+        matchesCustomer(customer,order)
+      )
+      .sort(
+        (a,b) =>
+          toTimestamp(b.date) -
+          toTimestamp(a.date)
+      );
+
+
+  if(!related.length){
+
+    container.innerHTML = `
+      <div class="history-empty">
+        No order history found for this customer.
+      </div>
+    `;
+
+    return;
+
+  }
+
+
+  container.innerHTML = `
+
+    <table>
+
+      <thead>
+
+        <tr>
+          <th>Order</th>
+          <th>Website</th>
+          <th>Amount</th>
+          <th>Order Status</th>
+          <th>Payment</th>
+          <th>Date</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        ${related.map(order => `
+
+          <tr>
+
+            <td>
+              <strong>
+                ${escapeHTML(order.id)}
+              </strong>
+            </td>
+
+            <td>
+              ${escapeHTML(order.website || "—")}
+            </td>
+
+            <td>
+              <strong>
+                ${money(order.amount)}
+              </strong>
+            </td>
+
+            <td>
+              <span class="type-badge">
+                ${escapeHTML(order.orderStatus)}
+              </span>
+            </td>
+
+            <td>
+              <span class="type-badge">
+                ${escapeHTML(order.paymentStatus)}
+              </span>
+            </td>
+
+            <td>
+              ${formatDate(order.date)}
+            </td>
+
+          </tr>
+
+        `).join("")}
+
+      </tbody>
+
+    </table>
+
+  `;
+
+}
+
+
+/* =========================================================
+   SAVE CUSTOMER
+========================================================= */
+
+function saveCustomer(){
+
+  const id =
+    document.getElementById("customerId").value.trim();
+
+  const name =
+    document.getElementById("customerName").value.trim();
+
+  const email =
+    document.getElementById("customerEmail").value
+      .trim()
+      .toLowerCase();
+
+  const phone =
+    document.getElementById("customerPhone").value.trim();
+
+  const status =
+    document.getElementById("customerStatus").value;
+
+  const joined =
+    document.getElementById("customerJoined").value;
+
+  const address =
+    document.getElementById("customerAddress").value.trim();
+
+  const note =
+    document.getElementById("customerNote").value.trim();
+
+
+  if(!name){
+
+    showToast("Customer name is required.");
+
+    document.getElementById("customerName").focus();
+
+    return;
+
+  }
+
+
+  if(!email){
+
+    showToast("Customer email is required.");
+
+    document.getElementById("customerEmail").focus();
+
+    return;
+
+  }
+
+
+  const duplicate =
+    customers.find(customer =>
+      customer.email &&
+      customer.email.toLowerCase() === email &&
+      customer.id !== editingCustomerId
+    );
+
+  if(duplicate){
+
+    showToast("Another customer already uses this email.");
+
+    return;
+
+  }
+
+
+  const customerData = {
+
+    id:
+      editingCustomerId ||
+      id ||
+      generateCustomerId(),
+
+    name,
+
+    email,
+
+    phone,
+
+    status:normalizeCustomerStatus(status),
+
+    joined:
+      joined
+        ? new Date(joined + "T12:00:00").toISOString()
+        : new Date().toISOString(),
+
+    address,
+
+    note,
+
+    avatar:
+      editingCustomerId
+        ? (
+            customers.find(
+              c => c.id === editingCustomerId
+            )?.avatar || ""
+          )
+        : "",
+
+    totalOrders:0,
+
+    totalSpent:0,
+
+    lastOrder:""
+
+  };
+
+
+  if(editingCustomerId){
 
     const index =
       customers.findIndex(
-        customer =>
-          customer.id === editingCustomerId
+        c => c.id === editingCustomerId
       );
 
+    if(index !== -1){
 
-    if(index === -1){
-      return;
-    }
+      customerData.totalOrders =
+        customers[index].totalOrders || 0;
 
+      customerData.totalSpent =
+        customers[index].totalSpent || 0;
 
-    const existing =
-      customers[index];
+      customerData.lastOrder =
+        customers[index].lastOrder || "";
 
-
-    const updated = {
-
-      ...existing,
-
-      name:
-        $("customerName").value.trim() ||
-        "Unnamed Customer",
-
-      email:
-        $("customerEmail").value.trim(),
-
-      phone:
-        $("customerPhone").value.trim(),
-
-      status:
-        normalizeStatus(
-          $("customerStatus").value
-        ),
-
-      joined:
-        $("customerJoined").value
-          ? new Date(
-              $("customerJoined").value +
-              "T12:00:00"
-            ).toISOString()
-          : existing.joined,
-
-      address:
-        $("customerAddress").value.trim(),
-
-      note:
-        $("customerNote").value.trim(),
-
-      explicit:true
-
-    };
-
-
-    /*
-      Check duplicate email.
-    */
-
-    const email =
-      updated.email.toLowerCase();
-
-
-    if(email){
-
-      const duplicate =
-        customers.some(
-          customer =>
-            customer.id !== updated.id &&
-            String(customer.email || "")
-              .toLowerCase() === email
-        );
-
-
-      if(duplicate){
-
-        showToast(
-          "Duplicate email",
-          "Another customer already uses this email address.",
-          "error"
-        );
-
-        return;
-
-      }
+      customers[index] = customerData;
 
     }
 
+  }else{
 
-    customers[index] =
-      updated;
+    customers.push(customerData);
+
+  }
 
 
-    persistCustomers();
+  enrichCustomers();
+
+  saveCustomers();
+
+  updateStats();
+
+  applyFilters();
+
+  closeModal("customerModal");
+
+  showToast(
+    editingCustomerId
+      ? "Customer updated successfully."
+      : "Customer created successfully."
+  );
+
+}
+
+
+/* =========================================================
+   SAVE LOCAL STORAGE
+========================================================= */
+
+function saveCustomers(){
+
+  /*
+    Keep explicit customer records only.
+    Demo / derived records can still be persisted after editing.
+  */
+
+  localStorage.setItem(
+    CUSTOMER_KEY,
+    JSON.stringify(customers)
+  );
+
+}
+
+
+/* =========================================================
+   STATUS TOGGLE
+========================================================= */
+
+function toggleCurrentCustomerStatus(){
+
+  if(!editingCustomerId){
+    return;
+  }
+
+  const customer =
+    customers.find(
+      c => c.id === editingCustomerId
+    );
+
+  if(!customer){
+    return;
+  }
+
+
+  customer.status =
+    customer.status === "suspended"
+      ? "active"
+      : "suspended";
+
+
+  saveCustomers();
+
+  updateStats();
+
+  applyFilters();
+
+  openCustomerModal(editingCustomerId);
+
+  showToast(
+    customer.status === "suspended"
+      ? "Customer suspended."
+      : "Customer activated."
+  );
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+function deleteCurrentCustomer(){
+
+  if(!editingCustomerId){
+    return;
+  }
+
+  askDeleteCustomer(editingCustomerId);
+
+}
+
+
+function askDeleteCustomer(id){
+
+  pendingDeleteId = id;
+
+  const customer =
+    customers.find(
+      c => c.id === id
+    );
+
+  if(!customer){
+    return;
+  }
+
+  document.getElementById("deleteMessage")
+    .textContent =
+      `Delete ${customer.name} (${customer.id})? This action cannot be undone.`;
+
+  document.getElementById("deleteModal")
+    .classList.add("show");
+
+}
+
+
+function confirmDelete(){
+
+  if(pendingDeleteId === "__BULK__"){
+
+    const ids = getSelectedIds();
 
     customers =
-      buildCustomers();
+      customers.filter(
+        customer => !ids.includes(customer.id)
+      );
+
+    saveCustomers();
+
+    closeModal("deleteModal");
 
     updateStats();
 
     applyFilters();
 
-
-    const refreshed =
-      customers.find(
-        customer =>
-          customer.id === updated.id
-      );
-
-
-    if(refreshed){
-
-      renderModalProfile(refreshed);
-
-      renderHistory(refreshed);
-
-      updateModalStatusButton(refreshed);
-
-    }
-
+    pendingDeleteId = null;
 
     showToast(
-      "Customer saved",
-      "Customer information has been updated successfully."
+      `${ids.length} customer(s) deleted.`
     );
+
+    return;
 
   }
 
 
-  $("saveCustomerBtn").addEventListener(
-    "click",
-    saveCustomer
+  if(!pendingDeleteId){
+    return;
+  }
+
+
+  const customer =
+    customers.find(
+      c => c.id === pendingDeleteId
+    );
+
+
+  customers =
+    customers.filter(
+      c => c.id !== pendingDeleteId
+    );
+
+
+  saveCustomers();
+
+  closeModal("deleteModal");
+
+  closeModal("customerModal");
+
+  updateStats();
+
+  applyFilters();
+
+  showToast(
+    customer
+      ? `${customer.name} deleted.`
+      : "Customer deleted."
   );
 
+  pendingDeleteId = null;
 
-  /* =======================================================
-     ADD CUSTOMER
-  ======================================================= */
-
-  function addCustomer(){
-
-    const stored =
-      readArray(CUSTOMER_KEY);
+}
 
 
-    let nextNumber = 1001;
+/* =========================================================
+   CSV
+========================================================= */
+
+function csvEscape(value){
+
+  const text = String(value ?? "");
+
+  if(
+    text.includes(",") ||
+    text.includes('"') ||
+    text.includes("\n")
+  ){
+
+    return '"' +
+      text.replace(/"/g,'""') +
+      '"';
+
+  }
+
+  return text;
+
+}
 
 
-    const usedIds =
-      stored
-        .map(item =>
-          String(
-            item.id ||
-            item.customerId ||
-            ""
-          )
-        )
-        .filter(Boolean);
+function exportCSV(){
 
+  if(!filteredCustomers.length){
 
-    while(
-      usedIds.includes(
-        "CUS-" + nextNumber
-      )
-    ){
+    showToast("No customers to export.");
 
-      nextNumber++;
-
-    }
-
-
-    const newCustomer = {
-
-      id:
-        "CUS-" + nextNumber,
-
-      name:"New Customer",
-
-      email:"",
-
-      phone:"",
-
-      status:"active",
-
-      joined:
-        new Date().toISOString(),
-
-      address:"",
-
-      note:"",
-
-      avatar:"",
-
-      explicit:true
-
-    };
-
-
-    stored.push(newCustomer);
-
-    saveArray(
-      CUSTOMER_KEY,
-      stored
-    );
-
-
-    customers =
-      buildCustomers();
-
-    updateStats();
-
-    applyFilters();
-
-
-    openModal(
-      newCustomer.id,
-      "edit"
-    );
-
-
-    $("customerName").focus();
-
-    $("customerName").select();
-
-
-    showToast(
-      "Customer created",
-      "A new customer profile is ready to edit."
-    );
+    return;
 
   }
 
 
-  $("addCustomerBtn").addEventListener(
-    "click",
-    addCustomer
-  );
+  const rows = [
 
-
-  /* =======================================================
-     VIEW / EDIT / DELETE ACTIONS
-  ======================================================= */
-
-  $("customerTableBody").addEventListener(
-    "click",
-    function(event){
-
-      const button =
-        event.target.closest(
-          "[data-action]"
-        );
-
-      if(!button){
-        return;
-      }
-
-
-      const id =
-        button.dataset.id;
-
-      const action =
-        button.dataset.action;
-
-
-      if(action === "view"){
-
-        openModal(
-          id,
-          "view"
-        );
-
-      }
-
-
-      if(action === "edit"){
-
-        openModal(
-          id,
-          "edit"
-        );
-
-      }
-
-
-      if(action === "delete"){
-
-        openDeleteModal(id);
-
-      }
-
-    }
-  );
-
-
-  /* =======================================================
-     DELETE
-  ======================================================= */
-
-  function openDeleteModal(id){
-
-    const customer =
-      customers.find(
-        item => item.id === id
-      );
-
-
-    if(!customer){
-      return;
-    }
-
-
-    pendingDeleteId =
-      id;
-
-
-    $("deleteModal").classList.add("show");
-
-    document.body.style.overflow = "hidden";
-
-  }
-
-
-  function deleteCustomer(id){
-
-    if(!id){
-      return;
-    }
-
-
-    const customer =
-      customers.find(
-        item => item.id === id
-      );
-
-
-    if(!customer){
-      return;
-    }
-
-
-    /*
-      Only remove explicit customer profile.
-      Orders remain untouched.
-    */
-
-    const stored =
-      readArray(CUSTOMER_KEY);
-
-
-    const filtered =
-      stored.filter(
-        item => {
-
-          const itemId =
-            String(
-              item.id ||
-              item.customerId ||
-              ""
-            );
-
-          const itemEmail =
-            String(
-              item.email ||
-              item.customerEmail ||
-              ""
-            ).toLowerCase();
-
-
-          return !(
-            itemId === String(id) ||
-            (
-              customer.email &&
-              itemEmail ===
-                String(customer.email).toLowerCase()
-            )
-          );
-
-        }
-      );
-
-
-    saveArray(
-      CUSTOMER_KEY,
-      filtered
-    );
-
-
-    selectedIds.delete(id);
-
-    customers =
-      buildCustomers();
-
-    updateStats();
-
-    applyFilters();
-
-
-    showToast(
-      "Customer removed",
-      `${customer.name} was removed from the customer profile database.`
-    );
-
-  }
-
-
-  $("confirmDeleteBtn").addEventListener(
-    "click",
-    function(){
-
-      if(!pendingDeleteId){
-        return;
-      }
-
-
-      const id =
-        pendingDeleteId;
-
-
-      pendingDeleteId = null;
-
-      closeModal("deleteModal");
-
-      deleteCustomer(id);
-
-    }
-  );
-
-
-  $("modalDeleteBtn").addEventListener(
-    "click",
-    function(){
-
-      if(!editingCustomerId){
-        return;
-      }
-
-
-      const id =
-        editingCustomerId;
-
-
-      closeModal("customerModal");
-
-      openDeleteModal(id);
-
-    }
-  );
-
-
-  /* =======================================================
-     MODAL STATUS
-  ======================================================= */
-
-  $("modalStatusBtn").addEventListener(
-    "click",
-    function(){
-
-      if(!editingCustomerId){
-        return;
-      }
-
-
-      const index =
-        customers.findIndex(
-          customer =>
-            customer.id === editingCustomerId
-        );
-
-
-      if(index === -1){
-        return;
-      }
-
-
-      const customer =
-        customers[index];
-
-
-      customer.status =
-        customer.status === "suspended"
-          ? "active"
-          : "suspended";
-
-
-      persistCustomers();
-
-
-      customers =
-        buildCustomers();
-
-      updateStats();
-
-      applyFilters();
-
-
-      const refreshed =
-        customers.find(
-          item =>
-            item.id === editingCustomerId
-        );
-
-
-      if(refreshed){
-
-        renderModalProfile(refreshed);
-
-        renderHistory(refreshed);
-
-        updateModalStatusButton(refreshed);
-
-        $("customerStatus").value =
-          refreshed.status;
-
-      }
-
-
-      showToast(
-        customer.status === "suspended"
-          ? "Customer suspended"
-          : "Customer activated",
-        customer.status === "suspended"
-          ? "The customer account is now suspended."
-          : "The customer account is active again."
-      );
-
-    }
-  );
-
-
-  /* =======================================================
-     BULK ACTIONS
-  ======================================================= */
-
-  function bulkUpdateStatus(status){
-
-    if(!selectedIds.size){
-      return;
-    }
-
-
-    const stored =
-      readArray(CUSTOMER_KEY);
-
-
-    let changed = 0;
-
-
-    stored.forEach(item => {
-
-      const id =
-        String(
-          item.id ||
-          item.customerId ||
-          ""
-        );
-
-
-      if(selectedIds.has(id)){
-
-        item.status = status;
-
-        changed++;
-
-      }
-
-    });
-
-
-    saveArray(
-      CUSTOMER_KEY,
-      stored
-    );
-
-
-    selectedIds.clear();
-
-    customers =
-      buildCustomers();
-
-    updateStats();
-
-    applyFilters();
-
-
-    showToast(
-      "Customers updated",
-      `${changed} customer profile(s) updated successfully.`
-    );
-
-  }
-
-
-  function bulkDelete(){
-
-    if(!selectedIds.size){
-      return;
-    }
-
-
-    const ids =
-      new Set(selectedIds);
-
-
-    const stored =
-      readArray(CUSTOMER_KEY);
-
-
-    const filtered =
-      stored.filter(item => {
-
-        const id =
-          String(
-            item.id ||
-            item.customerId ||
-            ""
-          );
-
-        return !ids.has(id);
-
-      });
-
-
-    saveArray(
-      CUSTOMER_KEY,
-      filtered
-    );
-
-
-    const count =
-      ids.size;
-
-
-    selectedIds.clear();
-
-
-    customers =
-      buildCustomers();
-
-    updateStats();
-
-    applyFilters();
-
-
-    showToast(
-      "Customers removed",
-      `${count} customer profile(s) were removed. Existing orders remain safe.`
-    );
-
-  }
-
-
-  $("bulkActivateBtn").addEventListener(
-    "click",
-    () => bulkUpdateStatus("active")
-  );
-
-
-  $("bulkSuspendBtn").addEventListener(
-    "click",
-    () => bulkUpdateStatus("suspended")
-  );
-
-
-  $("bulkDeleteBtn").addEventListener(
-    "click",
-    bulkDelete
-  );
-
-
-  /* =======================================================
-     PERSIST CUSTOMER PROFILES
-  ======================================================= */
-
-  function persistCustomers(){
-
-    /*
-      Preserve only explicitly stored customer profiles.
-      Derived customer data from orders should not be written
-      back as duplicate records.
-    */
-
-    const currentStored =
-      readArray(CUSTOMER_KEY);
-
-
-    const currentById =
-      new Map();
-
-
-    currentStored.forEach(item => {
-
-      const id =
-        String(
-          item.id ||
-          item.customerId ||
-          ""
-        );
-
-
-      if(id){
-        currentById.set(id,item);
-      }
-
-    });
-
-
-    customers.forEach(customer => {
-
-      if(!customer.explicit){
-        return;
-      }
-
-
-      currentById.set(
-        String(customer.id),
-        {
-          id:customer.id,
-          name:customer.name,
-          email:customer.email,
-          phone:customer.phone,
-          status:customer.status,
-          joined:customer.joined,
-          address:customer.address,
-          note:customer.note,
-          avatar:customer.avatar
-        }
-      );
-
-    });
-
-
-    saveArray(
-      CUSTOMER_KEY,
-      Array.from(
-        currentById.values()
-      )
-    );
-
-  }
-
-
-  /* =======================================================
-     SEARCH / FILTER EVENTS
-  ======================================================= */
-
-  $("searchInput").addEventListener(
-    "input",
-    applyFilters
-  );
-
-  $("statusFilter").addEventListener(
-    "change",
-    applyFilters
-  );
-
-  $("typeFilter").addEventListener(
-    "change",
-    applyFilters
-  );
-
-  $("sortFilter").addEventListener(
-    "change",
-    applyFilters
-  );
-
-
-  $("resetFiltersBtn").addEventListener(
-    "click",
-    function(){
-
-      $("searchInput").value = "";
-
-      $("statusFilter").value = "all";
-
-      $("typeFilter").value = "all";
-
-      $("sortFilter").value = "newest";
-
-      selectedIds.clear();
-
-      applyFilters();
-
-
-      showToast(
-        "Filters reset",
-        "Customer filters have been restored to default."
-      );
-
-    }
-  );
-
-
-  /* =======================================================
-     REFRESH
-  ======================================================= */
-
-  $("refreshBtn").addEventListener(
-    "click",
-    function(){
-
-      customers =
-        buildCustomers();
-
-      selectedIds.clear();
-
-      updateStats();
-
-      applyFilters();
-
-
-      showToast(
-        "Customer data refreshed",
-        "Latest LocalStorage customer and order data has been loaded."
-      );
-
-    }
-  );
-
-
-  /* =======================================================
-     CSV EXPORT
-  ======================================================= */
-
-  function csvEscape(value){
-
-    const text =
-      String(value ?? "");
-
-    return `"${text.replace(
-      /"/g,
-      '""'
-    )}"`;
-
-  }
-
-
-  function exportCSV(){
-
-    if(!filteredCustomers.length){
-
-      showToast(
-        "Nothing to export",
-        "There are no customers matching the current filters.",
-        "error"
-      );
-
-      return;
-
-    }
-
-
-    const headers = [
-
+    [
       "Customer ID",
       "Name",
       "Email",
       "Phone",
       "Status",
       "Joined",
-      "Total Orders",
+      "Orders",
       "Total Spent",
       "Last Order",
-      "Customer Type"
+      "Address",
+      "Note"
+    ],
 
-    ];
+    ...filteredCustomers.map(customer => [
 
+      customer.id,
+      customer.name,
+      customer.email,
+      customer.phone,
+      customer.status,
+      formatDate(customer.joined),
+      customer.totalOrders,
+      customer.totalSpent,
+      formatDate(customer.lastOrder),
+      customer.address,
+      customer.note
 
-    const rows =
-      filteredCustomers.map(customer => [
+    ])
 
-        customer.id,
-
-        customer.name,
-
-        customer.email,
-
-        customer.phone,
-
-        customer.status,
-
-        formatDate(customer.joined),
-
-        customer.totalOrders,
-
-        customer.totalSpent,
-
-        formatDate(customer.lastOrder),
-
-        customer.isReturning
-          ? "Returning"
-          : customer.isNew
-            ? "New"
-            : "Regular"
-
-      ]);
+  ];
 
 
-    const csv =
-      [
-        headers,
-        ...rows
-      ]
-        .map(row =>
-          row
-            .map(csvEscape)
-            .join(",")
-        )
-        .join("\n");
-
-
-    const blob =
-      new Blob(
-        [
-          "\uFEFF" + csv
-        ],
-        {
-          type:"text/csv;charset=utf-8;"
-        }
-      );
-
-
-    const url =
-      URL.createObjectURL(blob);
-
-
-    const link =
-      document.createElement("a");
-
-
-    link.href = url;
-
-    link.download =
-      "website-deals-customers.csv";
-
-
-    document.body.appendChild(link);
-
-    link.click();
-
-    link.remove();
-
-    URL.revokeObjectURL(url);
-
-
-    showToast(
-      "CSV exported",
-      `${filteredCustomers.length} customer records exported successfully.`
-    );
-
-  }
-
-
-  $("exportBtn").addEventListener(
-    "click",
-    exportCSV
-  );
-
-
-  /* =======================================================
-     PRINT
-  ======================================================= */
-
-  $("printBtn").addEventListener(
-    "click",
-    function(){
-
-      window.print();
-
-    }
-  );
-
-
-  /* =======================================================
-     MOBILE SIDEBAR
-  ======================================================= */
-
-  function openSidebar(){
-
-    $("sidebar").classList.add("open");
-
-    $("overlay").classList.add("show");
-
-    document.body.style.overflow = "hidden";
-
-  }
-
-
-  function closeSidebar(){
-
-    $("sidebar").classList.remove("open");
-
-    $("overlay").classList.remove("show");
-
-    if(
-      !document.querySelector(
-        ".modal-backdrop.show"
+  const csv =
+    rows
+      .map(row =>
+        row
+          .map(csvEscape)
+          .join(",")
       )
-    ){
-
-      document.body.style.overflow = "";
-
-    }
-
-  }
+      .join("\n");
 
 
-  $("mobileMenu").addEventListener(
-    "click",
-    openSidebar
-  );
-
-
-  $("overlay").addEventListener(
-    "click",
-    closeSidebar
-  );
-
-
-  document.querySelectorAll(
-    ".sidebar .nav-link"
-  ).forEach(link => {
-
-    link.addEventListener(
-      "click",
-      closeSidebar
+  const blob =
+    new Blob(
+      [csv],
+      {
+        type:"text/csv;charset=utf-8;"
+      }
     );
 
-  });
+
+  const url =
+    URL.createObjectURL(blob);
+
+  const link =
+    document.createElement("a");
+
+  link.href = url;
+
+  link.download =
+    "website-deals-customers.csv";
+
+  document.body.appendChild(link);
+
+  link.click();
+
+  link.remove();
+
+  URL.revokeObjectURL(url);
+
+  showToast("Customer CSV exported.");
+
+}
 
 
-  /* =======================================================
-     LOGOUT
-  ======================================================= */
+/* =========================================================
+   REFRESH
+========================================================= */
 
-  $("logoutBtn").addEventListener(
-    "click",
-    function(){
+function refreshCustomers(){
 
-      sessionStorage.removeItem(
-        AUTH_KEY
-      );
-
-      window.location.href =
-        "login/";
-
-    }
-  );
-
-
-  /* =======================================================
-     TOAST
-  ======================================================= */
-
-  function showToast(
-    title,
-    message,
-    type = "success"
-  ){
-
-    const wrap =
-      $("toastWrap");
-
-
-    const toast =
-      document.createElement("div");
-
-
-    toast.className = "toast";
-
-
-    const icon =
-      type === "error"
-        ? `
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 9v4"/>
-            <path d="M12 17h.01"/>
-            <path d="M10.3 3.8 2.4 17a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0z"/>
-          </svg>
-        `
-        : `
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="m5 12 4 4L19 6"/>
-          </svg>
-        `;
-
-
-    toast.innerHTML = `
-
-      <div class="toast-icon">
-        ${icon}
-      </div>
-
-      <div>
-        <strong>
-          ${escapeHTML(title)}
-        </strong>
-
-        <span>
-          ${escapeHTML(message)}
-        </span>
-      </div>
-
-    `;
-
-
-    wrap.appendChild(toast);
-
-
-    setTimeout(
-      () => {
-
-        toast.style.opacity = "0";
-
-        toast.style.transform =
-          "translateY(8px)";
-
-        toast.style.transition =
-          ".2s ease";
-
-
-        setTimeout(
-          () => toast.remove(),
-          220
-        );
-
-      },
-      3600
-    );
-
-  }
-
-
-  /* =======================================================
-     INITIAL RENDER
-  ======================================================= */
+  loadData();
 
   updateStats();
 
   applyFilters();
 
+  showToast("Customer data refreshed.");
 
-})();
+}
+
+
+/* =========================================================
+   MODAL HELPERS
+========================================================= */
+
+function closeModal(id){
+
+  const modal =
+    document.getElementById(id);
+
+  if(modal){
+    modal.classList.remove("show");
+  }
+
+}
+
+
+document.querySelectorAll(".modal-overlay")
+  .forEach(overlay => {
+
+    overlay.addEventListener("click",event => {
+
+      if(event.target === overlay){
+
+        overlay.classList.remove("show");
+
+      }
+
+    });
+
+  });
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+function openSidebar(){
+
+  document
+    .getElementById("sidebar")
+    .classList.add("open");
+
+  document
+    .getElementById("sidebarOverlay")
+    .classList.add("show");
+
+}
+
+
+function closeSidebar(){
+
+  document
+    .getElementById("sidebar")
+    .classList.remove("open");
+
+  document
+    .getElementById("sidebarOverlay")
+    .classList.remove("show");
+
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+function logout(){
+
+  sessionStorage.removeItem(AUTH_KEY);
+
+  window.location.href = "login/";
+
+}
+
+
+/* =========================================================
+   UTILITIES
+========================================================= */
+
+function getInitials(name){
+
+  const parts =
+    String(name || "Customer")
+      .trim()
+      .split(/\s+/)
+      .filter(Boolean);
+
+  return (
+    parts
+      .slice(0,2)
+      .map(part =>
+        part.charAt(0).toUpperCase()
+      )
+      .join("")
+  ) || "CU";
+
+}
+
+
+function escapeJS(value){
+
+  return String(value ?? "")
+    .replace(/\\/g,"\\\\")
+    .replace(/'/g,"\\'")
+    .replace(/"/g,'\\"')
+    .replace(/\n/g,"\\n")
+    .replace(/\r/g,"\\r");
+
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+let toastTimer = null;
+
+function showToast(message){
+
+  const toast =
+    document.getElementById("toast");
+
+  document.getElementById("toastText")
+    .textContent = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(toastTimer);
+
+  toastTimer =
+    setTimeout(() => {
+
+      toast.classList.remove("show");
+
+    },2800);
+
+}
+
+
+/* =========================================================
+   BEFORE UNLOAD
+========================================================= */
+
+window.addEventListener("beforeunload",() => {
+  /* Data is saved immediately on every action. */
+});
 </script>
 
 </body>
