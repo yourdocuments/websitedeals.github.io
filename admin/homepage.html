@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Homepage Manager | Website Deals</title>
+<link rel="icon" href="../logo.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{--g:#18a957;--dark:#111713;--text:#17211b;--muted:#748078;--bg:#f5f7f6;--card:#fff;--border:#e4e9e6;--shadow:0 14px 40px #1017130b}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter;background:var(--bg);color:var(--text)}
+.layout{display:flex;min-height:100vh}.side{position:fixed;inset:0 auto 0 0;width:260px;background:var(--dark);color:#fff;padding:24px 16px}.brand{display:flex;gap:12px;align-items:center;padding:4px 10px 27px}.brand img{width:42px;height:42px;background:#fff;border-radius:10px}.brand b{font:700 18px "Space Grotesk"}.brand small{display:block;color:#7d897f;font-size:10px}.nav-title{font-size:10px;color:#69746d;text-transform:uppercase;letter-spacing:1.3px;padding:17px 12px 7px}.nav a{display:flex;gap:12px;text-decoration:none;color:#aeb8b1;font-size:13px;padding:12px;border-radius:10px;margin:2px 0}.nav a:hover,.nav a.active{background:#1d2821;color:#fff}.nav a.active{box-shadow:inset 3px 0 var(--g)}
+main{margin-left:260px;width:calc(100% - 260px);padding:30px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}.eyebrow{font-size:11px;color:var(--g);font-weight:800;letter-spacing:1.5px;text-transform:uppercase}h1{font:700 30px "Space Grotesk";margin-top:4px}.sub{font-size:13px;color:var(--muted);margin-top:5px}.admin{padding:10px 14px;background:#fff;border:1px solid var(--border);border-radius:11px;font-size:12px}
+.panel{background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:var(--shadow);padding:24px;margin-bottom:18px}.panel h2{font:700 19px "Space Grotesk"}.panel-desc{font-size:12px;color:var(--muted);margin:5px 0 20px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:17px}.field.full{grid-column:1/-1}.field label{display:block;font-size:11px;font-weight:800;margin-bottom:7px}.field input,.field textarea,.field select{width:100%;border:1px solid var(--border);border-radius:11px;padding:12px 13px;outline:none;background:#fff}.field textarea{min-height:100px;resize:vertical}.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--g)}
+.switchrow{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--border);border-radius:12px;padding:15px;margin-top:10px}.switchrow strong{font-size:13px}.switchrow span{display:block;color:var(--muted);font-size:11px;margin-top:3px}.switch{width:45px;height:25px;position:relative}.switch input{display:none}.slider{position:absolute;inset:0;background:#d8dfda;border-radius:30px}.slider:before{content:"";position:absolute;width:19px;height:19px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}.switch input:checked+.slider{background:var(--g)}.switch input:checked+.slider:before{transform:translateX(20px)}
+.order{display:grid;grid-template-columns:40px 1fr auto;gap:13px;align-items:center;border:1px solid var(--border);padding:13px;border-radius:12px;margin:8px 0}.num{width:38px;height:38px;border-radius:10px;background:#eaf8f0;color:var(--g);display:grid;place-items:center;font-weight:800}.order b{font-size:13px}.order small{display:block;color:var(--muted);font-size:11px;margin-top:3px}.handle{color:#9ba59f;font-size:18px}.actions{text-align:right;margin-top:20px}.btn{border:0;border-radius:11px;padding:12px 18px;font-size:12px;font-weight:800}.save{background:var(--g);color:#fff}.reset{background:#edf1ee;color:#243028;margin-right:7px}.toast{display:none;position:fixed;right:25px;bottom:25px;background:#111713;color:#fff;padding:14px 18px;border-radius:12px;font-size:12px}
+@media(max-width:800px){.side{width:70px}.brand b,.brand small,.nav span,.nav-title{display:none}main{margin-left:70px;width:calc(100% - 70px);padding:18px}}
+@media(max-width:600px){.fields{grid-template-columns:1fr}.field.full{grid-column:auto}.top{display:block}.admin{display:inline-block;margin-top:15px}.panel{padding:17px}}
+</style>
+</head>
+
+<body>
+<div class="layout">
+<aside class="side">
+<div class="brand"><img src="../logo.png"><div><b>Website Deals</b><small>ADMIN PANEL</small></div></div>
+<div class="nav">
+<div class="nav-title">Core</div>
+<a href="dashboard.html">▦ <span>Dashboard</span></a>
+<a href="websites.html">◫ <span>Websites</span></a>
+<a href="categories.html">◈ <span>Categories</span></a>
+<a href="orders.html">⌁ <span>Orders</span></a>
+<a href="customers.html">♙ <span>Customers</span></a>
+<div class="nav-title">UI Management</div>
+<a href="browse-ui.html">◉ <span>Browse UI</span></a>
+<a class="active" href="homepage.html">⌂ <span>Homepage</span></a>
+<a href="banners.html">▣ <span>Banners</span></a>
+<div class="nav-title">Business</div>
+<a href="newsletter.html">✉ <span>Newsletter</span></a>
+<a href="payments.html">৳ <span>Payments</span></a>
+<a href="monthly-report.html">⌁ <span>Reports</span></a>
+</div>
+</aside>
+
+<main>
+<header class="top">
+<div><div class="eyebrow">Content Management</div><h1>Homepage Manager</h1><div class="sub">Control the content and section order of your marketplace homepage.</div></div>
+<div class="admin">● Admin Panel</div>
+</header>
+
+<section class="panel">
+<h2>Hero Content</h2>
+<div class="panel-desc">Main message customers see when they enter Website Deals.</div>
+<div class="fields">
+<div class="field"><label>Eyebrow</label><input id="eyebrow" value="PREMIUM WEBSITE MARKETPLACE"></div>
+<div class="field"><label>Search Placeholder</label><input id="search" value="Search websites, categories..."></div>
+<div class="field full"><label>Main Heading</label><input id="title" value="Premium websites. Ready today."></div>
+<div class="field full"><label>Subtitle</label><textarea id="subtitle">Your next website starts here. Explore professionally designed ready-made websites and launch faster.</textarea></div>
+</div>
+</section>
+
+<section class="panel">
+<h2>Homepage Sections</h2>
+<div class="panel-desc">Manage visibility and display priority.</div>
+
+<div class="order"><div class="num">01</div><div><b>Hero</b><small>Main marketplace introduction and search</small></div><label class="switch"><input checked type="checkbox" data-sec><i class="slider"></i></label></div>
+<div class="order"><div class="num">02</div><div><b>Category Discovery</b><small>Marketplace categories</small></div><label class="switch"><input checked type="checkbox" data-sec><i class="slider"></i></label></div>
+<div class="order"><div class="num">03</div><div><b>Featured / Popular</b><small>Highlighted website products</small></div><label class="switch"><input checked type="checkbox" data-sec><i class="slider"></i></label></div>
+<div class="order"><div class="num">04</div><div><b>New Websites</b><small>Recently published products</small></div><label class="switch"><input checked type="checkbox" data-sec><i class="slider"></i></label></div>
+<div class="order"><div class="num">05</div><div><b>Monthly</b><small>Monthly website packages</small></div><label class="switch"><input checked type="checkbox" data-sec><i class="slider"></i></label></div>
+<div class="order"><div class="num">06</div><div><b>Why Website Deals</b><small>Trust and marketplace benefits</small></div><label class="switch"><input checked type="checkbox" data-sec><i class="slider"></i></label></div>
+<div class="order"><div class="num">07</div><div><b>How It Works</b><small>Simple buying process</small></div><label class="switch"><input checked type="checkbox" data-sec><i class="slider"></i></label></div>
+<div class="order"><div class="num">08</div><div><b>Newsletter</b><small>Subscriber signup</small></div><label class="switch"><input checked type="checkbox" data-sec><i class="slider"></i></label></div>
+</section>
+
+<section class="panel">
+<h2>Marketplace Messaging</h2>
+<div class="panel-desc">Small pieces of copy used throughout the homepage.</div>
+<div class="fields">
+<div class="field"><label>Starting Price</label><input id="price" value="Websites from ৳999"></div>
+<div class="field"><label>Primary CTA</label><input id="cta" value="Explore Websites"></div>
+<div class="field"><label>Trust Rating</label><input id="rating" value="4.9/5 customer experience"></div>
+<div class="field"><label>Website Count Label</label><input id="count" value="50+ ready websites"></div>
+</div>
+<div class="actions">
+<button class="btn reset" onclick="resetData()">Reset</button>
+<button class="btn save" onclick="saveData()">Save Homepage</button>
+</div>
+</section>
+</main>
+</div>
+
+<div class="toast" id="toast">Homepage settings saved.</div>
+
+<script>
+const KEY="websiteDealsHomepage";
+const $=id=>document.getElementById(id);
+
+function saveData(){
+const sections=[...document.querySelectorAll("[data-sec]")].map(x=>x.checked);
+localStorage.setItem(KEY,JSON.stringify({
+eyebrow:$("eyebrow").value,
+search:$("search").value,
+title:$("title").value,
+subtitle:$("subtitle").value,
+sections,
+price:$("price").value,
+cta:$("cta").value,
+rating:$("rating").value,
+count:$("count").value,
+updatedAt:new Date().toISOString()
+}));
+show();
+}
+
+function loadData(){
+try{
+const d=JSON.parse(localStorage.getItem(KEY));
+if(!d)return;
+["eyebrow","search","title","subtitle","price","cta","rating","count"].forEach(k=>{
+if(d[k]!==undefined)$(k).value=d[k];
+});
+if(d.sections)document.querySelectorAll("[data-sec]").forEach((x,i)=>x.checked=d.sections[i]!==false);
+}catch(e){}
+}
+
+function resetData(){localStorage.removeItem(KEY);location.reload()}
+function show(){ $("toast").style.display="block";setTimeout(()=>$("toast").style.display="none",2200)}
+loadData();
+</script>
+</body>
+</html>
