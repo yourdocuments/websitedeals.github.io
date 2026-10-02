@@ -5,2453 +5,1466 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>System Settings | Website Deals</title>
-
-  <meta
-    name="description"
-    content="Website Deals Super Admin - System Settings"
-  >
-
-  <meta name="theme-color" content="#101713">
+  <meta name="description" content="Website Deals Super Admin System Settings">
 
   <link rel="icon" type="image/png" href="../logo.png">
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
-
-  <!-- Font Awesome -->
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   >
 
   <style>
+    :root{
+      --green:#18a957;
+      --green-dark:#118143;
+      --green-soft:#eaf8f0;
 
-    :root {
-      --green: #19a957;
-      --green-dark: #108342;
-      --green-soft: #eaf9f0;
+      --black:#101712;
+      --black-2:#18221c;
+      --text:#18221c;
+      --muted:#718078;
 
-      --dark: #101713;
-      --dark-2: #17211b;
-      --dark-3: #202b25;
+      --surface:#f6f8f7;
+      --white:#ffffff;
+      --border:#e5ebe7;
 
-      --text: #17211b;
-      --muted: #718078;
+      --danger:#dc3545;
+      --danger-soft:#fff0f1;
 
-      --white: #fff;
-      --surface: #f6f8f7;
-      --border: #e4e9e6;
+      --warning:#d98a00;
+      --warning-soft:#fff7e6;
 
-      --danger: #dc3545;
-      --danger-soft: #fff0f2;
+      --blue:#3478f6;
+      --blue-soft:#eef4ff;
 
-      --warning: #d99000;
-      --warning-soft: #fff7df;
+      --shadow:0 12px 35px rgba(16,23,18,.07);
+      --shadow-sm:0 5px 18px rgba(16,23,18,.05);
 
-      --blue: #3478f6;
-      --blue-soft: #edf4ff;
+      --radius:18px;
+      --radius-sm:12px;
 
-      --shadow-sm: 0 5px 18px rgba(16,23,19,.05);
-      --shadow-md: 0 14px 40px rgba(16,23,19,.09);
-      --shadow-lg: 0 25px 70px rgba(16,23,19,.14);
-
-      --radius-sm: 10px;
-      --radius-md: 16px;
-      --radius-lg: 24px;
+      --sidebar-width:264px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    html {
-      scroll-behavior: smooth;
+    html{
+      scroll-behavior:smooth;
     }
 
-    body {
-      font-family: Inter, sans-serif;
-      background: var(--surface);
-      color: var(--text);
-      min-height: 100vh;
+    body{
+      font-family:"Inter","Hind Siliguri",sans-serif;
+      background:var(--surface);
+      color:var(--text);
+      min-height:100vh;
     }
 
     button,
     input,
     select,
-    textarea {
-      font: inherit;
+    textarea{
+      font:inherit;
     }
 
-    button {
-      cursor: pointer;
+    button{
+      cursor:pointer;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    a{
+      color:inherit;
+      text-decoration:none;
     }
 
-    /* =========================
-       APP
-    ========================== */
-
-    .app {
-      min-height: 100vh;
-      display: flex;
+    .app{
+      min-height:100vh;
     }
 
     /* =========================
        SIDEBAR
     ========================== */
 
-    .sidebar {
-      width: 270px;
-      min-height: 100vh;
-      position: fixed;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      z-index: 1000;
-
-      display: flex;
-      flex-direction: column;
-
-      color: #fff;
-      background: var(--dark);
-
-      border-right: 1px solid rgba(255,255,255,.05);
+    .sidebar{
+      position:fixed;
+      inset:0 auto 0 0;
+      width:var(--sidebar-width);
+      background:var(--black);
+      color:#fff;
+      z-index:1000;
+      display:flex;
+      flex-direction:column;
+      transition:.3s ease;
     }
 
-    .sidebar-top {
-      padding: 24px 20px 18px;
+    .brand{
+      height:78px;
+      padding:18px 20px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      border-bottom:1px solid rgba(255,255,255,.07);
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
+    .brand-logo{
+      width:42px;
+      height:42px;
+      border-radius:11px;
+      background:#fff;
+      object-fit:contain;
+      padding:5px;
+      flex:none;
     }
 
-    .brand-logo {
-      width: 42px;
-      height: 42px;
-      padding: 5px;
-      object-fit: contain;
-      border-radius: 12px;
-      background: #fff;
+    .brand-copy{
+      min-width:0;
     }
 
-    .brand-text strong {
-      display: block;
-      font-family: Manrope, sans-serif;
-      font-size: 17px;
-      font-weight: 800;
-      letter-spacing: -.4px;
+    .brand-title{
+      font-size:15px;
+      font-weight:800;
+      letter-spacing:-.3px;
+      white-space:nowrap;
     }
 
-    .brand-text span {
-      display: block;
-      margin-top: 2px;
-      color: #89968e;
-      font-size: 11px;
-      font-weight: 600;
+    .brand-subtitle{
+      color:#8f9c94;
+      font-size:10px;
+      margin-top:3px;
+      letter-spacing:.7px;
+      text-transform:uppercase;
     }
 
-    .sidebar-scroll {
-      flex: 1;
-      overflow-y: auto;
-      padding: 10px 14px 20px;
+    .sidebar-scroll{
+      flex:1;
+      overflow-y:auto;
+      padding:18px 12px;
     }
 
-    .nav-label {
-      padding: 16px 12px 8px;
-      color: #6f7c74;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
+    .nav-label{
+      color:#66736b;
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-weight:800;
+      padding:10px 12px 8px;
     }
 
-    .nav-link {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-
-      padding: 12px 13px;
-      margin-bottom: 3px;
-
-      color: #aeb9b2;
-      border-radius: 12px;
-
-      font-size: 13px;
-      font-weight: 600;
-
-      transition: .2s ease;
+    .nav-item{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:12px 13px;
+      border-radius:11px;
+      color:#aeb9b2;
+      margin-bottom:4px;
+      font-size:13px;
+      font-weight:600;
+      transition:.2s ease;
     }
 
-    .nav-link i {
-      width: 18px;
-      text-align: center;
-      font-size: 14px;
+    .nav-item i{
+      width:19px;
+      text-align:center;
+      font-size:14px;
     }
 
-    .nav-link:hover {
-      color: #fff;
-      background: rgba(255,255,255,.06);
+    .nav-item:hover{
+      background:rgba(255,255,255,.06);
+      color:#fff;
     }
 
-    .nav-link.active {
-      color: #55d88b;
-      background: rgba(25,169,87,.14);
-      box-shadow: inset 3px 0 0 var(--green);
+    .nav-item.active{
+      background:var(--green);
+      color:#fff;
+      box-shadow:0 8px 20px rgba(24,169,87,.22);
     }
 
-    .nav-badge {
-      margin-left: auto;
-      min-width: 20px;
-      height: 20px;
-      padding: 0 6px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      color: #cbd4cf;
-      background: rgba(255,255,255,.08);
-      border-radius: 20px;
-
-      font-size: 10px;
-      font-weight: 800;
+    .nav-item.restricted{
+      color:#c8d0cb;
     }
 
-    .restricted-box {
-      margin: 12px 4px;
-      padding: 13px;
-
-      border: 1px solid rgba(217,144,0,.22);
-      background: rgba(217,144,0,.06);
-      border-radius: 14px;
+    .sidebar-user{
+      padding:15px 14px;
+      border-top:1px solid rgba(255,255,255,.07);
     }
 
-    .restricted-title {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-
-      margin-bottom: 8px;
-
-      color: #e7b84c;
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: .7px;
-      text-transform: uppercase;
+    .user-card{
+      background:#17211b;
+      border:1px solid rgba(255,255,255,.07);
+      border-radius:13px;
+      padding:12px;
+      display:flex;
+      align-items:center;
+      gap:10px;
     }
 
-    .restricted-box .nav-link {
-      padding: 9px 8px;
-      margin: 0;
-      color: #9eaaa2;
+    .user-avatar{
+      width:36px;
+      height:36px;
+      border-radius:10px;
+      background:var(--green);
+      display:grid;
+      place-items:center;
+      font-weight:800;
+      font-size:13px;
+      flex:none;
     }
 
-    .restricted-box .nav-link.active {
-      color: #e7b84c;
-      background: rgba(217,144,0,.09);
-      box-shadow: none;
+    .user-info{
+      min-width:0;
     }
 
-    .sidebar-bottom {
-      padding: 14px;
-      border-top: 1px solid rgba(255,255,255,.07);
+    .user-name{
+      font-size:12px;
+      font-weight:700;
+      color:#fff;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
-    .profile-mini {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      padding: 10px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.04);
-    }
-
-    .profile-avatar {
-      width: 38px;
-      height: 38px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 50%;
-
-      background: linear-gradient(
-        135deg,
-        #19a957,
-        #8be8ad
-      );
-
-      color: #07130c;
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    .profile-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .profile-info strong {
-      display: block;
-      color: #fff;
-      font-size: 12px;
-    }
-
-    .profile-info span {
-      display: block;
-      margin-top: 3px;
-      color: #829087;
-      font-size: 10px;
-    }
-
-    .logout-btn {
-      width: 34px;
-      height: 34px;
-
-      border: 0;
-      border-radius: 10px;
-      background: transparent;
-
-      color: #7f8d84;
-    }
-
-    .logout-btn:hover {
-      color: #fff;
-      background: rgba(255,255,255,.07);
+    .user-role{
+      color:#839087;
+      font-size:10px;
+      margin-top:2px;
     }
 
     /* =========================
        MAIN
     ========================== */
 
-    .main {
-      width: calc(100% - 270px);
-      margin-left: 270px;
-      min-height: 100vh;
+    .main{
+      margin-left:var(--sidebar-width);
+      min-height:100vh;
     }
 
-    .top-header {
-      height: 76px;
-      padding: 0 32px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      position: sticky;
-      top: 0;
-      z-index: 500;
-
-      background: rgba(255,255,255,.94);
-      border-bottom: 1px solid var(--border);
-
-      backdrop-filter: blur(16px);
+    .topbar{
+      height:78px;
+      background:rgba(255,255,255,.94);
+      backdrop-filter:blur(15px);
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 30px;
+      position:sticky;
+      top:0;
+      z-index:100;
     }
 
-    .page-heading {
-      display: flex;
-      align-items: center;
-      gap: 13px;
+    .topbar-left{
+      display:flex;
+      align-items:center;
+      gap:15px;
     }
 
-    .page-heading-icon {
-      width: 40px;
-      height: 40px;
-
-      display: grid;
-      place-items: center;
-
-      color: var(--warning);
-      background: var(--warning-soft);
-      border: 1px solid #f3e0a6;
-      border-radius: 12px;
+    .mobile-menu{
+      display:none;
+      width:40px;
+      height:40px;
+      border:1px solid var(--border);
+      background:#fff;
+      border-radius:10px;
+      align-items:center;
+      justify-content:center;
+      color:var(--text);
     }
 
-    .page-heading h1 {
-      font-family: Manrope, sans-serif;
-      font-size: 19px;
-      letter-spacing: -.5px;
+    .page-heading h1{
+      font-size:21px;
+      font-weight:800;
+      letter-spacing:-.6px;
     }
 
-    .page-heading p {
-      margin-top: 2px;
-      color: var(--muted);
-      font-size: 11px;
+    .page-heading p{
+      color:var(--muted);
+      font-size:11px;
+      margin-top:4px;
     }
 
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .topbar-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
     }
 
-    .icon-btn {
-      width: 40px;
-      height: 40px;
-
-      border: 1px solid var(--border);
-      border-radius: 11px;
-      background: #fff;
-
-      color: #627068;
-
-      transition: .2s ease;
+    .save-status{
+      display:flex;
+      align-items:center;
+      gap:7px;
+      background:var(--green-soft);
+      color:var(--green-dark);
+      padding:8px 11px;
+      border-radius:9px;
+      font-size:11px;
+      font-weight:700;
     }
 
-    .icon-btn:hover {
-      color: var(--green-dark);
-      background: var(--green-soft);
-      border-color: #b9d9c6;
+    .save-status.dirty{
+      background:var(--warning-soft);
+      color:var(--warning);
     }
 
-    .mobile-menu-btn {
-      display: none;
+    .save-status i{
+      font-size:8px;
     }
 
-    /* =========================
-       CONTENT
-    ========================== */
-
-    .content {
-      max-width: 1450px;
-      padding: 30px 32px 70px;
+    .content{
+      padding:28px 30px 40px;
+      max-width:1500px;
+      margin:auto;
     }
 
     /* =========================
-       SECURITY BANNER
+       HERO
     ========================== */
 
-    .security-banner {
-      margin-bottom: 24px;
-      padding: 22px 24px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-
-      color: #fff;
-
-      background:
-        radial-gradient(
-          circle at 90% 20%,
-          rgba(217,144,0,.13),
-          transparent 35%
-        ),
-        linear-gradient(
-          135deg,
-          #151e19,
-          #202a24
-        );
-
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
+    .settings-hero{
+      background:linear-gradient(135deg,#101712 0%,#17251c 58%,#1a3323 100%);
+      color:#fff;
+      border-radius:22px;
+      padding:26px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:25px;
+      margin-bottom:22px;
+      overflow:hidden;
+      position:relative;
+      box-shadow:var(--shadow);
     }
 
-    .security-left {
-      display: flex;
-      align-items: center;
-      gap: 15px;
+    .settings-hero:after{
+      content:"";
+      position:absolute;
+      width:300px;
+      height:300px;
+      border-radius:50%;
+      background:rgba(24,169,87,.12);
+      right:-90px;
+      top:-140px;
     }
 
-    .security-icon {
-      width: 48px;
-      height: 48px;
-
-      display: grid;
-      place-items: center;
-
-      color: #efbd4c;
-      background: rgba(217,144,0,.14);
-      border-radius: 14px;
-
-      font-size: 19px;
-      flex: 0 0 auto;
+    .hero-copy{
+      position:relative;
+      z-index:1;
     }
 
-    .security-text strong {
-      display: block;
-      font-family: Manrope, sans-serif;
-      font-size: 14px;
+    .hero-eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
+      font-size:10px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:1px;
+      color:#91d9ae;
+      margin-bottom:8px;
     }
 
-    .security-text p {
-      margin-top: 5px;
-      color: #aeb9b2;
-      font-size: 11px;
-      line-height: 1.6;
+    .hero-copy h2{
+      font-size:25px;
+      line-height:1.2;
+      letter-spacing:-.8px;
     }
 
-    .secure-tag {
-      white-space: nowrap;
+    .hero-copy p{
+      color:#aab8af;
+      font-size:12px;
+      max-width:650px;
+      margin-top:8px;
+      line-height:1.7;
+    }
 
-      padding: 8px 12px;
+    .hero-status{
+      position:relative;
+      z-index:1;
+      min-width:210px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.09);
+      border-radius:16px;
+      padding:16px;
+    }
 
-      color: #d8dfdb;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.09);
-      border-radius: 30px;
+    .hero-status-label{
+      color:#87968d;
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:.8px;
+    }
 
-      font-size: 10px;
-      font-weight: 800;
+    .hero-status-value{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-top:8px;
+      font-size:14px;
+      font-weight:800;
+    }
+
+    .status-dot{
+      width:9px;
+      height:9px;
+      background:var(--green);
+      border-radius:50%;
+      box-shadow:0 0 0 4px rgba(24,169,87,.12);
+    }
+
+    .status-dot.maintenance{
+      background:#e39a18;
+      box-shadow:0 0 0 4px rgba(227,154,24,.12);
     }
 
     /* =========================
-       SETTINGS LAYOUT
+       GRID
     ========================== */
 
-    .settings-layout {
-      display: grid;
-      grid-template-columns: 220px minmax(0, 1fr);
-      gap: 20px;
-      align-items: start;
+    .settings-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:18px;
     }
 
-    .settings-nav {
-      position: sticky;
-      top: 96px;
-
-      padding: 9px;
-
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-
-      box-shadow: var(--shadow-sm);
+    .settings-card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-sm);
+      overflow:hidden;
     }
 
-    .settings-nav-title {
-      padding: 9px 10px 8px;
-
-      color: #89958e;
-      font-size: 9px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .8px;
+    .settings-card.full{
+      grid-column:1/-1;
     }
 
-    .settings-nav button {
-      width: 100%;
-
-      display: flex;
-      align-items: center;
-      gap: 9px;
-
-      padding: 10px;
-
-      border: 0;
-      border-radius: 10px;
-      background: transparent;
-
-      color: #6c7871;
-
-      text-align: left;
-      font-size: 10px;
-      font-weight: 700;
-
-      transition: .18s ease;
+    .card-head{
+      padding:18px 20px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
     }
 
-    .settings-nav button i {
-      width: 17px;
-      text-align: center;
+    .card-title-wrap{
+      display:flex;
+      align-items:center;
+      gap:11px;
     }
 
-    .settings-nav button:hover {
-      color: var(--green-dark);
-      background: #f4faf6;
+    .card-icon{
+      width:38px;
+      height:38px;
+      border-radius:11px;
+      background:var(--green-soft);
+      color:var(--green-dark);
+      display:grid;
+      place-items:center;
+      font-size:14px;
     }
 
-    .settings-nav button.active {
-      color: var(--green-dark);
-      background: var(--green-soft);
+    .card-title{
+      font-size:14px;
+      font-weight:800;
     }
 
-    .settings-nav button.danger {
-      color: var(--danger);
+    .card-description{
+      color:var(--muted);
+      font-size:10px;
+      margin-top:3px;
+      line-height:1.5;
     }
 
-    .settings-nav button.danger:hover,
-    .settings-nav button.danger.active {
-      background: var(--danger-soft);
-      color: var(--danger);
+    .card-body{
+      padding:20px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:16px;
+    }
+
+    .form-group.full{
+      grid-column:1/-1;
+    }
+
+    label{
+      display:block;
+      font-size:11px;
+      font-weight:700;
+      margin-bottom:7px;
+      color:#29352e;
+    }
+
+    .field-help{
+      color:#8a968f;
+      font-size:10px;
+      line-height:1.5;
+      margin-top:6px;
+    }
+
+    input,
+    select,
+    textarea{
+      width:100%;
+      border:1px solid var(--border);
+      background:#fbfcfb;
+      color:var(--text);
+      border-radius:10px;
+      padding:11px 12px;
+      outline:none;
+      font-size:12px;
+      transition:.2s ease;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus{
+      border-color:var(--green);
+      background:#fff;
+      box-shadow:0 0 0 3px rgba(24,169,87,.09);
+    }
+
+    textarea{
+      min-height:90px;
+      resize:vertical;
+      line-height:1.6;
+    }
+
+    .input-prefix{
+      display:flex;
+      align-items:center;
+      border:1px solid var(--border);
+      background:#fbfcfb;
+      border-radius:10px;
+      overflow:hidden;
+    }
+
+    .input-prefix span{
+      padding:0 11px;
+      color:#6e7b73;
+      font-size:11px;
+      font-weight:700;
+      border-right:1px solid var(--border);
+      align-self:stretch;
+      display:flex;
+      align-items:center;
+      background:#f4f7f5;
+    }
+
+    .input-prefix input{
+      border:0;
+      border-radius:0;
+      background:transparent;
+      box-shadow:none;
     }
 
     /* =========================
-       SETTINGS CARD
+       TOGGLES
     ========================== */
 
-    .settings-section {
-      scroll-margin-top: 100px;
-      margin-bottom: 18px;
-
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-
-      box-shadow: var(--shadow-sm);
-      overflow: hidden;
+    .toggle-list{
+      display:flex;
+      flex-direction:column;
+      gap:1px;
     }
 
-    .settings-head {
-      padding: 20px 22px;
-      border-bottom: 1px solid var(--border);
+    .toggle-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      padding:13px 0;
+      border-bottom:1px solid #eef2ef;
     }
 
-    .settings-head h2 {
-      font-family: Manrope, sans-serif;
-      font-size: 15px;
-      letter-spacing: -.3px;
+    .toggle-row:first-child{
+      padding-top:0;
     }
 
-    .settings-head p {
-      margin-top: 4px;
-      color: var(--muted);
-      font-size: 10px;
-      line-height: 1.6;
+    .toggle-row:last-child{
+      border-bottom:0;
+      padding-bottom:0;
     }
 
-    .settings-body {
-      padding: 21px 22px;
+    .toggle-copy{
+      min-width:0;
     }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 17px;
+    .toggle-title{
+      font-size:12px;
+      font-weight:700;
+      color:#27332c;
     }
 
-    .form-group.full {
-      grid-column: 1 / -1;
+    .toggle-description{
+      color:#87928c;
+      font-size:10px;
+      margin-top:3px;
+      line-height:1.5;
     }
 
-    .form-label {
-      display: block;
-      margin-bottom: 7px;
-
-      color: #435048;
-      font-size: 10px;
-      font-weight: 800;
+    .switch{
+      position:relative;
+      width:42px;
+      height:24px;
+      flex:none;
     }
 
-    .form-input,
-    .form-select,
-    .form-textarea {
-      width: 100%;
-
-      border: 1px solid var(--border);
-      border-radius: 11px;
-
-      outline: none;
-      background: #fbfcfb;
-      color: var(--text);
-
-      font-size: 11px;
-
-      transition: .18s ease;
+    .switch input{
+      opacity:0;
+      width:0;
+      height:0;
+      position:absolute;
     }
 
-    .form-input,
-    .form-select {
-      height: 43px;
-      padding: 0 12px;
+    .slider{
+      position:absolute;
+      inset:0;
+      border-radius:50px;
+      background:#d7ded9;
+      transition:.2s ease;
+      cursor:pointer;
     }
 
-    .form-textarea {
-      min-height: 95px;
-      resize: vertical;
-      padding: 12px;
-      line-height: 1.6;
+    .slider:before{
+      content:"";
+      position:absolute;
+      width:18px;
+      height:18px;
+      left:3px;
+      top:3px;
+      border-radius:50%;
+      background:#fff;
+      box-shadow:0 2px 5px rgba(0,0,0,.15);
+      transition:.2s ease;
     }
 
-    .form-input:focus,
-    .form-select:focus,
-    .form-textarea:focus {
-      background: #fff;
-      border-color: #9bcdb0;
-      box-shadow: 0 0 0 3px rgba(25,169,87,.08);
+    .switch input:checked + .slider{
+      background:var(--green);
     }
 
-    .form-help {
-      margin-top: 6px;
-      color: #8b968f;
-      font-size: 9px;
-      line-height: 1.5;
+    .switch input:checked + .slider:before{
+      transform:translateX(18px);
     }
 
     /* =========================
-       TOGGLE
+       MAINTENANCE
     ========================== */
 
-    .toggle-list {
-      display: grid;
-      gap: 0;
+    .maintenance-box{
+      border:1px solid #f0dfb8;
+      background:var(--warning-soft);
+      border-radius:14px;
+      padding:15px;
+      margin-bottom:18px;
+      display:flex;
+      align-items:flex-start;
+      gap:11px;
     }
 
-    .toggle-row {
-      min-height: 66px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-
-      border-bottom: 1px solid #edf0ee;
+    .maintenance-box i{
+      color:#d88b0c;
+      margin-top:2px;
     }
 
-    .toggle-row:last-child {
-      border-bottom: 0;
+    .maintenance-box strong{
+      display:block;
+      font-size:11px;
+      color:#754e0a;
+      margin-bottom:3px;
     }
 
-    .toggle-copy {
-      min-width: 0;
+    .maintenance-box span{
+      color:#86672e;
+      font-size:10px;
+      line-height:1.5;
     }
 
-    .toggle-copy strong {
-      display: block;
-      color: #28332c;
-      font-size: 11px;
-      font-weight: 800;
+    .maintenance-fields{
+      display:none;
     }
 
-    .toggle-copy span {
-      display: block;
-      margin-top: 4px;
-      color: #8a958e;
-      font-size: 9px;
-      line-height: 1.5;
-    }
-
-    .switch {
-      position: relative;
-      width: 43px;
-      height: 24px;
-      flex: 0 0 auto;
-    }
-
-    .switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-
-    .slider {
-      position: absolute;
-      inset: 0;
-
-      cursor: pointer;
-
-      background: #d8dedb;
-      border-radius: 30px;
-
-      transition: .2s ease;
-    }
-
-    .slider::before {
-      content: "";
-
-      position: absolute;
-      width: 18px;
-      height: 18px;
-
-      left: 3px;
-      top: 3px;
-
-      background: #fff;
-      border-radius: 50%;
-
-      box-shadow: 0 2px 5px rgba(0,0,0,.16);
-
-      transition: .2s ease;
-    }
-
-    .switch input:checked + .slider {
-      background: var(--green);
-    }
-
-    .switch input:checked + .slider::before {
-      transform: translateX(19px);
+    .maintenance-fields.show{
+      display:block;
     }
 
     /* =========================
-       INFO BOX
+       INFO CARDS
     ========================== */
 
-    .info-box {
-      margin-top: 17px;
-      padding: 14px;
-
-      display: flex;
-      align-items: flex-start;
-      gap: 11px;
-
-      background: var(--blue-soft);
-      border: 1px solid #d9e7ff;
-      border-radius: 13px;
+    .system-info-grid{
+      display:grid;
+      grid-template-columns:repeat(4,minmax(0,1fr));
+      gap:10px;
     }
 
-    .info-box i {
-      color: var(--blue);
-      margin-top: 2px;
+    .system-info{
+      background:#f8faf9;
+      border:1px solid #edf1ee;
+      border-radius:12px;
+      padding:13px;
     }
 
-    .info-box strong {
-      display: block;
-      color: #315d9e;
-      font-size: 10px;
+    .system-info-label{
+      color:#8a968f;
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:.6px;
+      font-weight:800;
     }
 
-    .info-box p {
-      margin-top: 4px;
-      color: #6680a5;
-      font-size: 9px;
-      line-height: 1.6;
+    .system-info-value{
+      font-size:12px;
+      font-weight:800;
+      margin-top:6px;
+      word-break:break-word;
+    }
+
+    .storage-ok{
+      color:var(--green-dark);
+    }
+
+    .storage-warning{
+      color:var(--warning);
     }
 
     /* =========================
-       DANGER ZONE
+       PREVIEW
     ========================== */
 
-    .danger-zone {
-      border-color: #f1ccd1;
+    .market-preview{
+      background:linear-gradient(135deg,#f0faf4,#fff);
+      border:1px solid #dcefe3;
+      border-radius:14px;
+      padding:18px;
     }
 
-    .danger-zone .settings-head {
-      background: #fffafb;
+    .preview-label{
+      color:var(--green-dark);
+      font-size:9px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:1px;
     }
 
-    .danger-title {
-      color: var(--danger) !important;
+    .preview-name{
+      font-size:19px;
+      font-weight:800;
+      margin-top:5px;
     }
 
-    .danger-action {
-      padding: 15px 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-
-      border-bottom: 1px solid #f2e1e3;
+    .preview-tagline{
+      color:var(--muted);
+      font-size:11px;
+      margin-top:3px;
     }
 
-    .danger-action:last-child {
-      border-bottom: 0;
+    .preview-stats{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:8px;
+      margin-top:15px;
     }
 
-    .danger-copy strong {
-      display: block;
-      color: #54252b;
-      font-size: 11px;
+    .preview-stat{
+      background:#fff;
+      border:1px solid #e5eee8;
+      border-radius:10px;
+      padding:10px;
     }
 
-    .danger-copy p {
-      margin-top: 4px;
-      color: #977278;
-      font-size: 9px;
-      line-height: 1.5;
+    .preview-stat strong{
+      display:block;
+      font-size:13px;
+    }
+
+    .preview-stat span{
+      color:#8a968f;
+      font-size:9px;
+      display:block;
+      margin-top:2px;
+    }
+
+    .preview-contact{
+      margin-top:12px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+
+    .contact-chip{
+      padding:7px 9px;
+      border-radius:8px;
+      background:#fff;
+      border:1px solid #e4ebe6;
+      color:#637068;
+      font-size:9px;
     }
 
     /* =========================
-       SAVE BAR
+       ACTION BAR
     ========================== */
 
-    .save-bar {
-      position: sticky;
-      bottom: 15px;
-      z-index: 100;
-
-      margin-top: 24px;
-      padding: 13px 15px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-
-      background: rgba(255,255,255,.95);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-
-      box-shadow: var(--shadow-md);
-      backdrop-filter: blur(15px);
+    .action-bar{
+      position:sticky;
+      bottom:15px;
+      z-index:50;
+      margin-top:22px;
+      background:rgba(255,255,255,.95);
+      backdrop-filter:blur(15px);
+      border:1px solid var(--border);
+      box-shadow:0 12px 35px rgba(16,23,18,.12);
+      border-radius:16px;
+      padding:12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
     }
 
-    .save-note {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
-      color: #7b877f;
-      font-size: 9px;
+    .action-note{
+      color:var(--muted);
+      font-size:10px;
     }
 
-    .save-note i {
-      color: var(--green);
+    .action-buttons{
+      display:flex;
+      gap:8px;
     }
 
-    .save-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .btn{
+      border:0;
+      border-radius:10px;
+      padding:10px 14px;
+      font-size:11px;
+      font-weight:800;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:7px;
+      transition:.2s ease;
     }
 
-    .btn {
-      min-height: 40px;
-
-      padding: 0 14px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-
-      border: 1px solid var(--border);
-      border-radius: 11px;
-
-      background: #fff;
-      color: #536159;
-
-      font-size: 10px;
-      font-weight: 800;
-
-      transition: .2s ease;
+    .btn:hover{
+      transform:translateY(-1px);
     }
 
-    .btn:hover {
-      color: var(--green-dark);
-      background: #fbfffc;
-      border-color: #bdd8c6;
+    .btn-primary{
+      background:var(--green);
+      color:#fff;
+      box-shadow:0 6px 16px rgba(24,169,87,.18);
     }
 
-    .btn-primary {
-      color: #fff;
-      background: var(--green);
-      border-color: var(--green);
-      box-shadow: 0 8px 20px rgba(25,169,87,.2);
+    .btn-primary:hover{
+      background:var(--green-dark);
     }
 
-    .btn-primary:hover {
-      color: #fff;
-      background: var(--green-dark);
-      border-color: var(--green-dark);
+    .btn-light{
+      background:#f1f4f2;
+      color:#435048;
     }
 
-    .btn-danger {
-      color: var(--danger);
-      background: #fff;
-      border-color: #efc6cb;
+    .btn-light:hover{
+      background:#e8ece9;
     }
 
-    .btn-danger:hover {
-      color: #b92232;
-      background: var(--danger-soft);
-      border-color: #e6abb3;
+    .btn-danger{
+      background:var(--danger-soft);
+      color:var(--danger);
     }
 
     /* =========================
        TOAST
     ========================== */
 
-    .toast {
-      position: fixed;
-      right: 24px;
-      bottom: 24px;
-
-      width: min(370px, calc(100vw - 32px));
-
-      padding: 14px 15px;
-
-      display: flex;
-      align-items: flex-start;
-      gap: 11px;
-
-      color: #fff;
-      background: #17211b;
-
-      border-radius: 15px;
-      box-shadow: var(--shadow-lg);
-
-      transform: translateY(130%);
-      opacity: 0;
-      pointer-events: none;
-
-      transition: .3s ease;
-
-      z-index: 9000;
+    .toast{
+      position:fixed;
+      right:25px;
+      bottom:25px;
+      z-index:3000;
+      background:#101712;
+      color:#fff;
+      padding:13px 16px;
+      border-radius:12px;
+      box-shadow:0 15px 40px rgba(0,0,0,.2);
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:11px;
+      font-weight:700;
+      transform:translateY(30px);
+      opacity:0;
+      pointer-events:none;
+      transition:.25s ease;
     }
 
-    .toast.show {
-      transform: translateY(0);
-      opacity: 1;
+    .toast.show{
+      transform:translateY(0);
+      opacity:1;
     }
 
-    .toast-icon {
-      width: 31px;
-      height: 31px;
-
-      display: grid;
-      place-items: center;
-
-      color: #5ce291;
-      background: rgba(25,169,87,.16);
-      border-radius: 9px;
-      flex: 0 0 auto;
-    }
-
-    .toast-content {
-      flex: 1;
-    }
-
-    .toast-content strong {
-      display: block;
-      font-size: 11px;
-    }
-
-    .toast-content span {
-      display: block;
-      margin-top: 3px;
-
-      color: #aeb9b2;
-      font-size: 10px;
-      line-height: 1.5;
-    }
-
-    .toast-close {
-      border: 0;
-      background: transparent;
-      color: #849088;
-      font-size: 13px;
+    .toast i{
+      color:#6ee69a;
     }
 
     /* =========================
-       MOBILE SIDEBAR
+       MOBILE OVERLAY
     ========================== */
 
-    .sidebar-overlay {
-      display: none;
-
-      position: fixed;
-      inset: 0;
-
-      background: rgba(0,0,0,.45);
-
-      z-index: 900;
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.45);
+      z-index:900;
+      display:none;
     }
 
-    @media (max-width: 1100px) {
-
-      .sidebar {
-        transform: translateX(-100%);
-        transition: transform .25s ease;
-      }
-
-      .sidebar.open {
-        transform: translateX(0);
-      }
-
-      .sidebar-overlay.show {
-        display: block;
-      }
-
-      .main {
-        width: 100%;
-        margin-left: 0;
-      }
-
-      .mobile-menu-btn {
-        display: grid;
-      }
-
-      .top-header {
-        padding: 0 20px;
-      }
-
-      .content {
-        padding: 24px 20px 55px;
-      }
-
+    .overlay.show{
+      display:block;
     }
 
-    @media (max-width: 850px) {
+    /* =========================
+       RESPONSIVE
+    ========================== */
 
-      .settings-layout {
-        grid-template-columns: 1fr;
+    @media(max-width:1100px){
+      :root{
+        --sidebar-width:245px;
       }
 
-      .settings-nav {
-        position: static;
-
-        display: flex;
-        gap: 4px;
-
-        overflow-x: auto;
-        padding: 7px;
+      .content{
+        padding:24px 20px 35px;
       }
 
-      .settings-nav-title {
-        display: none;
+      .topbar{
+        padding:0 20px;
       }
 
-      .settings-nav button {
-        min-width: max-content;
+      .system-info-grid{
+        grid-template-columns:repeat(2,1fr);
       }
-
     }
 
-    @media (max-width: 700px) {
-
-      .security-banner {
-        align-items: flex-start;
-        flex-direction: column;
+    @media(max-width:900px){
+      .sidebar{
+        transform:translateX(-100%);
       }
 
-      .form-grid {
-        grid-template-columns: 1fr;
+      .sidebar.open{
+        transform:translateX(0);
       }
 
-      .form-group.full {
-        grid-column: auto;
+      .main{
+        margin-left:0;
       }
 
-      .danger-action {
-        align-items: flex-start;
-        flex-direction: column;
+      .mobile-menu{
+        display:flex;
       }
 
-      .danger-action .btn {
-        width: 100%;
+      .settings-grid{
+        grid-template-columns:1fr;
       }
 
-      .save-bar {
-        align-items: flex-start;
-        flex-direction: column;
+      .settings-card.full{
+        grid-column:auto;
       }
 
-      .save-actions {
-        width: 100%;
+      .settings-hero{
+        flex-direction:column;
+        align-items:flex-start;
       }
 
-      .save-actions .btn {
-        flex: 1;
+      .hero-status{
+        width:100%;
       }
-
     }
 
-    @media (max-width: 560px) {
-
-      .top-header {
-        height: 68px;
-        padding: 0 14px;
+    @media(max-width:650px){
+      .topbar{
+        height:70px;
       }
 
-      .page-heading-icon {
-        width: 36px;
-        height: 36px;
+      .page-heading h1{
+        font-size:17px;
       }
 
-      .page-heading h1 {
-        font-size: 16px;
+      .page-heading p{
+        display:none;
       }
 
-      .page-heading p {
-        display: none;
+      .save-status span{
+        display:none;
       }
 
-      .header-actions .view-btn {
-        display: none;
+      .content{
+        padding:18px 13px 30px;
       }
 
-      .content {
-        padding: 18px 14px 45px;
+      .settings-hero{
+        padding:20px;
+        border-radius:17px;
       }
 
-      .security-banner {
-        padding: 18px;
-        border-radius: 18px;
+      .hero-copy h2{
+        font-size:20px;
       }
 
-      .settings-head,
-      .settings-body {
-        padding-left: 17px;
-        padding-right: 17px;
+      .hero-copy p{
+        font-size:11px;
       }
 
-      .save-bar {
-        bottom: 8px;
+      .card-body,
+      .card-head{
+        padding:16px;
       }
 
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+
+      .form-group.full{
+        grid-column:auto;
+      }
+
+      .preview-stats{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .system-info-grid{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .action-bar{
+        align-items:stretch;
+        flex-direction:column;
+        bottom:8px;
+      }
+
+      .action-buttons{
+        width:100%;
+      }
+
+      .action-buttons .btn{
+        flex:1;
+      }
+
+      .toast{
+        left:13px;
+        right:13px;
+        bottom:15px;
+      }
     }
 
+    @media(max-width:420px){
+      .topbar-actions{
+        gap:6px;
+      }
+
+      .mobile-menu{
+        width:36px;
+        height:36px;
+      }
+
+      .system-info-grid{
+        grid-template-columns:1fr;
+      }
+    }
   </style>
 </head>
 
 <body>
 
-  <div class="app">
+<div class="app">
 
-    <!-- =========================================
-         SIDEBAR
-    ========================================== -->
+  <!-- =========================
+       SIDEBAR
+  ========================== -->
 
-    <aside class="sidebar" id="sidebar">
+  <aside class="sidebar" id="sidebar">
 
-      <div class="sidebar-top">
-
-        <a href="../index.html" class="brand">
-
-          <img
-            src="../logo.png"
-            alt="Website Deals"
-            class="brand-logo"
-          >
-
-          <div class="brand-text">
-            <strong>Website Deals</strong>
-            <span>Marketplace Control</span>
-          </div>
-
-        </a>
-
+    <div class="brand">
+      <img src="../logo.png" alt="Website Deals" class="brand-logo">
+      <div class="brand-copy">
+        <div class="brand-title">Website Deals</div>
+        <div class="brand-subtitle">Admin Control Center</div>
       </div>
+    </div>
 
+    <div class="sidebar-scroll">
 
-      <div class="sidebar-scroll">
+      <div class="nav-label">Marketplace</div>
 
-        <div class="nav-label">
-          Marketplace
+      <a class="nav-item" href="dashboard.html">
+        <i class="fa-solid fa-grid-2"></i>
+        <span>Dashboard</span>
+      </a>
+
+      <a class="nav-item" href="websites.html">
+        <i class="fa-solid fa-globe"></i>
+        <span>Websites</span>
+      </a>
+
+      <a class="nav-item" href="categories.html">
+        <i class="fa-solid fa-layer-group"></i>
+        <span>Categories</span>
+      </a>
+
+      <a class="nav-item" href="orders.html">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Orders</span>
+      </a>
+
+      <a class="nav-item" href="customers.html">
+        <i class="fa-solid fa-users"></i>
+        <span>Customers</span>
+      </a>
+
+      <a class="nav-item" href="newsletter.html">
+        <i class="fa-solid fa-envelope"></i>
+        <span>Newsletter</span>
+      </a>
+
+      <div class="nav-label">Restricted Controls</div>
+
+      <a class="nav-item restricted" href="admins.html">
+        <i class="fa-solid fa-user-shield"></i>
+        <span>Admin Management</span>
+      </a>
+
+      <a class="nav-item restricted active" href="settings.html">
+        <i class="fa-solid fa-sliders"></i>
+        <span>System Settings</span>
+      </a>
+
+    </div>
+
+    <div class="sidebar-user">
+      <div class="user-card">
+        <div class="user-avatar" id="sidebarAvatar">SA</div>
+        <div class="user-info">
+          <div class="user-name" id="sidebarName">Super Admin</div>
+          <div class="user-role" id="sidebarRole">Super Administrator</div>
         </div>
-
-        <a href="dashboard.html" class="nav-link">
-          <i class="fa-solid fa-grid-2"></i>
-          <span>Dashboard</span>
-        </a>
-
-        <a href="websites.html" class="nav-link">
-          <i class="fa-solid fa-window-maximize"></i>
-          <span>Websites</span>
-          <span class="nav-badge">11</span>
-        </a>
-
-        <a href="categories.html" class="nav-link">
-          <i class="fa-solid fa-layer-group"></i>
-          <span>Categories</span>
-        </a>
-
-        <a href="orders.html" class="nav-link">
-          <i class="fa-solid fa-bag-shopping"></i>
-          <span>Orders</span>
-          <span class="nav-badge">12</span>
-        </a>
-
-        <a href="customers.html" class="nav-link">
-          <i class="fa-solid fa-users"></i>
-          <span>Customers</span>
-        </a>
-
-        <a href="newsletter.html" class="nav-link">
-          <i class="fa-solid fa-envelope"></i>
-          <span>Newsletter</span>
-        </a>
-
-
-        <!-- RESTRICTED -->
-
-        <div class="restricted-box">
-
-          <div class="restricted-title">
-            <i class="fa-solid fa-shield-halved"></i>
-            Restricted Controls
-          </div>
-
-          <a href="admins.html" class="nav-link">
-            <i class="fa-solid fa-user-shield"></i>
-            <span>Admin Management</span>
-          </a>
-
-          <a href="settings.html" class="nav-link active">
-            <i class="fa-solid fa-sliders"></i>
-            <span>System Settings</span>
-          </a>
-
-        </div>
-
       </div>
+    </div>
 
+  </aside>
 
-      <div class="sidebar-bottom">
+  <div class="overlay" id="overlay"></div>
 
-        <div class="profile-mini">
+  <!-- =========================
+       MAIN
+  ========================== -->
 
-          <div class="profile-avatar">
-            SA
-          </div>
+  <main class="main">
 
-          <div class="profile-info">
-            <strong>Super Admin</strong>
-            <span>Full System Access</span>
-          </div>
+    <header class="topbar">
 
-          <button
-            class="logout-btn"
-            id="logout-btn"
-            title="Sign out"
-          >
-            <i class="fa-solid fa-right-from-bracket"></i>
-          </button>
+      <div class="topbar-left">
 
-        </div>
-
-      </div>
-
-    </aside>
-
-
-    <div
-      class="sidebar-overlay"
-      id="sidebar-overlay"
-    ></div>
-
-
-    <!-- =========================================
-         MAIN
-    ========================================== -->
-
-    <main class="main">
-
-      <!-- HEADER -->
-
-      <header class="top-header">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">
+          <i class="fa-solid fa-bars"></i>
+        </button>
 
         <div class="page-heading">
+          <h1>System Settings</h1>
+          <p>Control your Website Deals marketplace configuration.</p>
+        </div>
 
-          <button
-            class="icon-btn mobile-menu-btn"
-            id="mobile-menu-btn"
-            aria-label="Open menu"
-          >
-            <i class="fa-solid fa-bars"></i>
-          </button>
+      </div>
 
-          <div class="page-heading-icon">
-            <i class="fa-solid fa-sliders"></i>
+      <div class="topbar-actions">
+
+        <div class="save-status" id="saveStatus">
+          <i class="fa-solid fa-circle"></i>
+          <span>All changes saved</span>
+        </div>
+
+      </div>
+
+    </header>
+
+    <section class="content">
+
+      <!-- =========================
+           HERO
+      ========================== -->
+
+      <div class="settings-hero">
+
+        <div class="hero-copy">
+          <div class="hero-eyebrow">
+            <i class="fa-solid fa-shield-halved"></i>
+            Super Admin Control
           </div>
 
-          <div>
-            <h1>System Settings</h1>
-            <p>Control marketplace configuration</p>
+          <h2>System Configuration</h2>
+
+          <p>
+            Manage marketplace identity, checkout rules, notifications,
+            maintenance mode and security preferences from one place.
+          </p>
+        </div>
+
+        <div class="hero-status">
+
+          <div class="hero-status-label">
+            Marketplace Status
+          </div>
+
+          <div class="hero-status-value">
+            <span class="status-dot" id="heroStatusDot"></span>
+            <span id="heroStatusText">Live & Operational</span>
           </div>
 
         </div>
 
+      </div>
 
-        <div class="header-actions">
+      <!-- =========================
+           SETTINGS GRID
+      ========================== -->
 
-          <button
-            class="icon-btn"
-            id="refresh-btn"
-            title="Reload settings"
-          >
-            <i class="fa-solid fa-rotate"></i>
-          </button>
+      <div class="settings-grid">
 
-          <a
-            href="../index.html"
-            target="_blank"
-            class="btn view-btn"
-          >
-            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-            Marketplace
-          </a>
+        <!-- GENERAL -->
 
-        </div>
+        <section class="settings-card">
 
-      </header>
+          <div class="card-head">
 
+            <div class="card-title-wrap">
 
-      <!-- CONTENT -->
+              <div class="card-icon">
+                <i class="fa-solid fa-store"></i>
+              </div>
 
-      <div class="content">
-
-        <!-- SECURITY -->
-
-        <section class="security-banner">
-
-          <div class="security-left">
-
-            <div class="security-icon">
-              <i class="fa-solid fa-shield-halved"></i>
-            </div>
-
-            <div class="security-text">
-
-              <strong>
-                Super Admin Control Center
-              </strong>
-
-              <p>
-                These settings affect the marketplace globally.
-                Review changes carefully before saving.
-              </p>
+              <div>
+                <div class="card-title">General Settings</div>
+                <div class="card-description">
+                  Basic marketplace identity and support information.
+                </div>
+              </div>
 
             </div>
 
           </div>
 
-          <div class="secure-tag">
-            <i class="fa-solid fa-lock"></i>
-            Restricted Area
+          <div class="card-body">
+
+            <div class="form-grid">
+
+              <div class="form-group">
+                <label for="siteName">Site Name</label>
+                <input id="siteName" type="text">
+              </div>
+
+              <div class="form-group">
+                <label for="tagline">Tagline</label>
+                <input id="tagline" type="text">
+              </div>
+
+              <div class="form-group">
+                <label for="supportEmail">Support Email</label>
+                <input id="supportEmail" type="email">
+              </div>
+
+              <div class="form-group">
+                <label for="supportPhone">Support Phone</label>
+                <input id="supportPhone" type="text">
+              </div>
+
+              <div class="form-group">
+                <label for="timezone">Timezone</label>
+                <select id="timezone">
+                  <option value="Asia/Dhaka">Asia/Dhaka</option>
+                  <option value="Asia/Kolkata">Asia/Kolkata</option>
+                  <option value="Asia/Dubai">Asia/Dubai</option>
+                  <option value="UTC">UTC</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="currency">Currency</label>
+                <select id="currency">
+                  <option value="BDT">BDT — Bangladeshi Taka</option>
+                  <option value="USD">USD — US Dollar</option>
+                  <option value="INR">INR — Indian Rupee</option>
+                  <option value="AED">AED — UAE Dirham</option>
+                </select>
+              </div>
+
+            </div>
+
           </div>
 
         </section>
 
+        <!-- MARKETPLACE -->
 
-        <!-- SETTINGS -->
+        <section class="settings-card">
 
-        <div class="settings-layout">
+          <div class="card-head">
 
-          <!-- SETTINGS NAV -->
+            <div class="card-title-wrap">
 
-          <aside class="settings-nav">
+              <div class="card-icon">
+                <i class="fa-solid fa-chart-simple"></i>
+              </div>
 
-            <div class="settings-nav-title">
-              Settings
+              <div>
+                <div class="card-title">Marketplace Settings</div>
+                <div class="card-description">
+                  Configure marketplace summary numbers and order format.
+                </div>
+              </div>
+
             </div>
 
-            <button
-              class="active"
-              data-target="general"
-            >
-              <i class="fa-solid fa-store"></i>
-              General
-            </button>
+          </div>
 
-            <button data-target="marketplace">
-              <i class="fa-solid fa-shop"></i>
-              Marketplace
-            </button>
+          <div class="card-body">
 
-            <button data-target="orders">
-              <i class="fa-solid fa-bag-shopping"></i>
-              Orders
-            </button>
+            <div class="form-grid">
 
-            <button data-target="notifications">
-              <i class="fa-solid fa-bell"></i>
-              Notifications
-            </button>
+              <div class="form-group">
+                <label for="startingPrice">Starting Price</label>
 
-            <button data-target="maintenance">
-              <i class="fa-solid fa-screwdriver-wrench"></i>
-              Maintenance
-            </button>
-
-            <button data-target="security">
-              <i class="fa-solid fa-lock"></i>
-              Security
-            </button>
-
-            <button
-              class="danger"
-              data-target="danger"
-            >
-              <i class="fa-solid fa-triangle-exclamation"></i>
-              Danger Zone
-            </button>
-
-          </aside>
-
-
-          <!-- SETTINGS CONTENT -->
-
-          <div>
-
-
-            <!-- =================================
-                 GENERAL
-            ================================== -->
-
-            <section
-              class="settings-section"
-              id="general"
-            >
-
-              <div class="settings-head">
-
-                <h2>
-                  General Settings
-                </h2>
-
-                <p>
-                  Basic marketplace identity and support information.
-                </p>
-
-              </div>
-
-
-              <div class="settings-body">
-
-                <div class="form-grid">
-
-                  <div class="form-group">
-
-                    <label class="form-label">
-                      Marketplace Name
-                    </label>
-
-                    <input
-                      type="text"
-                      class="form-input"
-                      id="marketplace-name"
-                      value="Website Deals"
-                    >
-
-                  </div>
-
-
-                  <div class="form-group">
-
-                    <label class="form-label">
-                      Marketplace Tagline
-                    </label>
-
-                    <input
-                      type="text"
-                      class="form-input"
-                      id="marketplace-tagline"
-                      value="Premium Ready-Made Websites"
-                    >
-
-                  </div>
-
-
-                  <div class="form-group">
-
-                    <label class="form-label">
-                      Support Email
-                    </label>
-
-                    <input
-                      type="email"
-                      class="form-input"
-                      id="support-email"
-                      value="support@websitedeals.com"
-                    >
-
-                  </div>
-
-
-                  <div class="form-group">
-
-                    <label class="form-label">
-                      Support Phone
-                    </label>
-
-                    <input
-                      type="text"
-                      class="form-input"
-                      id="support-phone"
-                      value="+880 1XXX-XXXXXX"
-                    >
-
-                  </div>
-
-
-                  <div class="form-group full">
-
-                    <label class="form-label">
-                      Marketplace Description
-                    </label>
-
-                    <textarea
-                      class="form-textarea"
-                      id="marketplace-description"
-                    >Premium ready-made websites for businesses, restaurants, agencies, portfolios and online stores.</textarea>
-
-                  </div>
-
+                <div class="input-prefix">
+                  <span>৳</span>
+                  <input id="startingPrice" type="number" min="0">
                 </div>
 
               </div>
 
-            </section>
+              <div class="form-group">
+                <label for="orderPrefix">Order Prefix</label>
+                <input id="orderPrefix" type="text" maxlength="10">
+                <div class="field-help">
+                  Example: WD-1028
+                </div>
+              </div>
 
+              <div class="form-group">
+                <label for="websiteCount">Website Count Display</label>
+                <input id="websiteCount" type="number" min="0">
+              </div>
 
-            <!-- =================================
-                 MARKETPLACE
-            ================================== -->
+              <div class="form-group">
+                <label for="customerCount">Customer Count Display</label>
+                <input id="customerCount" type="number" min="0">
+              </div>
 
-            <section
-              class="settings-section"
-              id="marketplace"
-            >
+              <div class="form-group">
+                <label for="rating">Rating Display</label>
+                <input id="rating" type="number" min="0" max="5" step="0.1">
+              </div>
 
-              <div class="settings-head">
+            </div>
 
-                <h2>
-                  Marketplace Settings
-                </h2>
+          </div>
 
-                <p>
-                  Configure pricing, discovery and marketplace visibility.
-                </p>
+        </section>
+
+        <!-- CHECKOUT -->
+
+        <section class="settings-card">
+
+          <div class="card-head">
+
+            <div class="card-title-wrap">
+
+              <div class="card-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </div>
+
+              <div>
+                <div class="card-title">Checkout & Orders</div>
+                <div class="card-description">
+                  Configure how customer orders are processed.
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="card-body">
+
+            <div class="toggle-list">
+
+              <div class="toggle-row">
+
+                <div class="toggle-copy">
+                  <div class="toggle-title">Auto Confirm Orders</div>
+                  <div class="toggle-description">
+                    Automatically mark new orders as confirmed.
+                  </div>
+                </div>
+
+                <label class="switch">
+                  <input id="autoConfirmOrders" type="checkbox">
+                  <span class="slider"></span>
+                </label>
 
               </div>
 
+              <div class="toggle-row">
 
-              <div class="settings-body">
-
-                <div class="form-grid">
-
-                  <div class="form-group">
-
-                    <label class="form-label">
-                      Currency
-                    </label>
-
-                    <select
-                      class="form-select"
-                      id="currency"
-                    >
-                      <option value="BDT">BDT — ৳</option>
-                      <option value="USD">USD — $</option>
-                      <option value="INR">INR — ₹</option>
-                      <option value="EUR">EUR — €</option>
-                    </select>
-
+                <div class="toggle-copy">
+                  <div class="toggle-title">Payment Verification</div>
+                  <div class="toggle-description">
+                    Require payment verification before processing.
                   </div>
-
-
-                  <div class="form-group">
-
-                    <label class="form-label">
-                      Starting Price
-                    </label>
-
-                    <input
-                      type="number"
-                      class="form-input"
-                      id="starting-price"
-                      value="999"
-                      min="0"
-                    >
-
-                  </div>
-
                 </div>
 
-
-                <div class="toggle-list">
-
-                  <div class="toggle-row">
-
-                    <div class="toggle-copy">
-
-                      <strong>
-                        Marketplace Enabled
-                      </strong>
-
-                      <span>
-                        Allow customers to browse the marketplace.
-                      </span>
-
-                    </div>
-
-                    <label class="switch">
-
-                      <input
-                        type="checkbox"
-                        id="marketplace-enabled"
-                        checked
-                      >
-
-                      <span class="slider"></span>
-
-                    </label>
-
-                  </div>
-
-
-                  <div class="toggle-row">
-
-                    <div class="toggle-copy">
-
-                      <strong>
-                        Show Search
-                      </strong>
-
-                      <span>
-                        Display marketplace search controls.
-                      </span>
-
-                    </div>
-
-                    <label class="switch">
-
-                      <input
-                        type="checkbox"
-                        id="show-search"
-                        checked
-                      >
-
-                      <span class="slider"></span>
-
-                    </label>
-
-                  </div>
-
-
-                  <div class="toggle-row">
-
-                    <div class="toggle-copy">
-
-                      <strong>
-                        Show Featured Websites
-                      </strong>
-
-                      <span>
-                        Display featured website sections on the homepage.
-                      </span>
-
-                    </div>
-
-                    <label class="switch">
-
-                      <input
-                        type="checkbox"
-                        id="show-featured"
-                        checked
-                      >
-
-                      <span class="slider"></span>
-
-                    </label>
-
-                  </div>
-
-
-                  <div class="toggle-row">
-
-                    <div class="toggle-copy">
-
-                      <strong>
-                        Show Monthly Package
-                      </strong>
-
-                      <span>
-                        Display monthly website packages.
-                      </span>
-
-                    </div>
-
-                    <label class="switch">
-
-                      <input
-                        type="checkbox"
-                        id="show-monthly"
-                        checked
-                      >
-
-                      <span class="slider"></span>
-
-                    </label>
-
-                  </div>
-
-                </div>
+                <label class="switch">
+                  <input id="requirePaymentVerification" type="checkbox">
+                  <span class="slider"></span>
+                </label>
 
               </div>
 
-            </section>
+              <div class="toggle-row">
 
+                <div class="toggle-copy">
+                  <div class="toggle-title">Payment Screenshot</div>
+                  <div class="toggle-description">
+                    Ask customers to submit proof of payment.
+                  </div>
+                </div>
 
-            <!-- =================================
-                 ORDERS
-            ================================== -->
-
-            <section
-              class="settings-section"
-              id="orders"
-            >
-
-              <div class="settings-head">
-
-                <h2>
-                  Order Settings
-                </h2>
-
-                <p>
-                  Configure the default order workflow and requirements.
-                </p>
+                <label class="switch">
+                  <input id="requirePaymentScreenshot" type="checkbox">
+                  <span class="slider"></span>
+                </label>
 
               </div>
 
+              <div class="toggle-row">
 
-              <div class="settings-body">
-
-                <div class="form-grid">
-
-                  <div class="form-group">
-
-                    <label class="form-label">
-                      Default Order Status
-                    </label>
-
-                    <select
-                      class="form-select"
-                      id="default-order-status"
-                    >
-                      <option value="pending">
-                        Pending
-                      </option>
-
-                      <option value="processing">
-                        Processing
-                      </option>
-
-                      <option value="confirmed">
-                        Confirmed
-                      </option>
-
-                    </select>
-
+                <div class="toggle-copy">
+                  <div class="toggle-title">Duplicate Order Protection</div>
+                  <div class="toggle-description">
+                    Detect repeated order submissions.
                   </div>
-
-
-                  <div class="form-group">
-
-                    <label class="form-label">
-                      Order Prefix
-                    </label>
-
-                    <input
-                      type="text"
-                      class="form-input"
-                      id="order-prefix"
-                      value="WD-"
-                    >
-
-                  </div>
-
                 </div>
 
-
-                <div class="toggle-list">
-
-                  <div class="toggle-row">
-
-                    <div class="toggle-copy">
-
-                      <strong>
-                        Require Customer Phone
-                      </strong>
-
-                      <span>
-                        Phone number must be supplied during checkout.
-                      </span>
-
-                    </div>
-
-                    <label class="switch">
-
-                      <input
-                        type="checkbox"
-                        id="require-phone"
-                        checked
-                      >
-
-                      <span class="slider"></span>
-
-                    </label>
-
-                  </div>
-
-
-                  <div class="toggle-row">
-
-                    <div class="toggle-copy">
-
-                      <strong>
-                        Require Payment Confirmation
-                      </strong>
-
-                      <span>
-                        Orders remain pending until payment is confirmed.
-                      </span>
-
-                    </div>
-
-                    <label class="switch">
-
-                      <input
-                        type="checkbox"
-                        id="require-payment"
-                        checked
-                      >
-
-                      <span class="slider"></span>
-
-                    </label>
-
-                  </div>
-
-
-                  <div class="toggle-row">
-
-                    <div class="toggle-copy">
-
-                      <strong>
-                        Send Order Notifications
-                      </strong>
-
-                      <span>
-                        Notify administrators when a new order arrives.
-                      </span>
-
-                    </div>
-
-                    <label class="switch">
-
-                      <input
-                        type="checkbox"
-                        id="order-notifications"
-                        checked
-                      >
-
-                      <span class="slider"></span>
-
-                    </label>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </section>
-
-
-            <!-- =================================
-                 NOTIFICATIONS
-            ================================== -->
-
-            <section
-              class="settings-section"
-              id="notifications"
-            >
-
-              <div class="settings-head">
-
-                <h2>
-                  Notification Settings
-                </h2>
-
-                <p>
-                  Choose which marketplace events should generate alerts.
-                </p>
-
-              </div>
-
-
-              <div class="settings-body">
-
-                <div class="toggle-list">
-
-                  <div class="toggle-row">
-
-                    <div class="toggle-copy">
-
-                      <strong>
-                        New Order Alert
-                      </strong>
-
-                      <span>
-                        Alert administrators when customers submit orders.
-                      </span>
-
-                    </div>
-
-                    <label class="switch">
-
-                      <input
-                        type="checkbox"
-                        id="new-order-alert"
-                        checked
-                      >
-
-                      <span class="slider"></span>
-
-                    </label>
-
-                  </div>
-
-
-                  <div class="toggle-row">
-
-                    <div class="toggle-copy">
-
-                      <strong>
-                        New Subscriber Alert
-                      </strong>
-
-                      <span>
-                        Alert administrators when a new newsletter subscriber joins.
-                      </span>
-
-                    </div>
-
-                    <label class="switch">
-
-                      <input
-                        type="checkbox"
-                        id="new-subscriber-alert"
-                        checked
-                      >
-
-                      <span class="slider"></span>
-
-                    </label>
-
-                  </div>
-
-
-                  <div class="toggle-row">
-
-                    <div class="toggle-copy">
-
-                      <strong>
-                        Admin Activity Alerts
-                      </strong>
-
-                      <span>
-                        Record and notify about important administrator actions.
-                      </span>
-
-                    </div>
-
-                    <label class="switch">
-
-                      <input
-                        type="checkbox"
-                        id="admin-activity-alerts"
-                        checked
-                      >
-
-                      <span class="slider"></span>
-
-                    </label>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </section>
-
-
-            <!-- =================================
-                 MAINTENANCE
-            ================================== -->
-
-            <section
-              class="settings-section"
-              id="maintenance"
-            >
-
-              <div class="settings-head">
-
-                <h2>
-                  Maintenance Mode
-                </h2>
-
-                <p>
-                  Temporarily disable the public marketplace while making major changes.
-                </p>
-
-              </div>
-
-
-              <div class="settings-body">
-
-                <div class="toggle-list">
-
-                  <div class="toggle-row">
-
-                    <div class="toggle-copy">
-
-                      <strong>
-                        Enable Maintenance Mode
-                      </strong>
-
-                      <span>
-                        Visitors will see the maintenance message instead of the marketplace.
-                      </span>
-
-                    </div>
-
-                    <label class="switch">
-
-                      <input
-                        type="checkbox"
-                        id="maintenance-mode"
-                      >
-
-                      <span class="slider"></span>
-
-                    </label>
-
-                  </div>
-
-                </div>
-
-
-                <div
-                  class="form-group"
-                  style="margin-top:18px;"
-                >
-
-                  <label class="form-label">
-                    Maintenance Message
-                  </label>
-
-                  <textarea
-                    class="form-textarea"
-                    id="maintenance-message"
-                  >We're currently updating Website Deals. Please check back shortly.</textarea>
-
-                </div>
-
-
-                <div class="info-box">
-
-                  <i class="fa-solid fa-circle-info"></i>
-
-                  <div>
-
-                    <strong>
-                      Maintenance behavior
-                    </strong>
-
-                    <p>
-                      In the Firebase version, this setting will be read by the public
-                      website before rendering marketplace content.
-                    </p>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </section>
-
-
-            <!-- =================================
-                 SECURITY
-            ================================== -->
-
-            <section
-              class="settings-section"
-              id="security"
-            >
-
-              <div class="settings-head">
-
-                <h2>
-                  Security Settings
-                </h2>
-
-                <p>
-                  Configure administrator session and security preferences.
-                </p>
-
-              </div>
-
-
-              <div class="settings-body">
-
-                <div class="form-grid">
-
-                  <div class="form-group">
-
-                    <label class="form-label">
-                      Session Timeout
-                    </label>
-
-                    <select
-                      class="form-select"
-                      id="session-timeout"
-                    >
-                      <option value="30">30 Minutes</option>
-                      <option value="60" selected>1 Hour</option>
-                      <option value="240">4 Hours</option>
-                      <option value="480">8 Hours</option>
-                      <option value="0">No Timeout</option>
-                    </select>
-
-                  </div>
-
-
-                  <div class="form-group">
-
-                    <label class="form-label">
-                      Login Attempts
-                    </label>
-
-                    <select
-                      class="form-select"
-                      id="login-attempts"
-                    >
-                      <option value="3">3 Attempts</option>
-                      <option value="5" selected>5 Attempts</option>
-                      <option value="10">10 Attempts</option>
-                    </select>
-
-                  </div>
-
-                </div>
-
-
-                <div class="toggle-list">
-
-                  <div class="toggle-row">
-
-                    <div class="toggle-copy">
-
-                      <strong>
-                        Require Secure Authentication
-                      </strong>
-
-                      <span>
-                        Production authentication should use Firebase Authentication.
-                      </span>
-
-                    </div>
-
-                    <label class="switch">
-
-                      <input
-                        type="checkbox"
-                        id="secure-auth"
-                        checked
-                      >
-
-                      <span class="slider"></span>
-
-                    </label>
-
-                  </div>
-
-
-                  <div class="toggle-row">
-
-                    <div class="toggle-copy">
-
-                      <strong>
-                        Activity Logging
-                      </strong>
-
-                      <span>
-                        Record important administrator actions for audit purposes.
-                      </span>
-
-                    </div>
-
-                    <label class="switch">
-
-                      <input
-                        type="checkbox"
-                        id="activity-logging"
-                        checked
-                      >
-
-                      <span class="slider"></span>
-
-                    </label>
-
-                  </div>
-
-                </div>
-
-
-                <div class="info-box">
-
-                  <i class="fa-solid fa-shield-halved"></i>
-
-                  <div>
-
-                    <strong>
-                      Production security
-                    </strong>
-
-                    <p>
-                      UI settings cannot provide real authorization by themselves.
-                      Firebase Authentication and Firestore Security Rules will enforce
-                      the actual Super Admin permissions.
-                    </p>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </section>
-
-
-            <!-- =================================
-                 DANGER ZONE
-            ================================== -->
-
-            <section
-              class="settings-section danger-zone"
-              id="danger"
-            >
-
-              <div class="settings-head">
-
-                <h2 class="danger-title">
-                  Danger Zone
-                </h2>
-
-                <p>
-                  Destructive demo actions. These controls will be replaced with
-                  protected Firebase operations in production.
-                </p>
-
-              </div>
-
-
-              <div class="settings-body">
-
-                <div class="danger-action">
-
-                  <div class="danger-copy">
-
-                    <strong>
-                      Clear Demo Orders
-                    </strong>
-
-                    <p>
-                      Remove locally stored Website Deals demo orders.
-                    </p>
-
-                  </div>
-
-                  <button
-                    class="btn btn-danger"
-                    id="clear-orders-btn"
-                  >
-                    <i class="fa-solid fa-trash"></i>
-                    Clear Orders
-                  </button>
-
-                </div>
-
-
-                <div class="danger-action">
-
-                  <div class="danger-copy">
-
-                    <strong>
-                      Clear Newsletter Subscribers
-                    </strong>
-
-                    <p>
-                      Remove locally stored newsletter subscriber records.
-                    </p>
-
-                  </div>
-
-                  <button
-                    class="btn btn-danger"
-                    id="clear-subscribers-btn"
-                  >
-                    <i class="fa-solid fa-trash"></i>
-                    Clear Subscribers
-                  </button>
-
-                </div>
-
-
-                <div class="danger-action">
-
-                  <div class="danger-copy">
-
-                    <strong>
-                      Reset All Settings
-                    </strong>
-
-                    <p>
-                      Restore Website Deals settings to their original demo defaults.
-                    </p>
-
-                  </div>
-
-                  <button
-                    class="btn btn-danger"
-                    id="reset-settings-btn"
-                  >
-                    <i class="fa-solid fa-arrow-rotate-left"></i>
-                    Reset Settings
-                  </button>
-
-                </div>
-
-              </div>
-
-            </section>
-
-
-            <!-- SAVE BAR -->
-
-            <div class="save-bar">
-
-              <div class="save-note">
-
-                <i class="fa-solid fa-floppy-disk"></i>
-
-                <span>
-                  Demo mode — settings are saved in this browser.
-                </span>
-
-              </div>
-
-
-              <div class="save-actions">
-
-                <button
-                  class="btn"
-                  id="discard-btn"
-                >
-                  Discard
-                </button>
-
-                <button
-                  class="btn btn-primary"
-                  id="save-btn"
-                >
-                  <i class="fa-solid fa-check"></i>
-                  Save Settings
-                </button>
+                <label class="switch">
+                  <input id="duplicateOrderProtection" type="checkbox">
+                  <span class="slider"></span>
+                </label>
 
               </div>
 
@@ -2459,895 +1472,1104 @@
 
           </div>
 
+        </section>
+
+        <!-- NOTIFICATIONS -->
+
+        <section class="settings-card">
+
+          <div class="card-head">
+
+            <div class="card-title-wrap">
+
+              <div class="card-icon">
+                <i class="fa-solid fa-bell"></i>
+              </div>
+
+              <div>
+                <div class="card-title">Notifications</div>
+                <div class="card-description">
+                  Decide which marketplace events should trigger alerts.
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="card-body">
+
+            <div class="toggle-list">
+
+              <div class="toggle-row">
+
+                <div class="toggle-copy">
+                  <div class="toggle-title">Email Notifications</div>
+                  <div class="toggle-description">
+                    Enable system email notifications.
+                  </div>
+                </div>
+
+                <label class="switch">
+                  <input id="emailNotifications" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+
+              </div>
+
+              <div class="toggle-row">
+
+                <div class="toggle-copy">
+                  <div class="toggle-title">New Order Alerts</div>
+                  <div class="toggle-description">
+                    Notify admins when a new order arrives.
+                  </div>
+                </div>
+
+                <label class="switch">
+                  <input id="newOrderAlerts" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+
+              </div>
+
+              <div class="toggle-row">
+
+                <div class="toggle-copy">
+                  <div class="toggle-title">Admin Alerts</div>
+                  <div class="toggle-description">
+                    Send alerts for important administrative events.
+                  </div>
+                </div>
+
+                <label class="switch">
+                  <input id="adminAlerts" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+
+              </div>
+
+              <div class="toggle-row">
+
+                <div class="toggle-copy">
+                  <div class="toggle-title">Newsletter Notifications</div>
+                  <div class="toggle-description">
+                    Notify admins about newsletter activity.
+                  </div>
+                </div>
+
+                <label class="switch">
+                  <input id="newsletterNotifications" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- MAINTENANCE -->
+
+        <section class="settings-card">
+
+          <div class="card-head">
+
+            <div class="card-title-wrap">
+
+              <div class="card-icon">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+              </div>
+
+              <div>
+                <div class="card-title">Maintenance Mode</div>
+                <div class="card-description">
+                  Temporarily show a maintenance message on the marketplace.
+                </div>
+              </div>
+
+            </div>
+
+            <label class="switch">
+              <input id="maintenanceMode" type="checkbox">
+              <span class="slider"></span>
+            </label>
+
+          </div>
+
+          <div class="card-body">
+
+            <div class="maintenance-box">
+
+              <i class="fa-solid fa-triangle-exclamation"></i>
+
+              <div>
+                <strong>Maintenance mode is a marketplace setting.</strong>
+                <span>
+                  This admin page will remain accessible so a Super Admin can
+                  disable maintenance mode when required.
+                </span>
+              </div>
+
+            </div>
+
+            <div class="maintenance-fields" id="maintenanceFields">
+
+              <div class="form-grid">
+
+                <div class="form-group full">
+                  <label for="maintenanceTitle">Maintenance Title</label>
+                  <input id="maintenanceTitle" type="text">
+                </div>
+
+                <div class="form-group full">
+                  <label for="maintenanceMessage">Maintenance Message</label>
+                  <textarea id="maintenanceMessage"></textarea>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- SECURITY -->
+
+        <section class="settings-card">
+
+          <div class="card-head">
+
+            <div class="card-title-wrap">
+
+              <div class="card-icon">
+                <i class="fa-solid fa-lock"></i>
+              </div>
+
+              <div>
+                <div class="card-title">Security Settings</div>
+                <div class="card-description">
+                  Administrative security preferences for the dashboard.
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="card-body">
+
+            <div class="form-grid" style="margin-bottom:18px;">
+
+              <div class="form-group">
+                <label for="sessionTimeout">Session Timeout</label>
+
+                <select id="sessionTimeout">
+                  <option value="15">15 minutes</option>
+                  <option value="30">30 minutes</option>
+                  <option value="60">1 hour</option>
+                  <option value="120">2 hours</option>
+                  <option value="0">No timeout</option>
+                </select>
+
+              </div>
+
+            </div>
+
+            <div class="toggle-list">
+
+              <div class="toggle-row">
+
+                <div class="toggle-copy">
+                  <div class="toggle-title">Login Attempt Protection</div>
+                  <div class="toggle-description">
+                    Enable protection against repeated login attempts.
+                  </div>
+                </div>
+
+                <label class="switch">
+                  <input id="loginProtection" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+
+              </div>
+
+              <div class="toggle-row">
+
+                <div class="toggle-copy">
+                  <div class="toggle-title">Admin Access Logging</div>
+                  <div class="toggle-description">
+                    Record administrator access activity.
+                  </div>
+                </div>
+
+                <label class="switch">
+                  <input id="accessLogging" type="checkbox">
+                  <span class="slider"></span>
+                </label>
+
+              </div>
+
+            </div>
+
+            <div class="field-help" style="margin-top:15px;">
+              Security controls shown here are configuration preferences.
+              Real authentication, rate limiting and access enforcement
+              should be implemented with Firebase/backend security.
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- LIVE PREVIEW -->
+
+        <section class="settings-card full">
+
+          <div class="card-head">
+
+            <div class="card-title-wrap">
+
+              <div class="card-icon">
+                <i class="fa-solid fa-eye"></i>
+              </div>
+
+              <div>
+                <div class="card-title">Live Marketplace Summary</div>
+                <div class="card-description">
+                  Quick preview of the marketplace information controlled here.
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="card-body">
+
+            <div class="market-preview">
+
+              <div class="preview-label">
+                Marketplace Preview
+              </div>
+
+              <div class="preview-name" id="previewSiteName">
+                Website Deals
+              </div>
+
+              <div class="preview-tagline" id="previewTagline">
+                Premium Websites. Ready to Launch.
+              </div>
+
+              <div class="preview-stats">
+
+                <div class="preview-stat">
+                  <strong id="previewPrice">৳325+</strong>
+                  <span>Starting Price</span>
+                </div>
+
+                <div class="preview-stat">
+                  <strong id="previewWebsites">11</strong>
+                  <span>Websites</span>
+                </div>
+
+                <div class="preview-stat">
+                  <strong id="previewCustomers">316</strong>
+                  <span>Customers</span>
+                </div>
+
+                <div class="preview-stat">
+                  <strong id="previewRating">4.9 ★</strong>
+                  <span>Rating</span>
+                </div>
+
+              </div>
+
+              <div class="preview-contact">
+
+                <div class="contact-chip">
+                  <i class="fa-solid fa-envelope"></i>
+                  <span id="previewEmail">support@websitedeals.com</span>
+                </div>
+
+                <div class="contact-chip">
+                  <i class="fa-solid fa-phone"></i>
+                  <span id="previewPhone">+880 1XXX-XXXXXX</span>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+        <!-- SYSTEM INFO -->
+
+        <section class="settings-card full">
+
+          <div class="card-head">
+
+            <div class="card-title-wrap">
+
+              <div class="card-icon">
+                <i class="fa-solid fa-circle-info"></i>
+              </div>
+
+              <div>
+                <div class="card-title">System Information</div>
+                <div class="card-description">
+                  Current prototype environment and browser storage information.
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="card-body">
+
+            <div class="system-info-grid">
+
+              <div class="system-info">
+                <div class="system-info-label">Mode</div>
+                <div class="system-info-value">Prototype Mode</div>
+              </div>
+
+              <div class="system-info">
+                <div class="system-info-label">Version</div>
+                <div class="system-info-value">1.0.0</div>
+              </div>
+
+              <div class="system-info">
+                <div class="system-info-label">Storage Key</div>
+                <div class="system-info-value">websiteDealsSettings</div>
+              </div>
+
+              <div class="system-info">
+                <div class="system-info-label">Browser Storage</div>
+                <div class="system-info-value storage-ok" id="storageStatus">
+                  Available
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+      <!-- =========================
+           ACTION BAR
+      ========================== -->
+
+      <div class="action-bar">
+
+        <div class="action-note" id="actionNote">
+          Your system configuration is saved locally in this browser.
+        </div>
+
+        <div class="action-buttons">
+
+          <button class="btn btn-light" id="resetBtn">
+            <i class="fa-solid fa-rotate-left"></i>
+            Reset Defaults
+          </button>
+
+          <button class="btn btn-primary" id="saveBtn">
+            <i class="fa-solid fa-floppy-disk"></i>
+            Save Settings
+          </button>
+
         </div>
 
       </div>
 
-    </main>
+    </section>
 
-  </div>
+  </main>
 
+</div>
 
-  <!-- =========================================
-       TOAST
-  ========================================== -->
+<!-- TOAST -->
 
-  <div
-    class="toast"
-    id="toast"
-  >
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toastText">Settings saved successfully.</span>
+</div>
 
-    <div class="toast-icon">
-      <i class="fa-solid fa-check"></i>
-    </div>
+<script>
+  /* =========================================================
+     WEBSITE DEALS — SYSTEM SETTINGS
+  ========================================================== */
 
-    <div class="toast-content">
+  const AUTH_KEY = "websiteDealsAdminAuth";
+  const SETTINGS_KEY = "websiteDealsSettings";
 
-      <strong id="toast-title">
-        Success
-      </strong>
+  const DEFAULT_SETTINGS = {
+    siteName: "Website Deals",
+    tagline: "Premium Websites. Ready to Launch.",
 
-      <span id="toast-message">
-        Action completed successfully.
-      </span>
+    supportEmail: "support@websitedeals.com",
+    supportPhone: "+880 1XXX-XXXXXX",
 
-    </div>
+    timezone: "Asia/Dhaka",
+    currency: "BDT",
 
-    <button
-      class="toast-close"
-      id="toast-close"
-    >
-      <i class="fa-solid fa-xmark"></i>
-    </button>
+    startingPrice: 325,
+    orderPrefix: "WD-",
 
-  </div>
+    websiteCount: 11,
+    customerCount: 316,
+    rating: 4.9,
 
+    autoConfirmOrders: false,
+    requirePaymentVerification: true,
+    requirePaymentScreenshot: true,
+    duplicateOrderProtection: true,
 
-  <script>
+    emailNotifications: true,
+    newOrderAlerts: true,
+    adminAlerts: true,
+    newsletterNotifications: true,
 
-    /* =====================================================
-       WEBSITE DEALS
-       SUPER ADMIN — SYSTEM SETTINGS
-       DEMO / LOCAL STORAGE VERSION
-    ====================================================== */
+    maintenanceMode: false,
+    maintenanceTitle: "We’ll be back shortly",
+    maintenanceMessage:
+      "Website Deals is currently under maintenance. Please check back soon.",
 
-    const STORAGE_KEY = "websiteDealsSettings";
+    sessionTimeout: "30",
+    loginProtection: true,
+    accessLogging: true,
 
-    let originalSettings = null;
+    accentColor: "#18a957"
+  };
 
-    let toastTimer;
+  /* =========================================================
+     AUTH
+  ========================================================== */
 
+  function getAdminSession(){
+    try{
+      const raw = sessionStorage.getItem(AUTH_KEY);
 
-    /* =====================================================
-       DEFAULT SETTINGS
-    ====================================================== */
-
-    const DEFAULT_SETTINGS = {
-
-      marketplaceName:
-        "Website Deals",
-
-      marketplaceTagline:
-        "Premium Ready-Made Websites",
-
-      supportEmail:
-        "support@websitedeals.com",
-
-      supportPhone:
-        "+880 1XXX-XXXXXX",
-
-      marketplaceDescription:
-        "Premium ready-made websites for businesses, restaurants, agencies, portfolios and online stores.",
-
-      currency:
-        "BDT",
-
-      startingPrice:
-        999,
-
-      marketplaceEnabled:
-        true,
-
-      showSearch:
-        true,
-
-      showFeatured:
-        true,
-
-      showMonthly:
-        true,
-
-      defaultOrderStatus:
-        "pending",
-
-      orderPrefix:
-        "WD-",
-
-      requirePhone:
-        true,
-
-      requirePayment:
-        true,
-
-      orderNotifications:
-        true,
-
-      newOrderAlert:
-        true,
-
-      newSubscriberAlert:
-        true,
-
-      adminActivityAlerts:
-        true,
-
-      maintenanceMode:
-        false,
-
-      maintenanceMessage:
-        "We're currently updating Website Deals. Please check back shortly.",
-
-      sessionTimeout:
-        "60",
-
-      loginAttempts:
-        "5",
-
-      secureAuth:
-        true,
-
-      activityLogging:
-        true
-
-    };
-
-
-    /* =====================================================
-       ELEMENT HELPERS
-    ====================================================== */
-
-    function $(id) {
-      return document.getElementById(id);
-    }
-
-
-    function getValue(id) {
-      return $(id).value;
-    }
-
-
-    function getChecked(id) {
-      return $(id).checked;
-    }
-
-
-    function setValue(id, value) {
-
-      if ($(id)) {
-        $(id).value = value ?? "";
+      if(!raw){
+        return null;
       }
 
-    }
+      const session = JSON.parse(raw);
 
-
-    function setChecked(id, value) {
-
-      if ($(id)) {
-        $(id).checked = Boolean(value);
+      if(!session || session.authenticated !== true){
+        return null;
       }
 
+      return session;
+
+    }catch(error){
+      return null;
     }
+  }
 
+  const adminSession = getAdminSession();
 
-    /* =====================================================
-       STORAGE
-    ====================================================== */
+  if(!adminSession){
+    window.location.replace("login/");
+  }
 
-    function loadSettings() {
+  if(
+    adminSession &&
+    adminSession.role !== "superadmin" &&
+    adminSession.role !== "superAdmin"
+  ){
+    alert("Super Admin access required.");
+    window.location.replace("dashboard.html");
+  }
 
-      try {
+  /* =========================================================
+     DOM
+  ========================================================== */
 
-        const saved =
-          localStorage.getItem(STORAGE_KEY);
+  const sidebar = document.getElementById("sidebar");
+  const overlay = document.getElementById("overlay");
+  const mobileMenu = document.getElementById("mobileMenu");
 
-        if (saved) {
+  const saveBtn = document.getElementById("saveBtn");
+  const resetBtn = document.getElementById("resetBtn");
 
-          return {
-            ...DEFAULT_SETTINGS,
-            ...JSON.parse(saved)
-          };
+  const saveStatus = document.getElementById("saveStatus");
+  const saveStatusText = saveStatus.querySelector("span");
 
-        }
+  const toast = document.getElementById("toast");
+  const toastText = document.getElementById("toastText");
 
-      } catch (error) {
+  const maintenanceFields =
+    document.getElementById("maintenanceFields");
 
-        console.error(
-          "Could not load settings:",
-          error
-        );
+  const maintenanceMode =
+    document.getElementById("maintenanceMode");
 
+  const heroStatusDot =
+    document.getElementById("heroStatusDot");
+
+  const heroStatusText =
+    document.getElementById("heroStatusText");
+
+  let settings = {};
+  let dirty = false;
+  let toastTimer = null;
+
+  /* =========================================================
+     HELPERS
+  ========================================================== */
+
+  function cloneDefaults(){
+    return JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
+  }
+
+  function safeNumber(value, fallback){
+    const number = Number(value);
+
+    return Number.isFinite(number)
+      ? number
+      : fallback;
+  }
+
+  function showToast(message){
+    clearTimeout(toastTimer);
+
+    toastText.textContent = message;
+    toast.classList.add("show");
+
+    toastTimer = setTimeout(() => {
+      toast.classList.remove("show");
+    }, 2600);
+  }
+
+  function setDirty(value){
+    dirty = value;
+
+    if(dirty){
+      saveStatus.classList.add("dirty");
+      saveStatusText.textContent = "Unsaved changes";
+      saveStatus.querySelector("i").style.color = "#d98a00";
+    }else{
+      saveStatus.classList.remove("dirty");
+      saveStatusText.textContent = "All changes saved";
+      saveStatus.querySelector("i").style.color = "";
+    }
+  }
+
+  function getStoredSettings(){
+
+    try{
+
+      const raw = localStorage.getItem(SETTINGS_KEY);
+
+      if(!raw){
+        return cloneDefaults();
       }
+
+      const parsed = JSON.parse(raw);
 
       return {
-        ...DEFAULT_SETTINGS
+        ...cloneDefaults(),
+        ...(parsed || {})
       };
 
+    }catch(error){
+
+      console.warn("Unable to read settings:", error);
+
+      return cloneDefaults();
     }
+  }
 
+  function saveStoredSettings(){
 
-    function saveSettingsToStorage(settings) {
-
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(settings)
-      );
-
-    }
-
-
-    /* =====================================================
-       READ FORM
-    ====================================================== */
-
-    function readFormSettings() {
-
-      return {
-
-        marketplaceName:
-          getValue("marketplace-name").trim(),
-
-        marketplaceTagline:
-          getValue("marketplace-tagline").trim(),
-
-        supportEmail:
-          getValue("support-email").trim(),
-
-        supportPhone:
-          getValue("support-phone").trim(),
-
-        marketplaceDescription:
-          getValue("marketplace-description").trim(),
-
-        currency:
-          getValue("currency"),
-
-        startingPrice:
-          Number(getValue("starting-price")) || 0,
-
-        marketplaceEnabled:
-          getChecked("marketplace-enabled"),
-
-        showSearch:
-          getChecked("show-search"),
-
-        showFeatured:
-          getChecked("show-featured"),
-
-        showMonthly:
-          getChecked("show-monthly"),
-
-        defaultOrderStatus:
-          getValue("default-order-status"),
-
-        orderPrefix:
-          getValue("order-prefix").trim(),
-
-        requirePhone:
-          getChecked("require-phone"),
-
-        requirePayment:
-          getChecked("require-payment"),
-
-        orderNotifications:
-          getChecked("order-notifications"),
-
-        newOrderAlert:
-          getChecked("new-order-alert"),
-
-        newSubscriberAlert:
-          getChecked("new-subscriber-alert"),
-
-        adminActivityAlerts:
-          getChecked("admin-activity-alerts"),
-
-        maintenanceMode:
-          getChecked("maintenance-mode"),
-
-        maintenanceMessage:
-          getValue("maintenance-message").trim(),
-
-        sessionTimeout:
-          getValue("session-timeout"),
-
-        loginAttempts:
-          getValue("login-attempts"),
-
-        secureAuth:
-          getChecked("secure-auth"),
-
-        activityLogging:
-          getChecked("activity-logging")
-
-      };
-
-    }
-
-
-    /* =====================================================
-       APPLY SETTINGS
-    ====================================================== */
-
-    function applySettings(settings) {
-
-      setValue(
-        "marketplace-name",
-        settings.marketplaceName
-      );
-
-      setValue(
-        "marketplace-tagline",
-        settings.marketplaceTagline
-      );
-
-      setValue(
-        "support-email",
-        settings.supportEmail
-      );
-
-      setValue(
-        "support-phone",
-        settings.supportPhone
-      );
-
-      setValue(
-        "marketplace-description",
-        settings.marketplaceDescription
-      );
-
-      setValue(
-        "currency",
-        settings.currency
-      );
-
-      setValue(
-        "starting-price",
-        settings.startingPrice
-      );
-
-      setChecked(
-        "marketplace-enabled",
-        settings.marketplaceEnabled
-      );
-
-      setChecked(
-        "show-search",
-        settings.showSearch
-      );
-
-      setChecked(
-        "show-featured",
-        settings.showFeatured
-      );
-
-      setChecked(
-        "show-monthly",
-        settings.showMonthly
-      );
-
-      setValue(
-        "default-order-status",
-        settings.defaultOrderStatus
-      );
-
-      setValue(
-        "order-prefix",
-        settings.orderPrefix
-      );
-
-      setChecked(
-        "require-phone",
-        settings.requirePhone
-      );
-
-      setChecked(
-        "require-payment",
-        settings.requirePayment
-      );
-
-      setChecked(
-        "order-notifications",
-        settings.orderNotifications
-      );
-
-      setChecked(
-        "new-order-alert",
-        settings.newOrderAlert
-      );
-
-      setChecked(
-        "new-subscriber-alert",
-        settings.newSubscriberAlert
-      );
-
-      setChecked(
-        "admin-activity-alerts",
-        settings.adminActivityAlerts
-      );
-
-      setChecked(
-        "maintenance-mode",
-        settings.maintenanceMode
-      );
-
-      setValue(
-        "maintenance-message",
-        settings.maintenanceMessage
-      );
-
-      setValue(
-        "session-timeout",
-        settings.sessionTimeout
-      );
-
-      setValue(
-        "login-attempts",
-        settings.loginAttempts
-      );
-
-      setChecked(
-        "secure-auth",
-        settings.secureAuth
-      );
-
-      setChecked(
-        "activity-logging",
-        settings.activityLogging
-      );
-
-    }
-
-
-    /* =====================================================
-       TOAST
-    ====================================================== */
-
-    function showToast(
-      title,
-      message
-    ) {
-
-      $("toast-title").textContent =
-        title;
-
-      $("toast-message").textContent =
-        message;
-
-      $("toast").classList.add("show");
-
-      clearTimeout(toastTimer);
-
-      toastTimer =
-        setTimeout(() => {
-
-          $("toast")
-            .classList.remove("show");
-
-        }, 3500);
-
-    }
-
-
-    $("toast-close")
-      .addEventListener(
-        "click",
-        () => {
-
-          $("toast")
-            .classList.remove("show");
-
-        }
-      );
-
-
-    /* =====================================================
-       SAVE
-    ====================================================== */
-
-    $("save-btn")
-      .addEventListener(
-        "click",
-        () => {
-
-          const settings =
-            readFormSettings();
-
-          if (!settings.marketplaceName) {
-
-            showToast(
-              "Missing Information",
-              "Marketplace name is required."
-            );
-
-            $("marketplace-name").focus();
-
-            return;
-
-          }
-
-
-          if (
-            settings.supportEmail &&
-            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/
-              .test(settings.supportEmail)
-          ) {
-
-            showToast(
-              "Invalid Email",
-              "Please enter a valid support email address."
-            );
-
-            $("support-email").focus();
-
-            return;
-
-          }
-
-
-          saveSettingsToStorage(
-            settings
-          );
-
-          originalSettings =
-            JSON.parse(
-              JSON.stringify(settings)
-            );
-
-          showToast(
-            "Settings Saved",
-            "Marketplace settings have been saved successfully."
-          );
-
-        }
-      );
-
-
-    /* =====================================================
-       DISCARD
-    ====================================================== */
-
-    $("discard-btn")
-      .addEventListener(
-        "click",
-        () => {
-
-          if (!originalSettings) {
-            return;
-          }
-
-          applySettings(
-            originalSettings
-          );
-
-          showToast(
-            "Changes Discarded",
-            "Your unsaved changes have been reverted."
-          );
-
-        }
-      );
-
-
-    /* =====================================================
-       REFRESH
-    ====================================================== */
-
-    $("refresh-btn")
-      .addEventListener(
-        "click",
-        () => {
-
-          const settings =
-            loadSettings();
-
-          originalSettings =
-            JSON.parse(
-              JSON.stringify(settings)
-            );
-
-          applySettings(settings);
-
-          showToast(
-            "Settings Refreshed",
-            "The latest saved settings have been loaded."
-          );
-
-        }
-      );
-
-
-    /* =====================================================
-       SETTINGS NAV
-    ====================================================== */
-
-    document
-      .querySelectorAll(
-        ".settings-nav button"
-      )
-      .forEach(button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            const targetId =
-              button.dataset.target;
-
-            const target =
-              document.getElementById(
-                targetId
-              );
-
-            if (!target) return;
-
-            document
-              .querySelectorAll(
-                ".settings-nav button"
-              )
-              .forEach(item => {
-
-                item.classList.remove(
-                  "active"
-                );
-
-              });
-
-            button.classList.add(
-              "active"
-            );
-
-            target.scrollIntoView({
-              behavior: "smooth",
-              block: "start"
-            });
-
-          }
-        );
-
-      });
-
-
-    /* =====================================================
-       DANGER ZONE
-    ====================================================== */
-
-    $("clear-orders-btn")
-      .addEventListener(
-        "click",
-        () => {
-
-          const confirmed =
-            window.confirm(
-              "Clear all locally stored demo orders?"
-            );
-
-          if (!confirmed) return;
-
-          localStorage.removeItem(
-            "websiteDealsOrders"
-          );
-
-          showToast(
-            "Demo Orders Cleared",
-            "Local demo order data has been removed."
-          );
-
-        }
-      );
-
-
-    $("clear-subscribers-btn")
-      .addEventListener(
-        "click",
-        () => {
-
-          const confirmed =
-            window.confirm(
-              "Clear all locally stored newsletter subscribers?"
-            );
-
-          if (!confirmed) return;
-
-          localStorage.removeItem(
-            "websiteDealsSubscribers"
-          );
-
-          showToast(
-            "Subscribers Cleared",
-            "Local newsletter subscriber data has been removed."
-          );
-
-        }
-      );
-
-
-    $("reset-settings-btn")
-      .addEventListener(
-        "click",
-        () => {
-
-          const confirmed =
-            window.confirm(
-              "Reset all Website Deals settings to demo defaults?"
-            );
-
-          if (!confirmed) return;
-
-          saveSettingsToStorage(
-            DEFAULT_SETTINGS
-          );
-
-          originalSettings =
-            JSON.parse(
-              JSON.stringify(
-                DEFAULT_SETTINGS
-              )
-            );
-
-          applySettings(
-            DEFAULT_SETTINGS
-          );
-
-          showToast(
-            "Settings Reset",
-            "All settings have been restored to demo defaults."
-          );
-
-        }
-      );
-
-
-    /* =====================================================
-       MOBILE SIDEBAR
-    ====================================================== */
-
-    const sidebar =
-      $("sidebar");
-
-    const sidebarOverlay =
-      $("sidebar-overlay");
-
-    function openSidebar() {
-
-      sidebar.classList.add(
-        "open"
-      );
-
-      sidebarOverlay.classList.add(
-        "show"
-      );
-
-    }
-
-
-    function closeSidebar() {
-
-      sidebar.classList.remove(
-        "open"
-      );
-
-      sidebarOverlay.classList.remove(
-        "show"
-      );
-
-    }
-
-
-    $("mobile-menu-btn")
-      .addEventListener(
-        "click",
-        openSidebar
-      );
-
-
-    sidebarOverlay
-      .addEventListener(
-        "click",
-        closeSidebar
-      );
-
-
-    document
-      .querySelectorAll(
-        ".sidebar .nav-link"
-      )
-      .forEach(link => {
-
-        link.addEventListener(
-          "click",
-          () => {
-
-            if (
-              window.innerWidth <= 1100
-            ) {
-              closeSidebar();
-            }
-
-          }
-        );
-
-      });
-
-
-    /* =====================================================
-       LOGOUT
-    ====================================================== */
-
-    $("logout-btn")
-      .addEventListener(
-        "click",
-        () => {
-
-          const confirmed =
-            window.confirm(
-              "Sign out from Super Admin?"
-            );
-
-          if (!confirmed) return;
-
-          /*
-            Firebase version:
-            await signOut(auth);
-          */
-
-          window.location.href =
-            "index.html";
-
-        }
-      );
-
-
-    /* =====================================================
-       ESCAPE
-    ====================================================== */
-
-    document.addEventListener(
-      "keydown",
-      event => {
-
-        if (
-          event.key === "Escape"
-        ) {
-
-          closeSidebar();
-
-          $("toast")
-            .classList.remove("show");
-
-        }
-
-      }
+    localStorage.setItem(
+      SETTINGS_KEY,
+      JSON.stringify(settings)
     );
+  }
 
+  /* =========================================================
+     LOAD
+  ========================================================== */
 
-    /* =====================================================
-       INITIALIZE
-    ====================================================== */
+  function loadSettings(){
 
-    const initialSettings =
-      loadSettings();
+    settings = getStoredSettings();
 
-    originalSettings =
-      JSON.parse(
-        JSON.stringify(
-          initialSettings
+    const textFields = [
+      "siteName",
+      "tagline",
+      "supportEmail",
+      "supportPhone",
+      "timezone",
+      "currency",
+      "startingPrice",
+      "orderPrefix",
+      "websiteCount",
+      "customerCount",
+      "rating",
+      "maintenanceTitle",
+      "maintenanceMessage",
+      "sessionTimeout"
+    ];
+
+    textFields.forEach(id => {
+
+      const element = document.getElementById(id);
+
+      if(!element){
+        return;
+      }
+
+      element.value =
+        settings[id] !== undefined
+          ? settings[id]
+          : "";
+
+    });
+
+    const toggles = [
+      "autoConfirmOrders",
+      "requirePaymentVerification",
+      "requirePaymentScreenshot",
+      "duplicateOrderProtection",
+      "emailNotifications",
+      "newOrderAlerts",
+      "adminAlerts",
+      "newsletterNotifications",
+      "maintenanceMode",
+      "loginProtection",
+      "accessLogging"
+    ];
+
+    toggles.forEach(id => {
+
+      const element = document.getElementById(id);
+
+      if(element){
+        element.checked = Boolean(settings[id]);
+      }
+
+    });
+
+    updateMaintenanceUI();
+    updatePreview();
+    updateHeroStatus();
+    setDirty(false);
+  }
+
+  /* =========================================================
+     COLLECT
+  ========================================================== */
+
+  function collectSettings(){
+
+    settings.siteName =
+      document.getElementById("siteName").value.trim();
+
+    settings.tagline =
+      document.getElementById("tagline").value.trim();
+
+    settings.supportEmail =
+      document.getElementById("supportEmail").value.trim();
+
+    settings.supportPhone =
+      document.getElementById("supportPhone").value.trim();
+
+    settings.timezone =
+      document.getElementById("timezone").value;
+
+    settings.currency =
+      document.getElementById("currency").value;
+
+    settings.startingPrice =
+      safeNumber(
+        document.getElementById("startingPrice").value,
+        DEFAULT_SETTINGS.startingPrice
+      );
+
+    settings.orderPrefix =
+      document.getElementById("orderPrefix").value.trim();
+
+    settings.websiteCount =
+      safeNumber(
+        document.getElementById("websiteCount").value,
+        DEFAULT_SETTINGS.websiteCount
+      );
+
+    settings.customerCount =
+      safeNumber(
+        document.getElementById("customerCount").value,
+        DEFAULT_SETTINGS.customerCount
+      );
+
+    settings.rating =
+      Math.min(
+        5,
+        Math.max(
+          0,
+          safeNumber(
+            document.getElementById("rating").value,
+            DEFAULT_SETTINGS.rating
+          )
         )
       );
 
-    applySettings(
-      initialSettings
+    settings.maintenanceTitle =
+      document.getElementById("maintenanceTitle").value.trim();
+
+    settings.maintenanceMessage =
+      document.getElementById("maintenanceMessage").value.trim();
+
+    settings.sessionTimeout =
+      document.getElementById("sessionTimeout").value;
+
+    const toggles = [
+      "autoConfirmOrders",
+      "requirePaymentVerification",
+      "requirePaymentScreenshot",
+      "duplicateOrderProtection",
+      "emailNotifications",
+      "newOrderAlerts",
+      "adminAlerts",
+      "newsletterNotifications",
+      "maintenanceMode",
+      "loginProtection",
+      "accessLogging"
+    ];
+
+    toggles.forEach(id => {
+
+      const element = document.getElementById(id);
+
+      settings[id] = Boolean(element.checked);
+
+    });
+
+    settings.accentColor = DEFAULT_SETTINGS.accentColor;
+  }
+
+  /* =========================================================
+     PREVIEW
+  ========================================================== */
+
+  function updatePreview(){
+
+    collectSettings();
+
+    document.getElementById("previewSiteName").textContent =
+      settings.siteName || DEFAULT_SETTINGS.siteName;
+
+    document.getElementById("previewTagline").textContent =
+      settings.tagline || DEFAULT_SETTINGS.tagline;
+
+    document.getElementById("previewPrice").textContent =
+      "৳" + Number(settings.startingPrice).toLocaleString("en-BD") + "+";
+
+    document.getElementById("previewWebsites").textContent =
+      Number(settings.websiteCount).toLocaleString("en-BD");
+
+    document.getElementById("previewCustomers").textContent =
+      Number(settings.customerCount).toLocaleString("en-BD");
+
+    document.getElementById("previewRating").textContent =
+      Number(settings.rating).toFixed(1) + " ★";
+
+    document.getElementById("previewEmail").textContent =
+      settings.supportEmail || "—";
+
+    document.getElementById("previewPhone").textContent =
+      settings.supportPhone || "—";
+  }
+
+  /* =========================================================
+     MAINTENANCE UI
+  ========================================================== */
+
+  function updateMaintenanceUI(){
+
+    const enabled = maintenanceMode.checked;
+
+    maintenanceFields.classList.toggle(
+      "show",
+      enabled
     );
 
-  </script>
+    updateHeroStatus();
+  }
+
+  function updateHeroStatus(){
+
+    const enabled = maintenanceMode.checked;
+
+    if(enabled){
+
+      heroStatusDot.classList.add("maintenance");
+      heroStatusText.textContent = "Maintenance Mode";
+
+    }else{
+
+      heroStatusDot.classList.remove("maintenance");
+      heroStatusText.textContent = "Live & Operational";
+    }
+  }
+
+  /* =========================================================
+     SAVE
+  ========================================================== */
+
+  function saveSettings(){
+
+    collectSettings();
+
+    if(!settings.siteName){
+      showToast("Please enter a site name.");
+      document.getElementById("siteName").focus();
+      return;
+    }
+
+    if(!settings.supportEmail){
+      showToast("Please enter a support email.");
+      document.getElementById("supportEmail").focus();
+      return;
+    }
+
+    if(!settings.orderPrefix){
+      settings.orderPrefix = DEFAULT_SETTINGS.orderPrefix;
+    }
+
+    saveStoredSettings();
+
+    setDirty(false);
+
+    updatePreview();
+    updateHeroStatus();
+
+    showToast("System settings saved successfully.");
+  }
+
+  /* =========================================================
+     RESET
+  ========================================================== */
+
+  function resetSettings(){
+
+    const confirmed = confirm(
+      "Reset all system settings to the default configuration?"
+    );
+
+    if(!confirmed){
+      return;
+    }
+
+    settings = cloneDefaults();
+
+    loadSettings();
+
+    setDirty(true);
+
+    showToast(
+      "Defaults loaded. Click Save Settings to apply them."
+    );
+  }
+
+  /* =========================================================
+     EVENTS
+  ========================================================== */
+
+  const allInputs = document.querySelectorAll(
+    "input, select, textarea"
+  );
+
+  allInputs.forEach(element => {
+
+    element.addEventListener("input", () => {
+
+      setDirty(true);
+
+      updatePreview();
+
+      if(element.id === "maintenanceMode"){
+        updateMaintenanceUI();
+      }
+
+    });
+
+    element.addEventListener("change", () => {
+
+      setDirty(true);
+
+      updatePreview();
+
+      if(element.id === "maintenanceMode"){
+        updateMaintenanceUI();
+      }
+
+    });
+
+  });
+
+  saveBtn.addEventListener("click", saveSettings);
+
+  resetBtn.addEventListener("click", resetSettings);
+
+  /* =========================================================
+     MOBILE SIDEBAR
+  ========================================================== */
+
+  function openSidebar(){
+
+    sidebar.classList.add("open");
+    overlay.classList.add("show");
+
+  }
+
+  function closeSidebar(){
+
+    sidebar.classList.remove("open");
+    overlay.classList.remove("show");
+
+  }
+
+  mobileMenu.addEventListener("click", openSidebar);
+  overlay.addEventListener("click", closeSidebar);
+
+  document.querySelectorAll(".nav-item").forEach(link => {
+
+    link.addEventListener("click", () => {
+
+      if(window.innerWidth <= 900){
+        closeSidebar();
+      }
+
+    });
+
+  });
+
+  /* =========================================================
+     ADMIN IDENTITY
+  ========================================================== */
+
+  function setupAdminIdentity(){
+
+    if(!adminSession){
+      return;
+    }
+
+    const name =
+      adminSession.name ||
+      adminSession.email ||
+      "Super Admin";
+
+    const role =
+      adminSession.role === "superadmin" ||
+      adminSession.role === "superAdmin"
+        ? "Super Administrator"
+        : "Administrator";
+
+    document.getElementById("sidebarName").textContent =
+      name;
+
+    document.getElementById("sidebarRole").textContent =
+      role;
+
+    const initials = name
+      .split(/\s+/)
+      .filter(Boolean)
+      .slice(0,2)
+      .map(word => word.charAt(0).toUpperCase())
+      .join("");
+
+    document.getElementById("sidebarAvatar").textContent =
+      initials || "SA";
+  }
+
+  /* =========================================================
+     STORAGE STATUS
+  ========================================================== */
+
+  function checkStorage(){
+
+    const storageStatus =
+      document.getElementById("storageStatus");
+
+    try{
+
+      const testKey =
+        "__websiteDealsStorageTest";
+
+      localStorage.setItem(testKey,"1");
+      localStorage.removeItem(testKey);
+
+      storageStatus.textContent = "Available";
+      storageStatus.className =
+        "system-info-value storage-ok";
+
+    }catch(error){
+
+      storageStatus.textContent = "Unavailable";
+      storageStatus.className =
+        "system-info-value storage-warning";
+    }
+  }
+
+  /* =========================================================
+     ESCAPE / CLOSE
+  ========================================================== */
+
+  document.addEventListener("keydown", event => {
+
+    if(event.key === "Escape"){
+      closeSidebar();
+    }
+
+  });
+
+  /* =========================================================
+     BEFORE UNLOAD
+  ========================================================== */
+
+  window.addEventListener("beforeunload", event => {
+
+    if(!dirty){
+      return;
+    }
+
+    event.preventDefault();
+    event.returnValue = "";
+
+  });
+
+  /* =========================================================
+     LOGOUT — available for future header/user action
+  ========================================================== */
+
+  function logout(){
+
+    sessionStorage.removeItem(AUTH_KEY);
+
+    window.location.href = "login/";
+  }
+
+  /* =========================================================
+     INIT
+  ========================================================== */
+
+  setupAdminIdentity();
+  checkStorage();
+  loadSettings();
+
+</script>
 
 </body>
 </html>
