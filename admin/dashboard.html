@@ -2,32 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Dashboard | Website Deals Admin</title>
+  <meta name="description" content="Website Deals premium admin dashboard and marketplace overview.">
+  <meta name="theme-color" content="#07110b">
 
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="icon" type="image/png" href="../logo.png">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#07110b">
-
-  <title>Dashboard | Website Deals Admin</title>
-
-  <meta
-    name="description"
-    content="Website Deals premium admin dashboard."
-  >
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --green:#18a957;
-      --green-dark:#108447;
+      --green-dark:#108344;
       --green-soft:#eaf8f0;
 
       --dark:#07110b;
@@ -35,31 +26,26 @@
 
       --surface:#fff;
       --surface-2:#f6f8f7;
-      --surface-3:#eef3f0;
 
       --border:#e3eae6;
-      --border-strong:#d5dfd9;
 
       --text:#142019;
       --muted:#738079;
 
-      --danger:#dc3545;
-      --danger-soft:#fff0f1;
+      --blue:#3478f6;
+      --blue-soft:#edf4ff;
 
-      --warning:#c58b00;
-      --warning-soft:#fff8df;
+      --orange:#d88a00;
+      --orange-soft:#fff7e6;
 
-      --blue:#2563eb;
-      --blue-soft:#eef4ff;
+      --red:#dc3545;
+      --red-soft:#fff0f1;
 
-      --purple:#7c3aed;
-      --purple-soft:#f3edff;
+      --purple:#7c4dff;
+      --purple-soft:#f2edff;
 
-      --shadow:0 12px 35px rgba(16,32,23,.07);
-      --shadow-lg:0 20px 55px rgba(16,32,23,.11);
-
-      --radius:18px;
-      --radius-sm:12px;
+      --shadow:0 16px 40px rgba(16,35,24,.07);
+      --radius:20px;
     }
 
     *{
@@ -96,7 +82,7 @@
 
     /* =========================
        APP
-    ========================= */
+    ========================== */
 
     .app{
       min-height:100vh;
@@ -105,93 +91,87 @@
 
     /* =========================
        SIDEBAR
-    ========================= */
+    ========================== */
 
     .sidebar{
       width:270px;
-      min-width:270px;
-      min-height:100vh;
+      position:fixed;
+      inset:0 auto 0 0;
+      z-index:1000;
 
       background:var(--sidebar);
       color:#fff;
 
-      position:fixed;
-      left:0;
-      top:0;
-      bottom:0;
-
-      z-index:1000;
-
       display:flex;
       flex-direction:column;
 
-      overflow-y:auto;
-
-      transition:.25s ease;
+      transition:transform .25s ease;
     }
 
     .brand{
-      padding:24px 20px 20px;
-      border-bottom:1px solid rgba(255,255,255,.07);
-    }
+      padding:24px 22px 20px;
 
-    .brand a{
       display:flex;
       align-items:center;
       gap:12px;
+
+      border-bottom:1px solid rgba(255,255,255,.07);
     }
 
-    .brand-logo{
+    .brand img{
       width:42px;
       height:42px;
-      object-fit:contain;
+
+      object-fit:cover;
+
       border-radius:12px;
+
       background:#fff;
-      padding:5px;
+      padding:3px;
     }
 
-    .brand-copy strong{
-      display:block;
+    .brand-title{
       font-family:"Manrope",sans-serif;
       font-size:17px;
       font-weight:800;
-      line-height:1.1;
+      letter-spacing:-.4px;
     }
 
-    .brand-copy span{
-      display:block;
-      color:#8fa097;
+    .brand-sub{
+      margin-top:2px;
+
+      color:#91a198;
       font-size:11px;
-      margin-top:4px;
     }
 
     .nav{
-      padding:18px 12px;
       flex:1;
+      padding:18px 13px;
+      overflow-y:auto;
     }
 
     .nav-label{
-      color:#68776e;
+      padding:10px 11px 8px;
+
+      color:#64736a;
+
       font-size:10px;
-      text-transform:uppercase;
-      letter-spacing:1.2px;
       font-weight:700;
-      padding:10px 12px 8px;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
     }
 
-    .nav a{
+    .nav-item{
       display:flex;
       align-items:center;
-      gap:11px;
+      gap:12px;
 
-      min-height:44px;
+      margin-bottom:4px;
+      padding:11px 12px;
 
-      padding:10px 12px;
-      margin:3px 0;
+      border-radius:12px;
 
-      color:#aebbb4;
-
-      border-radius:11px;
+      color:#aab5af;
 
       font-size:13px;
       font-weight:600;
@@ -199,26 +179,29 @@
       transition:.2s ease;
     }
 
-    .nav a:hover{
+    .nav-item:hover{
+      background:rgba(255,255,255,.055);
       color:#fff;
-      background:rgba(255,255,255,.06);
     }
 
-    .nav a.active{
+    .nav-item.active{
+      background:var(--green);
       color:#fff;
-      background:rgba(24,169,87,.16);
-      box-shadow:inset 3px 0 0 var(--green);
+
+      box-shadow:0 8px 20px rgba(24,169,87,.22);
     }
 
     .nav-icon{
       width:20px;
+      flex:none;
+
       text-align:center;
       font-size:16px;
-      flex:0 0 20px;
     }
 
-    .sidebar-footer{
-      padding:15px;
+    .sidebar-bottom{
+      padding:14px;
+
       border-top:1px solid rgba(255,255,255,.07);
     }
 
@@ -229,1087 +212,226 @@
 
       padding:10px;
 
-      border-radius:12px;
+      border-radius:14px;
       background:rgba(255,255,255,.045);
     }
 
-    .avatar{
-      width:34px;
-      height:34px;
-
-      border-radius:50%;
-
-      background:linear-gradient(
-        135deg,
-        var(--green),
-        #7be6a4
-      );
-
-      color:#07110b;
+    .admin-avatar{
+      width:36px;
+      height:36px;
 
       display:grid;
       place-items:center;
 
+      flex:none;
+
+      border-radius:11px;
+
+      background:var(--green);
+      color:#fff;
+
       font-size:12px;
       font-weight:800;
-
-      flex:0 0 34px;
     }
 
-    .admin-mini strong{
-      display:block;
-      font-size:12px;
+    .admin-info{
+      min-width:0;
+      flex:1;
+    }
+
+    .admin-name{
       color:#fff;
+
+      font-size:12px;
+      font-weight:700;
+
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
     }
 
-    .admin-mini span{
-      display:block;
-      color:#7f8d85;
-      font-size:10px;
+    .admin-role{
       margin-top:2px;
+
+      color:#7f8e85;
+      font-size:10px;
+    }
+
+    .logout-btn{
+      border:0;
+      background:transparent;
+
+      color:#87948d;
+
+      font-size:16px;
+      padding:5px;
+    }
+
+    .logout-btn:hover{
+      color:#fff;
     }
 
     /* =========================
        MAIN
-    ========================= */
+    ========================== */
 
     .main{
       width:calc(100% - 270px);
+      min-width:0;
+
       margin-left:270px;
-      min-height:100vh;
     }
 
     .topbar{
-      height:76px;
+      height:72px;
 
-      background:rgba(255,255,255,.92);
-      border-bottom:1px solid var(--border);
+      position:sticky;
+      top:0;
+      z-index:500;
 
       display:flex;
       align-items:center;
       justify-content:space-between;
 
-      gap:20px;
-
       padding:0 30px;
 
-      position:sticky;
-      top:0;
+      background:rgba(255,255,255,.92);
+      backdrop-filter:blur(14px);
 
-      z-index:500;
-
-      backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--border);
     }
 
-    .top-left{
+    .topbar-left{
       display:flex;
       align-items:center;
       gap:14px;
     }
 
     .mobile-menu{
-      display:none;
-
       width:40px;
       height:40px;
 
-      border:1px solid var(--border);
-      background:#fff;
+      display:none;
+      place-items:center;
 
+      border:1px solid var(--border);
       border-radius:11px;
+
+      background:#fff;
 
       font-size:19px;
     }
 
-    .breadcrumb{
-      display:flex;
-      align-items:center;
-      gap:8px;
-
-      color:var(--muted);
-
-      font-size:12px;
+    .page-title{
+      font-family:"Manrope",sans-serif;
+      font-size:18px;
+      font-weight:800;
+      letter-spacing:-.5px;
     }
 
-    .breadcrumb strong{
-      color:var(--text);
+    .page-context{
+      margin-top:2px;
+
+      color:var(--muted);
+      font-size:12px;
     }
 
     .top-actions{
       display:flex;
       align-items:center;
-      gap:9px;
+      gap:8px;
     }
 
-    .icon-btn{
-      width:40px;
-      height:40px;
-
-      border:1px solid var(--border);
-      background:#fff;
-
-      border-radius:11px;
-
-      display:grid;
-      place-items:center;
-
-      color:var(--text);
-
-      font-size:16px;
-    }
-
-    .icon-btn:hover{
-      border-color:#b9c8bf;
-      background:var(--surface-2);
-    }
-
-    .logout-btn{
-      height:40px;
-
-      padding:0 13px;
-
-      border:1px solid #f0d0d3;
-
-      color:var(--danger);
-      background:#fff;
-
-      border-radius:11px;
-
-      font-size:12px;
-      font-weight:700;
-    }
-
-    .logout-btn:hover{
-      background:var(--danger-soft);
-    }
-
-    /* =========================
-       CONTENT
-    ========================= */
-
-    .content{
-      padding:30px;
-      max-width:1550px;
-      margin:auto;
-    }
-
-    .page-head{
-      display:flex;
-      justify-content:space-between;
-      align-items:flex-start;
-
-      gap:20px;
-
-      margin-bottom:25px;
-    }
-
-    .page-head h1{
-      font-family:"Manrope",sans-serif;
-
-      font-size:30px;
-      line-height:1.15;
-
-      font-weight:800;
-
-      letter-spacing:-.8px;
-    }
-
-    .page-head p{
-      color:var(--muted);
-
-      margin-top:8px;
-
-      font-size:13px;
-      line-height:1.5;
-    }
-
-    .date-pill{
-      display:inline-flex;
-      align-items:center;
-      gap:7px;
-
-      margin-top:10px;
-
-      padding:7px 10px;
-
-      background:#fff;
-      border:1px solid var(--border);
-
-      border-radius:50px;
-
-      color:var(--muted);
-
-      font-size:10px;
-      font-weight:700;
-    }
-
-    .head-actions{
-      display:flex;
-      align-items:center;
-      gap:9px;
-      flex-wrap:wrap;
-    }
-
-    .btn{
-      min-height:42px;
-
-      border:1px solid var(--border);
-      background:#fff;
-
-      color:var(--text);
-
-      border-radius:11px;
-
-      padding:0 15px;
+    .top-btn{
+      height:38px;
 
       display:inline-flex;
       align-items:center;
       justify-content:center;
+      gap:7px;
 
-      gap:8px;
+      padding:0 13px;
+
+      border:1px solid var(--border);
+      border-radius:11px;
+
+      background:#fff;
+      color:var(--text);
 
       font-size:12px;
       font-weight:700;
-
-      transition:.2s ease;
     }
 
-    .btn:hover{
-      transform:translateY(-1px);
-      box-shadow:0 5px 15px rgba(16,32,23,.07);
-    }
-
-    .btn-primary{
-      color:#fff;
-      border-color:var(--green);
-      background:var(--green);
-    }
-
-    .btn-primary:hover{
-      background:var(--green-dark);
-      border-color:var(--green-dark);
-    }
-
-    .btn-dark{
-      color:#fff;
-      background:var(--dark);
-      border-color:var(--dark);
-    }
-
-    /* =========================
-       KPI
-    ========================= */
-
-    .kpi-grid{
-      display:grid;
-
-      grid-template-columns:
-        repeat(6,minmax(0,1fr));
-
-      gap:15px;
-
-      margin-bottom:20px;
-    }
-
-    .kpi{
-      background:#fff;
-
-      border:1px solid var(--border);
-
-      border-radius:16px;
-
-      padding:17px;
-
-      box-shadow:var(--shadow);
-
-      min-width:0;
-
-      position:relative;
-
-      overflow:hidden;
-    }
-
-    .kpi::after{
-      content:"";
-
-      position:absolute;
-
-      right:-25px;
-      top:-25px;
-
-      width:80px;
-      height:80px;
-
-      border-radius:50%;
-
-      background:var(--green-soft);
-
-      opacity:.75;
-    }
-
-    .kpi-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-
-      gap:8px;
-
-      position:relative;
-      z-index:2;
-    }
-
-    .kpi-icon{
-      width:36px;
-      height:36px;
-
-      border-radius:10px;
-
-      display:grid;
-      place-items:center;
-
-      background:var(--green-soft);
-
-      color:var(--green-dark);
-
-      font-size:16px;
-    }
-
-    .kpi-icon.blue{
-      background:var(--blue-soft);
-      color:var(--blue);
-    }
-
-    .kpi-icon.warning{
-      background:var(--warning-soft);
-      color:var(--warning);
-    }
-
-    .kpi-icon.purple{
-      background:var(--purple-soft);
-      color:var(--purple);
-    }
-
-    .kpi-icon.red{
-      background:var(--danger-soft);
-      color:var(--danger);
-    }
-
-    .kpi-change{
-      font-size:9px;
-      font-weight:800;
-
-      padding:5px 7px;
-
-      border-radius:50px;
-
-      background:var(--green-soft);
-      color:var(--green-dark);
-    }
-
-    .kpi-change.neutral{
+    .top-btn:hover{
       background:var(--surface-2);
-      color:var(--muted);
     }
 
-    .kpi-value{
-      font-family:"Manrope",sans-serif;
+    .content{
+      max-width:1800px;
+      margin:auto;
 
-      font-size:22px;
-      font-weight:800;
-
-      margin-top:16px;
-
-      letter-spacing:-.5px;
-
-      position:relative;
-      z-index:2;
-
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .kpi-label{
-      color:var(--muted);
-
-      font-size:10px;
-
-      margin-top:4px;
-
-      position:relative;
-      z-index:2;
+      padding:30px;
     }
 
     /* =========================
-       GRID
-    ========================= */
+       HERO
+    ========================== */
 
-    .dashboard-grid{
-      display:grid;
+    .hero{
+      position:relative;
+      overflow:hidden;
 
-      grid-template-columns:
-        minmax(0,1.65fr)
-        minmax(300px,.85fr);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:25px;
 
-      gap:20px;
-
-      margin-bottom:20px;
-    }
-
-    .bottom-grid{
-      display:grid;
-
-      grid-template-columns:
-        minmax(0,1.45fr)
-        minmax(320px,.85fr);
-
-      gap:20px;
-    }
-
-    .card{
-      background:var(--surface);
+      margin-bottom:22px;
+      padding:28px;
 
       border:1px solid var(--border);
-
-      border-radius:18px;
-
-      box-shadow:var(--shadow);
-
-      overflow:hidden;
-    }
-
-    .card-head{
-      padding:18px 20px;
-
-      border-bottom:1px solid var(--border);
-
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-
-      gap:15px;
-    }
-
-    .card-title{
-      font-family:"Manrope",sans-serif;
-
-      font-weight:800;
-
-      font-size:14px;
-    }
-
-    .card-subtitle{
-      color:var(--muted);
-
-      font-size:10px;
-
-      margin-top:4px;
-    }
-
-    .card-body{
-      padding:20px;
-    }
-
-    /* =========================
-       CHART
-    ========================= */
-
-    .chart-card{
-      min-width:0;
-    }
-
-    .chart-summary{
-      display:flex;
-      align-items:flex-end;
-      gap:10px;
-    }
-
-    .chart-summary strong{
-      font-family:"Manrope",sans-serif;
-
-      font-size:24px;
-
-      font-weight:800;
-
-      letter-spacing:-.6px;
-    }
-
-    .chart-summary span{
-      color:var(--green-dark);
-
-      font-size:10px;
-
-      font-weight:800;
-
-      padding-bottom:4px;
-    }
-
-    .chart-wrap{
-      margin-top:18px;
-
-      height:250px;
-
-      position:relative;
-
-      overflow:hidden;
-    }
-
-    .chart-grid{
-      position:absolute;
-      inset:0;
-
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-    }
-
-    .chart-grid-line{
-      border-top:1px dashed #e6ece8;
-
-      width:100%;
-      height:1px;
-    }
-
-    .chart-y{
-      position:absolute;
-
-      left:0;
-      top:0;
-      bottom:0;
-
-      width:38px;
-
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-
-      color:#9aa69f;
-
-      font-size:8px;
-    }
-
-    .chart-svg{
-      position:absolute;
-
-      left:45px;
-      right:0;
-      top:0;
-      bottom:23px;
-
-      width:calc(100% - 45px);
-      height:calc(100% - 23px);
-
-      overflow:visible;
-    }
-
-    .chart-line{
-      fill:none;
-
-      stroke:var(--green);
-
-      stroke-width:3;
-
-      stroke-linecap:round;
-      stroke-linejoin:round;
-    }
-
-    .chart-area{
-      fill:rgba(24,169,87,.08);
-      stroke:none;
-    }
-
-    .chart-dot{
-      fill:#fff;
-
-      stroke:var(--green);
-
-      stroke-width:2;
-    }
-
-    .chart-x{
-      position:absolute;
-
-      left:45px;
-      right:0;
-      bottom:0;
-
-      display:flex;
-      justify-content:space-between;
-
-      color:#9aa69f;
-
-      font-size:8px;
-    }
-
-    .chart-tooltip{
-      position:absolute;
-
-      display:none;
-
-      min-width:110px;
-
-      padding:8px 10px;
-
-      background:#101713;
-      color:#fff;
-
-      border-radius:9px;
-
-      font-size:9px;
-
-      pointer-events:none;
-
-      z-index:10;
-
-      box-shadow:var(--shadow-lg);
-    }
-
-    .chart-tooltip strong{
-      display:block;
-      font-size:11px;
-    }
-
-    .chart-tooltip span{
-      display:block;
-      color:#9da9a3;
-      margin-top:2px;
-    }
-
-    /* =========================
-       QUICK ACTIONS
-    ========================= */
-
-    .quick-grid{
-      display:grid;
-
-      grid-template-columns:
-        repeat(2,minmax(0,1fr));
-
-      gap:10px;
-    }
-
-    .quick-action{
-      min-height:105px;
-
-      border:1px solid var(--border);
-
-      border-radius:13px;
-
-      padding:13px;
-
-      background:#fff;
-
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-
-      transition:.2s ease;
-    }
-
-    .quick-action:hover{
-      transform:translateY(-2px);
-
-      border-color:#bfd0c6;
-
-      box-shadow:0 10px 22px rgba(16,32,23,.07);
-    }
-
-    .quick-icon{
-      width:34px;
-      height:34px;
-
-      border-radius:10px;
-
-      display:grid;
-      place-items:center;
-
-      background:var(--surface-2);
-
-      color:var(--green-dark);
-
-      font-size:15px;
-    }
-
-    .quick-action strong{
-      display:block;
-
-      font-size:11px;
-
-      margin-top:10px;
-    }
-
-    .quick-action span{
-      display:block;
-
-      color:var(--muted);
-
-      font-size:9px;
-
-      margin-top:3px;
-    }
-
-    /* =========================
-       ORDERS TABLE
-    ========================= */
-
-    .table-wrap{
-      overflow-x:auto;
-    }
-
-    table{
-      width:100%;
-
-      border-collapse:collapse;
-
-      min-width:650px;
-    }
-
-    th{
-      text-align:left;
-
-      color:#7c8982;
-
-      background:#fafcfb;
-
-      font-size:9px;
-
-      text-transform:uppercase;
-
-      letter-spacing:.6px;
-
-      padding:11px 12px;
-
-      border-bottom:1px solid var(--border);
-
-      white-space:nowrap;
-    }
-
-    td{
-      padding:13px 12px;
-
-      border-bottom:1px solid var(--border);
-
-      font-size:10px;
-
-      vertical-align:middle;
-    }
-
-    tbody tr:last-child td{
-      border-bottom:0;
-    }
-
-    tbody tr:hover{
-      background:#fbfdfc;
-    }
-
-    .order-id{
-      font-family:monospace;
-
-      font-size:10px;
-
-      font-weight:700;
-
-      color:var(--text);
-    }
-
-    .customer-cell strong{
-      display:block;
-
-      font-size:10px;
-    }
-
-    .customer-cell span{
-      display:block;
-
-      color:var(--muted);
-
-      font-size:9px;
-
-      margin-top:3px;
-    }
-
-    .status{
-      display:inline-flex;
-
-      align-items:center;
-
-      padding:5px 8px;
-
-      border-radius:50px;
-
-      font-size:8px;
-
-      font-weight:800;
-
-      white-space:nowrap;
-    }
-
-    .status.paid{
-      background:var(--green-soft);
-      color:var(--green-dark);
-    }
-
-    .status.pending{
-      background:var(--warning-soft);
-      color:var(--warning);
-    }
-
-    .status.cancelled{
-      background:var(--danger-soft);
-      color:var(--danger);
-    }
-
-    .status.processing{
-      background:var(--blue-soft);
-      color:var(--blue);
-    }
-
-    .empty{
-      padding:40px 20px;
-
-      text-align:center;
-
-      color:var(--muted);
-
-      font-size:11px;
-    }
-
-    /* =========================
-       TOP WEBSITES
-    ========================= */
-
-    .website-list{
-      display:grid;
-      gap:0;
-    }
-
-    .website-item{
-      display:flex;
-
-      align-items:center;
-
-      gap:11px;
-
-      padding:12px 0;
-
-      border-bottom:1px solid var(--border);
-    }
-
-    .website-item:last-child{
-      border-bottom:0;
-    }
-
-    .website-thumb{
-      width:45px;
-      height:39px;
-
-      border-radius:9px;
+      border-radius:24px;
 
       background:
+        radial-gradient(
+          circle at 92% 15%,
+          rgba(24,169,87,.16),
+          transparent 32%
+        ),
         linear-gradient(
           135deg,
-          #edf7f0,
-          #dcece2
+          #fff 0%,
+          #f5faf7 100%
         );
 
-      flex:0 0 45px;
-
-      overflow:hidden;
-
-      display:grid;
-      place-items:center;
-
-      color:var(--green-dark);
-
-      font-size:14px;
+      box-shadow:var(--shadow);
     }
 
-    .website-thumb img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
+    .hero-copy{
+      position:relative;
+      z-index:1;
     }
 
-    .website-info{
-      min-width:0;
-      flex:1;
-    }
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:7px;
 
-    .website-info strong{
-      display:block;
+      margin-bottom:10px;
+      padding:6px 10px;
 
-      font-size:10px;
+      border-radius:999px;
 
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-    }
-
-    .website-info span{
-      display:block;
-
-      color:var(--muted);
-
-      font-size:9px;
-
-      margin-top:3px;
-    }
-
-    .website-price{
-      font-family:"Manrope",sans-serif;
-
-      font-size:10px;
-
-      font-weight:800;
-
-      white-space:nowrap;
-    }
-
-    /* =========================
-       ACTIVITY
-    ========================= */
-
-    .activity-list{
-      display:grid;
-      gap:0;
-    }
-
-    .activity{
-      display:flex;
-
-      gap:11px;
-
-      padding:12px 0;
-
-      border-bottom:1px solid var(--border);
-    }
-
-    .activity:last-child{
-      border-bottom:0;
-    }
-
-    .activity-icon{
-      width:32px;
-      height:32px;
-
-      border-radius:9px;
-
-      display:grid;
-      place-items:center;
-
-      flex:0 0 32px;
-
-      font-size:13px;
-    }
-
-    .activity-icon.green{
       background:var(--green-soft);
       color:var(--green-dark);
-    }
-
-    .activity-icon.blue{
-      background:var(--blue-soft);
-      color:var(--blue);
-    }
-
-    .activity-icon.yellow{
-      background:var(--warning-soft);
-      color:var(--warning);
-    }
-
-    .activity-icon.red{
-      background:var(--danger-soft);
-      color:var(--danger);
-    }
-
-    .activity-content{
-      min-width:0;
-      flex:1;
-    }
-
-    .activity-content strong{
-      display:block;
 
       font-size:10px;
-
-      line-height:1.4;
-    }
-
-    .activity-content span{
-      display:block;
-
-      color:var(--muted);
-
-      font-size:9px;
-
-      margin-top:3px;
-      line-height:1.4;
-    }
-
-    /* =========================
-       SYSTEM STATUS
-    ========================= */
-
-    .system-list{
-      display:grid;
-      gap:1px;
-
-      border:1px solid var(--border);
-
-      border-radius:12px;
-
-      overflow:hidden;
-    }
-
-    .system-row{
-      display:flex;
-
-      align-items:center;
-      justify-content:space-between;
-
-      gap:15px;
-
-      padding:12px;
-
-      background:#fff;
-
-      border-bottom:1px solid var(--border);
-    }
-
-    .system-row:last-child{
-      border-bottom:0;
-    }
-
-    .system-row > div:first-child strong{
-      display:block;
-      font-size:10px;
-    }
-
-    .system-row > div:first-child span{
-      display:block;
-
-      color:var(--muted);
-
-      font-size:8px;
-
-      margin-top:3px;
-    }
-
-    .system-state{
-      display:inline-flex;
-
-      align-items:center;
-
-      gap:5px;
-
-      font-size:8px;
-
       font-weight:800;
-
-      white-space:nowrap;
+      letter-spacing:.7px;
+      text-transform:uppercase;
     }
 
-    .state-dot{
+    .eyebrow-dot{
       width:6px;
       height:6px;
 
@@ -1318,125 +440,708 @@
       background:var(--green);
     }
 
-    .state-dot.warning{
-      background:#e0aa19;
+    .hero h1{
+      margin-bottom:8px;
+
+      font-family:"Manrope",sans-serif;
+      font-size:30px;
+      line-height:1.15;
+
+      letter-spacing:-1.1px;
     }
 
-    .state-dot.red{
-      background:var(--danger);
+    .hero p{
+      max-width:680px;
+
+      color:var(--muted);
+
+      font-size:13px;
+      line-height:1.65;
+    }
+
+    .hero-actions{
+      position:relative;
+      z-index:1;
+
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+      gap:9px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+
+      padding:11px 15px;
+
+      border:0;
+      border-radius:12px;
+
+      font-size:12px;
+      font-weight:800;
+
+      transition:.2s ease;
+    }
+
+    .btn-primary{
+      background:var(--green);
+      color:#fff;
+
+      box-shadow:0 8px 18px rgba(24,169,87,.2);
+    }
+
+    .btn-primary:hover{
+      background:var(--green-dark);
+      transform:translateY(-1px);
+    }
+
+    .btn-light{
+      background:#fff;
+      border:1px solid var(--border);
+      color:var(--text);
+    }
+
+    .btn-light:hover{
+      background:var(--surface-2);
     }
 
     /* =========================
-       FOOTER
-    ========================= */
+       KPI
+    ========================== */
 
-    .footer-note{
-      padding:25px 0 5px;
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(6,minmax(0,1fr));
+      gap:14px;
 
-      text-align:center;
+      margin-bottom:22px;
+    }
 
-      color:#9aa59f;
+    .stat{
+      min-width:0;
 
+      padding:18px;
+
+      background:#fff;
+
+      border:1px solid var(--border);
+      border-radius:18px;
+
+      box-shadow:0 8px 25px rgba(16,35,24,.035);
+    }
+
+    .stat-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+
+      margin-bottom:13px;
+    }
+
+    .stat-label{
+      color:var(--muted);
+
+      font-size:11px;
+      font-weight:700;
+    }
+
+    .stat-icon{
+      width:30px;
+      height:30px;
+
+      display:grid;
+      place-items:center;
+
+      border-radius:9px;
+
+      background:var(--green-soft);
+      color:var(--green-dark);
+
+      font-size:14px;
+    }
+
+    .stat-value{
+      font-family:"Manrope",sans-serif;
+
+      font-size:23px;
+      font-weight:800;
+
+      letter-spacing:-.7px;
+    }
+
+    .stat-note{
+      margin-top:3px;
+
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .stat.blue .stat-icon{
+      background:var(--blue-soft);
+      color:var(--blue);
+    }
+
+    .stat.orange .stat-icon{
+      background:var(--orange-soft);
+      color:var(--orange);
+    }
+
+    .stat.purple .stat-icon{
+      background:var(--purple-soft);
+      color:var(--purple);
+    }
+
+    /* =========================
+       GRID
+    ========================== */
+
+    .dashboard-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.45fr) minmax(320px,.85fr);
+      gap:18px;
+
+      margin-bottom:18px;
+    }
+
+    .panel{
+      min-width:0;
+
+      background:#fff;
+
+      border:1px solid var(--border);
+      border-radius:20px;
+
+      box-shadow:0 8px 25px rgba(16,35,24,.035);
+
+      overflow:hidden;
+    }
+
+    .panel-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+
+      padding:18px 20px;
+
+      border-bottom:1px solid var(--border);
+    }
+
+    .panel-title{
+      font-family:"Manrope",sans-serif;
+
+      font-size:14px;
+      font-weight:800;
+      letter-spacing:-.3px;
+    }
+
+    .panel-sub{
+      margin-top:3px;
+
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .panel-link{
+      color:var(--green-dark);
+
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .panel-link:hover{
+      text-decoration:underline;
+    }
+
+    /* =========================
+       REVENUE CHART
+    ========================== */
+
+    .chart-panel{
+      padding-bottom:10px;
+    }
+
+    .chart-summary{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap:15px;
+
+      padding:20px 20px 4px;
+    }
+
+    .revenue-big{
+      font-family:"Manrope",sans-serif;
+
+      font-size:29px;
+      font-weight:800;
+
+      letter-spacing:-1px;
+    }
+
+    .revenue-label{
+      margin-top:3px;
+
+      color:var(--muted);
+      font-size:10px;
+    }
+
+    .trend{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+
+      padding:6px 8px;
+
+      border-radius:8px;
+
+      background:var(--green-soft);
+      color:var(--green-dark);
+
+      font-size:9px;
+      font-weight:800;
+    }
+
+    .chart-wrap{
+      height:245px;
+      padding:15px 20px 10px;
+    }
+
+    #revenueChart{
+      width:100%;
+      height:100%;
+      display:block;
+    }
+
+    .chart-empty{
+      height:100%;
+
+      display:grid;
+      place-items:center;
+
+      color:var(--muted);
+      font-size:11px;
+    }
+
+    /* =========================
+       QUICK ACTIONS
+    ========================== */
+
+    .quick-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+
+      padding:16px;
+    }
+
+    .quick-card{
+      min-height:92px;
+
+      padding:13px;
+
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+
+      border:1px solid var(--border);
+      border-radius:14px;
+
+      background:#fff;
+
+      transition:.2s ease;
+    }
+
+    .quick-card:hover{
+      border-color:#cbd7d0;
+      background:#fbfcfb;
+      transform:translateY(-1px);
+    }
+
+    .quick-icon{
+      width:31px;
+      height:31px;
+
+      display:grid;
+      place-items:center;
+
+      border-radius:9px;
+
+      background:var(--green-soft);
+      color:var(--green-dark);
+
+      font-size:14px;
+    }
+
+    .quick-title{
+      margin-top:10px;
+
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .quick-sub{
+      margin-top:2px;
+
+      color:var(--muted);
       font-size:9px;
     }
 
     /* =========================
-       TOAST
-    ========================= */
+       RECENT ORDERS
+    ========================== */
 
-    .toast-wrap{
-      position:fixed;
+    .order-list{
+      padding:4px 20px 10px;
+    }
 
-      right:22px;
-      bottom:22px;
-
-      z-index:3000;
-
+    .order-row{
       display:grid;
+      grid-template-columns:1.3fr .9fr .7fr .75fr auto;
+      align-items:center;
+      gap:12px;
 
-      gap:9px;
+      padding:13px 0;
+
+      border-bottom:1px solid #edf1ee;
     }
 
-    .toast{
-      min-width:260px;
-      max-width:360px;
+    .order-row:last-child{
+      border-bottom:0;
+    }
 
-      padding:13px 15px;
-
-      background:#101713;
-
-      color:#fff;
-
-      border-radius:12px;
-
-      box-shadow:var(--shadow-lg);
-
-      border:1px solid rgba(255,255,255,.08);
-
-      animation:toastIn .25s ease;
-
+    .order-id{
       font-size:11px;
+      font-weight:800;
     }
 
-    .toast strong{
-      display:block;
+    .order-customer{
+      margin-top:2px;
+
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .order-site{
+      font-size:10px;
+      font-weight:700;
+    }
+
+    .order-date{
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .order-price{
       font-size:11px;
+      font-weight:800;
+      white-space:nowrap;
     }
 
-    .toast span{
-      display:block;
+    .status{
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
 
-      color:#9eaaa4;
+      padding:5px 8px;
 
-      margin-top:3px;
+      border-radius:8px;
 
-      line-height:1.4;
+      font-size:8px;
+      font-weight:800;
+
+      text-transform:uppercase;
+      letter-spacing:.3px;
+
+      white-space:nowrap;
     }
 
-    @keyframes toastIn{
-      from{
-        opacity:0;
-        transform:translateY(10px);
-      }
+    .status-dot{
+      width:5px;
+      height:5px;
 
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
+      border-radius:50%;
+
+      background:currentColor;
+    }
+
+    .status-paid{
+      color:#138247;
+      background:#eaf8f0;
+    }
+
+    .status-pending{
+      color:#a46a00;
+      background:#fff6df;
+    }
+
+    .status-cancelled{
+      color:#b42331;
+      background:#fff0f1;
+    }
+
+    .status-refunded{
+      color:#59636d;
+      background:#edf0f2;
+    }
+
+    .status-processing{
+      color:#3478f6;
+      background:#edf4ff;
+    }
+
+    .empty-small{
+      padding:30px 10px;
+
+      text-align:center;
+
+      color:var(--muted);
+      font-size:10px;
     }
 
     /* =========================
-       OVERLAY
-    ========================= */
+       BOTTOM GRID
+    ========================== */
+
+    .bottom-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:18px;
+
+      margin-bottom:18px;
+    }
+
+    /* =========================
+       TOP WEBSITES
+    ========================== */
+
+    .ranking{
+      padding:4px 20px 12px;
+    }
+
+    .rank-row{
+      display:grid;
+      grid-template-columns:30px 1fr auto;
+      align-items:center;
+      gap:10px;
+
+      padding:12px 0;
+
+      border-bottom:1px solid #edf1ee;
+    }
+
+    .rank-row:last-child{
+      border-bottom:0;
+    }
+
+    .rank-number{
+      width:28px;
+      height:28px;
+
+      display:grid;
+      place-items:center;
+
+      border-radius:9px;
+
+      background:var(--surface-2);
+
+      color:#68756e;
+
+      font-size:10px;
+      font-weight:800;
+    }
+
+    .rank-name{
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .rank-meta{
+      margin-top:2px;
+
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .rank-price{
+      font-size:11px;
+      font-weight:800;
+
+      white-space:nowrap;
+    }
+
+    /* =========================
+       SYSTEM HEALTH
+    ========================== */
+
+    .health{
+      padding:16px 20px 20px;
+    }
+
+    .health-item{
+      padding:11px 0;
+
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+
+      border-bottom:1px solid #edf1ee;
+    }
+
+    .health-item:last-child{
+      border-bottom:0;
+    }
+
+    .health-left{
+      display:flex;
+      align-items:center;
+      gap:9px;
+    }
+
+    .health-dot{
+      width:8px;
+      height:8px;
+
+      border-radius:50%;
+
+      background:var(--green);
+      box-shadow:0 0 0 4px var(--green-soft);
+    }
+
+    .health-name{
+      font-size:10px;
+      font-weight:700;
+    }
+
+    .health-value{
+      color:var(--muted);
+      font-size:9px;
+    }
+
+    .health-badge{
+      padding:5px 8px;
+
+      border-radius:7px;
+
+      background:var(--green-soft);
+      color:var(--green-dark);
+
+      font-size:8px;
+      font-weight:800;
+      text-transform:uppercase;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    .footer{
+      padding:25px 20px 35px;
+
+      text-align:center;
+
+      color:#89948e;
+      font-size:10px;
+    }
+
+    /* =========================
+       SIDEBAR OVERLAY
+    ========================== */
 
     .sidebar-overlay{
       display:none;
 
       position:fixed;
       inset:0;
-
-      background:rgba(0,0,0,.42);
-
       z-index:900;
+
+      background:rgba(0,0,0,.4);
     }
 
-    .sidebar-overlay.show{
-      display:block;
+    /* =========================
+       TOAST
+    ========================== */
+
+    .toast-wrap{
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:4000;
+
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+
+      pointer-events:none;
+    }
+
+    .toast{
+      min-width:250px;
+      max-width:380px;
+
+      display:flex;
+      align-items:center;
+      gap:9px;
+
+      padding:12px 14px;
+
+      border-radius:12px;
+
+      background:#111b15;
+      color:#fff;
+
+      box-shadow:0 15px 35px rgba(0,0,0,.18);
+
+      font-size:11px;
+      font-weight:700;
+
+      animation:toastIn .2s ease;
+    }
+
+    .toast.success::before{
+      content:"✓";
+
+      width:20px;
+      height:20px;
+
+      display:grid;
+      place-items:center;
+
+      flex:none;
+
+      border-radius:50%;
+
+      background:var(--green);
+    }
+
+    @keyframes toastIn{
+      from{
+        opacity:0;
+        transform:translateY(8px);
+      }
+
+      to{
+        opacity:1;
+        transform:none;
+      }
     }
 
     /* =========================
        RESPONSIVE
-    ========================= */
+    ========================== */
 
     @media(max-width:1250px){
 
-      .kpi-grid{
-        grid-template-columns:
-          repeat(3,minmax(0,1fr));
+      .stats{
+        grid-template-columns:repeat(3,1fr);
       }
 
-      .dashboard-grid,
-      .bottom-grid{
+      .dashboard-grid{
         grid-template-columns:1fr;
       }
 
@@ -1452,6 +1157,10 @@
         transform:translateX(0);
       }
 
+      .sidebar-overlay.show{
+        display:block;
+      }
+
       .main{
         width:100%;
         margin-left:0;
@@ -1459,122 +1168,200 @@
 
       .mobile-menu{
         display:grid;
-        place-items:center;
       }
 
       .topbar{
-        padding:0 18px;
+        padding:0 16px;
+      }
+
+      .top-actions .hide-mobile{
+        display:none;
       }
 
       .content{
-        padding:22px 18px;
+        padding:18px 15px;
       }
 
-    }
-
-    @media(max-width:680px){
-
-      .page-head{
+      .hero{
         flex-direction:column;
+        align-items:flex-start;
       }
 
-      .head-actions{
-        width:100%;
+      .hero-actions{
+        justify-content:flex-start;
       }
 
-      .head-actions .btn{
-        flex:1;
-      }
-
-      .kpi-grid{
-        grid-template-columns:
-          repeat(2,minmax(0,1fr));
-
-        gap:10px;
-      }
-
-      .kpi{
-        padding:14px;
-      }
-
-      .kpi-value{
-        font-size:19px;
-      }
-
-      .kpi-change{
-        display:none;
-      }
-
-      .quick-grid{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .top-actions .icon-btn{
-        display:none;
-      }
-
-      .logout-btn{
-        padding:0 10px;
-      }
-
-      .breadcrumb span:first-child{
-        display:none;
-      }
-
-      .card-head{
-        padding:16px;
-      }
-
-      .card-body{
-        padding:16px;
-      }
-
-      .chart-wrap{
-        height:210px;
-      }
-
-      .toast-wrap{
-        left:15px;
-        right:15px;
-        bottom:15px;
-      }
-
-      .toast{
-        min-width:0;
-        max-width:none;
-      }
-
-    }
-
-    @media(max-width:430px){
-
-      .kpi-grid{
-        grid-template-columns:1fr 1fr;
-      }
-
-      .quick-grid{
+      .bottom-grid{
         grid-template-columns:1fr;
       }
 
-      .page-head h1{
+    }
+
+    @media(max-width:700px){
+
+      .stats{
+        grid-template-columns:repeat(2,1fr);
+        gap:9px;
+      }
+
+      .stat{
+        padding:14px;
+        border-radius:15px;
+      }
+
+      .stat-value{
+        font-size:20px;
+      }
+
+      .hero{
+        padding:21px;
+      }
+
+      .hero h1{
         font-size:25px;
+      }
+
+      .quick-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .order-list{
+        padding-left:13px;
+        padding-right:13px;
+      }
+
+      .order-row{
+        grid-template-columns:1fr auto;
+        gap:6px 10px;
+      }
+
+      .order-site{
+        grid-column:1;
+      }
+
+      .order-date{
+        grid-column:1;
+      }
+
+      .order-price{
+        grid-column:2;
+        grid-row:1 / span 3;
+        align-self:center;
+      }
+
+      .order-row .status{
+        grid-column:1;
+        width:max-content;
       }
 
     }
 
-    /* =========================
-       PRINT
-    ========================= */
+    @media(max-width:480px){
+
+      .topbar{
+        height:64px;
+      }
+
+      .page-title{
+        font-size:15px;
+      }
+
+      .page-context{
+        display:none;
+      }
+
+      .content{
+        padding:13px 11px;
+      }
+
+      .hero{
+        padding:18px;
+        border-radius:18px;
+      }
+
+      .hero h1{
+        font-size:22px;
+      }
+
+      .hero-actions{
+        width:100%;
+      }
+
+      .hero-actions .btn{
+        flex:1;
+      }
+
+      .stats{
+        gap:8px;
+      }
+
+      .stat{
+        padding:12px;
+      }
+
+      .stat-label{
+        font-size:10px;
+      }
+
+      .stat-value{
+        font-size:18px;
+      }
+
+      .stat-note{
+        font-size:9px;
+      }
+
+      .panel-head{
+        padding:15px;
+      }
+
+      .chart-summary{
+        padding:16px 15px 3px;
+      }
+
+      .chart-wrap{
+        padding:12px 10px 10px;
+        height:205px;
+      }
+
+      .quick-grid{
+        padding:12px;
+        gap:8px;
+      }
+
+      .quick-card{
+        min-height:85px;
+        padding:11px;
+      }
+
+      .ranking,
+      .health{
+        padding-left:15px;
+        padding-right:15px;
+      }
+
+      .toast-wrap{
+        left:11px;
+        right:11px;
+        bottom:11px;
+      }
+
+      .toast{
+        width:100%;
+        min-width:0;
+      }
+
+    }
 
     @media print{
 
       .sidebar,
       .topbar,
-      .head-actions,
-      .mobile-menu,
+      .hero-actions,
       .sidebar-overlay,
-      .toast-wrap{
-        display:none !important;
+      .footer,
+      .quick-card{
+        display:none!important;
       }
 
       .main{
@@ -1586,10 +1373,13 @@
         padding:0;
       }
 
-      .card,
-      .kpi{
+      .hero{
         box-shadow:none;
-        break-inside:avoid;
+      }
+
+      .panel,
+      .stat{
+        box-shadow:none;
       }
 
       body{
@@ -1605,156 +1395,139 @@
 
 <div class="app">
 
-  <!-- =====================================================
+  <!-- =========================
        SIDEBAR
-  ====================================================== -->
+  ========================== -->
 
   <aside class="sidebar" id="sidebar">
 
     <div class="brand">
 
-      <a href="../index.html">
+      <img src="../logo.png" alt="Website Deals">
 
-        <img
-          src="../logo.png"
-          class="brand-logo"
-          alt="Website Deals"
-          onerror="this.style.display='none'"
-        >
-
-        <div class="brand-copy">
-
-          <strong>Website Deals</strong>
-
-          <span>
-            Admin Control Center
-          </span>
-
-        </div>
-
-      </a>
+      <div>
+        <div class="brand-title">Website Deals</div>
+        <div class="brand-sub">Admin Control Center</div>
+      </div>
 
     </div>
 
     <nav class="nav">
 
-      <div class="nav-label">
-        Overview
-      </div>
+      <div class="nav-label">Overview</div>
 
-      <a
-        href="dashboard.html"
-        class="active"
-      >
+      <a class="nav-item active" href="dashboard.html">
         <span class="nav-icon">⌂</span>
         <span>Dashboard</span>
       </a>
 
-      <div class="nav-label">
-        Marketplace
-      </div>
+      <div class="nav-label">Marketplace</div>
 
-      <a href="websites.html">
+      <a class="nav-item" href="websites.html">
         <span class="nav-icon">▣</span>
         <span>Websites</span>
       </a>
 
-      <a href="categories.html">
-        <span class="nav-icon">◈</span>
+      <a class="nav-item" href="website-editor.html">
+        <span class="nav-icon">✎</span>
+        <span>Website Editor</span>
+      </a>
+
+      <a class="nav-item" href="categories.html">
+        <span class="nav-icon">◫</span>
         <span>Categories</span>
       </a>
 
-      <a href="browse-ui.html">
-        <span class="nav-icon">◫</span>
+      <a class="nav-item" href="browse-ui.html">
+        <span class="nav-icon">◉</span>
         <span>Browse UI</span>
       </a>
 
-      <a href="homepage.html">
+      <a class="nav-item" href="homepage.html">
         <span class="nav-icon">⌂</span>
         <span>Homepage</span>
       </a>
 
-      <a href="banners.html">
+      <a class="nav-item" href="banners.html">
         <span class="nav-icon">▤</span>
         <span>Banners</span>
       </a>
 
-      <div class="nav-label">
-        Sales
-      </div>
+      <div class="nav-label">Orders & Customers</div>
 
-      <a href="orders.html">
-        <span class="nav-icon">▤</span>
+      <a class="nav-item" href="orders.html">
+        <span class="nav-icon">▱</span>
         <span>Orders</span>
       </a>
 
-      <a href="customers.html">
+      <a class="nav-item" href="customers.html">
         <span class="nav-icon">♙</span>
         <span>Customers</span>
       </a>
 
-      <a href="payments.html">
+      <a class="nav-item" href="payments.html">
         <span class="nav-icon">৳</span>
         <span>Payments</span>
       </a>
 
-      <a href="newsletter.html">
+      <a class="nav-item" href="newsletter.html">
         <span class="nav-icon">✉</span>
         <span>Newsletter</span>
       </a>
 
-      <div class="nav-label">
-        Reports
-      </div>
+      <div class="nav-label">Analytics</div>
 
-      <a href="reports.html">
-        <span class="nav-icon">◒</span>
+      <a class="nav-item" href="reports.html">
+        <span class="nav-icon">▥</span>
         <span>Reports</span>
       </a>
 
-      <a href="monthly-report.html">
-        <span class="nav-icon">▦</span>
+      <a class="nav-item" href="monthly-report.html">
+        <span class="nav-icon">◴</span>
         <span>Monthly Report</span>
       </a>
 
-      <div class="nav-label">
-        System
-      </div>
+      <div class="nav-label">System</div>
 
-      <a href="admins.html">
+      <a class="nav-item" href="admins.html">
         <span class="nav-icon">♟</span>
         <span>Admins</span>
       </a>
 
-      <a href="settings.html">
+      <a class="nav-item" href="settings.html">
         <span class="nav-icon">⚙</span>
         <span>Settings</span>
       </a>
 
     </nav>
 
-    <div class="sidebar-footer">
+    <div class="sidebar-bottom">
 
       <div class="admin-mini">
 
-        <div
-          class="avatar"
-          id="sidebarAvatar"
-        >
+        <div class="admin-avatar" id="sidebarAvatar">
           SA
         </div>
 
-        <div>
+        <div class="admin-info">
 
-          <strong id="sidebarAdminName">
+          <div class="admin-name" id="sidebarName">
             Super Admin
-          </strong>
+          </div>
 
-          <span id="sidebarAdminRole">
+          <div class="admin-role" id="sidebarRole">
             Super Administrator
-          </span>
+          </div>
 
         </div>
+
+        <button
+          class="logout-btn"
+          id="logoutBtn"
+          title="Logout"
+        >
+          ↪
+        </button>
 
       </div>
 
@@ -1762,44 +1535,35 @@
 
   </aside>
 
-  <div
-    class="sidebar-overlay"
-    id="sidebarOverlay"
-  ></div>
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-
-  <!-- =====================================================
+  <!-- =========================
        MAIN
-  ====================================================== -->
+  ========================== -->
 
   <main class="main">
 
-    <!-- TOPBAR -->
-
     <header class="topbar">
 
-      <div class="top-left">
+      <div class="topbar-left">
 
         <button
           class="mobile-menu"
           id="mobileMenu"
-          type="button"
           aria-label="Open menu"
         >
           ☰
         </button>
 
-        <div class="breadcrumb">
+        <div>
 
-          <span>
-            Overview
-          </span>
-
-          <b>›</b>
-
-          <strong>
+          <div class="page-title">
             Dashboard
-          </strong>
+          </div>
+
+          <div class="page-context">
+            Marketplace overview & control center
+          </div>
 
         </div>
 
@@ -1808,882 +1572,724 @@
       <div class="top-actions">
 
         <button
-          class="icon-btn"
-          type="button"
-          id="viewSiteBtn"
-          title="View Website"
-        >
-          ↗
-        </button>
-
-        <button
-          class="icon-btn"
-          type="button"
+          class="top-btn hide-mobile"
           id="refreshBtn"
-          title="Refresh Dashboard"
         >
-          ↻
+          ↻ Refresh
         </button>
 
         <button
-          class="logout-btn"
-          type="button"
-          id="logoutBtn"
+          class="top-btn"
+          onclick="location.href='website-editor.html'"
         >
-          Logout
+          ＋ Add Website
         </button>
 
       </div>
 
     </header>
 
-
-    <!-- CONTENT -->
-
     <section class="content">
 
-      <!-- PAGE HEAD -->
+      <!-- =========================
+           HERO
+      ========================== -->
 
-      <div class="page-head">
+      <div class="hero">
 
-        <div>
+        <div class="hero-copy">
 
-          <h1 id="greeting">
-            Good morning, Super Admin
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Admin Overview
+          </div>
+
+          <h1>
+            Welcome back,
+            <span id="heroAdminName">Admin</span>.
           </h1>
 
           <p>
-            Here’s what’s happening across your Website Deals marketplace.
+            Keep an eye on your marketplace, website inventory,
+            orders, customers and revenue from one central dashboard.
           </p>
-
-          <div class="date-pill">
-            <span>◷</span>
-            <span id="currentDate">
-              Loading date...
-            </span>
-          </div>
 
         </div>
 
-        <div class="head-actions">
+        <div class="hero-actions">
 
           <button
-            class="btn"
-            type="button"
+            class="btn btn-light"
             id="printBtn"
           >
-            ⎙ Print
+            ⎙ Print Dashboard
           </button>
 
-          <a
-            class="btn"
-            href="reports.html"
+          <button
+            class="btn btn-light"
+            onclick="location.href='reports.html'"
           >
-            ◒ View Reports
-          </a>
+            ▥ View Reports
+          </button>
 
-          <a
+          <button
             class="btn btn-primary"
-            href="website-editor.html"
+            onclick="location.href='website-editor.html'"
           >
-            + Add Website
-          </a>
+            ＋ Add Website
+          </button>
 
         </div>
 
       </div>
 
+      <!-- =========================
+           STATS
+      ========================== -->
 
-      <!-- =================================================
-           KPI GRID
-      ================================================== -->
+      <div class="stats">
 
-      <div class="kpi-grid">
+        <div class="stat">
 
-        <!-- Websites -->
+          <div class="stat-top">
 
-        <div class="kpi">
+            <span class="stat-label">
+              Total Websites
+            </span>
 
-          <div class="kpi-top">
-
-            <div class="kpi-icon">
+            <span class="stat-icon">
               ▣
-            </div>
-
-            <span
-              class="kpi-change"
-              id="websiteChange"
-            >
-              Live
             </span>
 
           </div>
 
           <div
-            class="kpi-value"
-            id="totalWebsites"
+            class="stat-value"
+            id="statWebsites"
           >
             0
           </div>
 
-          <div class="kpi-label">
-            Total Websites
+          <div class="stat-note">
+            Marketplace inventory
           </div>
 
         </div>
 
+        <div class="stat">
 
-        <!-- Orders -->
+          <div class="stat-top">
 
-        <div class="kpi">
+            <span class="stat-label">
+              Active Websites
+            </span>
 
-          <div class="kpi-top">
-
-            <div class="kpi-icon blue">
-              ▤
-            </div>
-
-            <span
-              class="kpi-change"
-              id="orderChange"
-            >
-              0
+            <span class="stat-icon">
+              ✓
             </span>
 
           </div>
 
           <div
-            class="kpi-value"
-            id="totalOrders"
+            class="stat-value"
+            id="statActive"
           >
             0
           </div>
 
-          <div class="kpi-label">
-            Total Orders
+          <div class="stat-note">
+            Published listings
           </div>
 
         </div>
 
+        <div class="stat blue">
 
-        <!-- Customers -->
+          <div class="stat-top">
 
-        <div class="kpi">
+            <span class="stat-label">
+              Orders
+            </span>
 
-          <div class="kpi-top">
+            <span class="stat-icon">
+              ▱
+            </span>
 
-            <div class="kpi-icon purple">
+          </div>
+
+          <div
+            class="stat-value"
+            id="statOrders"
+          >
+            0
+          </div>
+
+          <div class="stat-note">
+            Total marketplace orders
+          </div>
+
+        </div>
+
+        <div class="stat purple">
+
+          <div class="stat-top">
+
+            <span class="stat-label">
+              Customers
+            </span>
+
+            <span class="stat-icon">
               ♙
-            </div>
-
-            <span
-              class="kpi-change"
-              id="customerChange"
-            >
-              0
             </span>
 
           </div>
 
           <div
-            class="kpi-value"
-            id="totalCustomers"
+            class="stat-value"
+            id="statCustomers"
           >
             0
           </div>
 
-          <div class="kpi-label">
-            Total Customers
+          <div class="stat-note">
+            Registered customers
           </div>
 
         </div>
 
+        <div class="stat">
 
-        <!-- Revenue -->
+          <div class="stat-top">
 
-        <div class="kpi">
+            <span class="stat-label">
+              Paid Orders
+            </span>
 
-          <div class="kpi-top">
-
-            <div class="kpi-icon">
+            <span class="stat-icon">
               ৳
-            </div>
-
-            <span
-              class="kpi-change"
-              id="revenueChange"
-            >
-              Paid
             </span>
 
           </div>
 
           <div
-            class="kpi-value"
-            id="totalRevenue"
+            class="stat-value"
+            id="statPaid"
+          >
+            0
+          </div>
+
+          <div class="stat-note">
+            Completed payments
+          </div>
+
+        </div>
+
+        <div class="stat orange">
+
+          <div class="stat-top">
+
+            <span class="stat-label">
+              Revenue
+            </span>
+
+            <span class="stat-icon">
+              ↗
+            </span>
+
+          </div>
+
+          <div
+            class="stat-value"
+            id="statRevenue"
           >
             ৳0
           </div>
 
-          <div class="kpi-label">
-            Total Revenue
-          </div>
-
-        </div>
-
-
-        <!-- Pending -->
-
-        <div class="kpi">
-
-          <div class="kpi-top">
-
-            <div class="kpi-icon warning">
-              ◷
-            </div>
-
-            <span
-              class="kpi-change neutral"
-            >
-              Action
-            </span>
-
-          </div>
-
-          <div
-            class="kpi-value"
-            id="pendingOrders"
-          >
-            0
-          </div>
-
-          <div class="kpi-label">
-            Pending Orders
-          </div>
-
-        </div>
-
-
-        <!-- Active -->
-
-        <div class="kpi">
-
-          <div class="kpi-top">
-
-            <div class="kpi-icon">
-              ✓
-            </div>
-
-            <span
-              class="kpi-change"
-            >
-              Live
-            </span>
-
-          </div>
-
-          <div
-            class="kpi-value"
-            id="activeWebsites"
-          >
-            0
-          </div>
-
-          <div class="kpi-label">
-            Active Websites
+          <div class="stat-note">
+            Paid order revenue
           </div>
 
         </div>
 
       </div>
 
-
-      <!-- =================================================
-           CHART + QUICK ACTIONS
-      ================================================== -->
+      <!-- =========================
+           MAIN GRID
+      ========================== -->
 
       <div class="dashboard-grid">
 
-        <!-- REVENUE CHART -->
+        <!-- REVENUE -->
 
-        <section class="card chart-card">
+        <div class="panel chart-panel">
 
-          <div class="card-head">
+          <div class="panel-head">
 
             <div>
 
-              <div class="card-title">
+              <div class="panel-title">
                 Revenue Overview
               </div>
 
-              <div class="card-subtitle">
-                Monthly paid revenue from available order data.
+              <div class="panel-sub">
+                Paid revenue across recent months
               </div>
 
             </div>
 
             <a
+              class="panel-link"
               href="monthly-report.html"
-              class="btn"
-              style="min-height:34px;padding:0 10px;font-size:10px"
             >
               Monthly Report →
             </a>
 
           </div>
 
-          <div class="card-body">
+          <div class="chart-summary">
 
-            <div class="chart-summary">
+            <div>
 
-              <strong id="chartRevenue">
+              <div
+                class="revenue-big"
+                id="chartRevenue"
+              >
                 ৳0
-              </strong>
+              </div>
 
-              <span id="chartPeriod">
-                This year
-              </span>
+              <div class="revenue-label">
+                Total paid revenue
+              </div>
 
             </div>
 
             <div
-              class="chart-wrap"
-              id="chartWrap"
+              class="trend"
+              id="revenueTrend"
             >
-
-              <div class="chart-grid">
-
-                <div class="chart-grid-line"></div>
-                <div class="chart-grid-line"></div>
-                <div class="chart-grid-line"></div>
-                <div class="chart-grid-line"></div>
-                <div class="chart-grid-line"></div>
-
-              </div>
-
-              <div
-                class="chart-y"
-                id="chartY"
-              >
-                <span>৳0</span>
-                <span>৳0</span>
-                <span>৳0</span>
-                <span>৳0</span>
-                <span>৳0</span>
-              </div>
-
-              <svg
-                class="chart-svg"
-                id="revenueChart"
-                viewBox="0 0 800 220"
-                preserveAspectRatio="none"
-                aria-label="Revenue chart"
-              >
-                <path
-                  id="chartArea"
-                  class="chart-area"
-                  d=""
-                ></path>
-
-                <path
-                  id="chartLine"
-                  class="chart-line"
-                  d=""
-                ></path>
-
-                <g id="chartDots"></g>
-              </svg>
-
-              <div
-                class="chart-x"
-                id="chartX"
-              >
-                <span>Jan</span>
-                <span>Feb</span>
-                <span>Mar</span>
-                <span>Apr</span>
-                <span>May</span>
-                <span>Jun</span>
-                <span>Jul</span>
-                <span>Aug</span>
-                <span>Sep</span>
-                <span>Oct</span>
-                <span>Nov</span>
-                <span>Dec</span>
-              </div>
-
-              <div
-                class="chart-tooltip"
-                id="chartTooltip"
-              >
-                <strong>৳0</strong>
-                <span>January</span>
-              </div>
-
+              ● Live Data
             </div>
 
           </div>
 
-        </section>
+          <div class="chart-wrap">
 
+            <svg
+              id="revenueChart"
+              viewBox="0 0 800 245"
+              preserveAspectRatio="none"
+              aria-label="Revenue chart"
+            ></svg>
+
+          </div>
+
+        </div>
 
         <!-- QUICK ACTIONS -->
 
-        <section class="card">
+        <div class="panel">
 
-          <div class="card-head">
+          <div class="panel-head">
 
             <div>
 
-              <div class="card-title">
+              <div class="panel-title">
                 Quick Actions
               </div>
 
-              <div class="card-subtitle">
-                Frequently used admin tools.
+              <div class="panel-sub">
+                Frequently used admin tools
               </div>
 
             </div>
 
           </div>
 
-          <div class="card-body">
-
-            <div class="quick-grid">
-
-              <a
-                class="quick-action"
-                href="website-editor.html"
-              >
-
-                <div class="quick-icon">
-                  +
-                </div>
-
-                <div>
-
-                  <strong>
-                    Add Website
-                  </strong>
-
-                  <span>
-                    Create new listing
-                  </span>
-
-                </div>
-
-              </a>
-
-
-              <a
-                class="quick-action"
-                href="orders.html"
-              >
-
-                <div class="quick-icon">
-                  ▤
-                </div>
-
-                <div>
-
-                  <strong>
-                    Manage Orders
-                  </strong>
-
-                  <span>
-                    View customer orders
-                  </span>
-
-                </div>
-
-              </a>
-
-
-              <a
-                class="quick-action"
-                href="customers.html"
-              >
-
-                <div class="quick-icon">
-                  ♙
-                </div>
-
-                <div>
-
-                  <strong>
-                    Customers
-                  </strong>
-
-                  <span>
-                    Customer directory
-                  </span>
-
-                </div>
-
-              </a>
-
-
-              <a
-                class="quick-action"
-                href="browse-ui.html"
-              >
-
-                <div class="quick-icon">
-                  ◫
-                </div>
-
-                <div>
-
-                  <strong>
-                    Browse UI
-                  </strong>
-
-                  <span>
-                    Manage marketplace UI
-                  </span>
-
-                </div>
-
-              </a>
-
-
-              <a
-                class="quick-action"
-                href="banners.html"
-              >
-
-                <div class="quick-icon">
-                  ▤
-                </div>
-
-                <div>
-
-                  <strong>
-                    Banners
-                  </strong>
-
-                  <span>
-                    Manage promotions
-                  </span>
-
-                </div>
-
-              </a>
-
-
-              <a
-                class="quick-action"
-                href="payments.html"
-              >
-
-                <div class="quick-icon">
-                  ৳
-                </div>
-
-                <div>
-
-                  <strong>
-                    Payments
-                  </strong>
-
-                  <span>
-                    Payment controls
-                  </span>
-
-                </div>
-
-              </a>
-
-            </div>
-
-          </div>
-
-        </section>
-
-      </div>
-
-
-      <!-- =================================================
-           RECENT ORDERS + TOP WEBSITES
-      ================================================== -->
-
-      <div class="bottom-grid">
-
-        <!-- RECENT ORDERS -->
-
-        <section class="card">
-
-          <div class="card-head">
-
-            <div>
-
-              <div class="card-title">
-                Recent Orders
-              </div>
-
-              <div class="card-subtitle">
-                Latest marketplace activity.
-              </div>
-
-            </div>
+          <div class="quick-grid">
 
             <a
-              href="orders.html"
-              class="btn"
-              style="min-height:34px;padding:0 10px;font-size:10px"
+              class="quick-card"
+              href="website-editor.html"
             >
-              View All →
+
+              <div class="quick-icon">
+                ＋
+              </div>
+
+              <div>
+
+                <div class="quick-title">
+                  Add Website
+                </div>
+
+                <div class="quick-sub">
+                  Create new listing
+                </div>
+
+              </div>
+
+            </a>
+
+            <a
+              class="quick-card"
+              href="orders.html"
+            >
+
+              <div class="quick-icon">
+                ▱
+              </div>
+
+              <div>
+
+                <div class="quick-title">
+                  Manage Orders
+                </div>
+
+                <div class="quick-sub">
+                  Review marketplace orders
+                </div>
+
+              </div>
+
+            </a>
+
+            <a
+              class="quick-card"
+              href="customers.html"
+            >
+
+              <div class="quick-icon">
+                ♙
+              </div>
+
+              <div>
+
+                <div class="quick-title">
+                  Customers
+                </div>
+
+                <div class="quick-sub">
+                  View customer directory
+                </div>
+
+              </div>
+
+            </a>
+
+            <a
+              class="quick-card"
+              href="banners.html"
+            >
+
+              <div class="quick-icon">
+                ▤
+              </div>
+
+              <div>
+
+                <div class="quick-title">
+                  Manage Banners
+                </div>
+
+                <div class="quick-sub">
+                  Update promotional banners
+                </div>
+
+              </div>
+
+            </a>
+
+            <a
+              class="quick-card"
+              href="homepage.html"
+            >
+
+              <div class="quick-icon">
+                ⌂
+              </div>
+
+              <div>
+
+                <div class="quick-title">
+                  Homepage
+                </div>
+
+                <div class="quick-sub">
+                  Control homepage sections
+                </div>
+
+              </div>
+
+            </a>
+
+            <a
+              class="quick-card"
+              href="settings.html"
+            >
+
+              <div class="quick-icon">
+                ⚙
+              </div>
+
+              <div>
+
+                <div class="quick-title">
+                  Settings
+                </div>
+
+                <div class="quick-sub">
+                  System configuration
+                </div>
+
+              </div>
+
             </a>
 
           </div>
 
-          <div class="table-wrap">
+        </div>
 
-            <table>
+      </div>
 
-              <thead>
+      <!-- =========================
+           RECENT ORDERS
+      ========================== -->
 
-                <tr>
-                  <th>Order</th>
-                  <th>Customer</th>
-                  <th>Website</th>
-                  <th>Amount</th>
-                  <th>Status</th>
-                </tr>
+      <div class="panel" style="margin-bottom:18px;">
 
-              </thead>
+        <div class="panel-head">
 
-              <tbody
-                id="recentOrdersBody"
-              ></tbody>
+          <div>
 
-            </table>
+            <div class="panel-title">
+              Recent Orders
+            </div>
+
+            <div class="panel-sub">
+              Latest marketplace activity
+            </div>
 
           </div>
 
-        </section>
+          <a
+            class="panel-link"
+            href="orders.html"
+          >
+            View All →
+          </a>
 
+        </div>
+
+        <div
+          class="order-list"
+          id="recentOrders"
+        ></div>
+
+      </div>
+
+      <!-- =========================
+           BOTTOM GRID
+      ========================== -->
+
+      <div class="bottom-grid">
 
         <!-- TOP WEBSITES -->
 
-        <section class="card">
+        <div class="panel">
 
-          <div class="card-head">
+          <div class="panel-head">
 
             <div>
 
-              <div class="card-title">
+              <div class="panel-title">
                 Website Inventory
               </div>
 
-              <div class="card-subtitle">
-                Current marketplace listings.
+              <div class="panel-sub">
+                Highest-value current listings
               </div>
 
             </div>
 
             <a
+              class="panel-link"
               href="websites.html"
-              class="btn"
-              style="min-height:34px;padding:0 10px;font-size:10px"
             >
               Manage →
             </a>
 
           </div>
 
-          <div class="card-body">
+          <div
+            class="ranking"
+            id="topWebsites"
+          ></div>
 
-            <div
-              class="website-list"
-              id="websiteList"
-            ></div>
+        </div>
 
-          </div>
+        <!-- SYSTEM HEALTH -->
 
-        </section>
+        <div class="panel">
 
-      </div>
-
-
-      <!-- =================================================
-           ACTIVITY + SYSTEM
-      ================================================== -->
-
-      <div
-        class="dashboard-grid"
-        style="margin-top:20px;margin-bottom:0"
-      >
-
-        <!-- ACTIVITY -->
-
-        <section class="card">
-
-          <div class="card-head">
+          <div class="panel-head">
 
             <div>
 
-              <div class="card-title">
-                Recent Activity
+              <div class="panel-title">
+                System Overview
               </div>
 
-              <div class="card-subtitle">
-                Recent events detected from your local admin data.
-              </div>
-
-            </div>
-
-            <button
-              class="btn"
-              type="button"
-              id="activityRefresh"
-              style="min-height:34px;padding:0 10px;font-size:10px"
-            >
-              Refresh
-            </button>
-
-          </div>
-
-          <div class="card-body">
-
-            <div
-              class="activity-list"
-              id="activityList"
-            ></div>
-
-          </div>
-
-        </section>
-
-
-        <!-- SYSTEM -->
-
-        <section class="card">
-
-          <div class="card-head">
-
-            <div>
-
-              <div class="card-title">
-                System Status
-              </div>
-
-              <div class="card-subtitle">
-                Current prototype environment.
+              <div class="panel-sub">
+                Current marketplace environment
               </div>
 
             </div>
 
+            <span class="health-badge">
+              Local
+            </span>
+
           </div>
 
-          <div class="card-body">
+          <div class="health">
 
-            <div class="system-list">
+            <div class="health-item">
 
-              <div class="system-row">
+              <div class="health-left">
+
+                <span class="health-dot"></span>
 
                 <div>
-                  <strong>
-                    Admin Session
-                  </strong>
+                  <div class="health-name">
+                    Authentication
+                  </div>
 
-                  <span>
-                    Current login state
-                  </span>
-                </div>
-
-                <div class="system-state">
-                  <i class="state-dot"></i>
-                  Active
+                  <div class="health-value">
+                    Admin session active
+                  </div>
                 </div>
 
               </div>
 
-
-              <div class="system-row">
-
-                <div>
-                  <strong>
-                    LocalStorage
-                  </strong>
-
-                  <span>
-                    Marketplace data storage
-                  </span>
-                </div>
-
-                <div class="system-state">
-                  <i class="state-dot"></i>
-                  Available
-                </div>
-
-              </div>
-
-
-              <div class="system-row">
-
-                <div>
-                  <strong>
-                    Marketplace
-                  </strong>
-
-                  <span>
-                    Public website
-                  </span>
-                </div>
-
-                <div
-                  class="system-state"
-                  id="marketplaceState"
-                >
-                  <i class="state-dot"></i>
-                  Online
-                </div>
-
-              </div>
-
-
-              <div class="system-row">
-
-                <div>
-                  <strong>
-                    Maintenance
-                  </strong>
-
-                  <span>
-                    Controlled from Settings
-                  </span>
-                </div>
-
-                <div
-                  class="system-state"
-                  id="maintenanceState"
-                >
-                  <i class="state-dot"></i>
-                  Off
-                </div>
-
-              </div>
+              <span class="health-badge">
+                Active
+              </span>
 
             </div>
 
-            <a
-              href="settings.html"
-              class="btn"
-              style="width:100%;margin-top:12px"
-            >
-              ⚙ System Settings
-            </a>
+            <div class="health-item">
+
+              <div class="health-left">
+
+                <span class="health-dot"></span>
+
+                <div>
+                  <div class="health-name">
+                    Website Inventory
+                  </div>
+
+                  <div
+                    class="health-value"
+                    id="healthWebsites"
+                  >
+                    Loading...
+                  </div>
+                </div>
+
+              </div>
+
+              <span class="health-badge">
+                Ready
+              </span>
+
+            </div>
+
+            <div class="health-item">
+
+              <div class="health-left">
+
+                <span class="health-dot"></span>
+
+                <div>
+                  <div class="health-name">
+                    Orders
+                  </div>
+
+                  <div
+                    class="health-value"
+                    id="healthOrders"
+                  >
+                    Loading...
+                  </div>
+                </div>
+
+              </div>
+
+              <span class="health-badge">
+                Ready
+              </span>
+
+            </div>
+
+            <div class="health-item">
+
+              <div class="health-left">
+
+                <span class="health-dot"></span>
+
+                <div>
+                  <div class="health-name">
+                    Customers
+                  </div>
+
+                  <div
+                    class="health-value"
+                    id="healthCustomers"
+                  >
+                    Loading...
+                  </div>
+                </div>
+
+              </div>
+
+              <span class="health-badge">
+                Ready
+              </span>
+
+            </div>
+
+            <div class="health-item">
+
+              <div class="health-left">
+
+                <span class="health-dot"></span>
+
+                <div>
+                  <div class="health-name">
+                    Storage
+                  </div>
+
+                  <div class="health-value">
+                    Browser LocalStorage
+                  </div>
+                </div>
+
+              </div>
+
+              <span class="health-badge">
+                Prototype
+              </span>
+
+            </div>
 
           </div>
 
-        </section>
+        </div>
 
       </div>
 
-
-      <div class="footer-note">
-        Website Deals Admin • Prototype / LocalStorage Environment
+      <div class="footer">
+        Website Deals Admin · Prototype / LocalStorage Environment
       </div>
 
     </section>
@@ -2692,41 +2298,32 @@
 
 </div>
 
-
 <div
   class="toast-wrap"
   id="toastWrap"
 ></div>
 
-
 <script>
-/* =========================================================
-   WEBSITE DEALS — PREMIUM ADMIN DASHBOARD
-   ========================================================= */
-
 (function(){
 
   "use strict";
 
-
-  /* =======================================================
+  /* =====================================================
      AUTH
-  ======================================================= */
+  ===================================================== */
 
-  const AUTH_KEY =
-    "websiteDealsAdminAuth";
-
+  const AUTH_KEY = "websiteDealsAdminAuth";
 
   function getAdminSession(){
 
     try{
 
       const raw =
-        sessionStorage.getItem(
-          AUTH_KEY
-        );
+        sessionStorage.getItem(AUTH_KEY);
 
-      if(!raw) return null;
+      if(!raw){
+        return null;
+      }
 
       const session =
         JSON.parse(raw);
@@ -2735,9 +2332,7 @@
         !session ||
         session.authenticated !== true
       ){
-
         return null;
-
       }
 
       return session;
@@ -2750,25 +2345,19 @@
 
   }
 
-
   const adminSession =
     getAdminSession();
 
-
   if(!adminSession){
 
-    window.location.replace(
-      "login/"
-    );
-
+    window.location.replace("login/");
     return;
 
   }
 
-
-  /* =======================================================
+  /* =====================================================
      STORAGE KEYS
-  ======================================================= */
+  ===================================================== */
 
   const WEBSITE_KEY =
     "websiteDealsAdminWebsites";
@@ -2779,82 +2368,455 @@
   const CUSTOMER_KEY =
     "websiteDealsCustomers";
 
-  const TRANSACTION_KEY =
-    "websiteDealsTransactions";
+  const TRANSACTION_KEYS = [
+    "websiteDealsTransactions",
+    "websiteDealsPaymentTransactions"
+  ];
 
-  const PAYMENT_TRANSACTION_KEY =
-    "websiteDealsPaymentTransactions";
+  /* =====================================================
+     STATE
+  ===================================================== */
 
-  const CATEGORY_KEY =
-    "websiteDealsCategories";
+  let websites = [];
+  let orders = [];
+  let customers = [];
+  let transactions = [];
 
-  const SETTINGS_KEY =
-    "websiteDealsSettings";
-
-
-  /* =======================================================
-     DOM HELPER
-  ======================================================= */
+  /* =====================================================
+     HELPERS
+  ===================================================== */
 
   const $ = id =>
     document.getElementById(id);
 
-
-  /* =======================================================
-     SAFE PARSE
-  ======================================================= */
-
-  function safeParse(
-    key,
-    fallback
-  ){
+  function safeParse(value,fallback){
 
     try{
-
-      const raw =
-        localStorage.getItem(key);
-
-      if(!raw) return fallback;
-
-      const parsed =
-        JSON.parse(raw);
-
-      return parsed ?? fallback;
-
+      return JSON.parse(value);
     }catch(error){
-
       return fallback;
-
     }
 
   }
 
+  function arrayValue(value){
 
-  /* =======================================================
-     ESCAPE
-  ======================================================= */
-
-  function escapeHTML(value){
-
-    return String(
-      value ?? ""
-    )
-      .replace(/&/g,"&amp;")
-      .replace(/</g,"&lt;")
-      .replace(/>/g,"&gt;")
-      .replace(/"/g,"&quot;")
-      .replace(/'/g,"&#039;");
+    return Array.isArray(value)
+      ? value
+      : [];
 
   }
 
+  function normalizeStatus(value){
 
-  /* =======================================================
-     DATE HELPERS
-  ======================================================= */
+    const status =
+      String(value || "")
+        .trim()
+        .toLowerCase();
 
-  function dateValue(value){
+    if([
+      "paid",
+      "completed",
+      "success",
+      "succeeded"
+    ].includes(status)){
+      return "paid";
+    }
 
-    if(!value) return null;
+    if([
+      "pending",
+      "processing",
+      "unpaid",
+      "awaiting"
+    ].includes(status)){
+      return "pending";
+    }
+
+    if([
+      "cancel",
+      "cancelled",
+      "canceled",
+      "failed"
+    ].includes(status)){
+      return "cancelled";
+    }
+
+    if([
+      "refund",
+      "refunded"
+    ].includes(status)){
+      return "refunded";
+    }
+
+    if([
+      "processing"
+    ].includes(status)){
+      return "processing";
+    }
+
+    return status || "pending";
+
+  }
+
+  function normalizeWebsite(item,index){
+
+    const source =
+      item && typeof item === "object"
+        ? item
+        : {};
+
+    const name =
+      source.name ||
+      source.title ||
+      source.websiteName ||
+      `Website ${index + 1}`;
+
+    const regularPrice =
+      Number(
+        source.regularPrice ??
+        source.price ??
+        0
+      ) || 0;
+
+    const offerPrice =
+      Number(
+        source.offerPrice ??
+        source.salePrice ??
+        source.currentPrice ??
+        source.price ??
+        regularPrice
+      ) || 0;
+
+    return {
+
+      ...source,
+
+      id:
+        source.id ||
+        source.websiteId ||
+        `WEB-${1000 + index + 1}`,
+
+      name:String(name),
+
+      slug:
+        String(
+          source.slug ||
+          slugify(name)
+        ),
+
+      category:
+        source.category ||
+        source.categoryName ||
+        "Uncategorized",
+
+      technology:
+        source.technology ||
+        source.tech ||
+        source.stack ||
+        "HTML / CSS / JS",
+
+      regularPrice,
+
+      offerPrice,
+
+      currency:
+        source.currency ||
+        "BDT",
+
+      status:
+        normalizeWebsiteStatus(
+          source.status
+        ),
+
+      featured:
+        normalizeBoolean(
+          source.featured ??
+          source.isFeatured
+        ),
+
+      createdAt:
+        source.createdAt ||
+        source.created ||
+        source.date ||
+        "",
+
+      updatedAt:
+        source.updatedAt ||
+        source.updated ||
+        source.createdAt ||
+        ""
+
+    };
+
+  }
+
+  function normalizeWebsiteStatus(value){
+
+    const status =
+      String(value || "active")
+        .toLowerCase()
+        .trim();
+
+    if([
+      "active",
+      "published",
+      "live",
+      "enabled"
+    ].includes(status)){
+      return "active";
+    }
+
+    if([
+      "draft",
+      "pending",
+      "unpublished"
+    ].includes(status)){
+      return "draft";
+    }
+
+    if([
+      "sold",
+      "sold-out",
+      "soldout"
+    ].includes(status)){
+      return "sold";
+    }
+
+    return "active";
+
+  }
+
+  function normalizeBoolean(value){
+
+    if(value === true){
+      return true;
+    }
+
+    if(value === false){
+      return false;
+    }
+
+    return [
+      "true",
+      "1",
+      "yes",
+      "on",
+      "enabled"
+    ].includes(
+      String(value || "")
+        .toLowerCase()
+        .trim()
+    );
+
+  }
+
+  function normalizeOrder(item,index){
+
+    const source =
+      item && typeof item === "object"
+        ? item
+        : {};
+
+    const amount =
+      Number(
+        source.amount ??
+        source.total ??
+        source.totalAmount ??
+        source.price ??
+        source.offerPrice ??
+        source.orderTotal ??
+        0
+      ) || 0;
+
+    const customerName =
+      source.customerName ||
+      source.name ||
+      source.fullName ||
+      source.customer?.name ||
+      "Guest Customer";
+
+    const websiteName =
+      source.websiteName ||
+      source.websiteTitle ||
+      source.productName ||
+      source.website ||
+      source.itemName ||
+      "Website";
+
+    const date =
+      source.createdAt ||
+      source.orderDate ||
+      source.date ||
+      source.created ||
+      "";
+
+    return {
+
+      ...source,
+
+      id:
+        source.id ||
+        source.orderId ||
+        source.orderNumber ||
+        `WD-${1000 + index + 1}`,
+
+      customerName:String(customerName),
+
+      customerEmail:
+        source.customerEmail ||
+        source.email ||
+        source.customer?.email ||
+        "",
+
+      websiteName:String(websiteName),
+
+      amount,
+
+      currency:
+        source.currency ||
+        "BDT",
+
+      status:
+        normalizeStatus(
+          source.paymentStatus ||
+          source.orderStatus ||
+          source.status
+        ),
+
+      createdAt:date
+
+    };
+
+  }
+
+  function normalizeCustomer(item,index){
+
+    const source =
+      item && typeof item === "object"
+        ? item
+        : {};
+
+    return {
+
+      ...source,
+
+      id:
+        source.id ||
+        source.customerId ||
+        `CUS-${1000 + index + 1}`,
+
+      name:
+        source.name ||
+        source.customerName ||
+        source.fullName ||
+        "Customer",
+
+      email:
+        source.email ||
+        source.customerEmail ||
+        "",
+
+      createdAt:
+        source.createdAt ||
+        source.joined ||
+        source.date ||
+        ""
+
+    };
+
+  }
+
+  function normalizeTransaction(item,index){
+
+    const source =
+      item && typeof item === "object"
+        ? item
+        : {};
+
+    const amount =
+      Number(
+        source.amount ??
+        source.total ??
+        source.value ??
+        source.paidAmount ??
+        0
+      ) || 0;
+
+    return {
+
+      ...source,
+
+      id:
+        source.id ||
+        source.transactionId ||
+        `TXN-${1000 + index + 1}`,
+
+      amount,
+
+      status:
+        normalizeStatus(
+          source.status ||
+          source.paymentStatus
+        ),
+
+      createdAt:
+        source.createdAt ||
+        source.date ||
+        source.transactionDate ||
+        ""
+
+    };
+
+  }
+
+  function slugify(text){
+
+    return String(text || "")
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9]+/g,"-")
+      .replace(/^-+|-+$/g,"")
+      .slice(0,80);
+
+  }
+
+  function formatMoney(
+    value,
+    currency="BDT"
+  ){
+
+    const amount =
+      Number(value) || 0;
+
+    const symbols = {
+      BDT:"৳",
+      USD:"$",
+      EUR:"€",
+      GBP:"£"
+    };
+
+    const symbol =
+      symbols[
+        String(currency).toUpperCase()
+      ] || currency;
+
+    return (
+      symbol +
+      amount.toLocaleString(
+        "en-US",
+        {
+          maximumFractionDigits:0
+        }
+      )
+    );
+
+  }
+
+  function formatDate(value){
+
+    if(!value){
+      return "—";
+    }
 
     const date =
       new Date(value);
@@ -2864,22 +2826,8 @@
         date.getTime()
       )
     ){
-
-      return null;
-
+      return "—";
     }
-
-    return date;
-
-  }
-
-
-  function formatDate(value){
-
-    const date =
-      dateValue(value);
-
-    if(!date) return "—";
 
     return date.toLocaleDateString(
       "en-GB",
@@ -2892,393 +2840,189 @@
 
   }
 
+  function escapeHTML(value){
 
-  function formatDateTime(value){
+    return String(value ?? "")
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
 
-    const date =
-      dateValue(value);
+  }
 
-    if(!date) return "—";
+  function initials(name){
 
-    return date.toLocaleString(
-      "en-GB",
-      {
-        day:"2-digit",
-        month:"short",
-        year:"numeric",
-        hour:"2-digit",
-        minute:"2-digit"
+    return String(name || "Admin")
+      .trim()
+      .split(/\s+/)
+      .slice(0,2)
+      .map(
+        word =>
+          word
+            .charAt(0)
+            .toUpperCase()
+      )
+      .join("") || "A";
+
+  }
+
+  /* =====================================================
+     LOAD DATA
+  ===================================================== */
+
+  function loadData(){
+
+    websites =
+      arrayValue(
+        safeParse(
+          localStorage.getItem(
+            WEBSITE_KEY
+          ),
+          []
+        )
+      ).map(
+        normalizeWebsite
+      );
+
+    orders =
+      arrayValue(
+        safeParse(
+          localStorage.getItem(
+            ORDER_KEY
+          ),
+          []
+        )
+      ).map(
+        normalizeOrder
+      );
+
+    customers =
+      arrayValue(
+        safeParse(
+          localStorage.getItem(
+            CUSTOMER_KEY
+          ),
+          []
+        )
+      ).map(
+        normalizeCustomer
+      );
+
+    transactions = [];
+
+    TRANSACTION_KEYS.forEach(
+      key => {
+
+        const data =
+          arrayValue(
+            safeParse(
+              localStorage.getItem(key),
+              []
+            )
+          );
+
+        transactions.push(
+          ...data.map(
+            normalizeTransaction
+          )
+        );
+
       }
+    );
+
+    renderDashboard();
+
+  }
+
+  /* =====================================================
+     CUSTOMER DERIVATION
+  ===================================================== */
+
+  function getCustomerCount(){
+
+    if(customers.length){
+      return customers.length;
+    }
+
+    const keys =
+      new Set();
+
+    orders.forEach(order => {
+
+      const key =
+        String(
+          order.customerEmail ||
+          order.customerName ||
+          ""
+        )
+        .toLowerCase()
+        .trim();
+
+      if(key){
+        keys.add(key);
+      }
+
+    });
+
+    return keys.size;
+
+  }
+
+  /* =====================================================
+     REVENUE
+  ===================================================== */
+
+  function getPaidOrders(){
+
+    return orders.filter(
+      order =>
+        normalizeStatus(
+          order.status
+        ) === "paid"
     );
 
   }
 
+  function getRevenue(){
 
-  function relativeTime(value){
+    const paid =
+      getPaidOrders();
 
-    const date =
-      dateValue(value);
-
-    if(!date) return "Recently";
-
-    const diff =
-      Date.now() -
-      date.getTime();
-
-    const minutes =
-      Math.floor(
-        diff / 60000
-      );
-
-    if(minutes < 1){
-      return "Just now";
-    }
-
-    if(minutes < 60){
-      return minutes +
-        " min ago";
-    }
-
-    const hours =
-      Math.floor(
-        minutes / 60
-      );
-
-    if(hours < 24){
-      return hours +
-        " hr ago";
-    }
-
-    const days =
-      Math.floor(
-        hours / 24
-      );
-
-    if(days < 30){
-      return days +
-        " day" +
-        (days > 1 ? "s" : "") +
-        " ago";
-    }
-
-    return formatDate(date);
+    return paid.reduce(
+      (sum,order) =>
+        sum +
+        Number(order.amount || 0),
+      0
+    );
 
   }
 
+  /* =====================================================
+     RENDER DASHBOARD
+  ===================================================== */
 
-  /* =======================================================
-     MONEY
-  ======================================================= */
+  function renderDashboard(){
 
-  function money(
-    value,
-    currency = "BDT"
-  ){
+    renderAdminIdentity();
 
-    const amount =
-      Number(value || 0);
+    renderStats();
 
-    if(currency === "USD"){
+    renderRevenueChart();
 
-      return "$" +
-        amount.toLocaleString(
-          "en-US",
-          {
-            maximumFractionDigits:0
-          }
-        );
+    renderRecentOrders();
 
-    }
+    renderTopWebsites();
 
-    if(currency === "EUR"){
-
-      return "€" +
-        amount.toLocaleString(
-          "en-US",
-          {
-            maximumFractionDigits:0
-          }
-        );
-
-    }
-
-    return "৳" +
-      amount.toLocaleString(
-        "en-BD",
-        {
-          maximumFractionDigits:0
-        }
-      );
+    renderHealth();
 
   }
 
-
-  /* =======================================================
-     NORMALIZE STATUS
-  ======================================================= */
-
-  function normalizeOrderStatus(
-    value
-  ){
-
-    const status =
-      String(
-        value || ""
-      )
-      .toLowerCase()
-      .trim();
-
-    if(
-      [
-        "paid",
-        "completed",
-        "complete",
-        "success",
-        "successful",
-        "succeeded"
-      ].includes(status)
-    ){
-
-      return "paid";
-
-    }
-
-    if(
-      [
-        "pending",
-        "processing",
-        "unpaid",
-        "awaiting",
-        "awaiting_payment"
-      ].includes(status)
-    ){
-
-      return "pending";
-
-    }
-
-    if(
-      [
-        "cancel",
-        "cancelled",
-        "canceled",
-        "failed",
-        "declined"
-      ].includes(status)
-    ){
-
-      return "cancelled";
-
-    }
-
-    if(
-      [
-        "refunded",
-        "refund"
-      ].includes(status)
-    ){
-
-      return "refunded";
-
-    }
-
-    return status || "pending";
-
-  }
-
-
-  function normalizeWebsiteStatus(
-    value
-  ){
-
-    const status =
-      String(
-        value || ""
-      )
-      .toLowerCase()
-      .trim();
-
-    if(
-      [
-        "active",
-        "published",
-        "available",
-        "live"
-      ].includes(status)
-    ){
-
-      return "active";
-
-    }
-
-    if(
-      [
-        "sold",
-        "soldout",
-        "sold-out"
-      ].includes(status)
-    ){
-
-      return "sold";
-
-    }
-
-    return "draft";
-
-  }
-
-
-  /* =======================================================
-     NORMALIZE ORDER
-  ======================================================= */
-
-  function normalizeOrder(
-    order,
-    index
-  ){
-
-    const data =
-      order || {};
-
-    const id =
-      data.id ||
-      data.orderId ||
-      data.orderID ||
-      (
-        "WD-" +
-        (1028 + index)
-      );
-
-    const customer =
-      data.customer ||
-      data.customerName ||
-      data.name ||
-      data.fullName ||
-      "Customer";
-
-    const email =
-      data.email ||
-      data.customerEmail ||
-      "";
-
-    const website =
-      data.website ||
-      data.websiteName ||
-      data.productName ||
-      data.product ||
-      data.itemName ||
-      "Website";
-
-    const amount =
-      Number(
-        data.amount ??
-        data.total ??
-        data.totalAmount ??
-        data.price ??
-        data.offerPrice ??
-        0
-      ) || 0;
-
-    const status =
-      normalizeOrderStatus(
-        data.status ||
-        data.paymentStatus ||
-        data.orderStatus
-      );
-
-    const date =
-      data.createdAt ||
-      data.orderDate ||
-      data.date ||
-      data.updatedAt ||
-      "";
-
-    return {
-      raw:data,
-      id:String(id),
-      customer:String(customer),
-      email:String(email),
-      website:String(website),
-      amount,
-      status,
-      date
-    };
-
-  }
-
-
-  /* =======================================================
-     LOAD DATA
-  ======================================================= */
-
-  function loadArray(key){
-
-    const data =
-      safeParse(
-        key,
-        []
-      );
-
-    return Array.isArray(data)
-      ? data
-      : [];
-
-  }
-
-
-  function loadAll(){
-
-    return {
-
-      websites:
-        loadArray(
-          WEBSITE_KEY
-        ),
-
-      orders:
-        loadArray(
-          ORDER_KEY
-        )
-        .map(
-          normalizeOrder
-        ),
-
-      customers:
-        loadArray(
-          CUSTOMER_KEY
-        ),
-
-      transactions:
-        loadArray(
-          TRANSACTION_KEY
-        ),
-
-      paymentTransactions:
-        loadArray(
-          PAYMENT_TRANSACTION_KEY
-        ),
-
-      categories:
-        loadArray(
-          CATEGORY_KEY
-        ),
-
-      settings:
-        safeParse(
-          SETTINGS_KEY,
-          {}
-        )
-
-    };
-
-  }
-
-
-  /* =======================================================
+  /* =====================================================
      ADMIN IDENTITY
-  ======================================================= */
+  ===================================================== */
 
-  function setupIdentity(){
+  function renderAdminIdentity(){
 
     const name =
       adminSession.name ||
@@ -3289,807 +3033,447 @@
       adminSession.role ||
       "admin";
 
-    $("sidebarAdminName")
-      .textContent =
-      name;
-
-    $("sidebarAdminRole")
-      .textContent =
-      role.toLowerCase() ===
-      "superadmin"
+    const roleText =
+      String(role).toLowerCase() === "superadmin"
         ? "Super Administrator"
-        : "Administrator";
+        : String(role)
+            .replace(/[-_]/g," ")
+            .replace(
+              /\b\w/g,
+              char =>
+                char.toUpperCase()
+            );
 
-    const initials =
-      name
-        .split(/\s+/)
-        .filter(Boolean)
-        .slice(0,2)
-        .map(
-          part =>
-            part
-              .charAt(0)
-        )
-        .join("")
-        .toUpperCase();
-
-    $("sidebarAvatar")
-      .textContent =
-      initials ||
-      "SA";
-
-    updateGreeting(
-      name
-    );
-
-  }
-
-
-  function updateGreeting(
-    name
-  ){
-
-    const hour =
-      new Date().getHours();
-
-    let greeting =
-      "Good evening";
-
-    if(hour < 12){
-      greeting =
-        "Good morning";
-    }else if(hour < 17){
-      greeting =
-        "Good afternoon";
-    }
-
-    $("greeting")
-      .textContent =
-      greeting +
-      ", " +
+    $("sidebarName").textContent =
       name;
 
-  }
+    $("sidebarRole").textContent =
+      roleText;
 
+    $("sidebarAvatar").textContent =
+      initials(name);
 
-  /* =======================================================
-     CURRENT DATE
-  ======================================================= */
-
-  function renderDate(){
-
-    $("currentDate")
-      .textContent =
-      new Date()
-        .toLocaleDateString(
-          "en-GB",
-          {
-            weekday:"long",
-            day:"numeric",
-            month:"long",
-            year:"numeric"
-          }
-        );
+    $("heroAdminName").textContent =
+      name.split("@")[0];
 
   }
 
+  /* =====================================================
+     STATS
+  ===================================================== */
 
-  /* =======================================================
-     CUSTOMER COUNT
-  ======================================================= */
+  function renderStats(){
 
-  function getCustomerCount(
-    data
-  ){
-
-    if(
-      data.customers.length
-    ){
-
-      return data.customers
-        .filter(
-          customer =>
-            customer &&
-            customer.deleted !== true
-        )
-        .length;
-
-    }
-
-    const keys =
-      new Set();
-
-    data.orders.forEach(
-      order => {
-
-        const key =
-          (
-            order.email ||
-            order.customer ||
-            ""
-          )
-          .toLowerCase()
-          .trim();
-
-        if(key){
-          keys.add(key);
-        }
-
-      }
-    );
-
-    return keys.size;
-
-  }
-
-
-  /* =======================================================
-     REVENUE
-  ======================================================= */
-
-  function getPaidRevenue(
-    orders
-  ){
-
-    return orders
-      .filter(
-        order =>
-          order.status === "paid"
-      )
-      .reduce(
-        (sum,order) =>
-          sum + order.amount,
-        0
-      );
-
-  }
-
-
-  function getPaidOrders(
-    orders
-  ){
-
-    return orders.filter(
-      order =>
-        order.status === "paid"
-    );
-
-  }
-
-
-  /* =======================================================
-     KPIs
-  ======================================================= */
-
-  function renderKPIs(
-    data
-  ){
-
-    const websites =
-      data.websites;
-
-    const orders =
-      data.orders;
-
-    const customers =
-      getCustomerCount(
-        data
-      );
-
-    const revenue =
-      getPaidRevenue(
-        orders
-      );
-
-    const pending =
-      orders.filter(
-        order =>
-          order.status === "pending"
-      ).length;
+    const totalWebsites =
+      websites.length;
 
     const activeWebsites =
       websites.filter(
-        website =>
-          normalizeWebsiteStatus(
-            website.status
-          ) === "active"
+        item =>
+          item.status === "active"
       ).length;
 
-    $("totalWebsites")
-      .textContent =
-      websites.length
-        .toLocaleString();
+    const totalOrders =
+      orders.length;
 
-    $("totalOrders")
-      .textContent =
-      orders.length
-        .toLocaleString();
+    const customerCount =
+      getCustomerCount();
 
-    $("totalCustomers")
-      .textContent =
-      customers.toLocaleString();
+    const paidOrders =
+      getPaidOrders().length;
 
-    $("totalRevenue")
-      .textContent =
-      money(revenue);
+    const revenue =
+      getRevenue();
 
-    $("pendingOrders")
-      .textContent =
-      pending.toLocaleString();
+    $("statWebsites").textContent =
+      totalWebsites.toLocaleString();
 
-    $("activeWebsites")
-      .textContent =
+    $("statActive").textContent =
       activeWebsites.toLocaleString();
 
+    $("statOrders").textContent =
+      totalOrders.toLocaleString();
 
-    $("websiteChange")
-      .textContent =
-      activeWebsites +
-      " active";
+    $("statCustomers").textContent =
+      customerCount.toLocaleString();
 
-    $("orderChange")
-      .textContent =
-      orders.length
-        ? getPaidOrders(
-            orders
-          ).length +
-          " paid"
-        : "No orders";
+    $("statPaid").textContent =
+      paidOrders.toLocaleString();
 
-    $("customerChange")
-      .textContent =
-      customers +
-      " total";
+    $("statRevenue").textContent =
+      formatMoney(revenue);
 
-    $("revenueChange")
-      .textContent =
-      getPaidOrders(
-        orders
-      ).length +
-      " paid";
+    $("chartRevenue").textContent =
+      formatMoney(revenue);
 
   }
 
+  /* =====================================================
+     MONTHLY REVENUE DATA
+  ===================================================== */
 
-  /* =======================================================
-     MONTHLY REVENUE
-  ======================================================= */
+  function getMonthlyRevenue(){
 
-  function getMonthlyRevenue(
-    orders,
-    year
-  ){
+    const now =
+      new Date();
 
-    const months =
-      Array.from(
-        {length:12},
-        () => 0
+    const months = [];
+
+    for(let i=5;i>=0;i--){
+
+      const date =
+        new Date(
+          now.getFullYear(),
+          now.getMonth() - i,
+          1
+        );
+
+      months.push({
+        key:
+          `${date.getFullYear()}-${String(
+            date.getMonth()+1
+          ).padStart(2,"0")}`,
+
+        label:
+          date.toLocaleDateString(
+            "en-US",
+            {
+              month:"short"
+            }
+          ),
+
+        value:0
+      });
+
+    }
+
+    const lookup =
+      new Map(
+        months.map(
+          month => [
+            month.key,
+            month
+          ]
+        )
       );
 
-    orders.forEach(
-      order => {
-
-        if(
-          order.status !== "paid"
-        ){
-          return;
-        }
+    getPaidOrders()
+      .forEach(order => {
 
         const date =
-          dateValue(
-            order.date
+          new Date(
+            order.createdAt
           );
 
-        if(!date){
-          return;
-        }
-
         if(
-          date.getFullYear() !==
-          year
+          Number.isNaN(
+            date.getTime()
+          )
         ){
           return;
         }
 
-        months[
-          date.getMonth()
-        ] += order.amount;
+        const key =
+          `${date.getFullYear()}-${String(
+            date.getMonth()+1
+          ).padStart(2,"0")}`;
 
-      }
-    );
+        const month =
+          lookup.get(key);
+
+        if(month){
+          month.value +=
+            Number(order.amount || 0);
+        }
+
+      });
 
     return months;
 
   }
 
+  /* =====================================================
+     SVG REVENUE CHART
+  ===================================================== */
 
-  /* =======================================================
-     CHART
-  ======================================================= */
+  function renderRevenueChart(){
 
-  function renderChart(
-    data
-  ){
+    const svg =
+      $("revenueChart");
 
-    const currentYear =
-      new Date()
-        .getFullYear();
+    const data =
+      getMonthlyRevenue();
 
     const values =
-      getMonthlyRevenue(
-        data.orders,
-        currentYear
+      data.map(
+        item => item.value
       );
 
-    const total =
-      values.reduce(
-        (a,b) =>
-          a + b,
-        0
-      );
+    const width = 800;
+    const height = 245;
 
-    $("chartRevenue")
-      .textContent =
-      money(total);
+    const padLeft = 15;
+    const padRight = 15;
+    const padTop = 18;
+    const padBottom = 32;
 
-    $("chartPeriod")
-      .textContent =
-      String(currentYear);
+    const chartWidth =
+      width -
+      padLeft -
+      padRight;
 
+    const chartHeight =
+      height -
+      padTop -
+      padBottom;
 
     const max =
       Math.max(
         ...values,
-        100
+        1
       );
 
-    const chartWidth =
-      800;
+    const min = 0;
 
-    const chartHeight =
-      220;
-
-    const paddingX =
-      12;
-
-    const paddingY =
-      12;
-
-    const usableWidth =
-      chartWidth -
-      paddingX * 2;
-
-    const usableHeight =
-      chartHeight -
-      paddingY * 2;
+    const xStep =
+      chartWidth /
+      Math.max(
+        data.length - 1,
+        1
+      );
 
     const points =
-      values.map(
-        (value,index) => {
+      data.map(
+        (item,index) => {
 
           const x =
-            paddingX +
-            (
-              index /
-              11
-            ) *
-            usableWidth;
+            padLeft +
+            index * xStep;
 
           const y =
+            padTop +
             chartHeight -
-            paddingY -
             (
-              value /
-              max
+              (item.value - min) /
+              Math.max(
+                max - min,
+                1
+              )
             ) *
-            usableHeight;
+            chartHeight;
 
           return {
             x,
             y,
-            value
+            ...item
           };
 
         }
       );
 
-
-    const linePath =
+    const line =
       points
         .map(
           (point,index) =>
-            (
-              index === 0
-                ? "M"
-                : "L"
-            ) +
-            " " +
-            point.x +
-            " " +
-            point.y
+            `${index === 0 ? "M" : "L"} ${point.x} ${point.y}`
         )
         .join(" ");
 
+    const area =
+      `${line}
+       L ${points[points.length-1].x} ${padTop + chartHeight}
+       L ${points[0].x} ${padTop + chartHeight}
+       Z`;
 
-    const areaPath =
-      linePath +
-      " L " +
-      points[
-        points.length - 1
-      ].x +
-      " " +
-      chartHeight +
-      " L " +
-      points[0].x +
-      " " +
-      chartHeight +
-      " Z";
+    const gridLines = [];
 
+    for(let i=0;i<4;i++){
 
-    $("chartLine")
-      .setAttribute(
-        "d",
-        linePath
-      );
+      const y =
+        padTop +
+        (
+          chartHeight /
+          3
+        ) *
+        i;
 
-    $("chartArea")
-      .setAttribute(
-        "d",
-        areaPath
-      );
+      gridLines.push(`
+        <line
+          x1="${padLeft}"
+          y1="${y}"
+          x2="${width-padRight}"
+          y2="${y}"
+          stroke="#e9efeb"
+          stroke-width="1"
+        />
+      `);
 
-
-    $("chartDots")
-      .innerHTML =
-      points
-        .map(
-          (point,index) => `
-            <circle
-              class="chart-dot"
-              cx="${point.x}"
-              cy="${point.y}"
-              r="4"
-              data-index="${index}"
-            ></circle>
-          `
-        )
-        .join("");
-
+    }
 
     const labels =
-      [
-        "Jan","Feb","Mar","Apr",
-        "May","Jun","Jul","Aug",
-        "Sep","Oct","Nov","Dec"
-      ];
+      points.map(
+        point => `
+          <text
+            x="${point.x}"
+            y="${height-9}"
+            text-anchor="middle"
+            font-family="DM Sans"
+            font-size="10"
+            fill="#738079"
+          >
+            ${escapeHTML(point.label)}
+          </text>
+        `
+      ).join("");
 
-    $("chartX")
-      .innerHTML =
-      labels
-        .map(
-          label =>
-            `<span>${label}</span>`
-        )
-        .join("");
+    const circles =
+      points.map(
+        point => `
+          <circle
+            cx="${point.x}"
+            cy="${point.y}"
+            r="4"
+            fill="#18a957"
+          />
 
+          <circle
+            cx="${point.x}"
+            cy="${point.y}"
+            r="7"
+            fill="rgba(24,169,87,.10)"
+          />
+        `
+      ).join("");
 
-    const yMax =
-      max;
+    svg.innerHTML = `
 
-    const ySteps =
-      [
-        yMax,
-        yMax * .75,
-        yMax * .5,
-        yMax * .25,
-        0
-      ];
+      <defs>
 
-    $("chartY")
-      .innerHTML =
-      ySteps
-        .map(
-          value =>
-            `<span>${moneyCompact(value)}</span>`
-        )
-        .join("");
+        <linearGradient
+          id="revenueArea"
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="1"
+        >
+          <stop
+            offset="0%"
+            stop-color="#18a957"
+            stop-opacity=".18"
+          />
 
+          <stop
+            offset="100%"
+            stop-color="#18a957"
+            stop-opacity="0"
+          />
 
-    const dots =
-      $("chartDots")
-        .querySelectorAll(
-          ".chart-dot"
-        );
+        </linearGradient>
 
-    dots.forEach(
-      dot => {
+      </defs>
 
-        dot.addEventListener(
-          "mouseenter",
-          event => {
+      ${gridLines.join("")}
 
-            const index =
-              Number(
-                event.target
-                  .dataset
-                  .index
-              );
+      <path
+        d="${area}"
+        fill="url(#revenueArea)"
+      />
 
-            showChartTooltip(
-              index,
-              values[index],
-              labels[index]
-            );
+      <path
+        d="${line}"
+        fill="none"
+        stroke="#18a957"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
 
-          }
-        );
+      ${circles}
 
-        dot.addEventListener(
-          "mouseleave",
-          hideChartTooltip
-        );
+      ${labels}
 
-      }
-    );
-
-  }
-
-
-  function moneyCompact(
-    value
-  ){
-
-    const amount =
-      Number(value || 0);
-
-    if(amount >= 1000000){
-
-      return "৳" +
-        (
-          amount / 1000000
-        ).toFixed(1) +
-        "M";
-
-    }
-
-    if(amount >= 1000){
-
-      return "৳" +
-        (
-          amount / 1000
-        ).toFixed(1) +
-        "K";
-
-    }
-
-    return "৳" +
-      Math.round(
-        amount
-      );
-
-  }
-
-
-  function showChartTooltip(
-    index,
-    value,
-    month
-  ){
-
-    const tooltip =
-      $("chartTooltip");
-
-    const width =
-      $("chartWrap")
-        .clientWidth;
-
-    const left =
-      45 +
-      (
-        index / 11
-      ) *
-      (
-        width - 60
-      );
-
-    tooltip.style.display =
-      "block";
-
-    tooltip.style.left =
-      Math.max(
-        45,
-        Math.min(
-          left - 45,
-          width - 125
-        )
-      ) +
-      "px";
-
-    tooltip.style.top =
-      "12px";
-
-    tooltip.innerHTML = `
-      <strong>${escapeHTML(
-        money(value)
-      )}</strong>
-
-      <span>
-        ${escapeHTML(
-          month
-        )}
-      </span>
     `;
 
-  }
+    const revenue =
+      getRevenue();
 
+    const lastMonth =
+      data[data.length - 1]?.value || 0;
 
-  function hideChartTooltip(){
+    const previousMonth =
+      data[data.length - 2]?.value || 0;
 
-    $("chartTooltip")
-      .style.display =
-      "none";
+    let trendText =
+      "● Live Data";
 
-  }
+    if(
+      previousMonth > 0
+    ){
 
+      const percentage =
+        (
+          (
+            lastMonth -
+            previousMonth
+          ) /
+          previousMonth
+        ) *
+        100;
 
-  /* =======================================================
-     RECENT ORDERS
-  ======================================================= */
-
-  function renderRecentOrders(
-    orders
-  ){
-
-    const body =
-      $("recentOrdersBody");
-
-    const sorted =
-      [...orders]
-        .sort(
-          (a,b) => {
-
-            const ad =
-              dateValue(
-                a.date
-              );
-
-            const bd =
-              dateValue(
-                b.date
-              );
-
-            return (
-              bd?.getTime() || 0
-            ) -
-            (
-              ad?.getTime() || 0
-            );
-
-          }
+      if(
+        Number.isFinite(
+          percentage
         )
-        .slice(0,6);
+      ){
 
+        trendText =
+          `${percentage >= 0 ? "↑" : "↓"} ${
+            Math.abs(percentage).toFixed(0)
+          }% vs last month`;
 
-    if(!sorted.length){
+      }
 
-      body.innerHTML = `
-        <tr>
-          <td
-            colspan="5"
-            class="empty"
-          >
-            No order data available yet.
-          </td>
-        </tr>
-      `;
+    }else if(revenue > 0){
 
-      return;
+      trendText =
+        "● Revenue Active";
 
     }
 
-
-    body.innerHTML =
-      sorted
-        .map(
-          order => {
-
-            const status =
-              normalizeOrderStatus(
-                order.status
-              );
-
-            const statusClass =
-              status === "paid"
-                ? "paid"
-                : status === "cancelled"
-                  ? "cancelled"
-                  : status === "processing"
-                    ? "processing"
-                    : "pending";
-
-            return `
-              <tr>
-
-                <td>
-                  <span class="order-id">
-                    ${escapeHTML(
-                      order.id
-                    )}
-                  </span>
-                </td>
-
-                <td>
-                  <div class="customer-cell">
-
-                    <strong>
-                      ${escapeHTML(
-                        order.customer
-                      )}
-                    </strong>
-
-                    <span>
-                      ${escapeHTML(
-                        order.email ||
-                        "No email"
-                      )}
-                    </span>
-
-                  </div>
-                </td>
-
-                <td>
-                  ${escapeHTML(
-                    order.website
-                  )}
-                </td>
-
-                <td>
-                  <strong>
-                    ${escapeHTML(
-                      money(
-                        order.amount
-                      )
-                    )}
-                  </strong>
-                </td>
-
-                <td>
-                  <span class="status ${statusClass}">
-                    ${escapeHTML(
-                      status
-                        .charAt(0)
-                        .toUpperCase() +
-                      status.slice(1)
-                    )}
-                  </span>
-                </td>
-
-              </tr>
-            `;
-
-          }
-        )
-        .join("");
+    $("revenueTrend").textContent =
+      trendText;
 
   }
 
+  /* =====================================================
+     RECENT ORDERS
+  ===================================================== */
 
-  /* =======================================================
-     WEBSITE INVENTORY
-  ======================================================= */
-
-  function renderWebsiteList(
-    websites
-  ){
+  function renderRecentOrders(){
 
     const container =
-      $("websiteList");
+      $("recentOrders");
 
-    if(!websites.length){
+    const recent =
+      [...orders]
+        .sort(
+          (a,b) =>
+            new Date(
+              b.createdAt
+            ) -
+            new Date(
+              a.createdAt
+            )
+        )
+        .slice(0,7);
+
+    if(!recent.length){
 
       container.innerHTML = `
-        <div class="empty">
-          No website listings available yet.
+        <div class="empty-small">
+          No orders available yet.
+          <br>
+          New marketplace orders will appear here.
         </div>
       `;
 
@@ -4097,735 +3481,380 @@
 
     }
 
+    container.innerHTML =
+      recent.map(
+        order => {
+
+          const status =
+            normalizeStatus(
+              order.status
+            );
+
+          const statusClass =
+            status === "paid"
+              ? "status-paid"
+              : status === "pending"
+                ? "status-pending"
+                : status === "cancelled"
+                  ? "status-cancelled"
+                  : status === "refunded"
+                    ? "status-refunded"
+                    : "status-processing";
+
+          const label =
+            status.charAt(0).toUpperCase() +
+            status.slice(1);
+
+          return `
+
+            <div class="order-row">
+
+              <div>
+
+                <div class="order-id">
+                  ${escapeHTML(order.id)}
+                </div>
+
+                <div class="order-customer">
+                  ${escapeHTML(order.customerName)}
+                </div>
+
+              </div>
+
+              <div class="order-site">
+                ${escapeHTML(
+                  order.websiteName
+                )}
+              </div>
+
+              <div class="order-date">
+                ${formatDate(
+                  order.createdAt
+                )}
+              </div>
+
+              <div class="order-price">
+                ${formatMoney(
+                  order.amount,
+                  order.currency
+                )}
+              </div>
+
+              <span class="status ${statusClass}">
+                <span class="status-dot"></span>
+                ${escapeHTML(label)}
+              </span>
+
+            </div>
+
+          `;
+
+        }
+      ).join("");
+
+  }
+
+  /* =====================================================
+     TOP WEBSITES
+  ===================================================== */
+
+  function renderTopWebsites(){
+
+    const container =
+      $("topWebsites");
 
     const sorted =
       [...websites]
         .sort(
-          (a,b) => {
-
-            const af =
-              Boolean(
-                a.featured ||
-                a.isFeatured
-              );
-
-            const bf =
-              Boolean(
-                b.featured ||
-                b.isFeatured
-              );
-
-            return (
-              Number(bf) -
-              Number(af)
-            );
-
-          }
-        )
-        .slice(0,7);
-
-
-    container.innerHTML =
-      sorted
-        .map(
-          website => {
-
-            const name =
-              website.name ||
-              website.title ||
-              "Untitled Website";
-
-            const category =
-              website.categoryName ||
-              website.category ||
-              "Website";
-
-            const image =
-              website.image ||
-              website.thumbnail ||
-              website.coverImage ||
-              website.imageUrl ||
-              "";
-
-            const price =
+          (a,b) =>
+            (
               Number(
-                website.offerPrice ??
-                website.salePrice ??
-                website.price ??
-                website.regularPrice ??
+                b.offerPrice ||
+                b.regularPrice ||
                 0
-              ) || 0;
-
-            const status =
-              normalizeWebsiteStatus(
-                website.status
-              );
-
-            return `
-              <div class="website-item">
-
-                <div class="website-thumb">
-
-                  ${
-                    image
-                      ? `
-                        <img
-                          src="${escapeHTML(
-                            image
-                          )}"
-                          alt=""
-                        >
-                      `
-                      : "▣"
-                  }
-
-                </div>
-
-                <div class="website-info">
-
-                  <strong>
-                    ${escapeHTML(
-                      name
-                    )}
-                  </strong>
-
-                  <span>
-                    ${escapeHTML(
-                      category
-                    )}
-                    •
-                    ${escapeHTML(
-                      status
-                    )}
-                  </span>
-
-                </div>
-
-                <div class="website-price">
-                  ${escapeHTML(
-                    money(price)
-                  )}
-                </div>
-
-              </div>
-            `;
-
-          }
+              )
+            ) -
+            (
+              Number(
+                a.offerPrice ||
+                a.regularPrice ||
+                0
+              )
+            )
         )
-        .join("");
-
-  }
-
-
-  /* =======================================================
-     ACTIVITY
-  ======================================================= */
-
-  function renderActivity(
-    data
-  ){
-
-    const activity =
-      [];
-
-
-    /* Orders */
-
-    [...data.orders]
-      .sort(
-        (a,b) => {
-
-          const ad =
-            dateValue(a.date);
-
-          const bd =
-            dateValue(b.date);
-
-          return (
-            bd?.getTime() || 0
-          ) -
-          (
-            ad?.getTime() || 0
-          );
-
-        }
-      )
-      .slice(0,5)
-      .forEach(
-        order => {
-
-          let type =
-            "blue";
-
-          let icon =
-            "▤";
-
-          if(
-            order.status === "paid"
-          ){
-
-            type =
-              "green";
-
-            icon =
-              "✓";
-
-          }else if(
-            order.status === "pending"
-          ){
-
-            type =
-              "yellow";
-
-            icon =
-              "◷";
-
-          }else if(
-            order.status === "cancelled"
-          ){
-
-            type =
-              "red";
-
-            icon =
-              "×";
-
-          }
-
-          activity.push({
-
-            date:order.date,
-
-            html:`
-              <div class="activity">
-
-                <div class="activity-icon ${type}">
-                  ${icon}
-                </div>
-
-                <div class="activity-content">
-
-                  <strong>
-                    Order ${escapeHTML(
-                      order.id
-                    )}
-                    —
-                    ${escapeHTML(
-                      order.customer
-                    )}
-                  </strong>
-
-                  <span>
-                    ${escapeHTML(
-                      order.website
-                    )}
-                    •
-                    ${escapeHTML(
-                      money(
-                        order.amount
-                      )
-                    )}
-                    •
-                    ${escapeHTML(
-                      relativeTime(
-                        order.date
-                      )
-                    )}
-                  </span>
-
-                </div>
-
-              </div>
-            `
-
-          });
-
-        }
-      );
-
-
-    /* Websites */
-
-    [...data.websites]
-      .sort(
-        (a,b) => {
-
-          const ad =
-            dateValue(
-              a.updatedAt ||
-              a.updated ||
-              a.createdAt ||
-              a.created
-            );
-
-          const bd =
-            dateValue(
-              b.updatedAt ||
-              b.updated ||
-              b.createdAt ||
-              b.created
-            );
-
-          return (
-            bd?.getTime() || 0
-          ) -
-          (
-            ad?.getTime() || 0
-          );
-
-        }
-      )
-      .slice(0,3)
-      .forEach(
-        website => {
-
-          const name =
-            website.name ||
-            website.title ||
-            "Website";
-
-          const date =
-            website.updatedAt ||
-            website.updated ||
-            website.createdAt ||
-            website.created;
-
-          activity.push({
-
-            date,
-
-            html:`
-              <div class="activity">
-
-                <div class="activity-icon green">
-                  ▣
-                </div>
-
-                <div class="activity-content">
-
-                  <strong>
-                    Website updated —
-                    ${escapeHTML(
-                      name
-                    )}
-                  </strong>
-
-                  <span>
-                    Marketplace inventory •
-                    ${escapeHTML(
-                      relativeTime(
-                        date
-                      )
-                    )}
-                  </span>
-
-                </div>
-
-              </div>
-            `
-
-          });
-
-        }
-      );
-
-
-    activity.sort(
-      (a,b) => {
-
-        const ad =
-          dateValue(
-            a.date
-          );
-
-        const bd =
-          dateValue(
-            b.date
-          );
-
-        return (
-          bd?.getTime() || 0
-        ) -
-        (
-          ad?.getTime() || 0
-        );
-
-      }
-    );
-
-
-    const visible =
-      activity.slice(
-        0,
-        7
-      );
-
-
-    if(!visible.length){
-
-      $("activityList")
-        .innerHTML = `
-          <div class="empty">
-            No recent activity available yet.
-          </div>
-        `;
+        .slice(0,6);
+
+    if(!sorted.length){
+
+      container.innerHTML = `
+        <div class="empty-small">
+          No websites available.
+          <br>
+          Add your first website to populate this section.
+        </div>
+      `;
 
       return;
 
     }
 
+    container.innerHTML =
+      sorted.map(
+        (website,index) => `
 
-    $("activityList")
-      .innerHTML =
-      visible
-        .map(
-          item =>
-            item.html
-        )
-        .join("");
+          <div class="rank-row">
+
+            <div class="rank-number">
+              ${index + 1}
+            </div>
+
+            <div>
+
+              <div class="rank-name">
+                ${escapeHTML(
+                  website.name
+                )}
+              </div>
+
+              <div class="rank-meta">
+                ${escapeHTML(
+                  website.category
+                )}
+                ·
+                ${escapeHTML(
+                  website.status
+                )}
+                ${
+                  website.featured
+                    ? " · Featured"
+                    : ""
+                }
+              </div>
+
+            </div>
+
+            <div class="rank-price">
+              ${formatMoney(
+                website.offerPrice ||
+                website.regularPrice,
+                website.currency
+              )}
+            </div>
+
+          </div>
+
+        `
+      ).join("");
 
   }
 
+  /* =====================================================
+     HEALTH
+  ===================================================== */
 
-  /* =======================================================
-     SYSTEM STATUS
-  ======================================================= */
+  function renderHealth(){
 
-  function renderSystem(
-    data
-  ){
+    $("healthWebsites").textContent =
+      `${websites.length} listing${
+        websites.length === 1 ? "" : "s"
+      } loaded`;
 
-    const settings =
-      data.settings ||
-      {};
+    $("healthOrders").textContent =
+      `${orders.length} order${
+        orders.length === 1 ? "" : "s"
+      } loaded`;
 
-    const maintenance =
-      Boolean(
-        settings.maintenanceMode
-      );
+    $("healthCustomers").textContent =
+      `${getCustomerCount()} customer${
+        getCustomerCount() === 1 ? "" : "s"
+      } detected`;
 
+  }
 
-    const maintenanceEl =
-      $("maintenanceState");
+  /* =====================================================
+     REFRESH
+  ===================================================== */
 
+  $("refreshBtn")
+    .addEventListener(
+      "click",
+      function(){
 
-    maintenanceEl.innerHTML = `
-      <i class="state-dot ${
-        maintenance
-          ? "warning"
-          : ""
-      }"></i>
+        loadData();
 
-      ${
-        maintenance
-          ? "On"
-          : "Off"
+        showToast(
+          "Dashboard refreshed successfully."
+        );
+
       }
-    `;
+    );
 
+  /* =====================================================
+     PRINT
+  ===================================================== */
 
-    const marketplaceEl =
-      $("marketplaceState");
+  $("printBtn")
+    .addEventListener(
+      "click",
+      function(){
 
+        window.print();
 
-    marketplaceEl.innerHTML = `
-      <i class="state-dot ${
-        maintenance
-          ? "warning"
-          : ""
-      }"></i>
-
-      ${
-        maintenance
-          ? "Maintenance"
-          : "Online"
       }
-    `;
-
-  }
-
-
-  /* =======================================================
-     FULL RENDER
-  ======================================================= */
-
-  function renderDashboard(){
-
-    const data =
-      loadAll();
-
-    renderKPIs(
-      data
     );
 
-    renderChart(
-      data
+  /* =====================================================
+     MOBILE SIDEBAR
+  ===================================================== */
+
+  $("mobileMenu")
+    .addEventListener(
+      "click",
+      function(){
+
+        $("sidebar")
+          .classList
+          .toggle("open");
+
+        $("sidebarOverlay")
+          .classList
+          .toggle("show");
+
+      }
     );
 
-    renderRecentOrders(
-      data.orders
+  $("sidebarOverlay")
+    .addEventListener(
+      "click",
+      function(){
+
+        $("sidebar")
+          .classList
+          .remove("open");
+
+        $("sidebarOverlay")
+          .classList
+          .remove("show");
+
+      }
     );
 
-    renderWebsiteList(
-      data.websites
+  document
+    .querySelectorAll(".nav-item")
+    .forEach(
+      link => {
+
+        link.addEventListener(
+          "click",
+          function(){
+
+            $("sidebar")
+              .classList
+              .remove("open");
+
+            $("sidebarOverlay")
+              .classList
+              .remove("show");
+
+          }
+        );
+
+      }
     );
 
-    renderActivity(
-      data
+  /* =====================================================
+     LOGOUT
+  ===================================================== */
+
+  $("logoutBtn")
+    .addEventListener(
+      "click",
+      function(){
+
+        sessionStorage.removeItem(
+          AUTH_KEY
+        );
+
+        window.location.href =
+          "login/";
+
+      }
     );
 
-    renderSystem(
-      data
-    );
-
-  }
-
-
-  /* =======================================================
+  /* =====================================================
      TOAST
-  ======================================================= */
+  ===================================================== */
 
-  function toast(
-    title,
+  function showToast(
     message
   ){
 
     const wrap =
       $("toastWrap");
 
-    const item =
+    const toast =
       document.createElement(
         "div"
       );
 
-    item.className =
-      "toast";
+    toast.className =
+      "toast success";
 
-    item.innerHTML = `
-      <strong>
-        ${escapeHTML(
-          title
-        )}
-      </strong>
-
-      <span>
-        ${escapeHTML(
-          message
-        )}
-      </span>
-    `;
+    toast.textContent =
+      message;
 
     wrap.appendChild(
-      item
+      toast
     );
 
     setTimeout(
       () => {
 
-        item.style.opacity =
-          "0";
-
-        item.style.transform =
+        toast.style.opacity = "0";
+        toast.style.transform =
           "translateY(8px)";
 
         setTimeout(
-          () =>
-            item.remove(),
-          250
+          () => toast.remove(),
+          200
         );
 
       },
-      3000
+      2500
     );
 
   }
 
+  /* =====================================================
+     ESCAPE / MOBILE
+  ===================================================== */
 
-  /* =======================================================
-     MOBILE MENU
-  ======================================================= */
+  document.addEventListener(
+    "keydown",
+    function(event){
 
-  function setupMobileMenu(){
+      if(
+        event.key === "Escape"
+      ){
 
-    const sidebar =
-      $("sidebar");
+        $("sidebar")
+          .classList
+          .remove("open");
 
-    const overlay =
-      $("sidebarOverlay");
-
-
-    $("mobileMenu")
-      .addEventListener(
-        "click",
-        () => {
-
-          sidebar.classList.add(
-            "open"
-          );
-
-          overlay.classList.add(
-            "show"
-          );
-
-        }
-      );
-
-
-    overlay.addEventListener(
-      "click",
-      () => {
-
-        sidebar.classList.remove(
-          "open"
-        );
-
-        overlay.classList.remove(
-          "show"
-        );
+        $("sidebarOverlay")
+          .classList
+          .remove("show");
 
       }
-    );
 
+    }
+  );
 
-    document
-      .querySelectorAll(
-        ".nav a"
-      )
-      .forEach(
-        link => {
+  /* =====================================================
+     INITIALIZE
+  ===================================================== */
 
-          link.addEventListener(
-            "click",
-            () => {
-
-              sidebar.classList.remove(
-                "open"
-              );
-
-              overlay.classList.remove(
-                "show"
-              );
-
-            }
-          );
-
-        }
-      );
-
-  }
-
-
-  /* =======================================================
-     EVENTS
-  ======================================================= */
-
-  function bindEvents(){
-
-    $("viewSiteBtn")
-      .addEventListener(
-        "click",
-        () => {
-
-          window.open(
-            "../index.html",
-            "_blank"
-          );
-
-        }
-      );
-
-
-    $("refreshBtn")
-      .addEventListener(
-        "click",
-        () => {
-
-          renderDashboard();
-
-          toast(
-            "Dashboard refreshed",
-            "Latest local marketplace data has been loaded."
-          );
-
-        }
-      );
-
-
-    $("activityRefresh")
-      .addEventListener(
-        "click",
-        () => {
-
-          renderDashboard();
-
-          toast(
-            "Activity refreshed",
-            "Recent activity has been updated."
-          );
-
-        }
-      );
-
-
-    $("printBtn")
-      .addEventListener(
-        "click",
-        () => {
-
-          window.print();
-
-        }
-      );
-
-
-    $("logoutBtn")
-      .addEventListener(
-        "click",
-        () => {
-
-          sessionStorage.removeItem(
-            AUTH_KEY
-          );
-
-          window.location.href =
-            "login/";
-
-        }
-      );
-
-
-    window.addEventListener(
-      "storage",
-      () => {
-
-        renderDashboard();
-
-      }
-    );
-
-  }
-
-
-  /* =======================================================
-     INIT
-  ======================================================= */
-
-  function init(){
-
-    setupIdentity();
-
-    renderDate();
-
-    setupMobileMenu();
-
-    bindEvents();
-
-    renderDashboard();
-
-  }
-
-
-  init();
+  loadData();
 
 })();
 </script>
