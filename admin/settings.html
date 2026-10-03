@@ -2,18 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>System Settings | Website Deals Admin</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg">
+  <link rel="icon" type="image/png" href="../logo.png">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07110b">
+
+  <title>System Settings | Website Deals</title>
 
   <meta
     name="description"
     content="Website Deals Admin System Settings"
   >
-
-  <meta name="theme-color" content="#07110b">
-
-  <link rel="icon" type="image/png" href="../logo.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,36 +27,37 @@
   <style>
     :root{
       --green:#18a957;
-      --green-dark:#108445;
+      --green-dark:#128542;
       --green-soft:#eaf8f0;
 
       --dark:#07110b;
-      --dark-2:#101713;
-      --dark-3:#17221b;
+      --sidebar:#101713;
+      --sidebar-hover:#17231b;
 
-      --bg:#f5f8f6;
+      --bg:#f4f7f5;
       --surface:#ffffff;
-      --surface-2:#f8faf9;
+      --surface-2:#f6f8f7;
 
-      --text:#172019;
-      --muted:#738078;
+      --border:#e3eae6;
+      --border-strong:#d7e1db;
 
-      --border:#e4ebe6;
+      --text:#142019;
+      --muted:#738079;
+      --muted-2:#98a39d;
 
-      --danger:#dc4c4c;
-      --danger-soft:#fff0f0;
+      --danger:#dc3f4d;
+      --danger-soft:#fff0f1;
 
-      --warning:#d89417;
-      --warning-soft:#fff7e7;
+      --warning:#d18b16;
+      --warning-soft:#fff7e8;
 
-      --blue:#3977d6;
-      --blue-soft:#edf4ff;
-
-      --shadow:0 18px 50px rgba(20,38,27,.07);
-      --shadow-soft:0 8px 28px rgba(20,38,27,.05);
+      --shadow-sm:0 4px 14px rgba(12,28,18,.05);
+      --shadow:0 12px 32px rgba(12,28,18,.08);
 
       --radius:20px;
-      --sidebar:270px;
+      --radius-sm:14px;
+
+      --sidebar-width:270px;
     }
 
     *{
@@ -92,117 +94,135 @@
       text-decoration:none;
     }
 
-    /* =========================================
+    /* =========================
+       APP
+    ========================== */
+
+    .app{
+      min-height:100vh;
+    }
+
+    /* =========================
        SIDEBAR
-    ========================================= */
+    ========================== */
 
     .sidebar{
       position:fixed;
       inset:0 auto 0 0;
-      width:var(--sidebar);
-      background:var(--dark-2);
+      width:var(--sidebar-width);
+      background:var(--sidebar);
       color:#fff;
       z-index:1000;
       display:flex;
       flex-direction:column;
-      padding:22px 16px 16px;
-      transition:transform .3s ease;
+      border-right:1px solid rgba(255,255,255,.05);
     }
 
     .brand{
+      height:82px;
+      padding:18px 20px;
       display:flex;
       align-items:center;
       gap:12px;
-      padding:4px 10px 25px;
+      border-bottom:1px solid rgba(255,255,255,.07);
     }
 
     .brand-logo{
-      width:42px;
-      height:42px;
-      border-radius:12px;
-      object-fit:contain;
+      width:44px;
+      height:44px;
+      border-radius:13px;
       background:#fff;
-      padding:5px;
-      border:1px solid rgba(255,255,255,.08);
+      padding:6px;
+      object-fit:contain;
+      flex:none;
     }
 
     .brand-copy{
       min-width:0;
     }
 
-    .brand-name{
+    .brand-title{
       font-family:"Manrope",sans-serif;
-      font-size:16px;
       font-weight:800;
-      letter-spacing:-.3px;
+      font-size:15px;
+      line-height:1.1;
+      white-space:nowrap;
     }
 
-    .brand-sub{
-      color:#8d9a92;
+    .brand-subtitle{
+      margin-top:4px;
       font-size:11px;
-      margin-top:2px;
+      color:#8f9c95;
+      white-space:nowrap;
     }
 
     .nav{
       flex:1;
-      overflow:auto;
-      padding-right:3px;
+      padding:20px 13px;
+      overflow-y:auto;
     }
 
-    .nav::-webkit-scrollbar{
-      width:4px;
-    }
-
-    .nav::-webkit-scrollbar-thumb{
-      background:#2b372f;
-      border-radius:20px;
-    }
-
-    .nav-section{
-      margin:18px 9px 8px;
-      color:#657269;
-      text-transform:uppercase;
+    .nav-label{
+      padding:0 10px 9px;
+      color:#65736b;
       font-size:10px;
       font-weight:800;
-      letter-spacing:1.1px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
     }
 
-    .nav-link{
+    .nav-list{
+      display:grid;
+      gap:4px;
+      margin-bottom:22px;
+    }
+
+    .nav-item{
+      min-height:45px;
       display:flex;
       align-items:center;
       gap:12px;
-      min-height:46px;
       padding:0 12px;
-      margin:4px 0;
-      border-radius:13px;
-      color:#aeb9b1;
+      border-radius:12px;
+      color:#aeb9b2;
       font-size:13px;
       font-weight:600;
       transition:.2s ease;
     }
 
-    .nav-link:hover{
-      background:rgba(255,255,255,.055);
+    .nav-item:hover{
       color:#fff;
+      background:var(--sidebar-hover);
     }
 
-    .nav-link.active{
-      background:var(--green);
+    .nav-item.active{
       color:#fff;
-      box-shadow:0 8px 20px rgba(24,169,87,.22);
+      background:rgba(24,169,87,.16);
+      box-shadow:inset 3px 0 0 var(--green);
     }
 
     .nav-icon{
       width:20px;
-      text-align:center;
-      font-size:16px;
+      height:20px;
+      display:grid;
+      place-items:center;
       flex:none;
+      color:currentColor;
+    }
+
+    .nav-icon svg{
+      width:18px;
+      height:18px;
+      stroke:currentColor;
+      fill:none;
+      stroke-width:1.8;
+      stroke-linecap:round;
+      stroke-linejoin:round;
     }
 
     .sidebar-bottom{
+      padding:13px;
       border-top:1px solid rgba(255,255,255,.07);
-      padding-top:14px;
-      margin-top:12px;
     }
 
     .admin-mini{
@@ -210,6 +230,7 @@
       align-items:center;
       gap:10px;
       padding:10px;
+      margin-bottom:8px;
       border-radius:14px;
       background:rgba(255,255,255,.04);
     }
@@ -217,88 +238,110 @@
     .admin-avatar{
       width:36px;
       height:36px;
-      flex:none;
+      border-radius:11px;
+      background:linear-gradient(135deg,var(--green),#6ee7a5);
+      color:#06200f;
       display:grid;
       place-items:center;
-      border-radius:11px;
-      background:var(--green);
-      color:#fff;
-      font-size:13px;
       font-weight:800;
+      font-size:12px;
+      flex:none;
     }
 
     .admin-info{
       min-width:0;
-      flex:1;
     }
 
     .admin-name{
       font-size:12px;
       font-weight:700;
+      color:#fff;
       white-space:nowrap;
       overflow:hidden;
       text-overflow:ellipsis;
     }
 
     .admin-role{
-      color:#849188;
-      font-size:10px;
       margin-top:2px;
+      color:#829088;
+      font-size:10px;
     }
 
     .logout-btn{
+      width:100%;
+      height:42px;
       border:0;
+      border-radius:12px;
       background:transparent;
-      color:#87938b;
-      font-size:16px;
-      width:32px;
-      height:32px;
-      border-radius:9px;
+      color:#9daaa3;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:0 12px;
+      font-size:12px;
+      font-weight:700;
+      transition:.2s ease;
     }
 
     .logout-btn:hover{
-      color:#fff;
-      background:rgba(255,255,255,.07);
+      background:rgba(220,63,77,.12);
+      color:#ff9ca5;
     }
 
-    /* =========================================
+    .logout-btn svg{
+      width:17px;
+      height:17px;
+      stroke:currentColor;
+      fill:none;
+      stroke-width:1.8;
+    }
+
+    /* =========================
        MAIN
-    ========================================= */
+    ========================== */
 
     .main{
-      margin-left:var(--sidebar);
       min-height:100vh;
+      margin-left:var(--sidebar-width);
     }
 
     .topbar{
-      height:76px;
-      padding:0 32px;
-      background:rgba(255,255,255,.88);
-      border-bottom:1px solid var(--border);
-      backdrop-filter:blur(14px);
+      position:sticky;
+      top:0;
+      z-index:500;
+      height:74px;
+      padding:0 30px;
+      background:rgba(244,247,245,.9);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(227,234,230,.8);
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:20px;
-      position:sticky;
-      top:0;
-      z-index:500;
     }
 
     .topbar-left{
       display:flex;
       align-items:center;
-      gap:13px;
+      gap:12px;
     }
 
     .mobile-menu{
-      display:none;
-      width:40px;
-      height:40px;
+      width:42px;
+      height:42px;
       border:1px solid var(--border);
-      background:#fff;
+      background:var(--surface);
       border-radius:12px;
-      font-size:19px;
+      display:none;
+      place-items:center;
+    }
+
+    .mobile-menu svg{
+      width:19px;
+      height:19px;
+      stroke:var(--text);
+      fill:none;
+      stroke-width:1.8;
     }
 
     .breadcrumb{
@@ -307,6 +350,7 @@
       gap:8px;
       color:var(--muted);
       font-size:12px;
+      font-weight:600;
     }
 
     .breadcrumb strong{
@@ -319,282 +363,397 @@
       gap:9px;
     }
 
-    .btn{
+    .top-btn{
       height:40px;
-      padding:0 14px;
-      border-radius:11px;
+      padding:0 13px;
       border:1px solid var(--border);
-      background:#fff;
+      background:var(--surface);
       color:var(--text);
+      border-radius:11px;
+      display:flex;
+      align-items:center;
+      gap:8px;
       font-size:12px;
       font-weight:700;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      transition:.2s ease;
+      box-shadow:var(--shadow-sm);
     }
 
-    .btn:hover{
+    .top-btn:hover{
+      border-color:#cbd8d0;
       transform:translateY(-1px);
-      box-shadow:var(--shadow-soft);
     }
 
-    .btn.primary{
-      background:var(--green);
+    .top-btn svg{
+      width:16px;
+      height:16px;
+      stroke:currentColor;
+      fill:none;
+      stroke-width:1.8;
+    }
+
+    .top-btn.primary{
       color:#fff;
+      background:var(--green);
       border-color:var(--green);
     }
 
-    .btn.primary:hover{
+    .top-btn.primary:hover{
       background:var(--green-dark);
     }
 
-    .btn.dark{
-      background:var(--dark);
-      color:#fff;
-      border-color:var(--dark);
-    }
-
-    .btn.danger{
-      color:var(--danger);
-      border-color:#f1d2d2;
-      background:#fff;
-    }
+    /* =========================
+       CONTENT
+    ========================== */
 
     .content{
-      padding:30px 32px 40px;
+      padding:30px;
       max-width:1500px;
+      margin:0 auto;
     }
 
-    /* =========================================
-       HERO
-    ========================================= */
-
-    .hero{
-      position:relative;
-      overflow:hidden;
-      border-radius:26px;
-      background:
-        radial-gradient(circle at 88% 12%,rgba(24,169,87,.28),transparent 28%),
-        radial-gradient(circle at 72% 90%,rgba(24,169,87,.11),transparent 32%),
-        var(--dark);
-      color:#fff;
-      padding:31px;
-      box-shadow:0 22px 60px rgba(7,17,11,.14);
-      margin-bottom:22px;
-    }
-
-    .hero::after{
-      content:"";
-      position:absolute;
-      width:280px;
-      height:280px;
-      right:-110px;
-      bottom:-150px;
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:50%;
-    }
-
-    .hero-content{
-      position:relative;
-      z-index:2;
+    .page-head{
       display:flex;
-      align-items:flex-end;
       justify-content:space-between;
+      align-items:flex-end;
       gap:25px;
+      margin-bottom:25px;
     }
 
     .eyebrow{
-      display:inline-flex;
+      display:flex;
       align-items:center;
-      gap:7px;
-      color:#91e9b5;
-      text-transform:uppercase;
-      letter-spacing:1.2px;
-      font-size:10px;
+      gap:8px;
+      color:var(--green-dark);
+      font-size:11px;
       font-weight:800;
-      margin-bottom:10px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      margin-bottom:9px;
     }
 
     .eyebrow-dot{
       width:7px;
       height:7px;
       border-radius:50%;
-      background:#55dc8a;
-      box-shadow:0 0 0 5px rgba(85,220,138,.1);
+      background:var(--green);
+      box-shadow:0 0 0 5px rgba(24,169,87,.1);
     }
 
-    .hero h1{
+    .page-title{
       font-family:"Manrope",sans-serif;
-      font-size:clamp(25px,3vw,38px);
+      font-size:clamp(27px,3vw,39px);
       line-height:1.08;
-      letter-spacing:-1.4px;
-      margin-bottom:9px;
+      letter-spacing:-.04em;
+      font-weight:800;
     }
 
-    .hero p{
-      max-width:700px;
-      color:#aab8af;
+    .page-description{
+      max-width:650px;
+      margin-top:9px;
+      color:var(--muted);
       font-size:13px;
       line-height:1.7;
     }
 
-    .security-pill{
-      min-height:40px;
-      padding:0 14px;
-      border:1px solid rgba(85,220,138,.2);
-      background:rgba(85,220,138,.08);
-      color:#b4f2ca;
-      border-radius:12px;
+    .save-state{
       display:flex;
       align-items:center;
       gap:8px;
+      padding:10px 13px;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:12px;
+      color:var(--muted);
       font-size:11px;
+      font-weight:700;
+      white-space:nowrap;
+      box-shadow:var(--shadow-sm);
+    }
+
+    .save-state-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:#96a39b;
+    }
+
+    .save-state.dirty{
+      color:#986600;
+      background:var(--warning-soft);
+      border-color:#f0dba9;
+    }
+
+    .save-state.dirty .save-state-dot{
+      background:var(--warning);
+    }
+
+    .save-state.saved{
+      color:var(--green-dark);
+      background:var(--green-soft);
+      border-color:#cdebd9;
+    }
+
+    .save-state.saved .save-state-dot{
+      background:var(--green);
+    }
+
+    /* =========================
+       SETTINGS LAYOUT
+    ========================== */
+
+    .settings-layout{
+      display:grid;
+      grid-template-columns:220px minmax(0,1fr);
+      gap:22px;
+      align-items:start;
+    }
+
+    .settings-nav{
+      position:sticky;
+      top:96px;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:9px;
+      box-shadow:var(--shadow-sm);
+    }
+
+    .settings-nav-title{
+      padding:10px 10px 8px;
+      color:var(--muted-2);
+      font-size:9px;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.13em;
+    }
+
+    .settings-tab{
+      width:100%;
+      min-height:42px;
+      border:0;
+      background:transparent;
+      color:var(--muted);
+      border-radius:11px;
+      display:flex;
+      align-items:center;
+      gap:9px;
+      padding:0 10px;
+      text-align:left;
+      font-size:11px;
+      font-weight:700;
+      transition:.2s ease;
+    }
+
+    .settings-tab:hover{
+      background:var(--surface-2);
+      color:var(--text);
+    }
+
+    .settings-tab.active{
+      color:var(--green-dark);
+      background:var(--green-soft);
+    }
+
+    .settings-tab svg{
+      width:16px;
+      height:16px;
+      stroke:currentColor;
+      fill:none;
+      stroke-width:1.8;
+      flex:none;
+    }
+
+    .settings-content{
+      display:grid;
+      gap:18px;
+      min-width:0;
+    }
+
+    .settings-section{
+      scroll-margin-top:95px;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow-sm);
+      overflow:hidden;
+    }
+
+    .section-head{
+      min-height:76px;
+      padding:18px 21px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:18px;
+      border-bottom:1px solid var(--border);
+    }
+
+    .section-title-wrap{
+      display:flex;
+      align-items:center;
+      gap:12px;
+    }
+
+    .section-icon{
+      width:39px;
+      height:39px;
+      border-radius:12px;
+      background:var(--green-soft);
+      color:var(--green-dark);
+      display:grid;
+      place-items:center;
+      flex:none;
+    }
+
+    .section-icon svg{
+      width:18px;
+      height:18px;
+      stroke:currentColor;
+      fill:none;
+      stroke-width:1.8;
+    }
+
+    .section-title{
+      font-family:"Manrope",sans-serif;
+      font-size:14px;
+      font-weight:800;
+      letter-spacing:-.01em;
+    }
+
+    .section-subtitle{
+      margin-top:3px;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.5;
+    }
+
+    .section-badge{
+      padding:6px 9px;
+      border-radius:999px;
+      background:var(--surface-2);
+      color:var(--muted);
+      font-size:9px;
       font-weight:800;
       white-space:nowrap;
     }
 
-    .security-pill span:first-child{
-      width:8px;
-      height:8px;
-      border-radius:50%;
-      background:#55dc8a;
+    .section-body{
+      padding:21px;
     }
 
-    /* =========================================
-       SETTINGS GRID
-    ========================================= */
-
-    .settings-layout{
+    .form-grid{
       display:grid;
-      grid-template-columns:minmax(0,1fr) 310px;
-      gap:20px;
-      align-items:start;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:17px;
     }
 
-    .settings-main{
+    .form-grid.three{
+      grid-template-columns:repeat(3,minmax(0,1fr));
+    }
+
+    .field{
       min-width:0;
-    }
-
-    .settings-card{
-      background:var(--surface);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow-soft);
-      overflow:hidden;
-      margin-bottom:18px;
-    }
-
-    .card-head{
-      padding:19px 20px 16px;
-      border-bottom:1px solid #eef2ef;
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:15px;
-    }
-
-    .card-title{
-      font-family:"Manrope",sans-serif;
-      font-size:14px;
-      font-weight:800;
-    }
-
-    .card-subtitle{
-      color:var(--muted);
-      font-size:10px;
-      line-height:1.6;
-      margin-top:4px;
-    }
-
-    .card-body{
-      padding:20px;
-    }
-
-    .fields{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:16px;
     }
 
     .field.full{
       grid-column:1/-1;
     }
 
-    .field label{
-      display:block;
-      color:#69756d;
-      font-size:10px;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.7px;
-      margin:0 0 7px 2px;
-    }
-
-    .input,
-    .select,
-    .textarea{
-      width:100%;
-      border:1px solid var(--border);
-      border-radius:11px;
-      background:#fbfcfb;
-      color:var(--text);
-      outline:none;
-      font-size:12px;
-      font-weight:600;
-      transition:.2s;
-    }
-
-    .input,
-    .select{
-      height:43px;
-      padding:0 12px;
-    }
-
-    .textarea{
-      min-height:105px;
-      padding:11px 12px;
-      resize:vertical;
-      line-height:1.6;
-    }
-
-    .input:focus,
-    .select:focus,
-    .textarea:focus{
-      border-color:rgba(24,169,87,.55);
-      box-shadow:0 0 0 4px rgba(24,169,87,.08);
-      background:#fff;
-    }
-
-    .help{
-      color:#929c96;
-      font-size:9px;
-      line-height:1.5;
-      margin-top:5px;
-    }
-
-    /* =========================================
-       TOGGLE
-    ========================================= */
-
-    .toggle-list{
-      display:flex;
-      flex-direction:column;
-    }
-
-    .toggle-row{
-      min-height:65px;
-      padding:13px 0;
-      border-bottom:1px solid #eef2ef;
+    .label{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap:20px;
+      gap:10px;
+      margin-bottom:7px;
+      font-size:10px;
+      font-weight:800;
+      color:#4c5a52;
     }
 
-    .toggle-row:last-child{
-      border-bottom:0;
+    .hint{
+      color:var(--muted-2);
+      font-size:9px;
+      font-weight:500;
+    }
+
+    input,
+    select,
+    textarea{
+      width:100%;
+      border:1px solid var(--border);
+      background:#fff;
+      color:var(--text);
+      outline:none;
+      border-radius:11px;
+      transition:.18s ease;
+    }
+
+    input,
+    select{
+      height:43px;
+      padding:0 12px;
+      font-size:12px;
+    }
+
+    textarea{
+      min-height:105px;
+      padding:11px 12px;
+      resize:vertical;
+      font-size:12px;
+      line-height:1.6;
+    }
+
+    input:hover,
+    select:hover,
+    textarea:hover{
+      border-color:#cbd8d0;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus{
+      border-color:var(--green);
+      box-shadow:0 0 0 3px rgba(24,169,87,.1);
+    }
+
+    .input-prefix{
+      position:relative;
+    }
+
+    .input-prefix span{
+      position:absolute;
+      left:12px;
+      top:50%;
+      transform:translateY(-50%);
+      color:var(--muted);
+      font-size:11px;
+      font-weight:700;
+      pointer-events:none;
+    }
+
+    .input-prefix input{
+      padding-left:34px;
+    }
+
+    /* =========================
+       TOGGLE ROWS
+    ========================== */
+
+    .toggle-list{
+      display:grid;
+      gap:10px;
+    }
+
+    .toggle-row{
+      min-height:62px;
+      padding:13px 14px;
+      background:var(--surface-2);
+      border:1px solid var(--border);
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
     }
 
     .toggle-copy{
@@ -607,307 +766,280 @@
     }
 
     .toggle-description{
+      margin-top:3px;
       color:var(--muted);
       font-size:10px;
       line-height:1.5;
-      margin-top:3px;
-      max-width:650px;
     }
 
     .switch{
-      width:46px;
-      height:26px;
       position:relative;
+      width:44px;
+      height:24px;
       flex:none;
     }
 
     .switch input{
-      opacity:0;
-      width:0;
-      height:0;
       position:absolute;
+      opacity:0;
+      pointer-events:none;
     }
 
-    .slider{
+    .switch-track{
       position:absolute;
       inset:0;
-      border-radius:30px;
-      background:#dfe6e1;
-      transition:.2s;
+      border-radius:999px;
+      background:#d5ddd8;
+      cursor:pointer;
+      transition:.2s ease;
     }
 
-    .slider::before{
+    .switch-track::after{
       content:"";
       position:absolute;
-      width:20px;
-      height:20px;
+      width:18px;
+      height:18px;
       left:3px;
       top:3px;
       border-radius:50%;
       background:#fff;
-      box-shadow:0 2px 6px rgba(0,0,0,.15);
-      transition:.2s;
+      box-shadow:0 2px 5px rgba(0,0,0,.15);
+      transition:.2s ease;
     }
 
-    .switch input:checked + .slider{
+    .switch input:checked + .switch-track{
       background:var(--green);
     }
 
-    .switch input:checked + .slider::before{
+    .switch input:checked + .switch-track::after{
       transform:translateX(20px);
     }
 
-    /* =========================================
-       WARNING BOX
-    ========================================= */
+    /* =========================
+       MAINTENANCE
+    ========================== */
 
-    .notice{
-      padding:13px 14px;
-      border-radius:12px;
+    .maintenance-box{
+      padding:16px;
+      border:1px solid #f0dba9;
+      background:var(--warning-soft);
+      border-radius:15px;
+    }
+
+    .maintenance-box.active{
+      border-color:#bfe6cd;
+      background:var(--green-soft);
+    }
+
+    .maintenance-head{
       display:flex;
       align-items:flex-start;
-      gap:10px;
-      margin-bottom:17px;
-      font-size:10px;
-      line-height:1.6;
+      justify-content:space-between;
+      gap:15px;
     }
 
-    .notice.warning{
-      background:var(--warning-soft);
-      border:1px solid #f2dfb7;
-      color:#8c651f;
-    }
-
-    .notice.info{
-      background:var(--blue-soft);
-      border:1px solid #dce8fb;
-      color:#3566a7;
-    }
-
-    .notice-icon{
-      width:23px;
-      height:23px;
-      display:grid;
-      place-items:center;
-      border-radius:7px;
-      background:rgba(255,255,255,.65);
-      flex:none;
+    .maintenance-title{
+      font-size:12px;
       font-weight:800;
     }
 
-    /* =========================================
-       COLOR
-    ========================================= */
+    .maintenance-copy{
+      margin-top:4px;
+      color:var(--muted);
+      font-size:10px;
+      line-height:1.55;
+      max-width:600px;
+    }
 
-    .color-row{
+    /* =========================
+       COLOR
+    ========================== */
+
+    .color-control{
       display:flex;
       align-items:center;
-      gap:12px;
+      gap:10px;
     }
 
     .color-input{
-      width:54px;
+      width:48px;
       height:43px;
-      padding:3px;
-      border:1px solid var(--border);
-      border-radius:11px;
-      background:#fff;
+      padding:4px;
       cursor:pointer;
+      border-radius:11px;
     }
 
-    .color-value{
+    .color-code{
       flex:1;
     }
 
-    /* =========================================
-       SIDE PANEL
-    ========================================= */
-
-    .side-column{
-      min-width:0;
-      position:sticky;
-      top:95px;
-    }
-
-    .side-card{
-      background:var(--surface);
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow-soft);
-      overflow:hidden;
-      margin-bottom:18px;
-    }
-
-    .side-head{
-      padding:18px 18px 15px;
-      border-bottom:1px solid #eef2ef;
-    }
-
-    .side-title{
-      font-family:"Manrope",sans-serif;
-      font-size:13px;
-      font-weight:800;
-    }
-
-    .side-sub{
-      color:var(--muted);
-      font-size:9px;
-      line-height:1.5;
-      margin-top:4px;
-    }
-
-    .side-body{
-      padding:16px;
-    }
-
-    .save-panel{
-      display:flex;
-      flex-direction:column;
-      gap:9px;
-    }
-
-    .save-panel .btn{
+    .color-preview{
       width:100%;
-    }
-
-    .save-state{
+      height:43px;
+      border-radius:11px;
+      border:1px solid var(--border);
       display:flex;
       align-items:center;
-      justify-content:center;
-      gap:7px;
-      min-height:32px;
-      color:#7b8780;
+      gap:10px;
+      padding:0 12px;
+      background:var(--surface-2);
+    }
+
+    .color-dot{
+      width:19px;
+      height:19px;
+      border-radius:50%;
+      background:var(--green);
+      box-shadow:inset 0 0 0 1px rgba(0,0,0,.1);
+    }
+
+    .color-preview span{
+      font-size:11px;
+      font-weight:700;
+      color:var(--muted);
+    }
+
+    /* =========================
+       INFO CARDS
+    ========================== */
+
+    .info-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:11px;
+    }
+
+    .info-card{
+      padding:14px;
+      border:1px solid var(--border);
+      background:var(--surface-2);
+      border-radius:14px;
+    }
+
+    .info-label{
+      color:var(--muted);
       font-size:9px;
       font-weight:700;
     }
 
-    .state-dot{
-      width:7px;
-      height:7px;
-      border-radius:50%;
-      background:#aab4ad;
+    .info-value{
+      margin-top:5px;
+      font-family:"Manrope",sans-serif;
+      font-size:15px;
+      font-weight:800;
     }
 
-    .state-dot.saved{
-      background:var(--green);
+    /* =========================
+       DANGER
+    ========================== */
+
+    .danger-box{
+      padding:17px;
+      border:1px solid #f0cdd1;
+      background:var(--danger-soft);
+      border-radius:15px;
     }
 
-    .state-dot.dirty{
-      background:var(--warning);
+    .danger-title{
+      color:#b52f3c;
+      font-size:12px;
+      font-weight:800;
     }
 
-    .summary-item{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      padding:12px 0;
-      border-bottom:1px solid #eef2ef;
-    }
-
-    .summary-item:last-child{
-      border-bottom:0;
-    }
-
-    .summary-label{
-      color:var(--muted);
+    .danger-copy{
+      margin-top:4px;
+      color:#8d5c62;
       font-size:10px;
+      line-height:1.55;
     }
 
-    .summary-value{
-      font-size:11px;
-      font-weight:800;
-      text-align:right;
-    }
+    /* =========================
+       SAVE BAR
+    ========================== */
 
-    .system-list{
-      padding:2px 16px 15px;
-    }
-
-    .system-row{
-      padding:10px 0;
-      border-bottom:1px solid #eef2ef;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-    }
-
-    .system-row:last-child{
-      border-bottom:0;
-    }
-
-    .system-key{
-      color:var(--muted);
-      font-size:9px;
-    }
-
-    .system-value{
-      color:var(--text);
-      font-size:9px;
-      font-weight:800;
-      text-align:right;
-      word-break:break-word;
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      min-height:22px;
-      padding:0 8px;
-      border-radius:7px;
-      background:var(--green-soft);
-      color:var(--green-dark);
-      font-size:8px;
-      font-weight:800;
-    }
-
-    /* =========================================
-       ACTION FOOTER
-    ========================================= */
-
-    .bottom-actions{
+    .save-bar{
+      position:sticky;
+      bottom:15px;
+      z-index:100;
+      margin-top:20px;
+      padding:12px;
+      background:rgba(16,23,19,.96);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:17px;
+      box-shadow:0 15px 45px rgba(7,17,11,.2);
+      backdrop-filter:blur(16px);
       display:flex;
       align-items:center;
       justify-content:space-between;
       gap:15px;
-      padding:17px 20px;
-      background:#fbfcfb;
-      border-top:1px solid var(--border);
     }
 
-    .bottom-note{
-      color:#8a958e;
-      font-size:9px;
-      line-height:1.5;
+    .save-message{
+      color:#aab6af;
+      font-size:10px;
+      font-weight:600;
     }
 
-    .bottom-buttons{
+    .save-message strong{
+      color:#fff;
+    }
+
+    .save-actions{
       display:flex;
       gap:8px;
     }
 
-    /* =========================================
+    .action-btn{
+      height:39px;
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      padding:0 14px;
+      background:rgba(255,255,255,.06);
+      color:#d8e1dc;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .action-btn:hover{
+      background:rgba(255,255,255,.1);
+    }
+
+    .action-btn.primary{
+      border-color:var(--green);
+      background:var(--green);
+      color:#fff;
+    }
+
+    .action-btn.primary:hover{
+      background:var(--green-dark);
+    }
+
+    .action-btn:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+    }
+
+    /* =========================
        TOAST
-    ========================================= */
+    ========================== */
 
     .toast{
       position:fixed;
-      right:24px;
-      bottom:24px;
+      right:22px;
+      bottom:22px;
       z-index:3000;
-      background:var(--dark);
-      color:#fff;
-      min-width:250px;
+      min-width:280px;
       max-width:380px;
       padding:13px 15px;
-      border-radius:13px;
-      box-shadow:0 18px 50px rgba(0,0,0,.2);
+      background:var(--dark);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      box-shadow:0 20px 50px rgba(0,0,0,.25);
       display:flex;
-      align-items:center;
+      align-items:flex-start;
       gap:10px;
-      font-size:11px;
-      font-weight:700;
-      transform:translateY(20px);
+      transform:translateY(30px);
       opacity:0;
       pointer-events:none;
       transition:.25s ease;
@@ -921,49 +1053,96 @@
     .toast-icon{
       width:25px;
       height:25px;
+      border-radius:8px;
+      background:rgba(24,169,87,.15);
+      color:#61dc92;
       display:grid;
       place-items:center;
-      background:var(--green);
-      border-radius:8px;
       flex:none;
     }
 
-    /* =========================================
-       MOBILE
-    ========================================= */
+    .toast-icon svg{
+      width:14px;
+      height:14px;
+      stroke:currentColor;
+      fill:none;
+      stroke-width:2;
+    }
 
-    .overlay{
+    .toast-title{
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .toast-message{
+      margin-top:2px;
+      color:#9eaaa3;
+      font-size:10px;
+      line-height:1.4;
+    }
+
+    /* =========================
+       MOBILE OVERLAY
+    ========================== */
+
+    .sidebar-overlay{
+      display:none;
       position:fixed;
       inset:0;
-      background:rgba(0,0,0,.45);
       z-index:900;
-      display:none;
+      background:rgba(0,0,0,.42);
+      backdrop-filter:blur(3px);
     }
 
-    .overlay.show{
-      display:block;
-    }
+    /* =========================
+       RESPONSIVE
+    ========================== */
 
-    @media(max-width:1150px){
-
+    @media(max-width:1100px){
       .settings-layout{
         grid-template-columns:1fr;
       }
 
-      .side-column{
+      .settings-nav{
         position:static;
+        display:flex;
+        gap:5px;
+        overflow-x:auto;
+        padding:7px;
       }
 
+      .settings-nav-title{
+        display:none;
+      }
+
+      .settings-tab{
+        width:auto;
+        min-width:max-content;
+        padding:0 13px;
+      }
+
+      .form-grid.three{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
     }
 
-    @media(max-width:1050px){
+    @media(max-width:900px){
+      :root{
+        --sidebar-width:270px;
+      }
 
       .sidebar{
         transform:translateX(-100%);
+        transition:.25s ease;
+        box-shadow:20px 0 50px rgba(0,0,0,.18);
       }
 
       .sidebar.open{
         transform:translateX(0);
+      }
+
+      .sidebar-overlay.show{
+        display:block;
       }
 
       .main{
@@ -972,41 +1151,36 @@
 
       .mobile-menu{
         display:grid;
-        place-items:center;
       }
-
-    }
-
-    @media(max-width:760px){
 
       .topbar{
-        height:68px;
-        padding:0 15px;
-      }
-
-      .breadcrumb{
-        display:none;
-      }
-
-      .topbar-actions .marketplace-btn{
-        display:none;
+        padding:0 18px;
       }
 
       .content{
-        padding:18px 14px 30px;
+        padding:22px 18px;
       }
+    }
 
-      .hero{
-        padding:23px 20px;
-        border-radius:20px;
-      }
-
-      .hero-content{
-        flex-direction:column;
+    @media(max-width:700px){
+      .page-head{
         align-items:flex-start;
+        flex-direction:column;
       }
 
-      .fields{
+      .topbar-actions .top-btn span{
+        display:none;
+      }
+
+      .top-btn{
+        width:40px;
+        padding:0;
+        justify-content:center;
+      }
+
+      .form-grid,
+      .form-grid.three,
+      .info-grid{
         grid-template-columns:1fr;
       }
 
@@ -1014,50 +1188,29 @@
         grid-column:auto;
       }
 
-      .card-body{
-        padding:16px;
+      .section-head{
+        align-items:flex-start;
       }
 
-      .card-head{
-        padding:16px;
-      }
-
-      .bottom-actions{
-        flex-direction:column;
-        align-items:stretch;
-      }
-
-      .bottom-buttons{
-        width:100%;
-      }
-
-      .bottom-buttons .btn{
-        flex:1;
-      }
-
-    }
-
-    @media(max-width:480px){
-
-      .topbar-actions .btn{
-        padding:0 10px;
-      }
-
-      .topbar-actions .btn span{
+      .section-badge{
         display:none;
       }
 
-      .hero h1{
-        font-size:25px;
+      .section-body{
+        padding:16px;
       }
 
-      .security-pill{
-        width:100%;
-        justify-content:center;
-      }
-
-      .toggle-row{
+      .save-bar{
         align-items:flex-start;
+        flex-direction:column;
+      }
+
+      .save-actions{
+        width:100%;
+      }
+
+      .action-btn{
+        flex:1;
       }
 
       .toast{
@@ -1066,44 +1219,38 @@
         bottom:14px;
         min-width:0;
       }
-
     }
 
-    @media print{
-
-      body{
-        background:#fff;
-      }
-
-      .sidebar,
-      .topbar,
-      .hero,
-      .side-column,
-      .bottom-actions,
-      .toast{
-        display:none !important;
-      }
-
-      .main{
-        margin-left:0;
-      }
-
+    @media(max-width:480px){
       .content{
-        padding:0;
-        max-width:none;
+        padding:18px 13px 25px;
       }
 
-      .settings-card{
-        box-shadow:none;
-        break-inside:avoid;
+      .topbar{
+        padding:0 13px;
       }
 
-      .input,
-      .select,
-      .textarea{
-        background:#fff;
+      .breadcrumb{
+        font-size:11px;
       }
 
+      .page-title{
+        font-size:28px;
+      }
+
+      .settings-tab{
+        min-height:39px;
+        font-size:10px;
+      }
+
+      .settings-tab svg{
+        width:14px;
+        height:14px;
+      }
+
+      .toggle-row{
+        align-items:flex-start;
+      }
     }
   </style>
 </head>
@@ -1112,175 +1259,261 @@
 
 <div class="app">
 
-  <!-- =========================================
-       MOBILE OVERLAY
-  ========================================== -->
-
-  <div class="overlay" id="overlay"></div>
-
-
-  <!-- =========================================
+  <!-- =========================
        SIDEBAR
-  ========================================== -->
+  ========================== -->
 
   <aside class="sidebar" id="sidebar">
 
     <div class="brand">
-
       <img
+        class="brand-logo"
         src="../logo.png"
         alt="Website Deals"
-        class="brand-logo"
-        onerror="this.style.display='none'"
       >
 
       <div class="brand-copy">
-
-        <div class="brand-name">
-          Website Deals
-        </div>
-
-        <div class="brand-sub">
-          Admin Control Center
-        </div>
-
+        <div class="brand-title">Website Deals</div>
+        <div class="brand-subtitle">Admin Control Center</div>
       </div>
-
     </div>
-
 
     <nav class="nav">
 
-      <div class="nav-section">
-        Marketplace
+      <div class="nav-label">Main</div>
+
+      <div class="nav-list">
+
+        <a class="nav-item" href="dashboard.html">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="7" rx="1"/>
+              <rect x="14" y="3" width="7" height="7" rx="1"/>
+              <rect x="3" y="14" width="7" height="7" rx="1"/>
+              <rect x="14" y="14" width="7" height="7" rx="1"/>
+            </svg>
+          </span>
+          Dashboard
+        </a>
+
+        <a class="nav-item" href="websites.html">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="14" rx="2"/>
+              <path d="M8 21h8"/>
+              <path d="M12 18v3"/>
+            </svg>
+          </span>
+          Websites
+        </a>
+
+        <a class="nav-item" href="categories.html">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 5h16"/>
+              <path d="M4 12h16"/>
+              <path d="M4 19h16"/>
+              <circle cx="8" cy="5" r="2"/>
+              <circle cx="15" cy="12" r="2"/>
+              <circle cx="10" cy="19" r="2"/>
+            </svg>
+          </span>
+          Categories
+        </a>
+
+        <a class="nav-item" href="orders.html">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M6 3h12l2 4H4l2-4Z"/>
+              <path d="M5 7v13h14V7"/>
+              <path d="M9 11h6"/>
+              <path d="M9 15h4"/>
+            </svg>
+          </span>
+          Orders
+        </a>
+
+        <a class="nav-item" href="customers.html">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <circle cx="9" cy="8" r="3"/>
+              <path d="M3 20c0-3.2 2.7-5 6-5s6 1.8 6 5"/>
+              <path d="M16 5.5c2.2.2 4 1.7 4 4"/>
+              <path d="M17 15c2 .6 3.3 2 3.3 4"/>
+            </svg>
+          </span>
+          Customers
+        </a>
+
       </div>
 
-      <a class="nav-link" href="dashboard.html">
-        <span class="nav-icon">⌂</span>
-        <span>Dashboard</span>
-      </a>
+      <div class="nav-label">Content</div>
 
-      <a class="nav-link" href="websites.html">
-        <span class="nav-icon">▦</span>
-        <span>Websites</span>
-      </a>
+      <div class="nav-list">
 
-      <a class="nav-link" href="categories.html">
-        <span class="nav-icon">◫</span>
-        <span>Categories</span>
-      </a>
+        <a class="nav-item" href="browse-ui.html">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="18" height="18" rx="3"/>
+              <path d="M8 8h8"/>
+              <path d="M8 12h5"/>
+              <path d="M8 16h7"/>
+            </svg>
+          </span>
+          Browse UI
+        </a>
 
-      <a class="nav-link" href="orders.html">
-        <span class="nav-icon">▤</span>
-        <span>Orders</span>
-      </a>
+        <a class="nav-item" href="homepage.html">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="m4 5 8-2 8 2v14l-8 2-8-2Z"/>
+              <path d="M12 3v18"/>
+            </svg>
+          </span>
+          Homepage
+        </a>
 
-      <a class="nav-link" href="payments.html">
-        <span class="nav-icon">৳</span>
-        <span>Payments</span>
-      </a>
+        <a class="nav-item" href="banners.html">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <circle cx="8" cy="10" r="1.5"/>
+              <path d="m5 16 4-4 3 3 2-2 5 3"/>
+            </svg>
+          </span>
+          Banners
+        </a>
 
-      <a class="nav-link" href="customers.html">
-        <span class="nav-icon">♙</span>
-        <span>Customers</span>
-      </a>
+        <a class="nav-item" href="newsletter.html">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <path d="m4 7 8 6 8-6"/>
+            </svg>
+          </span>
+          Newsletter
+        </a>
 
-      <a class="nav-link" href="newsletter.html">
-        <span class="nav-icon">✉</span>
-        <span>Newsletter</span>
-      </a>
-
-
-      <div class="nav-section">
-        Reports
       </div>
 
-      <a class="nav-link" href="reports.html">
-        <span class="nav-icon">▥</span>
-        <span>Reports</span>
-      </a>
+      <div class="nav-label">Finance</div>
 
-      <a class="nav-link" href="monthly-report.html">
-        <span class="nav-icon">◷</span>
-        <span>Monthly Report</span>
-      </a>
+      <div class="nav-list">
 
+        <a class="nav-item" href="payments.html">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <path d="M3 10h18"/>
+              <path d="M7 15h3"/>
+            </svg>
+          </span>
+          Payments
+        </a>
 
-      <div class="nav-section restricted-nav">
-        Restricted Controls
+        <a class="nav-item" href="reports.html">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 19V5"/>
+              <path d="M4 19h17"/>
+              <path d="m7 15 4-4 3 2 5-6"/>
+            </svg>
+          </span>
+          Reports
+        </a>
+
+        <a class="nav-item" href="monthly-report.html">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="4" width="18" height="17" rx="2"/>
+              <path d="M7 2v4"/>
+              <path d="M17 2v4"/>
+              <path d="M3 9h18"/>
+              <path d="M8 13h3"/>
+              <path d="M13 13h3"/>
+              <path d="M8 17h3"/>
+            </svg>
+          </span>
+          Monthly Report
+        </a>
+
       </div>
 
-      <a
-        class="nav-link restricted-nav"
-        href="admins.html"
-      >
-        <span class="nav-icon">♟</span>
-        <span>Admin Management</span>
-      </a>
+      <div class="nav-label">System</div>
 
-      <a
-        class="nav-link active restricted-nav"
-        href="settings.html"
-      >
-        <span class="nav-icon">⚙</span>
-        <span>System Settings</span>
-      </a>
+      <div class="nav-list">
+
+        <a class="nav-item" href="admins.html">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <circle cx="9" cy="8" r="3"/>
+              <path d="M3 20c0-3.2 2.7-5 6-5s6 1.8 6 5"/>
+              <path d="M16 8h5"/>
+              <path d="M18.5 5.5v5"/>
+            </svg>
+          </span>
+          Admins
+        </a>
+
+        <a class="nav-item active" href="settings.html">
+          <span class="nav-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z"/>
+              <path d="M4.9 4.9 7 7"/>
+              <path d="m17 17 2.1 2.1"/>
+              <path d="M4 12H1"/>
+              <path d="M23 12h-3"/>
+              <path d="m4.9 19.1 2.1-2.1"/>
+              <path d="M17 7l2.1-2.1"/>
+              <path d="M12 4V1"/>
+              <path d="M12 23v-3"/>
+            </svg>
+          </span>
+          Settings
+        </a>
+
+      </div>
 
     </nav>
-
 
     <div class="sidebar-bottom">
 
       <div class="admin-mini">
-
-        <div
-          class="admin-avatar"
-          id="adminAvatar"
-        >
-          SA
-        </div>
+        <div class="admin-avatar" id="adminAvatar">SA</div>
 
         <div class="admin-info">
-
-          <div
-            class="admin-name"
-            id="adminName"
-          >
-            Super Admin
-          </div>
-
-          <div
-            class="admin-role"
-            id="adminRole"
-          >
-            Super Admin
-          </div>
-
+          <div class="admin-name" id="adminName">Super Admin</div>
+          <div class="admin-role" id="adminRole">System Administrator</div>
         </div>
-
-        <button
-          class="logout-btn"
-          id="logoutBtn"
-          title="Sign out"
-          aria-label="Sign out"
-        >
-          ↪
-        </button>
-
       </div>
+
+      <button
+        class="logout-btn"
+        type="button"
+        id="logoutBtn"
+      >
+        <svg viewBox="0 0 24 24">
+          <path d="M10 17l5-5-5-5"/>
+          <path d="M15 12H3"/>
+          <path d="M21 3v18"/>
+        </svg>
+        Sign out
+      </button>
 
     </div>
 
   </aside>
 
+  <div
+    class="sidebar-overlay"
+    id="sidebarOverlay"
+  ></div>
 
-  <!-- =========================================
+  <!-- =========================
        MAIN
-  ========================================== -->
+  ========================== -->
 
   <main class="main">
-
-    <!-- TOPBAR -->
 
     <header class="topbar">
 
@@ -1289,266 +1522,331 @@
         <button
           class="mobile-menu"
           id="mobileMenu"
-          aria-label="Open menu"
+          type="button"
+          aria-label="Open navigation"
         >
-          ☰
+          <svg viewBox="0 0 24 24">
+            <path d="M4 6h16"/>
+            <path d="M4 12h16"/>
+            <path d="M4 18h16"/>
+          </svg>
         </button>
 
         <div class="breadcrumb">
-
           <span>Admin</span>
           <span>/</span>
-
-          <strong>
-            System Settings
-          </strong>
-
+          <strong>Settings</strong>
         </div>
 
       </div>
 
-
       <div class="topbar-actions">
 
         <button
-          class="btn marketplace-btn"
-          id="marketplaceBtn"
+          class="top-btn"
+          type="button"
+          id="resetTopBtn"
+          title="Reset settings"
         >
-          ↗ <span>Marketplace</span>
+          <svg viewBox="0 0 24 24">
+            <path d="M3 12a9 9 0 1 0 3-6.7"/>
+            <path d="M3 4v6h6"/>
+          </svg>
+          <span>Reset</span>
         </button>
 
         <button
-          class="btn"
-          id="printBtn"
-        >
-          ⎙ <span>Print</span>
-        </button>
-
-        <button
-          class="btn primary"
+          class="top-btn primary"
+          type="button"
           id="saveTopBtn"
         >
-          ✓ <span>Save Changes</span>
+          <svg viewBox="0 0 24 24">
+            <path d="M5 12.5 9.5 17 19 7.5"/>
+          </svg>
+          <span>Save Changes</span>
         </button>
 
       </div>
 
     </header>
 
+    <div class="content">
 
-    <!-- CONTENT -->
+      <!-- PAGE HEAD -->
 
-    <section class="content">
+      <div class="page-head">
 
-
-      <!-- =====================================
-           HERO
-      ====================================== -->
-
-      <section class="hero">
-
-        <div class="hero-content">
-
-          <div>
-
-            <div class="eyebrow">
-
-              <span class="eyebrow-dot"></span>
-
-              Restricted Control
-
-            </div>
-
-            <h1>
-              System Settings
-            </h1>
-
-            <p>
-              Control the core marketplace configuration,
-              checkout behavior, notifications, maintenance
-              messaging and administrative security preferences.
-            </p>
-
+        <div>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            System Control
           </div>
 
+          <h1 class="page-title">
+            Settings
+          </h1>
 
-          <div class="security-pill">
-
-            <span></span>
-
-            <span>
-              Super Admin Access
-            </span>
-
-          </div>
-
+          <p class="page-description">
+            Manage your Website Deals marketplace, checkout flow,
+            notifications, security and system appearance from one place.
+          </p>
         </div>
 
-      </section>
+        <div
+          class="save-state"
+          id="saveState"
+        >
+          <span class="save-state-dot"></span>
+          <span id="saveStateText">All changes saved</span>
+        </div>
 
+      </div>
 
-      <!-- =====================================
-           SETTINGS LAYOUT
-      ====================================== -->
+      <!-- SETTINGS -->
 
       <div class="settings-layout">
 
+        <!-- SETTINGS NAV -->
 
-        <!-- ===================================
-             MAIN SETTINGS
-        ==================================== -->
+        <aside class="settings-nav">
 
-        <div class="settings-main">
+          <div class="settings-nav-title">
+            Settings Menu
+          </div>
 
+          <button
+            class="settings-tab active"
+            type="button"
+            data-target="general"
+          >
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.8 1.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V20h-2.6v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1-1.8-1.8.1-.1A1.7 1.7 0 0 0 8 15a1.7 1.7 0 0 0-1.5-1H6v-2.6h.5A1.7 1.7 0 0 0 8 10a1.7 1.7 0 0 0-.3-1.9l-.1-.1 1.8-1.8.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.5V5H15v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1 1.8 1.8-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 1.5 1h.1V14h-.1a1.7 1.7 0 0 0-1.5 1Z"/>
+            </svg>
+            General
+          </button>
 
-          <!-- GENERAL -->
+          <button
+            class="settings-tab"
+            type="button"
+            data-target="marketplace"
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M4 5h16"/>
+              <path d="M5 5v14h14V5"/>
+              <path d="M8 9h8"/>
+              <path d="M8 13h5"/>
+            </svg>
+            Marketplace
+          </button>
 
-          <section class="settings-card">
+          <button
+            class="settings-tab"
+            type="button"
+            data-target="checkout"
+          >
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <path d="M3 10h18"/>
+              <path d="M7 15h4"/>
+            </svg>
+            Checkout
+          </button>
 
-            <div class="card-head">
+          <button
+            class="settings-tab"
+            type="button"
+            data-target="notifications"
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+              <path d="M10 21h4"/>
+            </svg>
+            Notifications
+          </button>
 
-              <div>
+          <button
+            class="settings-tab"
+            type="button"
+            data-target="maintenance"
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M12 3 2.8 20h18.4L12 3Z"/>
+              <path d="M12 9v5"/>
+              <path d="M12 17h.01"/>
+            </svg>
+            Maintenance
+          </button>
 
-                <div class="card-title">
-                  General Configuration
+          <button
+            class="settings-tab"
+            type="button"
+            data-target="security"
+          >
+            <svg viewBox="0 0 24 24">
+              <rect x="5" y="10" width="14" height="10" rx="2"/>
+              <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+              <circle cx="12" cy="15" r="1"/>
+            </svg>
+            Security
+          </button>
+
+          <button
+            class="settings-tab"
+            type="button"
+            data-target="appearance"
+          >
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="8"/>
+              <path d="M12 4v16"/>
+              <path d="M4 12h16"/>
+            </svg>
+            Appearance
+          </button>
+
+        </aside>
+
+        <!-- SETTINGS CONTENT -->
+
+        <div class="settings-content">
+
+          <!-- =========================
+               GENERAL
+          ========================== -->
+
+          <section
+            class="settings-section"
+            id="general"
+          >
+
+            <div class="section-head">
+
+              <div class="section-title-wrap">
+
+                <div class="section-icon">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.8 1.8-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.5V20h-2.6v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1-1.8-1.8.1-.1A1.7 1.7 0 0 0 8 15a1.7 1.7 0 0 0-1.5-1H6v-2.6h.5A1.7 1.7 0 0 0 8 10a1.7 1.7 0 0 0-.3-1.9l-.1-.1 1.8-1.8.1.1a1.7 1.7 0 0 0 1.9.3 1.7 1.7 0 0 0 1-1.5V5H15v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1 1.8 1.8-.1.1a1.7 1.7 0 0 0-.3 1.9 1.7 1.7 0 0 0 .3 1.9 1.7 1.7 0 0 0 1.5 1h.1V14h-.1a1.7 1.7 0 0 0-1.5 1Z"/>
+                  </svg>
                 </div>
 
-                <div class="card-subtitle">
-                  Basic marketplace identity and support information.
+                <div>
+                  <div class="section-title">
+                    General Settings
+                  </div>
+
+                  <div class="section-subtitle">
+                    Core identity and contact information for your marketplace.
+                  </div>
                 </div>
 
               </div>
 
+              <span class="section-badge">
+                Core
+              </span>
+
             </div>
 
+            <div class="section-body">
 
-            <div class="card-body">
-
-              <div class="fields">
+              <div class="form-grid">
 
                 <div class="field">
 
-                  <label for="siteName">
+                  <label class="label" for="siteName">
                     Site Name
                   </label>
 
                   <input
-                    class="input"
                     id="siteName"
                     type="text"
-                    placeholder="Website Deals"
+                    value="Website Deals"
+                    data-setting="siteName"
+                    autocomplete="organization"
                   >
 
                 </div>
 
-
                 <div class="field">
 
-                  <label for="tagline">
+                  <label class="label" for="tagline">
                     Tagline
                   </label>
 
                   <input
-                    class="input"
                     id="tagline"
                     type="text"
-                    placeholder="Premium Websites. Ready to Launch."
+                    value="Premium Websites. Ready to Launch."
+                    data-setting="tagline"
                   >
 
                 </div>
 
-
                 <div class="field">
 
-                  <label for="supportEmail">
+                  <label class="label" for="supportEmail">
                     Support Email
                   </label>
 
                   <input
-                    class="input"
                     id="supportEmail"
                     type="email"
-                    placeholder="support@websitedeals.com"
+                    value="support@websitedeals.com"
+                    data-setting="supportEmail"
+                    autocomplete="email"
                   >
 
                 </div>
 
-
                 <div class="field">
 
-                  <label for="supportPhone">
+                  <label class="label" for="supportPhone">
                     Support Phone
                   </label>
 
                   <input
-                    class="input"
                     id="supportPhone"
-                    type="text"
-                    placeholder="+880 1XXX-XXXXXX"
+                    type="tel"
+                    value="+880 1XXX-XXXXXX"
+                    data-setting="supportPhone"
+                    autocomplete="tel"
                   >
 
                 </div>
 
-
                 <div class="field">
 
-                  <label for="timezone">
+                  <label class="label" for="timezone">
                     Timezone
                   </label>
 
                   <select
-                    class="select"
                     id="timezone"
+                    data-setting="timezone"
                   >
-
-                    <option value="Asia/Dhaka">
-                      Asia/Dhaka
-                    </option>
-
-                    <option value="Asia/Kolkata">
-                      Asia/Kolkata
-                    </option>
-
-                    <option value="Asia/Dubai">
-                      Asia/Dubai
-                    </option>
-
-                    <option value="Asia/Singapore">
-                      Asia/Singapore
-                    </option>
-
-                    <option value="UTC">
-                      UTC
-                    </option>
-
+                    <option value="Asia/Dhaka">Asia/Dhaka</option>
+                    <option value="Asia/Kolkata">Asia/Kolkata</option>
+                    <option value="Asia/Dubai">Asia/Dubai</option>
+                    <option value="Asia/Singapore">Asia/Singapore</option>
+                    <option value="UTC">UTC</option>
                   </select>
 
                 </div>
 
-
                 <div class="field">
 
-                  <label for="currency">
+                  <label class="label" for="currency">
                     Currency
                   </label>
 
                   <select
-                    class="select"
                     id="currency"
+                    data-setting="currency"
                   >
-
-                    <option value="BDT">
-                      BDT — Bangladeshi Taka
-                    </option>
-
-                    <option value="USD">
-                      USD — US Dollar
-                    </option>
-
-                    <option value="INR">
-                      INR — Indian Rupee
-                    </option>
-
+                    <option value="BDT">BDT — Bangladeshi Taka</option>
+                    <option value="USD">USD — US Dollar</option>
+                    <option value="EUR">EUR — Euro</option>
                   </select>
 
                 </div>
@@ -1559,120 +1857,206 @@
 
           </section>
 
+          <!-- =========================
+               MARKETPLACE
+          ========================== -->
 
-          <!-- MARKETPLACE -->
+          <section
+            class="settings-section"
+            id="marketplace"
+          >
 
-          <section class="settings-card">
+            <div class="section-head">
 
-            <div class="card-head">
+              <div class="section-title-wrap">
 
-              <div>
-
-                <div class="card-title">
-                  Marketplace Configuration
+                <div class="section-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M4 5h16"/>
+                    <path d="M5 5v14h14V5"/>
+                    <path d="M8 9h8"/>
+                    <path d="M8 13h5"/>
+                  </svg>
                 </div>
 
-                <div class="card-subtitle">
-                  Public marketplace numbers and order identity.
+                <div>
+                  <div class="section-title">
+                    Marketplace Settings
+                  </div>
+
+                  <div class="section-subtitle">
+                    Control marketplace defaults, pricing and inventory display.
+                  </div>
                 </div>
 
               </div>
 
+              <span class="section-badge">
+                Commerce
+              </span>
+
             </div>
 
+            <div class="section-body">
 
-            <div class="card-body">
-
-              <div class="fields">
+              <div class="form-grid three">
 
                 <div class="field">
 
-                  <label for="startingPrice">
+                  <label class="label" for="startingPrice">
                     Starting Price
+                    <span class="hint">Minimum advertised price</span>
                   </label>
 
-                  <input
-                    class="input"
-                    id="startingPrice"
-                    type="number"
-                    min="0"
-                    step="1"
-                  >
+                  <div class="input-prefix">
+                    <span>৳</span>
 
-                  <div class="help">
-                    Used for marketplace pricing messages.
+                    <input
+                      id="startingPrice"
+                      type="number"
+                      min="0"
+                      step="1"
+                      value="325"
+                      data-setting="startingPrice"
+                    >
                   </div>
 
                 </div>
 
-
                 <div class="field">
 
-                  <label for="orderPrefix">
+                  <label class="label" for="orderPrefix">
                     Order Prefix
                   </label>
 
                   <input
-                    class="input"
                     id="orderPrefix"
                     type="text"
-                    maxlength="10"
-                    placeholder="WD-"
+                    value="WD-"
+                    data-setting="orderPrefix"
                   >
-
-                  <div class="help">
-                    Example: WD-1028
-                  </div>
 
                 </div>
 
-
                 <div class="field">
 
-                  <label for="websiteCount">
-                    Website Count
+                  <label class="label" for="websiteCount">
+                    Display Website Count
                   </label>
 
                   <input
-                    class="input"
                     id="websiteCount"
                     type="number"
                     min="0"
+                    value="11"
+                    data-setting="websiteCount"
                   >
 
                 </div>
 
-
                 <div class="field">
 
-                  <label for="customerCount">
-                    Customer Count
+                  <label class="label" for="customerCount">
+                    Display Customer Count
                   </label>
 
                   <input
-                    class="input"
                     id="customerCount"
                     type="number"
                     min="0"
+                    value="316"
+                    data-setting="customerCount"
                   >
 
                 </div>
 
-
                 <div class="field">
 
-                  <label for="rating">
-                    Marketplace Rating
+                  <label class="label" for="rating">
+                    Display Rating
                   </label>
 
                   <input
-                    class="input"
                     id="rating"
                     type="number"
                     min="0"
                     max="5"
-                    step=".1"
+                    step="0.1"
+                    value="4.9"
+                    data-setting="rating"
                   >
+
+                </div>
+
+              </div>
+
+              <div style="height:17px"></div>
+
+              <div class="toggle-list">
+
+                <div class="toggle-row">
+
+                  <div class="toggle-copy">
+                    <div class="toggle-title">
+                      Show Inventory Count
+                    </div>
+                    <div class="toggle-description">
+                      Display marketplace website inventory numbers publicly.
+                    </div>
+                  </div>
+
+                  <label class="switch">
+                    <input
+                      type="checkbox"
+                      id="showInventoryCount"
+                      checked
+                    >
+                    <span class="switch-track"></span>
+                  </label>
+
+                </div>
+
+                <div class="toggle-row">
+
+                  <div class="toggle-copy">
+                    <div class="toggle-title">
+                      Show Customer Count
+                    </div>
+                    <div class="toggle-description">
+                      Show the customer count in marketplace statistics.
+                    </div>
+                  </div>
+
+                  <label class="switch">
+                    <input
+                      type="checkbox"
+                      id="showCustomerCount"
+                      checked
+                    >
+                    <span class="switch-track"></span>
+                  </label>
+
+                </div>
+
+                <div class="toggle-row">
+
+                  <div class="toggle-copy">
+                    <div class="toggle-title">
+                      Show Marketplace Rating
+                    </div>
+                    <div class="toggle-description">
+                      Display the configured rating in public marketplace sections.
+                    </div>
+                  </div>
+
+                  <label class="switch">
+                    <input
+                      type="checkbox"
+                      id="showRating"
+                      checked
+                    >
+                    <span class="switch-track"></span>
+                  </label>
 
                 </div>
 
@@ -1682,167 +2066,139 @@
 
           </section>
 
+          <!-- =========================
+               CHECKOUT
+          ========================== -->
 
-          <!-- CHECKOUT -->
+          <section
+            class="settings-section"
+            id="checkout"
+          >
 
-          <section class="settings-card">
+            <div class="section-head">
 
-            <div class="card-head">
+              <div class="section-title-wrap">
 
-              <div>
-
-                <div class="card-title">
-                  Checkout &amp; Order Controls
-                </div>
-
-                <div class="card-subtitle">
-                  Control how orders and payment verification should behave.
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <div class="card-body">
-
-              <div class="notice info">
-
-                <div class="notice-icon">
-                  i
+                <div class="section-icon">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="3" y="5" width="18" height="14" rx="2"/>
+                    <path d="M3 10h18"/>
+                    <path d="M7 15h4"/>
+                  </svg>
                 </div>
 
                 <div>
-                  These switches control the intended marketplace
-                  behavior. Full enforcement should be connected
-                  to your backend or Firebase security rules.
+                  <div class="section-title">
+                    Checkout & Order Controls
+                  </div>
+
+                  <div class="section-subtitle">
+                    Define how orders and payments are processed.
+                  </div>
                 </div>
 
               </div>
 
+              <span class="section-badge">
+                Orders
+              </span>
+
+            </div>
+
+            <div class="section-body">
 
               <div class="toggle-list">
-
 
                 <div class="toggle-row">
 
                   <div class="toggle-copy">
-
                     <div class="toggle-title">
                       Auto Confirm Orders
                     </div>
 
                     <div class="toggle-description">
-                      Automatically move new orders into a confirmed
-                      state after submission.
+                      Automatically confirm an order after successful submission.
                     </div>
-
                   </div>
 
-
                   <label class="switch">
-
                     <input
                       type="checkbox"
-                      id="autoConfirmOrders"
+                      data-setting-bool="autoConfirmOrders"
                     >
-
-                    <span class="slider"></span>
-
+                    <span class="switch-track"></span>
                   </label>
 
                 </div>
 
-
                 <div class="toggle-row">
 
                   <div class="toggle-copy">
-
                     <div class="toggle-title">
                       Require Payment Verification
                     </div>
 
                     <div class="toggle-description">
-                      Require an admin payment review before completing
-                      an order.
+                      Keep orders pending until an admin verifies payment.
                     </div>
-
                   </div>
 
-
                   <label class="switch">
-
                     <input
                       type="checkbox"
-                      id="requirePaymentVerification"
+                      data-setting-bool="requirePaymentVerification"
+                      checked
                     >
-
-                    <span class="slider"></span>
-
+                    <span class="switch-track"></span>
                   </label>
 
                 </div>
 
-
                 <div class="toggle-row">
 
                   <div class="toggle-copy">
-
                     <div class="toggle-title">
                       Require Payment Screenshot
                     </div>
 
                     <div class="toggle-description">
-                      Ask customers to submit payment evidence with
-                      applicable orders.
+                      Ask customers to provide proof of payment before submission.
                     </div>
-
                   </div>
 
-
                   <label class="switch">
-
                     <input
                       type="checkbox"
-                      id="requirePaymentScreenshot"
+                      data-setting-bool="requirePaymentScreenshot"
+                      checked
                     >
-
-                    <span class="slider"></span>
-
+                    <span class="switch-track"></span>
                   </label>
 
                 </div>
 
-
                 <div class="toggle-row">
 
                   <div class="toggle-copy">
-
                     <div class="toggle-title">
                       Duplicate Order Protection
                     </div>
 
                     <div class="toggle-description">
-                      Enable duplicate-order checks before accepting
-                      a new checkout submission.
+                      Prevent repeated submissions for the same website and customer.
                     </div>
-
                   </div>
 
-
                   <label class="switch">
-
                     <input
                       type="checkbox"
-                      id="duplicateOrderProtection"
+                      data-setting-bool="duplicateOrderProtection"
+                      checked
                     >
-
-                    <span class="slider"></span>
-
+                    <span class="switch-track"></span>
                   </label>
 
                 </div>
-
 
               </div>
 
@@ -1850,248 +2206,249 @@
 
           </section>
 
+          <!-- =========================
+               NOTIFICATIONS
+          ========================== -->
 
-          <!-- NOTIFICATIONS -->
+          <section
+            class="settings-section"
+            id="notifications"
+          >
 
-          <section class="settings-card">
+            <div class="section-head">
 
-            <div class="card-head">
+              <div class="section-title-wrap">
 
-              <div>
-
-                <div class="card-title">
-                  Notifications
+                <div class="section-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+                    <path d="M10 21h4"/>
+                  </svg>
                 </div>
 
-                <div class="card-subtitle">
-                  Decide which administrative alerts are enabled.
+                <div>
+                  <div class="section-title">
+                    Notification Controls
+                  </div>
+
+                  <div class="section-subtitle">
+                    Decide which system events should trigger admin notifications.
+                  </div>
                 </div>
 
               </div>
 
+              <span class="section-badge">
+                Alerts
+              </span>
+
             </div>
 
-
-            <div class="card-body">
+            <div class="section-body">
 
               <div class="toggle-list">
-
 
                 <div class="toggle-row">
 
                   <div class="toggle-copy">
-
                     <div class="toggle-title">
                       Email Notifications
                     </div>
 
                     <div class="toggle-description">
-                      Enable administrative email notifications.
+                      Enable system-generated email notification workflows.
                     </div>
-
                   </div>
 
                   <label class="switch">
-
                     <input
                       type="checkbox"
-                      id="emailNotifications"
+                      data-setting-bool="emailNotifications"
+                      checked
                     >
-
-                    <span class="slider"></span>
-
+                    <span class="switch-track"></span>
                   </label>
 
                 </div>
 
-
                 <div class="toggle-row">
 
                   <div class="toggle-copy">
-
                     <div class="toggle-title">
                       New Order Alerts
                     </div>
 
                     <div class="toggle-description">
-                      Notify administrators when a new order arrives.
+                      Notify admins when a new website order is submitted.
                     </div>
-
                   </div>
 
                   <label class="switch">
-
                     <input
                       type="checkbox"
-                      id="newOrderAlerts"
+                      data-setting-bool="newOrderAlerts"
+                      checked
                     >
-
-                    <span class="slider"></span>
-
+                    <span class="switch-track"></span>
                   </label>
 
                 </div>
 
-
                 <div class="toggle-row">
 
                   <div class="toggle-copy">
-
                     <div class="toggle-title">
                       Admin Alerts
                     </div>
 
                     <div class="toggle-description">
-                      Enable system-level alerts for administrators.
+                      Enable important system and account alerts for admins.
                     </div>
-
                   </div>
 
                   <label class="switch">
-
                     <input
                       type="checkbox"
-                      id="adminAlerts"
+                      data-setting-bool="adminAlerts"
+                      checked
                     >
-
-                    <span class="slider"></span>
-
+                    <span class="switch-track"></span>
                   </label>
 
                 </div>
 
-
                 <div class="toggle-row">
 
                   <div class="toggle-copy">
-
                     <div class="toggle-title">
                       Newsletter Notifications
                     </div>
 
                     <div class="toggle-description">
-                      Notify admins about newsletter activity.
+                      Notify admins about newsletter activity and campaigns.
+                    </div>
+                  </div>
+
+                  <label class="switch">
+                    <input
+                      type="checkbox"
+                      data-setting-bool="newsletterNotifications"
+                      checked
+                    >
+                    <span class="switch-track"></span>
+                  </label>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+          <!-- =========================
+               MAINTENANCE
+          ========================== -->
+
+          <section
+            class="settings-section"
+            id="maintenance"
+          >
+
+            <div class="section-head">
+
+              <div class="section-title-wrap">
+
+                <div class="section-icon">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 3 2.8 20h18.4L12 3Z"/>
+                    <path d="M12 9v5"/>
+                    <path d="M12 17h.01"/>
+                  </svg>
+                </div>
+
+                <div>
+                  <div class="section-title">
+                    Maintenance Mode
+                  </div>
+
+                  <div class="section-subtitle">
+                    Temporarily restrict the public marketplace during updates.
+                  </div>
+                </div>
+
+              </div>
+
+              <span class="section-badge">
+                System
+              </span>
+
+            </div>
+
+            <div class="section-body">
+
+              <div
+                class="maintenance-box"
+                id="maintenanceBox"
+              >
+
+                <div class="maintenance-head">
+
+                  <div>
+
+                    <div class="maintenance-title">
+                      Marketplace Maintenance
+                    </div>
+
+                    <div class="maintenance-copy">
+                      When enabled, your public marketplace can display the
+                      maintenance message instead of the normal storefront.
                     </div>
 
                   </div>
 
                   <label class="switch">
-
                     <input
                       type="checkbox"
-                      id="newsletterNotifications"
+                      data-setting-bool="maintenanceMode"
+                      id="maintenanceMode"
                     >
-
-                    <span class="slider"></span>
-
+                    <span class="switch-track"></span>
                   </label>
 
                 </div>
 
-
               </div>
 
-            </div>
+              <div style="height:17px"></div>
 
-          </section>
+              <div class="form-grid">
 
+                <div class="field">
 
-          <!-- MAINTENANCE -->
-
-          <section class="settings-card">
-
-            <div class="card-head">
-
-              <div>
-
-                <div class="card-title">
-                  Maintenance Mode
-                </div>
-
-                <div class="card-subtitle">
-                  Prepare a public maintenance message without locking
-                  administrators out of the control panel.
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <div class="card-body">
-
-              <div class="notice warning">
-
-                <div class="notice-icon">
-                  !
-                </div>
-
-                <div>
-                  Maintenance mode is a configuration flag only in this
-                  prototype. Connect it to the public website before
-                  using it as a real access-control mechanism.
-                </div>
-
-              </div>
-
-
-              <div class="toggle-row">
-
-                <div class="toggle-copy">
-
-                  <div class="toggle-title">
-                    Enable Maintenance Mode
-                  </div>
-
-                  <div class="toggle-description">
-                    Show the configured maintenance state on the
-                    public marketplace when backend integration is active.
-                  </div>
-
-                </div>
-
-
-                <label class="switch">
-
-                  <input
-                    type="checkbox"
-                    id="maintenanceMode"
-                  >
-
-                  <span class="slider"></span>
-
-                </label>
-
-              </div>
-
-
-              <div class="fields" style="margin-top:17px;">
-
-                <div class="field full">
-
-                  <label for="maintenanceTitle">
+                  <label class="label" for="maintenanceTitle">
                     Maintenance Title
                   </label>
 
                   <input
-                    class="input"
                     id="maintenanceTitle"
                     type="text"
+                    value="We’ll be back shortly"
+                    data-setting="maintenanceTitle"
                   >
 
                 </div>
 
-
                 <div class="field full">
 
-                  <label for="maintenanceMessage">
+                  <label class="label" for="maintenanceMessage">
                     Maintenance Message
                   </label>
 
                   <textarea
-                    class="textarea"
                     id="maintenanceMessage"
-                  ></textarea>
+                    data-setting="maintenanceMessage"
+                  >Website Deals is currently under maintenance. Please check back soon.</textarea>
 
                 </div>
 
@@ -2101,152 +2458,136 @@
 
           </section>
 
+          <!-- =========================
+               SECURITY
+          ========================== -->
 
-          <!-- SECURITY -->
+          <section
+            class="settings-section"
+            id="security"
+          >
 
-          <section class="settings-card">
+            <div class="section-head">
 
-            <div class="card-head">
+              <div class="section-title-wrap">
 
-              <div>
-
-                <div class="card-title">
-                  Security Preferences
-                </div>
-
-                <div class="card-subtitle">
-                  Administrative session and access-monitoring preferences.
-                </div>
-
-              </div>
-
-            </div>
-
-
-            <div class="card-body">
-
-
-              <div class="notice warning">
-
-                <div class="notice-icon">
-                  !
+                <div class="section-icon">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="5" y="10" width="14" height="10" rx="2"/>
+                    <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+                    <circle cx="12" cy="15" r="1"/>
+                  </svg>
                 </div>
 
                 <div>
-                  Security settings stored in browser storage are
-                  configuration preferences only. Real authentication,
-                  authorization and session expiry must be enforced
-                  server-side or through Firebase.
+                  <div class="section-title">
+                    Security
+                  </div>
+
+                  <div class="section-subtitle">
+                    Manage the prototype admin session and access controls.
+                  </div>
                 </div>
 
               </div>
 
+              <span class="section-badge">
+                Protected
+              </span>
 
-              <div class="fields">
+            </div>
+
+            <div class="section-body">
+
+              <div class="form-grid">
 
                 <div class="field">
 
-                  <label for="sessionTimeout">
+                  <label class="label" for="sessionTimeout">
                     Session Timeout
                   </label>
 
                   <select
-                    class="select"
                     id="sessionTimeout"
+                    data-setting="sessionTimeout"
                   >
-
-                    <option value="15">
-                      15 Minutes
-                    </option>
-
-                    <option value="30">
-                      30 Minutes
-                    </option>
-
-                    <option value="60">
-                      1 Hour
-                    </option>
-
-                    <option value="120">
-                      2 Hours
-                    </option>
-
-                    <option value="240">
-                      4 Hours
-                    </option>
-
+                    <option value="15">15 minutes</option>
+                    <option value="30">30 minutes</option>
+                    <option value="60">60 minutes</option>
+                    <option value="120">2 hours</option>
+                    <option value="0">No automatic timeout</option>
                   </select>
 
                 </div>
 
               </div>
 
+              <div style="height:17px"></div>
 
-              <div
-                class="toggle-list"
-                style="margin-top:10px;"
-              >
-
+              <div class="toggle-list">
 
                 <div class="toggle-row">
 
                   <div class="toggle-copy">
-
                     <div class="toggle-title">
                       Login Protection
                     </div>
 
                     <div class="toggle-description">
-                      Enable additional login protection when backend
-                      authentication is connected.
+                      Keep admin login protection enabled.
                     </div>
-
                   </div>
 
-
                   <label class="switch">
-
                     <input
                       type="checkbox"
-                      id="loginProtection"
+                      data-setting-bool="loginProtection"
+                      checked
                     >
-
-                    <span class="slider"></span>
-
+                    <span class="switch-track"></span>
                   </label>
 
                 </div>
 
-
                 <div class="toggle-row">
 
                   <div class="toggle-copy">
-
                     <div class="toggle-title">
                       Access Logging
                     </div>
 
                     <div class="toggle-description">
-                      Record administrator access activity when an
-                      activity-log backend is available.
+                      Keep a local record of important admin access events.
                     </div>
-
                   </div>
 
-
                   <label class="switch">
-
                     <input
                       type="checkbox"
-                      id="accessLogging"
+                      data-setting-bool="accessLogging"
+                      checked
                     >
-
-                    <span class="slider"></span>
-
+                    <span class="switch-track"></span>
                   </label>
 
                 </div>
 
+              </div>
+
+              <div style="height:17px"></div>
+
+              <div class="danger-box">
+
+                <div class="danger-title">
+                  Prototype Authentication
+                </div>
+
+                <div class="danger-copy">
+                  This admin interface currently uses browser
+                  SessionStorage/LocalStorage for prototype authentication
+                  and configuration. It is not a production-grade security
+                  system until connected to a real backend authentication layer.
+                </div>
 
               </div>
 
@@ -2254,57 +2595,190 @@
 
           </section>
 
+          <!-- =========================
+               APPEARANCE
+          ========================== -->
 
-          <!-- APPEARANCE -->
+          <section
+            class="settings-section"
+            id="appearance"
+          >
 
-          <section class="settings-card">
+            <div class="section-head">
 
-            <div class="card-head">
+              <div class="section-title-wrap">
 
-              <div>
-
-                <div class="card-title">
-                  Admin Appearance
+                <div class="section-icon">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="8"/>
+                    <path d="M12 4v16"/>
+                    <path d="M4 12h16"/>
+                  </svg>
                 </div>
 
-                <div class="card-subtitle">
-                  Keep the Website Deals admin visual identity consistent.
+                <div>
+                  <div class="section-title">
+                    Appearance
+                  </div>
+
+                  <div class="section-subtitle">
+                    Configure the main marketplace accent color and visual identity.
+                  </div>
+                </div>
+
+              </div>
+
+              <span class="section-badge">
+                Branding
+              </span>
+
+            </div>
+
+            <div class="section-body">
+
+              <div class="form-grid">
+
+                <div class="field">
+
+                  <label class="label">
+                    Accent Color
+                    <span class="hint">Primary brand color</span>
+                  </label>
+
+                  <div class="color-control">
+
+                    <input
+                      class="color-input"
+                      id="accentColorPicker"
+                      type="color"
+                      value="#18a957"
+                    >
+
+                    <input
+                      class="color-code"
+                      id="accentColor"
+                      type="text"
+                      value="#18a957"
+                      data-setting="accentColor"
+                      maxlength="7"
+                    >
+
+                  </div>
+
+                </div>
+
+                <div class="field">
+
+                  <label class="label">
+                    Current Accent
+                  </label>
+
+                  <div class="color-preview">
+
+                    <span
+                      class="color-dot"
+                      id="accentPreview"
+                    ></span>
+
+                    <span id="accentPreviewText">
+                      #18A957
+                    </span>
+
+                  </div>
+
                 </div>
 
               </div>
 
             </div>
 
+          </section>
 
-            <div class="card-body">
+          <!-- =========================
+               SYSTEM INFO
+          ========================== -->
 
-              <div class="field">
+          <section class="settings-section">
 
-                <label for="accentColor">
-                  Admin Accent Color
-                </label>
+            <div class="section-head">
 
-                <div class="color-row">
+              <div class="section-title-wrap">
 
-                  <input
-                    class="color-input"
-                    id="accentColor"
-                    type="color"
-                    value="#18a957"
+                <div class="section-icon">
+                  <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path d="M12 10v6"/>
+                    <path d="M12 7h.01"/>
+                  </svg>
+                </div>
+
+                <div>
+                  <div class="section-title">
+                    System Information
+                  </div>
+
+                  <div class="section-subtitle">
+                    Current environment and local configuration status.
+                  </div>
+                </div>
+
+              </div>
+
+              <span class="section-badge">
+                Local
+              </span>
+
+            </div>
+
+            <div class="section-body">
+
+              <div class="info-grid">
+
+                <div class="info-card">
+                  <div class="info-label">Environment</div>
+                  <div class="info-value">Prototype</div>
+                </div>
+
+                <div class="info-card">
+                  <div class="info-label">Storage</div>
+                  <div class="info-value">LocalStorage</div>
+                </div>
+
+                <div class="info-card">
+                  <div class="info-label">Currency</div>
+                  <div
+                    class="info-value"
+                    id="systemCurrency"
                   >
+                    BDT
+                  </div>
+                </div>
 
-                  <input
-                    class="input color-value"
-                    id="accentColorText"
-                    type="text"
-                    value="#18a957"
-                    maxlength="7"
+                <div class="info-card">
+                  <div class="info-label">Timezone</div>
+                  <div
+                    class="info-value"
+                    id="systemTimezone"
                   >
-
+                    Asia/Dhaka
+                  </div>
                 </div>
 
-                <div class="help">
-                  Current Website Deals admin accent: #18a957
+                <div class="info-card">
+                  <div class="info-label">Admin Role</div>
+                  <div
+                    class="info-value"
+                    id="systemRole"
+                  >
+                    Super Admin
+                  </div>
+                </div>
+
+                <div class="info-card">
+                  <div class="info-label">Settings Key</div>
+                  <div class="info-value">
+                    websiteDealsSettings
+                  </div>
                 </div>
 
               </div>
@@ -2312,658 +2786,228 @@
             </div>
 
           </section>
-
-
-          <!-- ACTION FOOTER -->
-
-          <section class="settings-card">
-
-            <div class="bottom-actions">
-
-              <div class="bottom-note">
-
-                Changes are saved to browser storage in this prototype.
-                Backend/Firebase integration can replace this later.
-
-              </div>
-
-
-              <div class="bottom-buttons">
-
-                <button
-                  class="btn"
-                  id="resetBtn"
-                >
-                  Reset
-                </button>
-
-                <button
-                  class="btn primary"
-                  id="saveBtn"
-                >
-                  ✓ Save Changes
-                </button>
-
-              </div>
-
-            </div>
-
-          </section>
-
 
         </div>
 
-
-        <!-- ===================================
-             SIDE COLUMN
-        ==================================== -->
-
-        <aside class="side-column">
-
-
-          <!-- SAVE -->
-
-          <section class="side-card">
-
-            <div class="side-head">
-
-              <div class="side-title">
-                Settings Control
-              </div>
-
-              <div class="side-sub">
-                Save or restore your current marketplace configuration.
-              </div>
-
-            </div>
-
-
-            <div class="side-body">
-
-              <div class="save-panel">
-
-                <button
-                  class="btn primary"
-                  id="sideSaveBtn"
-                >
-                  ✓ Save Settings
-                </button>
-
-                <button
-                  class="btn"
-                  id="sideResetBtn"
-                >
-                  ↺ Restore Defaults
-                </button>
-
-                <button
-                  class="btn"
-                  id="exportBtn"
-                >
-                  ↓ Export Settings
-                </button>
-
-                <button
-                  class="btn"
-                  id="importBtn"
-                >
-                  ↑ Import Settings
-                </button>
-
-                <input
-                  type="file"
-                  id="importFile"
-                  accept=".json,application/json"
-                  hidden
-                >
-
-                <div
-                  class="save-state"
-                  id="saveState"
-                >
-
-                  <span class="state-dot saved"></span>
-
-                  <span>
-                    All changes saved
-                  </span>
-
-                </div>
-
-              </div>
-
-            </div>
-
-          </section>
-
-
-          <!-- MARKETPLACE SUMMARY -->
-
-          <section class="side-card">
-
-            <div class="side-head">
-
-              <div class="side-title">
-                Marketplace Preview
-              </div>
-
-              <div class="side-sub">
-                Quick view of the public-facing values.
-              </div>
-
-            </div>
-
-
-            <div class="side-body">
-
-              <div class="summary-item">
-
-                <span class="summary-label">
-                  Site
-                </span>
-
-                <strong
-                  class="summary-value"
-                  id="previewSiteName"
-                >
-                  Website Deals
-                </strong>
-
-              </div>
-
-
-              <div class="summary-item">
-
-                <span class="summary-label">
-                  Starting Price
-                </span>
-
-                <strong
-                  class="summary-value"
-                  id="previewStartingPrice"
-                >
-                  ৳325
-                </strong>
-
-              </div>
-
-
-              <div class="summary-item">
-
-                <span class="summary-label">
-                  Websites
-                </span>
-
-                <strong
-                  class="summary-value"
-                  id="previewWebsiteCount"
-                >
-                  11
-                </strong>
-
-              </div>
-
-
-              <div class="summary-item">
-
-                <span class="summary-label">
-                  Customers
-                </span>
-
-                <strong
-                  class="summary-value"
-                  id="previewCustomerCount"
-                >
-                  316
-                </strong>
-
-              </div>
-
-
-              <div class="summary-item">
-
-                <span class="summary-label">
-                  Rating
-                </span>
-
-                <strong
-                  class="summary-value"
-                  id="previewRating"
-                >
-                  4.9 / 5
-                </strong>
-
-              </div>
-
-
-              <div class="summary-item">
-
-                <span class="summary-label">
-                  Currency
-                </span>
-
-                <strong
-                  class="summary-value"
-                  id="previewCurrency"
-                >
-                  BDT
-                </strong>
-
-              </div>
-
-            </div>
-
-          </section>
-
-
-          <!-- SYSTEM INFO -->
-
-          <section class="side-card">
-
-            <div class="side-head">
-
-              <div class="side-title">
-                System Information
-              </div>
-
-              <div class="side-sub">
-                Current admin environment.
-              </div>
-
-            </div>
-
-
-            <div class="system-list">
-
-              <div class="system-row">
-
-                <span class="system-key">
-                  Mode
-                </span>
-
-                <span class="badge">
-                  Prototype
-                </span>
-
-              </div>
-
-
-              <div class="system-row">
-
-                <span class="system-key">
-                  Version
-                </span>
-
-                <strong class="system-value">
-                  1.0.0
-                </strong>
-
-              </div>
-
-
-              <div class="system-row">
-
-                <span class="system-key">
-                  Storage
-                </span>
-
-                <strong class="system-value">
-                  LocalStorage
-                </strong>
-
-              </div>
-
-
-              <div class="system-row">
-
-                <span class="system-key">
-                  Settings Key
-                </span>
-
-                <strong class="system-value">
-                  websiteDealsSettings
-                </strong>
-
-              </div>
-
-
-              <div class="system-row">
-
-                <span class="system-key">
-                  Admin
-                </span>
-
-                <strong
-                  class="system-value"
-                  id="systemAdmin"
-                >
-                  Super Admin
-                </strong>
-
-              </div>
-
-            </div>
-
-          </section>
-
-
-        </aside>
+      </div>
+
+      <!-- SAVE BAR -->
+
+      <div class="save-bar">
+
+        <div class="save-message">
+          <strong>System settings</strong>
+          are stored locally in this prototype environment.
+        </div>
+
+        <div class="save-actions">
+
+          <button
+            class="action-btn"
+            type="button"
+            id="resetBtn"
+          >
+            Reset
+          </button>
+
+          <button
+            class="action-btn primary"
+            type="button"
+            id="saveBtn"
+          >
+            Save Changes
+          </button>
+
+        </div>
 
       </div>
 
-
-    </section>
+    </div>
 
   </main>
 
 </div>
 
-
-<!-- =========================================
+<!-- =========================
      TOAST
-========================================== -->
+========================== -->
 
 <div
   class="toast"
   id="toast"
+  role="status"
+  aria-live="polite"
 >
 
   <div class="toast-icon">
-    ✓
+    <svg viewBox="0 0 24 24">
+      <path d="M5 12.5 9.5 17 19 7.5"/>
+    </svg>
   </div>
 
-  <div id="toastMessage">
-    Done
+  <div>
+    <div
+      class="toast-title"
+      id="toastTitle"
+    >
+      Saved
+    </div>
+
+    <div
+      class="toast-message"
+      id="toastMessage"
+    >
+      Settings saved successfully.
+    </div>
   </div>
 
 </div>
 
-
 <script>
 /* =========================================================
    WEBSITE DEALS
-   SYSTEM SETTINGS
-   admin/settings.html
+   ADMIN SETTINGS
 ========================================================= */
 
 (function(){
 
   "use strict";
 
+  /* =========================
+     AUTH
+  ========================== */
 
-  /* =======================================================
-     AUTHENTICATION
-  ======================================================= */
-
-  const AUTH_KEY =
-    "websiteDealsAdminAuth";
-
+  const AUTH_KEY = "websiteDealsAdminAuth";
 
   function getAdminSession(){
-
     try{
-
-      const raw =
-        sessionStorage.getItem(
-          AUTH_KEY
-        );
+      const raw = sessionStorage.getItem(AUTH_KEY);
 
       if(!raw){
         return null;
       }
 
-      const session =
-        JSON.parse(raw);
+      const session = JSON.parse(raw);
 
-      if(
-        !session ||
-        session.authenticated !== true
-      ){
-
+      if(!session || session.authenticated !== true){
         return null;
-
       }
 
       return session;
 
     }catch(error){
-
       return null;
-
     }
-
   }
 
-
-  const adminSession =
-    getAdminSession();
-
+  const adminSession = getAdminSession();
 
   if(!adminSession){
-
-    window.location.replace(
-      "login/"
-    );
-
+    window.location.replace("login/");
     return;
-
   }
 
+  /* =========================
+     ELEMENTS
+  ========================== */
 
-  /* =======================================================
-     SUPER ADMIN PROTECTION
-  ======================================================= */
+  const $ = (selector) => document.querySelector(selector);
 
-  const role =
-    String(
-      adminSession.role || ""
-    ).toLowerCase();
+  const $$ = (selector) => [
+    ...document.querySelectorAll(selector)
+  ];
 
-
-  const isSuperAdmin =
-    role === "superadmin";
-
-
-  if(!isSuperAdmin){
-
-    document.body.innerHTML = `
-
-      <div style="
-        min-height:100vh;
-        display:grid;
-        place-items:center;
-        background:#f5f8f6;
-        font-family:DM Sans,Arial,sans-serif;
-        padding:20px;
-      ">
-
-        <div style="
-          width:min(440px,100%);
-          background:#fff;
-          border:1px solid #e4ebe6;
-          border-radius:22px;
-          padding:30px;
-          text-align:center;
-          box-shadow:0 18px 50px rgba(20,38,27,.08);
-        ">
-
-          <div style="
-            width:54px;
-            height:54px;
-            display:grid;
-            place-items:center;
-            margin:0 auto 16px;
-            border-radius:16px;
-            background:#fff0f0;
-            color:#dc4c4c;
-            font-size:23px;
-            font-weight:800;
-          ">
-            !
-          </div>
-
-          <h1 style="
-            font-size:23px;
-            margin-bottom:8px;
-            color:#172019;
-          ">
-            Restricted Access
-          </h1>
-
-          <p style="
-            color:#738078;
-            font-size:12px;
-            line-height:1.7;
-            margin-bottom:20px;
-          ">
-            System Settings can only be accessed
-            by a Super Admin account.
-          </p>
-
-          <a
-            href="dashboard.html"
-            style="
-              display:inline-flex;
-              height:42px;
-              padding:0 16px;
-              align-items:center;
-              justify-content:center;
-              border-radius:11px;
-              background:#18a957;
-              color:#fff;
-              font-size:12px;
-              font-weight:700;
-              text-decoration:none;
-            "
-          >
-            Back to Dashboard
-          </a>
-
-        </div>
-
-      </div>
-
-    `;
-
-    return;
-
-  }
-
-
-  /* =======================================================
+  /* =========================
      DEFAULT SETTINGS
-  ======================================================= */
+  ========================== */
 
   const DEFAULT_SETTINGS = {
 
-    siteName:
-      "Website Deals",
+    siteName:"Website Deals",
 
-    tagline:
-      "Premium Websites. Ready to Launch.",
+    tagline:"Premium Websites. Ready to Launch.",
 
-    supportEmail:
-      "support@websitedeals.com",
+    supportEmail:"support@websitedeals.com",
 
-    supportPhone:
-      "+880 1XXX-XXXXXX",
+    supportPhone:"+880 1XXX-XXXXXX",
 
-    timezone:
-      "Asia/Dhaka",
+    timezone:"Asia/Dhaka",
 
-    currency:
-      "BDT",
+    currency:"BDT",
 
-    startingPrice:
-      325,
+    startingPrice:325,
 
-    orderPrefix:
-      "WD-",
+    orderPrefix:"WD-",
 
-    websiteCount:
-      11,
+    websiteCount:11,
 
-    customerCount:
-      316,
+    customerCount:316,
 
-    rating:
-      4.9,
+    rating:4.9,
 
-    autoConfirmOrders:
-      false,
+    autoConfirmOrders:false,
 
-    requirePaymentVerification:
-      true,
+    requirePaymentVerification:true,
 
-    requirePaymentScreenshot:
-      true,
+    requirePaymentScreenshot:true,
 
-    duplicateOrderProtection:
-      true,
+    duplicateOrderProtection:true,
 
-    emailNotifications:
-      true,
+    emailNotifications:true,
 
-    newOrderAlerts:
-      true,
+    newOrderAlerts:true,
 
-    adminAlerts:
-      true,
+    adminAlerts:true,
 
-    newsletterNotifications:
-      true,
+    newsletterNotifications:true,
 
-    maintenanceMode:
-      false,
+    maintenanceMode:false,
 
-    maintenanceTitle:
-      "We’ll be back shortly",
+    maintenanceTitle:"We’ll be back shortly",
 
     maintenanceMessage:
       "Website Deals is currently under maintenance. Please check back soon.",
 
-    sessionTimeout:
-      "30",
+    sessionTimeout:"30",
 
-    loginProtection:
-      true,
+    loginProtection:true,
 
-    accessLogging:
-      true,
+    accessLogging:true,
 
-    accentColor:
-      "#18a957"
+    accentColor:"#18a957",
+
+    showInventoryCount:true,
+
+    showCustomerCount:true,
+
+    showRating:true
 
   };
 
+  const STORAGE_KEY = "websiteDealsSettings";
 
-  const STORAGE_KEY =
-    "websiteDealsSettings";
+  /* =========================
+     STATE
+  ========================== */
 
+  let settings = loadSettings();
 
-  /* =======================================================
-     DOM
-  ======================================================= */
+  let originalSettings = JSON.parse(
+    JSON.stringify(settings)
+  );
 
-  const $ =
-    selector =>
-      document.querySelector(
-        selector
-      );
+  let dirty = false;
 
+  /* =========================
+     LOAD SETTINGS
+  ========================== */
 
-  /* =======================================================
-     STORAGE
-  ======================================================= */
-
-  function readSettings(){
+  function loadSettings(){
 
     try{
 
       const raw =
-        localStorage.getItem(
-          STORAGE_KEY
-        );
+        localStorage.getItem(STORAGE_KEY);
 
       if(!raw){
 
@@ -2977,253 +3021,177 @@
         JSON.parse(raw);
 
       return {
-
         ...DEFAULT_SETTINGS,
-
         ...(stored || {})
-
       };
 
     }catch(error){
+
+      console.warn(
+        "Unable to load settings:",
+        error
+      );
 
       return {
         ...DEFAULT_SETTINGS
       };
-
     }
-
   }
 
+  /* =========================
+     SAVE SETTINGS
+  ========================== */
 
-  let savedSettings =
-    readSettings();
+  function saveSettings(){
 
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(settings)
+    );
 
-  /* =======================================================
-     HELPERS
-  ======================================================= */
-
-  function number(value){
-
-    const parsed =
-      Number(value);
-
-    return Number.isFinite(parsed)
-      ? parsed
-      : 0;
-
-  }
-
-
-  function money(value){
-
-    const currency =
-      $("#currency")
-        ? $("#currency").value
-        : "BDT";
-
-    if(currency === "BDT"){
-
-      return "৳" +
-        new Intl.NumberFormat(
-          "en-BD",
-          {
-            maximumFractionDigits:0
-          }
-        ).format(
-          number(value)
-        );
-
-    }
-
-    try{
-
-      return new Intl.NumberFormat(
-        undefined,
-        {
-          style:"currency",
-          currency
-        }
-      ).format(
-        number(value)
+    originalSettings =
+      JSON.parse(
+        JSON.stringify(settings)
       );
 
-    }catch(error){
+    setDirty(false);
 
-      return String(value);
-
-    }
-
+    showToast(
+      "Settings saved",
+      "Your system settings have been saved successfully."
+    );
   }
 
+  /* =========================
+     APPLY SETTINGS TO UI
+  ========================== */
 
-  function initials(value){
+  function applySettingsToUI(){
 
-    const parts =
-      String(
-        value || "Admin"
-      )
-        .trim()
-        .split(/\s+/)
-        .filter(Boolean);
+    $$("[data-setting]").forEach(
+      (element) => {
 
-    if(!parts.length){
-      return "A";
-    }
-
-    if(parts.length === 1){
-
-      return parts[0]
-        .slice(0,2)
-        .toUpperCase();
-
-    }
-
-    return (
-
-      parts[0][0] +
-      parts[parts.length - 1][0]
-
-    ).toUpperCase();
-
-  }
-
-
-  /* =======================================================
-     ADMIN PROFILE
-  ======================================================= */
-
-  const adminName =
-    adminSession.name ||
-    adminSession.email ||
-    "Super Admin";
-
-
-  const adminRole =
-    adminSession.role ||
-    "superAdmin";
-
-
-  $("#adminName").textContent =
-    adminName;
-
-
-  $("#adminRole").textContent =
-    String(adminRole)
-      .replace(
-        /([a-z])([A-Z])/g,
-        "$1 $2"
-      )
-      .replace(
-        /^./,
-        char =>
-          char.toUpperCase()
-      );
-
-
-  $("#adminAvatar").textContent =
-    initials(adminName);
-
-
-  $("#systemAdmin").textContent =
-    adminName;
-
-
-  /* =======================================================
-     FORM ELEMENT MAP
-  ======================================================= */
-
-  const TEXT_FIELDS = [
-
-    "siteName",
-    "tagline",
-    "supportEmail",
-    "supportPhone",
-    "timezone",
-    "currency",
-    "startingPrice",
-    "orderPrefix",
-    "websiteCount",
-    "customerCount",
-    "rating",
-    "maintenanceTitle",
-    "maintenanceMessage",
-    "sessionTimeout",
-    "accentColor"
-
-  ];
-
-
-  const TOGGLE_FIELDS = [
-
-    "autoConfirmOrders",
-    "requirePaymentVerification",
-    "requirePaymentScreenshot",
-    "duplicateOrderProtection",
-    "emailNotifications",
-    "newOrderAlerts",
-    "adminAlerts",
-    "newsletterNotifications",
-    "maintenanceMode",
-    "loginProtection",
-    "accessLogging"
-
-  ];
-
-
-  /* =======================================================
-     GET FORM DATA
-  ======================================================= */
-
-  function getFormData(){
-
-    const data = {};
-
-
-    TEXT_FIELDS.forEach(
-      key => {
-
-        const element =
-          $("#" + key);
-
-        if(!element){
-          return;
-        }
+        const key =
+          element.dataset.setting;
 
         if(
-          [
-            "startingPrice",
-            "websiteCount",
-            "customerCount",
-            "rating"
-          ].includes(key)
+          Object.prototype.hasOwnProperty.call(
+            settings,
+            key
+          )
         ){
 
-          data[key] =
-            number(
-              element.value
-            );
-
-        }else{
-
-          data[key] =
-            element.value;
+          element.value =
+            settings[key] ?? "";
 
         }
 
       }
     );
 
+    $$("[data-setting-bool]").forEach(
+      (element) => {
 
-    TOGGLE_FIELDS.forEach(
-      key => {
+        const key =
+          element.dataset.settingBool;
+
+        if(
+          Object.prototype.hasOwnProperty.call(
+            settings,
+            key
+          )
+        ){
+
+          element.checked =
+            Boolean(settings[key]);
+
+        }
+
+      }
+    );
+
+    const extraBooleans = [
+      "showInventoryCount",
+      "showCustomerCount",
+      "showRating"
+    ];
+
+    extraBooleans.forEach(
+      (key) => {
 
         const element =
-          $("#" + key);
+          document.getElementById(key);
 
         if(element){
 
-          data[key] =
+          element.checked =
+            Boolean(settings[key]);
+
+        }
+
+      }
+    );
+
+    updateAccentUI();
+
+    updateMaintenanceUI();
+
+    updateSystemInfo();
+
+    setDirty(false);
+  }
+
+  /* =========================
+     READ UI SETTINGS
+  ========================== */
+
+  function readSettingsFromUI(){
+
+    $$("[data-setting]").forEach(
+      (element) => {
+
+        const key =
+          element.dataset.setting;
+
+        if(!key){
+          return;
+        }
+
+        let value =
+          element.value;
+
+        if([
+          "startingPrice",
+          "websiteCount",
+          "customerCount"
+        ].includes(key)){
+
+          value =
+            Number(value || 0);
+
+        }
+
+        if(key === "rating"){
+
+          value =
+            Number(value || 0);
+
+        }
+
+        settings[key] = value;
+
+      }
+    );
+
+    $$("[data-setting-bool]").forEach(
+      (element) => {
+
+        const key =
+          element.dataset.settingBool;
+
+        if(key){
+
+          settings[key] =
             element.checked;
 
         }
@@ -3231,282 +3199,591 @@
       }
     );
 
-
-    return {
-
-      ...DEFAULT_SETTINGS,
-
-      ...data
-
-    };
-
-  }
-
-
-  /* =======================================================
-     SET FORM DATA
-  ======================================================= */
-
-  function setFormData(settings){
-
-    const data = {
-
-      ...DEFAULT_SETTINGS,
-
-      ...(settings || {})
-
-    };
-
-
-    TEXT_FIELDS.forEach(
-      key => {
+    [
+      "showInventoryCount",
+      "showCustomerCount",
+      "showRating"
+    ].forEach(
+      (key) => {
 
         const element =
-          $("#" + key);
-
-        if(!element){
-          return;
-        }
-
-        element.value =
-          data[key] ?? "";
-
-      }
-    );
-
-
-    TOGGLE_FIELDS.forEach(
-      key => {
-
-        const element =
-          $("#" + key);
+          document.getElementById(key);
 
         if(element){
 
-          element.checked =
-            Boolean(
-              data[key]
-            );
+          settings[key] =
+            element.checked;
 
         }
 
       }
     );
 
+    const color =
+      normalizeColor(
+        $("#accentColor")?.value
+      );
 
-    updateColorInputs();
+    if(color){
 
-    updatePreview();
+      settings.accentColor =
+        color;
 
-    markSaved();
+    }
 
+    return settings;
   }
 
+  /* =========================
+     COLOR HELPERS
+  ========================== */
 
-  /* =======================================================
-     COLOR SYNC
-  ======================================================= */
+  function normalizeColor(value){
 
-  function updateColorInputs(){
+    if(!value){
+      return null;
+    }
+
+    let color =
+      String(value)
+        .trim()
+        .toLowerCase();
+
+    if(!color.startsWith("#")){
+
+      color =
+        "#" + color;
+
+    }
+
+    if(/^#[0-9a-f]{6}$/i.test(color)){
+
+      return color;
+
+    }
+
+    return null;
+  }
+
+  function updateAccentUI(){
 
     const color =
-      $("#accentColor").value ||
-      "#18a957";
-
-
-    $("#accentColorText").value =
-      color;
-
+      normalizeColor(
+        settings.accentColor
+      ) || "#18a957";
 
     document.documentElement
-      .style
-      .setProperty(
+      .style.setProperty(
         "--green",
         color
       );
 
+    const picker =
+      $("#accentColorPicker");
+
+    const input =
+      $("#accentColor");
+
+    const preview =
+      $("#accentPreview");
+
+    const previewText =
+      $("#accentPreviewText");
+
+    if(picker){
+      picker.value = color;
+    }
+
+    if(input){
+      input.value = color;
+    }
+
+    if(preview){
+      preview.style.background =
+        color;
+    }
+
+    if(previewText){
+
+      previewText.textContent =
+        color.toUpperCase();
+
+    }
   }
 
+  /* =========================
+     MAINTENANCE UI
+  ========================== */
 
-  $("#accentColor")
-    .addEventListener(
+  function updateMaintenanceUI(){
+
+    const box =
+      $("#maintenanceBox");
+
+    const enabled =
+      Boolean(
+        settings.maintenanceMode
+      );
+
+    if(box){
+
+      box.classList.toggle(
+        "active",
+        enabled
+      );
+
+    }
+  }
+
+  /* =========================
+     SYSTEM INFO
+  ========================== */
+
+  function updateSystemInfo(){
+
+    const currency =
+      $("#systemCurrency");
+
+    const timezone =
+      $("#systemTimezone");
+
+    const role =
+      $("#systemRole");
+
+    if(currency){
+      currency.textContent =
+        settings.currency || "BDT";
+    }
+
+    if(timezone){
+      timezone.textContent =
+        settings.timezone || "Asia/Dhaka";
+    }
+
+    if(role){
+
+      role.textContent =
+        formatRole(
+          adminSession.role
+        );
+
+    }
+  }
+
+  function formatRole(role){
+
+    const value =
+      String(role || "")
+        .trim()
+        .toLowerCase();
+
+    if(value === "superadmin"){
+      return "Super Admin";
+    }
+
+    if(value === "admin"){
+      return "Admin";
+    }
+
+    if(value === "editor"){
+      return "Editor";
+    }
+
+    return "Administrator";
+  }
+
+  /* =========================
+     DIRTY STATE
+  ========================== */
+
+  function setDirty(value){
+
+    dirty =
+      Boolean(value);
+
+    const state =
+      $("#saveState");
+
+    const stateText =
+      $("#saveStateText");
+
+    if(!state || !stateText){
+      return;
+    }
+
+    state.classList.remove(
+      "dirty",
+      "saved"
+    );
+
+    if(dirty){
+
+      state.classList.add("dirty");
+
+      stateText.textContent =
+        "Unsaved changes";
+
+    }else{
+
+      state.classList.add("saved");
+
+      stateText.textContent =
+        "All changes saved";
+
+    }
+  }
+
+  function detectDirty(){
+
+    readSettingsFromUI();
+
+    const changed =
+      JSON.stringify(settings) !==
+      JSON.stringify(originalSettings);
+
+    setDirty(changed);
+
+    updateMaintenanceUI();
+    updateAccentUI();
+    updateSystemInfo();
+  }
+
+  /* =========================
+     INPUT EVENTS
+  ========================== */
+
+  $$(
+    "[data-setting], [data-setting-bool]"
+  ).forEach(
+    (element) => {
+
+      element.addEventListener(
+        "input",
+        detectDirty
+      );
+
+      element.addEventListener(
+        "change",
+        detectDirty
+      );
+
+    }
+  );
+
+  [
+    "showInventoryCount",
+    "showCustomerCount",
+    "showRating"
+  ].forEach(
+    (id) => {
+
+      const element =
+        document.getElementById(id);
+
+      if(element){
+
+        element.addEventListener(
+          "change",
+          detectDirty
+        );
+
+      }
+
+    }
+  );
+
+  /* =========================
+     ACCENT COLOR
+  ========================== */
+
+  const accentPicker =
+    $("#accentColorPicker");
+
+  const accentText =
+    $("#accentColor");
+
+  if(accentPicker){
+
+    accentPicker.addEventListener(
       "input",
-      () => {
+      function(){
 
-        let value =
-          $("#accentColor").value;
-
-        $("#accentColorText").value =
-          value;
-
-        document.documentElement
-          .style
-          .setProperty(
-            "--green",
-            value
+        const color =
+          normalizeColor(
+            this.value
           );
 
-        markDirty();
+        if(!color){
+          return;
+        }
+
+        accentText.value =
+          color;
+
+        settings.accentColor =
+          color;
+
+        updateAccentUI();
+
+        detectDirty();
 
       }
     );
 
+  }
 
-  $("#accentColorText")
-    .addEventListener(
+  if(accentText){
+
+    accentText.addEventListener(
       "input",
-      () => {
+      function(){
 
-        let value =
-          $("#accentColorText")
-            .value
-            .trim();
+        const color =
+          normalizeColor(
+            this.value
+          );
 
+        if(color){
 
-        if(
-          /^#[0-9A-Fa-f]{6}$/.test(
-            value
-          )
-        ){
+          settings.accentColor =
+            color;
 
-          $("#accentColor").value =
-            value;
-
-          document.documentElement
-            .style
-            .setProperty(
-              "--green",
-              value
-            );
+          updateAccentUI();
 
         }
 
-        markDirty();
+        detectDirty();
 
       }
     );
 
+  }
 
-  /* =======================================================
-     PREVIEW
-  ======================================================= */
+  /* =========================
+     SAVE BUTTONS
+  ========================== */
 
-  function updatePreview(){
+  function handleSave(){
 
-    $("#previewSiteName")
-      .textContent =
-      $("#siteName").value ||
-      "Website Deals";
+    readSettingsFromUI();
 
+    if(
+      !normalizeColor(
+        settings.accentColor
+      )
+    ){
 
-    $("#previewStartingPrice")
-      .textContent =
-      money(
-        $("#startingPrice").value
+      settings.accentColor =
+        DEFAULT_SETTINGS.accentColor;
+
+    }
+
+    saveSettings();
+
+    updateAccentUI();
+
+    updateMaintenanceUI();
+
+    updateSystemInfo();
+  }
+
+  $("#saveBtn")?.addEventListener(
+    "click",
+    handleSave
+  );
+
+  $("#saveTopBtn")?.addEventListener(
+    "click",
+    handleSave
+  );
+
+  /* =========================
+     RESET
+  ========================== */
+
+  function resetSettings(){
+
+    const confirmed =
+      window.confirm(
+        "Reset all system settings to the default Website Deals configuration?"
       );
 
+    if(!confirmed){
+      return;
+    }
 
-    $("#previewWebsiteCount")
-      .textContent =
-      number(
-        $("#websiteCount").value
-      ).toLocaleString(
-        "en-BD"
+    settings =
+      JSON.parse(
+        JSON.stringify(
+          DEFAULT_SETTINGS
+        )
       );
 
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(settings)
+    );
 
-    $("#previewCustomerCount")
-      .textContent =
-      number(
-        $("#customerCount").value
-      ).toLocaleString(
-        "en-BD"
+    applySettingsToUI();
+
+    showToast(
+      "Settings reset",
+      "Default system settings have been restored."
+    );
+  }
+
+  $("#resetBtn")?.addEventListener(
+    "click",
+    resetSettings
+  );
+
+  $("#resetTopBtn")?.addEventListener(
+    "click",
+    resetSettings
+  );
+
+  /* =========================
+     SETTINGS NAV
+  ========================== */
+
+  $$(".settings-tab").forEach(
+    (button) => {
+
+      button.addEventListener(
+        "click",
+        function(){
+
+          const targetId =
+            this.dataset.target;
+
+          const target =
+            document.getElementById(
+              targetId
+            );
+
+          if(!target){
+            return;
+          }
+
+          $$(".settings-tab")
+            .forEach(
+              (tab) => {
+                tab.classList.remove(
+                  "active"
+                );
+              }
+            );
+
+          this.classList.add(
+            "active"
+          );
+
+          target.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+          });
+
+        }
       );
 
+    }
+  );
 
-    $("#previewRating")
-      .textContent =
-      number(
-        $("#rating").value
-      ).toFixed(1) +
-      " / 5";
+  /* =========================
+     INTERSECTION OBSERVER
+  ========================== */
 
+  if("IntersectionObserver" in window){
 
-    $("#previewCurrency")
-      .textContent =
-      $("#currency").value ||
-      "BDT";
+    const sections =
+      $$(".settings-section[id]");
+
+    const observer =
+      new IntersectionObserver(
+        (entries) => {
+
+          const visible =
+            entries
+              .filter(
+                entry =>
+                  entry.isIntersecting
+              )
+              .sort(
+                (a,b) =>
+                  b.intersectionRatio -
+                  a.intersectionRatio
+              )[0];
+
+          if(!visible){
+            return;
+          }
+
+          const id =
+            visible.target.id;
+
+          $$(".settings-tab")
+            .forEach(
+              (tab) => {
+
+                tab.classList.toggle(
+                  "active",
+                  tab.dataset.target === id
+                );
+
+              }
+            );
+
+        },
+        {
+          rootMargin:"-110px 0px -55% 0px",
+          threshold:[0,.2,.5]
+        }
+      );
+
+    sections.forEach(
+      section =>
+        observer.observe(section)
+    );
 
   }
 
-
-  /* =======================================================
-     DIRTY STATE
-  ======================================================= */
-
-  function markDirty(){
-
-    const state =
-      $("#saveState");
-
-    state.innerHTML = `
-
-      <span class="state-dot dirty"></span>
-
-      <span>
-        Unsaved changes
-      </span>
-
-    `;
-
-  }
-
-
-  function markSaved(){
-
-    const state =
-      $("#saveState");
-
-    state.innerHTML = `
-
-      <span class="state-dot saved"></span>
-
-      <span>
-        All changes saved
-      </span>
-
-    `;
-
-  }
-
-
-  /* =======================================================
+  /* =========================
      TOAST
-  ======================================================= */
+  ========================== */
 
-  let toastTimer;
+  let toastTimer = null;
 
-
-  function showToast(message){
+  function showToast(
+    title,
+    message
+  ){
 
     const toast =
       $("#toast");
 
+    const toastTitle =
+      $("#toastTitle");
 
-    $("#toastMessage")
-      .textContent =
+    const toastMessage =
+      $("#toastMessage");
+
+    if(!toast){
+      return;
+    }
+
+    toastTitle.textContent =
+      title;
+
+    toastMessage.textContent =
       message;
-
 
     toast.classList.add(
       "show"
     );
 
-
     clearTimeout(
       toastTimer
     );
-
 
     toastTimer =
       setTimeout(
@@ -3517,472 +3794,22 @@
           );
 
         },
-        2800
+        3200
       );
-
   }
 
-
-  /* =======================================================
-     SAVE SETTINGS
-  ======================================================= */
-
-  function saveSettings(){
-
-    const data =
-      getFormData();
-
-
-    try{
-
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(
-          data
-        )
-      );
-
-
-      savedSettings =
-        {
-          ...data
-        };
-
-
-      markSaved();
-
-      updatePreview();
-
-      showToast(
-        "System settings saved successfully."
-      );
-
-
-    }catch(error){
-
-      showToast(
-        "Unable to save settings."
-      );
-
-    }
-
-  }
-
-
-  /* =======================================================
-     RESET SETTINGS
-  ======================================================= */
-
-  function resetSettings(){
-
-    const confirmed =
-      window.confirm(
-        "Restore all system settings to their default values?"
-      );
-
-
-    if(!confirmed){
-      return;
-    }
-
-
-    setFormData(
-      DEFAULT_SETTINGS
-    );
-
-
-    markDirty();
-
-
-    showToast(
-      "Defaults restored. Save to keep these changes."
-    );
-
-  }
-
-
-  /* =======================================================
-     SAVE BUTTONS
-  ======================================================= */
-
-  $("#saveBtn")
-    .addEventListener(
-      "click",
-      saveSettings
-    );
-
-
-  $("#sideSaveBtn")
-    .addEventListener(
-      "click",
-      saveSettings
-    );
-
-
-  $("#saveTopBtn")
-    .addEventListener(
-      "click",
-      saveSettings
-    );
-
-
-  $("#resetBtn")
-    .addEventListener(
-      "click",
-      resetSettings
-    );
-
-
-  $("#sideResetBtn")
-    .addEventListener(
-      "click",
-      resetSettings
-    );
-
-
-  /* =======================================================
-     INPUT CHANGE EVENTS
-  ======================================================= */
-
-  TEXT_FIELDS
-    .forEach(
-      key => {
-
-        const element =
-          $("#" + key);
-
-        if(!element){
-          return;
-        }
-
-
-        element.addEventListener(
-          "input",
-          () => {
-
-            markDirty();
-
-            updatePreview();
-
-          }
-        );
-
-
-        element.addEventListener(
-          "change",
-          () => {
-
-            markDirty();
-
-            updatePreview();
-
-          }
-        );
-
-      }
-    );
-
-
-  TOGGLE_FIELDS
-    .forEach(
-      key => {
-
-        const element =
-          $("#" + key);
-
-        if(!element){
-          return;
-        }
-
-
-        element.addEventListener(
-          "change",
-          markDirty
-        );
-
-      }
-    );
-
-
-  /* =======================================================
-     EXPORT SETTINGS
-  ======================================================= */
-
-  function exportSettings(){
-
-    const data =
-      getFormData();
-
-
-    const payload = {
-
-      app:
-        "Website Deals",
-
-      type:
-        "system-settings",
-
-      version:
-        "1.0.0",
-
-      exportedAt:
-        new Date().toISOString(),
-
-      settings:
-        data
-
-    };
-
-
-    const blob =
-      new Blob(
-        [
-          JSON.stringify(
-            payload,
-            null,
-            2
-          )
-        ],
-        {
-          type:
-            "application/json"
-        }
-      );
-
-
-    const url =
-      URL.createObjectURL(
-        blob
-      );
-
-
-    const link =
-      document.createElement(
-        "a"
-      );
-
-
-    const date =
-      new Date()
-        .toISOString()
-        .slice(
-          0,
-          10
-        );
-
-
-    link.href =
-      url;
-
-
-    link.download =
-      `website-deals-settings-${date}.json`;
-
-
-    document.body.appendChild(
-      link
-    );
-
-
-    link.click();
-
-
-    link.remove();
-
-
-    URL.revokeObjectURL(
-      url
-    );
-
-
-    showToast(
-      "Settings exported successfully."
-    );
-
-  }
-
-
-  $("#exportBtn")
-    .addEventListener(
-      "click",
-      exportSettings
-    );
-
-
-  /* =======================================================
-     IMPORT SETTINGS
-  ======================================================= */
-
-  $("#importBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        $("#importFile").click();
-
-      }
-    );
-
-
-  $("#importFile")
-    .addEventListener(
-      "change",
-      event => {
-
-        const file =
-          event.target.files[0];
-
-
-        if(!file){
-          return;
-        }
-
-
-        const reader =
-          new FileReader();
-
-
-        reader.onload =
-          function(){
-
-            try{
-
-              const imported =
-                JSON.parse(
-                  reader.result
-                );
-
-
-              const incoming =
-                imported.settings ||
-                imported;
-
-
-              const merged = {
-
-                ...DEFAULT_SETTINGS,
-
-                ...(incoming || {})
-
-              };
-
-
-              setFormData(
-                merged
-              );
-
-
-              markDirty();
-
-
-              showToast(
-                "Settings imported. Save to apply them."
-              );
-
-
-            }catch(error){
-
-              showToast(
-                "Invalid settings file."
-              );
-
-            }
-
-
-            event.target.value =
-              "";
-
-          };
-
-
-        reader.readAsText(
-          file
-        );
-
-      }
-    );
-
-
-  /* =======================================================
-     MARKETPLACE LINK
-  ======================================================= */
-
-  $("#marketplaceBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        window.open(
-          "../index.html",
-          "_blank"
-        );
-
-      }
-    );
-
-
-  /* =======================================================
-     PRINT
-  ======================================================= */
-
-  $("#printBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        window.print();
-
-      }
-    );
-
-
-  /* =======================================================
-     LOGOUT
-  ======================================================= */
-
-  $("#logoutBtn")
-    .addEventListener(
-      "click",
-      () => {
-
-        const confirmed =
-          window.confirm(
-            "Are you sure you want to sign out?"
-          );
-
-
-        if(!confirmed){
-          return;
-        }
-
-
-        sessionStorage.removeItem(
-          AUTH_KEY
-        );
-
-
-        window.location.href =
-          "login/";
-
-      }
-    );
-
-
-  /* =======================================================
+  /* =========================
      MOBILE SIDEBAR
-  ======================================================= */
+  ========================== */
 
   const sidebar =
     $("#sidebar");
 
-
   const overlay =
-    $("#overlay");
-
+    $("#sidebarOverlay");
 
   const mobileMenu =
     $("#mobileMenu");
-
 
   function openSidebar(){
 
@@ -3996,7 +3823,6 @@
 
   }
 
-
   function closeSidebar(){
 
     sidebar.classList.remove(
@@ -4009,58 +3835,108 @@
 
   }
 
+  mobileMenu?.addEventListener(
+    "click",
+    openSidebar
+  );
 
-  mobileMenu
-    .addEventListener(
-      "click",
-      openSidebar
-    );
+  overlay?.addEventListener(
+    "click",
+    closeSidebar
+  );
 
+  $$(".nav-item").forEach(
+    (item) => {
 
-  overlay
-    .addEventListener(
-      "click",
-      closeSidebar
-    );
+      item.addEventListener(
+        "click",
+        () => {
 
+          if(
+            window.innerWidth <= 900
+          ){
 
-  document
-    .querySelectorAll(
-      ".nav-link"
-    )
-    .forEach(
-      link => {
-
-        link.addEventListener(
-          "click",
-          () => {
-
-            if(
-              window.innerWidth <=
-              1050
-            ){
-
-              closeSidebar();
-
-            }
+            closeSidebar();
 
           }
-        );
+
+        }
+      );
+
+    }
+  );
+
+  /* =========================
+     LOGOUT
+  ========================== */
+
+  $("#logoutBtn")?.addEventListener(
+    "click",
+    function(){
+
+      if(dirty){
+
+        const leave =
+          window.confirm(
+            "You have unsaved settings. Sign out anyway?"
+          );
+
+        if(!leave){
+          return;
+        }
 
       }
-    );
 
+      sessionStorage.removeItem(
+        AUTH_KEY
+      );
 
-  /* =======================================================
-     ESCAPE
-  ======================================================= */
+      window.location.href =
+        "login/";
+
+    }
+  );
+
+  /* =========================
+     BEFORE UNLOAD
+  ========================== */
+
+  window.addEventListener(
+    "beforeunload",
+    function(event){
+
+      if(!dirty){
+        return;
+      }
+
+      event.preventDefault();
+      event.returnValue = "";
+
+    }
+  );
+
+  /* =========================
+     KEYBOARD SHORTCUT
+  ========================== */
 
   document.addEventListener(
     "keydown",
-    event => {
+    function(event){
 
       if(
-        event.key === "Escape"
+        (event.ctrlKey || event.metaKey) &&
+        event.key.toLowerCase() === "s"
+      ){
+
+        event.preventDefault();
+
+        handleSave();
+
+      }
+
+      if(
+        event.key === "Escape" &&
+        window.innerWidth <= 900
       ){
 
         closeSidebar();
@@ -4070,46 +3946,68 @@
     }
   );
 
+  /* =========================
+     ADMIN IDENTITY
+  ========================== */
 
-  /* =======================================================
-     BEFORE UNLOAD
-  ======================================================= */
+  function updateAdminIdentity(){
 
-  window.addEventListener(
-    "beforeunload",
-    event => {
+    const name =
+      adminSession.name ||
+      "Super Admin";
 
-      const state =
-        $("#saveState");
+    const role =
+      formatRole(
+        adminSession.role
+      );
 
-      if(
-        state &&
-        state.textContent
-          .toLowerCase()
-          .includes(
-            "unsaved"
+    const nameElement =
+      $("#adminName");
+
+    const roleElement =
+      $("#adminRole");
+
+    const avatar =
+      $("#adminAvatar");
+
+    if(nameElement){
+      nameElement.textContent =
+        name;
+    }
+
+    if(roleElement){
+      roleElement.textContent =
+        role;
+    }
+
+    if(avatar){
+
+      const initials =
+        String(name)
+          .split(/\s+/)
+          .filter(Boolean)
+          .slice(0,2)
+          .map(
+            word =>
+              word.charAt(0)
+                .toUpperCase()
           )
-      ){
+          .join("");
 
-        event.preventDefault();
-
-        event.returnValue =
-          "";
-
-      }
+      avatar.textContent =
+        initials || "SA";
 
     }
-  );
 
+  }
 
-  /* =======================================================
-     INITIAL LOAD
-  ======================================================= */
+  /* =========================
+     INITIALIZE
+  ========================== */
 
-  setFormData(
-    savedSettings
-  );
+  updateAdminIdentity();
 
+  applySettingsToUI();
 
 })();
 </script>
